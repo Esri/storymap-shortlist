@@ -180,8 +180,7 @@ function loadNeighborhoods() {
 	
 	$("#neighborhoodsDiv a").click(function(e) {
 		var name = $(this).html();
-		var bookmark = $.grep(_bookmarks,function(n,i){return n.name == name})[0].extent;
-		var extent = new esri.geometry.Extent(bookmark.xmin,bookmark.ymin,bookmark.xmax,bookmark.ymax,new esri.SpatialReference({ wkid:bookmark.wkid }));
+		var extent = new esri.geometry.Extent($.grep(_bookmarks,function(n,i){return n.name == name})[0].extent);
 		_map.setExtent(extent);	
 		$("#neighborhoodsTogText").html('NEIGHBORHOODS &#x25BC;');
 		$("#neighborhoodsDiv").slideToggle();
