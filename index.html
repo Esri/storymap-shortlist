@@ -62,6 +62,8 @@ var _isMobile = isMobile();
 
 var _map;
 
+var _bookmarks;
+
 var _layerFood;
 var _layerFun;
 var _layerDesign;
@@ -145,6 +147,9 @@ function init() {
 			}
 		});
 		
+		_bookmarks = response.itemInfo.itemData.bookmarks;
+		loadNeighborhoods();
+		
 		var layers = response.itemInfo.itemData.operationalLayers; 
 
 		if(_map.loaded){
@@ -171,33 +176,16 @@ function SortByID(a, b){
 
 function loadNeighborhoods() {
 	
-	var arr = [];
-	
-	$.each(_layerNeighborhoods.graphics,function(index,value){arr.push(value.attributes.TITLE)});
-	$.each(_layerBeaches.graphics,function(index,value){arr.push(value.attributes.TITLE)});
-	$.each(_layerParks.graphics,function(index,value){arr.push(value.attributes.TITLE)});
-	
-	$.each(arr.sort(),function(index,value){$("#neighborhoodsDiv").append("<p><a>"+value+"</a></p>")});
+	$.each(_bookmarks,function(index,value){$("#neighborhoodsDiv").append("<p><a>"+value.name+"</a></p>")});
 	
 	$("#neighborhoodsDiv a").click(function(e) {
-        var graphic;
-		var result;
 		var name = $(this).html();
-		var extent;
-		$.each([_layerNeighborhoods,_layerBeaches,_layerParks],function(index,layerCurrent){
-			result = $.grep(layerCurrent.graphics,function(n,i){return n.attributes.TITLE == name});
-			if (result.length > 0) {
-				graphic = result[0];
-			}
-		});
-		
-		extent = graphic.geometry.getExtent()
-		_map.setExtent(extent.expand(2));			
+		var bookmark = $.grep(_bookmarks,function(n,i){return n.name == name})[0].extent;
+		var extent = new esri.geometry.Extent(bookmark.xmin,bookmark.ymin,bookmark.xmax,bookmark.ymax,new esri.SpatialReference({ wkid:bookmark.wkid }));
+		_map.setExtent(extent);	
 		$("#neighborhoodsTogText").html('NEIGHBORHOODS &#x25BC;');
 		$("#neighborhoodsDiv").slideToggle();
-		
     });
-
 
 }
 
@@ -232,8 +220,6 @@ function initMap(layers) {
 	dojo.connect(_layerParks, "onMouseOver", baselayer_onMouseOver);
 	dojo.connect(_layerParks, "onMouseOut", baselayer_onMouseOut);
 	dojo.connect(_layerParks, "onClick", baselayer_onClick);
-	
-	loadNeighborhoods();
 
 	_layerFun = buildLayer(
 				$.grep(layers,function(n,i){return n.title == "Fun"})[0].featureCollection.layers[0].featureSet.features.sort(SortByID),
