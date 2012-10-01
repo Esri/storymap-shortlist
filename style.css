@@ -1,0 +1,329 @@
+html,body {
+	/*
+	padding:0;
+	margin:0;
+	overflow:hidden;
+	*/
+	height:100%;
+	width:100%;
+	min-width:750px;
+	margin:auto	
+}
+
+body {
+	background-color:#fff;
+	color:#333;
+	font-size:14px;
+	overflow:hidden;
+	font-family:Georgia, "Times New Roman", Times, serif;
+}
+
+a {
+	color:#555;
+	font-weight:bold;
+	text-decoration:none;
+}
+
+a:hover{
+	text-decoration:underline;
+}
+	  
+#header {
+	height:95px;
+	background:#444;
+	color:#fff;
+	margin:0;
+	overflow:hidden;
+}
+
+#headerText{
+	padding-top:5px;
+	padding-left:25px;
+	width:70%;
+	float:left;
+}
+
+#title {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:20px;
+	font-weight:bold;
+	text-align:left;
+	white-space: nowrap;  
+	overflow: hidden;  
+	text-overflow: ellipsis;
+	-o-text-overflow:ellipsis;
+}
+
+#subtitle {
+	font-size:13px;
+	margin-top:10px;
+	overflow: hidden;
+	font-weight:normal;
+}
+
+#logoArea{
+	float:right;
+	padding-top:15px;
+	padding-right:25px;
+	text-align:right;
+}
+
+#social{
+	margin-bottom:20px;
+}
+
+#msLink{
+	color:#fff;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	font-size:13px;
+	outline:none;
+}
+
+#logo{
+	border:none;
+	outline:none;
+}
+
+#logoImg{
+	border:none;
+	outline:none;
+}
+	  
+#map {
+	border:none;
+	padding:0;
+	height:100%;
+	width:100%;
+}
+
+#hoverInfo{
+	font-size:10px;
+	font-family:Verdana, Geneva, sans-serif;
+	position:absolute;
+	padding:5px;
+	max-width:200px;
+	background-color:#FFC;
+	border:#848484 solid 1px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-moz-box-shadow: 2px 2px 10px #333;
+	-webkit-box-shadow: 2px 2px 10px #333;
+	box-shadow: 2px 2px 10px #333;
+	filter: progid: DXImageTransform.Microsoft.Shadow(strength = 2, direction = 135, color = '#333333');
+	-ms-filter: "progid: DXImageTransform.Microsoft.Shadow(strength = 2, Direction = 135, Color = '#333333')";
+	overflow:hidden;
+	display:none;
+	z-index:100;
+}
+
+#zoomToggle{
+	position:absolute;
+	left:15px;
+	top:15px;
+	width:32px;
+	z-index:2;
+	cursor:pointer;
+	visibility:hidden;
+}
+
+ul.tilelist {
+    width: 465px;
+	height:50%;
+	padding-left:1px;
+    display:inline-block;
+	overflow:visible;
+	margin-top:0px;
+	margin:auto;
+}
+
+ul.tilelist li {
+    list-style-type: none;
+    -moz-box-shadow: 1px 1px 3px #000;
+    -webkit-box-shadow: 1px 1px 3px #000;
+    margin: 2px;
+    width: 150px;
+    height: 150px;
+    float: left;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:9px;
+	font-weight:bold;
+	background-color:#E7E7E7;
+	cursor:pointer;
+}
+
+ul.tilelist > a {
+    display: block;
+    position: relative
+    text-decoration: none;
+    color: #FFFFFF;
+    width: 98px;
+    height: 75px;
+}
+
+ul.tilelist img {
+    max-width:130px;
+    max-height:130px;	
+	margin:10px;
+}
+
+ul.tilelist p {
+    margin: 0px;
+    margin-left: -40px;
+    margin-top: -10px;
+}
+
+ul.tilelist .footer {
+	padding-left:10px;
+}
+
+ul.tilelist .num {
+	width:16px;
+	padding-top:1px;
+	padding-bottom:1px;
+	float:left;
+	border:solid;
+	border-width:thin;
+	color:white;
+	font-size:11px;
+	text-align:center;
+}
+
+ul.tilelist .blurb {
+	width:110px;
+	float:left;
+	margin-left:4px;
+}
+
+.multiTip{
+	border: 1px solid #444;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.esriPopup .titleButton.maximize {
+	display:none;
+}
+
+.details {
+	padding:20px;
+	height:100%;
+}
+
+.details .title {
+	color:#8c8c8c;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:24px;
+}
+
+.details hr {
+	margin-top:5px;
+	margin-bottom:10px;
+}
+
+.details .leftDiv {
+	width:200px;
+	float:left;
+}
+
+.details .rightDiv {
+	width:250px;
+	float:left;
+	padding-left:20px;
+	height:100%;
+	overflow:auto;
+}
+
+.details .address {
+	margin-top:10px;
+	color:#393939;
+	font-size:12px;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+.details a {
+	color:#336699;
+	text-decoration:underline;
+}
+
+.tab {
+	float:left;
+	background-color:#444;
+	padding-top:4px;
+	padding-left:10px;
+	margin-top:10px;
+	height:21px;
+	width:80px;
+	margin-left:7px;
+	color:#d8d8d8;
+	cursor:pointer;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:bold;
+}
+
+.tab:hover {
+	color:#FFFFFF;
+}
+
+.tab-selected {
+	background-color:#b9b9b9;
+	color:#FFFFFF;
+	cursor:default;
+}
+
+#neighborhoodsCon{
+	position:absolute;
+	width:160px !important;
+	right:0px;
+	z-index:100;
+}
+
+#neighborhoodsDiv{
+	display:none;
+	background:#848484;
+	max-height:450px;
+	overflow:auto;
+	padding:10px;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+#neighborhoodsDiv a {
+	color:#FFFFFF;
+	cursor:pointer;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:normal;
+}
+
+#neighborhoodsToggle{
+	position:relative;
+	float:right;
+	background:#848484;
+	margin-top:-1px;
+	width:160px;
+	.height:28px;
+	cursor:pointer;
+	z-index:100;
+	color:#fff;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+#neighborhoodsTogText{
+	position:relative;
+	margin:auto;
+	margin-left:2px;
+	.margin-top:0px;
+	padding:5px;
+	color:#fff;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+.infoWindowLink {
+	color:#336699;
+	cursor:pointer;
+	font-weight:bold;
+}
+
+.infoWindowLink:hover {
+	text-decoration:underline;
+}

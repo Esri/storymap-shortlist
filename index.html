@@ -1,0 +1,705 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us">
+<head>
+
+<title>San Diego Shortlist</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=7, IE=9">
+
+<link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.0/js/dojo/dijit/themes/claro/claro.css">
+<link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.0/js/esri/dijit/css/Popup.css">
+<link rel="stylesheet" type="text/css" href="colorbox.css">
+<link rel="stylesheet" type="text/css" href="style.css">
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="lib/common/helper_functions.js"></script>
+<script type="text/javascript">var djConfig = {parseOnLoad: true};</script>
+<script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=3.0"></script>
+<script type="text/javascript" src="lib/jquery.colorbox-min.js"></script>
+<script type="text/javascript" src="lib/jquery.animate-colors-min.js"></script>
+
+<!--Social Media Links-->
+<script type="text/javascript">var switchTo5x=true;</script><script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({publisher:'77225c91-2742-42f7-b1b4-bddda99a9bde'});</script>
+<!--END Social Media Links-->
+<!--Google Analytics Start-->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26529417-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<!--Google Analytics End-->
+
+<script type="text/javascript">
+
+dojo.require("dijit.dijit");
+dojo.require("dijit.layout.BorderContainer");
+dojo.require("dijit.layout.ContentPane");
+dojo.require("esri.map");
+dojo.require("esri.arcgis.utils");
+
+/******************************************************
+***************** begin config section ****************
+*******************************************************/
+
+var COLOR_DIM = "#E7E7E7";
+var COLOR_FULL = "#FFFFFF";
+
+/******************************************************
+***************** end config section ******************
+*******************************************************/
+
+var _isMobile = isMobile();
+
+var _map;
+
+var _layerFood;
+var _layerFun;
+var _layerDesign;
+
+var _layerFerries;
+var _layerNeighborhoods;
+var _layerBeaches;
+var _layerParks;
+
+var _layerCurrent;
+
+var _selected;
+var _baseFeature;
+
+var _initExtent;
+
+var _dojoReady = false;
+var _jqueryReady = false;
+
+var _isLegacyIE = (navigator.appVersion.indexOf("MSIE 7.0") > -1) || (navigator.appVersion.indexOf("MSIE 8.0") > -1);
+
+dojo.addOnLoad(function() {_dojoReady = true;init()});
+jQuery(document).ready(function() {_jqueryReady = true;init()});
+
+function init() {
+	
+	if (!_jqueryReady) return;
+	if (!_dojoReady) return;
+	
+	$(this).resize(handleWindowResize);	
+	
+	$("#zoomIn").click(function(e) {
+        _map.setLevel(_map.getLevel()+1);
+    });
+	$("#zoomOut").click(function(e) {
+        _map.setLevel(_map.getLevel()-1);
+    });
+	$("#zoomExtent").click(function(e) {
+        _map.setExtent(_initExtent);
+    });	
+	
+	$("#divList").click(function(e) {
+        if ($(e.target).hasClass("tilelist")) unselect();
+    });
+	
+	$(document).bind('cbox_complete', function(){
+		$(".details .rightDiv").height($(".details").height() - 65);
+	});  
+	
+	$("#neighborhoodsToggle").click(function(){
+		if ($("#neighborhoodsDiv").css('display')=='none'){
+		  $("#neighborhoodsTogText").html('NEIGHBORHOODS &#x25B2;');
+		}
+		else{
+		  $("#neighborhoodsTogText").html('NEIGHBORHOODS &#x25BC;');
+		}
+		$("#neighborhoodsDiv").slideToggle();
+	});
+		
+	var mapDeferred = esri.arcgis.utils.createMap("1966ef409a344d089b001df85332608f", "map", {
+		mapOptions: {
+			slider: false
+		},
+		ignorePopups: true
+	});
+	
+	mapDeferred.addCallback(function(response) {	  
+	
+		_map = response.map;
+		  
+		  //resize the map when the browser resizes
+		dojo.connect(dijit.byId('map'), 'resize', _map,_map.resize);
+		dojo.connect(_map, 'onExtentChange', refreshList);
+
+		// click action on the map where there's no graphic 
+		// causes a deselect.
+
+		dojo.connect(_map, 'onClick', function(event){
+			if (event.graphic == null) {
+				unselect();
+			}
+		});
+		
+		var layers = response.itemInfo.itemData.operationalLayers; 
+
+		if(_map.loaded){
+			initMap(layers);
+		} else {
+			dojo.connect(_map,"onLoad",function(){
+				initMap(layers);
+			});
+		}
+	});
+	
+	mapDeferred.addErrback(function(error) {
+	  console.log("Map creation failed: ", dojo.toJson(error));
+	});
+	
+}
+
+//This will sort your array
+function SortByID(a, b){
+  var aID = a.attributes.Number;
+  var bID = b.attributes.Number; 
+  return ((aID < bID) ? -1 : ((aID > bID) ? 1 : 0));
+}
+
+function loadNeighborhoods() {
+	
+	var arr = [];
+	
+	$.each(_layerNeighborhoods.graphics,function(index,value){arr.push(value.attributes.TITLE)});
+	$.each(_layerBeaches.graphics,function(index,value){arr.push(value.attributes.TITLE)});
+	$.each(_layerParks.graphics,function(index,value){arr.push(value.attributes.TITLE)});
+	
+	$.each(arr.sort(),function(index,value){$("#neighborhoodsDiv").append("<p><a>"+value+"</a></p>")});
+	
+	$("#neighborhoodsDiv a").click(function(e) {
+        var graphic;
+		var result;
+		var name = $(this).html();
+		var extent;
+		$.each([_layerNeighborhoods,_layerBeaches,_layerParks],function(index,layerCurrent){
+			result = $.grep(layerCurrent.graphics,function(n,i){return n.attributes.TITLE == name});
+			if (result.length > 0) {
+				graphic = result[0];
+			}
+		});
+		
+		extent = graphic.geometry.getExtent()
+		_map.setExtent(extent.expand(2));			
+		$("#neighborhoodsTogText").html('NEIGHBORHOODS &#x25BC;');
+		$("#neighborhoodsDiv").slideToggle();
+		
+    });
+
+
+}
+
+function initMap(layers) {
+	
+	_initExtent = _map.extent;
+	
+	_map.removeLayer(findLayer(_map,"Food"));
+	_map.removeLayer(findLayer(_map,"Fun"));
+	_map.removeLayer(findLayer(_map,"Design"));
+	
+	_layerFerries = findLayer(_map,"Ferries");
+	
+	dojo.connect(_layerFerries, "onMouseOver", baselayer_onMouseOver);
+	dojo.connect(_layerFerries, "onMouseOut", baselayer_onMouseOut);
+	dojo.connect(_layerFerries, "onClick", baselayer_onClick);
+	
+	_layerNeighborhoods = findLayer(_map,"Neighborhoods");
+
+	dojo.connect(_layerNeighborhoods, "onMouseOver", baselayer_onMouseOver);
+	dojo.connect(_layerNeighborhoods, "onMouseOut", baselayer_onMouseOut);
+	dojo.connect(_layerNeighborhoods, "onClick", baselayer_onClick);
+	
+	_layerBeaches = findLayer(_map,"Beaches");	
+
+	dojo.connect(_layerBeaches, "onMouseOver", baselayer_onMouseOver);
+	dojo.connect(_layerBeaches, "onMouseOut", baselayer_onMouseOut);
+	dojo.connect(_layerBeaches, "onClick", baselayer_onClick);
+	
+	_layerParks = findLayer(_map,"Parks");	
+
+	dojo.connect(_layerParks, "onMouseOver", baselayer_onMouseOver);
+	dojo.connect(_layerParks, "onMouseOut", baselayer_onMouseOut);
+	dojo.connect(_layerParks, "onClick", baselayer_onClick);
+	
+	loadNeighborhoods();
+
+	_layerFun = buildLayer(
+				$.grep(layers,function(n,i){return n.title == "Fun"})[0].featureCollection.layers[0].featureSet.features.sort(SortByID),
+				"green",
+				"NumberIcong"
+				);
+
+	dojo.connect(_layerFun, "onMouseOver", layer_onMouseOver);
+	dojo.connect(_layerFun, "onMouseOut", layer_onMouseOut);
+	dojo.connect(_layerFun, "onClick", layer_onClick);
+
+	_map.addLayer(_layerFun);
+		
+	_layerFood = buildLayer(
+				$.grep(layers,function(n,i){return n.title == "Food"})[0].featureCollection.layers[0].featureSet.features.sort(SortByID),
+				"red",
+				"NumberIcon"
+				);
+				
+	dojo.connect(_layerFood, "onMouseOver", layer_onMouseOver);
+	dojo.connect(_layerFood, "onMouseOut", layer_onMouseOut);
+	dojo.connect(_layerFood, "onClick", layer_onClick);
+				
+	_map.addLayer(_layerFood);
+
+
+	_layerDesign = buildLayer(
+				$.grep(layers,function(n,i){return n.title == "Design"})[0].featureCollection.layers[0].featureSet.features.sort(SortByID),
+				"blue",
+				"NumberIconb"
+				);
+				
+	dojo.connect(_layerDesign, "onMouseOver", layer_onMouseOver);
+	dojo.connect(_layerDesign, "onMouseOut", layer_onMouseOut);
+	dojo.connect(_layerDesign, "onClick", layer_onClick);
+				
+	_map.addLayer(_layerDesign);
+
+	
+	activateLayer(_layerFun);
+	dojo.connect(_map.infoWindow,"onHide",infoWindow_onHide);
+	handleWindowResize();
+	$("#zoomToggle").css("visibility","visible");
+	
+
+}
+
+
+function activateLayer(layer) {
+		
+	_selected = null;
+	postSelection();
+
+	_layerCurrent = layer;
+	
+	var category;
+	var color;
+
+	if (_layerCurrent == _layerFun) {
+		category = "Fun";
+		color = "#22880d"
+	}  else if (_layerCurrent == _layerFood) {
+		category = "Food";
+		color = "#fd2d29"
+	} else if (_layerCurrent == _layerDesign) {
+		category = "Design";
+		color = "#177ff1";
+	} else {
+		throw("invalid category");
+	}
+	
+	var tab = $.grep($(".tab"),function(n,i){return $(n).html() == category})[0];
+	$(".tab").removeClass("tab-selected");
+	$(tab).addClass("tab-selected");
+	
+	_layerFood.setVisibility(_layerFood == _layerCurrent);
+	_layerFun.setVisibility(_layerFun == _layerCurrent);
+	_layerDesign.setVisibility(_layerDesign == _layerCurrent);
+
+	$("#myList").empty();
+	
+	var display;
+	var tile;
+	var img;
+	var footer;
+	var num;
+	var title;
+	
+	$.each(_layerCurrent.graphics,function(index,value){
+		if (_map.extent.contains(value.geometry)) {
+			display = "visible"
+		} else {
+			display = "none";
+		}
+		tile = $('<li id="item'+value.attributes.Number+'" style="display:'+display+'">');
+		img = $('<img src="'+value.attributes.IMAGE_URL+'">');
+		footer = $('<div class="footer"></div>');
+		num = $('<div class="num" style="background-color:'+color+'">'+value.attributes.Number+'</div>');
+		title = $('<div class="blurb">'+value.attributes.TITLE+'</div>');
+		$(footer).append(num);
+		$(footer).append(title);
+		$(tile).append(img);
+		$(tile).append(footer);
+		$("#myList").append(tile);
+	});
+	
+	// event handlers have to be re-assigned every time you load the list...
+	$("ul.tilelist li").mouseover(tile_onMouseOver);
+	$("ul.tilelist li").mouseout(tile_onMouseOut);
+	$("ul.tilelist li").click(tile_onClick);	
+	
+	$("#divList").animate({ scrollTop: 0 }, { duration: 200 } );
+	
+}
+
+function tile_onMouseOver(e) {
+	 $(this).stop().animate({'background-color' : COLOR_FULL});
+	 /*
+	if ($(this).hasClass("tile-selected")) {
+		return;
+	}
+	$(".tile").removeClass("tile-hover");
+	$(this).addClass("tile-hover");	
+	*/
+}
+
+function tile_onMouseOut(e) {
+	
+	if (_selected != null) {
+		// does this tile represent the selected graphic?
+		var id = parseInt($(this).attr("id").substring(4));
+		if (_selected.attributes.Number == id) {
+			return;
+		}
+	}
+	
+	$(this).stop().animate({'background-color' : COLOR_DIM});
+	//$(".tile").removeClass("tile-hover");
+	
+}
+
+function tile_onClick(e) {
+	/*
+	$(".tile").removeClass("tile-hover");
+	$(".tile").removeClass("tile-selected");
+	$(this).addClass("tile-selected");
+	*/
+	// turn off the last selected tile...
+	
+	if (_selected != null) {
+		var tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+_selected.attributes.Number})[0];
+		if ($(tile).attr("id") != $(this).attr("id")) $(tile).stop().animate({'background-color' : COLOR_DIM});
+	}	
+	$(this).stop().animate({'background-color' : COLOR_FULL});
+	var id= $(this).attr("id").substring(4);
+	_selected = $.grep(_layerCurrent.graphics,function(n,i){return n.attributes.Number == id})[0];
+	postSelection();
+}
+
+function unselect() {
+	if (_selected != null) {
+		tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+_selected.attributes.Number})[0]
+		$(tile).stop().animate({'background-color' : COLOR_DIM});
+	}	
+	_selected = null;
+	postSelection();
+}
+
+function infoWindow_onHide(event) {
+	unselect();
+}
+
+function baselayer_onMouseOver(event)
+{
+	if (_isMobile) return;	
+	_map.setMapCursor("pointer");
+	var graphic = event.graphic;
+	$("#hoverInfo").html(graphic.attributes.TITLE);
+	var pt = event.screenPoint;
+	hoverInfoPos(pt.x,pt.y);
+}
+
+function baselayer_onMouseOut(event)
+{
+	if (_isMobile) return;	
+	_map.setMapCursor("default");
+	$("#hoverInfo").hide();
+}
+
+function baselayer_onClick(event) {
+	_baseFeature = event.graphic;
+	_map.infoWindow.setTitle(event.graphic.attributes.TITLE);
+	_map.infoWindow.setContent(event.graphic.attributes.Short_Desc+"<p><span class='infoWindowLink'>Details >></span></p>");
+	_map.infoWindow.show(event.mapPoint);	
+	$(".infoWindowLink").click(function(e) {
+        showDetails(_baseFeature);
+    });
+	$("#hoverInfo").hide();	
+}
+
+function layer_onClick(event)
+{
+	var tile;
+	if (_selected != null) {
+		tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+_selected.attributes.Number})[0]
+		$(tile).stop().animate({'background-color' : COLOR_DIM});
+	}	
+	_selected = event.graphic;
+	tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+_selected.attributes.Number})[0]
+	$(tile).stop().animate({'background-color' : COLOR_FULL});
+	postSelection();
+}
+
+function layer_onMouseOver(event)
+{
+	if (_isMobile) return;
+	_map.setMapCursor("pointer");
+	var graphic = event.graphic;
+	if (graphic == _selected) return;
+	graphic.setSymbol(graphic.symbol.setHeight(30).setWidth(24));
+	$("#hoverInfo").html(graphic.attributes.TITLE);
+	var pt = _map.toScreen(graphic.geometry);
+	hoverInfoPos(pt.x,pt.y);
+}
+
+function layer_onMouseOut(event)
+{
+	if (_isMobile) return;	
+	_map.setMapCursor("default");
+	var graphic = event.graphic;	
+	graphic.setSymbol(graphic.symbol.setHeight(28).setWidth(22));
+	$("#hoverInfo").hide();
+}
+
+
+function refreshList() {
+	var tile;
+	$.each(_layerCurrent.graphics,function(index,value){
+		//find the corresponding tile
+		tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+value.attributes.Number})[0];
+		if (_map.extent.contains(value.geometry)) {
+			if ($(tile).css("display") == "none") $(tile).stop().fadeIn();
+		} else {
+			if ($(tile).css("display") != "none") $(tile).stop().fadeOut(1000);
+		}		
+	});
+}
+
+function buildLayer(arr,iconDir,root) {
+	var layer = new esri.layers.GraphicsLayer();
+	var pt;
+	var sym;
+	$.each(arr,function(index,value){
+		pt = new esri.geometry.Point(value.geometry.x,value.geometry.y,value.geometry.spatialReference);
+		sym = new esri.symbol.PictureMarkerSymbol("images/icons/"+iconDir+"/"+root+value.attributes.Number+".png",22,28);
+		layer.add(new esri.Graphic(pt,sym,value.attributes));
+	});
+	return layer;
+}
+
+function handleWindowResize() {
+	
+	var heightDoc = getViewportDimensions()[1];
+	
+	console.log("doc height ", heightDoc);
+	console.log("header height ", $("#header").height());
+
+	$("#mainWindow").height(heightDoc - ($("#header").height()));
+	dijit.byId("mainWindow").layout();
+	$("#paneTileList").height($("#mainWindow").height());
+	$("#map").height($("#mainWindow").height());
+	$("#divList").height($("#paneTileList").height() - 65);
+	
+	adjustPopup();
+
+	console.log("main window height ",$("#mainWindow").height());
+	console.log("map height ",$("#map").height());
+	console.log("paneTileList height ",$("#paneTileList").height());
+
+}
+
+
+function postSelection() {
+	
+	if (_selected == null) {
+		_map.infoWindow.hide();
+	} else {
+		_map.infoWindow.setTitle(_selected.attributes.TITLE);
+		_map.infoWindow.setContent(_selected.attributes.Short_Desc+"<p><span class='infoWindowLink'>Details >></span></p>");
+		_map.infoWindow.show(_selected.geometry);	
+		$(".infoWindowLink").click(function(e) {
+			showDetails(_selected);
+		});		
+	}
+
+	$("#hoverInfo").hide();
+	
+}
+
+function showDetails(graphic) {
+	
+  var mainDiv = $('<div class="details"></div>');
+  var titleDiv = $('<div class="title">'+graphic.attributes.TITLE+'</div>');
+  var leftDiv = $('<div class="leftDiv"></div>');
+  var rightDiv = $('<div class="rightDiv"></div>');
+  
+  var imageDiv = $('<img src="'+graphic.attributes.IMAGE_URL+'">');	
+  var addressDiv = $('<div class="address">'+graphic.attributes.Address+'</div>');
+  
+  $(leftDiv).append(imageDiv);
+  $(leftDiv).append(addressDiv); 
+
+  if (graphic.attributes.Hours != null) {
+	  if ($.trim(graphic.attributes.Hours) != '') {
+		  var hoursDiv = $('<div class="address">'+graphic.attributes.Hours+'</div>');
+		  $(leftDiv).append(hoursDiv);  
+	  }
+  }  
+
+  if (graphic.attributes.website != null) {
+	  if ($.trim(graphic.attributes.website) != '') {
+		  var websiteDiv = $('<div class="address"><a href="'+graphic.attributes.website+'" target="_blank">Website</a></div>');
+		  $(leftDiv).append(websiteDiv);  
+	  }
+  }  
+
+  if (graphic.attributes.Website != null) {
+	  if ($.trim(graphic.attributes.Website) != '') {
+		  var WSDiv = $('<div class="address"><a href="'+graphic.attributes.Website+'" target="_blank">Website</a></div>');
+		  $(leftDiv).append(WSDiv);  
+	  }
+  }    
+  if (graphic.attributes.Desc1 != null) {
+	  if ($.trim(graphic.attributes.Desc1) != '') {
+		  $(rightDiv).append('<div>'+graphic.attributes.Desc1+'</div>');
+	  }
+  }
+  if (graphic.attributes.Desc2 != null) {
+	  if ($.trim(graphic.attributes.Desc2) != '') {
+		$(rightDiv).append('<p>');
+		$(rightDiv).append('<div>'+graphic.attributes.Desc2+'</div>');
+	  }
+  }
+  if (graphic.attributes.Desc3 != null) {
+	  if ($.trim(graphic.attributes.Desc3) != '') {
+		$(rightDiv).append('<p>');
+		$(rightDiv).append('<div>'+graphic.attributes.Desc3+'</div>');
+	  }
+  }
+  if (graphic.attributes.Desc4 != null) {
+	  if ($.trim(graphic.attributes.Desc4) != '') {
+		  $(rightDiv).append('<p>');
+		  $(rightDiv).append('<div>'+graphic.attributes.Desc4+'</div>');
+	  }
+  }
+  if (graphic.attributes.Desc5 != null) {
+	  if ($.trim(graphic.attributes.Desc5) != '') {
+		  $(rightDiv).append('<p>');
+		  $(rightDiv).append('<div>'+graphic.attributes.Desc5+'</div>');
+	  }
+  }
+
+  $(mainDiv).append(titleDiv);
+  $(mainDiv).append("<hr>"); 
+  $(mainDiv).append(leftDiv);
+  $(mainDiv).append(rightDiv);
+  
+  $.fn.colorbox({
+	  html:mainDiv,
+	  open:true,
+	  maxHeight:$(document).height() - 100,
+	  maxWidth:"575px",
+	  scrolling:false
+  });
+  	
+}
+
+function hoverInfoPos(x,y){
+	if (x <= ($("#map").width())-230){
+		$("#hoverInfo").css("left",x+15);
+	}
+	else{
+		$("#hoverInfo").css("left",x-25-($("#hoverInfo").width()));
+	}
+	if (y >= ($("#hoverInfo").height())+50){
+		$("#hoverInfo").css("top",y-35-($("#hoverInfo").height()));
+	}
+	else{
+		$("#hoverInfo").css("top",y-15+($("#hoverInfo").height()));
+	}
+	$("#hoverInfo").show();
+}
+
+function adjustPopup() {
+	
+	if (_map) { 
+
+		var box = dojo.contentBox(_map.container);        
+		
+		var width = 270, height = 300, // defaults
+		newWidth = Math.round(box.w * 0.45),             
+		newHeight = Math.round(box.h * 0.40);        
+		
+		if (newWidth < width) {
+			width = newWidth;
+		}
+		
+		if (newHeight < height) {
+			height = newHeight;
+		}
+		
+		_map.infoWindow.resize(width, height);
+		
+	}
+	
+}
+
+
+</script>
+
+</head>
+
+<body class="claro">
+
+    <!-- Header Section-->
+    <div id="header">
+      <div id="headerText">
+	    <h1 id="title">San Diego Shortlist</h1>
+	    <h2 id="subtitle">The city, curated! &nbsp;A selection of cool places to check out.</h2>
+      </div>
+      <div id="logoArea">
+        <div id="social"><a id="msLink" href="http://storymaps.esri.com" target="_blank">A story map </a><span  class='st_facebook' ></span><span  class='st_twitter' ></span>
+        </div>
+        <div id="logo"><a id="logoLink" href="http://www.esri.com" target="_blank"><img id="logoImg" src="images/esriGlobeLogow.png" alt="Esri - Home"></a></div>
+      </div>
+    </div>
+    
+ 	<div id="mainWindow" dojotype="dijit.layout.BorderContainer" style="width:100%;height:100%" design="headline" gutters="false">
+
+      <div id="paneTileList" dojotype="dijit.layout.ContentPane" region="left" style="overflow:hidden;width:500px; padding:0px;background-color:#b9b9b9">
+        <div style="width:100%;margin:auto;padding-bottom:10px; background-color:#7a7a7a">
+        	<div style="padding-left:17px;height:25px;">
+                <div class="tab" onclick="activateLayer(_layerFun)">Fun</div>
+                <div class="tab" onclick="activateLayer(_layerFood)">Food</div>
+                <div class="tab" onclick="activateLayer(_layerDesign)">Design</div>
+            </div>
+        </div>
+		<div id="divList" style="overflow:auto;margin:auto;height:100%;width:485px;background-color:#b9b9b9;padding-left:14px;margin-top:10px;padding-bottom:10px">
+	      	<ul id="myList" class="tilelist"></ul>
+		</div>
+      </div> 
+
+        <div id="map" dojotype="dijit.layout.ContentPane" region="center" style="overflow:hidden;height:100%">
+            <div id="zoomToggle">
+                <img id="zoomIn" src="images/ZoomLight_01.png">
+                <img id="zoomExtent" src="images/ZoomHome.png">
+                <img id="zoomOut" src="images/ZoomLight_03.png">
+            </div><!--?zoomToggle-->    
+            <div id="neighborhoodsCon">
+              	<div id="neighborhoodsToggle"><p id="neighborhoodsTogText">NEIGHBORHOODS ▼</p></div>
+	         	<div id="neighborhoodsDiv">
+                </div>
+            </div>
+            <div id="hoverInfo"></div>
+        </div>
+       
+ 	</div>
+    
+</body>
+
+</html>
