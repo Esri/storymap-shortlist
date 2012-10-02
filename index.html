@@ -330,7 +330,7 @@ function activateLayer(layer) {
 	$("ul.tilelist li").mouseout(tile_onMouseOut);
 	$("ul.tilelist li").click(tile_onClick);	
 	
-	$("#divList").animate({ scrollTop: 0 }, { duration: 200 } );
+	$("ul.tilelist").animate({ scrollTop: 0 }, { duration: 200 } );
 	
 }
 
@@ -488,15 +488,14 @@ function handleWindowResize() {
 
 	$("#mainWindow").height(heightDoc - ($("#header").height()));
 	dijit.byId("mainWindow").layout();
-	$("#paneTileList").height($("#mainWindow").height() - 35);
+	$("#divList").height($("#mainWindow").height() - 35);
+	$(".tilelist").height($("#divList").height() - 20);
 	$("#map").height($("#mainWindow").height() - 35);
-	$("#divList").height($("#paneTileList").height() - 30);
 	
 	adjustPopup();
 
 	console.log("main window height ",$("#mainWindow").height());
 	console.log("map height ",$("#map").height());
-	console.log("paneTileList height ",$("#paneTileList").height());
 
 }
 
@@ -668,11 +667,11 @@ function adjustPopup() {
         
         <div region="center" dojotype="dijit.layout.BorderContainer" gutters="false">
         
-          <div id="paneTileList" dojotype="dijit.layout.ContentPane" region="left" style="overflow:hidden;width:500px; padding:0px;background-color:#b9b9b9">
-            <div id="divList" style="overflow:auto;margin:auto;width:485px;background-color:#b9b9b9;padding-left:14px;margin-top:10px;padding-bottom:10px">
+            <div id="divList" dojotype="dijit.layout.ContentPane" 
+                                region="left" 
+                                style="overflow:hidden;margin:auto;width:480px;background-color:#b9b9b9">
                 <ul id="myList" class="tilelist"></ul>
             </div>
-          </div> 
     
             <div id="map" dojotype="dijit.layout.ContentPane" region="center" style="overflow:hidden">
                 <div id="zoomToggle">

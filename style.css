@@ -129,11 +129,11 @@ a:hover{
 }
 
 ul.tilelist {
-    width: 465px;
+    width: 487px;
 	height:50%;
 	padding-left:1px;
     display:inline-block;
-	overflow:visible;
+	overflow:auto;
 	margin-top:0px;
 	margin:auto;
 }
