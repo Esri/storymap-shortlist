@@ -105,10 +105,6 @@ function init() {
         _map.setExtent(_initExtent);
     });	
 	
-	$("#paneLeft").click(function(e) {
-        if ($(e.target).hasClass("tilelist")) unselect();
-    });
-	
 	$(document).bind('cbox_complete', function(){
 		$(".details .rightDiv").height($(".details").height() - 65);
 	});  
