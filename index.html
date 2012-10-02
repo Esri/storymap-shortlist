@@ -332,13 +332,6 @@ function activateLayer(layer) {
 
 function tile_onMouseOver(e) {
 	 $(this).stop().animate({'background-color' : COLOR_FULL});
-	 /*
-	if ($(this).hasClass("tile-selected")) {
-		return;
-	}
-	$(".tile").removeClass("tile-hover");
-	$(this).addClass("tile-hover");	
-	*/
 }
 
 function tile_onMouseOut(e) {
@@ -352,16 +345,9 @@ function tile_onMouseOut(e) {
 	}
 	
 	$(this).stop().animate({'background-color' : COLOR_DIM});
-	//$(".tile").removeClass("tile-hover");
-	
 }
 
 function tile_onClick(e) {
-	/*
-	$(".tile").removeClass("tile-hover");
-	$(".tile").removeClass("tile-selected");
-	$(this).addClass("tile-selected");
-	*/
 	// turn off the last selected tile...
 	
 	if (_selected != null) {
@@ -479,9 +465,6 @@ function handleWindowResize() {
 	
 	var heightDoc = getViewportDimensions()[1];
 	
-	console.log("doc height ", heightDoc);
-	console.log("header height ", $("#header").height());
-
 	$("#mainWindow").height(heightDoc - ($("#header").height()));
 	dijit.byId("mainWindow").layout();
 	$("#paneLeft").height($("#mainWindow").height() - 35);
@@ -489,9 +472,6 @@ function handleWindowResize() {
 	$("#map").height($("#mainWindow").height() - 35);
 	
 	adjustPopup();
-
-	console.log("main window height ",$("#mainWindow").height());
-	console.log("map height ",$("#map").height());
 
 }
 
