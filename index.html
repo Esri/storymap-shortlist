@@ -105,7 +105,7 @@ function init() {
         _map.setExtent(_initExtent);
     });	
 	
-	$("#divList").click(function(e) {
+	$("#paneLeft").click(function(e) {
         if ($(e.target).hasClass("tilelist")) unselect();
     });
 	
@@ -488,8 +488,8 @@ function handleWindowResize() {
 
 	$("#mainWindow").height(heightDoc - ($("#header").height()));
 	dijit.byId("mainWindow").layout();
-	$("#divList").height($("#mainWindow").height() - 35);
-	$(".tilelist").height($("#divList").height() - 20);
+	$("#paneLeft").height($("#mainWindow").height() - 35);
+	$(".tilelist").height($("#paneLeft").height() - 20);
 	$("#map").height($("#mainWindow").height() - 35);
 	
 	adjustPopup();
@@ -667,7 +667,7 @@ function adjustPopup() {
         
         <div region="center" dojotype="dijit.layout.BorderContainer" gutters="false">
         
-            <div id="divList" dojotype="dijit.layout.ContentPane" 
+            <div id="paneLeft" dojotype="dijit.layout.ContentPane" 
                                 region="left" 
                                 style="overflow:hidden;margin:auto;width:480px;background-color:#b9b9b9">
                 <ul id="myList" class="tilelist"></ul>
