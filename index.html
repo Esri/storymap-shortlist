@@ -79,7 +79,6 @@ var _layerParks;
 var _layerCurrent;
 
 var _selected;
-var _baseFeature;
 
 var _initExtent;
 
@@ -394,12 +393,12 @@ function baselayer_onMouseOut(event)
 }
 
 function baselayer_onClick(event) {
-	_baseFeature = event.graphic;
+	var feature = event.graphic;
 	_map.infoWindow.setTitle(event.graphic.attributes.TITLE);
 	_map.infoWindow.setContent(event.graphic.attributes.Short_Desc+"<p><span class='infoWindowLink'>Details >></span></p>");
 	_map.infoWindow.show(event.mapPoint);	
 	$(".infoWindowLink").click(function(e) {
-        showDetails(_baseFeature);
+        showDetails(feature);
     });
 	$("#hoverInfo").hide();	
 }
