@@ -280,7 +280,7 @@ ul.tilelist .blurb {
 
 #neighborhoodsDiv{
 	display:none;
-	background:#848484;
+	background:#7A7A7A;
 	max-height:450px;
 	overflow:auto;
 	padding:10px;
@@ -297,7 +297,7 @@ ul.tilelist .blurb {
 #neighborhoodsToggle{
 	position:relative;
 	float:right;
-	background:#848484;
+	background:#7A7A7A;
 	margin-top:-1px;
 	width:160px;
 	.height:28px;
