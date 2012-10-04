@@ -113,10 +113,10 @@ function init() {
 	
 	$("#neighborhoodsToggle").click(function(){
 		if ($("#neighborhoodsDiv").css('display')=='none'){
-		  $("#neighborhoodsTogText").html('NEIGHBORHOODS &#x25B2;');
+		  $("#neighborhoodsTogText").html('Neighborhoods &#x25B2;');
 		}
 		else{
-		  $("#neighborhoodsTogText").html('NEIGHBORHOODS &#x25BC;');
+		  $("#neighborhoodsTogText").html('Neighborhoods &#x25BC;');
 		}
 		$("#neighborhoodsDiv").slideToggle();
 	});
@@ -180,7 +180,7 @@ function loadNeighborhoods() {
 		var name = $(this).html();
 		var extent = new esri.geometry.Extent($.grep(_bookmarks,function(n,i){return n.name == name})[0].extent);
 		_map.setExtent(extent);	
-		$("#neighborhoodsTogText").html('NEIGHBORHOODS &#x25BC;');
+		$("#neighborhoodsTogText").html('Neighborhoods &#x25BC;');
 		$("#neighborhoodsDiv").slideToggle();
     });
 
@@ -663,7 +663,7 @@ function adjustPopup() {
         </div>
 
         <div id="neighborhoodsCon">
-            <div id="neighborhoodsToggle"><p id="neighborhoodsTogText">NEIGHBORHOODS ▼</p></div>
+            <div id="neighborhoodsToggle"><p id="neighborhoodsTogText">Neighborhoods ▼</p></div>
             <div id="neighborhoodsDiv">
             </div>
         </div>
