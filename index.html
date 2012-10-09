@@ -57,6 +57,8 @@ dojo.require("esri.arcgis.utils");
 var COLOR_DIM = "#E7E7E7";
 var COLOR_FULL = "#FFFFFF";
 
+var SUPPORT_LAYERS = ["Ferries","Neighborhoods","Beaches","Parks"];
+
 /******************************************************
 ***************** end config section ******************
 *******************************************************/
@@ -194,29 +196,13 @@ function initMap(layers) {
 	_map.removeLayer(findLayer(_map,"Fun"));
 	_map.removeLayer(findLayer(_map,"Design"));
 	
-	_layerFerries = findLayer(_map,"Ferries");
-	
-	dojo.connect(_layerFerries, "onMouseOver", baselayer_onMouseOver);
-	dojo.connect(_layerFerries, "onMouseOut", baselayer_onMouseOut);
-	dojo.connect(_layerFerries, "onClick", baselayer_onClick);
-	
-	_layerNeighborhoods = findLayer(_map,"Neighborhoods");
-
-	dojo.connect(_layerNeighborhoods, "onMouseOver", baselayer_onMouseOver);
-	dojo.connect(_layerNeighborhoods, "onMouseOut", baselayer_onMouseOut);
-	dojo.connect(_layerNeighborhoods, "onClick", baselayer_onClick);
-	
-	_layerBeaches = findLayer(_map,"Beaches");	
-
-	dojo.connect(_layerBeaches, "onMouseOver", baselayer_onMouseOver);
-	dojo.connect(_layerBeaches, "onMouseOut", baselayer_onMouseOut);
-	dojo.connect(_layerBeaches, "onClick", baselayer_onClick);
-	
-	_layerParks = findLayer(_map,"Parks");	
-
-	dojo.connect(_layerParks, "onMouseOver", baselayer_onMouseOver);
-	dojo.connect(_layerParks, "onMouseOut", baselayer_onMouseOut);
-	dojo.connect(_layerParks, "onClick", baselayer_onClick);
+	var supportLayer;
+	$.each(SUPPORT_LAYERS,function(index,value) {
+		supportLayer = findLayer(_map,value);
+		dojo.connect(supportLayer, "onMouseOver", baselayer_onMouseOver);
+		dojo.connect(supportLayer, "onMouseOut", baselayer_onMouseOut);
+		dojo.connect(supportLayer, "onClick", baselayer_onClick);
+	});
 
 	_layerFun = buildLayer(
 				$.grep(layers,function(n,i){return n.title == "Fun"})[0].featureCollection.layers[0].featureSet.features.sort(SortByID),
