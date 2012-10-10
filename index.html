@@ -58,7 +58,12 @@ var COLOR_DIM = "#E7E7E7";
 var COLOR_FULL = "#FFFFFF";
 
 var SUPPORT_LAYERS = ["Ferries","Neighborhoods","Beaches","Parks"];
-
+var CONTENT_LAYERS = [
+					{name:"Fun",iconColor:"green",iconPrefix:"NumberIcong",color:"#22880d"},
+					{name:"Food",iconColor:"red",iconPrefix:"NumberIcon",color:"#fd2d29"},
+					{name:"Design",iconColor:"blue",iconPrefix:"NumberIconb",color:"#177ff1"}
+					];
+					
 /******************************************************
 ***************** end config section ******************
 *******************************************************/
@@ -68,15 +73,6 @@ var _isMobile = isMobile();
 var _map;
 
 var _bookmarks;
-
-var _layerFood;
-var _layerFun;
-var _layerDesign;
-
-var _layerFerries;
-var _layerNeighborhoods;
-var _layerBeaches;
-var _layerParks;
 
 var _layerCurrent;
 
@@ -151,7 +147,7 @@ function init() {
 		loadNeighborhoods();
 		
 		var layers = response.itemInfo.itemData.operationalLayers; 
-
+		
 		if(_map.loaded){
 			initMap(layers);
 		} else {
@@ -159,6 +155,7 @@ function init() {
 				initMap(layers);
 			});
 		}
+		
 	});
 	
 	mapDeferred.addErrback(function(error) {
@@ -192,10 +189,6 @@ function initMap(layers) {
 	
 	_initExtent = _map.extent;
 	
-	_map.removeLayer(findLayer(_map,"Food"));
-	_map.removeLayer(findLayer(_map,"Fun"));
-	_map.removeLayer(findLayer(_map,"Design"));
-	
 	var supportLayer;
 	$.each(SUPPORT_LAYERS,function(index,value) {
 		supportLayer = findLayer(_map,value);
@@ -203,46 +196,27 @@ function initMap(layers) {
 		dojo.connect(supportLayer, "onMouseOut", baselayer_onMouseOut);
 		dojo.connect(supportLayer, "onClick", baselayer_onClick);
 	});
-
-	_layerFun = buildLayer(
-				$.grep(layers,function(n,i){return n.title == "Fun"})[0].featureCollection.layers[0].featureSet.features.sort(SortByID),
-				"green",
-				"NumberIcong"
-				);
-
-	dojo.connect(_layerFun, "onMouseOver", layer_onMouseOver);
-	dojo.connect(_layerFun, "onMouseOut", layer_onMouseOut);
-	dojo.connect(_layerFun, "onClick", layer_onClick);
-
-	_map.addLayer(_layerFun);
-		
-	_layerFood = buildLayer(
-				$.grep(layers,function(n,i){return n.title == "Food"})[0].featureCollection.layers[0].featureSet.features.sort(SortByID),
-				"red",
-				"NumberIcon"
-				);
-				
-	dojo.connect(_layerFood, "onMouseOver", layer_onMouseOver);
-	dojo.connect(_layerFood, "onMouseOut", layer_onMouseOut);
-	dojo.connect(_layerFood, "onClick", layer_onClick);
-				
-	_map.addLayer(_layerFood);
-
-
-	_layerDesign = buildLayer(
-				$.grep(layers,function(n,i){return n.title == "Design"})[0].featureCollection.layers[0].featureSet.features.sort(SortByID),
-				"blue",
-				"NumberIconb"
-				);
-				
-	dojo.connect(_layerDesign, "onMouseOver", layer_onMouseOver);
-	dojo.connect(_layerDesign, "onMouseOut", layer_onMouseOut);
-	dojo.connect(_layerDesign, "onClick", layer_onClick);
-				
-	_map.addLayer(_layerDesign);
-
 	
-	activateLayer(_layerFun);
+	var contentLayer;
+
+	$.each(CONTENT_LAYERS,function(index,value) {
+
+		_map.removeLayer(findLayer(_map,value.name));
+
+		contentLayer = buildLayer(
+					$.grep(layers,function(n,i){return n.title == value.name})[0].featureCollection.layers[0].featureSet.features.sort(SortByID),
+					value.iconColor,
+					value.iconPrefix
+					);
+		dojo.connect(contentLayer, "onMouseOver", layer_onMouseOver);
+		dojo.connect(contentLayer, "onMouseOut", layer_onMouseOut);
+		dojo.connect(contentLayer, "onClick", layer_onClick);
+	
+		_map.addLayer(contentLayer);
+		value.layer = contentLayer;
+	});
+	
+	activateLayer(CONTENT_LAYERS[0].layer);
 	dojo.connect(_map.infoWindow,"onHide",infoWindow_onHide);
 	handleWindowResize();
 	$("#zoomToggle").css("visibility","visible");
@@ -252,35 +226,20 @@ function initMap(layers) {
 
 
 function activateLayer(layer) {
-		
 	_selected = null;
 	postSelection();
 
 	_layerCurrent = layer;
-	
-	var category;
-	var color;
 
-	if (_layerCurrent == _layerFun) {
-		category = "Fun";
-		color = "#22880d"
-	}  else if (_layerCurrent == _layerFood) {
-		category = "Food";
-		color = "#fd2d29"
-	} else if (_layerCurrent == _layerDesign) {
-		category = "Design";
-		color = "#177ff1";
-	} else {
-		throw("invalid category");
-	}
+	var meta = $.grep(CONTENT_LAYERS,function(n,i){return n.layer == _layerCurrent})[0];
 	
-	var tab = $.grep($(".tab"),function(n,i){return $(n).html() == category})[0];
+	var tab = $.grep($(".tab"),function(n,i){return $(n).html() == meta.name})[0];
 	$(".tab").removeClass("tab-selected");
 	$(tab).addClass("tab-selected");
-	
-	_layerFood.setVisibility(_layerFood == _layerCurrent);
-	_layerFun.setVisibility(_layerFun == _layerCurrent);
-	_layerDesign.setVisibility(_layerDesign == _layerCurrent);
+
+	$.each(CONTENT_LAYERS,function(index,value){
+		value.layer.setVisibility(value.layer == _layerCurrent);
+	});
 
 	$("#myList").empty();
 	
@@ -300,7 +259,7 @@ function activateLayer(layer) {
 		tile = $('<li id="item'+value.attributes.Number+'" style="display:'+display+'">');
 		img = $('<img src="'+value.attributes.IMAGE_URL+'">');
 		footer = $('<div class="footer"></div>');
-		num = $('<div class="num" style="background-color:'+color+'">'+value.attributes.Number+'</div>');
+		num = $('<div class="num" style="background-color:'+meta.color+'">'+value.attributes.Number+'</div>');
 		title = $('<div class="blurb">'+value.attributes.TITLE+'</div>');
 		$(footer).append(num);
 		$(footer).append(title);
@@ -623,9 +582,9 @@ function adjustPopup() {
 
         <div region="top" dojotype="dijit.layout.ContentPane" style="width:100%;height:35px;margin:auto;overflow:hidden;background-color:#7a7a7a;margin:0px;padding:0px;">
             <div style="padding-left:17px;">
-                <div class="tab" onclick="activateLayer(_layerFun)">Fun</div>
-                <div class="tab" onclick="activateLayer(_layerFood)">Food</div>
-                <div class="tab" onclick="activateLayer(_layerDesign)">Design</div>
+                <div class="tab" onclick="activateLayer(CONTENT_LAYERS[0].layer)">Fun</div>
+                <div class="tab" onclick="activateLayer(CONTENT_LAYERS[1].layer)">Food</div>
+                <div class="tab" onclick="activateLayer(CONTENT_LAYERS[2].layer)">Design</div>
             </div>
         </div>
         
