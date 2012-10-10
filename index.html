@@ -586,41 +586,40 @@ function adjustPopup() {
     
  	<div id="mainWindow" dojotype="dijit.layout.BorderContainer" style="width:100%;height:100%" design="headline" gutters="false">
 
-        <div region="top" dojotype="dijit.layout.ContentPane" style="width:100%;height:35px;margin:auto;overflow:hidden;background-color:#7a7a7a;margin:0px;padding:0px;">
+        <div region="top" dojotype="dijit.layout.ContentPane" style="width:100%;height:35px;margin:auto;overflow:visible;background-color:#7a7a7a;margin:0px;padding:0px;z-index:101">
             <div style="padding-left:17px;">
                 <div class="tab" onclick="activateLayer(CONTENT_LAYERS[0].layer)">Fun</div>
                 <div class="tab" onclick="activateLayer(CONTENT_LAYERS[1].layer)">Food</div>
                 <div class="tab" onclick="activateLayer(CONTENT_LAYERS[2].layer)">Design</div>
             </div>
-        </div>
-        
-        <div region="center" dojotype="dijit.layout.BorderContainer" gutters="false">
-        
-            <div id="paneLeft" dojotype="dijit.layout.ContentPane" 
-                                region="left" 
-                                style="overflow:hidden;width:480px;background-color:#b9b9b9">
-                <ul id="myList" class="tilelist"></ul>
-            </div>
     
-            <div id="map" dojotype="dijit.layout.ContentPane" region="center" style="overflow:hidden">
-                <div id="zoomToggle">
-                    <img id="zoomIn" src="images/ZoomLight_01.png">
-                    <img id="zoomExtent" src="images/ZoomHome.png">
-                    <img id="zoomOut" src="images/ZoomLight_03.png">
-                </div><!--?zoomToggle-->    
-                <div id="hoverInfo"></div>
+            <div id="neighborhoodsCon">
+                <div id="neighborhoodsToggle"><p id="neighborhoodsTogText">Neighborhoods ▼</p></div>
+                <div id="neighborhoodsDiv">
+                </div>
             </div>
 
         </div>
+        
+        
+        <div id="paneLeft" dojotype="dijit.layout.ContentPane" 
+                            region="left" 
+                            style="overflow:hidden;width:480px;background-color:#b9b9b9">
+            <ul id="myList" class="tilelist"></ul>
+        </div>
 
-        <div id="neighborhoodsCon">
-            <div id="neighborhoodsToggle"><p id="neighborhoodsTogText">Neighborhoods ▼</p></div>
-            <div id="neighborhoodsDiv">
-            </div>
+        <div id="map" dojotype="dijit.layout.ContentPane" region="center" style="overflow:hidden">
+            <div id="zoomToggle">
+                <img id="zoomIn" src="images/ZoomLight_01.png">
+                <img id="zoomExtent" src="images/ZoomHome.png">
+                <img id="zoomOut" src="images/ZoomLight_03.png">
+            </div><!--?zoomToggle-->    
+            <div id="hoverInfo"></div>
         </div>
 
        
  	</div>
+
     
 </body>
 
