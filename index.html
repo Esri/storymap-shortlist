@@ -59,14 +59,20 @@ var COLOR_FULL = "#FFFFFF";
 
 var SUPPORT_LAYERS = ["Ferries","Neighborhoods","Beaches","Parks"];
 var CONTENT_LAYERS = [
-					{name:"Fun",iconColor:"green",iconPrefix:"NumberIcong",color:"#22880d"},
-					{name:"Food",iconColor:"red",iconPrefix:"NumberIcon",color:"#fd2d29"},
-					{name:"Design",iconColor:"blue",iconPrefix:"NumberIconb",color:"#177ff1"}
+					{name:"Fun"},
+					{name:"Food"},
+					{name:"Design"}
 					];
 					
 /******************************************************
 ***************** end config section ******************
 *******************************************************/
+
+var COLOR_SCHEMES = [
+					{iconDir:"green",iconPrefix:"NumberIcong",color:"#22880d"},
+					{iconDir:"red",iconPrefix:"NumberIcon",color:"#fd2d29"},
+					{iconDir:"blue",iconPrefix:"NumberIconb",color:"#177ff1"}
+					]
 
 var _isMobile = isMobile();
 
@@ -205,9 +211,10 @@ function initMap(layers) {
 
 		contentLayer = buildLayer(
 					$.grep(layers,function(n,i){return n.title == value.name})[0].featureCollection.layers[0].featureSet.features.sort(SortByID),
-					value.iconColor,
-					value.iconPrefix
+					COLOR_SCHEMES[index].iconDir,
+					COLOR_SCHEMES[index].iconPrefix
 					);
+		contentLayer.color = COLOR_SCHEMES[index].color;
 		dojo.connect(contentLayer, "onMouseOver", layer_onMouseOver);
 		dojo.connect(contentLayer, "onMouseOut", layer_onMouseOut);
 		dojo.connect(contentLayer, "onClick", layer_onClick);
@@ -232,7 +239,6 @@ function activateLayer(layer) {
 	_layerCurrent = layer;
 
 	var meta = $.grep(CONTENT_LAYERS,function(n,i){return n.layer == _layerCurrent})[0];
-	
 	var tab = $.grep($(".tab"),function(n,i){return $(n).html() == meta.name})[0];
 	$(".tab").removeClass("tab-selected");
 	$(tab).addClass("tab-selected");
@@ -259,7 +265,7 @@ function activateLayer(layer) {
 		tile = $('<li id="item'+value.attributes.Number+'" style="display:'+display+'">');
 		img = $('<img src="'+value.attributes.IMAGE_URL+'">');
 		footer = $('<div class="footer"></div>');
-		num = $('<div class="num" style="background-color:'+meta.color+'">'+value.attributes.Number+'</div>');
+		num = $('<div class="num" style="background-color:'+_layerCurrent.color+'">'+value.attributes.Number+'</div>');
 		title = $('<div class="blurb">'+value.attributes.TITLE+'</div>');
 		$(footer).append(num);
 		$(footer).append(title);
