@@ -213,6 +213,10 @@ function initMap(layers) {
 	var contentLayer;
 	$.each(pointLayers,function(index,value) {
 		
+		if (index > 2) {
+			return false;
+		}
+		
 		_map.removeLayer(findLayer(_map,value.title));
 
 		contentLayer = buildLayer(
