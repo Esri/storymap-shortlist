@@ -56,23 +56,18 @@ dojo.require("esri.arcgis.utils");
 
 var COLOR_DIM = "#E7E7E7";
 var COLOR_FULL = "#FFFFFF";
-
-var SUPPORT_LAYERS = ["Ferries","Neighborhoods","Beaches","Parks"];
-var CONTENT_LAYERS = [
-					{name:"Fun"},
-					{name:"Food"},
-					{name:"Design"}
-					];
 					
 /******************************************************
 ***************** end config section ******************
 *******************************************************/
 
 var COLOR_SCHEMES = [
-					{iconDir:"green",iconPrefix:"NumberIcong",color:"#22880d"},
+					{iconDir:"blue",iconPrefix:"NumberIconb",color:"#177ff1"},
 					{iconDir:"red",iconPrefix:"NumberIcon",color:"#fd2d29"},
-					{iconDir:"blue",iconPrefix:"NumberIconb",color:"#177ff1"}
-					]
+					{iconDir:"green",iconPrefix:"NumberIcong",color:"#22880d"}					
+					];
+					
+var _contentLayers = [];
 
 var _isMobile = isMobile();
 
@@ -193,37 +188,50 @@ function loadNeighborhoods() {
 
 function initMap(layers) {
 	
+	var supportLayers = [];
+	var pointLayers = [];
+	
+	$.each(layers,function(index,value){
+		if (value.featureCollection.layers[0].featureSet.geometryType == "esriGeometryPoint") {
+			pointLayers.push(value);
+		} else {
+			supportLayers.push(value);
+		}
+	});
+	
 	_initExtent = _map.extent;
 	
 	var supportLayer;
-	$.each(SUPPORT_LAYERS,function(index,value) {
-		supportLayer = findLayer(_map,value);
+	$.each(supportLayers,function(index,value) {
+		supportLayer = findLayer(_map,value.title);
 		dojo.connect(supportLayer, "onMouseOver", baselayer_onMouseOver);
 		dojo.connect(supportLayer, "onMouseOut", baselayer_onMouseOut);
 		dojo.connect(supportLayer, "onClick", baselayer_onClick);
 	});
 	
 	var contentLayer;
-
-	$.each(CONTENT_LAYERS,function(index,value) {
-
-		_map.removeLayer(findLayer(_map,value.name));
+	$.each(pointLayers,function(index,value) {
+		
+		_map.removeLayer(findLayer(_map,value.title));
 
 		contentLayer = buildLayer(
-					$.grep(layers,function(n,i){return n.title == value.name})[0].featureCollection.layers[0].featureSet.features.sort(SortByID),
+					value.featureCollection.layers[0].featureSet.features.sort(SortByID),
 					COLOR_SCHEMES[index].iconDir,
 					COLOR_SCHEMES[index].iconPrefix
 					);
+					
 		contentLayer.color = COLOR_SCHEMES[index].color;
+		contentLayer.title = value.title;
 		dojo.connect(contentLayer, "onMouseOver", layer_onMouseOver);
 		dojo.connect(contentLayer, "onMouseOut", layer_onMouseOut);
 		dojo.connect(contentLayer, "onClick", layer_onClick);
 	
 		_map.addLayer(contentLayer);
-		value.layer = contentLayer;
+		_contentLayers.push(contentLayer);
+		
 	});
-	
-	activateLayer(CONTENT_LAYERS[0].layer);
+	_contentLayers.reverse();
+	activateLayer(_contentLayers[0]);
 	dojo.connect(_map.infoWindow,"onHide",infoWindow_onHide);
 	handleWindowResize();
 	$("#zoomToggle").css("visibility","visible");
@@ -235,16 +243,14 @@ function initMap(layers) {
 function activateLayer(layer) {
 	_selected = null;
 	postSelection();
-
 	_layerCurrent = layer;
 
-	var meta = $.grep(CONTENT_LAYERS,function(n,i){return n.layer == _layerCurrent})[0];
-	var tab = $.grep($(".tab"),function(n,i){return $(n).html() == meta.name})[0];
+	var tab = $.grep($(".tab"),function(n,i){return $(n).html() == _layerCurrent.title})[0];
 	$(".tab").removeClass("tab-selected");
 	$(tab).addClass("tab-selected");
 
-	$.each(CONTENT_LAYERS,function(index,value){
-		value.layer.setVisibility(value.layer == _layerCurrent);
+	$.each(_contentLayers,function(index,value){
+		value.setVisibility(value == _layerCurrent);
 	});
 
 	$("#myList").empty();
@@ -588,9 +594,9 @@ function adjustPopup() {
 
         <div region="top" dojotype="dijit.layout.ContentPane" style="width:100%;height:35px;margin:auto;overflow:visible;background-color:#7a7a7a;margin:0px;padding:0px;z-index:101">
             <div style="padding-left:17px;">
-                <div class="tab" onclick="activateLayer(CONTENT_LAYERS[0].layer)">Fun</div>
-                <div class="tab" onclick="activateLayer(CONTENT_LAYERS[1].layer)">Food</div>
-                <div class="tab" onclick="activateLayer(CONTENT_LAYERS[2].layer)">Design</div>
+                <div class="tab" onclick="activateLayer(_contentLayers[1])">Fun</div>
+                <div class="tab" onclick="activateLayer(_contentLayers[0])">Food</div>
+                <div class="tab" onclick="activateLayer(_contentLayers[2])">Design</div>
             </div>
     
             <div id="neighborhoodsCon">
