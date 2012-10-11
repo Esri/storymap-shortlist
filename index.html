@@ -84,8 +84,6 @@ var _initExtent;
 var _dojoReady = false;
 var _jqueryReady = false;
 
-var _isLegacyIE = (navigator.appVersion.indexOf("MSIE 7.0") > -1) || (navigator.appVersion.indexOf("MSIE 8.0") > -1);
-
 dojo.addOnLoad(function() {_dojoReady = true;init()});
 jQuery(document).ready(function() {_jqueryReady = true;init()});
 
