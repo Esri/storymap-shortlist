@@ -56,6 +56,8 @@ dojo.require("esri.arcgis.utils");
 
 var COLOR_DIM = "#E7E7E7";
 var COLOR_FULL = "#FFFFFF";
+
+var WEBMAP_ID = "1966ef409a344d089b001df85332608f";
 					
 /******************************************************
 ***************** end config section ******************
@@ -118,7 +120,7 @@ function init() {
 		$("#neighborhoodsDiv").slideToggle();
 	});
 		
-	var mapDeferred = esri.arcgis.utils.createMap("1966ef409a344d089b001df85332608f", "map", {
+	var mapDeferred = esri.arcgis.utils.createMap(WEBMAP_ID, "map", {
 		mapOptions: {
 			slider: false
 		},
