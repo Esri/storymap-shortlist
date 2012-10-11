@@ -54,7 +54,10 @@ dojo.require("esri.arcgis.utils");
 ***************** begin config section ****************
 *******************************************************/
 
-var WEBMAP_ID = "1966ef409a344d089b001df85332608f";
+var WEBMAP_ID = getParameterByName("webmap");
+if (WEBMAP_ID == "") {
+	WEBMAP_ID = "1966ef409a344d089b001df85332608f";
+}
 					
 /******************************************************
 ***************** end config section ******************
