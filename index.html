@@ -132,7 +132,10 @@ function init() {
 	});
 	
 	mapDeferred.addCallback(function(response) {	  
-	
+		
+		$("#title").html(response.itemInfo.item.title);
+		$("#subtitle").html(response.itemInfo.item.snippet);
+		
 		_map = response.map;
 		  
 		  //resize the map when the browser resizes
@@ -588,8 +591,8 @@ function adjustPopup() {
     <!-- Header Section-->
     <div id="header">
       <div id="headerText">
-	    <h1 id="title">San Diego Shortlist</h1>
-	    <h2 id="subtitle">The city, curated! &nbsp;A selection of cool places to check out.</h2>
+	    <h1 id="title"></h1>
+	    <h2 id="subtitle"></h2>
       </div>
       <div id="logoArea">
         <div id="social"><a id="msLink" href="http://storymaps.esri.com" target="_blank">A story map </a><span  class='st_facebook' ></span><span  class='st_twitter' ></span>
