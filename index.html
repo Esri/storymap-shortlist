@@ -215,28 +215,23 @@ function initMap(layers) {
 	
 	var contentLayer;
 	$.each(pointLayers,function(index,value) {
-		
-		if (index > 2) {
-			return false;
-		}
-		
 		_map.removeLayer(findLayer(_map,value.title));
-
-		contentLayer = buildLayer(
-					value.featureCollection.layers[0].featureSet.features.sort(SortByID),
-					COLOR_SCHEMES[index].iconDir,
-					COLOR_SCHEMES[index].iconPrefix
-					);
-					
-		contentLayer.color = COLOR_SCHEMES[index].color;
-		contentLayer.title = value.title;
-		dojo.connect(contentLayer, "onMouseOver", layer_onMouseOver);
-		dojo.connect(contentLayer, "onMouseOut", layer_onMouseOut);
-		dojo.connect(contentLayer, "onClick", layer_onClick);
-	
-		_map.addLayer(contentLayer);
-		_contentLayers.push(contentLayer);
+		if (index <= 2) {
+			contentLayer = buildLayer(
+						value.featureCollection.layers[0].featureSet.features.sort(SortByID),
+						COLOR_SCHEMES[index].iconDir,
+						COLOR_SCHEMES[index].iconPrefix
+						);
+						
+			contentLayer.color = COLOR_SCHEMES[index].color;
+			contentLayer.title = value.title;
+			dojo.connect(contentLayer, "onMouseOver", layer_onMouseOver);
+			dojo.connect(contentLayer, "onMouseOut", layer_onMouseOut);
+			dojo.connect(contentLayer, "onClick", layer_onClick);
 		
+			_map.addLayer(contentLayer);
+			_contentLayers.push(contentLayer);
+		}
 	});
 	
 	_contentLayers.reverse();
