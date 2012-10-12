@@ -211,6 +211,9 @@ function initMap(layers) {
 	var supportLayer;
 	$.each(supportLayers,function(index,value) {
 		supportLayer = findLayer(_map,value.title);
+		$.each(supportLayer.graphics,function(index,value) {
+			value.attributes.getValueCI = getValueCI; // assign extra method to handle case sensitivity
+		});
 		dojo.connect(supportLayer, "onMouseOver", baselayer_onMouseOver);
 		dojo.connect(supportLayer, "onMouseOut", baselayer_onMouseOut);
 		dojo.connect(supportLayer, "onClick", baselayer_onClick);
@@ -283,7 +286,7 @@ function activateLayer(layer) {
 		img = $('<img src="'+value.attributes.IMAGE_URL+'">');
 		footer = $('<div class="footer"></div>');
 		num = $('<div class="num" style="background-color:'+_layerCurrent.color+'">'+value.attributes.Number+'</div>');
-		title = $('<div class="blurb">'+value.attributes.TITLE+'</div>');
+		title = $('<div class="blurb">'+value.attributes.getValueCI("Title")+'</div>');
 		$(footer).append(num);
 		$(footer).append(title);
 		$(tile).append(img);
@@ -348,7 +351,7 @@ function baselayer_onMouseOver(event)
 	if (_isMobile) return;	
 	_map.setMapCursor("pointer");
 	var graphic = event.graphic;
-	$("#hoverInfo").html(graphic.attributes.TITLE);
+	$("#hoverInfo").html(graphic.attributes.getValueCI("Title"));
 	var pt = event.screenPoint;
 	hoverInfoPos(pt.x,pt.y);
 }
@@ -362,7 +365,7 @@ function baselayer_onMouseOut(event)
 
 function baselayer_onClick(event) {
 	var feature = event.graphic;
-	_map.infoWindow.setTitle(event.graphic.attributes.TITLE);
+	_map.infoWindow.setTitle(event.graphic.attributes.getValueCI("Title"));
 	_map.infoWindow.setContent(event.graphic.attributes.Short_Desc+"<p><span class='infoWindowLink'>Details >></span></p>");
 	_map.infoWindow.show(event.mapPoint);	
 	$(".infoWindowLink").click(function(e) {
@@ -391,7 +394,7 @@ function layer_onMouseOver(event)
 	var graphic = event.graphic;
 	if (graphic == _selected) return;
 	graphic.setSymbol(graphic.symbol.setHeight(30).setWidth(24));
-	$("#hoverInfo").html(graphic.attributes.TITLE);
+	$("#hoverInfo").html(graphic.attributes.getValueCI("Title"));
 	var pt = _map.toScreen(graphic.geometry);
 	hoverInfoPos(pt.x,pt.y);
 }
@@ -426,9 +429,21 @@ function buildLayer(arr,iconDir,root) {
 	$.each(arr,function(index,value){
 		pt = new esri.geometry.Point(value.geometry.x,value.geometry.y,value.geometry.spatialReference);
 		sym = new esri.symbol.PictureMarkerSymbol("images/icons/"+iconDir+"/"+root+value.attributes.Number+".png",22,28);
+		value.attributes.getValueCI = getValueCI; // assign extra method to handle case sensitivity
 		layer.add(new esri.Graphic(pt,sym,value.attributes));
 	});
 	return layer;
+}
+
+function getValueCI(field) {
+	var found;
+	$.each(this,function(index,value){
+		if (index.toUpperCase() == field.toUpperCase()) {
+			found = index;
+			return false;
+		}
+	});
+	return this[found];	
 }
 
 function handleWindowResize() {
@@ -451,7 +466,7 @@ function postSelection() {
 	if (_selected == null) {
 		_map.infoWindow.hide();
 	} else {
-		_map.infoWindow.setTitle(_selected.attributes.TITLE);
+		_map.infoWindow.setTitle(_selected.attributes.getValueCI("Title"));
 		_map.infoWindow.setContent(_selected.attributes.Short_Desc+"<p><span class='infoWindowLink'>Details >></span></p>");
 		_map.infoWindow.show(_selected.geometry);	
 		$(".infoWindowLink").click(function(e) {
@@ -466,7 +481,7 @@ function postSelection() {
 function showDetails(graphic) {
 	
   var mainDiv = $('<div class="details"></div>');
-  var titleDiv = $('<div class="title">'+graphic.attributes.TITLE+'</div>');
+  var titleDiv = $('<div class="title">'+graphic.attributes.getValueCI("Title")+'</div>');
   var leftDiv = $('<div class="leftDiv"></div>');
   var rightDiv = $('<div class="rightDiv"></div>');
   
