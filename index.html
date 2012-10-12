@@ -211,6 +211,7 @@ function initMap(layers) {
 	var supportLayer;
 	$.each(supportLayers,function(index,value) {
 		supportLayer = findLayer(_map,value.title);
+		if (supportLayer == null) return;
 		$.each(supportLayer.graphics,function(index,value) {
 			value.attributes.getValueCI = getValueCI; // assign extra method to handle case sensitivity
 		});
@@ -283,7 +284,7 @@ function activateLayer(layer) {
 			display = "none";
 		}
 		tile = $('<li id="item'+value.attributes.Number+'" style="display:'+display+'">');
-		img = $('<img src="'+value.attributes.IMAGE_URL+'">');
+		img = $('<img src="'+value.attributes.getValueCI("Image_URL")+'">');
 		footer = $('<div class="footer"></div>');
 		num = $('<div class="num" style="background-color:'+_layerCurrent.color+'">'+value.attributes.Number+'</div>');
 		title = $('<div class="blurb">'+value.attributes.getValueCI("Title")+'</div>');
@@ -485,7 +486,7 @@ function showDetails(graphic) {
   var leftDiv = $('<div class="leftDiv"></div>');
   var rightDiv = $('<div class="rightDiv"></div>');
   
-  var imageDiv = $('<img src="'+graphic.attributes.IMAGE_URL+'">');	
+  var imageDiv = $('<img src="'+graphic.attributes.getValueCI("Image_URL")+'">');	
   var addressDiv = $('<div class="address">'+graphic.attributes.Address+'</div>');
   
   $(leftDiv).append(imageDiv);
