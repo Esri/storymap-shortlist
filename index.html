@@ -197,7 +197,7 @@ function loadNeighborhoods() {
 		var name = $(this).html();
 		var extent = new esri.geometry.Extent($.grep(_bookmarks,function(n,i){return n.name == name})[0].extent);
 		_map.setExtent(extent);	
-		$("#neighborhoodsTogText").html('Neighborhoods &#x25BC;');
+		$("#neighborhoodsTogText").html(NEIGHBORHOODS_ALIAS+' &#x25BC;');
 		$("#neighborhoodsDiv").slideToggle();
     });
 
