@@ -72,7 +72,8 @@ if (NEIGHBORHOODS_ALIAS == "") {
 var COLOR_SCHEMES = [
 					{iconDir:"blue",iconPrefix:"NumberIconb",color:"#177ff1"},
 					{iconDir:"red",iconPrefix:"NumberIcon",color:"#fd2d29"},
-					{iconDir:"green",iconPrefix:"NumberIcong",color:"#22880d"}					
+					{iconDir:"green",iconPrefix:"NumberIcong",color:"#22880d"},
+					{iconDir:"blue",iconPrefix:"NumberIconb",color:"#177ff1"}
 					];
 
 var COLOR_DIM = "#E7E7E7";
@@ -232,7 +233,7 @@ function initMap(layers) {
 	var contentLayer;
 	$.each(pointLayers,function(index,value) {
 		_map.removeLayer(findLayer(_map,value.title));
-		if (index <= 2) {
+		if (index <= 3) {  // maximum of 4 point layers.
 			contentLayer = buildLayer(
 						value.featureCollection.layers[0].featureSet.features.sort(SortByID),
 						COLOR_SCHEMES[index].iconDir,
