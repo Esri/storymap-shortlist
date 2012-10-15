@@ -59,7 +59,11 @@ if (WEBMAP_ID == "") {
 	WEBMAP_ID = "1966ef409a344d089b001df85332608f";
 }
 
-var NEIGHBORHOODS_ALIAS = "Neighborhoods";
+var NEIGHBORHOODS_ALIAS = getParameterByName("neighborhood_alias");
+if (NEIGHBORHOODS_ALIAS == "") {
+	NEIGHBORHOODS_ALIAS = "Neighborhoods";
+}
+
 					
 /******************************************************
 ***************** end config section ******************
