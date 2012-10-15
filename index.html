@@ -58,6 +58,8 @@ var WEBMAP_ID = getParameterByName("webmap");
 if (WEBMAP_ID == "") {
 	WEBMAP_ID = "1966ef409a344d089b001df85332608f";
 }
+
+var NEIGHBORHOODS_ALIAS = "Neighborhoods";
 					
 /******************************************************
 ***************** end config section ******************
@@ -98,6 +100,8 @@ function init() {
 	if (!_jqueryReady) return;
 	if (!_dojoReady) return;
 	
+	$("#neighborhoodsTogText").html(NEIGHBORHOODS_ALIAS+' &#x25BC;');
+	
 	$(this).resize(handleWindowResize);	
 	
 	$("#zoomIn").click(function(e) {
@@ -116,10 +120,10 @@ function init() {
 	
 	$("#neighborhoodsToggle").click(function(){
 		if ($("#neighborhoodsDiv").css('display')=='none'){
-		  $("#neighborhoodsTogText").html('Neighborhoods &#x25B2;');
+		  $("#neighborhoodsTogText").html(NEIGHBORHOODS_ALIAS+' &#x25B2;');
 		}
 		else{
-		  $("#neighborhoodsTogText").html('Neighborhoods &#x25BC;');
+		  $("#neighborhoodsTogText").html(NEIGHBORHOODS_ALIAS+' &#x25BC;');
 		}
 		$("#neighborhoodsDiv").slideToggle();
 	});
