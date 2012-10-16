@@ -271,14 +271,14 @@ ul.tilelist .blurb {
 	cursor:default;
 }
 
-#neighborhoodsCon{
+#bookmarksCon{
 	position:absolute;
 	width:160px !important;
 	right:0px;
 	z-index:100;
 }
 
-#neighborhoodsDiv{
+#bookmarksDiv{
 	display:none;
 	background:#7A7A7A;
 	max-height:450px;
@@ -287,14 +287,14 @@ ul.tilelist .blurb {
 	font-family:Arial, Helvetica, sans-serif;
 }
 
-#neighborhoodsDiv a {
+#bookmarksDiv a {
 	color:#FFFFFF;
 	cursor:pointer;
 	font-family:Arial, Helvetica, sans-serif;
 	font-weight:normal;
 }
 
-#neighborhoodsToggle{
+#bookmarksToggle{
 	position:relative;
 	float:right;
 	background:#7A7A7A;
@@ -307,7 +307,7 @@ ul.tilelist .blurb {
 	font-family:Arial, Helvetica, sans-serif;
 }
 
-#neighborhoodsTogText{
+#bookmarksTogText{
 	position:relative;
 	margin:auto;
 	margin-left:2px;
