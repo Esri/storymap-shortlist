@@ -51,7 +51,7 @@ dojo.require("esri.map");
 dojo.require("esri.arcgis.utils");
 
 /******************************************************
-***************** begin config section ****************
+********************  config section ******************
 *******************************************************/
 
 var WEBMAP_ID = getParameterByName("webmap");
@@ -66,7 +66,7 @@ if (BOOKMARKS_ALIAS == "") {
 
 					
 /******************************************************
-***************** end config section ******************
+******************** app variables ********************
 *******************************************************/
 
 var COLOR_SCHEMES = [
@@ -97,12 +97,12 @@ var _initExtent;
 var _dojoReady = false;
 var _jqueryReady = false;
 
-dojo.addOnLoad(function() {_dojoReady = true;init()});
-jQuery(document).ready(function() {_jqueryReady = true;init()});
-
 /******************************************************
 ************************* init ************************
 *******************************************************/
+
+dojo.addOnLoad(function() {_dojoReady = true;init()});
+jQuery(document).ready(function() {_jqueryReady = true;init()});
 
 /* init comes in two parts because of async call to 
    createMap. */
@@ -189,7 +189,6 @@ function init() {
 	
 }
 
-
 function initMap(layers) {
 	
 	var supportLayers = [];
@@ -251,75 +250,9 @@ function initMap(layers) {
 
 }
 
-//This will sort your array
-function SortByID(a, b){
-  var aID = a.attributes.Number;
-  var bID = b.attributes.Number; 
-  return ((aID < bID) ? -1 : ((aID > bID) ? 1 : 0));
-}
-
-function loadBookmarks() {
-	
-	$.each(_bookmarks,function(index,value){$("#bookmarksDiv").append("<p><a>"+value.name+"</a></p>")});
-	
-	$("#bookmarksDiv a").click(function(e) {
-		var name = $(this).html();
-		var extent = new esri.geometry.Extent($.grep(_bookmarks,function(n,i){return n.name == name})[0].extent);
-		_map.setExtent(extent);	
-		$("#bookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
-		$("#bookmarksDiv").slideToggle();
-    });
-
-}
-
-function activateLayer(layer) {
-	_selected = null;
-	postSelection();
-	_layerCurrent = layer;
-
-	var tab = $.grep($(".tab"),function(n,i){return $(n).html() == _layerCurrent.title})[0];
-	$(".tab").removeClass("tab-selected");
-	$(tab).addClass("tab-selected");
-
-	$.each(_contentLayers,function(index,value){
-		value.setVisibility(value == _layerCurrent);
-	});
-
-	$("#myList").empty();
-	
-	var display;
-	var tile;
-	var img;
-	var footer;
-	var num;
-	var title;
-	
-	$.each(_layerCurrent.graphics,function(index,value){
-		if (_map.extent.contains(value.geometry)) {
-			display = "visible"
-		} else {
-			display = "none";
-		}
-		tile = $('<li id="item'+value.attributes.Number+'" style="display:'+display+'">');
-		img = $('<img src="'+value.attributes.getValueCI("Image_URL")+'">');
-		footer = $('<div class="footer"></div>');
-		num = $('<div class="num" style="background-color:'+_layerCurrent.color+'">'+value.attributes.Number+'</div>');
-		title = $('<div class="blurb">'+value.attributes.getValueCI("Title")+'</div>');
-		$(footer).append(num);
-		$(footer).append(title);
-		$(tile).append(img);
-		$(tile).append(footer);
-		$("#myList").append(tile);
-	});
-	
-	// event handlers have to be re-assigned every time you load the list...
-	$("ul.tilelist li").mouseover(tile_onMouseOver);
-	$("ul.tilelist li").mouseout(tile_onMouseOut);
-	$("ul.tilelist li").click(tile_onClick);	
-	
-	$("ul.tilelist").animate({ scrollTop: 0 }, { duration: 200 } );
-	
-}
+/******************************************************
+******************** event handlers *******************
+*******************************************************/
 
 function tile_onMouseOver(e) {
 	 $(this).stop().animate({'background-color' : COLOR_FULL});
@@ -348,15 +281,6 @@ function tile_onClick(e) {
 	$(this).stop().animate({'background-color' : COLOR_FULL});
 	var id= $(this).attr("id").substring(4);
 	_selected = $.grep(_layerCurrent.graphics,function(n,i){return n.attributes.Number == id})[0];
-	postSelection();
-}
-
-function unselect() {
-	if (_selected != null) {
-		tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+_selected.attributes.Number})[0]
-		$(tile).stop().animate({'background-color' : COLOR_DIM});
-	}	
-	_selected = null;
 	postSelection();
 }
 
@@ -426,6 +350,89 @@ function layer_onMouseOut(event)
 	$("#hoverInfo").hide();
 }
 
+
+/******************************************************
+****************** other functions ********************
+*******************************************************/
+
+function unselect() {
+	if (_selected != null) {
+		tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+_selected.attributes.Number})[0]
+		$(tile).stop().animate({'background-color' : COLOR_DIM});
+	}	
+	_selected = null;
+	postSelection();
+}
+
+// sort items by numeric ID
+function SortByID(a, b){
+  var aID = a.attributes.Number;
+  var bID = b.attributes.Number; 
+  return ((aID < bID) ? -1 : ((aID > bID) ? 1 : 0));
+}
+
+function loadBookmarks() {
+	
+	$.each(_bookmarks,function(index,value){$("#bookmarksDiv").append("<p><a>"+value.name+"</a></p>")});
+	
+	$("#bookmarksDiv a").click(function(e) {
+		var name = $(this).html();
+		var extent = new esri.geometry.Extent($.grep(_bookmarks,function(n,i){return n.name == name})[0].extent);
+		_map.setExtent(extent);	
+		$("#bookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
+		$("#bookmarksDiv").slideToggle();
+    });
+
+}
+
+function activateLayer(layer) {
+	_selected = null;
+	postSelection();
+	_layerCurrent = layer;
+
+	var tab = $.grep($(".tab"),function(n,i){return $(n).html() == _layerCurrent.title})[0];
+	$(".tab").removeClass("tab-selected");
+	$(tab).addClass("tab-selected");
+
+	$.each(_contentLayers,function(index,value){
+		value.setVisibility(value == _layerCurrent);
+	});
+
+	$("#myList").empty();
+	
+	var display;
+	var tile;
+	var img;
+	var footer;
+	var num;
+	var title;
+	
+	$.each(_layerCurrent.graphics,function(index,value){
+		if (_map.extent.contains(value.geometry)) {
+			display = "visible"
+		} else {
+			display = "none";
+		}
+		tile = $('<li id="item'+value.attributes.Number+'" style="display:'+display+'">');
+		img = $('<img src="'+value.attributes.getValueCI("Image_URL")+'">');
+		footer = $('<div class="footer"></div>');
+		num = $('<div class="num" style="background-color:'+_layerCurrent.color+'">'+value.attributes.Number+'</div>');
+		title = $('<div class="blurb">'+value.attributes.getValueCI("Title")+'</div>');
+		$(footer).append(num);
+		$(footer).append(title);
+		$(tile).append(img);
+		$(tile).append(footer);
+		$("#myList").append(tile);
+	});
+	
+	// event handlers have to be re-assigned every time you load the list...
+	$("ul.tilelist li").mouseover(tile_onMouseOver);
+	$("ul.tilelist li").mouseout(tile_onMouseOut);
+	$("ul.tilelist li").click(tile_onClick);	
+	
+	$("ul.tilelist").animate({ scrollTop: 0 }, { duration: 200 } );
+	
+}
 
 function refreshList() {
 	var tile;
