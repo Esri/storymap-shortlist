@@ -59,9 +59,9 @@ if (WEBMAP_ID == "") {
 	WEBMAP_ID = "1966ef409a344d089b001df85332608f";
 }
 
-var NEIGHBORHOODS_ALIAS = getParameterByName("neighborhoods_alias");
-if (NEIGHBORHOODS_ALIAS == "") {
-	NEIGHBORHOODS_ALIAS = "Neighborhoods";
+var BOOKMARKS_ALIAS = getParameterByName("bookmarks_alias");
+if (BOOKMARKS_ALIAS == "") {
+	BOOKMARKS_ALIAS = "Neighborhoods";
 }
 
 					
@@ -105,7 +105,7 @@ function init() {
 	if (!_jqueryReady) return;
 	if (!_dojoReady) return;
 	
-	$("#bookmarksTogText").html(NEIGHBORHOODS_ALIAS+' &#x25BC;');
+	$("#bookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
 	
 	$(this).resize(handleWindowResize);	
 	
@@ -125,10 +125,10 @@ function init() {
 	
 	$("#bookmarksToggle").click(function(){
 		if ($("#bookmarksDiv").css('display')=='none'){
-		  $("#bookmarksTogText").html(NEIGHBORHOODS_ALIAS+' &#x25B2;');
+		  $("#bookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25B2;');
 		}
 		else{
-		  $("#bookmarksTogText").html(NEIGHBORHOODS_ALIAS+' &#x25BC;');
+		  $("#bookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
 		}
 		$("#bookmarksDiv").slideToggle();
 	});
@@ -197,7 +197,7 @@ function loadNeighborhoods() {
 		var name = $(this).html();
 		var extent = new esri.geometry.Extent($.grep(_bookmarks,function(n,i){return n.name == name})[0].extent);
 		_map.setExtent(extent);	
-		$("#bookmarksTogText").html(NEIGHBORHOODS_ALIAS+' &#x25BC;');
+		$("#bookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
 		$("#bookmarksDiv").slideToggle();
     });
 
