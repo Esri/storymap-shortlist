@@ -162,7 +162,7 @@ function init() {
 		});
 		
 		_bookmarks = response.itemInfo.itemData.bookmarks;
-		loadNeighborhoods();
+		loadBookmarks();
 		
 		var layers = response.itemInfo.itemData.operationalLayers; 
 		
@@ -189,7 +189,7 @@ function SortByID(a, b){
   return ((aID < bID) ? -1 : ((aID > bID) ? 1 : 0));
 }
 
-function loadNeighborhoods() {
+function loadBookmarks() {
 	
 	$.each(_bookmarks,function(index,value){$("#bookmarksDiv").append("<p><a>"+value.name+"</a></p>")});
 	
