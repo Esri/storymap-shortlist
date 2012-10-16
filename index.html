@@ -100,6 +100,13 @@ var _jqueryReady = false;
 dojo.addOnLoad(function() {_dojoReady = true;init()});
 jQuery(document).ready(function() {_jqueryReady = true;init()});
 
+/******************************************************
+************************* init ************************
+*******************************************************/
+
+/* init comes in two parts because of async call to 
+   createMap. */
+
 function init() {
 	
 	if (!_jqueryReady) return;
@@ -182,26 +189,6 @@ function init() {
 	
 }
 
-//This will sort your array
-function SortByID(a, b){
-  var aID = a.attributes.Number;
-  var bID = b.attributes.Number; 
-  return ((aID < bID) ? -1 : ((aID > bID) ? 1 : 0));
-}
-
-function loadBookmarks() {
-	
-	$.each(_bookmarks,function(index,value){$("#bookmarksDiv").append("<p><a>"+value.name+"</a></p>")});
-	
-	$("#bookmarksDiv a").click(function(e) {
-		var name = $(this).html();
-		var extent = new esri.geometry.Extent($.grep(_bookmarks,function(n,i){return n.name == name})[0].extent);
-		_map.setExtent(extent);	
-		$("#bookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
-		$("#bookmarksDiv").slideToggle();
-    });
-
-}
 
 function initMap(layers) {
 	
@@ -264,6 +251,26 @@ function initMap(layers) {
 
 }
 
+//This will sort your array
+function SortByID(a, b){
+  var aID = a.attributes.Number;
+  var bID = b.attributes.Number; 
+  return ((aID < bID) ? -1 : ((aID > bID) ? 1 : 0));
+}
+
+function loadBookmarks() {
+	
+	$.each(_bookmarks,function(index,value){$("#bookmarksDiv").append("<p><a>"+value.name+"</a></p>")});
+	
+	$("#bookmarksDiv a").click(function(e) {
+		var name = $(this).html();
+		var extent = new esri.geometry.Extent($.grep(_bookmarks,function(n,i){return n.name == name})[0].extent);
+		_map.setExtent(extent);	
+		$("#bookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
+		$("#bookmarksDiv").slideToggle();
+    });
+
+}
 
 function activateLayer(layer) {
 	_selected = null;
