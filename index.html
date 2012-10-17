@@ -64,6 +64,10 @@ if (BOOKMARKS_ALIAS == "") {
 	BOOKMARKS_ALIAS = "Neighborhoods";
 }
 
+var COLOR_ORDER = getParameterByName("color_order");
+if (COLOR_ORDER == "") {
+	var COLOR_ORDER = "purple,red,green,blue";
+}
 					
 /******************************************************
 ******************** app variables ********************
@@ -73,13 +77,12 @@ var COLOR_SCHEMES = [
 					{iconDir:"blue",iconPrefix:"NumberIconb",color:"#177ff1"},
 					{iconDir:"red",iconPrefix:"NumberIcon",color:"#fd2d29"},
 					{iconDir:"green",iconPrefix:"NumberIcong",color:"#22880d"},
-					{iconDir:"blue",iconPrefix:"NumberIconb",color:"#177ff1"}
+					{iconDir:"purple",iconPrefix:"IconPurple",color:"#9c46fd"}
 					];
-
+					
 var COLOR_DIM = "#E7E7E7";
 var COLOR_FULL = "#FFFFFF";
-
-					
+	
 var _contentLayers = [];
 
 var _isMobile = isMobile();
@@ -216,17 +219,22 @@ function initMap(layers) {
 		dojo.connect(supportLayer, "onClick", baselayer_onClick);
 	});
 	
+	
+	var colorschemes = getSortedColorSchemes();
+	while (pointLayers.length < colorschemes.length) {
+		colorschemes.shift()
+	};
 	var contentLayer;
 	$.each(pointLayers,function(index,value) {
 		_map.removeLayer(findLayer(_map,value.title));
 		if (index <= 3) {  // maximum of 4 point layers.
 			contentLayer = buildLayer(
 						value.featureCollection.layers[0].featureSet.features.sort(SortByID),
-						COLOR_SCHEMES[index].iconDir,
-						COLOR_SCHEMES[index].iconPrefix
+						colorschemes[index].iconDir,
+						colorschemes[index].iconPrefix
 						);
 						
-			contentLayer.color = COLOR_SCHEMES[index].color;
+			contentLayer.color = colorschemes[index].color;
 			contentLayer.title = value.title;
 			dojo.connect(contentLayer, "onMouseOver", layer_onMouseOver);
 			dojo.connect(contentLayer, "onMouseOut", layer_onMouseOut);
@@ -619,6 +627,18 @@ function adjustPopup() {
 		
 	}
 	
+}
+
+function getSortedColorSchemes() {
+	
+	var schemes = [];
+	
+	$.each(COLOR_ORDER.split(","),function(index,value){
+		schemes.push($.grep(COLOR_SCHEMES,function(n,i){return value == n.iconDir})[0]);
+	});
+	schemes.reverse();
+	return schemes;
+		
 }
 
 
