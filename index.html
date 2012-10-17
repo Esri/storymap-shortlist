@@ -198,10 +198,15 @@ function initMap(layers) {
 	var pointLayers = [];
 	
 	$.each(layers,function(index,value){
-		if (value.featureCollection.layers[0].featureSet.geometryType == "esriGeometryPoint") {
-			pointLayers.push(value);
+		if (value.url == null) {
+			if (value.featureCollection.layers[0].featureSet.geometryType == "esriGeometryPoint") {
+				pointLayers.push(value);
+			} else {
+				supportLayers.push(value);
+			}
 		} else {
-			supportLayers.push(value);
+			// if the layer has an url property (meaning that it comes from a service), just
+			// keep going...it will remain in the map, but won't be query-able.
 		}
 	});
 	
