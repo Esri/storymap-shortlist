@@ -56,7 +56,7 @@ dojo.require("esri.arcgis.utils");
 
 var	WEBMAP_ID = "1966ef409a344d089b001df85332608f";
 var	BOOKMARKS_ALIAS = "Neighborhoods";
-var COLOR_ORDER = "green,red,blue"; // purple is the fourth option
+var COLOR_ORDER = "green,red,blue,purple"; // will only use as many colors as you have content (point) layers
 					
 /******************************************************
 ******************** app variables ********************
@@ -225,11 +225,20 @@ function initMap(layers) {
 		dojo.connect(supportLayer, "onClick", baselayer_onClick);
 	});
 	
+	if (COLOR_ORDER.split(",").length < pointLayers.length) {
+		// you have supplied fewer colors than point layers and
+		// therefore have lost your sorting privileges...
+		colorschemes = COLOR_SCHEMES;
+	} else {
+		// sort the colors
+		var colorschemes = getSortedColorSchemes();
+		// burn off any extra colors, if you have more colors
+		// than points.
+		while (pointLayers.length < colorschemes.length) {
+			colorschemes.shift()
+		};
+	}
 	
-	var colorschemes = getSortedColorSchemes();
-	while (pointLayers.length < colorschemes.length) {
-		colorschemes.shift()
-	};
 	var contentLayer;
 	$.each(pointLayers,function(index,value) {
 		_map.removeLayer(findLayer(_map,value.title));
