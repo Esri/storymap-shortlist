@@ -554,9 +554,9 @@ function showDetails(graphic) {
 	  }
   }  
 
-  if (graphic.attributes.Desc1 != null) {
-	  if ($.trim(graphic.attributes.Desc1) != '') {
-		  $(rightDiv).append('<div>'+graphic.attributes.Desc1+'</div>');
+  if (graphic.attributes.getValueCI("Desc1") != null) {
+	  if ($.trim(graphic.attributes.getValueCI("Desc1")) != '') {
+		  $(rightDiv).append('<div>'+graphic.attributes.getValueCI("Desc1")+'</div>');
 	  }
   }
   if (graphic.attributes.Desc2 != null) {
