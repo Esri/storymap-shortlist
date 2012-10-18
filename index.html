@@ -54,20 +54,9 @@ dojo.require("esri.arcgis.utils");
 ********************  config section ******************
 *******************************************************/
 
-var WEBMAP_ID = getParameterByName("webmap");
-if (WEBMAP_ID == "") {
-	WEBMAP_ID = "1966ef409a344d089b001df85332608f";
-}
-
-var BOOKMARKS_ALIAS = getParameterByName("bookmarks_alias");
-if (BOOKMARKS_ALIAS == "") {
-	BOOKMARKS_ALIAS = "Neighborhoods";
-}
-
-var COLOR_ORDER = getParameterByName("color_order");
-if (COLOR_ORDER == "") {
-	var COLOR_ORDER = "green,red,blue";
-}
+var	WEBMAP_ID = "1966ef409a344d089b001df85332608f";
+var	BOOKMARKS_ALIAS = "Neighborhoods";
+var COLOR_ORDER = "green,red,blue"; // purple is the fourth option
 					
 /******************************************************
 ******************** app variables ********************
@@ -114,6 +103,18 @@ function init() {
 	
 	if (!_jqueryReady) return;
 	if (!_dojoReady) return;
+	
+	if (getParameterByName("webmap") != "") {
+		WEBMAP_ID = getParameterByName("webmap");
+	}
+	
+	if (getParameterByName("bookmarks_alias") != "") {
+		BOOKMARKS_ALIAS = getParameterByName("bookmarks_alias");
+	}
+	
+	if (getParameterByName("color_order") != "") {
+		COLOR_ORDER = getParameterByName("color_order")
+	}	
 	
 	$("#bookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
 	
