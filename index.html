@@ -565,22 +565,22 @@ function showDetails(graphic) {
 		$(rightDiv).append('<div>'+graphic.attributes.getValueCI("Desc2")+'</div>');
 	  }
   }
-  if (graphic.attributes.Desc3 != null) {
-	  if ($.trim(graphic.attributes.Desc3) != '') {
+  if (graphic.attributes.getValueCI("Desc3") != null) {
+	  if ($.trim(graphic.attributes.getValueCI("Desc3")) != '') {
 		$(rightDiv).append('<p>');
-		$(rightDiv).append('<div>'+graphic.attributes.Desc3+'</div>');
+		$(rightDiv).append('<div>'+graphic.attributes.getValueCI("Desc3")+'</div>');
 	  }
   }
-  if (graphic.attributes.Desc4 != null) {
-	  if ($.trim(graphic.attributes.Desc4) != '') {
+  if (graphic.attributes.getValueCI("Desc4") != null) {
+	  if ($.trim(graphic.attributes.getValueCI("Desc4")) != '') {
 		  $(rightDiv).append('<p>');
-		  $(rightDiv).append('<div>'+graphic.attributes.Desc4+'</div>');
+		  $(rightDiv).append('<div>'+graphic.attributes.getValueCI("Desc4")+'</div>');
 	  }
   }
-  if (graphic.attributes.Desc5 != null) {
-	  if ($.trim(graphic.attributes.Desc5) != '') {
+  if (graphic.attributes.getValueCI("Desc5") != null) {
+	  if ($.trim(graphic.attributes.getValueCI("Desc5")) != '') {
 		  $(rightDiv).append('<p>');
-		  $(rightDiv).append('<div>'+graphic.attributes.Desc5+'</div>');
+		  $(rightDiv).append('<div>'+graphic.attributes.getValueCI("Desc5")+'</div>');
 	  }
   }
 
