@@ -535,7 +535,7 @@ function showDetails(graphic) {
   var rightDiv = $('<div class="rightDiv"></div>');
   
   var imageDiv = $('<img src="'+graphic.attributes.getValueCI("Image_URL")+'">');	
-  var addressDiv = $('<div class="address">'+graphic.attributes.Address+'</div>');
+  var addressDiv = $('<div class="address">'+graphic.attributes.getValueCI("Address")+'</div>');
   
   $(leftDiv).append(imageDiv);
   $(leftDiv).append(addressDiv); 
