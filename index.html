@@ -547,19 +547,13 @@ function showDetails(graphic) {
 	  }
   }  
 
-  if (graphic.attributes.website != null) {
-	  if ($.trim(graphic.attributes.website) != '') {
-		  var websiteDiv = $('<div class="address"><a href="'+graphic.attributes.website+'" target="_blank">Website</a></div>');
+  if (graphic.attributes.getValueCI("Website") != null) {
+	  if ($.trim(graphic.attributes.getValueCI("Website")) != '') {
+		  var websiteDiv = $('<div class="address"><a href="'+graphic.attributes.getValueCI("Website")+'" target="_blank">Website</a></div>');
 		  $(leftDiv).append(websiteDiv);  
 	  }
   }  
 
-  if (graphic.attributes.Website != null) {
-	  if ($.trim(graphic.attributes.Website) != '') {
-		  var WSDiv = $('<div class="address"><a href="'+graphic.attributes.Website+'" target="_blank">Website</a></div>');
-		  $(leftDiv).append(WSDiv);  
-	  }
-  }    
   if (graphic.attributes.Desc1 != null) {
 	  if ($.trim(graphic.attributes.Desc1) != '') {
 		  $(rightDiv).append('<div>'+graphic.attributes.Desc1+'</div>');
