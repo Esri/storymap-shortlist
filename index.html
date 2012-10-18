@@ -540,9 +540,9 @@ function showDetails(graphic) {
   $(leftDiv).append(imageDiv);
   $(leftDiv).append(addressDiv); 
 
-  if (graphic.attributes.Hours != null) {
-	  if ($.trim(graphic.attributes.Hours) != '') {
-		  var hoursDiv = $('<div class="address">'+graphic.attributes.Hours+'</div>');
+  if (graphic.attributes.getValueCI("Hours") != null) {
+	  if ($.trim(graphic.attributes.getValueCI("Hours")) != '') {
+		  var hoursDiv = $('<div class="address">'+graphic.attributes.getValueCI("Hours")+'</div>');
 		  $(leftDiv).append(hoursDiv);  
 	  }
   }  
