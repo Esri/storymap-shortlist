@@ -243,12 +243,14 @@ function initMap(layers) {
 	$.each(pointLayers,function(index,value) {
 		_map.removeLayer(findLayer(_map,value.title));
 		if (index <= 3) {  // maximum of 4 point layers.
+			$.each(value.featureCollection.layers[0].featureSet.features,function(index,value) {
+				value.attributes.getValueCI = getValueCI; // assign extra method to handle case sensitivity
+			});
 			contentLayer = buildLayer(
 						value.featureCollection.layers[0].featureSet.features.sort(SortByID),
 						colorschemes[index].iconDir,
 						colorschemes[index].iconPrefix
 						);
-						
 			contentLayer.color = colorschemes[index].color;
 			contentLayer.title = value.title;
 			dojo.connect(contentLayer, "onMouseOver", layer_onMouseOver);
@@ -286,7 +288,7 @@ function tile_onMouseOut(e) {
 	if (_selected != null) {
 		// does this tile represent the selected graphic?
 		var id = parseInt($(this).attr("id").substring(4));
-		if (_selected.attributes.Number == id) {
+		if (_selected.attributes.getValueCI("Number") == id) {
 			return;
 		}
 	}
@@ -298,12 +300,12 @@ function tile_onClick(e) {
 	// turn off the last selected tile...
 	
 	if (_selected != null) {
-		var tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+_selected.attributes.Number})[0];
+		var tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+_selected.attributes.getValueCI("Number")})[0];
 		if ($(tile).attr("id") != $(this).attr("id")) $(tile).stop().animate({'background-color' : COLOR_DIM});
 	}	
 	$(this).stop().animate({'background-color' : COLOR_FULL});
 	var id= $(this).attr("id").substring(4);
-	_selected = $.grep(_layerCurrent.graphics,function(n,i){return n.attributes.Number == id})[0];
+	_selected = $.grep(_layerCurrent.graphics,function(n,i){return n.attributes.getValueCI("Number") == id})[0];
 	postSelection();
 }
 
@@ -343,11 +345,11 @@ function layer_onClick(event)
 {
 	var tile;
 	if (_selected != null) {
-		tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+_selected.attributes.Number})[0]
+		tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+_selected.attributes.getValueCI("Number")})[0]
 		$(tile).stop().animate({'background-color' : COLOR_DIM});
 	}	
 	_selected = event.graphic;
-	tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+_selected.attributes.Number})[0]
+	tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+_selected.attributes.getValueCI("Number")})[0]
 	$(tile).stop().animate({'background-color' : COLOR_FULL});
 	postSelection();
 }
@@ -380,7 +382,7 @@ function layer_onMouseOut(event)
 
 function unselect() {
 	if (_selected != null) {
-		tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+_selected.attributes.Number})[0]
+		tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+_selected.attributes.getValueCI("Number")})[0]
 		$(tile).stop().animate({'background-color' : COLOR_DIM});
 	}	
 	_selected = null;
@@ -389,8 +391,8 @@ function unselect() {
 
 // sort items by numeric ID
 function SortByID(a, b){
-  var aID = a.attributes.Number;
-  var bID = b.attributes.Number; 
+  var aID = a.attributes.getValueCI("Number");
+  var bID = b.attributes.getValueCI("Number"); 
   return ((aID < bID) ? -1 : ((aID > bID) ? 1 : 0));
 }
 
@@ -436,10 +438,10 @@ function activateLayer(layer) {
 		} else {
 			display = "none";
 		}
-		tile = $('<li id="item'+value.attributes.Number+'" style="display:'+display+'">');
+		tile = $('<li id="item'+value.attributes.getValueCI("Number")+'" style="display:'+display+'">');
 		img = $('<img src="'+value.attributes.getValueCI("Image_URL")+'">');
 		footer = $('<div class="footer"></div>');
-		num = $('<div class="num" style="background-color:'+_layerCurrent.color+'">'+value.attributes.Number+'</div>');
+		num = $('<div class="num" style="background-color:'+_layerCurrent.color+'">'+value.attributes.getValueCI("Number")+'</div>');
 		title = $('<div class="blurb">'+value.attributes.getValueCI("Title")+'</div>');
 		$(footer).append(num);
 		$(footer).append(title);
@@ -461,7 +463,7 @@ function refreshList() {
 	var tile;
 	$.each(_layerCurrent.graphics,function(index,value){
 		//find the corresponding tile
-		tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+value.attributes.Number})[0];
+		tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+value.attributes.getValueCI("Number")})[0];
 		if (_map.extent.contains(value.geometry)) {
 			if ($(tile).css("display") == "none") $(tile).stop().fadeIn();
 		} else {
@@ -476,8 +478,7 @@ function buildLayer(arr,iconDir,root) {
 	var sym;
 	$.each(arr,function(index,value){
 		pt = new esri.geometry.Point(value.geometry.x,value.geometry.y,value.geometry.spatialReference);
-		sym = new esri.symbol.PictureMarkerSymbol("images/icons/"+iconDir+"/"+root+value.attributes.Number+".png",22,28);
-		value.attributes.getValueCI = getValueCI; // assign extra method to handle case sensitivity
+		sym = new esri.symbol.PictureMarkerSymbol("images/icons/"+iconDir+"/"+root+value.attributes.getValueCI("Number")+".png",22,28);
 		layer.add(new esri.Graphic(pt,sym,value.attributes));
 	});
 	return layer;
