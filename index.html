@@ -333,7 +333,7 @@ function baselayer_onMouseOut(event)
 function baselayer_onClick(event) {
 	var feature = event.graphic;
 	_map.infoWindow.setTitle(event.graphic.attributes.getValueCI("Title"));
-	_map.infoWindow.setContent(event.graphic.attributes.Short_Desc+"<p><span class='infoWindowLink'>Details >></span></p>");
+	_map.infoWindow.setContent(event.graphic.attributes.getValueCI("Short_desc")+"<p><span class='infoWindowLink'>Details >></span></p>");
 	_map.infoWindow.show(event.mapPoint);	
 	$(".infoWindowLink").click(function(e) {
         showDetails(feature);
@@ -516,7 +516,7 @@ function postSelection() {
 		_map.infoWindow.hide();
 	} else {
 		_map.infoWindow.setTitle(_selected.attributes.getValueCI("Title"));
-		_map.infoWindow.setContent(_selected.attributes.Short_Desc+"<p><span class='infoWindowLink'>Details >></span></p>");
+		_map.infoWindow.setContent(_selected.attributes.getValueCI("Short_desc")+"<p><span class='infoWindowLink'>Details >></span></p>");
 		_map.infoWindow.show(_selected.geometry);	
 		$(".infoWindowLink").click(function(e) {
 			showDetails(_selected);
