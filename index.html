@@ -57,6 +57,7 @@ dojo.require("esri.arcgis.utils");
 var	WEBMAP_ID = "1966ef409a344d089b001df85332608f";
 var	BOOKMARKS_ALIAS = "Neighborhoods";
 var COLOR_ORDER = "green,red,blue,purple"; // will only use as many colors as you have content (point) layers
+var BINGMAPS_KEY = "";
 					
 /******************************************************
 ******************** app variables ********************
@@ -148,7 +149,8 @@ function init() {
 		mapOptions: {
 			slider: false
 		},
-		ignorePopups: true
+		ignorePopups: true,
+		bingMapsKey: BINGMAPS_KEY
 	});
 	
 	mapDeferred.addCallback(function(response) {	  
