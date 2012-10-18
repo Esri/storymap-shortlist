@@ -559,10 +559,10 @@ function showDetails(graphic) {
 		  $(rightDiv).append('<div>'+graphic.attributes.getValueCI("Desc1")+'</div>');
 	  }
   }
-  if (graphic.attributes.Desc2 != null) {
-	  if ($.trim(graphic.attributes.Desc2) != '') {
+  if (graphic.attributes.getValueCI("Desc2") != null) {
+	  if ($.trim(graphic.attributes.getValueCI("Desc2")) != '') {
 		$(rightDiv).append('<p>');
-		$(rightDiv).append('<div>'+graphic.attributes.Desc2+'</div>');
+		$(rightDiv).append('<div>'+graphic.attributes.getValueCI("Desc2")+'</div>');
 	  }
   }
   if (graphic.attributes.Desc3 != null) {
