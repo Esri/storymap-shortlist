@@ -129,8 +129,8 @@ a:hover{
 }
 
 ul.tilelist {
-    width: 482px;
-	padding-left:6px;
+    width: 492px;
+	padding-left:1px;
     display:inline-block;
 	overflow:auto;
 	margin-top:0px;
