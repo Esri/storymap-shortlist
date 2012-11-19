@@ -558,38 +558,43 @@ function showDetails(graphic) {
 
   if (graphic.attributes.getValueCI("Desc1") != null) {
 	  if ($.trim(graphic.attributes.getValueCI("Desc1")) != '') {
-		  $(rightDiv).append('<div>'+graphic.attributes.getValueCI("Desc1")+'</div>');
+		  $(rightDiv).append('<div class="desc">'+graphic.attributes.getValueCI("Desc1")+'</div>');
 	  }
   }
   if (graphic.attributes.getValueCI("Desc2") != null) {
 	  if ($.trim(graphic.attributes.getValueCI("Desc2")) != '') {
 		$(rightDiv).append('<p>');
-		$(rightDiv).append('<div>'+graphic.attributes.getValueCI("Desc2")+'</div>');
+		$(rightDiv).append('<div class="desc">'+graphic.attributes.getValueCI("Desc2")+'</div>');
 	  }
   }
   if (graphic.attributes.getValueCI("Desc3") != null) {
 	  if ($.trim(graphic.attributes.getValueCI("Desc3")) != '') {
 		$(rightDiv).append('<p>');
-		$(rightDiv).append('<div>'+graphic.attributes.getValueCI("Desc3")+'</div>');
+		$(rightDiv).append('<div class="desc">'+graphic.attributes.getValueCI("Desc3")+'</div>');
 	  }
   }
   if (graphic.attributes.getValueCI("Desc4") != null) {
 	  if ($.trim(graphic.attributes.getValueCI("Desc4")) != '') {
 		  $(rightDiv).append('<p>');
-		  $(rightDiv).append('<div>'+graphic.attributes.getValueCI("Desc4")+'</div>');
+		  $(rightDiv).append('<div class="desc">'+graphic.attributes.getValueCI("Desc4")+'</div>');
 	  }
   }
   if (graphic.attributes.getValueCI("Desc5") != null) {
 	  if ($.trim(graphic.attributes.getValueCI("Desc5")) != '') {
 		  $(rightDiv).append('<p>');
-		  $(rightDiv).append('<div>'+graphic.attributes.getValueCI("Desc5")+'</div>');
+		  $(rightDiv).append('<div class="desc">'+graphic.attributes.getValueCI("Desc5")+'</div>');
 	  }
   }
+  
 
   $(mainDiv).append(titleDiv);
   $(mainDiv).append("<hr>"); 
   $(mainDiv).append(leftDiv);
   $(mainDiv).append(rightDiv);
+  if ($(mainDiv).find(".desc").length > 0) {
+	  var lastDesc = $(mainDiv).find(".desc")[$(mainDiv).find(".desc").length - 1];
+	  $(lastDesc).css("margin-bottom","5px");
+  }
   
   $.fn.colorbox({
 	  html:mainDiv,
