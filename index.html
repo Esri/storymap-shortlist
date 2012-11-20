@@ -537,10 +537,15 @@ function showDetails(graphic) {
   var rightDiv = $('<div class="rightDiv"></div>');
   
   var imageDiv = $('<img src="'+graphic.attributes.getValueCI("Image_URL")+'">');	
-  var addressDiv = $('<div class="address">'+graphic.attributes.getValueCI("Address")+'</div>');
   
   $(leftDiv).append(imageDiv);
-  $(leftDiv).append(addressDiv); 
+  
+  if (graphic.attributes.getValueCI("Address") != null) {
+	if ($.trim(graphic.attributes.getValueCI("Address")) != '') {
+		var addressDiv = $('<div class="address">'+graphic.attributes.getValueCI("Address")+'</div>');
+		$(leftDiv).append(addressDiv); 
+	}
+  }
 
   if (graphic.attributes.getValueCI("Hours") != null) {
 	  if ($.trim(graphic.attributes.getValueCI("Hours")) != '') {
