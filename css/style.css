@@ -226,6 +226,11 @@ ul.tilelist .blurb {
 	float:left;
 }
 
+.details img {
+	width:200px;
+	height:150px;
+}
+
 .details .rightDiv {
 	width:250px;
 	float:left;
