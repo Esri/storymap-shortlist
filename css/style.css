@@ -151,7 +151,6 @@ ul.tilelist li {
 	background-color:#E7E7E7;
 	cursor:pointer;
 	position:relative;
-	text-align:center;
 }
 
 ul.tilelist > a {
@@ -165,7 +164,7 @@ ul.tilelist > a {
 
 ul.tilelist img {
     max-width:130px;
-    max-height:110px;	
+    max-height:100px;	
 	margin:10px;
 }
 
