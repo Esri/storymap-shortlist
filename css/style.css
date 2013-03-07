@@ -178,7 +178,7 @@ ul.tilelist p {
 ul.tilelist .footer {
 	padding-left:10px;
 	position:absolute;
-	bottom:10px;
+	top:117px;
 }
 
 ul.tilelist .num {
@@ -197,6 +197,7 @@ ul.tilelist .blurb {
 	width:110px;
 	float:left;
 	margin-left:4px;
+	text-align:left;
 }
 
 .multiTip{
