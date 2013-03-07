@@ -150,6 +150,8 @@ ul.tilelist li {
 	font-weight:bold;
 	background-color:#E7E7E7;
 	cursor:pointer;
+	position:relative;
+	text-align:center;
 }
 
 ul.tilelist > a {
@@ -163,7 +165,7 @@ ul.tilelist > a {
 
 ul.tilelist img {
     max-width:130px;
-    max-height:130px;	
+    max-height:110px;	
 	margin:10px;
 }
 
@@ -175,6 +177,8 @@ ul.tilelist p {
 
 ul.tilelist .footer {
 	padding-left:10px;
+	position:absolute;
+	bottom:10px;
 }
 
 ul.tilelist .num {
