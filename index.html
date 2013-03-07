@@ -147,7 +147,8 @@ function init() {
 		
 	var mapDeferred = esri.arcgis.utils.createMap(WEBMAP_ID, "map", {
 		mapOptions: {
-			slider: false
+			slider: false,
+			wrapAround180:false
 		},
 		ignorePopups: true,
 		bingMapsKey: BINGMAPS_KEY
