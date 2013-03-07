@@ -230,9 +230,14 @@ ul.tilelist .blurb {
 	float:left;
 }
 
-.details img {
+.details .pictureFrame {
 	width:200px;
 	height:150px;
+}
+
+.details img {
+	max-width:200px;
+	max-height:150px;
 }
 
 .details .rightDiv {
