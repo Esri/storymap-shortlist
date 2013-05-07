@@ -176,7 +176,7 @@ function init() {
 		});
 		
 		_bookmarks = response.itemInfo.itemData.bookmarks;
-		loadBookmarks();
+		if (_bookmarks) loadBookmarks();
 		
 		var layers = response.itemInfo.itemData.operationalLayers; 
 		
