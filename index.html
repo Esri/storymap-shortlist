@@ -558,7 +558,11 @@ function showDetails(graphic) {
 
   if (graphic.attributes.getValueCI("Website") != null) {
 	  if ($.trim(graphic.attributes.getValueCI("Website")) != '') {
-		  var websiteDiv = $('<div class="address"><a href="'+graphic.attributes.getValueCI("Website")+'" target="_blank">Website</a></div>');
+		  var website = graphic.attributes.getValueCI("Website").toLowerCase();
+		  if (!(website.indexOf("http") >= 0)) {
+			  website = "http://"+website;
+		  }
+		  var websiteDiv = $('<div class="address"><a href="'+website+'" target="_blank">Website</a></div>');
 		  $(leftDiv).append(websiteDiv);  
 	  }
   }  
