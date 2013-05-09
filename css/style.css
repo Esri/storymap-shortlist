@@ -291,6 +291,7 @@ ul.tilelist .blurb {
 	width:160px !important;
 	right:0px;
 	z-index:100;
+	display:none;
 }
 
 #bookmarksDiv{
