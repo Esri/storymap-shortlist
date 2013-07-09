@@ -76,6 +76,7 @@ var COLOR_FULL = "#FFFFFF";
 var _contentLayers = [];
 
 var _isMobile = isMobile();
+var _isIE = (navigator.appVersion.indexOf("MSIE") > -1);
 
 var _map;
 
@@ -367,6 +368,7 @@ function layer_onMouseOver(event)
 	var graphic = event.graphic;
 	if (graphic == _selected) return;
 	graphic.setSymbol(graphic.symbol.setHeight(30).setWidth(24));
+	if (!_isIE) moveGraphicToFront(graphic);	
 	$("#hoverInfo").html(graphic.attributes.getValueCI("Title"));
 	var pt = _map.toScreen(graphic.geometry);
 	hoverInfoPos(pt.x,pt.y);
@@ -673,6 +675,11 @@ function getSortedColorSchemes() {
 		
 }
 
+function moveGraphicToFront(graphic)
+{
+	var dojoShape = graphic.getDojoShape();
+	if (dojoShape) dojoShape.moveToFront();
+}
 
 </script>
 
