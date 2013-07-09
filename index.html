@@ -14,6 +14,7 @@
 <link rel="stylesheet" type="text/css" href="css/style.css">
 
 <script type="text/javascript" src="lib/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="lib/IconSpecs.js"></script>
 <script type="text/javascript" src="lib/common/helper_functions.js"></script>
 <script type="text/javascript">var djConfig = {parseOnLoad: true};</script>
 <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=3.2"></script>
@@ -72,6 +73,12 @@ var COLOR_SCHEMES = [
 					
 var COLOR_DIM = "#E7E7E7";
 var COLOR_FULL = "#FFFFFF";
+
+var _lutIconSpecs = {
+	tiny:new IconSpecs(22,28,3,8),
+	medium:new IconSpecs(24,30,3,8),
+	large:new IconSpecs(32,40,3,11)
+}
 	
 var _contentLayers = [];
 
@@ -304,14 +311,8 @@ function tile_onMouseOut(e) {
 }
 
 function tile_onClick(e) {
-	// turn off the last selected tile...
-	
-	if (_selected != null) {
-		var tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+_selected.attributes.getValueCI("Number")})[0];
-		if ($(tile).attr("id") != $(this).attr("id")) $(tile).stop().animate({'background-color' : COLOR_DIM});
-	}	
-	$(this).stop().animate({'background-color' : COLOR_FULL});
-	var id= $(this).attr("id").substring(4);
+	var id = $(this).attr("id").substring(4);	
+	preSelection();
 	_selected = $.grep(_layerCurrent.graphics,function(n,i){return n.attributes.getValueCI("Number") == id})[0];
 	postSelection();
 }
@@ -350,14 +351,8 @@ function baselayer_onClick(event) {
 
 function layer_onClick(event)
 {
-	var tile;
-	if (_selected != null) {
-		tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+_selected.attributes.getValueCI("Number")})[0]
-		$(tile).stop().animate({'background-color' : COLOR_DIM});
-	}	
+	preSelection();		
 	_selected = event.graphic;
-	tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+_selected.attributes.getValueCI("Number")})[0]
-	$(tile).stop().animate({'background-color' : COLOR_FULL});
 	postSelection();
 }
 
@@ -367,7 +362,7 @@ function layer_onMouseOver(event)
 	_map.setMapCursor("pointer");
 	var graphic = event.graphic;
 	if (graphic == _selected) return;
-	graphic.setSymbol(graphic.symbol.setHeight(30).setWidth(24));
+	graphic.setSymbol(resizePictureMarkerSymbol(graphic.symbol, _lutIconSpecs["medium"]));
 	if (!_isIE) moveGraphicToFront(graphic);	
 	$("#hoverInfo").html(graphic.attributes.getValueCI("Title"));
 	var pt = _map.toScreen(graphic.geometry);
@@ -379,7 +374,8 @@ function layer_onMouseOut(event)
 	if (_isMobile) return;	
 	_map.setMapCursor("default");
 	var graphic = event.graphic;	
-	graphic.setSymbol(graphic.symbol.setHeight(28).setWidth(22));
+	if (graphic != _selected)
+		graphic.setSymbol(resizePictureMarkerSymbol(graphic.symbol, _lutIconSpecs["tiny"]));
 	$("#hoverInfo").hide();
 }
 
@@ -389,10 +385,7 @@ function layer_onMouseOut(event)
 *******************************************************/
 
 function unselect() {
-	if (_selected != null) {
-		tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+_selected.attributes.getValueCI("Number")})[0]
-		$(tile).stop().animate({'background-color' : COLOR_DIM});
-	}	
+	preSelection();		
 	_selected = null;
 	postSelection();
 }
@@ -419,6 +412,7 @@ function loadBookmarks() {
 }
 
 function activateLayer(layer) {
+	preSelection();	
 	_selected = null;
 	postSelection();
 	_layerCurrent = layer;
@@ -484,9 +478,10 @@ function buildLayer(arr,iconDir,root) {
 	var layer = new esri.layers.GraphicsLayer();
 	var pt;
 	var sym;
+	var spec = _lutIconSpecs["tiny"];
 	$.each(arr,function(index,value){
 		pt = new esri.geometry.Point(value.geometry.x,value.geometry.y,value.geometry.spatialReference);
-		sym = new esri.symbol.PictureMarkerSymbol("images/icons/"+iconDir+"/"+root+value.attributes.getValueCI("Number")+".png",22,28);
+		sym = createPictureMarkerSymbol("images/icons/"+iconDir+"/"+root+value.attributes.getValueCI("Number")+".png", _lutIconSpecs["tiny"]);
 		layer.add(new esri.Graphic(pt,sym,value.attributes));
 	});
 	return layer;
@@ -517,18 +512,52 @@ function handleWindowResize() {
 
 }
 
+function preSelection() 
+{
+	// return the soon-to-be formerly selected graphic icon to normal
+	// size & dim the corresponding tile.
+	
+	if (_selected) {
+		_selected.setSymbol(resizePictureMarkerSymbol(_selected.symbol, _lutIconSpecs["medium"]));
+		var tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+_selected.attributes.getValueCI("Number")})[0];
+		if ($(tile).attr("id") != $(this).attr("id")) $(tile).stop().animate({'background-color' : COLOR_DIM});
+	}
+		
+}
 
 function postSelection() {
 	
 	if (_selected == null) {
 		_map.infoWindow.hide();
 	} else {
+		
+		// make the selected location's icon LARGE
+		_selected.setSymbol(resizePictureMarkerSymbol(_selected.symbol, _lutIconSpecs["large"]));
+		
+		// calling moveToFront directly after messing
+		// with the symbol causes problems, so I
+		// put it on a delay and put it in a try/catch
+		// just to be safe...
+		setTimeout(function(){
+			try {
+				_selected.getDojoShape().moveToFront();
+			} catch (err) {
+				console.log("problem with 'moveToFront()'...");
+			}
+		},10);				
+		
 		_map.infoWindow.setTitle(_selected.attributes.getValueCI("Title"));
 		_map.infoWindow.setContent(_selected.attributes.getValueCI("Short_desc")+"<p><span class='infoWindowLink'>Details >></span></p>");
 		_map.infoWindow.show(_selected.geometry);	
 		$(".infoWindowLink").click(function(e) {
 			showDetails(_selected);
 		});		
+		
+		// light up the corresponding tile.
+
+		var tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+_selected.attributes.getValueCI("Number")})[0]
+		$(tile).stop().animate({'background-color' : COLOR_FULL});
+
 	}
 
 	$("#hoverInfo").hide();
@@ -680,6 +709,24 @@ function moveGraphicToFront(graphic)
 	var dojoShape = graphic.getDojoShape();
 	if (dojoShape) dojoShape.moveToFront();
 }
+
+function createPictureMarkerSymbol(url, spec)
+{
+	return new esri.symbol.PictureMarkerSymbol(
+			url,
+			spec.getWidth(),
+			spec.getHeight()
+		).setOffset(
+			spec.getOffsetX(),
+			spec.getOffsetY()
+		);
+}
+
+function resizePictureMarkerSymbol(sym, spec)
+{
+	return sym.setHeight(spec.getHeight()).setWidth(spec.getWidth()).setOffset(spec.getOffsetX(),spec.getOffsetY());
+}
+
 
 </script>
 
