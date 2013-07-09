@@ -221,7 +221,7 @@ function initMap(layers) {
 	
 	var supportLayer;
 	$.each(supportLayers,function(index,value) {
-		supportLayer = findLayer(_map,value.title);
+		supportLayer = _map.getLayer($.grep(_map.graphicsLayerIds, function(n,i){return _map.getLayer(n).id == value.featureCollection.layers[0].id})[0]);
 		if (supportLayer == null) return;
 		$.each(supportLayer.graphics,function(index,value) {
 			value.attributes.getValueCI = getValueCI; // assign extra method to handle case sensitivity
@@ -247,7 +247,7 @@ function initMap(layers) {
 	
 	var contentLayer;
 	$.each(pointLayers,function(index,value) {
-		_map.removeLayer(findLayer(_map,value.title));
+		_map.removeLayer(_map.getLayer($.grep(_map.graphicsLayerIds, function(n,i){return _map.getLayer(n).id == value.featureCollection.layers[0].id})[0]));
 		if (index <= 3) {  // maximum of 4 point layers.
 			$.each(value.featureCollection.layers[0].featureSet.features,function(index,value) {
 				value.attributes.getValueCI = getValueCI; // assign extra method to handle case sensitivity
