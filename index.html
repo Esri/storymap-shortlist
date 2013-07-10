@@ -518,7 +518,7 @@ function preSelection()
 	// size & dim the corresponding tile.
 	
 	if (_selected) {
-		_selected.setSymbol(resizePictureMarkerSymbol(_selected.symbol, _lutIconSpecs["medium"]));
+		_selected.setSymbol(resizePictureMarkerSymbol(_selected.symbol, _lutIconSpecs["tiny"]));
 		var tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+_selected.attributes.getValueCI("Number")})[0];
 		if ($(tile).attr("id") != $(this).attr("id")) $(tile).stop().animate({'background-color' : COLOR_DIM});
 	}
