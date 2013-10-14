@@ -43,6 +43,9 @@
 </script>
 <!--Google Analytics End-->
 
+<!--Load the config file-->
+<script type="text/javascript" src="config.json"></script>
+
 <script type="text/javascript">
 
 dojo.require("dijit.dijit");
@@ -52,13 +55,13 @@ dojo.require("esri.map");
 dojo.require("esri.arcgis.utils");
 
 /******************************************************
-********************  config section ******************
+********************  config variables ******************
 *******************************************************/
 
-var	WEBMAP_ID = "1966ef409a344d089b001df85332608f";
-var	BOOKMARKS_ALIAS = "Zoom";
-var COLOR_ORDER = "green,red,blue,purple"; // will only use as many colors as you have content (point) layers
-var BINGMAPS_KEY = "";
+var	WEBMAP_ID = config.WEBMAP_ID;
+var	BOOKMARKS_ALIAS = config.BOOKMARKS_ALIAS;
+var COLOR_ORDER = config.COLOR_ORDER; // will only use as many colors as you have content (point) layers
+var BINGMAPS_KEY = config.BINGMAPS_KEY;
 					
 /******************************************************
 ******************** app variables ********************
