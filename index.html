@@ -592,8 +592,8 @@ function showDetails(graphic) {
 
   if (graphic.attributes.getValueCI("Website") != null) {
 	  if ($.trim(graphic.attributes.getValueCI("Website")) != '') {
-		  var website = graphic.attributes.getValueCI("Website").toLowerCase();
-		  if (!(website.indexOf("http") >= 0)) {
+		  var website = graphic.attributes.getValueCI("Website");
+		  if (!(website.toLowerCase().indexOf("http") >= 0)) {
 			  website = "http://"+website;
 		  }
 		  var websiteDiv = $('<div class="address"><a href="'+website+'" target="_blank">Website</a></div>');
