@@ -1,0 +1,7 @@
+// Configure the app here.
+var config = {
+    "WEBMAP_ID": "1966ef409a344d089b001df85332608f",
+    "BOOKMARKS_ALIAS": "Zoom",
+    "COLOR_ORDER": "green,red,blue,purple", // will only use as many colors as you have content (point) layers
+    "BINGMAPS_KEY": ""    
+};
