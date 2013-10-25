@@ -256,24 +256,22 @@ function initMap(layers) {
 	var contentLayer;
 	$.each(pointLayers,function(index,value) {
 		_map.removeLayer(_map.getLayer($.grep(_map.graphicsLayerIds, function(n,i){return _map.getLayer(n).id == value.featureCollection.layers[0].id})[0]));
-		if (index <= 3) {  // maximum of 4 point layers.
-			$.each(value.featureCollection.layers[0].featureSet.features,function(index,value) {
-				value.attributes.getValueCI = getValueCI; // assign extra method to handle case sensitivity
-			});
-			contentLayer = buildLayer(
-						value.featureCollection.layers[0].featureSet.features.sort(SortByID),
-						colorschemes[index].iconDir,
-						colorschemes[index].iconPrefix
-						);
-			contentLayer.color = colorschemes[index].color;
-			contentLayer.title = value.title;
-			dojo.connect(contentLayer, "onMouseOver", layer_onMouseOver);
-			dojo.connect(contentLayer, "onMouseOut", layer_onMouseOut);
-			dojo.connect(contentLayer, "onClick", layer_onClick);
-		
-			_map.addLayer(contentLayer);
-			_contentLayers.push(contentLayer);
-		}
+		$.each(value.featureCollection.layers[0].featureSet.features,function(index,value) {
+			value.attributes.getValueCI = getValueCI; // assign extra method to handle case sensitivity
+		});
+		contentLayer = buildLayer(
+					value.featureCollection.layers[0].featureSet.features.sort(SortByID),
+					colorschemes[index].iconDir,
+					colorschemes[index].iconPrefix
+					);
+		contentLayer.color = colorschemes[index].color;
+		contentLayer.title = value.title;
+		dojo.connect(contentLayer, "onMouseOver", layer_onMouseOver);
+		dojo.connect(contentLayer, "onMouseOut", layer_onMouseOut);
+		dojo.connect(contentLayer, "onClick", layer_onClick);
+	
+		_map.addLayer(contentLayer);
+		_contentLayers.push(contentLayer);
 	});
 	
 	_contentLayers.reverse();
