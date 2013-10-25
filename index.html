@@ -509,6 +509,7 @@ function handleWindowResize() {
 	$("#paneLeft").height($("#mainWindow").height() - 35);
 	$(".tilelist").height($("#paneLeft").height() - 18);
 	$("#map").height($("#mainWindow").height() - 35);
+	$("#headerText").css("max-width",$("#header").width() - ($("#logoArea").width()+100));
 	
 	adjustPopup();
 
