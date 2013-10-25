@@ -343,3 +343,10 @@ ul.tilelist .blurb {
 .infoWindowLink:hover {
 	text-decoration:underline;
 }
+
+/* To change position of close button to Top Right Corner */
+#colorbox #cboxClose
+{
+	top: 0;
+	right: 0;
+}
