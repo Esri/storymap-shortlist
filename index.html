@@ -419,7 +419,7 @@ function activateLayer(layer) {
 	postSelection();
 	_layerCurrent = layer;
 
-	var tab = $.grep($(".tab"),function(n,i){return $(n).html() == _layerCurrent.title})[0];
+	var tab = $.grep($(".tab"), function(n,i){return $(n).text() == _layerCurrent.title})[0];
 	$(".tab").removeClass("tab-selected");
 	$(tab).addClass("tab-selected");
 
