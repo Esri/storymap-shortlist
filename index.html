@@ -551,7 +551,7 @@ function postSelection() {
 		},10);				
 		
 		_map.infoWindow.setTitle(_selected.attributes.getValueCI("Title"));
-		var shortDesc = event.graphic.attributes.getValueCI("Short_desc");
+		var shortDesc = _selected.attributes.getValueCI("Short_desc");
 		if (shortDesc)
 			_map.infoWindow.setContent(shortDesc+"<p><span class='infoWindowLink'>Details >></span></p>");
 		else
