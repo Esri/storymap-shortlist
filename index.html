@@ -341,7 +341,11 @@ function baselayer_onMouseOut(event)
 function baselayer_onClick(event) {
 	var feature = event.graphic;
 	_map.infoWindow.setTitle(event.graphic.attributes.getValueCI("Title"));
-	_map.infoWindow.setContent(event.graphic.attributes.getValueCI("Short_desc")+"<p><span class='infoWindowLink'>Details >></span></p>");
+	var shortDesc = event.graphic.attributes.getValueCI("Short_desc");
+	if (shortDesc)
+		_map.infoWindow.setContent(shortDesc+"<p><span class='infoWindowLink'>Details >></span></p>");
+	else
+		_map.infoWindow.setContent("<span class='infoWindowLink'>Details >></span>");
 	_map.infoWindow.show(event.mapPoint);	
 	$(".infoWindowLink").click(function(e) {
         showDetails(feature);
@@ -547,7 +551,11 @@ function postSelection() {
 		},10);				
 		
 		_map.infoWindow.setTitle(_selected.attributes.getValueCI("Title"));
-		_map.infoWindow.setContent(_selected.attributes.getValueCI("Short_desc")+"<p><span class='infoWindowLink'>Details >></span></p>");
+		var shortDesc = event.graphic.attributes.getValueCI("Short_desc");
+		if (shortDesc)
+			_map.infoWindow.setContent(shortDesc+"<p><span class='infoWindowLink'>Details >></span></p>");
+		else
+			_map.infoWindow.setContent("<span class='infoWindowLink'>Details >></span>");
 		_map.infoWindow.show(_selected.geometry);	
 		$(".infoWindowLink").click(function(e) {
 			showDetails(_selected);
