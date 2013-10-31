@@ -175,8 +175,6 @@ function init() {
 		
 		_map = response.map;
 		  
-		  //resize the map when the browser resizes
-		dojo.connect(dijit.byId('map'), 'resize', _map,_map.resize);
 		dojo.connect(_map, 'onExtentChange', refreshList);
 
 		// click action on the map where there's no graphic 
@@ -517,6 +515,8 @@ function handleWindowResize() {
 	$(".tilelist").width($("#paneLeft").width()+7);		
 	$("#map").height($("#mainWindow").height() - 35);
 	$("#headerText").css("max-width",$("#header").width() - ($("#logoArea").width()+100));
+
+	if (_map) _map.resize();
 	
 	adjustPopup();
 
