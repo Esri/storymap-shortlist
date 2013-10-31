@@ -508,12 +508,14 @@ function handleWindowResize() {
 	var heightDoc = getViewportDimensions()[1];
 	
 	$("#mainWindow").height(heightDoc - ($("#header").height()));
-	dijit.byId("mainWindow").layout();
 	$("#paneLeft").height($("#mainWindow").height() - 35);
 	$("#paneLeft").width($("body").width() <= 800 ? LEFT_PANE_WIDTH_TWO_COLUMN : LEFT_PANE_WIDTH_THREE_COLUMN);
 	$(".tilelist").height($("#paneLeft").height() - 18);
 	$(".tilelist").width($("#paneLeft").width()+7);		
 	$("#map").height($("#mainWindow").height() - 35);
+
+	dijit.byId("mainWindow").layout();
+
 	$("#headerText").css("max-width",$("#header").width() - ($("#logoArea").width()+100));
 
 	if (_map) _map.resize();
