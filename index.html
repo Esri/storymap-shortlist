@@ -74,6 +74,11 @@ var COLOR_SCHEMES = [
 var COLOR_DIM = "#E7E7E7";
 var COLOR_FULL = "#FFFFFF";
 
+var LEFT_PANE_WIDTH_TWO_COLUMN = 323;
+var LEFT_PANE_WIDTH_THREE_COLUMN = 485;
+
+var TWO_COLUMN_THRESHOLD = 600;
+
 var _lutIconSpecs = {
 	tiny:new IconSpecs(22,28,3,8),
 	medium:new IconSpecs(24,30,3,8),
@@ -507,7 +512,9 @@ function handleWindowResize() {
 	$("#mainWindow").height(heightDoc - ($("#header").height()));
 	dijit.byId("mainWindow").layout();
 	$("#paneLeft").height($("#mainWindow").height() - 35);
+	$("#paneLeft").width($("body").width() <= 800 ? LEFT_PANE_WIDTH_TWO_COLUMN : LEFT_PANE_WIDTH_THREE_COLUMN);
 	$(".tilelist").height($("#paneLeft").height() - 18);
+	$(".tilelist").width($("#paneLeft").width()+7);		
 	$("#map").height($("#mainWindow").height() - 35);
 	$("#headerText").css("max-width",$("#header").width() - ($("#logoArea").width()+100));
 	
@@ -769,8 +776,7 @@ function resizePictureMarkerSymbol(sym, spec)
         
         
         <div id="paneLeft" dojotype="dijit.layout.ContentPane" 
-                            region="left" 
-                            style="overflow:hidden;width:485px;background-color:#b9b9b9">
+                            region="left">
             <ul id="myList" class="tilelist"></ul>
         </div>
 

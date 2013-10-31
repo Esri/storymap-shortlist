@@ -6,7 +6,7 @@ html,body {
 	*/
 	height:100%;
 	width:100%;
-	min-width:750px;
+	min-width:500px;
 	margin:auto	
 }
 
@@ -88,6 +88,13 @@ a:hover{
 	border:none;
 	outline:none;
 }
+
+#paneLeft {
+	/* initial width -- will be re-calculated in app */
+	width:485px;
+	overflow:hidden;
+	background-color:#b9b9b9;	
+}
 	  
 #map {
 	border:none;
@@ -128,7 +135,8 @@ a:hover{
 }
 
 ul.tilelist {
-    width: 492px;
+	/* initial width -- will be re-calculated in app */
+	width: 492px;
 	padding-left:1px;
     display:inline-block;
 	overflow:auto;
