@@ -244,13 +244,21 @@ function initMap(layers) {
 	
 	var contentLayer;
 	var colorScheme;
+	var colorOrder = COLOR_ORDER.split(",");
+	var colorIndex;
 	$.each(pointLayers,function(index,value) {
 		_map.removeLayer(_map.getLayer($.grep(_map.graphicsLayerIds, function(n,i){return _map.getLayer(n).id == value.featureCollection.layers[0].id})[0]));
 		$.each(value.featureCollection.layers[0].featureSet.features,function(index,value) {
 			value.attributes.getValueCI = getValueCI; // assign extra method to handle case sensitivity
 		});
+		/* color index assignment is a weird bit of voodoo.  first thing to consider
+		   is that layers names actually appear in tabs in reverse order (i.e. last layer in
+		   is leftmost tab).  this means that we have to invert the color index for things to match
+		   right.  also, using modulus to handle overflow -- when there are more layers
+		   than colors.  so, we end up re-using colors but keeping the sequence. */
+		colorIndex = (pointLayers.length - index - 1) % colorOrder.length;
 		colorScheme = $.grep(COLOR_SCHEMES, function(n,i){
-			return n.name.toLowerCase() == $.trim(COLOR_ORDER.split(",")[index % COLOR_ORDER.split(",").length].toLowerCase())
+			return n.name.toLowerCase() == $.trim(colorOrder[colorIndex].toLowerCase())
 		})[0];
 		contentLayer = buildLayer(
 					value.featureCollection.layers[0].featureSet.features.sort(SortByID),
