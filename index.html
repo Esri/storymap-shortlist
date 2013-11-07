@@ -65,10 +65,10 @@ var BINGMAPS_KEY = "";
 *******************************************************/
 
 var COLOR_SCHEMES = [
-					{iconDir:"blue",iconPrefix:"NumberIconb",color:"#177ff1"},
-					{iconDir:"red",iconPrefix:"NumberIcon",color:"#fd2d29"},
-					{iconDir:"green",iconPrefix:"NumberIcong",color:"#22880d"},
-					{iconDir:"purple",iconPrefix:"IconPurple",color:"#9c46fd"}
+					{name:"blue",iconDir:"blue",iconPrefix:"NumberIconb",color:"#177ff1"},
+					{name:"red",iconDir:"red",iconPrefix:"NumberIcon",color:"#fd2d29"},
+					{name:"green",iconDir:"green",iconPrefix:"NumberIcong",color:"#22880d"},
+					{name:"purple",iconDir:"purple",iconPrefix:"IconPurple",color:"#9c46fd"}
 					];
 					
 var COLOR_DIM = "#E7E7E7";
@@ -242,32 +242,22 @@ function initMap(layers) {
 		dojo.connect(supportLayer, "onClick", baselayer_onClick);
 	});
 	
-	if (COLOR_ORDER.split(",").length < pointLayers.length) {
-		// you have supplied fewer colors than point layers and
-		// therefore have lost your sorting privileges...
-		colorschemes = COLOR_SCHEMES;
-	} else {
-		// sort the colors
-		var colorschemes = getSortedColorSchemes();
-		// burn off any extra colors, if you have more colors
-		// than points.
-		while (pointLayers.length < colorschemes.length) {
-			colorschemes.shift()
-		};
-	}
-	
 	var contentLayer;
+	var colorScheme;
 	$.each(pointLayers,function(index,value) {
 		_map.removeLayer(_map.getLayer($.grep(_map.graphicsLayerIds, function(n,i){return _map.getLayer(n).id == value.featureCollection.layers[0].id})[0]));
 		$.each(value.featureCollection.layers[0].featureSet.features,function(index,value) {
 			value.attributes.getValueCI = getValueCI; // assign extra method to handle case sensitivity
 		});
+		colorScheme = $.grep(COLOR_SCHEMES, function(n,i){
+			return n.name.toLowerCase() == $.trim(COLOR_ORDER.split(",")[index % COLOR_ORDER.split(",").length].toLowerCase())
+		})[0];
 		contentLayer = buildLayer(
 					value.featureCollection.layers[0].featureSet.features.sort(SortByID),
-					colorschemes[index % colorschemes.length].iconDir,
-					colorschemes[index % colorschemes.length].iconPrefix
+					colorScheme.iconDir,
+					colorScheme.iconPrefix
 					);
-		contentLayer.color = colorschemes[index % colorschemes.length].color;
+		contentLayer.color = colorScheme.color;
 		contentLayer.title = value.title;
 		dojo.connect(contentLayer, "onMouseOver", layer_onMouseOver);
 		dojo.connect(contentLayer, "onMouseOut", layer_onMouseOut);
@@ -706,18 +696,6 @@ function adjustPopup() {
 		
 	}
 	
-}
-
-function getSortedColorSchemes() {
-	
-	var schemes = [];
-	
-	$.each(COLOR_ORDER.split(","),function(index,value){
-		schemes.push($.grep(COLOR_SCHEMES,function(n,i){return value == n.iconDir})[0]);
-	});
-	schemes.reverse();
-	return schemes;
-		
 }
 
 function moveGraphicToFront(graphic)
