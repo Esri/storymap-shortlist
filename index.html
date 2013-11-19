@@ -81,6 +81,7 @@ var TWO_COLUMN_THRESHOLD = 600;
 
 var FIELDNAME_NUMBER = "Number";
 var FIELDNAME_TITLE = "Title";
+var FIELDNAME_SHORTDESC = "Short_desc";
 
 var _lutIconSpecs = {
 	tiny:new IconSpecs(22,28,3,8),
@@ -343,7 +344,7 @@ function baselayer_onMouseOut(event)
 function baselayer_onClick(event) {
 	var feature = event.graphic;
 	_map.infoWindow.setTitle(event.graphic.attributes.getValueCI(FIELDNAME_TITLE));
-	var shortDesc = event.graphic.attributes.getValueCI("Short_desc");
+	var shortDesc = event.graphic.attributes.getValueCI(FIELDNAME_SHORTDESC);
 	if (shortDesc)
 		_map.infoWindow.setContent(shortDesc+"<p><span class='infoWindowLink'>Details >></span></p>");
 	else
@@ -560,7 +561,7 @@ function postSelection() {
 		},10);				
 		
 		_map.infoWindow.setTitle(_selected.attributes.getValueCI(FIELDNAME_TITLE));
-		var shortDesc = _selected.attributes.getValueCI("Short_desc");
+		var shortDesc = _selected.attributes.getValueCI(FIELDNAME_SHORTDESC);
 		if (shortDesc)
 			_map.infoWindow.setContent(shortDesc+"<p><span class='infoWindowLink'>Details >></span></p>");
 		else
