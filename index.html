@@ -274,7 +274,7 @@ function initMap(layers) {
 			return n.name.toLowerCase() == $.trim(colorOrder[colorIndex].toLowerCase())
 		})[0];
 		contentLayer = buildLayer(
-					value.featureCollection.layers[0].featureSet.features.sort(SortByID),
+					value.featureCollection.layers[0].featureSet.features.sort(SortByNumber),
 					colorScheme.iconDir,
 					colorScheme.iconPrefix
 					);
@@ -406,11 +406,10 @@ function unselect() {
 	postSelection();
 }
 
-// sort items by numeric ID
-function SortByID(a, b){
-  var aID = a.attributes.getValueCI(FIELDNAME_NUMBER);
-  var bID = b.attributes.getValueCI(FIELDNAME_NUMBER); 
-  return ((aID < bID) ? -1 : ((aID > bID) ? 1 : 0));
+function SortByNumber(a, b){
+  var aNumber = a.attributes.getValueCI(FIELDNAME_NUMBER);
+  var bNumber = b.attributes.getValueCI(FIELDNAME_NUMBER); 
+  return ((aNumber < bNumber) ? -1 : ((aNumber > bNumber) ? 1 : 0));
 }
 
 function loadBookmarks() {
