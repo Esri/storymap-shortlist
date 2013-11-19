@@ -88,6 +88,7 @@ var FIELDNAME_HOURS = "Hours";
 var FIELDNAME_WEBSITE = "Website";
 var FIELDNAME_DESC1 = "Desc1";
 var FIELDNAME_DESC2 = "Desc2";
+var FIELDNAME_DESC3 = "Desc3";
 
 var _lutIconSpecs = {
 	tiny:new IconSpecs(22,28,3,8),
@@ -636,10 +637,10 @@ function showDetails(graphic) {
 		$(rightDiv).append('<div class="desc">'+graphic.attributes.getValueCI(FIELDNAME_DESC2)+'</div>');
 	  }
   }
-  if (graphic.attributes.getValueCI("Desc3") != null) {
-	  if ($.trim(graphic.attributes.getValueCI("Desc3")) != '') {
+  if (graphic.attributes.getValueCI(FIELDNAME_DESC3) != null) {
+	  if ($.trim(graphic.attributes.getValueCI(FIELDNAME_DESC3)) != '') {
 		$(rightDiv).append('<p>');
-		$(rightDiv).append('<div class="desc">'+graphic.attributes.getValueCI("Desc3")+'</div>');
+		$(rightDiv).append('<div class="desc">'+graphic.attributes.getValueCI(FIELDNAME_DESC3)+'</div>');
 	  }
   }
   if (graphic.attributes.getValueCI("Desc4") != null) {
