@@ -79,6 +79,8 @@ var LEFT_PANE_WIDTH_THREE_COLUMN = 485;
 
 var TWO_COLUMN_THRESHOLD = 600;
 
+var FIELDNAME_NUMBER = "Number";
+
 var _lutIconSpecs = {
 	tiny:new IconSpecs(22,28,3,8),
 	medium:new IconSpecs(24,30,3,8),
@@ -301,7 +303,7 @@ function tile_onMouseOut(e) {
 	if (_selected != null) {
 		// does this tile represent the selected graphic?
 		var id = parseInt($(this).attr("id").substring(4));
-		if (_selected.attributes.getValueCI("Number") == id) {
+		if (_selected.attributes.getValueCI(FIELDNAME_NUMBER) == id) {
 			return;
 		}
 	}
@@ -312,7 +314,7 @@ function tile_onMouseOut(e) {
 function tile_onClick(e) {
 	var id = $(this).attr("id").substring(4);	
 	preSelection();
-	_selected = $.grep(_layerCurrent.graphics,function(n,i){return n.attributes.getValueCI("Number") == id})[0];
+	_selected = $.grep(_layerCurrent.graphics,function(n,i){return n.attributes.getValueCI(FIELDNAME_NUMBER) == id})[0];
 	postSelection();
 }
 
@@ -395,8 +397,8 @@ function unselect() {
 
 // sort items by numeric ID
 function SortByID(a, b){
-  var aID = a.attributes.getValueCI("Number");
-  var bID = b.attributes.getValueCI("Number"); 
+  var aID = a.attributes.getValueCI(FIELDNAME_NUMBER);
+  var bID = b.attributes.getValueCI(FIELDNAME_NUMBER); 
   return ((aID < bID) ? -1 : ((aID > bID) ? 1 : 0));
 }
 
@@ -443,10 +445,10 @@ function activateLayer(layer) {
 		} else {
 			display = "none";
 		}
-		tile = $('<li id="item'+value.attributes.getValueCI("Number")+'" style="display:'+display+'">');
+		tile = $('<li id="item'+value.attributes.getValueCI(FIELDNAME_NUMBER)+'" style="display:'+display+'">');
 		img = $('<img src="'+value.attributes.getValueCI("Image_URL")+'">');
 		footer = $('<div class="footer"></div>');
-		num = $('<div class="num" style="background-color:'+_layerCurrent.color+'">'+value.attributes.getValueCI("Number")+'</div>');
+		num = $('<div class="num" style="background-color:'+_layerCurrent.color+'">'+value.attributes.getValueCI(FIELDNAME_NUMBER)+'</div>');
 		title = $('<div class="blurb">'+value.attributes.getValueCI("Title")+'</div>');
 		$(footer).append(num);
 		$(footer).append(title);
@@ -468,7 +470,7 @@ function refreshList() {
 	var tile;
 	$.each(_layerCurrent.graphics,function(index,value){
 		//find the corresponding tile
-		tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+value.attributes.getValueCI("Number")})[0];
+		tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+value.attributes.getValueCI(FIELDNAME_NUMBER)})[0];
 		if (_map.extent.contains(value.geometry)) {
 			if ($(tile).css("display") == "none") $(tile).stop().fadeIn();
 		} else {
@@ -484,7 +486,7 @@ function buildLayer(arr,iconDir,root) {
 	var spec = _lutIconSpecs["tiny"];
 	$.each(arr,function(index,value){
 		pt = new esri.geometry.Point(value.geometry.x,value.geometry.y,value.geometry.spatialReference);
-		sym = createPictureMarkerSymbol("images/icons/"+iconDir+"/"+root+value.attributes.getValueCI("Number")+".png", _lutIconSpecs["tiny"]);
+		sym = createPictureMarkerSymbol("images/icons/"+iconDir+"/"+root+value.attributes.getValueCI(FIELDNAME_NUMBER)+".png", _lutIconSpecs["tiny"]);
 		layer.add(new esri.Graphic(pt,sym,value.attributes));
 	});
 	return layer;
@@ -529,7 +531,7 @@ function preSelection()
 	
 	if (_selected) {
 		_selected.setSymbol(resizePictureMarkerSymbol(_selected.symbol, _lutIconSpecs["tiny"]));
-		var tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+_selected.attributes.getValueCI("Number")})[0];
+		var tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+_selected.attributes.getValueCI(FIELDNAME_NUMBER)})[0];
 		if ($(tile).attr("id") != $(this).attr("id")) $(tile).stop().animate({'background-color' : COLOR_DIM});
 	}
 		
@@ -569,7 +571,7 @@ function postSelection() {
 		
 		// light up the corresponding tile.
 
-		var tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+_selected.attributes.getValueCI("Number")})[0]
+		var tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+_selected.attributes.getValueCI(FIELDNAME_NUMBER)})[0]
 		$(tile).stop().animate({'background-color' : COLOR_FULL});
 
 	}
