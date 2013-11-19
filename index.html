@@ -82,6 +82,7 @@ var TWO_COLUMN_THRESHOLD = 600;
 var FIELDNAME_NUMBER = "Number";
 var FIELDNAME_TITLE = "Title";
 var FIELDNAME_SHORTDESC = "Short_desc";
+var FIELDNAME_IMAGEURL = "Image_URL";
 
 var _lutIconSpecs = {
 	tiny:new IconSpecs(22,28,3,8),
@@ -448,7 +449,7 @@ function activateLayer(layer) {
 			display = "none";
 		}
 		tile = $('<li id="item'+value.attributes.getValueCI(FIELDNAME_NUMBER)+'" style="display:'+display+'">');
-		img = $('<img src="'+value.attributes.getValueCI("Image_URL")+'">');
+		img = $('<img src="'+value.attributes.getValueCI(FIELDNAME_IMAGEURL)+'">');
 		footer = $('<div class="footer"></div>');
 		num = $('<div class="num" style="background-color:'+_layerCurrent.color+'">'+value.attributes.getValueCI(FIELDNAME_NUMBER)+'</div>');
 		title = $('<div class="blurb">'+value.attributes.getValueCI(FIELDNAME_TITLE)+'</div>');
@@ -589,7 +590,7 @@ function showDetails(graphic) {
   var leftDiv = $('<div class="leftDiv"></div>');
   var rightDiv = $('<div class="rightDiv"></div>');
   
-  var imageDiv = $('<img src="'+graphic.attributes.getValueCI("Image_URL")+'">');	
+  var imageDiv = $('<img src="'+graphic.attributes.getValueCI(FIELDNAME_IMAGEURL)+'">');	
   var pictureFrame = $('<div class="pictureFrame"></div>');	
   $(pictureFrame).append(imageDiv);
   $(leftDiv).append(pictureFrame);
