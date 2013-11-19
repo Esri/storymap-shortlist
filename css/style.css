@@ -220,6 +220,7 @@ ul.tilelist .blurb {
 
 .details {
 	padding:20px;
+	padding-bottom:0px;
 	height:100%;
 }
 
