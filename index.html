@@ -85,6 +85,7 @@ var FIELDNAME_SHORTDESC = "Short_desc";
 var FIELDNAME_IMAGEURL = "Image_URL";
 var FIELDNAME_ADDRESS = "Address";
 var FIELDNAME_HOURS = "Hours";
+var FIELDNAME_WEBSITE = "Website";
 
 var _lutIconSpecs = {
 	tiny:new IconSpecs(22,28,3,8),
@@ -611,9 +612,9 @@ function showDetails(graphic) {
 	  }
   }  
 
-  if (graphic.attributes.getValueCI("Website") != null) {
-	  if ($.trim(graphic.attributes.getValueCI("Website")) != '') {
-		  var website = graphic.attributes.getValueCI("Website").toLowerCase();
+  if (graphic.attributes.getValueCI(FIELDNAME_WEBSITE) != null) {
+	  if ($.trim(graphic.attributes.getValueCI(FIELDNAME_WEBSITE)) != '') {
+		  var website = graphic.attributes.getValueCI(FIELDNAME_WEBSITE).toLowerCase();
 		  if (!(website.indexOf("http") >= 0)) {
 			  website = "http://"+website;
 		  }
