@@ -80,6 +80,7 @@ var LEFT_PANE_WIDTH_THREE_COLUMN = 485;
 var TWO_COLUMN_THRESHOLD = 600;
 
 var FIELDNAME_NUMBER = "Number";
+var FIELDNAME_TITLE = "Title";
 
 var _lutIconSpecs = {
 	tiny:new IconSpecs(22,28,3,8),
@@ -327,7 +328,7 @@ function baselayer_onMouseOver(event)
 	if (_isMobile) return;	
 	_map.setMapCursor("pointer");
 	var graphic = event.graphic;
-	$("#hoverInfo").html(graphic.attributes.getValueCI("Title"));
+	$("#hoverInfo").html(graphic.attributes.getValueCI(FIELDNAME_TITLE));
 	var pt = event.screenPoint;
 	hoverInfoPos(pt.x,pt.y);
 }
@@ -341,7 +342,7 @@ function baselayer_onMouseOut(event)
 
 function baselayer_onClick(event) {
 	var feature = event.graphic;
-	_map.infoWindow.setTitle(event.graphic.attributes.getValueCI("Title"));
+	_map.infoWindow.setTitle(event.graphic.attributes.getValueCI(FIELDNAME_TITLE));
 	var shortDesc = event.graphic.attributes.getValueCI("Short_desc");
 	if (shortDesc)
 		_map.infoWindow.setContent(shortDesc+"<p><span class='infoWindowLink'>Details >></span></p>");
@@ -369,7 +370,7 @@ function layer_onMouseOver(event)
 	if (graphic == _selected) return;
 	graphic.setSymbol(resizePictureMarkerSymbol(graphic.symbol, _lutIconSpecs["medium"]));
 	if (!_isIE) moveGraphicToFront(graphic);	
-	$("#hoverInfo").html(graphic.attributes.getValueCI("Title"));
+	$("#hoverInfo").html(graphic.attributes.getValueCI(FIELDNAME_TITLE));
 	var pt = _map.toScreen(graphic.geometry);
 	hoverInfoPos(pt.x,pt.y);
 }
@@ -449,7 +450,7 @@ function activateLayer(layer) {
 		img = $('<img src="'+value.attributes.getValueCI("Image_URL")+'">');
 		footer = $('<div class="footer"></div>');
 		num = $('<div class="num" style="background-color:'+_layerCurrent.color+'">'+value.attributes.getValueCI(FIELDNAME_NUMBER)+'</div>');
-		title = $('<div class="blurb">'+value.attributes.getValueCI("Title")+'</div>');
+		title = $('<div class="blurb">'+value.attributes.getValueCI(FIELDNAME_TITLE)+'</div>');
 		$(footer).append(num);
 		$(footer).append(title);
 		$(tile).append(img);
@@ -558,7 +559,7 @@ function postSelection() {
 			}
 		},10);				
 		
-		_map.infoWindow.setTitle(_selected.attributes.getValueCI("Title"));
+		_map.infoWindow.setTitle(_selected.attributes.getValueCI(FIELDNAME_TITLE));
 		var shortDesc = _selected.attributes.getValueCI("Short_desc");
 		if (shortDesc)
 			_map.infoWindow.setContent(shortDesc+"<p><span class='infoWindowLink'>Details >></span></p>");
@@ -583,7 +584,7 @@ function postSelection() {
 function showDetails(graphic) {
 	
   var mainDiv = $('<div class="details"></div>');
-  var titleDiv = $('<div class="title">'+graphic.attributes.getValueCI("Title")+'</div>');
+  var titleDiv = $('<div class="title">'+graphic.attributes.getValueCI(FIELDNAME_TITLE)+'</div>');
   var leftDiv = $('<div class="leftDiv"></div>');
   var rightDiv = $('<div class="rightDiv"></div>');
   
