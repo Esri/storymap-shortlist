@@ -89,6 +89,8 @@ var FIELDNAME_WEBSITE = "Website";
 var FIELDNAME_DESC1 = "Desc1";
 var FIELDNAME_DESC2 = "Desc2";
 var FIELDNAME_DESC3 = "Desc3";
+var FIELDNAME_DESC4 = "Desc4";
+var FIELDNAME_DESC5 = "Desc5";
 
 var _lutIconSpecs = {
 	tiny:new IconSpecs(22,28,3,8),
@@ -643,16 +645,16 @@ function showDetails(graphic) {
 		$(rightDiv).append('<div class="desc">'+graphic.attributes.getValueCI(FIELDNAME_DESC3)+'</div>');
 	  }
   }
-  if (graphic.attributes.getValueCI("Desc4") != null) {
-	  if ($.trim(graphic.attributes.getValueCI("Desc4")) != '') {
+  if (graphic.attributes.getValueCI(FIELDNAME_DESC4) != null) {
+	  if ($.trim(graphic.attributes.getValueCI(FIELDNAME_DESC4)) != '') {
 		  $(rightDiv).append('<p>');
-		  $(rightDiv).append('<div class="desc">'+graphic.attributes.getValueCI("Desc4")+'</div>');
+		  $(rightDiv).append('<div class="desc">'+graphic.attributes.getValueCI(FIELDNAME_DESC4)+'</div>');
 	  }
   }
-  if (graphic.attributes.getValueCI("Desc5") != null) {
-	  if ($.trim(graphic.attributes.getValueCI("Desc5")) != '') {
+  if (graphic.attributes.getValueCI(FIELDNAME_DESC5) != null) {
+	  if ($.trim(graphic.attributes.getValueCI(FIELDNAME_DESC5)) != '') {
 		  $(rightDiv).append('<p>');
-		  $(rightDiv).append('<div class="desc">'+graphic.attributes.getValueCI("Desc5")+'</div>');
+		  $(rightDiv).append('<div class="desc">'+graphic.attributes.getValueCI(FIELDNAME_DESC5)+'</div>');
 	  }
   }
   
