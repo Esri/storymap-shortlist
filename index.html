@@ -84,6 +84,7 @@ var FIELDNAME_TITLE = "Title";
 var FIELDNAME_SHORTDESC = "Short_desc";
 var FIELDNAME_IMAGEURL = "Image_URL";
 var FIELDNAME_ADDRESS = "Address";
+var FIELDNAME_HOURS = "Hours";
 
 var _lutIconSpecs = {
 	tiny:new IconSpecs(22,28,3,8),
@@ -603,9 +604,9 @@ function showDetails(graphic) {
 	}
   }
 
-  if (graphic.attributes.getValueCI("Hours") != null) {
-	  if ($.trim(graphic.attributes.getValueCI("Hours")) != '') {
-		  var hoursDiv = $('<div class="address">'+graphic.attributes.getValueCI("Hours")+'</div>');
+  if (graphic.attributes.getValueCI(FIELDNAME_HOURS) != null) {
+	  if ($.trim(graphic.attributes.getValueCI(FIELDNAME_HOURS)) != '') {
+		  var hoursDiv = $('<div class="address">'+graphic.attributes.getValueCI(FIELDNAME_HOURS)+'</div>');
 		  $(leftDiv).append(hoursDiv);  
 	  }
   }  
