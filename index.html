@@ -480,7 +480,7 @@ function refreshList() {
 	var tile;
 	$.each(_layerCurrent.graphics,function(index,value){
 		//find the corresponding tile
-		tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+value.attributes.getValueCI(FIELDNAME_NUMBER)})[0];
+		tile = findTile(value.attributes.getValueCI(FIELDNAME_NUMBER));
 		if (_map.extent.contains(value.geometry)) {
 			if ($(tile).css("display") == "none") $(tile).stop().fadeIn();
 		} else {
@@ -541,7 +541,7 @@ function preSelection()
 	
 	if (_selected) {
 		_selected.setSymbol(resizePictureMarkerSymbol(_selected.symbol, _lutIconSpecs["tiny"]));
-		var tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+_selected.attributes.getValueCI(FIELDNAME_NUMBER)})[0];
+		var tile = findTile(_selected.attributes.getValueCI(FIELDNAME_NUMBER));
 		if ($(tile).attr("id") != $(this).attr("id")) $(tile).stop().animate({'background-color' : COLOR_DIM});
 	}
 		
@@ -581,7 +581,7 @@ function postSelection() {
 		
 		// light up the corresponding tile.
 
-		var tile = $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+_selected.attributes.getValueCI(FIELDNAME_NUMBER)})[0]
+		var tile = findTile(_selected.attributes.getValueCI(FIELDNAME_NUMBER));
 		$(tile).stop().animate({'background-color' : COLOR_FULL});
 
 	}
@@ -676,6 +676,11 @@ function showDetails(graphic) {
 	  scrolling:false
   });
   	
+}
+
+function findTile(id)
+{
+	return $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+id})[0];	
 }
 
 function hoverInfoPos(x,y){
