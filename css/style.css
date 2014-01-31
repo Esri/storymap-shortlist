@@ -89,11 +89,33 @@ a:hover{
 	outline:none;
 }
 
+#mainWindow {
+	width:100%;
+	height:100%;
+	position:relative;
+}
+
+#divStrip {
+	width:100%;
+	height:35px;
+	margin:auto;
+	overflow:visible;
+	background-color:#7a7a7a;
+	margin:0px;
+	padding:0px;
+	z-index:101;
+}
+
+#tabs {
+	padding-left:17px;	
+}
+
 #paneLeft {
 	/* initial width -- will be re-calculated in app */
 	width:485px;
 	overflow:hidden;
-	background-color:#b9b9b9;	
+	background-color:#b9b9b9;
+	padding:8px;
 }
 	  
 #map {
@@ -360,4 +382,20 @@ ul.tilelist .blurb {
 {
 	top: 0;
 	right: 0;
+}
+
+#whiteOut {
+	position:absolute;
+	width:100%;
+	height:100%;
+	background-color:#FFF;
+	z-index:2000;top:0px;
+}
+
+#loader {
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin-top:-40px;
+	margin-left:-40px;	
 }

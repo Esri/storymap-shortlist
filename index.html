@@ -767,20 +767,18 @@ function resizePictureMarkerSymbol(sym, spec)
       </div>
     </div>
     
- 	<div id="mainWindow" style="width:100%;height:100%;position:relative">
+ 	<div id="mainWindow">
 
-        <div id="topDiv" style="width:100%;height:35px;margin:auto;overflow:visible;background-color:#7a7a7a;margin:0px;padding:0px;z-index:101">
-            <div id="tabs" style="padding-left:17px;"></div>
-    
+        <div id="divStrip">
+            <div id="tabs"></div>
             <div id="bookmarksCon">
                 <div id="bookmarksToggle"><p id="bookmarksTogText"></p></div>
                 <div id="bookmarksDiv">
                 </div>
             </div>
-
         </div>
         
-        <div id="paneLeft" style="padding:8px">
+        <div id="paneLeft">
             <ul id="myList" class="tilelist"></ul>
         </div>
 
@@ -795,8 +793,8 @@ function resizePictureMarkerSymbol(sym, spec)
        
  	</div>
 
-    <div id="whiteOut" style="position:absolute;width:100%;height:100%;background-color:#FFF;z-index:2000;top:0px">
-        <img id="loader" src="images/loader.gif" style="position:absolute;top:50%;left:50%;margin-top:-40px;margin-left:-40px"/>
+    <div id="whiteOut">
+        <img id="loader" src="images/loader.gif"/>
     </div>
     
 </body>
