@@ -97,10 +97,13 @@ a:hover{
 }
 	  
 #map {
+	position:absolute;
+	top:35px;
 	border:none;
 	padding:0;
 	height:100%;
 	width:100%;
+	overflow:hidden;
 }
 
 #hoverInfo{
