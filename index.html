@@ -134,21 +134,15 @@ function init() {
 	if (!_jqueryReady) return;
 	if (!_dojoReady) return;
 	
-	if (getParameterByName("webmap") != "") {
-		WEBMAP_ID = getParameterByName("webmap");
-	}
-	
-	if (getParameterByName("bookmarks_alias") != "") {
-		BOOKMARKS_ALIAS = getParameterByName("bookmarks_alias");
-	}
-	
-	if (getParameterByName("color_order") != "") {
-		COLOR_ORDER = getParameterByName("color_order")
-	}	
+	var queryString = new Object();
+	$.each(esri.urlToObject(document.location.href).query, function(index, value) {
+		queryString[index.toLowerCase()] = value;
+	});
 
-	if (getParameterByName("point_layer_exemptions") != "") {
-		POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS = getParameterByName("point_layer_exemptions")
-	}
+	WEBMAP_ID = queryString["webmap"] ? queryString["webmap"] : WEBMAP_ID;
+	BOOKMARKS_ALIAS = queryString["bookmarks_alias"] ? queryString["bookmarks_alias"] : BOOKMARKS_ALIAS;
+	COLOR_ORDER = queryString["color_order"] ? queryString["color_order"] : COLOR_ORDER;
+	POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS = queryString["point_layer_exemptions"] ? queryString["point_layer_exemptions"] : POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS;
 	
 	$("#bookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
 
