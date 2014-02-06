@@ -61,7 +61,7 @@ var COLOR_ORDER = "green,red,blue,purple"; // will only use as many colors as yo
 var BINGMAPS_KEY = "";
 // specify point layer(s) to be displayed on the map that don't define tabs.
 // if there's more than one layer, use the "|" character as delimeter
-var POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS = "Design|Food"  
+var POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS = "";  
 					
 /******************************************************
 ******************** app variables ********************
@@ -145,6 +145,10 @@ function init() {
 	if (getParameterByName("color_order") != "") {
 		COLOR_ORDER = getParameterByName("color_order")
 	}	
+
+	if (getParameterByName("point_layer_exemptions") != "") {
+		POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS = getParameterByName("point_layer_exemptions")
+	}
 	
 	$("#bookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
 
