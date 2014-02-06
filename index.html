@@ -135,9 +135,12 @@ function init() {
 	if (!_dojoReady) return;
 	
 	var queryString = new Object();
-	$.each(esri.urlToObject(document.location.href).query, function(index, value) {
-		queryString[index.toLowerCase()] = value;
-	});
+	var temp = esri.urlToObject(document.location.href).query;
+	if (temp) {
+		$.each(temp, function(index, value) {
+			queryString[index.toLowerCase()] = value;
+		});
+	}
 
 	WEBMAP_ID = queryString["webmap"] ? queryString["webmap"] : WEBMAP_ID;
 	BOOKMARKS_ALIAS = queryString["bookmarks_alias"] ? queryString["bookmarks_alias"] : BOOKMARKS_ALIAS;
