@@ -308,6 +308,8 @@ function initMap(layers) {
 	$.each(_contentLayers,function(index,value){
 		$("#tabs").append('<div class="tab" onclick="activateLayer(_contentLayers['+index+'])">'+value.title+'</div>');
 	});
+	
+	if ($(".tab").length == 1) $(".tab").css("display", "none");
 
 	activateLayer(_contentLayers[0]);
 	dojo.connect(_map.infoWindow,"onHide",infoWindow_onHide);
