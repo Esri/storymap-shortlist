@@ -142,7 +142,9 @@ function init() {
 	WEBMAP_ID = queryString["webmap"] ? queryString["webmap"] : WEBMAP_ID;
 	BOOKMARKS_ALIAS = queryString["bookmarks_alias"] ? queryString["bookmarks_alias"] : BOOKMARKS_ALIAS;
 	COLOR_ORDER = queryString["color_order"] ? queryString["color_order"] : COLOR_ORDER;
-	POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS = queryString["point_layers_not_to_be_shown_as_tabs"] ? queryString["point_layers_not_to_be_shown_as_tabs"] : POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS;
+	POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS = queryString["point_layers_not_to_be_shown_as_tabs"] ? 
+											queryString["point_layers_not_to_be_shown_as_tabs"] : 
+											POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS;
 	
 	$("#bookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
 
