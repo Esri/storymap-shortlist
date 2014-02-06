@@ -59,6 +59,9 @@ var	WEBMAP_ID = "1966ef409a344d089b001df85332608f";
 var	BOOKMARKS_ALIAS = "Zoom";
 var COLOR_ORDER = "green,red,blue,purple"; // will only use as many colors as you have content (point) layers
 var BINGMAPS_KEY = "";
+// specify point layer(s) to be displayed on the map that don't define tabs.
+// if there's more than one layer, use the "|" character as delimeter
+var POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS = "Design|Food"  
 					
 /******************************************************
 ******************** app variables ********************
@@ -181,7 +184,7 @@ function init() {
 		bingMapsKey: BINGMAPS_KEY
 	});
 	
-	mapDeferred.addCallback(function(response) {	  
+	mapDeferred.addCallback(function(response) {
 		
 		document.title = response.itemInfo.item.title;
 		$("#title").html(response.itemInfo.item.title);
@@ -229,9 +232,17 @@ function initMap(layers) {
 	var supportLayers = [];
 	var pointLayers = [];
 	
-	$.each(layers,function(index,value){
+	var arrExemptions = [];
+	$.each(POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS.split("|"), function(index, value) {
+		arrExemptions.push($.trim(value).toLowerCase());
+	});
+		
+	$.each(layers, function(index,value){
 		if (value.url == null) {
-			if (value.featureCollection.layers[0].featureSet.geometryType == "esriGeometryPoint") {
+			if (
+				value.featureCollection.layers[0].featureSet.geometryType == "esriGeometryPoint" && 
+				$.inArray(value.title.toLowerCase(), arrExemptions) == -1
+				) {
 				pointLayers.push(value);
 			} else {
 				supportLayers.push(value);
