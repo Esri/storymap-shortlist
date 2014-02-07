@@ -341,7 +341,7 @@ function tile_onMouseOut(e) {
 }
 
 function tile_onClick(e) {
-	var id = $(this).attr("id").substring(4);	
+	var id = parseInt($(this).attr("id").substring(4));	
 	preSelection();
 	_selected = $.grep(_layerCurrent.graphics,function(n,i){return n.attributes.getValueCI(FIELDNAME_ID) == id})[0];
 	postSelection();
