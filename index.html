@@ -45,9 +45,6 @@
 
 <script type="text/javascript">
 
-dojo.require("esri.map");
-dojo.require("esri.arcgis.utils");
-
 /******************************************************
 ********************  config section ******************
 *******************************************************/
@@ -63,6 +60,8 @@ var POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS = "";
 /******************************************************
 ******************** app variables ********************
 *******************************************************/
+
+dojo.require("esri.arcgis.utils");
 
 var COLOR_SCHEMES = [
 					{name:"blue",iconDir:"blue",iconPrefix:"NumberIconb",color:"#177ff1"},
