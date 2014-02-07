@@ -94,6 +94,7 @@ var FIELDNAME_DESC2 = "Desc2";
 var FIELDNAME_DESC3 = "Desc3";
 var FIELDNAME_DESC4 = "Desc4";
 var FIELDNAME_DESC5 = "Desc5";
+var FIELDNAME_ID = "Shortlist-ID";
 
 var _lutIconSpecs = {
 	tiny:new IconSpecs(22,28,3,8),
@@ -278,6 +279,7 @@ function initMap(layers) {
 		_map.removeLayer(_map.getLayer($.grep(_map.graphicsLayerIds, function(n,i){return _map.getLayer(n).id == value.featureCollection.layers[0].id})[0]));
 		$.each(value.featureCollection.layers[0].featureSet.features,function(index,value) {
 			value.attributes.getValueCI = getValueCI; // assign extra method to handle case sensitivity
+			value.attributes[FIELDNAME_ID] = index; // assign internal shortlist id
 		});
 		/* color index assignment is a weird bit of voodoo.  first thing to consider
 		   is that layers names actually appear in tabs in reverse order (i.e. last layer in
@@ -330,7 +332,7 @@ function tile_onMouseOut(e) {
 	if (_selected != null) {
 		// does this tile represent the selected graphic?
 		var id = parseInt($(this).attr("id").substring(4));
-		if (_selected.attributes.getValueCI(FIELDNAME_NUMBER) == id) {
+		if (_selected.attributes.getValueCI(FIELDNAME_ID) == id) {
 			return;
 		}
 	}
@@ -341,7 +343,7 @@ function tile_onMouseOut(e) {
 function tile_onClick(e) {
 	var id = $(this).attr("id").substring(4);	
 	preSelection();
-	_selected = $.grep(_layerCurrent.graphics,function(n,i){return n.attributes.getValueCI(FIELDNAME_NUMBER) == id})[0];
+	_selected = $.grep(_layerCurrent.graphics,function(n,i){return n.attributes.getValueCI(FIELDNAME_ID) == id})[0];
 	postSelection();
 }
 
@@ -471,7 +473,7 @@ function activateLayer(layer) {
 		} else {
 			display = "none";
 		}
-		tile = $('<li id="item'+value.attributes.getValueCI(FIELDNAME_NUMBER)+'" style="display:'+display+'">');
+		tile = $('<li id="item'+value.attributes.getValueCI(FIELDNAME_ID)+'" style="display:'+display+'">');
 		img = $('<img src="'+value.attributes.getValueCI(FIELDNAME_IMAGEURL)+'">');
 		footer = $('<div class="footer"></div>');
 		num = $('<div class="num" style="background-color:'+_layerCurrent.color+'">'+value.attributes.getValueCI(FIELDNAME_NUMBER)+'</div>');
@@ -496,7 +498,7 @@ function refreshList() {
 	var tile;
 	$.each(_layerCurrent.graphics,function(index,value){
 		//find the corresponding tile
-		tile = findTile(value.attributes.getValueCI(FIELDNAME_NUMBER));
+		tile = findTile(value.attributes.getValueCI(FIELDNAME_ID));
 		if (_map.extent.contains(value.geometry)) {
 			if ($(tile).css("display") == "none") $(tile).stop().fadeIn();
 		} else {
@@ -558,7 +560,7 @@ function preSelection()
 	
 	if (_selected) {
 		_selected.setSymbol(resizePictureMarkerSymbol(_selected.symbol, _lutIconSpecs["tiny"]));
-		var tile = findTile(_selected.attributes.getValueCI(FIELDNAME_NUMBER));
+		var tile = findTile(_selected.attributes.getValueCI(FIELDNAME_ID));
 		if ($(tile).attr("id") != $(this).attr("id")) $(tile).stop().animate({'background-color' : COLOR_DIM});
 	}
 		
@@ -598,7 +600,7 @@ function postSelection() {
 		
 		// light up the corresponding tile.
 
-		var tile = findTile(_selected.attributes.getValueCI(FIELDNAME_NUMBER));
+		var tile = findTile(_selected.attributes.getValueCI(FIELDNAME_ID));
 		$(tile).stop().animate({'background-color' : COLOR_FULL});
 
 	}
