@@ -529,7 +529,7 @@ function getValueCI(field) {
 
 function handleWindowResize() {
 	
-	var heightDoc = getViewportDimensions()[1];
+	var heightDoc = $("body").height();
 	
 	$("#mainWindow").height(heightDoc - ($("#header").height()));
 	$("#paneLeft").height($("#mainWindow").height() - 35);
