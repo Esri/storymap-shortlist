@@ -529,9 +529,7 @@ function getValueCI(field) {
 
 function handleWindowResize() {
 	
-	var heightDoc = $("body").height();
-	
-	$("#mainWindow").height(heightDoc - ($("#header").height()));
+	$("#mainWindow").height($("body").height() - ($("#header").height()));
 	$("#paneLeft").height($("#mainWindow").height() - 35);
 	$("#paneLeft").width($("body").width() <= 800 ? LEFT_PANE_WIDTH_TWO_COLUMN : LEFT_PANE_WIDTH_THREE_COLUMN);
 	$(".tilelist").height($("#paneLeft").height() - 18);
