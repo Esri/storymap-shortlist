@@ -548,8 +548,8 @@ function postSelection() {
 		var picture = _selected.attributes.getValueCI(FIELDNAME_IMAGEURL);
 		if (picture) {
 			var pDiv = $("<div></div>").width("100%").css("text-align", "center");
-			$(pDiv).css("padding-bottom","10px").css("padding-top", "10px");
-			$(pDiv).append($(new Image()).attr("src", picture));
+			$(pDiv).css("padding-bottom", "10px").css("padding-top", "10px");
+			$(pDiv).append($(new Image()).attr("src", picture).css("max-width", "245px"));
 			$(contentDiv).append(pDiv);
 		}
 		$(contentDiv).append($("<div></div>").addClass("infoWindowLink").html("Details >>"));
