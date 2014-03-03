@@ -82,6 +82,9 @@ function init() {
 	POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS = queryString["point_layers_not_to_be_shown_as_tabs"] ? 
 											queryString["point_layers_not_to_be_shown_as_tabs"] : 
 											POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS;
+	SUPPORTING_LAYERS_THAT_ARE_CLICKABLE = queryString["supporting_layers_that_are_clickable"] ?
+											queryString["supporting_layers_that_are_clickable"] :
+											SUPPORTING_LAYERS_THAT_ARE_CLICKABLE;
 	
 	$("#bookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
 
@@ -173,6 +176,11 @@ function initMap(layers) {
 	$.each(POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS.split("|"), function(index, value) {
 		arrExemptions.push($.trim(value).toLowerCase());
 	});
+	
+	var supportingLayersThatAreClickable = [];
+	$.each(SUPPORTING_LAYERS_THAT_ARE_CLICKABLE.split("|"), function(index, value) {
+		supportingLayersThatAreClickable.push($.trim(value).toLowerCase());
+	});
 		
 	$.each(layers, function(index,value){
 		if (value.url == null) {
@@ -199,9 +207,11 @@ function initMap(layers) {
 		$.each(supportLayer.graphics,function(index,value) {
 			value.attributes.getValueCI = getValueCI; // assign extra method to handle case sensitivity
 		});
-		dojo.connect(supportLayer, "onMouseOver", baselayer_onMouseOver);
-		dojo.connect(supportLayer, "onMouseOut", baselayer_onMouseOut);
-		dojo.connect(supportLayer, "onClick", baselayer_onClick);
+		if ($.inArray(value.title.toLowerCase(), supportingLayersThatAreClickable) > -1) {
+			dojo.connect(supportLayer, "onMouseOver", baselayer_onMouseOver);
+			dojo.connect(supportLayer, "onMouseOut", baselayer_onMouseOut);
+			dojo.connect(supportLayer, "onClick", baselayer_onClick);
+		}
 	});
 	
 	var contentLayer;
