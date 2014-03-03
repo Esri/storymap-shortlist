@@ -187,7 +187,7 @@ function initMap(layers) {
 	$.each(layers, function(index,value){
 		if (value.url == null || value.type == "CSV") {
 			if (
-				getGeometryType(value) == "esriGeometryPoint" && 
+				getFeatureSet(value).geometryType == "esriGeometryPoint" && 
 				$.inArray(value.title.toLowerCase(), arrExemptions) == -1
 				) {
 				pointLayers.push(value);
@@ -222,7 +222,7 @@ function initMap(layers) {
 	var colorIndex;
 	$.each(pointLayers,function(index,value) {
 		_map.removeLayer(_map.getLayer($.grep(_map.graphicsLayerIds, function(n,i){return _map.getLayer(n).id == getID(value)})[0]));
-		$.each(getFeatures(value), function(index,value) {
+		$.each(getFeatureSet(value).features, function(index,value) {
 			value.attributes.getValueCI = getValueCI; // assign extra method to handle case sensitivity
 			value.attributes[FIELDNAME_ID] = index; // assign internal shortlist id
 		});
@@ -236,7 +236,7 @@ function initMap(layers) {
 			return n.name.toLowerCase() == $.trim(colorOrder[colorIndex].toLowerCase())
 		})[0];
 		contentLayer = buildLayer(
-					getFeatures(value).sort(SortByNumber),
+					getFeatureSet(value).features.sort(SortByNumber),
 					colorScheme.iconDir,
 					colorScheme.iconPrefix
 					);
@@ -264,37 +264,14 @@ function initMap(layers) {
 
 }
 
-function getFeatures(layer)
+function getFeatureSet(layer)
 {
-	var features;
-	if (!layer.url) {
-		features = layer.featureCollection.layers[0].featureSet.features;
-	} else {
-		features = layer.featureCollection.featureSet.features;
-	}
-	return features;
-}
-
-function getGeometryType(layer)
-{
-	var geometryType;
-	if (!layer.url) {
-		geometryType = layer.featureCollection.layers[0].featureSet.geometryType;
-	} else {
-		geometryType = layer.featureCollection.featureSet.geometryType;
-	}
-	return geometryType;	
+	return layer.url ? layer.featureCollection.featureSet : layer.featureCollection.layers[0].featureSet;
 }
 
 function getID(layer)
 {
-	var id;
-	if (!layer.url) {
-		id = layer.featureCollection.layers[0].id
-	} else {
-		id = layer.id
-	}
-	return id;
+	return layer.url ? layer.id : layer.featureCollection.layers[0].id;
 }
 
 
