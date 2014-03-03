@@ -542,12 +542,20 @@ function postSelection() {
 			}
 		},10);				
 		
-		_map.infoWindow.setTitle(_selected.attributes.getValueCI(FIELDNAME_TITLE));
+		var contentDiv = $("<div></div");
 		var shortDesc = _selected.attributes.getValueCI(FIELDNAME_SHORTDESC);
-		if (shortDesc)
-			_map.infoWindow.setContent(shortDesc+"<p><span class='infoWindowLink'>Details >></span></p>");
-		else
-			_map.infoWindow.setContent("<span class='infoWindowLink'>Details >></span>");
+		if (shortDesc) $(contentDiv).append($("<div></div>").html(shortDesc));
+		var picture = _selected.attributes.getValueCI(FIELDNAME_IMAGEURL);
+		if (picture) {
+			var pDiv = $("<div></div>").width("100%").css("text-align", "center");
+			$(pDiv).css("padding-bottom","10px").css("padding-top", "10px");
+			$(pDiv).append($(new Image()).attr("src", picture));
+			$(contentDiv).append(pDiv);
+		}
+		$(contentDiv).append($("<div></div>").addClass("infoWindowLink").html("Details >>"));
+		
+		_map.infoWindow.setTitle(_selected.attributes.getValueCI(FIELDNAME_TITLE));
+		_map.infoWindow.setContent(contentDiv.html());
 		_map.infoWindow.show(_selected.geometry);	
 		$(".infoWindowLink").click(function(e) {
 			showDetails(_selected);
