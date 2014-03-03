@@ -264,17 +264,6 @@ function initMap(layers) {
 
 }
 
-function getFeatureSet(layer)
-{
-	return layer.url ? layer.featureCollection.featureSet : layer.featureCollection.layers[0].featureSet;
-}
-
-function getID(layer)
-{
-	return layer.url ? layer.id : layer.featureCollection.layers[0].id;
-}
-
-
 /******************************************************
 ******************** event handlers *******************
 *******************************************************/
@@ -373,6 +362,18 @@ function layer_onMouseOut(event)
 /******************************************************
 ****************** other functions ********************
 *******************************************************/
+
+//neutral way of getting featureSet
+function getFeatureSet(layer)
+{
+	return layer.url ? layer.featureCollection.featureSet : layer.featureCollection.layers[0].featureSet;
+}
+
+//neutral way of getting layer ID
+function getID(layer)
+{
+	return layer.url ? layer.id : layer.featureCollection.layers[0].id;
+}
 
 function unselect() {
 	preSelection();		
