@@ -85,6 +85,8 @@ function init() {
 	SUPPORTING_LAYERS_THAT_ARE_CLICKABLE = queryString["supporting_layers_that_are_clickable"] ?
 											queryString["supporting_layers_that_are_clickable"] :
 											SUPPORTING_LAYERS_THAT_ARE_CLICKABLE;
+											
+	if ($.trim(PROXY_URL).length > 0) esri.config.defaults.io.proxyUrl = PROXY_URL;
 	
 	$("#bookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
 
@@ -183,9 +185,9 @@ function initMap(layers) {
 	});
 		
 	$.each(layers, function(index,value){
-		if (value.url == null) {
+		if (value.url == null || value.type == "CSV") {
 			if (
-				value.featureCollection.layers[0].featureSet.geometryType == "esriGeometryPoint" && 
+				getGeometryType(value) == "esriGeometryPoint" && 
 				$.inArray(value.title.toLowerCase(), arrExemptions) == -1
 				) {
 				pointLayers.push(value);
@@ -195,14 +197,14 @@ function initMap(layers) {
 		} else {
 			// if the layer has an url property (meaning that it comes from a service), just
 			// keep going...it will remain in the map, but won't be query-able.
-		}
+		}		
 	});
-	
+
 	_initExtent = _map.extent;
 	
 	var supportLayer;
 	$.each(supportLayers,function(index,value) {
-		supportLayer = _map.getLayer($.grep(_map.graphicsLayerIds, function(n,i){return _map.getLayer(n).id == value.featureCollection.layers[0].id})[0]);
+		supportLayer = _map.getLayer($.grep(_map.graphicsLayerIds, function(n,i){return _map.getLayer(n).id == getID(value)})[0]);
 		if (supportLayer == null) return;
 		$.each(supportLayer.graphics,function(index,value) {
 			value.attributes.getValueCI = getValueCI; // assign extra method to handle case sensitivity
@@ -219,8 +221,8 @@ function initMap(layers) {
 	var colorOrder = COLOR_ORDER.split(",");
 	var colorIndex;
 	$.each(pointLayers,function(index,value) {
-		_map.removeLayer(_map.getLayer($.grep(_map.graphicsLayerIds, function(n,i){return _map.getLayer(n).id == value.featureCollection.layers[0].id})[0]));
-		$.each(value.featureCollection.layers[0].featureSet.features,function(index,value) {
+		_map.removeLayer(_map.getLayer($.grep(_map.graphicsLayerIds, function(n,i){return _map.getLayer(n).id == getID(value)})[0]));
+		$.each(getFeatures(value), function(index,value) {
 			value.attributes.getValueCI = getValueCI; // assign extra method to handle case sensitivity
 			value.attributes[FIELDNAME_ID] = index; // assign internal shortlist id
 		});
@@ -234,7 +236,7 @@ function initMap(layers) {
 			return n.name.toLowerCase() == $.trim(colorOrder[colorIndex].toLowerCase())
 		})[0];
 		contentLayer = buildLayer(
-					value.featureCollection.layers[0].featureSet.features.sort(SortByNumber),
+					getFeatures(value).sort(SortByNumber),
 					colorScheme.iconDir,
 					colorScheme.iconPrefix
 					);
@@ -247,7 +249,7 @@ function initMap(layers) {
 		_map.addLayer(contentLayer);
 		_contentLayers.push(contentLayer);
 	});
-	
+
 	_contentLayers.reverse();
 	$.each(_contentLayers,function(index,value){
 		$("#tabs").append('<div class="tab" onclick="activateLayer(_contentLayers['+index+'])">'+value.title+'</div>');
@@ -261,6 +263,40 @@ function initMap(layers) {
 	$("#whiteOut").fadeOut("slow");			
 
 }
+
+function getFeatures(layer)
+{
+	var features;
+	if (!layer.url) {
+		features = layer.featureCollection.layers[0].featureSet.features;
+	} else {
+		features = layer.featureCollection.featureSet.features;
+	}
+	return features;
+}
+
+function getGeometryType(layer)
+{
+	var geometryType;
+	if (!layer.url) {
+		geometryType = layer.featureCollection.layers[0].featureSet.geometryType;
+	} else {
+		geometryType = layer.featureCollection.featureSet.geometryType;
+	}
+	return geometryType;	
+}
+
+function getID(layer)
+{
+	var id;
+	if (!layer.url) {
+		id = layer.featureCollection.layers[0].id
+	} else {
+		id = layer.id
+	}
+	return id;
+}
+
 
 /******************************************************
 ******************** event handlers *******************
