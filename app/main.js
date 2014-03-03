@@ -547,9 +547,8 @@ function postSelection() {
 		if (shortDesc) $(contentDiv).append($("<div></div>").html(shortDesc));
 		var picture = _selected.attributes.getValueCI(FIELDNAME_IMAGEURL);
 		if (picture) {
-			var pDiv = $("<div></div>").width("100%").css("text-align", "center");
-			$(pDiv).css("padding-bottom", "10px").css("padding-top", "10px");
-			$(pDiv).append($(new Image()).attr("src", picture).css("max-width", "245px"));
+			var pDiv = $("<div></div>").addClass("infoWindowPictureDiv");
+			$(pDiv).append($(new Image()).attr("src", picture));
 			$(contentDiv).append(pDiv);
 		}
 		$(contentDiv).append($("<div></div>").addClass("infoWindowLink").html("Details >>"));

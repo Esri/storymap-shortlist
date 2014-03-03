@@ -377,6 +377,17 @@ ul.tilelist .blurb {
 	text-decoration:underline;
 }
 
+.infoWindowPictureDiv {
+	width: 100%;
+	text-align:center;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+
+.infoWindowPictureDiv img {
+	max-width: 245px;
+}
+
 /* To change position of close button to Top Right Corner */
 #colorbox #cboxClose
 {
@@ -399,3 +410,4 @@ ul.tilelist .blurb {
 	margin-top:-40px;
 	margin-left:-40px;	
 }
+
