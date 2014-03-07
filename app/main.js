@@ -122,8 +122,7 @@ function init() {
 			slider: false,
 			wrapAround180:false
 		},
-		ignorePopups: true,
-		bingMapsKey: BINGMAPS_KEY
+		ignorePopups: true
 	});
 	
 	mapDeferred.addCallback(function(response) {
