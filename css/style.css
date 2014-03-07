@@ -411,3 +411,6 @@ ul.tilelist .blurb {
 	margin-left:-40px;	
 }
 
+.esriPopup .sizer {
+	min-width: 270px;
+}
