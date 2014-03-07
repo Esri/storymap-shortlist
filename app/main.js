@@ -316,11 +316,7 @@ function baselayer_onMouseOut(event)
 function baselayer_onClick(event) {
 	var feature = event.graphic;
 	_map.infoWindow.setTitle(event.graphic.attributes.getValueCI(FIELDNAME_TITLE));
-	var shortDesc = event.graphic.attributes.getValueCI(FIELDNAME_SHORTDESC);
-	if (shortDesc)
-		_map.infoWindow.setContent(shortDesc+"<p><span class='infoWindowLink'>Details >></span></p>");
-	else
-		_map.infoWindow.setContent("<span class='infoWindowLink'>Details >></span>");
+	_map.infoWindow.setContent(buildPopupContentHTML(feature.attributes));
 	_map.infoWindow.show(event.mapPoint);	
 	$(".infoWindowLink").click(function(e) {
         showDetails(feature);
