@@ -85,8 +85,10 @@ function init() {
 	SUPPORTING_LAYERS_THAT_ARE_CLICKABLE = queryString["supporting_layers_that_are_clickable"] ?
 											queryString["supporting_layers_that_are_clickable"] :
 											SUPPORTING_LAYERS_THAT_ARE_CLICKABLE;
-											
-	if ($.trim(PROXY_URL).length > 0) esri.config.defaults.io.proxyUrl = PROXY_URL;
+	// Note:  If using a proxy server (required for remove CSV access),
+	//        you'll need to uncomment the following line and provide
+	//        a valid proxy server url. 										
+	//esri.config.defaults.io.proxyUrl = YOUR_PROXY_URL_HERE;
 	
 	$("#bookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
 
