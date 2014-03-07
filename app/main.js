@@ -575,8 +575,8 @@ function buildPopupContentHTML(atts)
 	if (!DETAILS_PANEL) {
 		var desc1 = atts.getValueCI(FIELDNAME_DESC1);
 		if (desc1) $(contentDiv).append($("<div></div>").html(desc1));
-		var website = atts.getValueCI(FIELDNAME_WEBSITE);
-		if (website) $(contentDiv).append($('<div class="address"><a href="'+website+'" target="_blank">Website</a></div>').css("padding-top",10)); 
+		var websiteLink = buildWebsiteLink(atts.getValueCI(FIELDNAME_WEBSITE));
+		if (websiteLink) $(contentDiv).append($(websiteLink).css("padding-top", 10)); 
 	} else {
 		$(contentDiv).append($("<div></div>").addClass("infoWindowLink").html("Details >>"));
 	}
@@ -609,16 +609,8 @@ function showDetails(graphic) {
 	  }
   }  
 
-  if (graphic.attributes.getValueCI(FIELDNAME_WEBSITE) != null) {
-	  if ($.trim(graphic.attributes.getValueCI(FIELDNAME_WEBSITE)) != '') {
-		  var website = graphic.attributes.getValueCI(FIELDNAME_WEBSITE).toLowerCase();
-		  if (!(website.indexOf("http") >= 0)) {
-			  website = "http://"+website;
-		  }
-		  var websiteDiv = $('<div class="address"><a href="'+website+'" target="_blank">Website</a></div>');
-		  $(leftDiv).append(websiteDiv);  
-	  }
-  }  
+  var websiteLink = buildWebsiteLink(graphic.attributes.getValueCI(FIELDNAME_WEBSITE));
+  if (websiteLink) $(leftDiv).append(websiteLink);
 
   if (graphic.attributes.getValueCI(FIELDNAME_DESC1) != null) {
 	  if ($.trim(graphic.attributes.getValueCI(FIELDNAME_DESC1)) != '') {
@@ -669,6 +661,17 @@ function showDetails(graphic) {
 	  scrolling:false
   });
   	
+}
+
+function buildWebsiteLink(website)
+{
+	if (!website) return null;
+	if ($.trim(website) == '') return null;
+	website = website.toLowerCase();
+	if (!(website.indexOf("http") >= 0)) {
+	  website = "http://"+website;
+	}
+	return $('<div class="address"><a href="'+website+'" target="_blank">Website</a></div>');
 }
 
 function findTile(id)
