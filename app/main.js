@@ -542,19 +542,11 @@ function postSelection() {
 			}
 		},10);				
 		
-		var contentDiv = $("<div></div");
-		var shortDesc = _selected.attributes.getValueCI(FIELDNAME_SHORTDESC);
-		if (shortDesc) $(contentDiv).append($("<div></div>").html(shortDesc));
-		var picture = _selected.attributes.getValueCI(FIELDNAME_IMAGEURL);
-		if (picture) {
-			var pDiv = $("<div></div>").addClass("infoWindowPictureDiv");
-			$(pDiv).append($(new Image()).attr("src", picture));
-			$(contentDiv).append(pDiv);
-		}
-		$(contentDiv).append($("<div></div>").addClass("infoWindowLink").html("Details >>"));
+		
+		
 		
 		_map.infoWindow.setTitle(_selected.attributes.getValueCI(FIELDNAME_TITLE));
-		_map.infoWindow.setContent(contentDiv.html());
+		_map.infoWindow.setContent(buildPopupContentHTML(_selected.attributes));
 		_map.infoWindow.show(_selected.geometry);	
 		$(".infoWindowLink").click(function(e) {
 			showDetails(_selected);
@@ -569,6 +561,21 @@ function postSelection() {
 
 	$("#hoverInfo").hide();
 	
+}
+
+function buildPopupContentHTML(atts)
+{
+	var contentDiv = $("<div></div");
+	var shortDesc = atts.getValueCI(FIELDNAME_SHORTDESC);
+	if (shortDesc) $(contentDiv).append($("<div></div>").html(shortDesc));
+	var picture = atts.getValueCI(FIELDNAME_IMAGEURL);
+	if (picture) {
+		var pDiv = $("<div></div>").addClass("infoWindowPictureDiv");
+		$(pDiv).append($(new Image()).attr("src", picture));
+		$(contentDiv).append(pDiv);
+	}
+	$(contentDiv).append($("<div></div>").addClass("infoWindowLink").html("Details >>"));
+	return contentDiv.html();
 }
 
 function showDetails(graphic) {
