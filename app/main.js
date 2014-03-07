@@ -79,6 +79,7 @@ function init() {
 	WEBMAP_ID = queryString["webmap"] ? queryString["webmap"] : WEBMAP_ID;
 	BOOKMARKS_ALIAS = queryString["bookmarks_alias"] ? queryString["bookmarks_alias"] : BOOKMARKS_ALIAS;
 	COLOR_ORDER = queryString["color_order"] ? queryString["color_order"] : COLOR_ORDER;
+	DETAILS_PANEL = queryString["details_panel"] ? $.trim((queryString["details_panel"])).toLowerCase() == "true" : DETAILS_PANEL;
 	POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS = queryString["point_layers_not_to_be_shown_as_tabs"] ? 
 											queryString["point_layers_not_to_be_shown_as_tabs"] : 
 											POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS;
@@ -571,7 +572,14 @@ function buildPopupContentHTML(atts)
 		$(pDiv).append($(new Image()).attr("src", picture));
 		$(contentDiv).append(pDiv);
 	}
-	$(contentDiv).append($("<div></div>").addClass("infoWindowLink").html("Details >>"));
+	if (!DETAILS_PANEL) {
+		var desc1 = atts.getValueCI(FIELDNAME_DESC1);
+		if (desc1) $(contentDiv).append($("<div></div>").html(desc1));
+		var website = atts.getValueCI(FIELDNAME_WEBSITE);
+		if (website) $(contentDiv).append($('<div class="address"><a href="'+website+'" target="_blank">Website</a></div>').css("padding-top",10)); 
+	} else {
+		$(contentDiv).append($("<div></div>").addClass("infoWindowLink").html("Details >>"));
+	}
 	return contentDiv.html();
 }
 
