@@ -630,36 +630,16 @@ function showDetails(graphic) {
 		}
 		$(leftDiv).append('<div class="address"><a href="'+website+'" target="_blank">Website</a></div>');
 	}
-
-	var desc1 = graphic.attributes.getValueCI(FIELDNAME_DESC1);
-	if (desc1)
-	{
-		$(rightDiv).append('<div class="desc">'+desc1+'</div>');
-	}
-  
-	var desc2 = graphic.attributes.getValueCI(FIELDNAME_DESC2);
-	if (desc2) {
-		$(rightDiv).append('<p>');
-		$(rightDiv).append('<div class="desc">'+desc2+'</div>');
-	}
-
-	var desc3 = graphic.attributes.getValueCI(FIELDNAME_DESC3);
-	if (desc3) {
-		$(rightDiv).append('<p>');
-		$(rightDiv).append('<div class="desc">'+desc3+'</div>');
-	}
-  
-	var desc4 = graphic.attributes.getValueCI(FIELDNAME_DESC4);
-	if (desc4) {
-		$(rightDiv).append('<p>');
-		$(rightDiv).append('<div class="desc">'+desc4+'</div>');
-	}
-  
-	var desc5 = graphic.attributes.getValueCI(FIELDNAME_DESC5);
-	if (desc5) {
-		$(rightDiv).append('<p>');
-		$(rightDiv).append('<div class="desc">'+desc5+'</div>');
-	}  
+	
+	var descFields = [FIELDNAME_DESC1, FIELDNAME_DESC2, FIELDNAME_DESC3, FIELDNAME_DESC4, FIELDNAME_DESC5];
+	var value;
+	$.each(descFields, function(index, field){
+		value = graphic.attributes.getValueCI(field);
+		if (value) {
+			$(rightDiv).append('<div class="desc">'+value+'</div>');
+			if ($(rightDiv).children().length > 0) $(rightDiv).append('<p>');
+		}
+	});
 
 	$(mainDiv).append(titleDiv);
 	$(mainDiv).append("<hr>"); 
