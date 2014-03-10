@@ -476,8 +476,12 @@ function buildLayer(arr,iconDir,root) {
 }
 
 function getValueCI(field) {
-	// uniform, case insensitive method for accessing an 
-	// attribute property
+	
+	// this function provides a uniform method for reading an 
+	// attribute property.  it performs two duties:
+	
+	// 1) case insensitive access
+	
 	var found;
 	var value;
 	$.each(this,function(index,value){
@@ -487,9 +491,17 @@ function getValueCI(field) {
 		}
 	});
 	value = this[found];
-	// treat any blank entries as null
+	
+	// NOTE:  once we adopt ECMAScript 5, ALL of the above can
+	// be accomplished with this one line:
+	// var value = this[$.grep(Object.keys(this), function(n, i) {return n.toLowerCase() == field.toLowerCase()})[0]];
+	
+	// 2) treat any blank entries as null
+	
 	if ($.trim(value).length == 0) value = null;
-	return value;	
+	
+	return value;
+		
 }
 
 function handleWindowResize() {
