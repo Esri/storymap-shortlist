@@ -508,7 +508,11 @@ function handleWindowResize() {
 	
 	$("#mainWindow").height($("body").height() - ($("#header").height()));
 	
-	$("#tabs").width($("body").width() - $("#bookmarksCon").width());
+	if (_bookmarks) {
+		$("#tabs").width($("body").width() - $("#bookmarksCon").width());
+	} else {
+		$("#tabs").width($("body").width());
+	}
 	
 	$("#paneLeft").height($("#mainWindow").height() - 35);
 	$("#paneLeft").width($("body").width() <= 800 ? LEFT_PANE_WIDTH_TWO_COLUMN : LEFT_PANE_WIDTH_THREE_COLUMN);
