@@ -602,25 +602,25 @@ function buildPopupContentHTML(atts)
 
 function showDetails(graphic) {
 	
-  var mainDiv = $('<div class="details"></div>');
-  var titleDiv = $('<div class="title">'+graphic.attributes.getValueCI(FIELDNAME_TITLE)+'</div>');
-  var leftDiv = $('<div class="leftDiv"></div>');
-  var rightDiv = $('<div class="rightDiv"></div>');
+	var mainDiv = $('<div class="details"></div>');
+	var titleDiv = $('<div class="title">'+graphic.attributes.getValueCI(FIELDNAME_TITLE)+'</div>');
+	var leftDiv = $('<div class="leftDiv"></div>');
+	var rightDiv = $('<div class="rightDiv"></div>');
   
-  var imageDiv = $('<img src="'+graphic.attributes.getValueCI(FIELDNAME_IMAGEURL)+'">');	
-  var pictureFrame = $('<div class="pictureFrame"></div>');	
-  $(pictureFrame).append(imageDiv);
-  $(leftDiv).append(pictureFrame);
+	var imageDiv = $('<img src="'+graphic.attributes.getValueCI(FIELDNAME_IMAGEURL)+'">');	
+	var pictureFrame = $('<div class="pictureFrame"></div>');	
+	$(pictureFrame).append(imageDiv);
+	$(leftDiv).append(pictureFrame);
   
-  var address = graphic.attributes.getValueCI(FIELDNAME_ADDRESS);
-  if (address) {
-	$(leftDiv).append($('<div class="address">'+address+'</div>')); 
-  }
+	var address = graphic.attributes.getValueCI(FIELDNAME_ADDRESS);
+	if (address) {
+		$(leftDiv).append($('<div class="address">'+address+'</div>')); 
+	}
 
-  var hours = graphic.attributes.getValueCI(FIELDNAME_HOURS);
-  if (hours) {
-	  $(leftDiv).append($('<div class="address">'+hours+'</div>'));  
-  }
+	var hours = graphic.attributes.getValueCI(FIELDNAME_HOURS);
+	if (hours) {
+		$(leftDiv).append($('<div class="address">'+hours+'</div>'));  
+	}
   
 	var website = graphic.attributes.getValueCI(FIELDNAME_WEBSITE);
 	if (website) {
@@ -631,53 +631,53 @@ function showDetails(graphic) {
 		$(leftDiv).append('<div class="address"><a href="'+website+'" target="_blank">Website</a></div>');
 	}
 
-  var desc1 = graphic.attributes.getValueCI(FIELDNAME_DESC1);
-  if (desc1)
-  {
-	  $(rightDiv).append('<div class="desc">'+desc1+'</div>');
-  }
+	var desc1 = graphic.attributes.getValueCI(FIELDNAME_DESC1);
+	if (desc1)
+	{
+		$(rightDiv).append('<div class="desc">'+desc1+'</div>');
+	}
   
-  var desc2 = graphic.attributes.getValueCI(FIELDNAME_DESC2);
-  if (desc2) {
-	$(rightDiv).append('<p>');
-	$(rightDiv).append('<div class="desc">'+desc2+'</div>');
-  }
+	var desc2 = graphic.attributes.getValueCI(FIELDNAME_DESC2);
+	if (desc2) {
+		$(rightDiv).append('<p>');
+		$(rightDiv).append('<div class="desc">'+desc2+'</div>');
+	}
 
-  var desc3 = graphic.attributes.getValueCI(FIELDNAME_DESC3);
-  if (desc3) {
-	$(rightDiv).append('<p>');
-	$(rightDiv).append('<div class="desc">'+desc3+'</div>');
-  }
+	var desc3 = graphic.attributes.getValueCI(FIELDNAME_DESC3);
+	if (desc3) {
+		$(rightDiv).append('<p>');
+		$(rightDiv).append('<div class="desc">'+desc3+'</div>');
+	}
   
-  var desc4 = graphic.attributes.getValueCI(FIELDNAME_DESC4);
-  if (desc4) {
-	  $(rightDiv).append('<p>');
-	  $(rightDiv).append('<div class="desc">'+desc4+'</div>');
-  }
+	var desc4 = graphic.attributes.getValueCI(FIELDNAME_DESC4);
+	if (desc4) {
+		$(rightDiv).append('<p>');
+		$(rightDiv).append('<div class="desc">'+desc4+'</div>');
+	}
   
-  var desc5 = graphic.attributes.getValueCI(FIELDNAME_DESC5);
-  if (desc5) {
-	  $(rightDiv).append('<p>');
-	  $(rightDiv).append('<div class="desc">'+desc5+'</div>');
-  }  
+	var desc5 = graphic.attributes.getValueCI(FIELDNAME_DESC5);
+	if (desc5) {
+		$(rightDiv).append('<p>');
+		$(rightDiv).append('<div class="desc">'+desc5+'</div>');
+	}  
 
-  $(mainDiv).append(titleDiv);
-  $(mainDiv).append("<hr>"); 
-  $(mainDiv).append(leftDiv);
-  $(mainDiv).append(rightDiv);
+	$(mainDiv).append(titleDiv);
+	$(mainDiv).append("<hr>"); 
+	$(mainDiv).append(leftDiv);
+	$(mainDiv).append(rightDiv);
   
-  if ($(mainDiv).find(".desc").length > 0) {
-	  var lastDesc = $(mainDiv).find(".desc")[$(mainDiv).find(".desc").length - 1];
-	  $(lastDesc).css("margin-bottom","5px");
-  }
+	if ($(mainDiv).find(".desc").length > 0) {
+		var lastDesc = $(mainDiv).find(".desc")[$(mainDiv).find(".desc").length - 1];
+		$(lastDesc).css("margin-bottom","5px");
+	}
   
-  $.fn.colorbox({
-	  html:mainDiv,
-	  open:true,
-	  maxHeight:$(document).height() - 100,
-	  maxWidth:"575px",
-	  scrolling:false
-  });
+	$.fn.colorbox({
+		html:mainDiv,
+		open:true,
+		maxHeight:$(document).height() - 100,
+		maxWidth:"575px",
+		scrolling:false
+	});
   	
 }
 
