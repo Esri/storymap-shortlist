@@ -476,14 +476,20 @@ function buildLayer(arr,iconDir,root) {
 }
 
 function getValueCI(field) {
+	// uniform, case insensitive method for accessing an 
+	// attribute property
 	var found;
+	var value;
 	$.each(this,function(index,value){
 		if (index.toUpperCase() == field.toUpperCase()) {
 			found = index;
 			return false;
 		}
 	});
-	return this[found];	
+	value = this[found];
+	// treat any blank entries as null
+	if ($.trim(value).length == 0) value = null;
+	return value;	
 }
 
 function handleWindowResize() {
@@ -578,8 +584,16 @@ function buildPopupContentHTML(atts)
 	if (!DETAILS_PANEL) {
 		var desc1 = atts.getValueCI(FIELDNAME_DESC1);
 		if (desc1) $(contentDiv).append($("<div></div>").html(desc1));
-		var websiteLink = buildWebsiteLink(atts.getValueCI(FIELDNAME_WEBSITE));
-		if (websiteLink) $(contentDiv).append($(websiteLink).css("padding-top", 10)); 
+		
+		var website = atts.getValueCI(FIELDNAME_WEBSITE);
+		if (website) {
+			website = website.toLowerCase();
+			if (!(website.indexOf("http") >= 0)) {
+				website = "http://"+website;
+			}
+			$(contentDiv).append($('<div class="address"><a href="'+website+'" target="_blank">Website</a></div>').css("padding-top", 10));
+		}
+		
 	} else {
 		$(contentDiv).append($("<div></div>").addClass("infoWindowLink").html("Details >>"));
 	}
@@ -598,53 +612,54 @@ function showDetails(graphic) {
   $(pictureFrame).append(imageDiv);
   $(leftDiv).append(pictureFrame);
   
-  if (graphic.attributes.getValueCI(FIELDNAME_ADDRESS) != null) {
-	if ($.trim(graphic.attributes.getValueCI(FIELDNAME_ADDRESS)) != '') {
-		var addressDiv = $('<div class="address">'+graphic.attributes.getValueCI(FIELDNAME_ADDRESS)+'</div>');
-		$(leftDiv).append(addressDiv); 
-	}
+  var address = graphic.attributes.getValueCI(FIELDNAME_ADDRESS);
+  if (address) {
+	$(leftDiv).append($('<div class="address">'+address+'</div>')); 
   }
 
-  if (graphic.attributes.getValueCI(FIELDNAME_HOURS) != null) {
-	  if ($.trim(graphic.attributes.getValueCI(FIELDNAME_HOURS)) != '') {
-		  var hoursDiv = $('<div class="address">'+graphic.attributes.getValueCI(FIELDNAME_HOURS)+'</div>');
-		  $(leftDiv).append(hoursDiv);  
-	  }
-  }  
-
-  var websiteLink = buildWebsiteLink(graphic.attributes.getValueCI(FIELDNAME_WEBSITE));
-  if (websiteLink) $(leftDiv).append(websiteLink);
-
-  if (graphic.attributes.getValueCI(FIELDNAME_DESC1) != null) {
-	  if ($.trim(graphic.attributes.getValueCI(FIELDNAME_DESC1)) != '') {
-		  $(rightDiv).append('<div class="desc">'+graphic.attributes.getValueCI(FIELDNAME_DESC1)+'</div>');
-	  }
-  }
-  if (graphic.attributes.getValueCI(FIELDNAME_DESC2) != null) {
-	  if ($.trim(graphic.attributes.getValueCI(FIELDNAME_DESC2)) != '') {
-		$(rightDiv).append('<p>');
-		$(rightDiv).append('<div class="desc">'+graphic.attributes.getValueCI(FIELDNAME_DESC2)+'</div>');
-	  }
-  }
-  if (graphic.attributes.getValueCI(FIELDNAME_DESC3) != null) {
-	  if ($.trim(graphic.attributes.getValueCI(FIELDNAME_DESC3)) != '') {
-		$(rightDiv).append('<p>');
-		$(rightDiv).append('<div class="desc">'+graphic.attributes.getValueCI(FIELDNAME_DESC3)+'</div>');
-	  }
-  }
-  if (graphic.attributes.getValueCI(FIELDNAME_DESC4) != null) {
-	  if ($.trim(graphic.attributes.getValueCI(FIELDNAME_DESC4)) != '') {
-		  $(rightDiv).append('<p>');
-		  $(rightDiv).append('<div class="desc">'+graphic.attributes.getValueCI(FIELDNAME_DESC4)+'</div>');
-	  }
-  }
-  if (graphic.attributes.getValueCI(FIELDNAME_DESC5) != null) {
-	  if ($.trim(graphic.attributes.getValueCI(FIELDNAME_DESC5)) != '') {
-		  $(rightDiv).append('<p>');
-		  $(rightDiv).append('<div class="desc">'+graphic.attributes.getValueCI(FIELDNAME_DESC5)+'</div>');
-	  }
+  var hours = graphic.attributes.getValueCI(FIELDNAME_HOURS);
+  if (hours) {
+	  $(leftDiv).append($('<div class="address">'+hours+'</div>'));  
   }
   
+	var website = graphic.attributes.getValueCI(FIELDNAME_WEBSITE);
+	if (website) {
+		website = website.toLowerCase();
+		if (!(website.indexOf("http") >= 0)) {
+			website = "http://"+website;
+		}
+		$(leftDiv).append('<div class="address"><a href="'+website+'" target="_blank">Website</a></div>');
+	}
+
+  var desc1 = graphic.attributes.getValueCI(FIELDNAME_DESC1);
+  if (desc1)
+  {
+	  $(rightDiv).append('<div class="desc">'+desc1+'</div>');
+  }
+  
+  var desc2 = graphic.attributes.getValueCI(FIELDNAME_DESC2);
+  if (desc2) {
+	$(rightDiv).append('<p>');
+	$(rightDiv).append('<div class="desc">'+desc2+'</div>');
+  }
+
+  var desc3 = graphic.attributes.getValueCI(FIELDNAME_DESC3);
+  if (desc3) {
+	$(rightDiv).append('<p>');
+	$(rightDiv).append('<div class="desc">'+desc3+'</div>');
+  }
+  
+  var desc4 = graphic.attributes.getValueCI(FIELDNAME_DESC4);
+  if (desc4) {
+	  $(rightDiv).append('<p>');
+	  $(rightDiv).append('<div class="desc">'+desc4+'</div>');
+  }
+  
+  var desc5 = graphic.attributes.getValueCI(FIELDNAME_DESC5);
+  if (desc5) {
+	  $(rightDiv).append('<p>');
+	  $(rightDiv).append('<div class="desc">'+desc5+'</div>');
+  }  
 
   $(mainDiv).append(titleDiv);
   $(mainDiv).append("<hr>"); 
@@ -664,17 +679,6 @@ function showDetails(graphic) {
 	  scrolling:false
   });
   	
-}
-
-function buildWebsiteLink(website)
-{
-	if (!website) return null;
-	if ($.trim(website) == '') return null;
-	website = website.toLowerCase();
-	if (!(website.indexOf("http") >= 0)) {
-	  website = "http://"+website;
-	}
-	return $('<div class="address"><a href="'+website+'" target="_blank">Website</a></div>');
 }
 
 function findTile(id)
