@@ -215,6 +215,8 @@ function initMap(layers) {
 			dojo.connect(supportLayer, "onMouseOver", baselayer_onMouseOver);
 			dojo.connect(supportLayer, "onMouseOut", baselayer_onMouseOut);
 			dojo.connect(supportLayer, "onClick", baselayer_onClick);
+		} else {
+			dojo.connect(supportLayer, "onClick", function(){unselect()});
 		}
 	});
 	
