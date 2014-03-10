@@ -320,6 +320,7 @@ function baselayer_onClick(event) {
 	_map.infoWindow.setTitle(event.graphic.attributes.getValueCI(FIELDNAME_TITLE));
 	_map.infoWindow.setContent(buildPopupContentHTML(feature.attributes));
 	_map.infoWindow.show(event.mapPoint);	
+	$(".esriPopup .contentPane").scrollTop(0);	
 	$(".infoWindowLink").click(function(e) {
         showDetails(feature);
     });
@@ -571,6 +572,7 @@ function postSelection() {
 		_map.infoWindow.setTitle(_selected.attributes.getValueCI(FIELDNAME_TITLE));
 		_map.infoWindow.setContent(buildPopupContentHTML(_selected.attributes));
 		_map.infoWindow.show(_selected.geometry);	
+		$(".esriPopup .contentPane").scrollTop(0);
 		$(".infoWindowLink").click(function(e) {
 			showDetails(_selected);
 		});		
