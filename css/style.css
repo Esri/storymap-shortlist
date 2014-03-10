@@ -107,7 +107,9 @@ a:hover{
 }
 
 #tabs {
+	height:100%;
 	padding-left:17px;	
+	overflow:hidden;
 }
 
 #paneLeft {
@@ -324,6 +326,7 @@ ul.tilelist .blurb {
 	position:absolute;
 	width:160px !important;
 	right:0px;
+	top:0px;
 	z-index:100;
 	display:none;
 }
