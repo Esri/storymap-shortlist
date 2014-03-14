@@ -151,6 +151,7 @@ function init() {
 		if (_bookmarks) {
 			loadBookmarks();
 			$("#bookmarksCon").show();
+			handleWindowResize(); // additional call to re-size tab bar
 		}
 		
 		var layers = response.itemInfo.itemData.operationalLayers; 
@@ -512,7 +513,7 @@ function handleWindowResize() {
 	$("#mainWindow").height($("body").height() - ($("#header").height()));
 	
 	if (_bookmarks) {
-		$("#tabs").width($("body").width() - $("#bookmarksCon").width());
+		$("#tabs").width($("body").width() - ($("#bookmarksCon").width() + parseInt($("#tabs").css("padding-left"))));
 	} else {
 		$("#tabs").width($("body").width());
 	}
