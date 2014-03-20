@@ -523,8 +523,6 @@ function handleWindowResize() {
 	$("#headerText").css("max-width",$("#header").width() - ($("#logoArea").width()+100));
 
 	if (_map) _map.resize();
-	
-	adjustPopup();
 
 }
 
@@ -724,30 +722,6 @@ function hoverInfoPos(x,y){
 		$("#hoverInfo").css("top",y-15+($("#hoverInfo").height()));
 	}
 	$("#hoverInfo").show();
-}
-
-function adjustPopup() {
-	
-	if (_map) { 
-
-		var box = dojo.contentBox(_map.container);        
-		
-		var width = 270, height = 300, // defaults
-		newWidth = Math.round(box.w * 0.45),             
-		newHeight = Math.round(box.h * 0.40);        
-		
-		if (newWidth < width) {
-			width = newWidth;
-		}
-		
-		if (newHeight < height) {
-			height = newHeight;
-		}
-		
-		_map.infoWindow.resize(width, height);
-		
-	}
-	
 }
 
 function moveGraphicToFront(graphic)
