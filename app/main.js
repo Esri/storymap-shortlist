@@ -622,8 +622,13 @@ function buildPopup(feature, geometry)
 		$(contentDiv).append($("<div></div>").addClass("infoWindowLink").html("Details >>"));
 	}
 
+	// note: what we really want is the entire contentDiv html in
+	//       this popup.  since contentDiv.html() only gives us the
+	//       inner html for the div, i am re-adding the wrapper div.
+	//       there's got to be a more elegant way to do this, but it
+	//       eludes me at the moment. 
+	_map.infoWindow.setContent("<div>"+contentDiv.html()+"</div>");
 	_map.infoWindow.setTitle(title);
-	_map.infoWindow.setContent(contentDiv.html());
 	_map.infoWindow.show(geometry);	
 	
 	$(".esriPopup .contentPane").scrollTop(0);	
