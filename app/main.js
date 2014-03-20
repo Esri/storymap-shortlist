@@ -13,7 +13,7 @@ var COLOR_FULL = "#FFFFFF";
 var LEFT_PANE_WIDTH_TWO_COLUMN = 327;
 var LEFT_PANE_WIDTH_THREE_COLUMN = 485;
 
-var TWO_COLUMN_THRESHOLD = 600;
+var TWO_COLUMN_THRESHOLD = 925;
 
 var FIELDNAME_NUMBER = "Number";
 var FIELDNAME_TITLE = "Title";
@@ -512,7 +512,7 @@ function handleWindowResize() {
 	}
 	
 	$("#paneLeft").height($("#mainWindow").height() - 35);
-	$("#paneLeft").width($("body").width() <= 800 ? LEFT_PANE_WIDTH_TWO_COLUMN : LEFT_PANE_WIDTH_THREE_COLUMN);
+	$("#paneLeft").width($("body").width() <= TWO_COLUMN_THRESHOLD ? LEFT_PANE_WIDTH_TWO_COLUMN : LEFT_PANE_WIDTH_THREE_COLUMN);
 	$(".tilelist").height($("#paneLeft").height() - 18);
 	$(".tilelist").width($("#paneLeft").width()+7);		
 
