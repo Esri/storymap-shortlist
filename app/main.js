@@ -327,6 +327,11 @@ function baselayer_onClick(event) {
 	$(".infoWindowLink").click(function(e) {
         showDetails(feature);
     });
+	if (DETAILS_PANEL) {
+		$(".infoWindowPictureDiv").click(function(e) {
+			showDetails(feature);
+		});	
+	}
 	$("#hoverInfo").hide();	
 }
 
@@ -578,7 +583,12 @@ function postSelection() {
 		$(".esriPopup .contentPane").scrollTop(0);
 		$(".infoWindowLink").click(function(e) {
 			showDetails(_selected);
-		});		
+		});
+		if (DETAILS_PANEL) {
+			$(".infoWindowPictureDiv").click(function(e) {
+				showDetails(_selected);
+			});
+		}
 		
 		// light up the corresponding tile.
 
@@ -593,20 +603,33 @@ function postSelection() {
 
 function buildPopupContentHTML(atts)
 {
-	var contentDiv = $("<div></div");
 	var shortDesc = atts.getValueCI(FIELDNAME_SHORTDESC);
-	if (shortDesc) $(contentDiv).append($("<div></div>").html(shortDesc));
 	var picture = atts.getValueCI(FIELDNAME_IMAGEURL);
+	var website = atts.getValueCI(FIELDNAME_WEBSITE);
+
+	var contentDiv = $("<div></div");
+	if (shortDesc) $(contentDiv).append($("<div></div>").html(shortDesc));
 	if (picture) {
 		var pDiv = $("<div></div>").addClass("infoWindowPictureDiv");
-		$(pDiv).append($(new Image()).attr("src", picture));
+		if (DETAILS_PANEL) {
+			$(pDiv).append($(new Image()).attr("src", picture));
+			$(pDiv).css("cursor", "pointer");
+		} else { // no details panel
+			if (website) {
+				var a = $("<a></a>").attr("href", website).attr("target","_blank");
+				$(a).append($(new Image()).attr("src", picture));
+				$(pDiv).append(a);
+			} else {
+				$(pDiv).append($(new Image()).attr("src", picture));
+			}
+		}
 		$(contentDiv).append(pDiv);
 	}
+	
 	if (!DETAILS_PANEL) {
 		var desc1 = atts.getValueCI(FIELDNAME_DESC1);
 		if (desc1) $(contentDiv).append($("<div></div>").html(desc1));
 		
-		var website = atts.getValueCI(FIELDNAME_WEBSITE);
 		if (website) {
 			website = website.toLowerCase();
 			if (!(website.indexOf("http") >= 0)) {
