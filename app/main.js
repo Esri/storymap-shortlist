@@ -319,19 +319,7 @@ function baselayer_onMouseOut(event)
 }
 
 function baselayer_onClick(event) {
-	var feature = event.graphic;
-	_map.infoWindow.setTitle(event.graphic.attributes.getValueCI(FIELDNAME_TITLE));
-	_map.infoWindow.setContent(buildPopupContentHTML(feature.attributes));
-	_map.infoWindow.show(event.mapPoint);	
-	$(".esriPopup .contentPane").scrollTop(0);	
-	$(".infoWindowLink").click(function(e) {
-        showDetails(feature);
-    });
-	if (DETAILS_PANEL) {
-		$(".infoWindowPictureDiv").click(function(e) {
-			showDetails(feature);
-		});	
-	}
+	buildPopup(event.graphic, event.mapPoint);
 	$("#hoverInfo").hide();	
 }
 
@@ -575,20 +563,7 @@ function postSelection() {
 		},10);				
 		
 		
-		
-		
-		_map.infoWindow.setTitle(_selected.attributes.getValueCI(FIELDNAME_TITLE));
-		_map.infoWindow.setContent(buildPopupContentHTML(_selected.attributes));
-		_map.infoWindow.show(_selected.geometry);	
-		$(".esriPopup .contentPane").scrollTop(0);
-		$(".infoWindowLink").click(function(e) {
-			showDetails(_selected);
-		});
-		if (DETAILS_PANEL) {
-			$(".infoWindowPictureDiv").click(function(e) {
-				showDetails(_selected);
-			});
-		}
+		buildPopup(_selected, _selected.geometry);
 		
 		// light up the corresponding tile.
 
@@ -601,8 +576,13 @@ function postSelection() {
 	
 }
 
-function buildPopupContentHTML(atts)
+function buildPopup(feature, geometry)
 {
+	
+	var atts = feature.attributes;
+	
+	var title =  atts.getValueCI(FIELDNAME_TITLE);
+	
 	var shortDesc = atts.getValueCI(FIELDNAME_SHORTDESC);
 	var picture = atts.getValueCI(FIELDNAME_IMAGEURL);
 	var website = atts.getValueCI(FIELDNAME_WEBSITE);
@@ -641,7 +621,22 @@ function buildPopupContentHTML(atts)
 	} else {
 		$(contentDiv).append($("<div></div>").addClass("infoWindowLink").html("Details >>"));
 	}
-	return contentDiv.html();
+
+	_map.infoWindow.setTitle(title);
+	_map.infoWindow.setContent(contentDiv.html());
+	_map.infoWindow.show(geometry);	
+	
+	$(".esriPopup .contentPane").scrollTop(0);	
+	$(".infoWindowLink").click(function(e) {
+        showDetails(feature);
+    });
+	
+	if (DETAILS_PANEL) {
+		$(".infoWindowPictureDiv").click(function(e) {
+			showDetails(feature);
+		});	
+	}
+	
 }
 
 function showDetails(graphic) {
