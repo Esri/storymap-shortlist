@@ -389,6 +389,7 @@ ul.tilelist .blurb {
 
 .infoWindowPictureDiv img {
 	max-width: 245px;
+	max-height: 245px;
 }
 
 /* To change position of close button to Top Right Corner */
