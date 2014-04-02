@@ -4,6 +4,8 @@ This repository contains the application files for the "Shortlist" story map app
 
 [View live app here](http://storymaps.esri.com/templates/shortlist)
 
+![App](https://raw.github.com/leebock/shortlist/master/images/shortlist-storytelling-template-js.png) 
+
 ## Features
 * You can organize your POIs by theme; for example, Food, Hotels, and Attractions. 
 * As users pan and zoom, the app presents POIs only for the current map extent.
