@@ -56,7 +56,9 @@ limitations under the License.
 A copy of the license is available in the repository's 
 [license.txt](license.txt) file.
 
-Some components in this repo are under the MIT License.
+The following components in this repo are under the MIT License.
 [license_mit.txt](license_mit.txt) file.
+* the jquery library
+* the jquery colorbox plugin (jquery.colorbox-min.js)
 
 
