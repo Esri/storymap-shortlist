@@ -267,7 +267,7 @@ function init() {
 			}
 		}
 	});   
-	if(GEOLOCATOR == 'true')
+	if(GEOLOCATOR == 'true' || GEOLOCATOR == true)
 		$('#locateButton').css('display', 'block');
 }
 
