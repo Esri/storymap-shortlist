@@ -13,7 +13,7 @@ var COLOR_FULL = "#FFFFFF";
 var LEFT_PANE_WIDTH_TWO_COLUMN = 327;
 var LEFT_PANE_WIDTH_THREE_COLUMN = 485;
 
-var TWO_COLUMN_THRESHOLD = 925;
+var TWO_COLUMN_THRESHOLD = 960;
 
 var FIELDNAME_NUMBER = "Number";
 var FIELDNAME_TITLE = "Title";
@@ -42,6 +42,8 @@ var _isIE = (navigator.appVersion.indexOf("MSIE") > -1);
 
 var _map;
 
+var _layout = null;
+
 var _bookmarks;
 
 var _layerCurrent;
@@ -49,6 +51,13 @@ var _layerCurrent;
 var _selected;
 
 var _initExtent;
+
+var _locateLayer;
+var _locateSymobol;
+
+var _mobileThemeSwiper;
+var _mobileFeatureSwiper;
+var _firstLoad = true;
 
 var _dojoReady = false;
 var _jqueryReady = false;
@@ -86,6 +95,7 @@ function init() {
 	SUPPORTING_LAYERS_THAT_ARE_CLICKABLE = queryString["supporting_layers_that_are_clickable"] ?
 											queryString["supporting_layers_that_are_clickable"] :
 											SUPPORTING_LAYERS_THAT_ARE_CLICKABLE;
+	GEOLOCATOR = queryString["geolocator"] ? queryString["geolocator"] : GEOLOCATOR;
 	// Note:  If using a proxy server (required for remove CSV access),
 	//        you'll need to uncomment the following line and provide
 	//        a valid proxy server url. 										
@@ -98,12 +108,15 @@ function init() {
 	
 	$("#zoomIn").click(function(e) {
         _map.setLevel(_map.getLevel()+1);
+		hideBookmarks();
     });
 	$("#zoomOut").click(function(e) {
         _map.setLevel(_map.getLevel()-1);
+		hideBookmarks();
     });
 	$("#zoomExtent").click(function(e) {
         _map.setExtent(_initExtent);
+		hideBookmarks();
     });	
 	
 	$(document).bind('cbox_complete', function(){
@@ -119,6 +132,16 @@ function init() {
 		}
 		$("#bookmarksDiv").slideToggle();
 	});
+	$("#mobileBookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
+	$("#mobileBookmarksToggle").click(function(){
+		if ($("#mobileBookmarksDiv").css('display')=='none'){
+		  $("#mobileBookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25B2;');
+		}
+		else{
+		  $("#mobileBookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
+		}
+		$("#mobileBookmarksDiv").slideToggle();
+	});
 			
 	var mapDeferred = esri.arcgis.utils.createMap(WEBMAP_ID, "map", {
 		mapOptions: {
@@ -129,10 +152,17 @@ function init() {
 	});
 	
 	mapDeferred.addCallback(function(response) {
+		var title = response.itemInfo.item.title;
+		var subtitle = response.itemInfo.item.snippet;
 		
-		document.title = response.itemInfo.item.title;
-		$("#title").html(response.itemInfo.item.title);
-		$("#subtitle").html(response.itemInfo.item.snippet);
+		document.title = title;
+		$("#title").html(title);
+		$("#subtitle").html(subtitle);
+		
+		$('#mobileTitlePage').append('<div class="mobileTitle">'+title+"</div>")
+		$('#mobileTitlePage').append('<div class="mobileSnippet"></div>')
+		if(subtitle)
+			$('.mobileSnippet').html(subtitle)
 		
 		_map = response.map;
 		  
@@ -142,15 +172,33 @@ function init() {
 		// causes a deselect.
 
 		dojo.connect(_map, 'onClick', function(event){
-			if (event.graphic == null) {
+			if (event.graphic == null && $('#header').css('display') == 'block') {
 				unselect();
 			}
+			$('#mobileTitlePage').css('display', 'none');
+			hideBookmarks();
 		});
+		
+		dojo.connect(_map, 'onZoomEnd', function(){
+			var level = _map.getLevel();
+			if (level > -1 && level === _map.getMaxZoom()) {
+				$('#zoomIn').addClass('disableControls');
+			}
+			else 
+				if (level > -1 && level === _map.getMinZoom()) {
+					$('#zoomOut').addClass('disableControls');
+				}
+				else {
+					$('#zoomIn').removeClass('disableControls');
+					$('#zoomOut').removeClass('disableControls');
+				}
+		})
 		
 		_bookmarks = response.itemInfo.itemData.bookmarks;
 		if (_bookmarks) {
 			loadBookmarks();
 			$("#bookmarksCon").show();
+			$("#mobileBookmarksCon").show();
 			handleWindowResize(); // additional call to re-size tab bar
 		}
 		
@@ -170,6 +218,57 @@ function init() {
 	  console.log("Map creation failed: ", dojo.toJson(error));
 	});
 	
+	dojo.connect(dojo.byId('returnIcon'), 'onclick', showMobileList);
+	
+	dojo.connect(dojo.byId('returnHiddenBar'), 'onclick', showMobileList);
+	
+	dojo.connect(dojo.byId('centerMapIconContainer'), 'onclick', centerMapOnFeature);
+	
+	dojo.connect(dojo.byId('locateButton'), 'onclick', getDeviceLocation);
+	
+	$(document).on("click", function(src) {
+		if(src.target.id != 'bitlyIcon' && src.target.id != 'bitlyContent' && src.target.id != 'bitlyInput' ){
+			 $(".popover").hide(); 
+		}
+	});
+	
+	$('#navThemeRight').on('click', function(){
+		_mobileThemeSwiper.swipeNext()
+	})
+	$('#navThemeLeft').on('click', function(){
+		_mobileThemeSwiper.swipePrev()
+	})
+	$('#mobileThemeBar').on('click', function(){
+		hideBookmarks();
+	})
+	
+	_mobileThemeSwiper = new Swiper('#mobileThemeBar .swiper-container',{
+		mode:'horizontal',
+		onSlideChangeEnd : function(){
+			activateLayer(_contentLayers[_mobileThemeSwiper.activeLoopIndex]);
+		}
+	});
+	
+	_mobileFeatureSwiper = new Swiper('#mobileFeature .swiper-container',{
+		mode:'horizontal',
+		keyboardControl: true,
+		onSlideNext: function(){
+			swipeFeature();
+		},
+		onSlidePrev: function(){
+			swipeFeature();
+		},
+		onSlideReset: function(evt){
+			if ((_mobileFeatureSwiper.previousIndex == 0 || _mobileFeatureSwiper.previousIndex == -0) && evt.touches.diff > 0) {
+				loopFeatureSlides('left')
+			}
+			if ((_mobileFeatureSwiper.previousIndex == (_mobileFeatureSwiper.slides.length - 1)) && (evt.touches.diff < 0)) {
+				loopFeatureSlides('right')
+			}
+		}
+	});   
+	if(GEOLOCATOR == 'true')
+		$('#locateButton').css('display', 'block');
 }
 
 function initMap(layers) {
@@ -204,6 +303,10 @@ function initMap(layers) {
 	});
 
 	_initExtent = _map.extent;
+	
+	_locateSymbol = new esri.symbol.PictureMarkerSymbol('images/mapcommand-location-marker.png', 21, 21);
+	_locateLayer = new esri.layers.GraphicsLayer({id: 'locateLayer'});
+	_map.addLayer(_locateLayer);
 	
 	var supportLayer;
 	$.each(supportLayers,function(index,value) {
@@ -256,17 +359,51 @@ function initMap(layers) {
 	});
 
 	_contentLayers.reverse();
-	$.each(_contentLayers,function(index,value){
-		$("#tabs").append('<div class="tab" onclick="activateLayer(_contentLayers['+index+'])">'+value.title+'</div>');
-	});
+		
+	if (_contentLayers.length > 1) {
+	 	$('#mobileTitlePage').append('<ul id="mobileThemeList" style=" height: 80px; line-height: 80px;" class="mobileTileList introList">')
+		$.each(_contentLayers, function(index, value){
+			$("#tabs").append('<div class="tab" onclick="activateLayer(_contentLayers[' + index + ']), hideBookmarks()">' + value.title + '</div>', true);
+			var newSlide = _mobileThemeSwiper.createSlide('<p>' + value.title + '</p>');
+			newSlide.append();
+			var introList = $('<li class="mobileTitleThemes" onclick="selectMobileTheme(' + index + ')">').append('<span style="margin-left: 30px; margin-right: 30px; vertical-align: middle; line-height: 20px; display: inline-block;">' + value.title + '</span>')
+			if(index == 0)
+				$(introList).css('border-width', '2px 0px 1px 0px')
+			if(index == (_contentLayers.length - 1))
+				$(introList).css('border-width', '1px 0px 2px 0px')
+			$('#mobileThemeList').append(introList)
+			
+		});
+	}
 	
-	if ($(".tab").length == 1) $(".tab").css("display", "none");
+	else {
+		$(".tab").css("display", "none");
+		$('#mobileThemeBar .swiper-container').css('display', 'none');
+		$('#mobileTitlePage').append("<br><hr></hr>")
+		$('#mobileTitlePage').append('<ul id="mobileThemeList" class="mobileTileList">')
+		var introList = $('<li class="mobileTitleTheme" onclick="selectMobileTheme(' + 0 + ')">').append('<div class="startButton"> Start </div>')
+		$('#mobileThemeList').append(introList)
+	}
 
-	activateLayer(_contentLayers[0]);
+	_mobileThemeSwiper.enableKeyboardControl();
+
+	activateLayer(_contentLayers[0], false);
 	dojo.connect(_map.infoWindow,"onHide",infoWindow_onHide);
 	$("#zoomToggle").css("visibility","visible");
-	$("#whiteOut").fadeOut("slow");			
-
+	$("#whiteOut").fadeOut("slow");
+	
+	$(".share_facebook").click(shareFacebook);
+	$(".share_twitter").click(shareTwitter);
+	$(".share_bitly").click(requestBitly);
+	$("#map").height($("#mainWindow").height() - $('#divStrip').height());
+	$("#map").css('top',$('#divStrip').height());
+	
+	$('body').keypress(function(e){
+		if(e.which == 13){
+			$(".mobileTitleTheme").click();
+			$(".mobileTitleThemes").eq(0).click();
+	    }
+	});
 }
 
 /******************************************************
@@ -280,7 +417,6 @@ function tile_onMouseOver(e) {
 function tile_onMouseOut(e) {
 	
 	if (_selected != null) {
-		// does this tile represent the selected graphic?
 		var id = parseInt($(this).attr("id").substring(4));
 		if (_selected.attributes.getValueCI(FIELDNAME_ID) == id) {
 			return;
@@ -295,6 +431,8 @@ function tile_onClick(e) {
 	preSelection();
 	_selected = $.grep(_layerCurrent.graphics,function(n,i){return n.attributes.getValueCI(FIELDNAME_ID) == id})[0];
 	postSelection();
+	$('#mobileTitlePage').css('display', 'none')
+	hideBookmarks();
 }
 
 function infoWindow_onHide(event) {
@@ -319,8 +457,9 @@ function baselayer_onMouseOut(event)
 }
 
 function baselayer_onClick(event) {
-	buildPopup(event.graphic, event.mapPoint);
+	buildPopup(event.graphic, event.mapPoint, "true");
 	$("#hoverInfo").hide();	
+	$('#mobileTitlePage').css('display', 'none')
 }
 
 function layer_onClick(event)
@@ -328,6 +467,7 @@ function layer_onClick(event)
 	preSelection();		
 	_selected = event.graphic;
 	postSelection();
+	$('#mobileTitlePage').css('display', 'none')
 }
 
 function layer_onMouseOver(event)
@@ -335,12 +475,26 @@ function layer_onMouseOver(event)
 	if (_isMobile) return;
 	_map.setMapCursor("pointer");
 	var graphic = event.graphic;
-	if (graphic == _selected) return;
-	graphic.setSymbol(resizePictureMarkerSymbol(graphic.symbol, _lutIconSpecs["medium"]));
-	if (!_isIE) moveGraphicToFront(graphic);	
-	$("#hoverInfo").html(graphic.attributes.getValueCI(FIELDNAME_TITLE));
-	var pt = _map.toScreen(graphic.geometry);
-	hoverInfoPos(pt.x,pt.y);
+	if (graphic == _selected && $('#header').css('display') == 'block') 
+		return;
+	else 
+		if (graphic == _selected && $('#header').css('display') == 'none') {
+			$("#hoverInfo").html(graphic.attributes.getValueCI(FIELDNAME_TITLE));
+			var pt = _map.toScreen(graphic.geometry);
+			hoverInfoPos(pt.x, pt.y);
+		}
+		else {
+			graphic.symbol.setWidth(_lutIconSpecs["medium"].getWidth())
+			graphic.symbol.setHeight(_lutIconSpecs["medium"].getHeight())
+			graphic.symbol.setOffset(_lutIconSpecs["medium"].getOffsetX(), _lutIconSpecs["medium"].getOffsetY());
+			graphic.draw();
+			
+			if (!_isIE) 
+				moveGraphicToFront(graphic);
+			$("#hoverInfo").html(graphic.attributes.getValueCI(FIELDNAME_TITLE));
+			var pt = _map.toScreen(graphic.geometry);
+			hoverInfoPos(pt.x, pt.y);
+		}
 }
 
 function layer_onMouseOut(event)
@@ -348,11 +502,14 @@ function layer_onMouseOut(event)
 	if (_isMobile) return;	
 	_map.setMapCursor("default");
 	var graphic = event.graphic;	
-	if (graphic != _selected)
-		graphic.setSymbol(resizePictureMarkerSymbol(graphic.symbol, _lutIconSpecs["tiny"]));
+	if (graphic != _selected) {
+		graphic.symbol.setWidth(_lutIconSpecs["tiny"].getWidth())
+		graphic.symbol.setHeight(_lutIconSpecs["tiny"].getHeight())
+		graphic.symbol.setOffset(_lutIconSpecs["tiny"].getOffsetX(), _lutIconSpecs["tiny"].getOffsetY());
+		graphic.draw();
+	}
 	$("#hoverInfo").hide();
 }
-
 
 /******************************************************
 ****************** other functions ********************
@@ -384,7 +541,10 @@ function SortByNumber(a, b){
 
 function loadBookmarks() {
 	
-	$.each(_bookmarks,function(index,value){$("#bookmarksDiv").append("<p><a>"+value.name+"</a></p>")});
+	$.each(_bookmarks,function(index,value){
+			$("#bookmarksDiv").append("<p><a>"+value.name+"</a></p>");
+			$("#mobileBookmarksDiv").append("<p><a>"+value.name+"</a></p>");
+	});
 	
 	$("#bookmarksDiv a").click(function(e) {
 		var name = $(this).html();
@@ -393,7 +553,28 @@ function loadBookmarks() {
 		$("#bookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
 		$("#bookmarksDiv").slideToggle();
     });
+	
+	$("#mobileBookmarksDiv a").click(function(e) {
+		var name = $(this).html();
+		var extent = new esri.geometry.Extent($.grep(_bookmarks,function(n,i){return n.name == name})[0].extent);
+		_map.setExtent(extent);	
+		$("#mobileBookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
+		$("#mobileBookmarksDiv").slideToggle();
+    });
 
+}
+
+function hideBookmarks(){
+	if ($("#mobileBookmarksDiv").css('display') === 'block') {
+		$("#mobileBookmarksDiv").slideToggle()
+		$("#mobileBookmarksTogText").html(BOOKMARKS_ALIAS + ' &#x25BC;')
+	}
+	if ($("#bookmarksDiv").css('display') === 'block') {
+		$("#bookmarksDiv").slideToggle()
+		$("#bookmarksTogText").html(BOOKMARKS_ALIAS + ' &#x25BC;')
+	}
+	else 
+		return
 }
 
 function activateLayer(layer) {
@@ -405,58 +586,117 @@ function activateLayer(layer) {
 	var tab = $.grep($(".tab"), function(n,i){return $(n).text() == _layerCurrent.title})[0];
 	$(".tab").removeClass("tab-selected");
 	$(tab).addClass("tab-selected");
+	var themeIndex = $('.tab-selected').index();
+	
+	
+	if (themeIndex == 0 && _mobileThemeSwiper.slides.length > 1) {
+		$('#navThemeLeft').css('display', 'none');
+		$('#navThemeRight').css('display', 'block');
+	}
+	else 
+		if (themeIndex == (_mobileThemeSwiper.slides.length - 1)) {
+			$('#navThemeRight').css('display', 'none');
+			$('#navThemeLeft').css('display', 'block');
+		}
+	else {
+		$('#navThemeLeft').css('display', 'block');
+		$('#navThemeRight').css('display', 'block');
+	}
+	
+	if(_mobileThemeSwiper.slides.length == 0){
+		$('#navThemeLeft').css('display', 'none');
+		$('#navThemeRight').css('display', 'none');
+	}
+
+	if (_firstLoad) {
+		_mobileThemeSwiper.swipeTo(themeIndex, 300, false);
+	}
+	else {
+		_mobileThemeSwiper.swipeTo(themeIndex);
+		$('#mobileTitlePage').css('display', 'none')
+		
+	}
+	_firstLoad = false;
+	
 
 	$.each(_contentLayers,function(index,value){
 		value.setVisibility(value == _layerCurrent);
 	});
 
 	$("#myList").empty();
+	$('#mobileList').empty();
 	
 	var display;
 	var tile;
 	var img;
+	var mobileImg;
 	var footer;
 	var num;
 	var title;
-	
+	var mobileTile;
+	var visibleFeatures = false;
+
 	$.each(_layerCurrent.graphics,function(index,value){
 		if (_map.extent.contains(value.geometry)) {
 			display = "visible"
+			visibleFeatures = true;
 		} else {
 			display = "none";
 		}
 		tile = $('<li id="item'+value.attributes.getValueCI(FIELDNAME_ID)+'" style="display:'+display+'">');
 		img = $('<img src="'+value.attributes.getValueCI(FIELDNAME_IMAGEURL)+'">');
+		mobileImg = $('<div style="height: 75px; margin-bottom: 8px;"><img src="'+value.attributes.getValueCI(FIELDNAME_IMAGEURL)+'"></div>');
 		footer = $('<div class="footer"></div>');
 		num = $('<div class="num" style="background-color:'+_layerCurrent.color+'">'+value.attributes.getValueCI(FIELDNAME_NUMBER)+'</div>');
 		title = $('<div class="blurb">'+value.attributes.getValueCI(FIELDNAME_TITLE)+'</div>');
 		$(footer).append(num);
 		$(footer).append(title);
-		$(tile).append(img);
 		$(tile).append(footer);
+		mobileTile = $(tile).clone();
+		$(tile).append(img);
+		$(mobileTile).append(mobileImg);
 		$("#myList").append(tile);
+		$('#mobileList').append(mobileTile);
 	});
 	
 	// event handlers have to be re-assigned every time you load the list...
 	$("ul.tilelist li").mouseover(tile_onMouseOver);
 	$("ul.tilelist li").mouseout(tile_onMouseOut);
-	$("ul.tilelist li").click(tile_onClick);	
+	$("ul.tilelist li").click(tile_onClick);
+	$("#mobilePaneList ul.mobileTileList li").click(tile_onClick);	
 	
-	$("ul.tilelist").animate({ scrollTop: 0 }, { duration: 200 } );
-	
+	$("ul.tilelist").animate({ scrollTop: 0 }, { duration: 200 } ); //Does this work?
+	$('#mobilePaneList').scrollTop(0)
+	if(!visibleFeatures)
+		$('.noFeature').css('display', 'block')
+	else
+		$('.noFeature').css('display', 'none')	
 }
 
 function refreshList() {
 	var tile;
+	var mobileTile;
+	var visibleFeatures = false;
 	$.each(_layerCurrent.graphics,function(index,value){
 		//find the corresponding tile
 		tile = findTile(value.attributes.getValueCI(FIELDNAME_ID));
+		mobileTile = findMobileTile(value.attributes.getValueCI(FIELDNAME_ID));
 		if (_map.extent.contains(value.geometry)) {
 			if ($(tile).css("display") == "none") $(tile).stop().fadeIn();
+			if ($(mobileTile).css("display") == "none") $(mobileTile).css("display", "block") ;
+			visibleFeatures = true;
 		} else {
 			if ($(tile).css("display") != "none") $(tile).stop().fadeOut(1000);
+			if ($(mobileTile).css("display") != "none") $(mobileTile).css("display", "none");
 		}		
 	});
+	
+	$('#mobilePaneList').scrollTop(0)
+
+	if(!visibleFeatures)
+		$('.noFeature').css('display', 'block')
+	else
+		$('.noFeature').css('display', 'none')
 }
 
 function buildLayer(arr,iconDir,root) {
@@ -502,28 +742,62 @@ function getValueCI(field) {
 }
 
 function handleWindowResize() {
-	
-	$("#mainWindow").height($("body").height() - ($("#header").height()));
-	
-	if (_bookmarks) {
-		$("#tabs").width($("body").width() - ($("#bookmarksCon").width() + parseInt($("#tabs").css("padding-left"))));
-	} else {
-		$("#tabs").width($("body").width());
+	if(!_firstLoad && _layout == 'normal')
+		$('#mobileTitlePage').css('display', 'none')
+	if ($('#header').css('display') != 'none') {
+		if(_layout == 'responsive'){
+			preSelection();
+			_map.infoWindow.hide();
+			_selected = null;
+		}
+		
+		_layout = 'normal';
+		$("#mainWindow").height($("body").height() - ($("#header").height()));
+		
+		if (_bookmarks) {
+			$("#tabs").width($("body").width() - ($("#bookmarksCon").width() + parseInt($("#tabs").css("padding-left"))));
+		}
+		else {
+			$("#tabs").width($("body").width());
+		}
+		
+		$("#paneLeft").height($("#mainWindow").height() - 35);
+		
+		if($("body").width() <= TWO_COLUMN_THRESHOLD || ($("body").width() <= 1024 && $("body").height() <= 768))
+			$("#paneLeft").width(LEFT_PANE_WIDTH_TWO_COLUMN)
+		else
+			$("#paneLeft").width(LEFT_PANE_WIDTH_THREE_COLUMN)
+		
+		$(".tilelist").height($("#paneLeft").height() - 18);
+		$(".tilelist").width($("#paneLeft").width() + 7);
+		$("#paneLeft .noFeature").width($('#paneLeft').width())
+		$("#paneLeft").width() == LEFT_PANE_WIDTH_TWO_COLUMN ? $('#paneLeft .noFeatureText').css('margin-left', '50px') : $('#paneLeft .noFeatureText').css('margin-left', '150px');
+		
+		$("#map").css("left", $("#paneLeft").outerWidth());
+		//$("#map").height($("#mainWindow").height() - 35);
+		$("#map").height($("#mainWindow").height() - $('#divStrip').height());
+		$("#map").css('top',$('#divStrip').height());
+		$("#map").width($("#mainWindow").width() - $("#paneLeft").outerWidth());
+		
+		$('#header').width($('body').width());
+		$("#headerText").css("max-width", $("#header").width() - ($("#logoArea").width() + 100));
 	}
-	
-	$("#paneLeft").height($("#mainWindow").height() - 35);
-	$("#paneLeft").width($("body").width() <= TWO_COLUMN_THRESHOLD ? LEFT_PANE_WIDTH_TWO_COLUMN : LEFT_PANE_WIDTH_THREE_COLUMN);
-	$(".tilelist").height($("#paneLeft").height() - 18);
-	$(".tilelist").width($("#paneLeft").width()+7);		
-
-	$("#map").css("left", $("#paneLeft").outerWidth());
-	$("#map").height($("#mainWindow").height() - 35);
-	$("#map").width($("#mainWindow").width() - $("#paneLeft").outerWidth());
-
-	$("#headerText").css("max-width",$("#header").width() - ($("#logoArea").width()+100));
+	else{
+		resizeMobileElements();
+		if(_layout == 'normal'){
+			preSelection();
+			_selected = null;
+			showMobileList();
+			postSelection();
+		}
+				
+		_layout = 'responsive'
+		$("#mobileList").width($("body").width());
+		if(!_firstLoad)
+			_mobileThemeSwiper.reInit();
+	}
 
 	if (_map) _map.resize();
-
 }
 
 function preSelection() 
@@ -532,21 +806,27 @@ function preSelection()
 	// size & dim the corresponding tile.
 	
 	if (_selected) {
-		_selected.setSymbol(resizePictureMarkerSymbol(_selected.symbol, _lutIconSpecs["tiny"]));
+		_selected.symbol.setWidth(_lutIconSpecs["tiny"].getWidth())
+		_selected.symbol.setHeight(_lutIconSpecs["tiny"].getHeight())
+		_selected.symbol.setOffset(_lutIconSpecs["tiny"].getOffsetX(), _lutIconSpecs["tiny"].getOffsetY());
+		_selected.draw();
 		var tile = findTile(_selected.attributes.getValueCI(FIELDNAME_ID));
 		if ($(tile).attr("id") != $(this).attr("id")) $(tile).stop().animate({'background-color' : COLOR_DIM});
 	}
 		
 }
 
-function postSelection() {
+function postSelection(skipPopup) {
 	
 	if (_selected == null) {
 		_map.infoWindow.hide();
 	} else {
 		
 		// make the selected location's icon LARGE
-		_selected.setSymbol(resizePictureMarkerSymbol(_selected.symbol, _lutIconSpecs["large"]));
+		_selected.symbol.setWidth(_lutIconSpecs["large"].getWidth())
+		_selected.symbol.setHeight(_lutIconSpecs["large"].getHeight())
+		_selected.symbol.setOffset(_lutIconSpecs["large"].getOffsetX(), _lutIconSpecs["large"].getOffsetY());
+		_selected.draw();
 		
 		// calling moveToFront directly after messing
 		// with the symbol causes problems, so I
@@ -560,53 +840,98 @@ function postSelection() {
 			}
 		},10);				
 		
-		
-		buildPopup(_selected, _selected.geometry);
+		if(!skipPopup)
+			buildPopup(_selected, _selected.geometry);
 		
 		// light up the corresponding tile.
 
 		var tile = findTile(_selected.attributes.getValueCI(FIELDNAME_ID));
 		$(tile).stop().animate({'background-color' : COLOR_FULL});
-
 	}
 
 	$("#hoverInfo").hide();
 	
 }
 
-function buildPopup(feature, geometry)
+function buildPopup(feature, geometry, baseLayerClick)
 {
-	
+	$('#mobileSupportedLayersView').html('');
+	$('#mobileThemeBar .swiper-container').css('display', 'none');
+	$('#navThemeLeft').css('visibility', 'hidden');
+	$('#navThemeRight').css('visibility', 'hidden');
 	var atts = feature.attributes;
 	
+	var mobile = $('#header').css('display') == 'none';
+	
+	if (!baseLayerClick && mobile) {
+		buildMobileSlideView()
+		return
+	}
+
 	var title =  atts.getValueCI(FIELDNAME_TITLE);
 	
 	var shortDesc = atts.getValueCI(FIELDNAME_SHORTDESC);
 	var picture = atts.getValueCI(FIELDNAME_IMAGEURL);
 	var website = atts.getValueCI(FIELDNAME_WEBSITE);
-
+	
 	var contentDiv = $("<div></div");
-	if (shortDesc) $(contentDiv).append($("<div></div>").html(shortDesc));
+	if (baseLayerClick && mobile)
+			$('#mobileSupportedLayersView').append($("<div style='padding-left: 20px;' class='mobileFeatureTitle'></div>").html(title));
+	if (shortDesc) {
+		$(contentDiv).append($("<div></div>").html(shortDesc));
+		if (baseLayerClick && mobile) {
+			$('#mobileSupportedLayersView').append($('<hr style="margin-left: 20px; margin-right: 20px;">'));
+			$('#mobileSupportedLayersView').append($("<div class='mobileFeatureSubtitle'></div>").html(shortDesc));
+		}
+	}
 	if (picture) {
 		var pDiv = $("<div></div>").addClass("infoWindowPictureDiv");
-		if (DETAILS_PANEL) {
+		var mobilePDiv = $("<div></div>").addClass("mobilePictureDiv");
+		if (DETAILS_PANEL && !mobile) {
 			$(pDiv).append($(new Image()).attr("src", picture));
 			$(pDiv).css("cursor", "pointer");
+		}
+		else if (DETAILS_PANEL && mobile) {
+			if (website) {
+				var mobileA = $("<a></a>").attr("href", website).attr("target","_blank");
+				$(mobileA).append($(new Image()).attr("src", picture));
+				$(mobilePDiv).append(mobileA);
+			} else {
+				$(mobilePDiv).append($(new Image()).attr("src", picture));
+			}
 		} else { // no details panel
 			if (website) {
 				var a = $("<a></a>").attr("href", website).attr("target","_blank");
+				var mobileA = $("<a></a>").attr("href", website).attr("target","_blank");
 				$(a).append($(new Image()).attr("src", picture));
+				$(mobileA).append($(new Image()).attr("src", picture));
 				$(pDiv).append(a);
+				$(mobilePDiv).append(mobileA);
 			} else {
 				$(pDiv).append($(new Image()).attr("src", picture));
+				$(mobilePDiv).append($(new Image()).attr("src", picture));
 			}
 		}
 		$(contentDiv).append(pDiv);
+		if(baseLayerClick && mobile)
+			$('#mobileSupportedLayersView').append(mobilePDiv);
+	}
+	
+	if (!picture) {
+		$(contentDiv).append("<br>");
+		if(baseLayerClick && mobile)
+			$('#mobileSupportedLayersView').append("<br>");
 	}
 	
 	if (!DETAILS_PANEL) {
+		if(!shortDesc)
+			$('.mobileFeatureTitle').after($('<hr style="margin-left: 20px; margin-right: 20px;">'));
 		var desc1 = atts.getValueCI(FIELDNAME_DESC1);
-		if (desc1) $(contentDiv).append($("<div></div>").html(desc1));
+		if (desc1) {
+			$(contentDiv).append($("<div></div>").html(desc1));
+			if(baseLayerClick)
+				$('#mobileSupportedLayersView').append($("<div class='mobileFeatureDesc'></div>").html(desc1));
+		}
 		
 		if (website) {
 			website = website.toLowerCase();
@@ -614,8 +939,67 @@ function buildPopup(feature, geometry)
 				website = "http://"+website;
 			}
 			$(contentDiv).append($('<div class="address"><a href="'+website+'" target="_blank">Website</a></div>').css("padding-top", 10));
+			if(baseLayerClick && mobile)
+				$('#mobileSupportedLayersView').append($('<div class="mobileFeatureAddress"><a href="'+website+'" target="_blank">Website</a></div>').css("padding-top", 10));
 		}
 		
+	}
+	else if (DETAILS_PANEL && mobile){
+		$(contentDiv).prepend($('<div style="margin-left: -50px" class="mobileFeatureTitle">'+title+'</div>'));
+		if(!shortDesc)
+			$('.mobileFeatureTitle').after($('<hr style="margin-left: 20px; margin-right: 20px;">'));
+
+		var descFields = [FIELDNAME_DESC1, FIELDNAME_DESC2, FIELDNAME_DESC3, FIELDNAME_DESC4, FIELDNAME_DESC5];
+		var value;
+		$.each(descFields, function(index, field){
+			value = atts.getValueCI(field);
+			if (value) {
+				$(contentDiv).append('<div class="mobileFeatureDesc">'+value+'</div>');
+				if ($(contentDiv).children().length > 0 && index < descFields.length -1){
+					$(contentDiv).append('<p>');
+				} 
+				if(baseLayerClick && mobile){
+					$('#mobileSupportedLayersView').append('<div class="mobileFeatureDesc">'+value+'</div>');
+				}
+				if(descFields.length > 1/* && index*/)
+					$('#mobileSupportedLayersView').append('<p>')
+			}
+		});
+		$(contentDiv).append($('<hr style="margin-left: 20px; margin-right: 20px;">'));
+		if(baseLayerClick && mobile){
+			$('#mobileSupportedLayersView').append($('<hr style="margin-left: 20px; margin-right: 20px;">'));
+		}
+		var address = atts.getValueCI(FIELDNAME_ADDRESS);
+		if (address) {
+			$(contentDiv).append($('<div class="mobileFeatureAddress">'+address+'</div>')); 
+			if(baseLayerClick && mobile){
+				$('#mobileSupportedLayersView').append($('<div class="mobileFeatureAddress">'+address+'</div>')); 
+			}
+		}
+	
+		var hours = atts.getValueCI(FIELDNAME_HOURS);
+		if (hours) {
+			$(contentDiv).append($('<div class="mobileFeatureAddress">'+hours+'</div>')); 
+			if(baseLayerClick && mobile){
+				$('#mobileSupportedLayersView').append($('<div class="mobileFeatureAddress">'+hours+'</div>')); 
+			}
+		}
+	  
+		var website = atts.getValueCI(FIELDNAME_WEBSITE);
+		if (website) {
+			website = website.toLowerCase();
+			if (!(website.indexOf("http") >= 0)) {
+				website = "http://"+website;
+			}
+			$(contentDiv).append('<div class="mobileFeatureAddress"><a href="'+website+'" target="_blank">Website</a></div>');
+			if(baseLayerClick && mobile){
+				$('#mobileSupportedLayersView').append('<div class="mobileFeatureAddress"><a href="'+website+'" target="_blank">Website</a></div>');
+			}
+		}
+		$(contentDiv).append('<div style="margin-bottom: 20px;"></div>');
+		if(baseLayerClick && mobile){
+			$('#mobileSupportedLayersView').append('<div style="margin-bottom: 20px;"></div>');
+		}
 	} else {
 		$(contentDiv).append($("<div></div>").addClass("infoWindowLink").html("Details >>"));
 	}
@@ -627,19 +1011,143 @@ function buildPopup(feature, geometry)
 	//       eludes me at the moment. 
 	_map.infoWindow.setContent("<div>"+contentDiv.html()+"</div>");
 	_map.infoWindow.setTitle(title);
-	_map.infoWindow.show(geometry);	
+	_map.infoWindow.show(geometry);
+	
+	//else{
+		$('#mobilePaneList').css('visibility', 'hidden');
+		$('#mobileFeature').css('visibility', 'hidden')
+		$('#returnIcon').css('display', 'block');
+		$('#returnHiddenBar').css('display', 'block');
+		$('#centerMapIconContainer').css('display', 'none');
+		$('#mobileSupportedLayersView').css('visibility', 'visible');
+		preSelection();
+	//}
 	
 	$(".esriPopup .contentPane").scrollTop(0);	
 	$(".infoWindowLink").click(function(e) {
         showDetails(feature);
     });
 	
-	if (DETAILS_PANEL) {
+	if (DETAILS_PANEL && $('#header').css('display') == 'block') {
 		$(".infoWindowPictureDiv").click(function(e) {
 			showDetails(feature);
 		});	
 	}
+}
+
+/*
+ * Builds swipe-able slides that display feature information
+ */
+function buildMobileSlideView(featureNumber){
+	_mobileFeatureSwiper.removeAllSlides();
+	var themeIndex = $('.tab-selected').index();
+	if(themeIndex<0)
+		themeIndex = 0;
+	var currentTheme = _contentLayers[themeIndex];
+	var features = currentTheme.graphics;
 	
+	$.each(features, function(index, feature){
+		if(!_map.extent.contains(feature.geometry))
+			return
+		var atts = feature.attributes;
+
+		var title =  atts.getValueCI(FIELDNAME_TITLE);
+		
+		var shortDesc = atts.getValueCI(FIELDNAME_SHORTDESC);
+		var picture = atts.getValueCI(FIELDNAME_IMAGEURL);
+		var website = atts.getValueCI(FIELDNAME_WEBSITE);
+		
+		var num = $('<div class="mobileFeatureNum" style="background-color:'+_layerCurrent.color+'">'+ atts.getValueCI(FIELDNAME_NUMBER)+'</div>');
+	
+		var mobileContentDiv = $("<div'></div");
+		$(mobileContentDiv).append(num);
+		if(title){
+			$(mobileContentDiv).append($("<div class='mobileFeatureTitle'></div>").html(title));
+		}
+		$(mobileContentDiv).append("<hr style='margin-left: 20px; margin-right: 20px;'>")
+
+		if (shortDesc) {
+			$(mobileContentDiv).append($("<div class='mobileFeatureSubtitle'></div>").html(shortDesc));
+		}
+		if (picture) {
+			var mobilePDiv = $("<div></div>").addClass("mobilePictureDiv");
+			if (website) {
+				var mobileA = $("<a></a>").attr("href", website).attr("target","_blank");
+				$(mobileA).append($(new Image()).attr("src", picture));
+				$(mobilePDiv).append(mobileA);
+			} else {
+				$(mobilePDiv).append($(new Image()).attr("src", picture));
+			}
+			
+			$(mobileContentDiv).append(mobilePDiv);
+		}
+		
+		if (!DETAILS_PANEL) {
+			var desc1 = atts.getValueCI(FIELDNAME_DESC1);
+			if (desc1) {
+				$(mobileContentDiv).append($("<div class='mobileFeatureDesc'></div>").html(desc1));
+			}
+			
+			if (website) {
+				website = website.toLowerCase();
+				if (!(website.indexOf("http") >= 0)) {
+					website = "http://"+website;
+				}
+				$(mobileContentDiv).append($('<div class="mobileFeatureDesc"><a href="'+website+'" target="_blank">Website</a></div>').css("padding-top", 10));
+			}
+			
+		} else {
+			var descFields = [FIELDNAME_DESC1, FIELDNAME_DESC2, FIELDNAME_DESC3, FIELDNAME_DESC4, FIELDNAME_DESC5];
+			var value;
+			$.each(descFields, function(index, field){
+				value = atts.getValueCI(field);
+				if (value) {
+					$(mobileContentDiv).append('<div class="mobileFeatureDesc">'+value+'</div>');
+					if ($(mobileContentDiv).children().length > 0){
+						$(mobileContentDiv).append('<br>');
+					} 
+				}
+			});
+			$(mobileContentDiv).append("<hr style='margin-left: 20px; margin-right: 20px;'>")
+			var address = atts.getValueCI(FIELDNAME_ADDRESS);
+			if (address) {
+				$(mobileContentDiv).append($('<div class="mobileFeatureAddress">'+address+'</div>')); 
+			}
+		
+			var hours = atts.getValueCI(FIELDNAME_HOURS);
+			if (hours) {
+				$(mobileContentDiv).append($('<div class="mobileFeatureAddress">'+hours+'</div>')); 
+			}
+		  
+			var website = atts.getValueCI(FIELDNAME_WEBSITE);
+			if (website) {
+				website = website.toLowerCase();
+				if (!(website.indexOf("http") >= 0)) {
+					website = "http://"+website;
+				}
+				$(mobileContentDiv).append('<div class="mobileFeatureAddress"><a href="'+website+'" target="_blank">Website</a></div>');
+			}
+			$(mobileContentDiv).append('<div style="margin-bottom: 20px;"></div>');
+		}
+	
+		var featureSlide = _mobileFeatureSwiper.createSlide(mobileContentDiv.html());
+		$(featureSlide).attr('data-number', atts.getValueCI(FIELDNAME_NUMBER));
+		$(featureSlide).css('overflowY', 'auto'); 
+		featureSlide.append() 
+	});
+	
+	 var selectedSlideIndex = null;
+
+	 $.each(_mobileFeatureSwiper.slides, function(index, slide){
+		 if (parseInt($(slide).data('number')) == _selected.attributes.getValueCI(FIELDNAME_NUMBER)) 
+		 	selectedSlideIndex = index;
+	 })
+	 _mobileFeatureSwiper.swipeTo(selectedSlideIndex);
+	 $('.swiper-slide-active').scrollTop(0)
+	 $('#mobileFeature').css('visibility', 'visible');
+	 $('#returnIcon').css('display', 'block');
+	 $('#returnHiddenBar').css('display', 'block');
+	 $('#centerMapIconContainer').css('display', 'block');
 }
 
 function showDetails(graphic) {
@@ -661,7 +1169,7 @@ function showDetails(graphic) {
 
 	var hours = graphic.attributes.getValueCI(FIELDNAME_HOURS);
 	if (hours) {
-		$(leftDiv).append($('<div class="address">'+hours+'</div>'));  
+		$(leftDiv).append($('<div class="address">'+hours+'</div>')); 
 	}
   
 	var website = graphic.attributes.getValueCI(FIELDNAME_WEBSITE);
@@ -679,7 +1187,9 @@ function showDetails(graphic) {
 		value = graphic.attributes.getValueCI(field);
 		if (value) {
 			$(rightDiv).append('<div class="desc">'+value+'</div>');
-			if ($(rightDiv).children().length > 0) $(rightDiv).append('<p>');
+			if ($(rightDiv).children().length > 0 && index < descFields.length -1){
+				$(rightDiv).append('<p>');
+			} 
 		}
 	});
 
@@ -700,12 +1210,18 @@ function showDetails(graphic) {
 		maxWidth:"575px",
 		scrolling:false
 	});
-  	
+	
+	$('.rightDiv').find('p').last().css('display', 'none');
 }
 
 function findTile(id)
 {
 	return $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+id})[0];	
+}
+
+function findMobileTile(id)
+{
+	return $.grep($("ul.mobileTileList li"),function(n,i){return n.id == "item"+id})[0];	
 }
 
 function hoverInfoPos(x,y){
@@ -747,3 +1263,167 @@ function resizePictureMarkerSymbol(sym, spec)
 	return sym.setHeight(spec.getHeight()).setWidth(spec.getWidth()).setOffset(spec.getOffsetX(),spec.getOffsetY());
 }
 
+function swipeFeature(){
+	preSelection();		
+	var themeIndex = $('.tab-selected').index();
+	if(themeIndex<0)
+		themeIndex = 0;
+	var currentTheme = _contentLayers[themeIndex];
+	var features = currentTheme.graphics;
+	var nextFeatureId = $(_mobileFeatureSwiper.activeSlide()).data('number')
+	var feature = currentTheme.graphics.filter(function(feat){
+		return feat.attributes.Number == nextFeatureId;
+	});
+	_selected = feature[0];
+	$('.swiper-slide-active').scrollTop(0)
+	postSelection(true);
+}
+
+function showMobileList(){
+	$('#mobileFeature').css('visibility', 'hidden');
+	$('#mobileSupportedLayersView').css('visibility', 'hidden');
+	$('.swiper-container').css('display', 'block');
+	$('#mobilePaneList').css('visibility', 'visible');
+	$('#returnIcon').css('display', 'none');
+	$('#returnHiddenBar').css('display', 'none');
+	$('#centerMapIconContainer').css('display', 'none');
+	$('#navThemeLeft').css('visibility', 'visible');
+	$('#navThemeRight').css('visibility', 'visible');
+	if (_selected) {
+		_selected.symbol.setWidth(_lutIconSpecs["tiny"].getWidth())
+		_selected.symbol.setHeight(_lutIconSpecs["tiny"].getHeight())
+		_selected.symbol.setOffset(_lutIconSpecs["tiny"].getOffsetX(), _lutIconSpecs["tiny"].getOffsetY());
+		_selected.draw();
+	}
+	if (_mobileThemeSwiper.activeIndex > 0 || _mobileThemeSwiper.activeIndex == -0) {
+		_mobileThemeSwiper.reInit()
+		_mobileThemeSwiper.swipeTo(_mobileThemeSwiper.activeIndex)
+	}
+}
+
+function centerMapOnFeature(){
+	_map.centerAt(_selected.geometry);
+}
+
+/*
+ * Workaround for looping slides from iDanergous swipe component because of inconsistent
+ * behavior when using 'loop' property of component and getting correct slide index.
+ */
+function loopFeatureSlides(direction){
+	if(direction == 'left'){
+		var slidesLength = _mobileFeatureSwiper.slides.length;
+		_mobileFeatureSwiper.swipeTo(slidesLength-1, 50)
+		swipeFeature()
+	}
+	if (direction == 'right') {
+		_mobileFeatureSwiper.swipeTo(0, 50);
+		swipeFeature();
+	}
+}
+
+function selectMobileTheme(index){
+	if(index != 0)
+		activateLayer(_contentLayers[index]);
+	$('#mobileTitlePage').css('display', 'none');
+	$('#map').css('height', '100%').css('height', '48%').css('height', '-=20px');
+	_map.resize()
+}
+
+function getDeviceLocation(){
+	navigator.geolocation.getCurrentPosition(
+		function(e){
+			var geom = new esri.geometry.Point(e.coords.longitude, e.coords.latitude);
+			var locationPoint = esri.geometry.geographicToWebMercator(geom);
+			_map.centerAt(locationPoint);
+			displayLocationPin(locationPoint);
+		}
+	);
+	$('#mobileTitlePage').css('display', 'none')
+}
+
+function getDeviceLocationError(error){
+	locationButtonCallback(false, error);
+}
+
+function displayLocationPin(point)
+{
+	_locateLayer.clear();
+	_locateLayer.add(new esri.Graphic( point, _locateSymbol ));
+	setTimeout(function(){
+		$('#locateLayer_layer image').hide();
+	}, 10000);
+}
+
+function shareFacebook()
+{
+	var options = '&p[title]=' + encodeURIComponent($('#title').text())
+					+ '&p[summary]=' + encodeURIComponent($('#subtitle').text())
+					+ '&p[url]=' + encodeURIComponent(document.location.href)
+					+ '&p[images][0]=' + encodeURIComponent($("meta[property='og:image']").attr("content"));
+	
+	window.open(
+		'http://www.facebook.com/sharer.php?s=100' + options, 
+		'Facebook sharing', 
+		'toolbar=0,status=0,width=626,height=436'
+	);
+}
+
+function shareTwitter()
+{
+	var options = 'text=' + encodeURIComponent($('#title').text())
+					+ '&url=' + encodeURIComponent(document.location.href)
+					+ '&related=EsriStoryMaps'
+					+ '&hashtags=storymap'; 
+
+	window.open(
+		'https://twitter.com/intent/tweet?' + options, 
+		'Tweet', 
+		'toolbar=0,status=0,width=626,height=436'
+	);
+}
+
+function requestBitly()
+{
+	var bitlyUrls = [
+		"http://api.bitly.com/v3/shorten?callback=?", 
+		"https://api-ssl.bitly.com/v3/shorten?callback=?"
+	];
+	var bitlyUrl = location.protocol == 'http:' ? bitlyUrls[0] : bitlyUrls[1];
+	
+	var urlParams = esri.urlToObject(document.location.href).query || {};
+	var targetUrl = document.location.href;
+	
+	$.getJSON(
+		bitlyUrl, 
+		{ 
+			"format": "json",
+			"apiKey": "R_14fc9f92e48f7c78c21db32bd01f7014",
+			"login": "esristorymaps",
+			"longUrl": targetUrl
+		},
+		function(response)
+		{
+			if( ! response || ! response || ! response.data.url )
+				return;
+			
+			$("#bitlyLoad").fadeOut();
+			$("#bitlyInput").fadeIn();
+			$("#bitlyInput").val(response.data.url);
+			$("#bitlyInput").select();
+		}
+	);
+	$(".popover").show()
+}
+
+// Necessary as css calc() method does not work in older android 
+function resizeMobileElements(){
+	$('#mobilePaneList').css('height', '52%').css('height', '-=20px');
+	$('#mobileFeature').css('height', '52%').css('height', '-=20px');
+	$('#mobileSupportedLayersView').css('height', '52%').css('height', '-=20px');
+	$('#mobileThemeBar').css('top', '48%').css('top', $('#mobileThemeBar').position().top -20 +'px');
+	$('#returnHiddenBar').css('width', '100%').css('width', '-=80px');
+	$('#mobilePaneList').css('height', '52%').css('height', '-=20px');
+	$('.mobileTileList.blurb').css('width', '100%').css('width', '-=125px');
+	if($('#header').css('display') == 'none')
+		$('#map').css('height', '48%').css('height', '-=20px');
+}
