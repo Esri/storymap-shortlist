@@ -96,6 +96,11 @@ function init() {
 											queryString["supporting_layers_that_are_clickable"] :
 											SUPPORTING_LAYERS_THAT_ARE_CLICKABLE;
 	GEOLOCATOR = queryString["geolocator"] ? queryString["geolocator"] : GEOLOCATOR;
+	FILTER_LIST_BY_EXTENT = queryString["extent_filter"] ? queryString["extent_filter"] : FILTER_LIST_BY_EXTENT;
+	FILTER_LIST_BY_EXTENT = (FILTER_LIST_BY_EXTENT === 'true' || FILTER_LIST_BY_EXTENT === 'yes' || FILTER_LIST_BY_EXTENT === true) ? true : false;
+	PAN_MAP_ON_ITEM_SELECT = queryString["pan_to_item"] ? queryString["pan_to_item"] : PAN_MAP_ON_ITEM_SELECT;
+	PAN_MAP_ON_ITEM_SELECT = (PAN_MAP_ON_ITEM_SELECT === 'true' || PAN_MAP_ON_ITEM_SELECT === 'yes' || PAN_MAP_ON_ITEM_SELECT === true) ? true : false;
+
 	// Note:  If using a proxy server (required for remove CSV access),
 	//        you'll need to uncomment the following line and provide
 	//        a valid proxy server url. 										
@@ -636,13 +641,18 @@ function activateLayer(layer) {
 	var mobileTile;
 	var visibleFeatures = false;
 
-	$.each(_layerCurrent.graphics,function(index,value){
-		if (_map.extent.contains(value.geometry)) {
-			display = "visible"
-			visibleFeatures = true;
-		} else {
-			display = "none";
-		}
+	$.each(_layerCurrent.graphics, function (index, value) {
+	   if (FILTER_LIST_BY_EXTENT) {
+	      if (_map.extent.contains(value.geometry)) {
+	         display = "visible"
+	         visibleFeatures = true;
+	      } else {
+	         display = "none";
+	      }
+	   } else {
+	      display = "visible"
+	      visibleFeatures = true;
+	   }
 		tile = $('<li id="item'+value.attributes.getValueCI(FIELDNAME_ID)+'" style="display:'+display+'">');
 		img = $('<img src="'+value.attributes.getValueCI(FIELDNAME_IMAGEURL)+'">');
 		mobileImg = $('<div style="height: 75px; margin-bottom: 8px;"><img src="'+value.attributes.getValueCI(FIELDNAME_IMAGEURL)+'"></div>');
@@ -674,29 +684,31 @@ function activateLayer(layer) {
 }
 
 function refreshList() {
-	var tile;
-	var mobileTile;
-	var visibleFeatures = false;
-	$.each(_layerCurrent.graphics,function(index,value){
-		//find the corresponding tile
-		tile = findTile(value.attributes.getValueCI(FIELDNAME_ID));
-		mobileTile = findMobileTile(value.attributes.getValueCI(FIELDNAME_ID));
-		if (_map.extent.contains(value.geometry)) {
-			if ($(tile).css("display") == "none") $(tile).stop().fadeIn();
-			if ($(mobileTile).css("display") == "none") $(mobileTile).css("display", "block") ;
-			visibleFeatures = true;
-		} else {
-			if ($(tile).css("display") != "none") $(tile).stop().fadeOut(1000);
-			if ($(mobileTile).css("display") != "none") $(mobileTile).css("display", "none");
-		}		
-	});
-	
-	$('#mobilePaneList').scrollTop(0)
+   if (FILTER_LIST_BY_EXTENT) {
+      var tile;
+      var mobileTile;
+      var visibleFeatures = false;
+      $.each(_layerCurrent.graphics, function (index, value) {
+         //find the corresponding tile
+         tile = findTile(value.attributes.getValueCI(FIELDNAME_ID));
+         mobileTile = findMobileTile(value.attributes.getValueCI(FIELDNAME_ID));
+         if (_map.extent.contains(value.geometry)) {
+            if ($(tile).css("display") == "none") $(tile).stop().fadeIn();
+            if ($(mobileTile).css("display") == "none") $(mobileTile).css("display", "block");
+            visibleFeatures = true;
+         } else {
+            if ($(tile).css("display") != "none") $(tile).stop().fadeOut(1000);
+            if ($(mobileTile).css("display") != "none") $(mobileTile).css("display", "none");
+         }
+      });
 
-	if(!visibleFeatures)
-		$('.noFeature').css('display', 'block')
-	else
-		$('.noFeature').css('display', 'none')
+      $('#mobilePaneList').scrollTop(0)
+
+      if (!visibleFeatures)
+         $('.noFeature').css('display', 'block')
+      else
+         $('.noFeature').css('display', 'none')
+   }
 }
 
 function buildLayer(arr,iconDir,root) {
@@ -831,17 +843,36 @@ function postSelection(skipPopup) {
 		// calling moveToFront directly after messing
 		// with the symbol causes problems, so I
 		// put it on a delay and put it in a try/catch
-		// just to be safe...
-		setTimeout(function(){
-			try {
-				_selected.getDojoShape().moveToFront();
-			} catch (err) {
-				console.log("problem with 'moveToFront()'...");
-			}
-		},10);				
-		
-		if(!skipPopup)
-			buildPopup(_selected, _selected.geometry);
+	   // just to be safe...\
+		if (PAN_MAP_ON_ITEM_SELECT) {
+		   setTimeout(function () {
+		      require(["dojo/on"], function (on) {
+		         var handle = on(_map, "pan-end", function () {
+		            try {
+		               _selected.getDojoShape().moveToFront();
+		            } catch (err) {
+		               console.log("problem with 'moveToFront()'...");
+		            }
+		            if (!skipPopup) {
+		               buildPopup(_selected, _selected.geometry);
+		            }
+		            handle.remove();
+		         });
+		      });
+		      _map.centerAt(_selected.geometry);
+		   }, 10);
+		} else {
+		   setTimeout(function () {
+		      try {
+		         _selected.getDojoShape().moveToFront();
+		      } catch (err) {
+		         console.log("problem with 'moveToFront()'...");
+		      }
+		   }, 10);
+
+		   if (!skipPopup)
+		      buildPopup(_selected, _selected.geometry);
+		}
 		
 		// light up the corresponding tile.
 
@@ -1047,7 +1078,7 @@ function buildMobileSlideView(featureNumber){
 	var features = currentTheme.graphics;
 	
 	$.each(features, function(index, feature){
-		if(!_map.extent.contains(feature.geometry))
+	   if(FILTER_LIST_BY_EXTENT && !_map.extent.contains(feature.geometry))
 			return
 		var atts = feature.attributes;
 
