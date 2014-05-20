@@ -28,7 +28,7 @@ This repository contains the application files for the "Shortlist" story map app
 * [Story Maps Blog](http://blogs.esri.com/esri/arcgis/category/story-maps/)
 * [ArcGIS.com] (http://www.arcgis.com/home)
 * [ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/index.html)
-* [@EsriStoryMaps Twitter Feed](hhttps://twitter.com/EsriStoryMaps)
+* [@EsriStoryMaps Twitter Feed](https://twitter.com/EsriStoryMaps)
 
 ## Issues
 
