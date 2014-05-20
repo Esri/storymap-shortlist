@@ -2,7 +2,7 @@
 
 This repository contains the application files for the "Shortlist" story map app.  The app presents a curated set of points of interest.  
 
-[View live app here](http://storymaps.esri.com/templates/shortlist)
+[View live app here](http://storymaps.esri.com/stories/shortlist-sandiego/)
 
 ![App](images/shortlist-storytelling-template-js.png) 
 
@@ -25,10 +25,10 @@ This repository contains the application files for the "Shortlist" story map app
 ## Resources
 
 * [Story Maps web site](http://storymaps.arcgis.com/)
-* [ArcGIS.com] (http://www.arcgis.com)
-* [ArcGIS for JavaScript API Resource Center](http://help.arcgis.com/en/webapi/javascript/arcgis/index.html)
-* [ArcGIS Blog](http://blogs.esri.com/esri/arcgis/)
-* [twitter@esri](http://twitter.com/esri)
+* [Story Maps Blog](http://blogs.esri.com/esri/arcgis/category/story-maps/)
+* [ArcGIS.com] (http://www.arcgis.com/home)
+* [ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/index.html)
+* [@EsriStoryMaps Twitter Feed](https://twitter.com/EsriStoryMaps)
 
 ## Issues
 
