@@ -62,4 +62,6 @@ The following components in this repo are under the MIT License.
 * the jquery colorbox plugin (jquery.colorbox-min.js)
 * the jquery color animation plugin (jquery.animate-colors-min.js)
 
-[](Esri Tags: Storytelling [http://github.com/esri/shortlist-storytelling-template-js])
+[](Esri Tags: Storytelling Shortlist ArcGIS-Online Template)
+[](Esri Language: JavaScript)
+
