@@ -1212,7 +1212,7 @@ function showDetails(graphic) {
 		$(lastDesc).css("margin-bottom","5px");
 	}
   
-	$.fn.colorbox({
+	$.colorbox({
 		html:mainDiv,
 		open:true,
 		maxHeight:$(document).height() - 100,
