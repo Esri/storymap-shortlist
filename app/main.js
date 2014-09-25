@@ -251,7 +251,7 @@ function init() {
 	
 	_mobileFeatureSwiper = new Swiper('#mobileFeature .swiper-container',{
 		mode:'horizontal',
-		keyboardControl: true,
+		//keyboardControl: true,
 		onSlideNext: function(){
 			swipeFeature();
 		},
@@ -385,7 +385,7 @@ function initMap(layers) {
 		$('#mobileThemeList').append(introList)
 	}
 
-	_mobileThemeSwiper.enableKeyboardControl();
+	//_mobileThemeSwiper.enableKeyboardControl();
 
 	activateLayer(_contentLayers[0], false);
 	dojo.connect(_map.infoWindow,"onHide",infoWindow_onHide);
@@ -397,13 +397,22 @@ function initMap(layers) {
 	$(".share_bitly").click(requestBitly);
 	$("#map").height($("#mainWindow").height() - $('#divStrip').height());
 	$("#map").css('top',$('#divStrip').height());
-	
-	$('body').keypress(function(e){
-		if(e.which == 13){
-			$(".mobileTitleTheme").click();
-			$(".mobileTitleThemes").eq(0).click();
-	    }
-	});
+
+    //Use enter/return key on focused element to trigger click event
+    //Use +/- keys to zoom in/out of map
+    $('body').keypress(function(e){
+        if(e.which == 13){ //enter/return
+            $( document.activeElement).click()
+        }
+        if(e.which == 43) { //'+'
+            _map.setLevel(_map.getLevel()+1);
+            hideBookmarks();
+        }
+        if(e.which == 45) { //'-'
+            _map.setLevel(_map.getLevel()-1);
+            hideBookmarks();
+        }
+    });
 }
 
 /******************************************************
