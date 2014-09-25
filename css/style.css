@@ -1,4 +1,4 @@
-html,body {
+﻿html,body {
 	height:100%;
 	width:100%;
 	margin:auto	
@@ -13,6 +13,12 @@ body {
 	position: fixed;
 	bottom: 0;
 	left: 0;
+}
+
+:focus {
+    outline-color:rgb(255,73,32);
+    outline-style:solid;
+    outline-width:2px;
 }
 
 a {
@@ -184,7 +190,7 @@ a:hover{
 
 .socialIcon-link:before { content: '\e802'; } /* '' */
 .socialIcon-twitter-1:before { content: '\e800'; } /* '' */
-.socialIcon-facebook-squared-1:before { content: '\e801'; } /* '�?' */
+.socialIcon-facebook-squared-1:before { content: '\e801'; } /* '�?' */
 
 .shareIcon {
     display: inline-block;

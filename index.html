@@ -100,9 +100,9 @@ var GEOLOCATOR = false;
         </div> -->
 		<div id="social">
 			<a id="msLink" href="http://storymaps.arcgis.com" target="_blank">A story map </a>
-			<i class="shareIcon share_facebook socialIcon-facebook-squared-1"></i>
-			<i class="socialIcon-twitter-1 shareIcon share_twitter"></i>
-			<i class="socialIcon-link shareIcon share_bitly" id="bitlyIcon" title="Get a short link to the application"></i>
+			<i class="shareIcon share_facebook socialIcon-facebook-squared-1" tabindex="0"></i>
+			<i class="socialIcon-twitter-1 shareIcon share_twitter" tabindex="0"></i>
+			<i class="socialIcon-link shareIcon share_bitly" id="bitlyIcon" title="Get a short link to the application" tabindex="0"></i>
 			<div class="popover fade left in" style="display: none;">
 				<div class="arrow"></div>
 				<div class="popover-content" id="bitlyContent">
@@ -122,13 +122,13 @@ var GEOLOCATOR = false;
         <div id="divStrip">
             <div id="tabs"></div>
             <div id="bookmarksCon">
-                <div id="bookmarksToggle"><p id="bookmarksTogText"></p></div>
+                <div id="bookmarksToggle" tabindex="0"><p id="bookmarksTogText"></p></div>
                 <div id="bookmarksDiv">
                 </div>
             </div>
         </div>
 		<div id="mobileBookmarksCon">
-        	<div id="mobileBookmarksToggle"><p id="mobileBookmarksTogText"></p></div>
+        	<div id="mobileBookmarksToggle" tabindex="0"><p id="mobileBookmarksTogText"></p></div>
             <div id="mobileBookmarksDiv"></div>
 		</div>
         
@@ -149,12 +149,12 @@ var GEOLOCATOR = false;
 
         <div id="map">
             <div id="zoomToggle">
-                <div id="zoomIn">+</div>
-                <div id="zoomExtent">
+                <div id="zoomIn" tabindex="0">+</div>
+                <div id="zoomExtent" tabindex="0">
 					<img id="zoomExtentImg" src="images/ZoomHome.png" alt="Zoom map to initial extents">
 				</div>
-                <div id="zoomOut">-</div>
-				<div id="locateButton">
+                <div id="zoomOut" tabindex="0">-</div>
+				<div id="locateButton" tabindex="0">
 					<img id="locateImage" src="images/locateButton.png" alt="Show current location on map">
 				</div>
 				
@@ -164,21 +164,21 @@ var GEOLOCATOR = false;
 			
 		</div>
 		
-		<div id="mobileThemeBar">
-			<div id="navThemeLeft">
+		<div id="mobileThemeBar" tabindex="0">
+			<div id="navThemeLeft" tabindex="0">
 				<span class='icon-arrow-left'></span>
 			</div>
-			<div id="navThemeRight">
+			<div id="navThemeRight" tabindex="0">
 				<span class='icon-arrow-right'></span>
 			</div>
 			<div class="swiper-container">
   				<div class="swiper-wrapper"></div>
 			</div>
-			<div id='returnIcon'>
+			<div id='returnIcon' tabindex="0">
 				<i class='icon-list'></i>
 			</div>
-			<div id="returnHiddenBar"></div>
-			<div id="centerMapIconContainer">
+			<div id="returnHiddenBar" tabindex="0"></div>
+			<div id="centerMapIconContainer" tabindex="0">
 				<div id='centerMapIcon'>
 					<i class='icon-contract'></i>
 				</div>

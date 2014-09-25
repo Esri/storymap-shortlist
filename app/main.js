@@ -363,10 +363,10 @@ function initMap(layers) {
 	if (_contentLayers.length > 1) {
 	 	$('#mobileTitlePage').append('<ul id="mobileThemeList" style=" height: 80px; line-height: 80px;" class="mobileTileList introList">')
 		$.each(_contentLayers, function(index, value){
-			$("#tabs").append('<div class="tab" onclick="activateLayer(_contentLayers[' + index + ']), hideBookmarks()">' + value.title + '</div>', true);
+			$("#tabs").append('<div class="tab" tabindex="0" onclick="activateLayer(_contentLayers[' + index + ']), hideBookmarks()">' + value.title + '</div>', true);
 			var newSlide = _mobileThemeSwiper.createSlide('<p>' + value.title + '</p>');
 			newSlide.append();
-			var introList = $('<li class="mobileTitleThemes" onclick="selectMobileTheme(' + index + ')">').append('<span style="margin-left: 30px; margin-right: 30px; vertical-align: middle; line-height: 20px; display: inline-block;">' + value.title + '</span>')
+			var introList = $('<li class="mobileTitleThemes" tabindex="0" onclick="selectMobileTheme(' + index + ')">').append('<span style="margin-left: 30px; margin-right: 30px; vertical-align: middle; line-height: 20px; display: inline-block;">' + value.title + '</span>')
 			if(index == 0)
 				$(introList).css('border-width', '2px 0px 1px 0px')
 			if(index == (_contentLayers.length - 1))
@@ -381,7 +381,7 @@ function initMap(layers) {
 		$('#mobileThemeBar .swiper-container').css('display', 'none');
 		$('#mobileTitlePage').append("<br><hr></hr>")
 		$('#mobileTitlePage').append('<ul id="mobileThemeList" class="mobileTileList">')
-		var introList = $('<li class="mobileTitleTheme" onclick="selectMobileTheme(' + 0 + ')">').append('<div class="startButton"> Start </div>')
+		var introList = $('<li class="mobileTitleTheme" tabindex="0" onclick="selectMobileTheme(' + 0 + ')">').append('<div class="startButton"> Start </div>')
 		$('#mobileThemeList').append(introList)
 	}
 
@@ -542,8 +542,8 @@ function SortByNumber(a, b){
 function loadBookmarks() {
 	
 	$.each(_bookmarks,function(index,value){
-			$("#bookmarksDiv").append("<p><a>"+value.name+"</a></p>");
-			$("#mobileBookmarksDiv").append("<p><a>"+value.name+"</a></p>");
+			$("#bookmarksDiv").append("<p><a tabindex='0'>"+value.name+"</a></p>");
+			$("#mobileBookmarksDiv").append("<p><a tabindex='0'>"+value.name+"</a></p>");
 	});
 	
 	$("#bookmarksDiv a").click(function(e) {
@@ -643,7 +643,7 @@ function activateLayer(layer) {
 		} else {
 			display = "none";
 		}
-		tile = $('<li id="item'+value.attributes.getValueCI(FIELDNAME_ID)+'" style="display:'+display+'">');
+		tile = $('<li tabindex="0" id="item'+value.attributes.getValueCI(FIELDNAME_ID)+'" style="display:'+display+'">');
 		img = $('<img src="'+value.attributes.getValueCI(FIELDNAME_IMAGEURL)+'" alt="'+value.attributes.getValueCI(FIELDNAME_TITLE)+'">');
 		mobileImg = $('<div style="height: 75px; margin-bottom: 8px;"><img src="'+value.attributes.getValueCI(FIELDNAME_IMAGEURL)+'"></div>');
 		footer = $('<div class="footer"></div>');
@@ -885,7 +885,7 @@ function buildPopup(feature, geometry, baseLayerClick)
 		}
 	}
 	if (picture) {
-		var pDiv = $("<div></div>").addClass("infoWindowPictureDiv");
+		var pDiv = $("<div></div>").addClass("infoWindowPictureDiv").attr("tabindex","0");
 		var mobilePDiv = $("<div></div>").addClass("mobilePictureDiv");
 		if (DETAILS_PANEL && !mobile) {
 			$(pDiv).append($(new Image()).attr("src", picture));
@@ -1001,7 +1001,7 @@ function buildPopup(feature, geometry, baseLayerClick)
 			$('#mobileSupportedLayersView').append('<div style="margin-bottom: 20px;"></div>');
 		}
 	} else {
-		$(contentDiv).append($("<div></div>").addClass("infoWindowLink").html("Details >>"));
+		$(contentDiv).append($("<div></div>").addClass("infoWindowLink").attr("tabindex","0").html("Details >>"));
 	}
 
 	// note: what we really want is the entire contentDiv html in
