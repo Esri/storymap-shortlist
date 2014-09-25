@@ -644,7 +644,7 @@ function activateLayer(layer) {
 			display = "none";
 		}
 		tile = $('<li id="item'+value.attributes.getValueCI(FIELDNAME_ID)+'" style="display:'+display+'">');
-		img = $('<img src="'+value.attributes.getValueCI(FIELDNAME_IMAGEURL)+'">');
+		img = $('<img src="'+value.attributes.getValueCI(FIELDNAME_IMAGEURL)+'" alt="'+value.attributes.getValueCI(FIELDNAME_TITLE)+'">');
 		mobileImg = $('<div style="height: 75px; margin-bottom: 8px;"><img src="'+value.attributes.getValueCI(FIELDNAME_IMAGEURL)+'"></div>');
 		footer = $('<div class="footer"></div>');
 		num = $('<div class="num" style="background-color:'+_layerCurrent.color+'">'+value.attributes.getValueCI(FIELDNAME_NUMBER)+'</div>');
@@ -1157,7 +1157,7 @@ function showDetails(graphic) {
 	var leftDiv = $('<div class="leftDiv"></div>');
 	var rightDiv = $('<div class="rightDiv"></div>');
   
-	var imageDiv = $('<img src="'+graphic.attributes.getValueCI(FIELDNAME_IMAGEURL)+'">');	
+	var imageDiv = $('<img src="'+graphic.attributes.getValueCI(FIELDNAME_IMAGEURL)+'" alt="'+graphic.attributes.getValueCI(FIELDNAME_TITLE)+'">');
 	var pictureFrame = $('<div class="pictureFrame"></div>');	
 	$(pictureFrame).append(imageDiv);
 	$(leftDiv).append(pictureFrame);
