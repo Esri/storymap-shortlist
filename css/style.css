@@ -1,4 +1,4 @@
-html,body {
+﻿html,body {
 	height:100%;
 	width:100%;
 	margin:auto	
@@ -7,9 +7,9 @@ html,body {
 body {
 	background-color:#fff;
 	color:#333;
-	font-size:14px;
+	font-size:88%;
 	overflow:hidden;
-	font-family: 'open_sansregular', sans-serif;
+    font-family: 'frutiger', Fallback, sans-serif;
 	position: fixed;
 	bottom: 0;
 	left: 0;
@@ -31,28 +31,18 @@ a:hover{
 }
 
 /*
- * Open-Sans Font
+ * Frutiger Font
  */
 @font-face {
-	font-family: 'open_sansregular';
-	src: url('../fonts/OpenSans-Regular-webfont.eot');
-	src: url('../fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/OpenSans-Regular-webfont.woff') format('woff'),
-		url('../fonts/OpenSans-Regular-webfont.ttf') format('truetype'),
-		url('../fonts/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
-	font-weight: normal;
-	font-style: normal;
+    font-family: 'frutiger';
+    src: url('../fonts/FrutigerLTStd-Roman.woff') format('woff'),
+    url('../fonts/FrutigerLTStd-Roman.otf') format('truetype');
 }
 
 @font-face {
-	font-family: 'open_sanssemibold';
-	src: url('../fonts/OpenSans-Semibold-webfont.eot');
-	src: url('../fonts/OpenSans-Semibold-webfont.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/OpenSans-Semibold-webfont.woff') format('woff'),
-		url('../fonts/OpenSans-Semibold-webfont.ttf') format('truetype'),
-		url('../fonts/OpenSans-Semibold-webfont.svg#open_sanssemibold') format('svg');
-	font-weight: normal;
-	font-style: normal;
+    font-family: 'frutiger-bold';
+    src: url('../fonts/FrutigerLTStd-Bold.woff') format('woff'),
+    url('../fonts/FrutigerLTStd-Bold.otf') format('truetype');
 }
 
 /*
@@ -61,50 +51,62 @@ a:hover{
 #header {
 	height:115px;
 	width: 100%;
-	background:#444;
+	background:#000000;
 	color:#fff;
 	margin:0;
 	overflow:hidden;
+	border-bottom-color:rgb(56,73,32); 
+	border-bottom-style:solid; 
+	border-bottom-width:5px;
 }
 
 #headerText{
-	padding-top:5px;
-	padding-left:25px;
+	padding-top:45px;
+	padding-left:20px;
 	float:left;
 }
 
 #title {
-	font-family: 'open_sanssemibold', sans-serif;
-	font-size:20px;
+	font-family: 'frutiger-bold', sans-serif;
+	font-size:1.7em;
 	font-weight:bold;
 	text-align:left;
 	white-space: nowrap;  
 	overflow: hidden;  
 	text-overflow: ellipsis;
 	-o-text-overflow:ellipsis;
+	margin:0px;
+	color:White;
 }
 
 #subtitle {
-	font-family: 'open_sansregular', sans-serif;
-	font-size:13px;
-	margin-top:10px;
+    font-family: 'frutiger', sans-serif;
+	font-size:.9em;
+    margin:0px;
 	overflow: hidden;
 	font-weight:normal;
-	color: #C5D5D5
+	color: #C5D5D5;
 }
 
 #logoArea{
-	float:right;
-	padding-top:15px;
-	padding-right:25px;
-	text-align:right;
+    float:right;
+    padding-top:20px;
+    padding-right:20px;
+}
+
+#organizationText {
+    float:left;
+    padding-right: 10px;
+    padding-top:15px;
+    text-align:right;
+    font-size:.9em;
 }
 
 #msLink{
 	color:#C5D5D5;
-	font-family: 'open_sansregular', sans-serif;
+    font-family: 'frutiger', sans-serif;
 	font-weight: normal !important;
-	font-size:13px;
+	font-size:.9em;
 	outline:none;
 	text-decoration: none;
 }
@@ -116,6 +118,8 @@ a:hover{
 #logo{
 	border:none;
 	outline:none;
+    float:right;
+    padding-left: 10px;
 }
 
 #logoImg{
@@ -184,7 +188,7 @@ a:hover{
 
 .socialIcon-link:before { content: '\e802'; } /* '' */
 .socialIcon-twitter-1:before { content: '\e800'; } /* '' */
-.socialIcon-facebook-squared-1:before { content: '\e801'; } /* '�?' */
+.socialIcon-facebook-squared-1:before { content: '\e801'; } /* '�?' */
 
 .shareIcon {
     display: inline-block;
@@ -207,6 +211,7 @@ a:hover{
 	display: none;
 }
 
+/*noinspection CssInvalidPseudoSelector*/
 #bitlyInput::-ms-clear {
 	display: none;
 }
@@ -222,7 +227,8 @@ a:hover{
 	text-align: left;
 	background-color: #ffffff;
 	-webkit-background-clip: padding-box;
-	-moz-background-clip: padding;
+    /*noinspection CssInvalidElement*/
+    -moz-background-clip: padding; /* support for Firefox 1.0 to 3.6 */
 	background-clip: padding-box;
 	border: 1px solid #ccc;
 	border: 1px solid rgba(0, 0, 0, 0.2);
@@ -267,7 +273,7 @@ a:hover{
 	height: auto;
 	margin:auto;
 	overflow:visible;
-	background-color:#7a7a7a;
+	background-color:#908D7C;
 	margin:0px;
 	padding:0px;
 	z-index:101;
@@ -281,7 +287,7 @@ a:hover{
 
 .tab {
 	float:left;
-	background-color:#444;
+	background-color:#515C36;
 	padding-top:4px;
 	padding-left:10px;
 	padding-right:10px;
@@ -290,19 +296,19 @@ a:hover{
 	width:auto;
 	min-width: 86px;
 	margin-left:7px;
-	color:#d8d8d8;
+	color:white;
 	cursor:pointer;
 	font-family: Arial, Helvetica, sans-serif;
 	font-weight:bold;
 }
 
 .tab:hover {
-	color:#FFFFFF;
+	background-color: #819355;
 }
 
 .tab-selected {
-	background-color:#b9b9b9;
-	color:#FFFFFF;
+	background-color:#AFBD8E;
+	color:white;
 	cursor:default;
 }
 
@@ -317,7 +323,7 @@ a:hover{
 
 #bookmarksDiv{
 	display:none;
-	background:#7A7A7A;
+	background:#908D7C;
 	max-height:450px;
 	overflow:auto;
 	padding:10px;
@@ -326,21 +332,21 @@ a:hover{
 #bookmarksDiv a {
 	color:#FFFFFF;
 	cursor:pointer;
-	font-family: 'open_sansregular', sans-serif;
+	font-family: 'frutiger', sans-serif;
 	font-weight:normal;
 }
 
 #bookmarksToggle{
 	position:relative;
 	float:right;
-	background:#7A7A7A;
-	margin-top:6px;
+	background:#908D7C;
+	margin-top:3px;
 	width:160px;
 	.height:28px;
 	cursor:pointer;
 	z-index:100;
 	color:#fff;
-	font-family: 'open_sansregular', sans-serif;
+	font-family: 'frutiger', sans-serif;
 }
 
 #bookmarksTogText{
@@ -350,7 +356,7 @@ a:hover{
 	.margin-top:0px;
 	padding:5px;
 	color:#fff;
-	font-family: 'open_sansregular', sans-serif;
+	font-family: 'frutiger', sans-serif;
 }
 
 /*
@@ -360,7 +366,7 @@ a:hover{
 	/* initial width -- will be re-calculated in app */
 	width:485px;
 	overflow:hidden;
-	background-color:#b9b9b9;
+	background-color:#AFBD8E;
 	padding:8px;
 }
 
@@ -399,9 +405,9 @@ ul.tilelist li {
     height: 150px;
     float: left;
 	font-family: Arial, Helvetica, sans-serif;
-	font-size:9px;
+	font-size:.65em;
 	font-weight:bold;
-	background-color:#E7E7E7;
+	background-color:#E2E1DE;
 	cursor:pointer;
 	position:relative;
 }
@@ -442,7 +448,7 @@ ul.tilelist .num {
 	border:solid;
 	border-width:thin;
 	color:white;
-	font-size:11px;
+	font-size:.80em;
 	text-align:center;
 }
 
@@ -474,8 +480,8 @@ ul.tilelist .blurb {
 	top: 15px;
 	text-align: center;
 	border: 1px solid #57585A;
-	background-color: #FFF;
-	color: #4C4C4C;
+	background-color: #74746A;
+	color: #FFF;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
@@ -491,8 +497,8 @@ ul.tilelist .blurb {
 	top:15px;
 	width: 30px;
 	height: 30px;
-	font-size: 24px;
-	font-family: 'open_sansregular', sans-serif;
+	font-size: 1.7em;
+	font-family: 'frutiger', sans-serif;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
@@ -504,27 +510,27 @@ ul.tilelist .blurb {
 }
 
 #zoomIn:hover{
-	background-color: #eee;
+	background-color: #626159;
 }
 
 #zoomExtent{
 	top:15px;
 	width: 30px;
 	height: 30px;
-	font-size: 24px;
-	font-family: 'open_sansregular', sans-serif;
+	font-size: 1.7em;
+	font-family: 'frutiger', sans-serif;
 	line-height: 25px;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
 	cursor: pointer;
-	-webkit-border-radius: 5px 5px 0 0;
-	border-radius: 5px 5px 0 0;
+	-webkit-border-radius: 0 0 0 0;
+	border-radius: 0 0 0 0;
 }
 
 #zoomExtent:hover{
-	background-color: #eee;
+	background-color: #626159;
 }
 
 #zoomExtentImg{
@@ -536,8 +542,8 @@ ul.tilelist .blurb {
 	top:75px;
 	width: 30px;
 	height: 30px;
-	font-size: 24px;
-	font-family: verdana,helvetica;
+	font-size: 1.7em;
+	font-family: 'frutiger-bold', sans-serif;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
@@ -549,7 +555,7 @@ ul.tilelist .blurb {
 }
 
 #zoomOut:hover{
-	background-color: #eee;
+	background-color: #626159;
 }
 
 #locateButton{
@@ -585,8 +591,8 @@ ul.tilelist .blurb {
 }
 
 #hoverInfo{
-	font-size:10px;
-	font-family: 'open_sansregular', sans-serif;
+	font-size:.7em;
+	font-family: 'frutiger', sans-serif;
 	position:absolute;
 	padding:5px;
 	max-width:200px;
@@ -628,8 +634,8 @@ ul.tilelist .blurb {
 
 .details .title {
 	color:#8c8c8c;
-	font-family: 'open_sansregular', sans-serif;
-	font-size:24px;
+	font-family: 'frutiger', sans-serif;
+	font-size:1.7em;
 }
 
 .details hr {
@@ -663,8 +669,8 @@ ul.tilelist .blurb {
 .details .address {
 	margin-top:10px;
 	color:#393939;
-	font-size:12px;
-	font-family: 'open_sansregular', sans-serif;
+	font-size:.85em;
+	font-family: 'frutiger', sans-serif;
 }
 
 .details a {
@@ -723,15 +729,18 @@ ul.tilelist .blurb {
 /*
  * Scrollbar
  */
+/*noinspection CssInvalidPseudoSelector*/
 ::-webkit-scrollbar {
 	width: 8px;
 }
 
+/*noinspection CssInvalidPseudoSelector*/
 ::-webkit-scrollbar-thumb {
 	background: #888;
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 }
 
+/*noinspection CssInvalidPseudoSelector*/
 ::-webkit-scrollbar-track {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 }
@@ -757,16 +766,16 @@ ul.tilelist .blurb {
 .mobileTitle{
 	margin-top: 12px;
 	margin-left: 15px;
-	font-family: 'open_sanssemibold', sans-serif;
-	font-size: 22px;
+	font-family: 'frutiger-bold', sans-serif;
+	font-size: 1.6em;
 	font-weight: bold;
 	color: #fff;
 }
 
 .mobileSnippet{
 	margin: 15px 15px 15px 15px;
-	font-family: 'open_sansregular', sans-serif;
-	font-size: 14px;
+	font-family: 'frutiger', sans-serif;
+	font-size: 1em;
 	color: #fff;
 	max-height: 350px;
 	overflow-y: auto;
@@ -774,8 +783,8 @@ ul.tilelist .blurb {
 
 .introList{
 	margin: 35px 0 0 0 !important;
-	font-family: 'open_sanssemibold', sans-serif;
-	font-size: 18px;
+	font-family: 'frutiger-bold', sans-serif;
+	font-size: 1.3em;
 	width: 100% !important;
 	background-color: #888;	
 	list-style-type: none;
@@ -796,7 +805,7 @@ ul.tilelist .blurb {
 	border-style: solid;
 	border-width: 1px 0px 1px;
 	background-color: #888;
-	font-size: 20px !important; 
+	font-size: 1.4em !important;
 	color: #f4f4f4
 }
 
@@ -811,7 +820,7 @@ ul.tilelist .blurb {
 	right: 50%;
 	-webkit-box-shadow: 1px 1px 3px #fff !important;
 	box-shadow: 1px 1px 3px #fff !important;
-	font-size: 20px;
+	font-size: 1.4em;
 	cursor: pointer;
 	color: #CFCFCF;
 	background-color: #888;
@@ -828,7 +837,7 @@ ul.tilelist .blurb {
 .startButton{
 	margin-top: 10px;
 	color: #f4f4f4;
-	font-size: 20px;
+	font-size: 1.4em;
 }
 
 .startButton:hover{
@@ -853,13 +862,13 @@ ul.tilelist .blurb {
 	max-height:450px;
 	overflow:auto;
 	padding:10px;
-	font-family: 'open_sansregular', sans-serif;
+	font-family: 'frutiger', sans-serif;
 }
 
 #mobileBookmarksDiv a {
 	color: #FFF;
 	cursor:pointer;
-	font-family: 'open_sansregular', sans-serif;
+	font-family: 'frutiger', sans-serif;
 	font-weight:normal;
 }
 
@@ -872,7 +881,7 @@ ul.tilelist .blurb {
 	cursor:pointer;
 	z-index:100;
 	color: #FFF;
-	font-family: 'open_sansregular', sans-serif;
+	font-family: 'frutiger', sans-serif;
 }
 
 #mobileBookmarksTogText{
@@ -882,7 +891,7 @@ ul.tilelist .blurb {
 	margin-top:0px;
 	padding:5px;
 	color: #FFF;
-	font-family: 'open_sansregular', sans-serif;
+	font-family: 'frutiger', sans-serif;
 }
 
 /*
@@ -928,8 +937,8 @@ ul.mobileTileList li {
     -webkit-box-shadow: 1px 1px 3px #000;
     margin: 2px;
     width: 100%;
-	font-family: 'open_sanssemibold', sans-serif;
-	font-size:14px;
+	font-family: 'frutiger-bold', sans-serif;
+	font-size:.9em;
 	cursor:pointer;
 	position:relative;
 	overflow: hidden;
@@ -974,7 +983,7 @@ ul.mobileTileList .num {
 	border:solid;
 	border-width:thin;
 	color:white;
-	font-size:14px;
+	font-size:1em;
 	text-align:center;
 }
 
@@ -1008,14 +1017,14 @@ ul.mobileTileList .blurb {
 	border:solid;
 	border-width:thin;
 	color:white;
-	font-size:20px;
+	font-size:1.4em;
 	text-align:center;
 }
 
 .mobileFeatureTitle{
 	color: #8c8c8c;
-	font-family: 'open_sanssemibold', sans-serif;
-	font-size: 20px;
+	font-family: 'frutiger-bold', sans-serif;
+	font-size: 1.4em;
 	text-align: left;
 	padding-left: 70px;
 	padding-top: 8px;
@@ -1025,8 +1034,8 @@ ul.mobileTileList .blurb {
 
 .mobileFeatureSubtitle{
 	color: #000;
-	font-family: 'open_sanssemibold', sans-serif;
-	font-size: 16px;
+	font-family: 'frutiger-bold', sans-serif;
+	font-size: 1.15em;
 	text-align: left;
 	padding-left: 20px;
 	padding-right: 20px;
@@ -1047,8 +1056,8 @@ ul.mobileTileList .blurb {
 
 .mobileFeatureDesc{
 	color: #000;
-	font-family: 'open_sansregular', sans-serif;
-	font-size: 14px;
+	font-family: 'frutiger', sans-serif;
+	font-size: 1em;
 	text-align: left;
 	padding-left: 20px;
 	padding-right: 20px;
@@ -1058,8 +1067,8 @@ ul.mobileTileList .blurb {
 
 .mobileFeatureAddress{
 	color: #000;
-	font-family: 'open_sansregular', sans-serif;
-	font-size: 14px;
+	font-family: 'frutiger', sans-serif;
+	font-size: 1em;
 	text-align: left;
 	padding-left: 20px;
 	padding-right: 20px;
@@ -1112,7 +1121,7 @@ ul.mobileTileList .blurb {
 	position: absolute;
 	color: #888;
 	font-weight: bold;
-	font-size: 24px;
+	font-size: 1.7em;
 	z-index: 50;
 	cursor: pointer;
 }
@@ -1129,7 +1138,7 @@ ul.mobileTileList .blurb {
 	position: absolute;
 	color: #888;
 	font-weight: bold;
-	font-size: 24px;
+	font-size: 1.7em;
 	z-index: 50;
 	cursor: pointer;
 }
@@ -1186,7 +1195,7 @@ ul.mobileTileList .blurb {
 }
 .icon-undo:before {
 	content: "\e600";
-	font-size: 30px;
+	font-size: 2.15em;
 	top: 5px;
 	left: 10px;
 	position: absolute;
@@ -1197,7 +1206,7 @@ ul.mobileTileList .blurb {
 }
 .icon-list:before {
 	content: "\e602";
-	font-size: 20px;
+	font-size: 1.4em;
 	top: 10px;
 	left: 10px;
 	position: absolute;
@@ -1270,7 +1279,7 @@ ul.mobileTileList .blurb {
 #centerMapIcon{
 	top: 9px;
 	left: 9px;
-	font-size: 18px;
+	font-size: 1.3em;
 	position: absolute;
 	-webkit-transform:rotate(45deg);
 	-moz-transform:rotate(45deg);
@@ -1292,9 +1301,9 @@ ul.mobileTileList .blurb {
 	margin-top: 9px;
 	margin-left: 10%;
 	margin-right: 10%;
-	font-size: 18px;
+	font-size: 1.3em;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	font-family: 'open_sanssemibold', sans-serif;
+	font-family: 'frutiger-bold', sans-serif;
 }
