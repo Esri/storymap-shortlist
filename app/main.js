@@ -1,4 +1,5 @@
 dojo.require("esri.arcgis.utils");
+dojo.require("esri.config");
 
 var COLOR_SCHEMES = [
 					{name:"blue",iconDir:"blue",iconPrefix:"NumberIconb",color:"#177ff1"},
@@ -142,7 +143,12 @@ function init() {
 		}
 		$("#mobileBookmarksDiv").slideToggle();
 	});
-			
+
+    if (ON_PORTAL) {
+        esri.arcgis.utils.arcgisUrl = DEFAULT_SHARING_URL;
+        esri.config.defaults.io.proxyurl = DEFAULT_PROXY_URL;
+    }
+
 	var mapDeferred = esri.arcgis.utils.createMap(WEBMAP_ID, "map", {
 		mapOptions: {
 			slider: false,
