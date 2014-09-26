@@ -15,6 +15,12 @@ body {
 	left: 0;
 }
 
+:focus {
+    outline-color:rgb(255,73,32);
+    outline-style:solid;
+    outline-width:2px;
+}
+
 a {
 	color:blue;
 	font-weight:bold;

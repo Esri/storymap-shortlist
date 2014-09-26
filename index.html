@@ -1,5 +1,5 @@
 <!DOCTYPE html> 
-<html>
+<html lang="en">
 <head>
 
 <title>Shortlist</title>
@@ -70,7 +70,7 @@ var WEBMAP_ID = "00410875d3714e3481861f0a4c263182"; //building test on portal
 //var WEBMAP_ID = "1966ef409a344d089b001df85332608f"; // San Diego on AGOL
 var BOOKMARKS_ALIAS = "Zoom";
 var COLOR_ORDER = "green,red,blue,purple"; // will only use as many colors as you have tabs
-var DETAILS_PANEL = false;  // specifies whether or not popups have a link to a separate Details panel
+var DETAILS_PANEL = true;  // specifies whether or not popups have a link to a separate Details panel
 //
 // Specify shapefile or CSV point layer(s) on your map that do NOT define a tab in the shortlist. 
 // If there's more than one layer, use the "|" character as delimiter
@@ -117,13 +117,13 @@ var GEOLOCATOR = false;
         <div id="divStrip">
             <div id="tabs"></div>
             <div id="bookmarksCon">
-                <div id="bookmarksToggle"><p id="bookmarksTogText"></p></div>
+                <div id="bookmarksToggle" tabindex="0"><p id="bookmarksTogText"></p></div>
                 <div id="bookmarksDiv">
                 </div>
             </div>
         </div>
 		<div id="mobileBookmarksCon">
-        	<div id="mobileBookmarksToggle"><p id="mobileBookmarksTogText"></p></div>
+        	<div id="mobileBookmarksToggle" tabindex="0"><p id="mobileBookmarksTogText"></p></div>
             <div id="mobileBookmarksDiv"></div>
 		</div>
         
@@ -144,13 +144,13 @@ var GEOLOCATOR = false;
 
         <div id="map">
             <div id="zoomToggle">
-                <div id="zoomIn">+</div>
-                <div id="zoomExtent">
-					<img id="zoomExtentImg" src="images/npmap_home.png">
+                <div id="zoomIn" tabindex="0">+</div>
+                <div id="zoomExtent" tabindex="0">
+					<img id="zoomExtentImg" src="images/npmap_home.png" alt="Zoom map to initial extents">
 				</div>
-                <div id="zoomOut">-</div>
-				<div id="locateButton">
-					<img id="locateImage" src="images/locateButton.png">
+                <div id="zoomOut" tabindex="0">-</div>
+				<div id="locateButton" tabindex="0">
+					<img id="locateImage" src="images/locateButton.png" alt="Show current location on map">
 				</div>
 				
             </div><!--?zoomToggle-->    
@@ -159,21 +159,21 @@ var GEOLOCATOR = false;
 			
 		</div>
 		
-		<div id="mobileThemeBar">
-			<div id="navThemeLeft">
+		<div id="mobileThemeBar" tabindex="0">
+			<div id="navThemeLeft" tabindex="0">
 				<span class='icon-arrow-left'></span>
 			</div>
-			<div id="navThemeRight">
+			<div id="navThemeRight" tabindex="0">
 				<span class='icon-arrow-right'></span>
 			</div>
 			<div class="swiper-container">
   				<div class="swiper-wrapper"></div>
 			</div>
-			<div id='returnIcon'>
+			<div id='returnIcon' tabindex="0">
 				<i class='icon-list'></i>
 			</div>
-			<div id="returnHiddenBar"></div>
-			<div id="centerMapIconContainer">
+			<div id="returnHiddenBar" tabindex="0"></div>
+			<div id="centerMapIconContainer" tabindex="0">
 				<div id='centerMapIcon'>
 					<i class='icon-contract'></i>
 				</div>
@@ -208,7 +208,7 @@ var GEOLOCATOR = false;
  	</div>
 
     <div id="whiteOut">
-        <img id="loader" src="images/loader/loader.gif"/>
+        <img id="loader" src="images/loader/loader.gif" alt="Application is loading..."/>
     </div>
     
 </body>
