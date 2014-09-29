@@ -894,7 +894,7 @@ function buildPopup(feature, geometry, baseLayerClick)
 		}
 	}
 	if (picture) {
-		var pDiv = $("<div></div>").addClass("infoWindowPictureDiv").attr("tabindex","0");
+		var pDiv = $("<div></div>").addClass("infoWindowPictureDiv");
 		var mobilePDiv = $("<div></div>").addClass("mobilePictureDiv");
 		if (DETAILS_PANEL && !mobile) {
 			$(pDiv).append($(new Image()).attr("src", picture));
