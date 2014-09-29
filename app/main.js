@@ -416,18 +416,27 @@ function initMap(layers) {
         }
     });
 
+     _map.disableKeyboardNavigation();
+
     $('#map').keydown(function(e){
+        oldCenter = _map.extent.getCenter();
+        deltaX = _map.extent.getWidth() * PAN_PERCENT;
+        deltaY = _map.extent.getHeight() * PAN_PERCENT;
         if (e.which == 37) {
-            _map.panLeft();
+            var newCenter = oldCenter.offset(-deltaX,0)
+            _map.centerAt(newCenter)
         }
         if (e.which == 38) {
-            _map.panUp();
+            var newCenter = oldCenter.offset(0,deltaY)
+            _map.centerAt(newCenter)
         }
         if (e.which == 39) {
-            _map.panRight();
+            var newCenter = oldCenter.offset(deltaX,0)
+            _map.centerAt(newCenter)
         }
         if (e.which == 40) {
-            _map.panDown();
+            var newCenter = oldCenter.offset(0,-deltaY)
+            _map.centerAt(newCenter)
         }
     });
 }
