@@ -920,7 +920,7 @@ function buildPopup(feature, geometry, baseLayerClick)
 		}
 		else if (DETAILS_PANEL && mobile) {
 			if (website) {
-				var mobileA = $("<a></a>").attr("href", website).attr("target","_blank");
+				var mobileA = $("<a></a>").attr("href", website).attr("target","_blank").attr("tabindex","-1");
 				$(mobileA).append($(new Image()).attr("src", picture));
 				$(mobilePDiv).append(mobileA);
 			} else {
