@@ -448,6 +448,9 @@ function initMap(layers) {
             _map.infoWindow.hide();
         }
     });
+
+    //Make close button focusable
+    $(".esriPopup .titleButton.close").attr("tabindex","0");
 }
 
 /******************************************************
