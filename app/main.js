@@ -578,6 +578,7 @@ function loadBookmarks() {
 		_map.setExtent(extent);	
 		$("#bookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
 		$("#bookmarksDiv").slideToggle();
+        $("#bookmarksToggle").focus();
     });
 	
 	$("#mobileBookmarksDiv a").click(function(e) {
