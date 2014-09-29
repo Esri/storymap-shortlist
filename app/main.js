@@ -1229,13 +1229,15 @@ function showDetails(graphic) {
 		var lastDesc = $(mainDiv).find(".desc")[$(mainDiv).find(".desc").length - 1];
 		$(lastDesc).css("margin-bottom","5px");
 	}
-  
+
+    var activeElement = $(document.activeElement);
 	$.colorbox({
 		html:mainDiv,
 		open:true,
 		maxHeight:$(document).height() - 100,
 		maxWidth:"575px",
-		scrolling:false
+		scrolling:false,
+        onClosed:function(){activeElement.focus()}
 	});
 	
 	$('.rightDiv').find('p').last().css('display', 'none');
