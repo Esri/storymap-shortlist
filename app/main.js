@@ -416,6 +416,12 @@ function initMap(layers) {
         }
     });
 
+    $('#myList').keydown(function(e){
+        if (e.which == 27) {
+            _map.infoWindow.hide();
+        }
+    });
+
      _map.disableKeyboardNavigation();
 
     $('#map').keydown(function(e){
@@ -437,6 +443,9 @@ function initMap(layers) {
         if (e.which == 40) {
             var newCenter = oldCenter.offset(0,-deltaY)
             _map.centerAt(newCenter)
+        }
+        if (e.which == 27) {
+            _map.infoWindow.hide();
         }
     });
 }
