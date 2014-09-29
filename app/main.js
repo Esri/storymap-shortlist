@@ -406,11 +406,28 @@ function initMap(layers) {
         }
         if(e.which == 43) { //'+'
             _map.setLevel(_map.getLevel()+1);
+            $("#zoomIn").focus();
             hideBookmarks();
         }
         if(e.which == 45) { //'-'
             _map.setLevel(_map.getLevel()-1);
+            $("#zoomOut").focus();
             hideBookmarks();
+        }
+    });
+
+    $('#map').keydown(function(e){
+        if (e.which == 37) {
+            _map.panLeft();
+        }
+        if (e.which == 38) {
+            _map.panUp();
+        }
+        if (e.which == 39) {
+            _map.panRight();
+        }
+        if (e.which == 40) {
+            _map.panDown();
         }
     });
 }
