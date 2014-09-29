@@ -422,20 +422,41 @@ function initMap(layers) {
         }
     });
 
-    $('#map').keydown(function(e){
-        if (e.which == 37) {
-            _map.panLeft();
-        }
-        if (e.which == 38) {
-            _map.panUp();
-        }
-        if (e.which == 39) {
-            _map.panRight();
-        }
-        if (e.which == 40) {
-            _map.panDown();
+    $('#myList').keydown(function(e){
+        if (e.which == 27) {
+            _map.infoWindow.hide();
         }
     });
+
+     _map.disableKeyboardNavigation();
+
+    $('#map').keydown(function(e){
+        oldCenter = _map.extent.getCenter();
+        deltaX = _map.extent.getWidth() * PAN_PERCENT;
+        deltaY = _map.extent.getHeight() * PAN_PERCENT;
+        if (e.which == 37) {
+            var newCenter = oldCenter.offset(-deltaX,0)
+            _map.centerAt(newCenter)
+        }
+        if (e.which == 38) {
+            var newCenter = oldCenter.offset(0,deltaY)
+            _map.centerAt(newCenter)
+        }
+        if (e.which == 39) {
+            var newCenter = oldCenter.offset(deltaX,0)
+            _map.centerAt(newCenter)
+        }
+        if (e.which == 40) {
+            var newCenter = oldCenter.offset(0,-deltaY)
+            _map.centerAt(newCenter)
+        }
+        if (e.which == 27) {
+            _map.infoWindow.hide();
+        }
+    });
+
+    //Make close button focusable
+    $(".esriPopup .titleButton.close").attr("tabindex","0");
 }
 
 /******************************************************
@@ -926,7 +947,7 @@ function buildPopup(feature, geometry, baseLayerClick)
 		}
 		else if (DETAILS_PANEL && mobile) {
 			if (website) {
-				var mobileA = $("<a></a>").attr("href", website).attr("target","_blank");
+				var mobileA = $("<a></a>").attr("href", website).attr("target","_blank").attr("tabindex","-1");
 				$(mobileA).append($(new Image()).attr("src", picture));
 				$(mobilePDiv).append(mobileA);
 			} else {
@@ -1235,13 +1256,15 @@ function showDetails(graphic) {
 		var lastDesc = $(mainDiv).find(".desc")[$(mainDiv).find(".desc").length - 1];
 		$(lastDesc).css("margin-bottom","5px");
 	}
-  
+
+    var activeElement = $(document.activeElement);
 	$.colorbox({
 		html:mainDiv,
 		open:true,
 		maxHeight:$(document).height() - 100,
 		maxWidth:"575px",
-		scrolling:false
+		scrolling:false,
+        onClosed:function(){activeElement.focus()}
 	});
 	
 	$('.rightDiv').find('p').last().css('display', 'none');
