@@ -48,7 +48,9 @@ var _bookmarks;
 
 var _layerCurrent;
 
-var _selected;
+var _selected;  //map graphic
+
+var _selectedTile;
 
 var _initExtent;
 
@@ -418,11 +420,21 @@ function initMap(layers) {
 
     $('#myList').keydown(function(e){
         if (e.which == 27) {
-            _map.infoWindow.hide();
+            if (_map.infoWindow.isShowing) {
+                _map.infoWindow.hide();
+            } else {
+                leaveTileGroup();
+            }
         }
     });
 
-     _map.disableKeyboardNavigation();
+    $('#tabs .tab').keypress(function(e){
+        if (e.which == 13) {
+            enterTileGroup();
+        }
+    });
+
+    _map.disableKeyboardNavigation();
 
     $('#map').keydown(function(e){
         oldCenter = _map.extent.getCenter();
@@ -449,8 +461,14 @@ function initMap(layers) {
         }
     });
 
-    //Make close button focusable
+    _map.infoWindow.onHide = function(){
+        _selectedTile.focus();
+    }
+
+    //Make popup close button focusable
     $(".esriPopup .titleButton.close").attr("tabindex","0");
+
+    leaveTileGroup();
 }
 
 /******************************************************
@@ -480,6 +498,8 @@ function tile_onClick(e) {
 	postSelection();
 	$('#mobileTitlePage').css('display', 'none')
 	hideBookmarks();
+    _selectedTile = e.target
+    $(".esriPopup .titleButton.close").focus();
 }
 
 function infoWindow_onHide(event) {
@@ -759,6 +779,18 @@ function buildLayer(arr,iconDir,root) {
 	});
 	return layer;
 }
+
+function enterTileGroup() {
+    //move keyboard focus into a group of tiles
+    $("ul#myList.tilelist li").attr("tabindex","0");
+    //$("ul#myList.tilelist li:first-child").focus();
+}
+
+function leaveTileGroup() {
+    //move the keyboard focus out of a group of tile and back to the tab
+    $("#tabs .tab-selected").focus();
+    $("ul#myList.tilelist li").removeAttr("tabindex");
+ }
 
 function getValueCI(field) {
 	
