@@ -63,24 +63,26 @@ var version = '1.3';
 /******************************************************
 ********************  config section ******************
 *******************************************************/
-var ON_PORTAL = false;  //If set to true, set the URL in the next two links to your server
-var DEFAULT_SHARING_URL = "http://www.example.com/arcgis/sharing/content/items";
-var DEFAULT_PROXY_URL = "http://www.example.com/arcgis/sharing/proxy";
-var WEBMAP_ID = "1966ef409a344d089b001df85332608f"; // San Diego on AGOL
+var WEBMAP_ID = "1966ef409a344d089b001df85332608f";
+
 var BOOKMARKS_ALIAS = "Zoom";
 var COLOR_ORDER = "green,red,blue,purple"; // will only use as many colors as you have tabs
 var DETAILS_PANEL = false;  // specifies whether or not popups have a link to a separate Details panel
-//
+
 // Specify shapefile or CSV point layer(s) on your map that do NOT define a tab in the shortlist. 
 // If there's more than one layer, use the "|" character as delimiter
 var POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS = "";
-//
+
 // Specify shapefile or CSV layer(s) in your map that will be clickable in the Shortlist
 // If there's more than one layer, use the "|" character as delimiter
 var SUPPORTING_LAYERS_THAT_ARE_CLICKABLE = "";
-//
+
 // Location button that locates user (on supported browsers)
 var GEOLOCATOR = false;
+
+// Uncomment and edit to use Portal for ArcGIS
+//var DEFAULT_SHARING_URL = "http://www.example.com/arcgis/sharing/content/items";
+//var DEFAULT_PROXY_URL = "http://www.example.com/arcgis/sharing/proxy";
 
 /******************************************************
 ******************  end config section ****************
