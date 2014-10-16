@@ -880,7 +880,9 @@ function buildPopup(feature, geometry, baseLayerClick)
 	var shortDesc = atts.getValueCI(FIELDNAME_SHORTDESC);
 	var picture = atts.getValueCI(FIELDNAME_IMAGEURL);
 	var website = atts.getValueCI(FIELDNAME_WEBSITE);
-	
+	if (website) {
+		prependHTTPToWebsite(website);
+	}
 	var contentDiv = $("<div></div");
 	if (baseLayerClick && mobile)
 			$('#mobileSupportedLayersView').append($("<div style='padding-left: 20px;' class='mobileFeatureTitle'></div>").html(title));
@@ -941,10 +943,6 @@ function buildPopup(feature, geometry, baseLayerClick)
 		}
 		
 		if (website) {
-			website = website.toLowerCase();
-			if (!(website.indexOf("http") >= 0)) {
-				website = "http://"+website;
-			}
 			$(contentDiv).append($('<div class="address"><a href="'+website+'" target="_blank">Website</a></div>').css("padding-top", 10));
 			if(baseLayerClick && mobile)
 				$('#mobileSupportedLayersView').append($('<div class="mobileFeatureAddress"><a href="'+website+'" target="_blank">Website</a></div>').css("padding-top", 10));
@@ -992,12 +990,7 @@ function buildPopup(feature, geometry, baseLayerClick)
 			}
 		}
 	  
-		var website = atts.getValueCI(FIELDNAME_WEBSITE);
 		if (website) {
-			website = website.toLowerCase();
-			if (!(website.indexOf("http") >= 0)) {
-				website = "http://"+website;
-			}
 			$(contentDiv).append('<div class="mobileFeatureAddress"><a href="'+website+'" target="_blank">Website</a></div>');
 			if(baseLayerClick && mobile){
 				$('#mobileSupportedLayersView').append('<div class="mobileFeatureAddress"><a href="'+website+'" target="_blank">Website</a></div>');
@@ -1063,7 +1056,9 @@ function buildMobileSlideView(featureNumber){
 		var shortDesc = atts.getValueCI(FIELDNAME_SHORTDESC);
 		var picture = atts.getValueCI(FIELDNAME_IMAGEURL);
 		var website = atts.getValueCI(FIELDNAME_WEBSITE);
-		
+		if (website) {
+			prependHTTPToWebsite(website);
+		}		
 		var num = $('<div class="mobileFeatureNum" style="background-color:'+_layerCurrent.color+'">'+ atts.getValueCI(FIELDNAME_NUMBER)+'</div>');
 	
 		var mobileContentDiv = $("<div'></div");
@@ -1096,10 +1091,6 @@ function buildMobileSlideView(featureNumber){
 			}
 			
 			if (website) {
-				website = website.toLowerCase();
-				if (!(website.indexOf("http") >= 0)) {
-					website = "http://"+website;
-				}
 				$(mobileContentDiv).append($('<div class="mobileFeatureDesc"><a href="'+website+'" target="_blank">Website</a></div>').css("padding-top", 10));
 			}
 			
@@ -1126,12 +1117,7 @@ function buildMobileSlideView(featureNumber){
 				$(mobileContentDiv).append($('<div class="mobileFeatureAddress">'+hours+'</div>')); 
 			}
 		  
-			var website = atts.getValueCI(FIELDNAME_WEBSITE);
 			if (website) {
-				website = website.toLowerCase();
-				if (!(website.indexOf("http") >= 0)) {
-					website = "http://"+website;
-				}
 				$(mobileContentDiv).append('<div class="mobileFeatureAddress"><a href="'+website+'" target="_blank">Website</a></div>');
 			}
 			$(mobileContentDiv).append('<div style="margin-bottom: 20px;"></div>');
@@ -1181,10 +1167,7 @@ function showDetails(graphic) {
   
 	var website = graphic.attributes.getValueCI(FIELDNAME_WEBSITE);
 	if (website) {
-		website = website.toLowerCase();
-		if (!(website.indexOf("http") >= 0)) {
-			website = "http://"+website;
-		}
+		prependHTTPToWebsite(website);
 		$(leftDiv).append('<div class="address"><a href="'+website+'" target="_blank">Website</a></div>');
 	}
 	
@@ -1433,4 +1416,11 @@ function resizeMobileElements(){
 	$('.mobileTileList.blurb').css('width', '100%').css('width', '-=125px');
 	if($('#header').css('display') == 'none')
 		$('#map').css('height', '48%').css('height', '-=20px');
+}
+
+function prependHTTPToWebsite(website)
+{
+	if (!(website.toLowerCase().indexOf("http") >= 0)) {
+		website = "http://"+website;
+	}
 }
