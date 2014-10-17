@@ -880,9 +880,8 @@ function buildPopup(feature, geometry, baseLayerClick)
 	var shortDesc = atts.getValueCI(FIELDNAME_SHORTDESC);
 	var picture = atts.getValueCI(FIELDNAME_IMAGEURL);
 	var website = atts.getValueCI(FIELDNAME_WEBSITE);
-	if (website) {
-		prependHTTPToWebsite(website);
-	}
+	if (website) website = prependURLHTTP($.trim(website));
+
 	var contentDiv = $("<div></div");
 	if (baseLayerClick && mobile)
 			$('#mobileSupportedLayersView').append($("<div style='padding-left: 20px;' class='mobileFeatureTitle'></div>").html(title));
@@ -1056,9 +1055,8 @@ function buildMobileSlideView(featureNumber){
 		var shortDesc = atts.getValueCI(FIELDNAME_SHORTDESC);
 		var picture = atts.getValueCI(FIELDNAME_IMAGEURL);
 		var website = atts.getValueCI(FIELDNAME_WEBSITE);
-		if (website) {
-			prependHTTPToWebsite(website);
-		}		
+		if (website) website = prependURLHTTP($.trim(website));
+
 		var num = $('<div class="mobileFeatureNum" style="background-color:'+_layerCurrent.color+'">'+ atts.getValueCI(FIELDNAME_NUMBER)+'</div>');
 	
 		var mobileContentDiv = $("<div'></div");
@@ -1165,9 +1163,9 @@ function showDetails(graphic) {
 		$(leftDiv).append($('<div class="address">'+hours+'</div>')); 
 	}
   
-	var website = graphic.attributes.getValueCI(FIELDNAME_WEBSITE);
+	var website = atts.getValueCI(FIELDNAME_WEBSITE);
 	if (website) {
-		prependHTTPToWebsite(website);
+		website = prependURLHTTP($.trim(website));
 		$(leftDiv).append('<div class="address"><a href="'+website+'" target="_blank">Website</a></div>');
 	}
 	
@@ -1418,9 +1416,13 @@ function resizeMobileElements(){
 		$('#map').css('height', '48%').css('height', '-=20px');
 }
 
-function prependHTTPToWebsite(website)
+function prependURLHTTP(url)
 {
-	if (!(website.toLowerCase().indexOf("http") >= 0)) {
-		website = "http://"+website;
-	}
+	if ( ! url || url === "" || url.match(/^mailto:/) )
+		return url;
+	
+	if ( ! /^(https?:\/\/)|^(\/\/)/i.test(url) )
+		return 'http://' + url;
+	
+	return url;
 }
