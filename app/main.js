@@ -1163,7 +1163,7 @@ function showDetails(graphic) {
 		$(leftDiv).append($('<div class="address">'+hours+'</div>')); 
 	}
   
-	var website = atts.getValueCI(FIELDNAME_WEBSITE);
+	var website = graphic.attributes.getValueCI(FIELDNAME_WEBSITE);
 	if (website) {
 		website = prependURLHTTP($.trim(website));
 		$(leftDiv).append('<div class="address"><a href="'+website+'" target="_blank">Website</a></div>');
