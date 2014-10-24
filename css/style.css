@@ -409,6 +409,12 @@ ul.tilelist li {
 	position:relative;
 }
 
+ul.tilelist li:focus {
+	outline-color:rgb(255,73,32);
+	outline-style:solid;
+	outline-width:2px;
+}
+
 ul.tilelist > a {
     display: block;
     position: relative
