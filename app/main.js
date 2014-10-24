@@ -1,4 +1,5 @@
 dojo.require("esri.arcgis.utils");
+dojo.require("esri.config");
 
 var COLOR_SCHEMES = [
 					{name:"blue",iconDir:"blue",iconPrefix:"NumberIconb",color:"#177ff1"},
@@ -144,7 +145,13 @@ function init() {
 		}
 		$("#mobileBookmarksDiv").slideToggle();
 	});
-			
+
+	if (window.DEFAULT_SHARING_URL)
+		esri.arcgis.utils.arcgisUrl = DEFAULT_SHARING_URL;
+	
+	if (window.DEFAULT_PROXY_URL)
+		esri.config.defaults.io.proxyurl = DEFAULT_PROXY_URL;
+
 	var mapDeferred = esri.arcgis.utils.createMap(WEBMAP_ID, "map", {
 		mapOptions: {
 			slider: false,
@@ -953,7 +960,8 @@ function buildPopup(feature, geometry, baseLayerClick)
 	var shortDesc = atts.getValueCI(FIELDNAME_SHORTDESC);
 	var picture = atts.getValueCI(FIELDNAME_IMAGEURL);
 	var website = atts.getValueCI(FIELDNAME_WEBSITE);
-	
+	if (website) website = prependURLHTTP($.trim(website));
+
 	var contentDiv = $("<div></div");
 	if (baseLayerClick && mobile)
 			$('#mobileSupportedLayersView').append($("<div style='padding-left: 20px;' class='mobileFeatureTitle'></div>").html(title));
@@ -1014,10 +1022,6 @@ function buildPopup(feature, geometry, baseLayerClick)
 		}
 		
 		if (website) {
-			website = website.toLowerCase();
-			if (!(website.indexOf("http") >= 0)) {
-				website = "http://"+website;
-			}
 			$(contentDiv).append($('<div class="address"><a href="'+website+'" target="_blank">Website</a></div>').css("padding-top", 10));
 			if(baseLayerClick && mobile)
 				$('#mobileSupportedLayersView').append($('<div class="mobileFeatureAddress"><a href="'+website+'" target="_blank">Website</a></div>').css("padding-top", 10));
@@ -1065,12 +1069,7 @@ function buildPopup(feature, geometry, baseLayerClick)
 			}
 		}
 	  
-		var website = atts.getValueCI(FIELDNAME_WEBSITE);
 		if (website) {
-			website = website.toLowerCase();
-			if (!(website.indexOf("http") >= 0)) {
-				website = "http://"+website;
-			}
 			$(contentDiv).append('<div class="mobileFeatureAddress"><a href="'+website+'" target="_blank">Website</a></div>');
 			if(baseLayerClick && mobile){
 				$('#mobileSupportedLayersView').append('<div class="mobileFeatureAddress"><a href="'+website+'" target="_blank">Website</a></div>');
@@ -1136,7 +1135,8 @@ function buildMobileSlideView(featureNumber){
 		var shortDesc = atts.getValueCI(FIELDNAME_SHORTDESC);
 		var picture = atts.getValueCI(FIELDNAME_IMAGEURL);
 		var website = atts.getValueCI(FIELDNAME_WEBSITE);
-		
+		if (website) website = prependURLHTTP($.trim(website));
+
 		var num = $('<div class="mobileFeatureNum" style="background-color:'+_layerCurrent.color+'">'+ atts.getValueCI(FIELDNAME_NUMBER)+'</div>');
 	
 		var mobileContentDiv = $("<div'></div");
@@ -1169,10 +1169,6 @@ function buildMobileSlideView(featureNumber){
 			}
 			
 			if (website) {
-				website = website.toLowerCase();
-				if (!(website.indexOf("http") >= 0)) {
-					website = "http://"+website;
-				}
 				$(mobileContentDiv).append($('<div class="mobileFeatureDesc"><a href="'+website+'" target="_blank">Website</a></div>').css("padding-top", 10));
 			}
 			
@@ -1199,12 +1195,7 @@ function buildMobileSlideView(featureNumber){
 				$(mobileContentDiv).append($('<div class="mobileFeatureAddress">'+hours+'</div>')); 
 			}
 		  
-			var website = atts.getValueCI(FIELDNAME_WEBSITE);
 			if (website) {
-				website = website.toLowerCase();
-				if (!(website.indexOf("http") >= 0)) {
-					website = "http://"+website;
-				}
 				$(mobileContentDiv).append('<div class="mobileFeatureAddress"><a href="'+website+'" target="_blank">Website</a></div>');
 			}
 			$(mobileContentDiv).append('<div style="margin-bottom: 20px;"></div>');
@@ -1254,10 +1245,7 @@ function showDetails(graphic) {
   
 	var website = graphic.attributes.getValueCI(FIELDNAME_WEBSITE);
 	if (website) {
-		website = website.toLowerCase();
-		if (!(website.indexOf("http") >= 0)) {
-			website = "http://"+website;
-		}
+		website = prependURLHTTP($.trim(website));
 		$(leftDiv).append('<div class="address"><a href="'+website+'" target="_blank">Website</a></div>');
 	}
 	
@@ -1508,4 +1496,15 @@ function resizeMobileElements(){
 	$('.mobileTileList.blurb').css('width', '100%').css('width', '-=125px');
 	if($('#header').css('display') == 'none')
 		$('#map').css('height', '48%').css('height', '-=20px');
+}
+
+function prependURLHTTP(url)
+{
+	if ( ! url || url === "" || url.match(/^mailto:/) )
+		return url;
+	
+	if ( ! /^(https?:\/\/)|^(\/\/)/i.test(url) )
+		return 'http://' + url;
+	
+	return url;
 }
