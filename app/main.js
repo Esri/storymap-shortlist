@@ -388,7 +388,7 @@ function initMap(layers) {
 	else {
 		$(".tab").css("display", "none");
 		$('#mobileThemeBar .swiper-container').css('display', 'none');
-		$('#mobileTitlePage').append("<br><hr></hr>")
+		$('#mobileTitlePage').append("<br><hr/>")
 		$('#mobileTitlePage').append('<ul id="mobileThemeList" class="mobileTileList">')
 		var introList = $('<li class="mobileTitleTheme" tabindex="0" onclick="selectMobileTheme(' + 0 + ')">').append('<div class="startButton"> Start </div>')
 		$('#mobileThemeList').append(introList)
@@ -962,7 +962,7 @@ function buildPopup(feature, geometry, baseLayerClick)
 	var website = atts.getValueCI(FIELDNAME_WEBSITE);
 	if (website) website = prependURLHTTP($.trim(website));
 
-	var contentDiv = $("<div></div");
+	var contentDiv = $("<div></div>");
 	if (baseLayerClick && mobile)
 			$('#mobileSupportedLayersView').append($("<div style='padding-left: 20px;' class='mobileFeatureTitle'></div>").html(title));
 	if (shortDesc) {
