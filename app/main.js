@@ -468,6 +468,38 @@ function initMap(layers) {
         }
     });
 
+	$('#bookmarksToggle').keydown(function(e){
+		if (e.which == 38) {
+			$('#bookmarksDiv a').last().focus();
+		}
+		if (e.which == 40) {
+			$('#bookmarksDiv a').first().focus();
+		}
+	});
+
+	$('#bookmarksDiv p').keydown(function(e){
+		if (e.which == 38) {
+			var prev = $(this).prev("p");
+			if ($( this ).is( ":first-child" ))  {
+				$('#bookmarksToggle').focus();
+			}
+			else {
+				$(this).prev("p").children("a").focus();
+			}
+		}
+		if (e.which == 40) {
+			if ($( this ).is( ":last-child" )) {
+				$('#bookmarksToggle').focus();
+			} else {
+				$(this).next("p").children("a").focus();
+			}
+		}
+		if (e.which == 27) {
+			hideBookmarks();
+			$('#bookmarksToggle').focus();
+		}
+	});
+
     _map.infoWindow.onHide = function(){
         _selectedTile.focus();
     }
