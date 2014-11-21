@@ -441,6 +441,24 @@ function initMap(layers) {
         }
     });
 
+	$('#tabs div.tab').keydown(function(e){
+		if (e.which == 37) {
+			if ($(this).is( ":first-child" ))  {
+				$('#tabs div:last-child').focus();
+			}
+			else {
+				$(this).prev().focus();
+			}
+		}
+		if (e.which == 39) {
+			if ($(this).is( ":last-child" )) {
+				$('#tabs div:first-child').focus();
+			} else {
+				$(this).next().focus();
+			}
+		}
+	});
+
     _map.disableKeyboardNavigation();
 
     $('#map').keydown(function(e){
@@ -479,7 +497,6 @@ function initMap(layers) {
 
 	$('#bookmarksDiv p').keydown(function(e){
 		if (e.which == 38) {
-			var prev = $(this).prev("p");
 			if ($( this ).is( ":first-child" ))  {
 				$('#bookmarksToggle').focus();
 			}
