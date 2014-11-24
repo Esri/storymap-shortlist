@@ -437,8 +437,11 @@ function initMap(layers) {
 
     $('#tabs .tab').keypress(function(e){
         if (e.which == 13) {
-            enterTileGroup();
-        }
+			var tabIndex = $("#tabs .tab").index(this);
+			var layer = _contentLayers[tabIndex];
+			enterTileGroup(layer);
+			e.stopPropagation();
+		}
     });
 
 	$('#tabs div.tab').keydown(function(e){
@@ -887,10 +890,12 @@ function buildLayer(arr,iconDir,root) {
 	return layer;
 }
 
-function enterTileGroup() {
+function enterTileGroup(layer) {
     //move keyboard focus into a group of tiles
+	activateLayer(layer);
+	hideBookmarks();
     $("ul#myList.tilelist li").attr("tabindex","0");
-    //$("ul#myList.tilelist li:first-child").focus();
+	$("ul#myList.tilelist li:visible")[0].focus();
 }
 
 function leaveTileGroup() {
