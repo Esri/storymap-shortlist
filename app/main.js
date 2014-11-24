@@ -565,7 +565,7 @@ function tile_keydown(e) {
 			tiles.get(-1).focus();
 		}
 		else {
-			$(this).prev().focus();
+			tiles[tiles.index(this)-1].focus();
 		}
 	}
 	if (e.which == 39) {
@@ -573,7 +573,7 @@ function tile_keydown(e) {
 		if (tiles.index(this) == (tiles.size() - 1)) {
 			tiles.get(0).focus();
 		} else {
-			$(this).next().focus();
+			tiles[tiles.index(this)+1].focus();
 		}
 	}
 	if (e.which == 38) {
