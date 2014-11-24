@@ -388,7 +388,7 @@ function initMap(layers) {
 	else {
 		$(".tab").css("display", "none");
 		$('#mobileThemeBar .swiper-container').css('display', 'none');
-		$('#mobileTitlePage').append("<br><hr></hr>")
+		$('#mobileTitlePage').append("<br><hr/>")
 		$('#mobileTitlePage').append('<ul id="mobileThemeList" class="mobileTileList">')
 		var introList = $('<li class="mobileTitleTheme" tabindex="0" onclick="selectMobileTheme(' + 0 + ')">').append('<div class="startButton"> Start </div>')
 		$('#mobileThemeList').append(introList)
@@ -437,9 +437,30 @@ function initMap(layers) {
 
     $('#tabs .tab').keypress(function(e){
         if (e.which == 13) {
-            enterTileGroup();
-        }
+			var tabIndex = $("#tabs .tab").index(this);
+			var layer = _contentLayers[tabIndex];
+			enterTileGroup(layer);
+			e.stopPropagation();
+		}
     });
+
+	$('#tabs div.tab').keydown(function(e){
+		if (e.which == 37) {
+			if ($(this).is( ":first-child" ))  {
+				$('#tabs div:last-child').focus();
+			}
+			else {
+				$(this).prev().focus();
+			}
+		}
+		if (e.which == 39) {
+			if ($(this).is( ":last-child" )) {
+				$('#tabs div:first-child').focus();
+			} else {
+				$(this).next().focus();
+			}
+		}
+	});
 
     _map.disableKeyboardNavigation();
 
@@ -467,6 +488,37 @@ function initMap(layers) {
             _map.infoWindow.hide();
         }
     });
+
+	$('#bookmarksToggle').keydown(function(e){
+		if (e.which == 38) {
+			$('#bookmarksDiv a').last().focus();
+		}
+		if (e.which == 40) {
+			$('#bookmarksDiv a').first().focus();
+		}
+	});
+
+	$('#bookmarksDiv p').keydown(function(e){
+		if (e.which == 38) {
+			if ($( this ).is( ":first-child" ))  {
+				$('#bookmarksToggle').focus();
+			}
+			else {
+				$(this).prev("p").children("a").focus();
+			}
+		}
+		if (e.which == 40) {
+			if ($( this ).is( ":last-child" )) {
+				$('#bookmarksToggle').focus();
+			} else {
+				$(this).next("p").children("a").focus();
+			}
+		}
+		if (e.which == 27) {
+			hideBookmarks();
+			$('#bookmarksToggle').focus();
+		}
+	});
 
     _map.infoWindow.onHide = function(){
         _selectedTile.focus();
@@ -507,6 +559,56 @@ function tile_onClick(e) {
 	hideBookmarks();
     _selectedTile = e.target
     $(".esriPopup .titleButton.close").focus();
+}
+
+function tile_keydown(e) {
+	if (e.which == 37) {
+		var tiles = $('ul#myList.tilelist li:visible');
+		if (tiles.index(this) == 0)  {
+			tiles.get(-1).focus();
+		}
+		else {
+			tiles[tiles.index(this)-1].focus();
+		}
+	}
+	if (e.which == 39) {
+		var tiles = $('ul#myList.tilelist li:visible');
+		if (tiles.index(this) == (tiles.size() - 1)) {
+			tiles.get(0).focus();
+		} else {
+			tiles[tiles.index(this)+1].focus();
+		}
+	}
+	if (e.which == 38) {
+		var w1 = $('ul#myList.tilelist').width();
+		var w2 = $('ul#myList.tilelist li:first-child').width();
+		var tiles_per_row = Math.floor(w1/w2);
+		var tiles = $('ul#myList.tilelist li:visible');
+		var myIndex = tiles.index(this);
+		var newIndex = myIndex - tiles_per_row;
+		if (newIndex < 0) {
+			var tilecount = tiles.size();
+			var gridcount = tilecount + tiles_per_row - (tilecount % tiles_per_row);
+			newIndex = gridcount + newIndex;
+			if (tilecount <= newIndex) {
+				newIndex = newIndex - tiles_per_row;
+			}
+		}
+		tiles.get(newIndex).focus();
+	}
+	if (e.which == 40) {
+		var w1 = $('ul#myList.tilelist').width();
+		var w2 = $('ul#myList.tilelist li:first-child').width();
+		var tiles_per_row = Math.floor(w1/w2);
+		var tiles = $('ul#myList.tilelist li:visible');
+		var myIndex = tiles.index(this);
+		var newIndex = myIndex + tiles_per_row;
+		var tilecount = tiles.size();
+		if (tilecount <= newIndex) {
+			newIndex = newIndex % tiles_per_row;
+		}
+		tiles[newIndex].focus();
+	}
 }
 
 function infoWindow_onHide(event) {
@@ -738,14 +840,15 @@ function activateLayer(layer) {
 	$("ul.tilelist li").mouseover(tile_onMouseOver);
 	$("ul.tilelist li").mouseout(tile_onMouseOut);
 	$("ul.tilelist li").click(tile_onClick);
-	$("#mobilePaneList ul.mobileTileList li").click(tile_onClick);	
-	
+	$("ul.tilelist li").keydown(tile_keydown);
+    $("#mobilePaneList ul.mobileTileList li").click(tile_onClick);
+
 	$("ul.tilelist").animate({ scrollTop: 0 }, { duration: 200 } ); //Does this work?
 	$('#mobilePaneList').scrollTop(0)
 	if(!visibleFeatures)
 		$('.noFeature').css('display', 'block')
 	else
-		$('.noFeature').css('display', 'none')	
+		$('.noFeature').css('display', 'none')
 }
 
 function refreshList() {
@@ -787,10 +890,12 @@ function buildLayer(arr,iconDir,root) {
 	return layer;
 }
 
-function enterTileGroup() {
+function enterTileGroup(layer) {
     //move keyboard focus into a group of tiles
+	activateLayer(layer);
+	hideBookmarks();
     $("ul#myList.tilelist li").attr("tabindex","0");
-    //$("ul#myList.tilelist li:first-child").focus();
+	$("ul#myList.tilelist li:visible")[0].focus();
 }
 
 function leaveTileGroup() {
@@ -962,7 +1067,7 @@ function buildPopup(feature, geometry, baseLayerClick)
 	var website = atts.getValueCI(FIELDNAME_WEBSITE);
 	if (website) website = prependURLHTTP($.trim(website));
 
-	var contentDiv = $("<div></div");
+	var contentDiv = $("<div></div>");
 	if (baseLayerClick && mobile)
 			$('#mobileSupportedLayersView').append($("<div style='padding-left: 20px;' class='mobileFeatureTitle'></div>").html(title));
 	if (shortDesc) {
