@@ -461,11 +461,9 @@ function initMap(layers) {
 			}
 		}
 		if (e.which == 40) {
-			if ($(this).is( ".tab-selected" ))  {
-				var tabIndex = $("#tabs .tab").index(this);
-				var layer = _contentLayers[tabIndex];
-				enterTileGroup(layer);
-			}
+			var tabIndex = $("#tabs .tab").index(this);
+			var layer = _contentLayers[tabIndex];
+			enterTileGroup(layer);
 		}
 	});
 
