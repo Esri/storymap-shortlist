@@ -460,6 +460,13 @@ function initMap(layers) {
 				$(this).next().focus();
 			}
 		}
+		if (e.which == 40) {
+			if ($(this).is( ".tab-selected" ))  {
+				var tabIndex = $("#tabs .tab").index(this);
+				var layer = _contentLayers[tabIndex];
+				enterTileGroup(layer);
+			}
+		}
 	});
 
     _map.disableKeyboardNavigation();
