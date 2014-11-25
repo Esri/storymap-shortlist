@@ -397,7 +397,6 @@ function initMap(layers) {
 	//_mobileThemeSwiper.enableKeyboardControl();
 
 	activateLayer(_contentLayers[0], false);
-	dojo.connect(_map.infoWindow,"onHide",infoWindow_onHide);
 	$("#zoomToggle").css("visibility","visible");
 	$("#whiteOut").fadeOut("slow");
 	
@@ -427,11 +426,7 @@ function initMap(layers) {
 
     $('#myList').keydown(function(e){
         if (e.which == 27) {
-            if (_map.infoWindow.isShowing) {
-                _map.infoWindow.hide();
-            } else {
-                leaveTileGroup();
-            }
+			leaveTileGroup();
         }
     });
 
@@ -460,6 +455,11 @@ function initMap(layers) {
 				$(this).next().focus();
 			}
 		}
+		if (e.which == 40) {
+			var tabIndex = $("#tabs .tab").index(this);
+			var layer = _contentLayers[tabIndex];
+			enterTileGroup(layer);
+		}
 	});
 
     _map.disableKeyboardNavigation();
@@ -483,9 +483,6 @@ function initMap(layers) {
         if (e.which == 40) {
             var newCenter = oldCenter.offset(0,-deltaY)
             _map.centerAt(newCenter)
-        }
-        if (e.which == 27) {
-            _map.infoWindow.hide();
         }
     });
 
@@ -519,14 +516,7 @@ function initMap(layers) {
 			$('#bookmarksToggle').focus();
 		}
 	});
-
-    _map.infoWindow.onHide = function(){
-        _selectedTile.focus();
-    }
-
-    //Make popup close button focusable
-    $(".esriPopup .titleButton.close").attr("tabindex","0");
-
+	modal_InfoWindow_Init();
     leaveTileGroup();
 }
 
@@ -611,10 +601,6 @@ function tile_keydown(e) {
 	}
 }
 
-function infoWindow_onHide(event) {
-	unselect();
-}
-
 function baselayer_onMouseOver(event)
 {
 	if (_isMobile) return;	
@@ -685,6 +671,60 @@ function layer_onMouseOut(event)
 		graphic.draw();
 	}
 	$("#hoverInfo").hide();
+}
+
+/******************************************************
+ ****************** Modal Info Window *****************
+ ******************************************************/
+
+ // based on http://www.smashingmagazine.com/2014/09/15/making-modal-windows-better-for-everyone/
+
+var _lastFocus;
+var _infoWindowCloseButton;
+var _infowWindowDom;
+var _showingDetails;
+
+function infoWindow_onShow(event) {
+	_lastFocus = document.activeElement;
+	_infoWindowCloseButton.setAttribute('tabindex', '0');
+	_infoWindowCloseButton.focus();
+}
+
+function infoWindow_onHide(event) {
+	_modalOpen = false;
+	_lastFocus.focus(); // place focus on the saved element
+}
+
+function focusRestrict ( event ) {
+	document.addEventListener('focus', function( event ) {
+		if (_map.infoWindow.isShowing &&
+			!_infowWindowDom.contains( event.target) &&
+			!_showingDetails) {
+			event.stopPropagation();
+			_infoWindowCloseButton.focus();
+		}
+	}, true);
+}
+
+function infoWindow_Close() {
+	_map.infoWindow.hide();
+}
+
+function modalClose ( e ) {
+	if ( !e.keyCode || e.keyCode === 27 ) {
+		if (_map.infoWindow.isShowing && !_showingDetails) {
+			infoWindow_Close()
+		}
+	}
+}
+
+function modal_InfoWindow_Init() {
+	dojo.connect(_map.infoWindow,"onHide",infoWindow_onHide);
+	dojo.connect(_map.infoWindow,"onShow",infoWindow_onShow);
+	_infoWindowCloseButton = $(".esriPopup .titleButton.close")[0]
+	_infowWindowDom = _map.infoWindow.domNode;
+	document.addEventListener('keydown', modalClose);
+	focusRestrict();
 }
 
 /******************************************************
@@ -939,7 +979,7 @@ function handleWindowResize() {
 	if ($('#header').css('display') != 'none') {
 		if(_layout == 'responsive'){
 			preSelection();
-			_map.infoWindow.hide();
+			infoWindow_Close();
 			_selected = null;
 		}
 		
@@ -1011,7 +1051,7 @@ function preSelection()
 function postSelection(skipPopup) {
 	
 	if (_selected == null) {
-		_map.infoWindow.hide();
+		infoWindow_Close();
 	} else {
 		
 		// make the selected location's icon LARGE
@@ -1377,13 +1417,14 @@ function showDetails(graphic) {
 	}
 
     var activeElement = $(document.activeElement);
+	_showingDetails = true;
 	$.colorbox({
 		html:mainDiv,
 		open:true,
 		maxHeight:$(document).height() - 100,
 		maxWidth:"575px",
 		scrolling:false,
-        onClosed:function(){activeElement.focus()}
+        onClosed:function(){_showingDetails = false; activeElement.focus()}
 	});
 	
 	$('.rightDiv').find('p').last().css('display', 'none');
