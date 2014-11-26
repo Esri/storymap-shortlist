@@ -1,5 +1,5 @@
 <!DOCTYPE html> 
-<html>
+<html lang="en">
 <head>
 
 <title>Shortlist</title>
@@ -59,7 +59,7 @@
 <!--Google Analytics End-->
 
 <script type="text/javascript">
-var version = '1.3';
+var version = '1.4';
 /******************************************************
 ********************  config section ******************
 *******************************************************/
@@ -67,9 +67,9 @@ var WEBMAP_ID = "1966ef409a344d089b001df85332608f";
 
 var BOOKMARKS_ALIAS = "Zoom";
 var COLOR_ORDER = "green,red,blue,purple"; // will only use as many colors as you have tabs
-var DETAILS_PANEL = false;  // specifies whether or not popups have a link to a separate Details panel
-
-// Specify shapefile or CSV point layer(s) on your map that do NOT define a tab in the shortlist. 
+var DETAILS_PANEL = true;  // specifies whether or not popups have a link to a separate Details panel
+//
+// Specify shapefile or CSV point layer(s) on your map that do NOT define a tab in the shortlist.
 // If there's more than one layer, use the "|" character as delimiter
 var POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS = "";
 
@@ -79,6 +79,9 @@ var SUPPORTING_LAYERS_THAT_ARE_CLICKABLE = "";
 
 // Location button that locates user (on supported browsers)
 var GEOLOCATOR = false;
+
+// Percent of the Height/Width to pan with each arrow key
+var PAN_PERCENT = 0.15
 
 // Uncomment and edit to use Portal for ArcGIS
 //var DEFAULT_SHARING_URL = "http://www.example.com/arcgis/sharing/content/items";
@@ -105,9 +108,9 @@ var GEOLOCATOR = false;
         </div> -->
 		<div id="social">
 			<a id="msLink" href="http://storymaps.arcgis.com" target="_blank">A story map </a>
-			<i class="shareIcon share_facebook socialIcon-facebook-squared-1"></i>
-			<i class="socialIcon-twitter-1 shareIcon share_twitter"></i>
-			<i class="socialIcon-link shareIcon share_bitly" id="bitlyIcon" title="Get a short link to the application"></i>
+			<i class="shareIcon share_facebook socialIcon-facebook-squared-1" tabindex="0"></i>
+			<i class="socialIcon-twitter-1 shareIcon share_twitter" tabindex="0"></i>
+			<i class="socialIcon-link shareIcon share_bitly" id="bitlyIcon" title="Get a short link to the application" tabindex="0"></i>
 			<div class="popover fade left in" style="display: none;">
 				<div class="arrow"></div>
 				<div class="popover-content" id="bitlyContent">
@@ -127,13 +130,13 @@ var GEOLOCATOR = false;
         <div id="divStrip">
             <div id="tabs"></div>
             <div id="bookmarksCon">
-                <div id="bookmarksToggle"><p id="bookmarksTogText"></p></div>
+                <div id="bookmarksToggle" tabindex="0"><p id="bookmarksTogText"></p></div>
                 <div id="bookmarksDiv">
                 </div>
             </div>
         </div>
 		<div id="mobileBookmarksCon">
-        	<div id="mobileBookmarksToggle"><p id="mobileBookmarksTogText"></p></div>
+        	<div id="mobileBookmarksToggle" tabindex="0"><p id="mobileBookmarksTogText"></p></div>
             <div id="mobileBookmarksDiv"></div>
 		</div>
         
@@ -152,15 +155,15 @@ var GEOLOCATOR = false;
 		</div>
         </div>
 
-        <div id="map">
+        <div id="map" tabindex="0">
             <div id="zoomToggle">
-                <div id="zoomIn">+</div>
-                <div id="zoomExtent">
-					<img id="zoomExtentImg" src="images/ZoomHome.png">
+                <div id="zoomIn" tabindex="0">+</div>
+                <div id="zoomExtent" tabindex="0">
+					<img id="zoomExtentImg" src="images/ZoomHome.png" alt="Zoom map to initial extents">
 				</div>
-                <div id="zoomOut">-</div>
-				<div id="locateButton">
-					<img id="locateImage" src="images/locateButton.png">
+                <div id="zoomOut" tabindex="0">-</div>
+				<div id="locateButton" tabindex="0">
+					<img id="locateImage" src="images/locateButton.png" alt="Show current location on map">
 				</div>
 				
             </div><!--?zoomToggle-->    
@@ -169,21 +172,21 @@ var GEOLOCATOR = false;
 			
 		</div>
 		
-		<div id="mobileThemeBar">
-			<div id="navThemeLeft">
+		<div id="mobileThemeBar" tabindex="0">
+			<div id="navThemeLeft" tabindex="0">
 				<span class='icon-arrow-left'></span>
 			</div>
-			<div id="navThemeRight">
+			<div id="navThemeRight" tabindex="0">
 				<span class='icon-arrow-right'></span>
 			</div>
 			<div class="swiper-container">
   				<div class="swiper-wrapper"></div>
 			</div>
-			<div id='returnIcon'>
+			<div id='returnIcon' tabindex="0">
 				<i class='icon-list'></i>
 			</div>
-			<div id="returnHiddenBar"></div>
-			<div id="centerMapIconContainer">
+			<div id="returnHiddenBar" tabindex="0"></div>
+			<div id="centerMapIconContainer" tabindex="0">
 				<div id='centerMapIcon'>
 					<i class='icon-contract'></i>
 				</div>
@@ -218,7 +221,7 @@ var GEOLOCATOR = false;
  	</div>
 
     <div id="whiteOut">
-        <img id="loader" src="images/loader/loader.gif"/>
+        <img id="loader" src="images/loader/loader.gif" alt="Application is loading..."/>
     </div>
     
 </body>

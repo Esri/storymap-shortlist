@@ -49,7 +49,9 @@ var _bookmarks;
 
 var _layerCurrent;
 
-var _selected;
+var _selected;  //map graphic
+
+var _selectedTile;
 
 var _initExtent;
 
@@ -258,7 +260,7 @@ function init() {
 	
 	_mobileFeatureSwiper = new Swiper('#mobileFeature .swiper-container',{
 		mode:'horizontal',
-		keyboardControl: true,
+		//keyboardControl: true,
 		onSlideNext: function(){
 			swipeFeature();
 		},
@@ -370,10 +372,10 @@ function initMap(layers) {
 	if (_contentLayers.length > 1) {
 	 	$('#mobileTitlePage').append('<ul id="mobileThemeList" style=" height: 80px; line-height: 80px;" class="mobileTileList introList">')
 		$.each(_contentLayers, function(index, value){
-			$("#tabs").append('<div class="tab" onclick="activateLayer(_contentLayers[' + index + ']), hideBookmarks()">' + value.title + '</div>', true);
+			$("#tabs").append('<div class="tab" tabindex="0" onclick="activateLayer(_contentLayers[' + index + ']), hideBookmarks()">' + value.title + '</div>', true);
 			var newSlide = _mobileThemeSwiper.createSlide('<p>' + value.title + '</p>');
 			newSlide.append();
-			var introList = $('<li class="mobileTitleThemes" onclick="selectMobileTheme(' + index + ')">').append('<span style="margin-left: 30px; margin-right: 30px; vertical-align: middle; line-height: 20px; display: inline-block;">' + value.title + '</span>')
+			var introList = $('<li class="mobileTitleThemes" tabindex="0" onclick="selectMobileTheme(' + index + ')">').append('<span style="margin-left: 30px; margin-right: 30px; vertical-align: middle; line-height: 20px; display: inline-block;">' + value.title + '</span>')
 			if(index == 0)
 				$(introList).css('border-width', '2px 0px 1px 0px')
 			if(index == (_contentLayers.length - 1))
@@ -386,16 +388,15 @@ function initMap(layers) {
 	else {
 		$(".tab").css("display", "none");
 		$('#mobileThemeBar .swiper-container').css('display', 'none');
-		$('#mobileTitlePage').append("<br><hr></hr>")
+		$('#mobileTitlePage').append("<br><hr/>")
 		$('#mobileTitlePage').append('<ul id="mobileThemeList" class="mobileTileList">')
-		var introList = $('<li class="mobileTitleTheme" onclick="selectMobileTheme(' + 0 + ')">').append('<div class="startButton"> Start </div>')
+		var introList = $('<li class="mobileTitleTheme" tabindex="0" onclick="selectMobileTheme(' + 0 + ')">').append('<div class="startButton"> Start </div>')
 		$('#mobileThemeList').append(introList)
 	}
 
-	_mobileThemeSwiper.enableKeyboardControl();
+	//_mobileThemeSwiper.enableKeyboardControl();
 
 	activateLayer(_contentLayers[0], false);
-	dojo.connect(_map.infoWindow,"onHide",infoWindow_onHide);
 	$("#zoomToggle").css("visibility","visible");
 	$("#whiteOut").fadeOut("slow");
 	
@@ -404,13 +405,118 @@ function initMap(layers) {
 	$(".share_bitly").click(requestBitly);
 	$("#map").height($("#mainWindow").height() - $('#divStrip').height());
 	$("#map").css('top',$('#divStrip').height());
-	
-	$('body').keypress(function(e){
-		if(e.which == 13){
-			$(".mobileTitleTheme").click();
-			$(".mobileTitleThemes").eq(0).click();
-	    }
+
+    //Use enter/return key on focused element to trigger click event
+    //Use +/- keys to zoom in/out of map
+    $('body').keypress(function(e){
+        if(e.which == 13){ //enter/return
+            $( document.activeElement).click()
+        }
+        if(e.which == 43) { //'+'
+            _map.setLevel(_map.getLevel()+1);
+            $("#zoomIn").focus();
+            hideBookmarks();
+        }
+        if(e.which == 45) { //'-'
+            _map.setLevel(_map.getLevel()-1);
+            $("#zoomOut").focus();
+            hideBookmarks();
+        }
+    });
+
+    $('#myList').keydown(function(e){
+        if (e.which == 27) {
+			leaveTileGroup();
+        }
+    });
+
+    $('#tabs .tab').keypress(function(e){
+        if (e.which == 13) {
+			var tabIndex = $("#tabs .tab").index(this);
+			var layer = _contentLayers[tabIndex];
+			enterTileGroup(layer);
+			e.stopPropagation();
+		}
+    });
+
+	$('#tabs div.tab').keydown(function(e){
+		if (e.which == 37) {
+			if ($(this).is( ":first-child" ))  {
+				$('#tabs div:last-child').focus();
+			}
+			else {
+				$(this).prev().focus();
+			}
+		}
+		if (e.which == 39) {
+			if ($(this).is( ":last-child" )) {
+				$('#tabs div:first-child').focus();
+			} else {
+				$(this).next().focus();
+			}
+		}
+		if (e.which == 40) {
+			var tabIndex = $("#tabs .tab").index(this);
+			var layer = _contentLayers[tabIndex];
+			enterTileGroup(layer);
+		}
 	});
+
+    _map.disableKeyboardNavigation();
+
+    $('#map').keydown(function(e){
+        oldCenter = _map.extent.getCenter();
+        deltaX = _map.extent.getWidth() * PAN_PERCENT;
+        deltaY = _map.extent.getHeight() * PAN_PERCENT;
+        if (e.which == 37) {
+            var newCenter = oldCenter.offset(-deltaX,0)
+            _map.centerAt(newCenter)
+        }
+        if (e.which == 38) {
+            var newCenter = oldCenter.offset(0,deltaY)
+            _map.centerAt(newCenter)
+        }
+        if (e.which == 39) {
+            var newCenter = oldCenter.offset(deltaX,0)
+            _map.centerAt(newCenter)
+        }
+        if (e.which == 40) {
+            var newCenter = oldCenter.offset(0,-deltaY)
+            _map.centerAt(newCenter)
+        }
+    });
+
+	$('#bookmarksToggle').keydown(function(e){
+		if (e.which == 38) {
+			$('#bookmarksDiv a').last().focus();
+		}
+		if (e.which == 40) {
+			$('#bookmarksDiv a').first().focus();
+		}
+	});
+
+	$('#bookmarksDiv p').keydown(function(e){
+		if (e.which == 38) {
+			if ($( this ).is( ":first-child" ))  {
+				$('#bookmarksToggle').focus();
+			}
+			else {
+				$(this).prev("p").children("a").focus();
+			}
+		}
+		if (e.which == 40) {
+			if ($( this ).is( ":last-child" )) {
+				$('#bookmarksToggle').focus();
+			} else {
+				$(this).next("p").children("a").focus();
+			}
+		}
+		if (e.which == 27) {
+			hideBookmarks();
+			$('#bookmarksToggle').focus();
+		}
+	});
+	modal_InfoWindow_Init();
 }
 
 /******************************************************
@@ -440,10 +546,58 @@ function tile_onClick(e) {
 	postSelection();
 	$('#mobileTitlePage').css('display', 'none')
 	hideBookmarks();
+    _selectedTile = e.target
+    $(".esriPopup .titleButton.close").focus();
 }
 
-function infoWindow_onHide(event) {
-	unselect();
+function tile_keydown(e) {
+	if (e.which == 37) {
+		var tiles = $('ul#myList.tilelist li:visible');
+		if (tiles.index(this) == 0)  {
+			tiles.get(-1).focus();
+		}
+		else {
+			tiles[tiles.index(this)-1].focus();
+		}
+	}
+	if (e.which == 39) {
+		var tiles = $('ul#myList.tilelist li:visible');
+		if (tiles.index(this) == (tiles.size() - 1)) {
+			tiles.get(0).focus();
+		} else {
+			tiles[tiles.index(this)+1].focus();
+		}
+	}
+	if (e.which == 38) {
+		var w1 = $('ul#myList.tilelist').width();
+		var w2 = $('ul#myList.tilelist li:first-child').width();
+		var tiles_per_row = Math.floor(w1/w2);
+		var tiles = $('ul#myList.tilelist li:visible');
+		var myIndex = tiles.index(this);
+		var newIndex = myIndex - tiles_per_row;
+		if (newIndex < 0) {
+			var tilecount = tiles.size();
+			var gridcount = tilecount + tiles_per_row - (tilecount % tiles_per_row);
+			newIndex = gridcount + newIndex;
+			if (tilecount <= newIndex) {
+				newIndex = newIndex - tiles_per_row;
+			}
+		}
+		tiles.get(newIndex).focus();
+	}
+	if (e.which == 40) {
+		var w1 = $('ul#myList.tilelist').width();
+		var w2 = $('ul#myList.tilelist li:first-child').width();
+		var tiles_per_row = Math.floor(w1/w2);
+		var tiles = $('ul#myList.tilelist li:visible');
+		var myIndex = tiles.index(this);
+		var newIndex = myIndex + tiles_per_row;
+		var tilecount = tiles.size();
+		if (tilecount <= newIndex) {
+			newIndex = newIndex % tiles_per_row;
+		}
+		tiles[newIndex].focus();
+	}
 }
 
 function baselayer_onMouseOver(event)
@@ -519,6 +673,60 @@ function layer_onMouseOut(event)
 }
 
 /******************************************************
+ ****************** Modal Info Window *****************
+ ******************************************************/
+
+ // based on http://www.smashingmagazine.com/2014/09/15/making-modal-windows-better-for-everyone/
+
+var _lastFocus;
+var _infoWindowCloseButton;
+var _infowWindowDom;
+var _showingDetails;
+
+function infoWindow_onShow(event) {
+	_lastFocus = document.activeElement;
+	_infoWindowCloseButton.setAttribute('tabindex', '0');
+	_infoWindowCloseButton.focus();
+}
+
+function infoWindow_onHide(event) {
+	_modalOpen = false;
+	_lastFocus.focus(); // place focus on the saved element
+}
+
+function focusRestrict ( event ) {
+	document.addEventListener('focus', function( event ) {
+		if (_map.infoWindow.isShowing &&
+			!_infowWindowDom.contains( event.target) &&
+			!_showingDetails) {
+			event.stopPropagation();
+			_infoWindowCloseButton.focus();
+		}
+	}, true);
+}
+
+function infoWindow_Close() {
+	_map.infoWindow.hide();
+}
+
+function modalClose ( e ) {
+	if ( !e.keyCode || e.keyCode === 27 ) {
+		if (_map.infoWindow.isShowing && !_showingDetails) {
+			infoWindow_Close()
+		}
+	}
+}
+
+function modal_InfoWindow_Init() {
+	dojo.connect(_map.infoWindow,"onHide",infoWindow_onHide);
+	dojo.connect(_map.infoWindow,"onShow",infoWindow_onShow);
+	_infoWindowCloseButton = $(".esriPopup .titleButton.close")[0]
+	_infowWindowDom = _map.infoWindow.domNode;
+	document.addEventListener('keydown', modalClose);
+	focusRestrict();
+}
+
+/******************************************************
 ****************** other functions ********************
 *******************************************************/
 
@@ -549,8 +757,8 @@ function SortByNumber(a, b){
 function loadBookmarks() {
 	
 	$.each(_bookmarks,function(index,value){
-			$("#bookmarksDiv").append("<p><a>"+value.name+"</a></p>");
-			$("#mobileBookmarksDiv").append("<p><a>"+value.name+"</a></p>");
+			$("#bookmarksDiv").append("<p><a tabindex='0'>"+value.name+"</a></p>");
+			$("#mobileBookmarksDiv").append("<p><a tabindex='0'>"+value.name+"</a></p>");
 	});
 	
 	$("#bookmarksDiv a").click(function(e) {
@@ -559,6 +767,7 @@ function loadBookmarks() {
 		_map.setExtent(extent);	
 		$("#bookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
 		$("#bookmarksDiv").slideToggle();
+        $("#bookmarksToggle").focus();
     });
 	
 	$("#mobileBookmarksDiv a").click(function(e) {
@@ -650,8 +859,8 @@ function activateLayer(layer) {
 		} else {
 			display = "none";
 		}
-		tile = $('<li id="item'+value.attributes.getValueCI(FIELDNAME_ID)+'" style="display:'+display+'">');
-		img = $('<img src="'+value.attributes.getValueCI(FIELDNAME_IMAGEURL)+'">');
+		tile = $('<li tabindex="0" id="item'+value.attributes.getValueCI(FIELDNAME_ID)+'" style="display:'+display+'">');
+		img = $('<img src="'+value.attributes.getValueCI(FIELDNAME_IMAGEURL)+'" alt="'+value.attributes.getValueCI(FIELDNAME_TITLE)+'">');
 		mobileImg = $('<div style="height: 75px; margin-bottom: 8px;"><img src="'+value.attributes.getValueCI(FIELDNAME_IMAGEURL)+'"></div>');
 		footer = $('<div class="footer"></div>');
 		num = $('<div class="num" style="background-color:'+_layerCurrent.color+'">'+value.attributes.getValueCI(FIELDNAME_NUMBER)+'</div>');
@@ -670,14 +879,15 @@ function activateLayer(layer) {
 	$("ul.tilelist li").mouseover(tile_onMouseOver);
 	$("ul.tilelist li").mouseout(tile_onMouseOut);
 	$("ul.tilelist li").click(tile_onClick);
-	$("#mobilePaneList ul.mobileTileList li").click(tile_onClick);	
-	
+	$("ul.tilelist li").keydown(tile_keydown);
+    $("#mobilePaneList ul.mobileTileList li").click(tile_onClick);
+
 	$("ul.tilelist").animate({ scrollTop: 0 }, { duration: 200 } ); //Does this work?
 	$('#mobilePaneList').scrollTop(0)
 	if(!visibleFeatures)
 		$('.noFeature').css('display', 'block')
 	else
-		$('.noFeature').css('display', 'none')	
+		$('.noFeature').css('display', 'none')
 }
 
 function refreshList() {
@@ -719,6 +929,18 @@ function buildLayer(arr,iconDir,root) {
 	return layer;
 }
 
+function enterTileGroup(layer) {
+    //move keyboard focus into a group of tiles
+	activateLayer(layer);
+	hideBookmarks();
+	$("ul#myList.tilelist li:visible")[0].focus();
+}
+
+function leaveTileGroup() {
+    //move the keyboard focus out of a group of tile and back to the tab
+    $("#tabs .tab-selected").focus();
+ }
+
 function getValueCI(field) {
 	
 	// this function provides a uniform method for reading an 
@@ -754,7 +976,7 @@ function handleWindowResize() {
 	if ($('#header').css('display') != 'none') {
 		if(_layout == 'responsive'){
 			preSelection();
-			_map.infoWindow.hide();
+			infoWindow_Close();
 			_selected = null;
 		}
 		
@@ -826,7 +1048,7 @@ function preSelection()
 function postSelection(skipPopup) {
 	
 	if (_selected == null) {
-		_map.infoWindow.hide();
+		infoWindow_Close();
 	} else {
 		
 		// make the selected location's icon LARGE
@@ -882,7 +1104,7 @@ function buildPopup(feature, geometry, baseLayerClick)
 	var website = atts.getValueCI(FIELDNAME_WEBSITE);
 	if (website) website = prependURLHTTP($.trim(website));
 
-	var contentDiv = $("<div></div");
+	var contentDiv = $("<div></div>");
 	if (baseLayerClick && mobile)
 			$('#mobileSupportedLayersView').append($("<div style='padding-left: 20px;' class='mobileFeatureTitle'></div>").html(title));
 	if (shortDesc) {
@@ -901,7 +1123,7 @@ function buildPopup(feature, geometry, baseLayerClick)
 		}
 		else if (DETAILS_PANEL && mobile) {
 			if (website) {
-				var mobileA = $("<a></a>").attr("href", website).attr("target","_blank");
+				var mobileA = $("<a></a>").attr("href", website).attr("target","_blank").attr("tabindex","-1");
 				$(mobileA).append($(new Image()).attr("src", picture));
 				$(mobilePDiv).append(mobileA);
 			} else {
@@ -1000,7 +1222,7 @@ function buildPopup(feature, geometry, baseLayerClick)
 			$('#mobileSupportedLayersView').append('<div style="margin-bottom: 20px;"></div>');
 		}
 	} else {
-		$(contentDiv).append($("<div></div>").addClass("infoWindowLink").html("Details >>"));
+		$(contentDiv).append($("<div></div>").addClass("infoWindowLink").attr("tabindex","0").html("Details >>"));
 	}
 
 	// note: what we really want is the entire contentDiv html in
@@ -1148,7 +1370,7 @@ function showDetails(graphic) {
 	var leftDiv = $('<div class="leftDiv"></div>');
 	var rightDiv = $('<div class="rightDiv"></div>');
   
-	var imageDiv = $('<img src="'+graphic.attributes.getValueCI(FIELDNAME_IMAGEURL)+'">');	
+	var imageDiv = $('<img src="'+graphic.attributes.getValueCI(FIELDNAME_IMAGEURL)+'" alt="'+graphic.attributes.getValueCI(FIELDNAME_TITLE)+'">');
 	var pictureFrame = $('<div class="pictureFrame"></div>');	
 	$(pictureFrame).append(imageDiv);
 	$(leftDiv).append(pictureFrame);
@@ -1190,13 +1412,16 @@ function showDetails(graphic) {
 		var lastDesc = $(mainDiv).find(".desc")[$(mainDiv).find(".desc").length - 1];
 		$(lastDesc).css("margin-bottom","5px");
 	}
-  
-	$.fn.colorbox({
+
+    var activeElement = $(document.activeElement);
+	_showingDetails = true;
+	$.colorbox({
 		html:mainDiv,
 		open:true,
 		maxHeight:$(document).height() - 100,
 		maxWidth:"575px",
-		scrolling:false
+		scrolling:false,
+        onClosed:function(){_showingDetails = false; activeElement.focus()}
 	});
 	
 	$('.rightDiv').find('p').last().css('display', 'none');

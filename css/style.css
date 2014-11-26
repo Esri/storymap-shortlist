@@ -1,4 +1,4 @@
-html,body {
+﻿html,body {
 	height:100%;
 	width:100%;
 	margin:auto	
@@ -184,7 +184,7 @@ a:hover{
 
 .socialIcon-link:before { content: '\e802'; } /* '' */
 .socialIcon-twitter-1:before { content: '\e800'; } /* '' */
-.socialIcon-facebook-squared-1:before { content: '\e801'; } /* '�?' */
+.socialIcon-facebook-squared-1:before { content: '\e801'; } /* '�?' */
 
 .shareIcon {
     display: inline-block;
