@@ -517,7 +517,6 @@ function initMap(layers) {
 		}
 	});
 	modal_InfoWindow_Init();
-    leaveTileGroup();
 }
 
 /******************************************************
@@ -934,14 +933,12 @@ function enterTileGroup(layer) {
     //move keyboard focus into a group of tiles
 	activateLayer(layer);
 	hideBookmarks();
-    $("ul#myList.tilelist li").attr("tabindex","0");
 	$("ul#myList.tilelist li:visible")[0].focus();
 }
 
 function leaveTileGroup() {
     //move the keyboard focus out of a group of tile and back to the tab
     $("#tabs .tab-selected").focus();
-    $("ul#myList.tilelist li").removeAttr("tabindex");
  }
 
 function getValueCI(field) {
