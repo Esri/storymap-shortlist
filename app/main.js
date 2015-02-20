@@ -84,10 +84,15 @@ function init() {
 	var temp = esri.urlToObject(document.location.href).query;
 	if (temp) {
 		$.each(temp, function(index, value) {
-			queryString[index.toLowerCase()] = value;
+			if (value) {
+				queryString[index.toLowerCase()] = value;
+			} else {
+				queryString[index.toLowerCase()] = index;
+			}
 		});
 	}
 
+	EMBED = queryString["embed"] ? $.trim((queryString["embed"])).toLowerCase() != "false" : EMBED;
 	WEBMAP_ID = queryString["webmap"] ? queryString["webmap"] : WEBMAP_ID;
 	BOOKMARKS_ALIAS = queryString["bookmarks_alias"] ? queryString["bookmarks_alias"] : BOOKMARKS_ALIAS;
 	COLOR_ORDER = queryString["color_order"] ? queryString["color_order"] : COLOR_ORDER;
@@ -103,8 +108,13 @@ function init() {
 	//        you'll need to uncomment the following line and provide
 	//        a valid proxy server url. 										
 	//esri.config.defaults.io.proxyUrl = YOUR_PROXY_URL_HERE;
-	
+
 	$("#bookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
+
+	if (EMBED) {
+		//$("#header").hide(); //can't hide it; because other code uses a hidden header to set other features.
+		$("#header").css('height', '0px')
+	}
 
 	handleWindowResize();	
 	$(this).resize(handleWindowResize);	
