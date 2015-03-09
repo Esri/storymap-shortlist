@@ -46,6 +46,20 @@ a:hover{
 }
 
 /*
+ * Focus enhancements
+ */
+/*make the firefox focus really POP */
+@-moz-document url-prefix() {
+	:focus {
+		/* Firefox uses:  outline: 1px dotted #212121; */
+		/* Chrome on OS X uses:  outline: -webkit-focus-ring-color auto 5px; where -webkit-focus-ring-color = '#5B9DD9' */
+		outline-color:rgb(255,73,32);
+		outline-style:solid;
+		outline-width:2px;
+	}
+}
+
+/*
  * Header Area
  */	  
 #header {
