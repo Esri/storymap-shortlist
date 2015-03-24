@@ -29,6 +29,7 @@ var FIELDNAME_DESC3 = "Desc3";
 var FIELDNAME_DESC4 = "Desc4";
 var FIELDNAME_DESC5 = "Desc5";
 var FIELDNAME_ID = "Shortlist-ID";
+var FIELDNAME_LAYER = "layer";
 
 var _lutIconSpecs = {
 	tiny:new IconSpecs(22,28,3,8),
@@ -52,6 +53,8 @@ var _layerCurrent;
 var _selected;  //map graphic
 
 var _selectedTile;
+
+var _selectedLayer; //esri/layers/Layer
 
 var _initExtent;
 
@@ -1051,6 +1054,10 @@ function preSelection()
 		_selected.draw();
 		var tile = findTile(_selected.attributes.getValueCI(FIELDNAME_ID));
 		if ($(tile).attr("id") != $(this).attr("id")) $(tile).stop().animate({'background-color' : COLOR_DIM});
+        if (_selectedLayer) {
+            _selectedLayer.setVisibility(false);
+            _selectedLayer = null;
+        }
 	}
 		
 }
@@ -1086,6 +1093,11 @@ function postSelection(skipPopup) {
 
 		var tile = findTile(_selected.attributes.getValueCI(FIELDNAME_ID));
 		$(tile).stop().animate({'background-color' : COLOR_FULL});
+        var layer = findLayer(_selected.attributes.getValueCI(FIELDNAME_LAYER));
+        if (layer) {
+            _selectedLayer = layer;
+            layer.setVisibility(true);
+        }
 	}
 
 	$("#hoverInfo").hide();
@@ -1440,6 +1452,19 @@ function showDetails(graphic) {
 function findTile(id)
 {
 	return $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+id})[0];	
+}
+
+function findLayer(id)
+{
+    if (!id)
+        return null;
+    var layers = _map.getLayersVisibleAtScale(_map.getScale());
+    layers.forEach(function(layer) {
+        if (layer.id == id) {
+            return layer;
+        }
+    });
+    return null;
 }
 
 function findMobileTile(id)
