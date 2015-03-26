@@ -1459,12 +1459,14 @@ function findLayer(name)
     if (!name)
         return null;
     var layers = _map.getLayersVisibleAtScale(_map.getScale());
-    layers.forEach(function(layer) {
+    var foundLayer = null
+    layers.some(function(layer) {
         if (layer.name == name) {
-            return layer;
+            foundLayer = layer;
         }
+        return layer.name == name
     });
-    return null;
+    return foundLayer;
 }
 
 function findMobileTile(id)
