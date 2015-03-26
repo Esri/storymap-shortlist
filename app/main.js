@@ -30,6 +30,7 @@ var FIELDNAME_DESC4 = "Desc4";
 var FIELDNAME_DESC5 = "Desc5";
 var FIELDNAME_ID = "Shortlist-ID";
 var FIELDNAME_LAYER = "Layer";
+var FIELDNAME_FULLSIZEURL = "FullSize_URL";
 
 var _lutIconSpecs = {
 	tiny:new IconSpecs(22,28,3,8),
@@ -1123,6 +1124,7 @@ function buildPopup(feature, geometry, baseLayerClick)
 	
 	var shortDesc = atts.getValueCI(FIELDNAME_SHORTDESC);
 	var picture = atts.getValueCI(FIELDNAME_IMAGEURL);
+    var bigpicture = atts.getValueCI(FIELDNAME_FULLSIZEURL);
 	var website = atts.getValueCI(FIELDNAME_WEBSITE);
 	if (website) website = prependURLHTTP($.trim(website));
 
@@ -1152,9 +1154,15 @@ function buildPopup(feature, geometry, baseLayerClick)
 				$(mobilePDiv).append($(new Image()).attr("src", picture));
 			}
 		} else { // no details panel
-			if (website) {
-				var a = $("<a></a>").attr("href", website).attr("target","_blank");
-				var mobileA = $("<a></a>").attr("href", website).attr("target","_blank");
+            var a = $("<a></a>");
+            if (website) {
+                $(a).attr("href", website).attr("target", "_blank");
+                var mobileA = $("<a></a>").attr("href", website).attr("target", "_blank");
+            }
+            if (bigpicture) {
+                $(a).attr('href', bigpicture).removeAttr('target').addClass('bigpicture').attr('title',title);
+            }
+            if (bigpicture || website) {
 				$(a).append($(new Image()).attr("src", picture));
 				$(mobileA).append($(new Image()).attr("src", picture));
 				$(pDiv).append(a);
@@ -1276,6 +1284,12 @@ function buildPopup(feature, geometry, baseLayerClick)
 			showDetails(feature);
 		});	
 	}
+
+    //Add colorbox to bigpicture class
+    $('a.bigpicture').colorbox({
+        maxHeight:'95%',
+        maxWidth:'95%'
+    });
 }
 
 /*
