@@ -29,7 +29,7 @@ var FIELDNAME_DESC3 = "Desc3";
 var FIELDNAME_DESC4 = "Desc4";
 var FIELDNAME_DESC5 = "Desc5";
 var FIELDNAME_ID = "Shortlist-ID";
-var FIELDNAME_LAYER = "layer";
+var FIELDNAME_LAYER = "Layer";
 
 var _lutIconSpecs = {
 	tiny:new IconSpecs(22,28,3,8),
