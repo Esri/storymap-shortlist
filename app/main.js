@@ -1454,13 +1454,13 @@ function findTile(id)
 	return $.grep($("ul.tilelist li"),function(n,i){return n.id == "item"+id})[0];	
 }
 
-function findLayer(id)
+function findLayer(name)
 {
-    if (!id)
+    if (!name)
         return null;
     var layers = _map.getLayersVisibleAtScale(_map.getScale());
     layers.forEach(function(layer) {
-        if (layer.id == id) {
+        if (layer.name == name) {
             return layer;
         }
     });
