@@ -72,31 +72,29 @@ a:hover{
 }
 
 #headerText{
-	padding-top:45px;
+	padding-top:20px;
 	padding-left:20px;
 	float:left;
 }
 
 #title {
-	font-family: 'frutiger-bold', sans-serif;
 	font-size:1.7em;
-	font-weight:bold;
 	text-align:left;
 	white-space: nowrap;  
 	overflow: hidden;  
 	text-overflow: ellipsis;
 	-o-text-overflow:ellipsis;
-	margin:0px;
+	margin:0;
 	color:White;
 }
 
 #subtitle {
     font-family: 'frutiger', sans-serif;
 	font-size:.9em;
-    margin:0px;
-	overflow: hidden;
+    margin: 0.4em 0 0;
+    overflow: hidden;
 	font-weight:normal;
-	color: #C5D5D5;
+	color: #eee;
 }
 
 #logoArea{
@@ -107,8 +105,8 @@ a:hover{
 
 #organizationText {
     float:left;
-    padding-right: 10px;
-    padding-top:15px;
+    padding-right: 11px;
+    padding-top:16px;
     text-align:right;
     font-size:.9em;
 }
@@ -130,7 +128,6 @@ a:hover{
 	border:none;
 	outline:none;
     float:right;
-    padding-left: 10px;
 }
 
 #logoImg{
