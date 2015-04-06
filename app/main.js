@@ -30,7 +30,8 @@ var FIELDNAME_DESC4 = "Desc4";
 var FIELDNAME_DESC5 = "Desc5";
 var FIELDNAME_ID = "Shortlist-ID";
 var FIELDNAME_LAYER = "Layer";
-var FIELDNAME_FULLSIZEURL = "FullSize_URL";
+//var FIELDNAME_FULLSIZEURL = "FullSize_URL";
+var FIELDNAME_FULLSIZEURL = "Large_URL";  //1024x768
 
 var _lutIconSpecs = {
 	tiny:new IconSpecs(22,28,3,8),
