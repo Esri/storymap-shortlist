@@ -32,6 +32,7 @@ var FIELDNAME_ID = "Shortlist-ID";
 var FIELDNAME_LAYER = "Layer";
 //var FIELDNAME_FULLSIZEURL = "FullSize_URL";
 var FIELDNAME_FULLSIZEURL = "Large_URL";  //1024x768
+var FIELDNAME_CREDITS = "Credits";
 
 var _lutIconSpecs = {
 	tiny:new IconSpecs(22,28,3,8),
@@ -1125,6 +1126,7 @@ function buildPopup(feature, geometry, baseLayerClick)
 	
 	var shortDesc = atts.getValueCI(FIELDNAME_SHORTDESC);
 	var picture = atts.getValueCI(FIELDNAME_IMAGEURL);
+	var credits = atts.getValueCI(FIELDNAME_CREDITS);
     var bigpicture = atts.getValueCI(FIELDNAME_FULLSIZEURL);
 	var website = atts.getValueCI(FIELDNAME_WEBSITE);
 	if (website) website = prependURLHTTP($.trim(website));
@@ -1183,13 +1185,20 @@ function buildPopup(feature, geometry, baseLayerClick)
 		if(baseLayerClick && mobile)
 			$('#mobileSupportedLayersView').append("<br>");
 	}
+
+	if (credits) {
+		$(contentDiv).append($("<div class='infoWindowCredits'></div>").html(credits));
+		if(baseLayerClick && mobile)
+			$('#mobileSupportedLayersView').append($("<div class='mobileFeatureCredits'></div>").html(credits));				
+	}
 	
 	if (!DETAILS_PANEL) {
 		if(!shortDesc)
 			$('.mobileFeatureTitle').after($('<hr style="margin-left: 20px; margin-right: 20px;">'));
+
 		var desc1 = atts.getValueCI(FIELDNAME_DESC1);
 		if (desc1) {
-			$(contentDiv).append($("<div></div>").html(desc1));
+			$(contentDiv).append($("<div class='infoWindowDesc'></div>").html(desc1));
 			if(baseLayerClick)
 				$('#mobileSupportedLayersView').append($("<div class='mobileFeatureDesc'></div>").html(desc1));
 		}
@@ -1313,8 +1322,9 @@ function buildMobileSlideView(featureNumber){
 		
 		var shortDesc = atts.getValueCI(FIELDNAME_SHORTDESC);
 		var picture = atts.getValueCI(FIELDNAME_IMAGEURL);
+		var credits = atts.getValueCI(FIELDNAME_CREDITS);
 		var website = atts.getValueCI(FIELDNAME_WEBSITE);
-		if (website) website = prependURLHTTP($.trim(website));
+		if (website) website = prependURLHTTP($.trim(website));		
 
 		var num = $('<div class="mobileFeatureNum" style="background-color:'+_layerCurrent.color+'">'+ atts.getValueCI(FIELDNAME_NUMBER)+'</div>');
 	
@@ -1339,6 +1349,10 @@ function buildMobileSlideView(featureNumber){
 			}
 			
 			$(mobileContentDiv).append(mobilePDiv);
+		}
+		
+		if (credits) {
+			$(mobileContentDiv).append($("<div class='mobileFeatureCredits'></div>").html(credits));			
 		}
 		
 		if (!DETAILS_PANEL) {
