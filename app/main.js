@@ -1122,13 +1122,13 @@ function buildPopup(feature, geometry, baseLayerClick)
 		return
 	}
 
-	var title =  atts.getValueCI(FIELDNAME_TITLE);
-	
+	var title =  atts.getValueCI(FIELDNAME_TITLE);	
 	var shortDesc = atts.getValueCI(FIELDNAME_SHORTDESC);
 	var picture = atts.getValueCI(FIELDNAME_IMAGEURL);
 	var credits = atts.getValueCI(FIELDNAME_CREDITS);
     var bigpicture = atts.getValueCI(FIELDNAME_FULLSIZEURL);
 	var website = atts.getValueCI(FIELDNAME_WEBSITE);
+	var longtitle = title + " (" + credits +")";
 	if (website) website = prependURLHTTP($.trim(website));
 
 	var contentDiv = $("<div></div>");
@@ -1163,7 +1163,10 @@ function buildPopup(feature, geometry, baseLayerClick)
                 var mobileA = $("<a></a>").attr("href", website).attr("target", "_blank");
             }
             if (bigpicture) {
-                $(a).attr('href', bigpicture).removeAttr('target').addClass('bigpicture').attr('title',title);
+				if (!credits)
+                	$(a).attr('href', bigpicture).removeAttr('target').addClass('bigpicture').attr('title',title);
+				else
+					$(a).attr('href', bigpicture).removeAttr('target').addClass('bigpicture').attr('title',longtitle);
             }
             if (bigpicture || website) {
 				$(a).append($(new Image()).attr("src", picture));
@@ -1187,9 +1190,9 @@ function buildPopup(feature, geometry, baseLayerClick)
 	}
 
 	if (credits) {
-		$(contentDiv).append($("<div class='infoWindowCredits'></div>").html(credits));
-		if(baseLayerClick && mobile)
-			$('#mobileSupportedLayersView').append($("<div class='mobileFeatureCredits'></div>").html(credits));				
+		$(contentDiv).append($("<div class='infoWindowCredits'></div>").html("Photo: " + credits));
+		if(baseLayerClick)
+			$('#mobileSupportedLayersView').append($("<div class='mobileFeatureCredits'></div>").html("Photo: " + credits));				
 	}
 	
 	if (!DETAILS_PANEL) {
@@ -1352,7 +1355,7 @@ function buildMobileSlideView(featureNumber){
 		}
 		
 		if (credits) {
-			$(mobileContentDiv).append($("<div class='mobileFeatureCredits'></div>").html(credits));			
+			$(mobileContentDiv).append($("<div class='mobileFeatureCredits'></div>").html("Photo: " + credits));			
 		}
 		
 		if (!DETAILS_PANEL) {
