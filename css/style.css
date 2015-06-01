@@ -826,7 +826,7 @@ ul.tilelist .blurb {
 	color: #f4f4f4
 }
 
-.mobileTitleThemes:hover{
+.mobileTitleThemes:hover, .mobileTitleThemes:focus{
 	background-color: #777 !important;
 	color: #fff;
 }
