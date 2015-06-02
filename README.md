@@ -4,7 +4,7 @@ This repository contains the application files for the "Shortlist" story map app
 
 [View live app here](http://storymaps.esri.com/stories/shortlist-sandiego/)
 
-![App](shortlist-storytelling-template-js.png) 
+![App](/resources/images/shortlist-storytelling-template-js.png) 
 
 ## Features
 * You can organize your POIs by theme; for example, Food, Hotels, and Attractions. 
