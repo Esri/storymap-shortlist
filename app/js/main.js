@@ -672,6 +672,9 @@ function initMap(layers) {
 	var graphicTitle;
 	
 	$.each(layers, function(index,value){
+		if(!value.visibleAtMapScale && value.type == "Feature Layer" && value.url)
+			return;
+			
 		var graphicAtts;
 		var geomType;
 
@@ -760,10 +763,24 @@ function initMap(layers) {
 	var newLayers = [];
 	
 	$.each(pointLayers,function(index,value) {
+		var title = value.alias || value.title || value.name;
+		
 		$.grep(_map.graphicsLayerIds, function(n,i){
 			if(_map.getLayer(n) && _map.getLayer(n).id){
 				if(_map.getLayer(n).id == getID(value)){
 					_map.getLayer(n).setVisibility(false);
+					var mapLayerId = null;
+					if(_map.getLayer(n).id.split('_').length > 2){
+						mapLayerId = _map.getLayer(n).id.split('_').slice(0,-1).join('_'); 
+					} else{
+						mapLayerId = _map.getLayer(n).id;
+					}
+					var match =  $.grep(_response.itemInfo.itemData.operationalLayers, function(v){
+						return v.id==mapLayerId;
+					});
+					if(match && match.length) {					
+						title = match[0].title;
+					} 
 				}
 			}else{
 				return;
@@ -822,7 +839,9 @@ function initMap(layers) {
 					colorScheme.iconPrefix
 					);
 		contentLayer.color = colorScheme.color;
-		contentLayer.title = value.alias || value.title || value.name;
+		contentLayer.title = title;
+		
+		//contentLayer.title = value.alias || value.title || value.name;
 		dojo.connect(contentLayer, "onMouseOver", layer_onMouseOver);
 		dojo.connect(contentLayer, "onMouseOut", layer_onMouseOut);
 		dojo.connect(contentLayer, "onClick", layer_onClick);
