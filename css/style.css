@@ -695,6 +695,15 @@ ul.tilelist .blurb {
 	text-decoration:underline;
 }
 
+.infoWindowCredits {
+	color: #949494;
+	text-align: center;
+}
+
+.infoWindowDesc {
+	padding-top:10px;
+}
+
 .infoWindowLink {
 	color:#336699;
 	cursor:pointer;
@@ -709,7 +718,7 @@ ul.tilelist .blurb {
 	width: 100%;
 	text-align:center;
 	padding-top:10px;
-	padding-bottom:10px;
+	padding-bottom:0px;
 }
 
 .infoWindowPictureDiv img {
@@ -1060,7 +1069,7 @@ ul.mobileTileList .blurb {
 
 .mobilePictureDiv {
 	padding-top: 10px;
-	padding-bottom: 10px;
+	padding-bottom: 0px;
 	overflow-x: hidden;
 	text-align: left;
 	margin-left: 20px;
@@ -1071,6 +1080,19 @@ ul.mobileTileList .blurb {
 	max-height: 200px;
 }
 
+.mobileFeatureCredits{
+	color: #949494;
+	font-family: 'frutiger', sans-serif;
+	font-size: 1em;
+	text-align: left;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 0px;
+	padding-bottom: 10px;
+	font-weight: normal;
+	margin-bottom: -5px;
+}
+
 .mobileFeatureDesc{
 	color: #000;
 	font-family: 'frutiger', sans-serif;
@@ -1078,6 +1100,7 @@ ul.mobileTileList .blurb {
 	text-align: left;
 	padding-left: 20px;
 	padding-right: 20px;
+	padding-top: 10px;
 	font-weight: normal;
 	margin-bottom: -5px;
 }

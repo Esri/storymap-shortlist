@@ -32,6 +32,7 @@ var FIELDNAME_ID = "Shortlist-ID";
 var FIELDNAME_LAYER = "Layer";
 //var FIELDNAME_FULLSIZEURL = "FullSize_URL";
 var FIELDNAME_FULLSIZEURL = "Large_URL";  //1024x768
+var FIELDNAME_CREDITS = "Credits";
 
 var _lutIconSpecs = {
 	tiny:new IconSpecs(22,28,3,8),
@@ -1121,12 +1122,13 @@ function buildPopup(feature, geometry, baseLayerClick)
 		return
 	}
 
-	var title =  atts.getValueCI(FIELDNAME_TITLE);
-	
+	var title =  atts.getValueCI(FIELDNAME_TITLE);	
 	var shortDesc = atts.getValueCI(FIELDNAME_SHORTDESC);
 	var picture = atts.getValueCI(FIELDNAME_IMAGEURL);
+	var credits = atts.getValueCI(FIELDNAME_CREDITS);
     var bigpicture = atts.getValueCI(FIELDNAME_FULLSIZEURL);
 	var website = atts.getValueCI(FIELDNAME_WEBSITE);
+	var longtitle = title + " (" + credits +")";
 	if (website) website = prependURLHTTP($.trim(website));
 
 	var contentDiv = $("<div></div>");
@@ -1161,7 +1163,10 @@ function buildPopup(feature, geometry, baseLayerClick)
                 var mobileA = $("<a></a>").attr("href", website).attr("target", "_blank");
             }
             if (bigpicture) {
-                $(a).attr('href', bigpicture).removeAttr('target').addClass('bigpicture').attr('title',title);
+				if (!credits)
+                	$(a).attr('href', bigpicture).removeAttr('target').addClass('bigpicture').attr('title',title);
+				else
+					$(a).attr('href', bigpicture).removeAttr('target').addClass('bigpicture').attr('title',longtitle);
             }
             if (bigpicture || website) {
 				$(a).append($(new Image()).attr("src", picture));
@@ -1183,13 +1188,20 @@ function buildPopup(feature, geometry, baseLayerClick)
 		if(baseLayerClick && mobile)
 			$('#mobileSupportedLayersView').append("<br>");
 	}
+
+	if (credits) {
+		$(contentDiv).append($("<div class='infoWindowCredits'></div>").html("Photo: " + credits));
+		if(baseLayerClick)
+			$('#mobileSupportedLayersView').append($("<div class='mobileFeatureCredits'></div>").html("Photo: " + credits));				
+	}
 	
 	if (!DETAILS_PANEL) {
 		if(!shortDesc)
 			$('.mobileFeatureTitle').after($('<hr style="margin-left: 20px; margin-right: 20px;">'));
+
 		var desc1 = atts.getValueCI(FIELDNAME_DESC1);
 		if (desc1) {
-			$(contentDiv).append($("<div></div>").html(desc1));
+			$(contentDiv).append($("<div class='infoWindowDesc'></div>").html(desc1));
 			if(baseLayerClick)
 				$('#mobileSupportedLayersView').append($("<div class='mobileFeatureDesc'></div>").html(desc1));
 		}
@@ -1313,8 +1325,9 @@ function buildMobileSlideView(featureNumber){
 		
 		var shortDesc = atts.getValueCI(FIELDNAME_SHORTDESC);
 		var picture = atts.getValueCI(FIELDNAME_IMAGEURL);
+		var credits = atts.getValueCI(FIELDNAME_CREDITS);
 		var website = atts.getValueCI(FIELDNAME_WEBSITE);
-		if (website) website = prependURLHTTP($.trim(website));
+		if (website) website = prependURLHTTP($.trim(website));		
 
 		var num = $('<div class="mobileFeatureNum" style="background-color:'+_layerCurrent.color+'">'+ atts.getValueCI(FIELDNAME_NUMBER)+'</div>');
 	
@@ -1339,6 +1352,10 @@ function buildMobileSlideView(featureNumber){
 			}
 			
 			$(mobileContentDiv).append(mobilePDiv);
+		}
+		
+		if (credits) {
+			$(mobileContentDiv).append($("<div class='mobileFeatureCredits'></div>").html("Photo: " + credits));			
 		}
 		
 		if (!DETAILS_PANEL) {
