@@ -124,10 +124,6 @@ function init() {
 											queryString["supporting_layers_that_are_clickable"] :
 											SUPPORTING_LAYERS_THAT_ARE_CLICKABLE;
 	GEOLOCATOR = queryString["geolocator"] ? queryString["geolocator"] : GEOLOCATOR;
-	// Note:  If using a proxy server (required for remove CSV access),
-	//        you'll need to uncomment the following line and provide
-	//        a valid proxy server url. 										
-	//esri.config.defaults.io.proxyUrl = YOUR_PROXY_URL_HERE;
 	
 	_geomServiceUrl = new esri.tasks.GeometryService('http://utility.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer');
 	esriConfig.defaults.geometryService = _geomServiceUrl;
@@ -174,11 +170,11 @@ function init() {
 		$("#mobileBookmarksDiv").slideToggle();
 	});
 	
-	if (window.DEFAULT_SHARING_URL)
+	if (DEFAULT_SHARING_URL)
 		esri.arcgis.utils.arcgisUrl = DEFAULT_SHARING_URL;
 	
-	if (window.DEFAULT_PROXY_URL)
-		esri.config.defaults.io.proxyurl = DEFAULT_PROXY_URL;
+	if (DEFAULT_PROXY_URL)
+		esri.config.defaults.io.proxyUrl = DEFAULT_PROXY_URL;
 
 	var mapDeferred = esri.arcgis.utils.createMap(WEBMAP_ID, "map", {
 		mapOptions: {
@@ -236,9 +232,9 @@ function init() {
 		}
 		  
 		dojo.connect(_map, 'onExtentChange', function(){
-				setTimeout(function(){
-					refreshList();
-				}, 0);
+			setTimeout(function(){
+				refreshList();
+			}, 0);
 		});
 
 		// click action on the map where there's no graphic 
@@ -292,7 +288,7 @@ function init() {
 			}else{
 				layerType = layer.type;
 			}
-			if (layer.url && (layerType === 'ArcGISFeatureLayer' || layerType === 'Feature Layer')) {
+			if (layer.url && (layerType === 'ArcGISFeatureLayer' || layerType === 'Feature Layer') && !layer.id.match(/^csv_/)) {
 				_featureService = true;
 				featServLayerID = layer;
 				featServUrl.push(layer.url);
@@ -510,7 +506,7 @@ function init() {
 				if(layer.url && (layer.type == "Feature Layer" || layer.layerType == "ArcGISFeatureLayer") && layer.geometryType == 'esriGeometryPoint'){
 					var query = new esri.tasks.Query();
 					query.outFields = ['*'];
-					query.where = "0=0";
+					query.where = "1=1";
 					requestIndex++;
 					requests.push(layer.queryFeatures(query, qCallback, qErrback));
 				}				 

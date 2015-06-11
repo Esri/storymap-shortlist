@@ -26,7 +26,7 @@
 		<meta property="og:image" content="resources/images/esri-globe.png">
 
 		<script type="text/javascript">
-			var version = '1.4.1';
+			var version = '1.4.2';
 
 			//----------------------------------- 
 			// Application configuration 
@@ -68,6 +68,16 @@
 			// whose webmaps are allowed to be viewed by this Shortlist deployment 
 			// This is the ArcGIS Online username of the webmap owner (e.g. ["user1"], ["user1", "user2"]) 
 			var AUTHORIZED_OWNERS = []; 
+			//
+			// Edit to use Portal for ArcGIS
+			var DEFAULT_SHARING_URL = "";
+			//"http://www.example.com/arcgis/sharing/content/items";
+			//
+			// Note:  If using a proxy server (required for remote CSV access),
+			//        you'll need to provide a valid proxy server url.
+			var DEFAULT_PROXY_URL = "";
+			//"http://www.example.com/arcgis/sharing/proxy";
+
 
 		</script>
 
