@@ -880,12 +880,18 @@ ul.tilelist .blurb {
 #mobileTitlePage{
 	height: 100%;
 	width: 100%;
-	background-color: rgb(68, 68, 68);
+	background-color: black;
 	display: none;
 	z-index:101;
 	position: absolute;
 	top: 0;
 	overflow-y: auto;
+}
+
+#mobileTitlePage img{
+  float: right;
+  margin-top: 12px;
+  margin-right: 15px;
 }
 
 .mobileTitle{
@@ -929,13 +935,13 @@ ul.tilelist .blurb {
 	border-color: #fff;
 	border-style: solid;
 	border-width: 1px 0px 1px;
-	background-color: #888;
+	background-color: #5e7630;
 	font-size: 1.4em !important;
-	color: #f4f4f4
+	color: #f4f4f4;
 }
 
 .mobileTitleThemes:hover{
-	background-color: #777 !important;
+	background-color: #b28000 !important;
 	color: #fff;
 }
 
@@ -1147,7 +1153,7 @@ ul.mobileTileList .blurb {
 }
 
 .mobileFeatureTitle{
-	color: #8c8c8c;
+	color: black;
 	font-family: 'frutiger-bold', sans-serif;
 	font-size: 1.4em;
 	text-align: left;
@@ -1226,7 +1232,7 @@ ul.mobileTileList .blurb {
 	width: 100%;
 	top: 48%;
 	height: 40px;
-	background-color: rgb(68, 68, 68);
+	background-color: #5e7630;
 	position: absolute;
 	color: #CFCFCF;
 }
@@ -1343,10 +1349,10 @@ ul.mobileTileList .blurb {
 	content: "\e60d";
 }
 .icon-contract{
-	color: #ededed;
+	color: white;
 }
 .icon-contract:hover{
-	color: #fff;
+	color:#DDC78F;
 }
 .icon-link:before {
 	content: "\e603";
@@ -1362,33 +1368,37 @@ ul.mobileTileList .blurb {
 	content: "\e609";
 }
 .icon-arrow-left{
-	color: #ededed;
+	color: white;
 	position: absolute;
 	left: 5px;
 	top: 8px;
 }
 .icon-arrow-left:hover {
-	color:#fff;
+	color:#DDC78F;
 }
 .icon-arrow-right:before {
 	content: "\e60a";
 }
 .icon-arrow-right{
-	color: #ededed;
+	color: white;
 	position: absolute;
 	right: 5px;
 	top: 8px;
 }
 .icon-arrow-right:hover {
-	color:#fff;
+	color:#DDC78F;
 }
 
 #returnIcon{
 	display: none; 
 	cursor: pointer;
-	color: #ededed;
+	color: white;
 	width: 40px;
 	height: 40px;
+}
+
+#returnIcon:hover{
+	color:#DDC78F;
 }
 
 #centerMapIconContainer{
