@@ -9,7 +9,7 @@ body {
 	color:#333;
 	font-size:88%;
 	overflow:hidden;
-    font-family: 'frutiger', Fallback, sans-serif;
+        font-family: 'frutiger', Fallback, sans-serif;
 	position: fixed;
 	bottom: 0;
 	left: 0;
@@ -60,17 +60,8 @@ a:hover{
 }
 
 /*
- * Header Area
- */	  
-#header {
-	height:115px;
-	width: 100%;
-	background:#000000;
-	color:#fff;
-	margin:0;
-	overflow:hidden;
-}
-
+ * OLD Header Area
+ */
 #headerText{
 	padding-top:45px;
 	padding-left:20px;
@@ -78,16 +69,13 @@ a:hover{
 }
 
 #title {
-	font-family: 'frutiger-bold', sans-serif;
-	font-size:1.7em;
-	font-weight:bold;
-	text-align:left;
-	white-space: nowrap;  
-	overflow: hidden;  
-	text-overflow: ellipsis;
-	-o-text-overflow:ellipsis;
-	margin:0px;
-	color:White;
+  color: #fff;
+  font-family: arial,helvetica,sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+  display: table-cell;
+  vertical-align: middle;
 }
 
 #subtitle {
@@ -139,10 +127,132 @@ a:hover{
 }
 
 /*
+ * NEW Header Area
+ */
+#header {
+  /* Transparent strip behind text */
+  /* Creates the solid bg for IE8 */
+  background: rgb(0, 0, 0);
+  /* Creates the optionally transparent bg for ALL OTHER BROWSERS */
+  background: rgba(0, 0, 0, 1.0);
+  color: #fff;
+  height: 111px;
+  width: 100%;
+  overflow:hidden;
+}
+
+#parkShortName {
+  display: table;
+  float: left;
+  height: 79px;
+  font-family: arial,helvetica,sans-serif;
+  font-size: 40px;
+  font-weight: normal;
+  letter-spacing: -0.7px;
+  line-height: 79px;
+  margin: 0;
+  padding: 0 0 0 25px;
+}
+
+#parkDetailName {
+  display: inline-block;
+  vertical-align: middle;
+  height: 40px;
+  float: left;
+  padding-left: 15px;
+  padding-top: 19px;
+}
+
+#unitType {
+  display: inline-block;
+  vertical-align: middle;
+  color: #fff;
+  font-family: arial,helvetica,sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 20px;
+  margin: 0;
+  float: left;
+  clear: both;
+}
+
+#parkLocation {
+  display: inline-block;
+  vertical-align: middle;
+  color: #fff;
+  font-family: arial,helvetica,sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  margin-bottom: 0;
+  line-height: 20px;
+  float: left;
+  clear: both;
+}
+
+.orgLogo {
+  display: table;
+  height: 79px;
+  float: right;
+  padding-right: 25px;
+}
+
+.orgLogo h2, .orgLogo h2 a:link, .orgLogo h2 a:visited  {
+  color: #fff;
+  display: table-cell;
+  font-family: arial,helvetica,sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 20px;
+  margin: 0;
+  vertical-align: middle;
+  text-decoration: none;
+}
+
+.orgLogo h2 a:hover, .orgLogo h2 a:active {
+  color: #fff;
+  display: table-cell;
+  font-family: arial,helvetica,sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 20px;
+  margin: 0;
+  vertical-align: middle;
+  text-decoration: underline;
+}
+
+
+.orgLogo img {
+  display: block;
+  padding-left: 15px;
+  padding-top: 12px;
+}
+
+.mapTitle {
+  background: #5e7630;
+  color: #fff;
+  height: 32px;
+  width: 100%;
+  position: absolute;
+  left: 0px;
+  top: 79px;
+  padding-left: 25px;
+}
+
+.titleArea {
+  display: table;
+  height: 32px;
+  float: left;
+}
+/*
  * Social sharing
  */
-#social{
-	margin-bottom:20px;
+.social{
+  float: right;
+  height: 32px;
+  color: white;
+  font-weight:normal;
+  font-size:13px;
+  padding-right: 50px;
 }
 
 @font-face {
@@ -152,8 +262,6 @@ a:hover{
        url('../fonts/storymaps-icons.woff?73880937') format('woff'),
        url('../fonts/storymaps-icons.ttf?73880937') format('truetype'),
        url('../fonts/storymaps-icons.svg?73880937#storymaps-icons') format('svg');
-  font-weight: normal;
-  font-style: normal;
 }
 /* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
 /* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
@@ -188,7 +296,7 @@ a:hover{
  
   /* Animation center compensation - margins should be symmetric */
   /* remove if not needed */
-  /*margin-left: .2em;*/
+  /* margin-left: .2em;*/
  
   /* you can be more comfortable with increased icons size */
   /* font-size: 120%; */
@@ -205,16 +313,16 @@ a:hover{
     display: inline-block;
     cursor: pointer;
     margin-left: 4px;
-    color: #C5D5D5;
-    vertical-align: 0px;
+    vertical-align: middle;
+    padding-top: 8px;
 }
 
 .shareIcon:hover {
-	color: #fff;
+	color: #DDC78F;
 }
 
 .share_bitly {
-	vertical-align: 1px;
+	vertical-align: bottom;
 	margin-left: 2px;
 }
 
@@ -229,8 +337,8 @@ a:hover{
 
 .popover {
 	position: absolute;
-	top: 0;
-	right: 47px;
+	top: -9px;
+	right: 75px;
 	z-index: 1010;
 	display: none;
 	max-width: 276px;

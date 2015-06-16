@@ -100,22 +100,35 @@ var DEFAULT_PROXY_URL = "http://gisportal.nps.gov/arcgis/sharing/proxy";
 <body class="claro">
 
     <!-- Header Section-->
-    <div id="header">
-      <div id="headerText">
-	    <h1 id="title"></h1>
-	    <h2 id="subtitle"></h2>
+      <div id="header">
+         <div id="parkShortName">Denali</div>
+         <div id="parkDetailName">
+            <div id="unitType">National Park & Preserve</div>
+            <div id="parkLocation">Alaska</div>
+         </div>
+	 <div class="orgLogo">
+            <h2><a href="http://www.nps.gov" target="blank">National Park Service</a></h2>
+            <a href="http://www.nps.gov" target="blank"><img src="images/ArrowheadNoBackground.png" height="55" alt="National Park Service Arrowhead"></a>
+         </div>
+         <div class="mapTitle">
+            <div class="titleArea">
+                <h1 id="title"></h1>
+            </div>
+            <div class="social">
+                <i class="shareIcon share_facebook socialIcon-facebook-squared-1" title="Share on Facebook" tabindex="0"></i>
+                <i class="socialIcon-twitter-1 shareIcon share_twitter" title="Share on Twitter" tabindex="0"></i>
+                <i class="socialIcon-link shareIcon share_bitly" id="bitlyIcon" title="Share a short link" tabindex="0"></i>
+                <div class="popover fade left in" style="display: none;">
+		    <div class="arrow"></div>
+		    <div class="popover-content" id="bitlyContent">
+		       <div style="width:150px; height:30px">  
+			  <input id="bitlyInput" type="text" value="" style="width: 150px;">
+		       </div> 
+		    </div>
+                </div>
+            </div>
+         </div>
       </div>
-      <div id="logoArea">
-        <div id="organizationText">
-          Alaska Region<br/>
-          National Park Service<br/>
-          U.S. Department of the Interior<br/>
-        </div>
-        <div id="logo">
-          <img src="images/ArrowheadNoBackground.png" height="75" alt="National Park Service Arrowhead">
-        </div>
-      </div>
-    </div>
 	
     <div id="mobileTitlePage"></div>
 	
