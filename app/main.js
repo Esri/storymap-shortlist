@@ -34,6 +34,8 @@ var FIELDNAME_LAYER = "Layer";
 var FIELDNAME_FULLSIZEURL = "Large_URL";  //1024x768
 var FIELDNAME_CREDITS = "Credits";
 
+var UNIT = '';  // TODO: make this a configurable setting
+
 var _lutIconSpecs = {
 	tiny:new IconSpecs(22,28,3,8),
 	medium:new IconSpecs(24,30,3,8),
@@ -42,12 +44,13 @@ var _lutIconSpecs = {
 	
 var _contentLayers = [];
 
-var _isMobile = isMobile();
+var _isMobile = isMobile();  //based on device type (see lib/common/helper_functions.js)
+                             //used for behavior in mouse over/out events
 var _isIE = (navigator.appVersion.indexOf("MSIE") > -1);
 
 var _map;
 
-var _layout = null;
+var _layout = null; //one of 'normal' : 'responsive' - based on the size of the browser window
 
 var _bookmarks;
 
@@ -70,6 +73,9 @@ var _firstLoad = true;
 
 var _dojoReady = false;
 var _jqueryReady = false;
+
+var _title;
+var _subtitle;
 
 /******************************************************
 ************************* init ************************
@@ -114,15 +120,12 @@ function init() {
 	//        you'll need to uncomment the following line and provide
 	//        a valid proxy server url. 										
 	//esri.config.defaults.io.proxyUrl = YOUR_PROXY_URL_HERE;
+    UNIT = queryString["unit"] ? queryString["unit"] : UNIT;
+    fixheader(UNIT);
 
 	$("#bookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
 
-	if (EMBED) {
-		//$("#header").hide(); //can't hide it; because other code uses a hidden header to set other features.
-		$("#header").css('height', '0px')
-	}
-
-	handleWindowResize();	
+	handleWindowResize();
 	$(this).resize(handleWindowResize);	
 	
 	$("#zoomIn").click(function(e) {
@@ -177,18 +180,18 @@ function init() {
 	});
 	
 	mapDeferred.addCallback(function(response) {
-		var title = response.itemInfo.item.title;
-		var subtitle = response.itemInfo.item.snippet;
+		_title = response.itemInfo.item.title;
+		_subtitle = response.itemInfo.item.snippet;
 		
-		document.title = title;
-		$("#title").html(title);
-		$("#subtitle").html(subtitle);
-		
-		$('#mobileTitlePage').append('<div class="mobileTitle">'+title+"</div>")
-		$('#mobileTitlePage').append('<div class="mobileSnippet"></div>')
-		if(subtitle)
-			$('.mobileSnippet').html(subtitle)
-		
+		document.title = _title;
+        if (_subtitle) {
+            $("#title").html(_subtitle);
+            $('#mobileTitle').html(_subtitle)
+        } else {
+            $("#title").html(_title);
+            $('#mobileTitle').html(_title)
+        }
+
 		_map = response.map;
 		  
 		dojo.connect(_map, 'onExtentChange', refreshList);
@@ -197,7 +200,7 @@ function init() {
 		// causes a deselect.
 
 		dojo.connect(_map, 'onClick', function(event){
-			if (event.graphic == null && $('#header').css('display') == 'block') {
+			if (event.graphic == null && headerIsVisible()) {
 				unselect();
 			}
 			$('#mobileTitlePage').css('display', 'none');
@@ -652,10 +655,10 @@ function layer_onMouseOver(event)
 	if (_isMobile) return;
 	_map.setMapCursor("pointer");
 	var graphic = event.graphic;
-	if (graphic == _selected && $('#header').css('display') == 'block') 
+	if (graphic == _selected && headerIsVisible())
 		return;
 	else 
-		if (graphic == _selected && $('#header').css('display') == 'none') {
+		if (graphic == _selected && headerIsHidden()) {
 			$("#hoverInfo").html(graphic.attributes.getValueCI(FIELDNAME_TITLE));
 			var pt = _map.toScreen(graphic.geometry);
 			hoverInfoPos(pt.x, pt.y);
@@ -768,6 +771,23 @@ function SortByNumber(a, b){
   var aNumber = a.attributes.getValueCI(FIELDNAME_NUMBER);
   var bNumber = b.attributes.getValueCI(FIELDNAME_NUMBER); 
   return ((aNumber < bNumber) ? -1 : ((aNumber > bNumber) ? 1 : 0));
+}
+
+function fixheader(unitcode) {
+    if (unitcode in units) {
+        $("#parkShortName").html(units[unitcode].name);
+        $("#unitType").html(units[unitcode].type);
+        $("#parkLocation").html(units[unitcode].state);
+    } else {
+        var headerparts = unitcode.split("|");
+        $("#parkShortName").html(headerparts[0]);
+        if (headerparts.length > 1) {
+            $("#unitType").html(headerparts[1]);
+        }
+        if (headerparts.length > 2) {
+            $("#parkLocation").html(headerparts[2]);
+        }
+    }
 }
 
 function loadBookmarks() {
@@ -987,18 +1007,26 @@ function getValueCI(field) {
 }
 
 function handleWindowResize() {
-	if(!_firstLoad && _layout == 'normal')
+    //Coordinate these magic numbers with responsive.css
+    var layout = $("body").width() > 768 ? 'normal' : 'responsive';
+
+	if(!_firstLoad && layout == 'normal')
 		$('#mobileTitlePage').css('display', 'none')
-	if ($('#header').css('display') != 'none') {
+	if (layout == 'normal') {
 		if(_layout == 'responsive'){
 			preSelection();
 			infoWindow_Close();
 			_selected = null;
 		}
-		
-		_layout = 'normal';
-		$("#mainWindow").height($("body").height() - ($("#header").height()));
-		
+        if (EMBED) {
+            $("#banner").hide();
+        } else {
+            $("#banner").show();
+        }
+
+        var headerspace = headerIsVisible() ? $("#banner").height() : 0;
+        $("#mainWindow").height($("body").height() - headerspace);
+
 		if (_bookmarks) {
 			$("#tabs").width($("body").width() - ($("#bookmarksCon").width() + parseInt($("#tabs").css("padding-left"))));
 		}
@@ -1023,11 +1051,16 @@ function handleWindowResize() {
 		$("#map").height($("#mainWindow").height() - $('#divStrip').height());
 		$("#map").css('top',$('#divStrip').height());
 		$("#map").width($("#mainWindow").width() - $("#paneLeft").outerWidth());
-		
-		$('#header').width($('body').width());
-		$("#headerText").css("max-width", $("#header").width() - ($("#logoArea").width() + 100));
+
+		/*
+		//Adjust width of header elements
+        var widthViewport = $('body').width();
+		$('#banner').width(widthViewport);
+		var rightAreaWidth = Math.max($("#banner .headerLogoImg").outerWidth() + 50, $(" #banner .rightArea").outerWidth() + 20);
+		$("#banner .textArea").width(widthViewport - rightAreaWidth - 15);
+		*/
 	}
-	else{
+	else{ // layout == 'responsive'
 		resizeMobileElements();
 		if(_layout == 'normal'){
 			preSelection();
@@ -1035,13 +1068,13 @@ function handleWindowResize() {
 			showMobileList();
 			postSelection();
 		}
-				
-		_layout = 'responsive'
-		$("#mobileList").width($("body").width());
+        $("#banner").hide();
+		//$("#mobileList").width($("body").width());
 		if(!_firstLoad)
 			_mobileThemeSwiper.reInit();
 	}
 
+    _layout = layout;  //save the layout for next call of handleWindowResize() and for buildPopup()
 	if (_map) _map.resize();
 }
 
@@ -1107,6 +1140,14 @@ function postSelection(skipPopup) {
 	
 }
 
+function headerIsVisible() {
+	return !headerIsHidden();
+}
+
+function headerIsHidden() {
+	return $('#banner').css('display') == 'none';
+}
+
 function buildPopup(feature, geometry, baseLayerClick)
 {
 	$('#mobileSupportedLayersView').html('');
@@ -1115,7 +1156,7 @@ function buildPopup(feature, geometry, baseLayerClick)
 	$('#navThemeRight').css('visibility', 'hidden');
 	var atts = feature.attributes;
 	
-	var mobile = $('#header').css('display') == 'none';
+	var mobile = _layout == 'responsive';
 	
 	if (!baseLayerClick && mobile) {
 		buildMobileSlideView()
@@ -1292,7 +1333,7 @@ function buildPopup(feature, geometry, baseLayerClick)
         showDetails(feature);
     });
 	
-	if (DETAILS_PANEL && $('#header').css('display') == 'block') {
+	if (DETAILS_PANEL && headerIsVisible()) {
 		$(".infoWindowPictureDiv").click(function(e) {
 			showDetails(feature);
 		});	
@@ -1638,8 +1679,8 @@ function displayLocationPin(point)
 
 function shareFacebook()
 {
-	var options = '&p[title]=' + encodeURIComponent($('#title').text())
-					+ '&p[summary]=' + encodeURIComponent($('#subtitle').text())
+	var options = '&p[title]=' + encodeURIComponent(_title)
+					+ '&p[summary]=' + encodeURIComponent(_subtitle)
 					+ '&p[url]=' + encodeURIComponent(document.location.href)
 					+ '&p[images][0]=' + encodeURIComponent($("meta[property='og:image']").attr("content"));
 	
@@ -1652,7 +1693,7 @@ function shareFacebook()
 
 function shareTwitter()
 {
-	var options = 'text=' + encodeURIComponent($('#title').text())
+	var options = 'text=' + encodeURIComponent(_title)
 					+ '&url=' + encodeURIComponent(document.location.href)
 					+ '&related=EsriStoryMaps'
 					+ '&hashtags=storymap'; 
@@ -1706,7 +1747,7 @@ function resizeMobileElements(){
 	$('#returnHiddenBar').css('width', '100%').css('width', '-=80px');
 	$('#mobilePaneList').css('height', '52%').css('height', '-=20px');
 	$('.mobileTileList.blurb').css('width', '100%').css('width', '-=125px');
-	if($('#header').css('display') == 'none')
+	if(headerIsHidden())
 		$('#map').css('height', '48%').css('height', '-=20px');
 }
 
