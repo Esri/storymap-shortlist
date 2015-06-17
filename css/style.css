@@ -129,7 +129,7 @@ a:hover{
 /*
  * NEW Header Area
  */
-#header {
+#banner {
   /* Transparent strip behind text */
   /* Creates the solid bg for IE8 */
   background: rgb(0, 0, 0);
@@ -894,22 +894,14 @@ ul.tilelist .blurb {
   margin-right: 15px;
 }
 
-.mobileTitle{
+#mobileTitle{
 	margin-top: 12px;
 	margin-left: 15px;
 	font-family: 'frutiger-bold', sans-serif;
-	font-size: 1.6em;
+	font-size: 1.4em;
 	font-weight: bold;
+    overflow-x: hidden;
 	color: #fff;
-}
-
-.mobileSnippet{
-	margin: 15px 15px 15px 15px;
-	font-family: 'frutiger', sans-serif;
-	font-size: 1em;
-	color: #fff;
-	max-height: 350px;
-	overflow-y: auto;
 }
 
 .introList{
