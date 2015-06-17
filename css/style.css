@@ -935,14 +935,8 @@ ul.tilelist .blurb {
 	font-size: 1.4em !important;
 	color: #f4f4f4;
 }
-
-<<<<<<< HEAD
 .mobileTitleThemes:hover, .mobileTitleThemes:focus{
-	background-color: #777 !important;
-=======
-.mobileTitleThemes:hover{
 	background-color: #b28000 !important;
->>>>>>> centennial-header
 	color: #fff;
 }
 
