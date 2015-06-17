@@ -253,13 +253,7 @@ function init() {
 	dojo.connect(dojo.byId('centerMapIconContainer'), 'onclick', centerMapOnFeature);
 	
 	dojo.connect(dojo.byId('locateButton'), 'onclick', getDeviceLocation);
-	
-	$(document).on("click", function(src) {
-		if(src.target.id != 'bitlyIcon' && src.target.id != 'bitlyContent' && src.target.id != 'bitlyInput' ){
-			 $(".popover").hide(); 
-		}
-	});
-	
+
 	$('#navThemeRight').on('click', function(){
 		_mobileThemeSwiper.swipeNext()
 	})
@@ -1726,16 +1720,20 @@ function requestBitly()
 		},
 		function(response)
 		{
-			if( ! response || ! response || ! response.data.url )
-				return;
+			var uri;
+            if( ! response || ! response.data || ! response.data.url )
+				uri = "Error";
+            else
+                uri = response.data.url
 			
 			$("#bitlyLoad").fadeOut();
 			$("#bitlyInput").fadeIn();
-			$("#bitlyInput").val(response.data.url);
+			$("#bitlyInput").val(uri);
 			$("#bitlyInput").select();
 		}
 	);
-	$(".popover").show()
+	$(".popover").show();
+    $("#bitlyInput").blur(function(){$(".popover").hide()});
 }
 
 // Necessary as css calc() method does not work in older android 

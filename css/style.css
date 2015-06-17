@@ -325,10 +325,6 @@ a:hover{
 	margin-left: 2px;
 }
 
-.social .popover-title {
-	display: none;
-}
-
 /*noinspection CssInvalidPseudoSelector*/
 #bitlyInput::-ms-clear {
 	display: none;

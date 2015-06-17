@@ -119,11 +119,14 @@ var PAN_PERCENT = 0.15
 					<i class="shareIcon share_facebook socialIcon-facebook-squared-1" title="Share on Facebook" tabindex="0"></i>
 					<i class="shareIcon share_twitter socialIcon-twitter-1" title="Share on Twitter" tabindex="0"></i>
 					<i class="shareIcon share_bitly socialIcon-link" title="Share a short link" tabindex="0"></i>
-					<div class="popover fade left in" style="display: none;">
+					<div class="popover">
 						<div class="arrow"></div>
 						<div class="popover-content" id="bitlyContent">
 							<div style="width:150px; height:30px">
-								<input id="bitlyInput" type="text" value="" style="width: 150px;">
+								<div id="bitlyLoad" style="position:absolute; top: 16px; left: 24px; width:130px; text-align:center;">
+									<img src="images/loader/loader-upload.gif" alt="Loading" />
+								</div>
+								<input id="bitlyInput" type="text" value="" style="display: none; width: 150px;">
 							</div>
 						</div>
 					</div>
