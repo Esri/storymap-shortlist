@@ -175,7 +175,7 @@ a:hover{
 #bookmarksCon{
 	position:absolute;
 	width:160px !important;
-	right:25px;
+	right:20px;
 	top:0px;
 	z-index:100;
 	display:none;

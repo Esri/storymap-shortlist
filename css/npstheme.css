@@ -93,14 +93,25 @@
   padding-right: 25px;
 }
 
-.orgLogo h2, .orgLogo h2 a:link, .orgLogo h2 a:visited  {
+.orgLogo h2 {
   color: #fff;
   display: table-cell;
   font-family: arial,helvetica,sans-serif;
   font-size: 14px;
   font-weight: bold;
   line-height: 20px;
-  margin: 0;
+  vertical-align: middle;
+  text-decoration: none;
+  padding-right:15px;
+}
+
+ .orgLogo h2 a:link, .orgLogo h2 a:visited  {
+  color: #fff;
+  display: table-cell;
+  font-family: arial,helvetica,sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 20px;
   vertical-align: middle;
   text-decoration: none;
 }
@@ -112,15 +123,13 @@
   font-size: 14px;
   font-weight: bold;
   line-height: 20px;
-  margin: 0;
   vertical-align: middle;
   text-decoration: underline;
 }
 
 .orgLogo img {
   display: block;
-  padding-left: 15px;
-  padding-top: 12px;
+  margin-top: 12px;
 }
 
 .mapTitle {
@@ -157,7 +166,7 @@
   cursor: pointer;
   margin-left: 4px;
   vertical-align: middle;
-  padding-top: 8px;
+  margin-top: 8px;
 }
 
 .shareIcon:hover {
