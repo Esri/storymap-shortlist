@@ -66,7 +66,7 @@
   color: #fff;
   font-family: arial,helvetica,sans-serif;
   font-size: 14px;
-  font-weight: bold;
+  font-weight: normal;
   line-height: 20px;
   margin: 0;
   float: left;
@@ -87,49 +87,38 @@
 }
 
 .orgLogo {
-  display: table;
-  height: 79px;
-  float: right;
-  padding-right: 25px;
+    display: table;
+    height: 79px;
+    float: right;
+    padding-right: 25px;
 }
 
-.orgLogo h2 {
-  color: #fff;
-  display: table-cell;
-  font-family: arial,helvetica,sans-serif;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 20px;
-  vertical-align: middle;
-  text-decoration: none;
-  padding-right:15px;
+.orgLogo h2  {
+    color: #fff;
+    display: table-cell;
+    font-family: arial,helvetica,sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 20px;
+    margin: 0;
+    vertical-align: middle;
+    text-decoration: none;
+    padding-right: 15px
 }
 
- .orgLogo h2 a:link, .orgLogo h2 a:visited  {
-  color: #fff;
-  display: table-cell;
-  font-family: arial,helvetica,sans-serif;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 20px;
-  vertical-align: middle;
-  text-decoration: none;
+.orgLogo h2 a:link, a:visited  {
+    color: #fff;
+    text-decoration: none;
 }
 
-.orgLogo h2 a:hover, .orgLogo h2 a:active {
-  color: #fff;
-  display: table-cell;
-  font-family: arial,helvetica,sans-serif;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 20px;
-  vertical-align: middle;
-  text-decoration: underline;
+.orgLogo h2 a:hover, h2 a:active {
+    color: #fff;
+    text-decoration: underline;
 }
 
-.orgLogo img {
-  display: block;
-  margin-top: 12px;
+.orgLogoDiv {
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .mapTitle {
@@ -162,20 +151,20 @@
 }
 
 .shareIcon {
-  display: inline-block;
-  cursor: pointer;
-  margin-left: 4px;
-  vertical-align: middle;
-  margin-top: 8px;
+    display: inline-block;
+    cursor: pointer;
+    padding: 2px 2px 0px 2px;
+    margin-top: 6px;
+    margin-left: 2px;
+    vertical-align: middle;
 }
 
 .shareIcon:hover {
-  color: #DDC78F;
+    color: #C8DEA8;
 }
 
 .share_bitly {
-  vertical-align: bottom;
-  margin-left: 2px;
+    vertical-align: bottom;
 }
 
 .popover {
