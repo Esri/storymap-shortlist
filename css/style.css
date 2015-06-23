@@ -196,35 +196,32 @@ a:hover{
   padding-right: 25px;
 }
 
-.orgLogo h2, .orgLogo h2 a:link, .orgLogo h2 a:visited  {
-  color: #fff;
-  display: table-cell;
-  font-family: arial,helvetica,sans-serif;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 20px;
-  margin: 0;
-  vertical-align: middle;
-  text-decoration: none;
+.orgLogo h2  {
+    color: #fff;
+    display: table-cell;
+    font-family: arial,helvetica,sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 20px;
+    margin: 0;
+    vertical-align: middle;
+    text-decoration: none;
+    padding-right: 15px
 }
 
-.orgLogo h2 a:hover, .orgLogo h2 a:active {
-  color: #fff;
-  display: table-cell;
-  font-family: arial,helvetica,sans-serif;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 20px;
-  margin: 0;
-  vertical-align: middle;
-  text-decoration: underline;
+.orgLogo h2 a:link, a:visited  {
+    color: #fff;
+    text-decoration: none;
 }
 
+.orgLogo h2 a:hover, h2 a:active {
+    color: #fff;
+    text-decoration: underline;
+}
 
-.orgLogo img {
-  display: block;
-  padding-left: 15px;
-  padding-top: 12px;
+.orgLogoDiv {
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .mapTitle {
