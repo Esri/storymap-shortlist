@@ -9,7 +9,7 @@ body {
 	color:#333;
 	font-size:88%;
 	overflow:hidden;
-    font-family: 'frutiger', Fallback, sans-serif;
+        font-family: 'frutiger', Fallback, sans-serif;
 	position: fixed;
 	bottom: 0;
 	left: 0;
@@ -31,21 +31,6 @@ a:hover{
 }
 
 /*
- * Frutiger Font
- */
-@font-face {
-    font-family: 'frutiger';
-    src: url('../fonts/FrutigerLTStd-Roman.woff') format('woff'),
-    url('../fonts/FrutigerLTStd-Roman.otf') format('truetype');
-}
-
-@font-face {
-    font-family: 'frutiger-bold';
-    src: url('../fonts/FrutigerLTStd-Bold.woff') format('woff'),
-    url('../fonts/FrutigerLTStd-Bold.otf') format('truetype');
-}
-
-/*
  * Focus enhancements
  */
 /*make the firefox focus really POP */
@@ -60,89 +45,9 @@ a:hover{
 }
 
 /*
- * Header Area
- */	  
-#header {
-	height:115px;
-	width: 100%;
-	background:#000000;
-	color:#fff;
-	margin:0;
-	overflow:hidden;
-}
-
-#headerText{
-	padding-top:45px;
-	padding-left:20px;
-	float:left;
-}
-
-#title {
-	font-family: 'frutiger-bold', sans-serif;
-	font-size:1.7em;
-	font-weight:bold;
-	text-align:left;
-	white-space: nowrap;  
-	overflow: hidden;  
-	text-overflow: ellipsis;
-	-o-text-overflow:ellipsis;
-	margin:0px;
-	color:White;
-}
-
-#subtitle {
-    font-family: 'frutiger', sans-serif;
-	font-size:.9em;
-    margin:0px;
-	overflow: hidden;
-	font-weight:normal;
-	color: #C5D5D5;
-}
-
-#logoArea{
-    float:right;
-    padding-top:20px;
-    padding-right:20px;
-}
-
-#organizationText {
-    float:left;
-    padding-right: 10px;
-    padding-top:15px;
-    text-align:right;
-    font-size:.9em;
-}
-
-#msLink{
-	color:#C5D5D5;
-    font-family: 'frutiger', sans-serif;
-	font-weight: normal !important;
-	font-size:.9em;
-	outline:none;
-	text-decoration: none;
-}
-
-#msLink:hover{
-	text-decoration: underline;	
-}
-
-#logo{
-	border:none;
-	outline:none;
-    float:right;
-    padding-left: 10px;
-}
-
-#logoImg{
-	border:none;
-	outline:none;
-}
-
-/*
  * Social sharing
  */
-#social{
-	margin-bottom:20px;
+.social{
 }
 
 @font-face {
@@ -152,8 +57,6 @@ a:hover{
        url('../fonts/storymaps-icons.woff?73880937') format('woff'),
        url('../fonts/storymaps-icons.ttf?73880937') format('truetype'),
        url('../fonts/storymaps-icons.svg?73880937#storymaps-icons') format('svg');
-  font-weight: normal;
-  font-style: normal;
 }
 /* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
 /* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
@@ -188,7 +91,7 @@ a:hover{
  
   /* Animation center compensation - margins should be symmetric */
   /* remove if not needed */
-  /*margin-left: .2em;*/
+  /* margin-left: .2em;*/
  
   /* you can be more comfortable with increased icons size */
   /* font-size: 120%; */
@@ -201,75 +104,15 @@ a:hover{
 .socialIcon-twitter-1:before { content: '\e800'; } /* '' */
 .socialIcon-facebook-squared-1:before { content: '\e801'; } /* '�?' */
 
-.shareIcon {
-    display: inline-block;
-    cursor: pointer;
-    margin-left: 4px;
-    color: #C5D5D5;
-    vertical-align: 0px;
-}
-
-.shareIcon:hover {
-	color: #fff;
-}
-
-.share_bitly {
-	vertical-align: 1px;
-	margin-left: 2px;
-}
-
-.social .popover-title {
-	display: none;
-}
-
 /*noinspection CssInvalidPseudoSelector*/
 #bitlyInput::-ms-clear {
 	display: none;
 }
 
 .popover {
-	position: absolute;
-	top: 0;
-	right: 47px;
-	z-index: 1010;
-	display: none;
-	max-width: 276px;
-	padding: 1px;
-	text-align: left;
-	background-color: #ffffff;
-	-webkit-background-clip: padding-box;
-    /*noinspection CssInvalidElement*/
-    -moz-background-clip: padding; /* support for Firefox 1.0 to 3.6 */
-	background-clip: padding-box;
-	border: 1px solid #ccc;
-	border: 1px solid rgba(0, 0, 0, 0.2);
-	-webkit-border-radius: 6px;
-	-moz-border-radius: 6px;
-	border-radius: 6px;
-	-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-	-moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-	white-space: normal;
-	margin-left: -10px;
-	color: black;
 }
 
 .arrow {
-	top: 50%;
-	right: -11px;
-	margin-top: -11px;
-	border-right-width: 0;
-	border-left-color: #999;
-	border-left-color: rgba(0, 0, 0, 0.25);
-	border-width: 11px;
-	border-bottom: 12px solid transparent;
-	margin-top: -12px;
-	width: 0;
-	border-left: 12px solid #f7f7f7;
-	height: 0;
-	border-top: 12px solid transparent;
-	top: 50%;
-	position: absolute;
 }
 
 .popover-content {
@@ -330,6 +173,7 @@ a:hover{
 	top:0px;
 	z-index:100;
 	display:none;
+	text-align: right;
 }
 
 #bookmarksDiv{
@@ -352,6 +196,7 @@ a:hover{
 	float:right;
 	background:#908D7C;
 	margin-top:3px;
+    margin-right:3px;
 	width:160px;
 	.height:28px;
 	cursor:pointer;
@@ -366,6 +211,8 @@ a:hover{
 	margin-left:2px;
 	.margin-top:0px;
 	padding:5px;
+    padding-right: 22px;
+    text-align: right;
 	color:#fff;
 	font-family: 'frutiger', sans-serif;
 }
@@ -781,7 +628,7 @@ ul.tilelist .blurb {
 #mobileTitlePage{
 	height: 100%;
 	width: 100%;
-	background-color: rgb(68, 68, 68);
+	background-color: black;
 	display: none;
 	z-index:101;
 	position: absolute;
@@ -789,22 +636,10 @@ ul.tilelist .blurb {
 	overflow-y: auto;
 }
 
-.mobileTitle{
-	margin-top: 12px;
-	margin-left: 15px;
-	font-family: 'frutiger-bold', sans-serif;
-	font-size: 1.6em;
-	font-weight: bold;
-	color: #fff;
+#mobileTitlePage img{
 }
 
-.mobileSnippet{
-	margin: 15px 15px 15px 15px;
-	font-family: 'frutiger', sans-serif;
-	font-size: 1em;
-	color: #fff;
-	max-height: 350px;
-	overflow-y: auto;
+#mobileTitle{
 }
 
 .introList{
@@ -823,21 +658,9 @@ ul.tilelist .blurb {
 }
 
 .mobileTitleThemes{
-	height: 80px;
-	-webkit-box-shadow: none !important;
-	cursor: pointer;
-	margin: 0 !important;
-	border-color: #fff;
-	border-style: solid;
-	border-width: 1px 0px 1px;
-	background-color: #888;
-	font-size: 1.4em !important;
-	color: #f4f4f4
 }
 
 .mobileTitleThemes:hover, .mobileTitleThemes:focus{
-	background-color: #777 !important;
-	color: #fff;
 }
 
 .mobileTitleTheme{
@@ -1048,14 +871,6 @@ ul.mobileTileList .blurb {
 }
 
 .mobileFeatureTitle{
-	color: #8c8c8c;
-	font-family: 'frutiger-bold', sans-serif;
-	font-size: 1.4em;
-	text-align: left;
-	padding-left: 70px;
-	padding-top: 8px;
-	margin-top: -35px;
-	font-weight: bold;
 }
 
 .mobileFeatureSubtitle{
@@ -1137,13 +952,6 @@ ul.mobileTileList .blurb {
  * Mobile Theme/Nav Bar 
  */
 #mobileThemeBar{
-	visibility: hidden;
-	width: 100%;
-	top: 48%;
-	height: 40px;
-	background-color: rgb(68, 68, 68);
-	position: absolute;
-	color: #CFCFCF;
 }
 
 /*#mobileThemeBar .swiper-container{
@@ -1258,10 +1066,8 @@ ul.mobileTileList .blurb {
 	content: "\e60d";
 }
 .icon-contract{
-	color: #ededed;
 }
 .icon-contract:hover{
-	color: #fff;
 }
 .icon-link:before {
 	content: "\e603";
@@ -1277,33 +1083,21 @@ ul.mobileTileList .blurb {
 	content: "\e609";
 }
 .icon-arrow-left{
-	color: #ededed;
-	position: absolute;
-	left: 5px;
-	top: 8px;
 }
 .icon-arrow-left:hover {
-	color:#fff;
 }
 .icon-arrow-right:before {
 	content: "\e60a";
 }
 .icon-arrow-right{
-	color: #ededed;
-	position: absolute;
-	right: 5px;
-	top: 8px;
 }
 .icon-arrow-right:hover {
-	color:#fff;
 }
 
 #returnIcon{
-	display: none; 
-	cursor: pointer;
-	color: #ededed;
-	width: 40px;
-	height: 40px;
+}
+
+#returnIcon:hover{
 }
 
 #centerMapIconContainer{
