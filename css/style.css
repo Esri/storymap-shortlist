@@ -312,18 +312,18 @@ a:hover{
 .shareIcon {
     display: inline-block;
     cursor: pointer;
-    margin-left: 4px;
+    padding: 2px 2px 0px 2px;
+    margin-top: 6px;
+    margin-left: 2px;
     vertical-align: middle;
-    padding-top: 8px;
 }
 
 .shareIcon:hover {
-	color: #DDC78F;
+    color: #C8DEA8;
 }
 
 .share_bitly {
 	vertical-align: bottom;
-	margin-left: 2px;
 }
 
 /*noinspection CssInvalidPseudoSelector*/
