@@ -456,6 +456,7 @@ a:hover{
 	float:right;
 	background:#908D7C;
 	margin-top:3px;
+    margin-right:3px;
 	width:160px;
 	.height:28px;
 	cursor:pointer;
@@ -470,6 +471,8 @@ a:hover{
 	margin-left:2px;
 	.margin-top:0px;
 	padding:5px;
+    padding-right: 22px;
+    text-align: right;
 	color:#fff;
 	font-family: 'frutiger', sans-serif;
 }
