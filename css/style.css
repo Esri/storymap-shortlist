@@ -7,7 +7,7 @@
 body {
 	background-color:#fff;
 	color:#333;
-	font-size:88%;
+	font-size:14px;
 	overflow:hidden;
         font-family: 'frutiger', Fallback, sans-serif;
 	position: fixed;
@@ -31,23 +31,10 @@ a:hover{
 }
 
 /*
- * Focus enhancements
- */
-/*make the firefox focus really POP */
-@-moz-document url-prefix() {
-	:focus {
-		/* Firefox uses:  outline: 1px dotted #212121; */
-		/* Chrome on OS X uses:  outline: -webkit-focus-ring-color auto 5px; where -webkit-focus-ring-color = '#5B9DD9' */
-		outline-color:#5B9DD9;
-		outline-style:solid;
-		outline-width:3px;
-	}
-}
-
-/*
  * Social sharing
  */
 .social{
+    margin-bottom:20px;
 }
 
 @font-face {
@@ -73,7 +60,6 @@ a:hover{
   font-family: "storymaps-icons";
   font-style: normal;
   font-weight: normal;
-  speak: none;
  
   display: inline-block;
   text-decoration: inherit;
@@ -104,15 +90,73 @@ a:hover{
 .socialIcon-twitter-1:before { content: '\e800'; } /* '' */
 .socialIcon-facebook-squared-1:before { content: '\e801'; } /* '�?' */
 
-/*noinspection CssInvalidPseudoSelector*/
+.shareIcon {
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 4px;
+    color: #C5D5D5;
+    vertical-align: 0px;
+}
+
+.shareIcon:hover {
+    color: #fff;
+}
+
+.share_bitly {
+    vertical-align: 1px;
+    margin-left: 2px;
+}
+
+.social .popover-title {
+    display: none;
+}
+
 #bitlyInput::-ms-clear {
-	display: none;
+    display: none;
 }
 
 .popover {
+    position: absolute;
+    top: 0;
+    right: 47px;
+    z-index: 1010;
+    display: none;
+    max-width: 276px;
+    padding: 1px;
+    text-align: left;
+    background-color: #ffffff;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    white-space: normal;
+    margin-left: -10px;
+    color: black;
 }
 
 .arrow {
+    top: 50%;
+    right: -11px;
+    margin-top: -11px;
+    border-right-width: 0;
+    border-left-color: #999;
+    border-left-color: rgba(0, 0, 0, 0.25);
+    border-width: 11px;
+    border-bottom: 12px solid transparent;
+    margin-top: -12px;
+    width: 0;
+    border-left: 12px solid #f7f7f7;
+    height: 0;
+    border-top: 12px solid transparent;
+    top: 50%;
+    position: absolute;
 }
 
 .popover-content {
@@ -125,11 +169,10 @@ a:hover{
 #divStrip {
 	width:100%;
 	height: auto;
-	margin:auto;
 	overflow:visible;
 	background-color:#908D7C;
-	margin:0px;
-	padding:0px;
+	margin:0;
+	padding:0;
 	z-index:101;
 }
 
@@ -169,8 +212,8 @@ a:hover{
 #bookmarksCon{
 	position:absolute;
 	width:160px !important;
-	right:0px;
-	top:0px;
+	right:0;
+	top:0;
 	z-index:100;
 	display:none;
 	text-align: right;
@@ -209,9 +252,8 @@ a:hover{
 	position:relative;
 	margin:auto;
 	margin-left:2px;
-	.margin-top:0px;
-	padding:5px;
-    padding-right: 22px;
+	.margin-top:0;
+    padding: 5px 22px 5px 5px;
     text-align: right;
 	color:#fff;
 	font-family: 'frutiger', sans-serif;
@@ -249,7 +291,6 @@ ul.tilelist {
 	padding-left:1px;
     display:inline-block;
 	overflow:auto;
-	margin-top:0px;
 	margin:auto;
 	padding-bottom:10px;
 }
@@ -292,7 +333,7 @@ ul.tilelist img {
 }
 
 ul.tilelist p {
-    margin: 0px;
+    margin: 0;
     margin-left: -40px;
     margin-top: -10px;
 }
@@ -301,7 +342,7 @@ ul.tilelist .footer {
 	padding-left:10px;
 	position:absolute;
 	top:113px;
-	left:0px;
+	left:0;
 }
 
 ul.tilelist .num {
@@ -465,7 +506,6 @@ ul.tilelist .blurb {
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
-	box-shadow: 2px 2px 10px #333;
 	-webkit-box-shadow: 2px 2px 10px #333;
 	box-shadow: 2px 2px 10px #333;
 	filter: progid: DXImageTransform.Microsoft.Shadow(strength = 2, direction = 135, color = '#333333');
@@ -492,7 +532,7 @@ ul.tilelist .blurb {
 
 .details {
 	padding:20px;
-	padding-bottom:0px;
+	padding-bottom:0;
 	height:100%;
 }
 
@@ -565,7 +605,7 @@ ul.tilelist .blurb {
 	width: 100%;
 	text-align:center;
 	padding-top:10px;
-	padding-bottom:0px;
+	padding-bottom:0;
 }
 
 .infoWindowPictureDiv img {
@@ -588,7 +628,7 @@ ul.tilelist .blurb {
 	width:100%;
 	height:100%;
 	background-color:#FFF;
-	z-index:2000;top:0px;
+	z-index:2000;top:0;
 }
 
 #loader {
@@ -628,7 +668,7 @@ ul.tilelist .blurb {
 #mobileTitlePage{
 	height: 100%;
 	width: 100%;
-	background-color: black;
+    background-color: rgb(68, 68, 68);
 	display: none;
 	z-index:101;
 	position: absolute;
@@ -636,14 +676,16 @@ ul.tilelist .blurb {
 	overflow-y: auto;
 }
 
-#mobileTitlePage img{
-}
-
 #mobileTitle{
+    margin-top: 12px;
+    margin-left: 15px;
+    font-family: 'open_sanssemibold', sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
 }
 
 .introList{
-	margin: 35px 0 0 0 !important;
 	font-family: 'frutiger-bold', sans-serif;
 	font-size: 1.3em;
 	width: 100% !important;
@@ -658,9 +700,21 @@ ul.tilelist .blurb {
 }
 
 .mobileTitleThemes{
+    height: 80px;
+    -webkit-box-shadow: none !important;
+    cursor: pointer;
+    margin: 0 !important;
+    border-color: #fff;
+    border-style: solid;
+    border-width: 1px 0px 1px;
+    background-color: #888;
+    font-size: 20px !important;
+    color: #f4f4f4
 }
 
 .mobileTitleThemes:hover, .mobileTitleThemes:focus{
+    background-color: #777 !important;
+    color: #fff;
 }
 
 .mobileTitleTheme{
@@ -673,7 +727,7 @@ ul.tilelist .blurb {
 	cursor: pointer;
 	color: #CFCFCF;
 	background-color: #888;
-	margin: 60px 75px 0px -75px !important;
+	margin: 60px 75px 0 -75px !important;
 	width: 150px !important;
 	text-align: center;
 	position: absolute !important;
@@ -699,8 +753,8 @@ ul.tilelist .blurb {
 #mobileBookmarksCon{
 	position:absolute;
 	width:auto;
-	right:0px;
-	top:0px;
+	right:0;
+	top:0;
 	z-index:100;
 	display:none;
 }
@@ -737,7 +791,7 @@ ul.tilelist .blurb {
 	position:relative;
 	margin:auto;
 	margin-left:2px;
-	margin-top:0px;
+	margin-top:0;
 	padding:5px;
 	color: #FFF;
 	font-family: 'frutiger', sans-serif;
@@ -774,8 +828,8 @@ ul.tilelist .blurb {
 }
 
 ul.mobileTileList {
-	margin-top:0px;
-	-webkit-padding-start: 0px;
+	margin-top:0;
+	-webkit-padding-start: 0;
 	margin-left: 0;
 	padding-left: 0;
 }
@@ -813,7 +867,7 @@ ul.mobileTileList img {
 }
 
 ul.mobileTileList p {
-    margin: 0px;
+    margin: 0;
     margin-left: -40px;
     margin-top: -10px;
 }
@@ -871,6 +925,14 @@ ul.mobileTileList .blurb {
 }
 
 .mobileFeatureTitle{
+    color: #8c8c8c;
+    font-family: 'open_sanssemibold', sans-serif;
+    font-size: 20px;
+    text-align: left;
+    padding-left: 70px;
+    padding-top: 8px;
+    margin-top: -35px;
+    font-weight: bold;
 }
 
 .mobileFeatureSubtitle{
@@ -884,7 +946,7 @@ ul.mobileTileList .blurb {
 
 .mobilePictureDiv {
 	padding-top: 10px;
-	padding-bottom: 0px;
+	padding-bottom: 0;
 	overflow-x: hidden;
 	text-align: left;
 	margin-left: 20px;
@@ -902,7 +964,7 @@ ul.mobileTileList .blurb {
 	text-align: left;
 	padding-left: 20px;
 	padding-right: 20px;
-	padding-top: 0px;
+	padding-top: 0;
 	padding-bottom: 10px;
 	font-weight: normal;
 	margin-bottom: -5px;
@@ -952,6 +1014,13 @@ ul.mobileTileList .blurb {
  * Mobile Theme/Nav Bar 
  */
 #mobileThemeBar{
+    visibility: hidden;
+    width: 100%;
+    top: 48%;
+    height: 40px;
+    background-color: rgb(68, 68, 68);
+    position: absolute;
+    color: #CFCFCF;
 }
 
 /*#mobileThemeBar .swiper-container{
@@ -1020,7 +1089,6 @@ ul.mobileTileList .blurb {
 
 [class^="icon-"], [class*=" icon-"] {
 	font-family: 'icomoon';
-	speak: none;
 	font-style: normal;
 	font-weight: normal;
 	font-variant: normal;
@@ -1035,7 +1103,6 @@ ul.mobileTileList .blurb {
 [data-icon]:before {
   font-family: 'icomoon'; /* BYO icon font, mapped smartly */
   content: attr(data-icon);
-  speak: none; /* Not to be trusted, but hey. */
 }
 
 .icon-phone:before {
@@ -1066,8 +1133,10 @@ ul.mobileTileList .blurb {
 	content: "\e60d";
 }
 .icon-contract{
+    color: #ededed;
 }
 .icon-contract:hover{
+    color: #fff;
 }
 .icon-link:before {
 	content: "\e603";
@@ -1083,21 +1152,33 @@ ul.mobileTileList .blurb {
 	content: "\e609";
 }
 .icon-arrow-left{
+    color: #ededed;
+    position: absolute;
+    left: 5px;
+    top: 8px;
 }
 .icon-arrow-left:hover {
+    color:#fff;
 }
 .icon-arrow-right:before {
 	content: "\e60a";
 }
 .icon-arrow-right{
+    color: #ededed;
+    position: absolute;
+    right: 5px;
+    top: 8px;
 }
 .icon-arrow-right:hover {
+    color:#fff;
 }
 
 #returnIcon{
-}
-
-#returnIcon:hover{
+    display: none;
+    cursor: pointer;
+    color: #ededed;
+    width: 40px;
+    height: 40px;
 }
 
 #centerMapIconContainer{

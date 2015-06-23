@@ -1,0 +1,18 @@
+#mobileFeature{
+	display: none !important;
+}
+#mobilePaneList .noFeature{
+	display: none;
+}
+#mobileSupportedLayersView{
+	display: none !important;
+}
+#navThemeLeft{
+	display: none !important;
+}
+#navThemeRight{
+	display: none !important;
+}
+#mobileBookmarksCon{
+	display: none !important;
+}

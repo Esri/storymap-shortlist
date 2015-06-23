@@ -1,4 +1,8 @@
-﻿/*
+﻿body {
+    font-size:88%;
+}
+
+/*
  * Frutiger Font
  */
 @font-face {
@@ -14,13 +18,27 @@
 }
 
 /*
+ * Focus enhancements
+ */
+/*make the firefox focus really POP */
+@-moz-document url-prefix() {
+    :focus {
+        /* Firefox uses:  outline: 1px dotted #212121; */
+        /* Chrome on OS X uses:  outline: -webkit-focus-ring-color auto 5px; where -webkit-focus-ring-color = '#5B9DD9' */
+        outline-color:#5B9DD9;
+        outline-style:solid;
+        outline-width:3px;
+    }
+}
+
+/*
  * NPS Banner & Subtitle Area
 */
 #title {
   color: #fff;
   font-family: arial,helvetica,sans-serif;
-  font-size: 14px;
   font-weight: bold;
+  font-size: 1.2em;
   margin: 0;
   display: table-cell;
   vertical-align: middle;
@@ -43,8 +61,7 @@
   float: left;
   height: 79px;
   font-family: arial,helvetica,sans-serif;
-  font-size: 40px;
-  font-weight: normal;
+  font-size: 2.6em;
   letter-spacing: -0.7px;
   line-height: 79px;
   margin: 0;
@@ -65,8 +82,6 @@
   vertical-align: middle;
   color: #fff;
   font-family: arial,helvetica,sans-serif;
-  font-size: 14px;
-  font-weight: normal;
   line-height: 20px;
   margin: 0;
   float: left;
@@ -78,8 +93,6 @@
   vertical-align: middle;
   color: #fff;
   font-family: arial,helvetica,sans-serif;
-  font-size: 14px;
-  font-weight: normal;
   margin-bottom: 0;
   line-height: 20px;
   float: left;
@@ -97,8 +110,7 @@
     color: #fff;
     display: table-cell;
     font-family: arial,helvetica,sans-serif;
-    font-size: 14px;
-    font-weight: normal;
+    font-size: 1em;
     line-height: 20px;
     margin: 0;
     vertical-align: middle;
@@ -127,7 +139,7 @@
   height: 32px;
   width: 100%;
   position: absolute;
-  left: 0px;
+  left: 0;
   top: 79px;
   padding-left: 25px;
 }
@@ -142,18 +154,15 @@
  * Social Sharing Icons
  */
 .social{
+  margin-bottom:inherit;
   float: right;
   height: 32px;
-  color: white;
-  font-weight:normal;
-  font-size:13px;
   padding-right: 50px;
 }
 
 .shareIcon {
-    display: inline-block;
-    cursor: pointer;
-    padding: 2px 2px 0px 2px;
+    color: white;
+    padding: 2px 2px 0 2px;
     margin-top: 6px;
     margin-left: 2px;
     vertical-align: middle;
@@ -168,52 +177,16 @@
 }
 
 .popover {
-  position: absolute;
-  top: -9px;
   right: 75px;
-  z-index: 1010;
-  display: none;
-  max-width: 276px;
-  padding: 1px;
-  text-align: left;
-  background-color: #ffffff;
-  -webkit-background-clip: padding-box;
-  /*noinspection CssInvalidElement*/
-  -moz-background-clip: padding; /* support for Firefox 1.0 to 3.6 */
-  background-clip: padding-box;
-  border: 1px solid #ccc;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
-  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  white-space: normal;
-  margin-left: -10px;
-  color: black;
-}
-.arrow {
-  top: 50%;
-  right: -11px;
-  margin-top: -11px;
-  border-right-width: 0;
-  border-left-color: #999;
-  border-left-color: rgba(0, 0, 0, 0.25);
-  border-width: 11px;
-  border-bottom: 12px solid transparent;
-  margin-top: -12px;
-  width: 0;
-  border-left: 12px solid #f7f7f7;
-  height: 0;
-  border-top: 12px solid transparent;
-  top: 50%;
-  position: absolute;
 }
 
 /*
  * Mobile Intro Page
  */
+#mobileTitlePage{
+    background-color: black;
+}
+
 #mobileTitlePage img{
   float: right;
   margin-top: 12px;
@@ -221,31 +194,18 @@
 }
 
 #mobileTitle{
-  margin-top: 12px;
-  margin-left: 15px;
   font-family: 'frutiger-bold', sans-serif;
   font-size: 1.4em;
-  font-weight: bold;
   overflow-x: hidden;
-  color: #fff;
 }
 
 .mobileTitleThemes{
-  height: 80px;
-  -webkit-box-shadow: none !important;
-  cursor: pointer;
-  margin: 0 !important;
-  border-color: #fff;
-  border-style: solid;
-  border-width: 1px 0px 1px;
   background-color: #5e7630;
   font-size: 1.4em !important;
-  color: #f4f4f4;
 }
 
 .mobileTitleThemes:hover, .mobileTitleThemes:focus{
   background-color: #b28000 !important;
-  color: #fff;
 }
 
 /*
@@ -255,24 +215,13 @@
   color: black;
   font-family: 'frutiger-bold', sans-serif;
   font-size: 1.4em;
-  text-align: left;
-  padding-left: 70px;
-  padding-top: 8px;
-  margin-top: -35px;
-  font-weight: bold;
 }
 
 /*
  * Mobile Theme/Nav Bar 
  */
 #mobileThemeBar{
-  visibility: hidden;
-  width: 100%;
-  top: 48%;
-  height: 40px;
   background-color: #5e7630;
-  position: absolute;
-  color: #CFCFCF;
 }
 
 /*
@@ -288,9 +237,6 @@
 
 .icon-arrow-left{
   color: white;
-  position: absolute;
-  left: 5px;
-  top: 8px;
 }
 
 .icon-arrow-left:hover {
@@ -299,9 +245,6 @@
 
 .icon-arrow-right{
   color: white;
-  position: absolute;
-  right: 5px;
-  top: 8px;
 }
 
 .icon-arrow-right:hover {
@@ -309,11 +252,7 @@
 }
 
 #returnIcon{
-  display: none; 
-  cursor: pointer;
   color: white;
-  width: 40px;
-  height: 40px;
 }
 
 #returnIcon:hover{
