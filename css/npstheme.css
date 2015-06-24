@@ -68,6 +68,16 @@
   padding: 0 0 0 25px;
 }
 
+#parkShortName a:link, a:visited  {
+    color: #fff;
+    text-decoration: none;
+}
+
+#parkShortName a:hover, a:active {
+    color: #fff;
+    text-decoration: underline;
+}
+
 #parkDetailName {
   display: inline-block;
   vertical-align: middle;

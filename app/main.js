@@ -866,13 +866,16 @@ function SortByNumber(a, b){
 }
 
 function fixheader(unitcode) {
-    if (unitcode in units) {
-        $("#parkShortName").html(units[unitcode].name);
+    if (unitcode.toUpperCase() in units) {
+        var url = config.uniturl || "http://www.nps.gov/" + unitcode;
+        var html = '<a href="'+ url + '" target=blank>' + units[unitcode].name +'</a>';
+        $("#parkShortName").html(html);
         $("#unitType").html(units[unitcode].type);
         $("#parkLocation").html(units[unitcode].state);
     } else {
         var headerparts = unitcode.split("|");
-        $("#parkShortName").html(headerparts[0]);
+        var html2 = config.uniturl ? '<a href="'+ config.uniturl + '" target=blank>' + headerparts[0] +'</a>' : headerparts[0]
+        $("#parkShortName").html(html2);
         if (headerparts.length > 1) {
             $("#unitType").html(headerparts[1]);
         }
