@@ -141,8 +141,11 @@ function initApp(config, queryParameters) {
             return false;
         }
     );
-    if (config.unit) fixheader(config.unit);
 
+    // Configure Header and other items not dependent on map
+    if (config.unit) fixheader(config.unit);
+    setupSocialMediaIcons();
+    
 	handleWindowResize();
 	$(this).resize(handleWindowResize);	
 	
@@ -877,6 +880,12 @@ function fixheader(unitcode) {
             $("#parkLocation").html(headerparts[2]);
         }
     }
+}
+
+function setupSocialMediaIcons() {
+    if (!config.show_facebook) $('.share_facebook').hide()
+    if (!config.show_twitter) $('.share_twitter').hide()
+    if (!config.show_bitly) $('.share_bitly').hide()
 }
 
 function loadBookmarks() {
