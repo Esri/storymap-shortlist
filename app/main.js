@@ -543,7 +543,8 @@ function GetQueryParameters() {
             if (value) {
                 queryString[index.toLowerCase()] = value;
             } else {
-                queryString[index.toLowerCase()] = index;
+                // A parameter with no value is treated as a boolean toggle being turned on.
+                queryString[index.toLowerCase()] = true;
             }
         });
     }
@@ -551,25 +552,31 @@ function GetQueryParameters() {
 }
 
 function cleanQueryParameters(queryParameters) {
-    // This function will transmogrify the query parameters object to create bools from strings, and
-    // to morf parameter names to support different names for options.
+    // This function will morph old parameter names to the config names coded in the app.
+    var old_new_name_map = {
+        // newname : [list of old names],
+        webmap: ['webmap_id']
+    };
+    $.each(old_new_name_map, function(key, value) {
+        if (!queryParameters.hasOwnProperty(key)) {
+            value.forEach(function (oldname) {
+                if (queryParameters.hasOwnProperty(oldname)) {
+                    queryParameters[key] = queryParameters[oldname];
+                    delete queryParameters[oldname];
+                }
+            });
+        }
+    });
 
-    //TODO: this is mostly unecessary now.  cleanup.
-    /*
-    EMBED = queryString["embed"] ? $.trim((queryString["embed"])).toLowerCase() != "false" : EMBED;
-    WEBMAP_ID = queryString["webmap"] ? queryString["webmap"] : WEBMAP_ID;
-    BOOKMARKS_ALIAS = queryString["bookmarks_alias"] ? queryString["bookmarks_alias"] : BOOKMARKS_ALIAS;
-    COLOR_ORDER = queryString["color_order"] ? queryString["color_order"] : COLOR_ORDER;
-    DETAILS_PANEL = queryString["details_panel"] ? $.trim((queryString["details_panel"])).toLowerCase() == "true" : DETAILS_PANEL;
-    POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS = queryString["point_layers_not_to_be_shown_as_tabs"] ?
-        queryString["point_layers_not_to_be_shown_as_tabs"] :
-        POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS;
-    SUPPORTING_LAYERS_THAT_ARE_CLICKABLE = queryString["supporting_layers_that_are_clickable"] ?
-        queryString["supporting_layers_that_are_clickable"] :
-        SUPPORTING_LAYERS_THAT_ARE_CLICKABLE;
-    GEOLOCATOR = queryString["geolocator"] ? queryString["geolocator"] : GEOLOCATOR;
-    UNIT = queryString["unit"] ? queryString["unit"] : UNIT;
-    */
+    // This function will transmogrify the query parameters object to create bools from strings
+    // For booleans: existance of the query parameter with no value or any value except "false" implies true
+    toggles = ['embed', 'details_panel', 'geolocator'];
+    toggles.forEach(function(param){
+        var value = queryParameters[param];
+        if (typeof(value) == "string") {
+            queryParameters[param] = $.trim((value)).toLowerCase() != "false"
+        }
+    });
     return queryParameters;
 }
 
