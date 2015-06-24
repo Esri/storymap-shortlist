@@ -1,0 +1,107 @@
+{
+    "configurationSettings": [{
+        "category": "<b>NPS Banner</b>",
+        "fields": [{
+            "type": "paragraph",
+            "value": "The Unit Code controls the main text in the Black Banner.  Use the 4 letter unit code or unitname|unittype|location. If a valid unit code is provided, the URL will be generated automatically"
+        }, {
+            "type": "string",
+            "fieldName": "unit",
+            "label": "Unit Code:",
+            "tooltip": ""
+        }, {
+            "type": "string",
+            "fieldName": "uniturl",
+            "label": "Unit Link:",
+            "tooltip": "URL to the Unit's web page"
+        }, {
+            "type": "string",
+            "fieldName": "title",
+            "label": "Title Text:",
+            "tooltip": "",
+            "placeHolder": "Defaults to map name"
+        }, {
+            "type": "paragraph",
+            "value": "Select the following social media icons to appear in the banner"
+        }, {
+            "type": "boolean",
+            "fieldName": "show_facebook",
+            "label": "Facebook",
+            "tooltip": ""
+        }, {
+            "type": "boolean",
+            "fieldName": "show_twitter",
+            "label": "Twitter",
+            "tooltip": ""
+        }, {
+            "type": "boolean",
+            "fieldName": "show_bitly",
+            "label": "Bitly",
+            "tooltip": ""
+        }, {
+          "type": "paragraph",
+          "value": "To hide the header add '&embed' to the end of the URL"
+        }, {
+          "type": "paragraph",
+          "value": ""
+        }]
+    }, {
+        "category": "<b>Other Options</b>",
+        "fields": [ {
+            "type": "paragraph",
+            "value": "To Do....."
+        }, {
+          "type": "string",
+          "fieldName": "bookmarks_alias",
+          "label": "Bookmarks:",
+          "tooltip": "Text to display on the zoom to bookmark control.",
+          "placeHolder": "Zoom"
+        }, {
+          "type": "string",
+          "fieldName": "color_order",
+          "label": "Color Order:",
+          "tooltip": "Tabs will get colored map pins in this order",
+          "placeHolder": "green,red,blue,purple"
+        }, {
+          "type": "string",
+          "fieldName": "point_layers_not_to_be_shown_as_tabs",
+          "label": "Ignore Layers:",
+          "tooltip": "Specify point layer(s) in your map that do NOT define a tab in the Shortlist. If there's more than one layer, use the '|' character as delimiter",
+          "placeHolder": ""
+        }, {
+          "type": "string",
+          "fieldName": "supporting_layers_that_are_clickable",
+          "label": "Clickable Layers:",
+          "tooltip": "Specify layer(s) in your map that will be clickable in the Shortlist. If there's more than one layer, use the '|' character as delimiter",
+          "placeHolder": ""
+        }, {
+          "type": "number",
+          "fieldName": "pan_percent",
+          "label": "Pan Percent:",
+          "tooltip": "Percent of the Height/Width to pan with each arrow key",
+          "constraints" : {"min":5, "max":95, "places":0}
+        }, {
+          "type": "boolean",
+          "fieldName": "details_panel",
+          "label": "Details Panel",
+          "tooltip": "Specifies whether or not popups have a link to a separate Details panel"
+        }, {
+          "type": "boolean",
+          "fieldName": "geolocator",
+          "label": "Show Locator",
+          "tooltip": "Show a location button that shows/hides the user's GPS location (on supported browsers)"
+        }, {
+            "type": "paragraph",
+            "value": ""
+        }]
+    }],
+    "values": {
+        "show_facebook": true,
+        "show_twitter": true,
+        "show_bitly": true,
+        "pan_percent": 15,
+        "details_panel": false,
+        "geolocator": false
+    }
+}
+
