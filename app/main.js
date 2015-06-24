@@ -145,7 +145,7 @@ function initApp(config, queryParameters) {
     // Configure Header and other items not dependent on map
     if (config.unit) fixheader(config.unit);
     setupSocialMediaIcons();
-    
+
 	handleWindowResize();
 	$(this).resize(handleWindowResize);	
 	
@@ -1132,7 +1132,7 @@ function handleWindowResize() {
 			$("#tabs").width($("body").width());
 		}
 		
-		$("#paneLeft").height($("#mainWindow").height() - 35);
+		$("#paneLeft").height($("#mainWindow").height() - $('#divStrip').height());
 		
 		if($("body").width() <= TWO_COLUMN_THRESHOLD || ($("body").width() <= 1024 && $("body").height() <= 768))
 			$("#paneLeft").width(LEFT_PANE_WIDTH_TWO_COLUMN)
