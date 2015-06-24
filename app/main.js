@@ -34,8 +34,6 @@ var FIELDNAME_LAYER = "Layer";
 var FIELDNAME_FULLSIZEURL = "Large_URL";  //1024x768
 var FIELDNAME_CREDITS = "Credits";
 
-var UNIT = '';  // TODO: make this a configurable setting
-
 var _lutIconSpecs = {
 	tiny:new IconSpecs(22,28,3,8),
 	medium:new IconSpecs(24,30,3,8),
@@ -87,41 +85,48 @@ jQuery(document).ready(function() {_jqueryReady = true;init()});
 /* init comes in three parts because of async calls getApp and createMap. */
 
 function init() {
-
     if (!_jqueryReady) return;
     if (!_dojoReady) return;
 
-    // Start with hard coded configuration
-    //TODO: reorg configuration parameters from index.html and above into a config object
-    var config = {
-        appid: APP_ID,
-        sharing_url: DEFAULT_SHARING_URL
-    };
-
+    // This function is responsible for setting up the configuration object, then calling the initApp()
+    
+    // Three configuration options control where we get other configuration options
+    // We need the query parameters in case the defaults were overwritten
     var queryParameters = GetQueryParameters();
 
-    config.appid = queryParameters["appid"] || config.appid;
+    config.default_sharing_url = queryParameters["default_sharing_url"] || config.default_sharing_url;
+    config.default_proxy_url = queryParameters["default_proxy_url"] || config.default_proxy_url;
+    config.appid = queryParameters["app_id"] || config.appid;
+
+    //TODO: sanity check these three options, and be prepared to fail gracefully
+
+    // These configuration options are required for getting the app and map items
+    esri.arcgis.utils.arcgisUrl = config.default_sharing_url;
+    esri.config.defaults.io.proxyurl = config.default_proxy_url;
+
+    // Get the app configuration from AGOL/Portal
     if (config.appid) {
         getAppConfig(config, queryParameters);
         // getAppConfig() will eventually call initApp()
     } else {
         initApp(config, queryParameters)
     }
-    // Note:  If using a proxy server (required for remove CSV access),
-    //        you'll need to uncomment the following line and provide
-    //        a valid proxy server url.
-    //esri.config.defaults.io.proxyUrl = YOUR_PROXY_URL_HERE;
 }
 
 function initApp(config, queryParameters) {
     // Add the query parameters to the config object
     $.extend(config, queryParameters);
 
-    //TODO: rewrite using a config object
+    //TODO: remove this after testing
     console.log(config);
 
     //Retrieve the map
-    esri.arcgis.utils.createMap(WEBMAP_ID, "map", {
+    if (!config.webmap) {
+        console.log("No map provided");
+        //FIXME: This is fatal, so put something in the browser
+        return
+    }
+    esri.arcgis.utils.createMap(config.webmap, "map", {
         mapOptions: {
             slider: false,
             wrapAround180:false
@@ -132,14 +137,12 @@ function initApp(config, queryParameters) {
             initMap(config, response);
         },
         function(error) {
+            //TODO: Check for permission problem and then try logging in first
             console.log("Map creation failed: ", dojo.toJson(error));
             //FIXME: This is fatal, so put something in the browser
         }
     );
-
-    fixheader(UNIT);
-
-	$("#bookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
+    if (config.unit) fixheader(config.unit);
 
 	handleWindowResize();
 	$(this).resize(handleWindowResize);	
@@ -159,33 +162,29 @@ function initApp(config, queryParameters) {
 	
 	$(document).bind('cbox_complete', function(){
 		$(".details .rightDiv").height($(".details").height() - $(".details .title").height() - 40);
-	});  
-	
-	$("#bookmarksToggle").click(function(){
+	});
+
+    $("#bookmarksTogText").html(config.bookmarks_alias+' &#x25BC;');
+    $("#bookmarksToggle").click(function(){
 		if ($("#bookmarksDiv").css('display')=='none'){
-		  $("#bookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25B2;');
+		  $("#bookmarksTogText").html(config.bookmarks_alias+' &#x25B2;');
 		}
 		else{
-		  $("#bookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
+		  $("#bookmarksTogText").html(config.bookmarks_alias+' &#x25BC;');
 		}
 		$("#bookmarksDiv").slideToggle();
 	});
-	$("#mobileBookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
+	$("#mobileBookmarksTogText").html(config.bookmarks_alias+' &#x25BC;');
 	$("#mobileBookmarksToggle").click(function(){
 		if ($("#mobileBookmarksDiv").css('display')=='none'){
-		  $("#mobileBookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25B2;');
+		  $("#mobileBookmarksTogText").html(config.bookmarks_alias+' &#x25B2;');
 		}
 		else{
-		  $("#mobileBookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
+		  $("#mobileBookmarksTogText").html(config.bookmarks_alias+' &#x25BC;');
 		}
 		$("#mobileBookmarksDiv").slideToggle();
 	});
-
-	if (window.DEFAULT_SHARING_URL)
-		esri.arcgis.utils.arcgisUrl = DEFAULT_SHARING_URL;
-	
-	if (window.DEFAULT_PROXY_URL)
-		esri.config.defaults.io.proxyurl = DEFAULT_PROXY_URL;
+    
 
 	dojo.connect(dojo.byId('returnIcon'), 'onclick', showMobileList);
 	
@@ -230,7 +229,7 @@ function initApp(config, queryParameters) {
 			}
 		}
 	});   
-	if(GEOLOCATOR == 'true' || GEOLOCATOR == true)
+	if(config.geolocator)
 		$('#locateButton').css('display', 'block');
 }
 
@@ -303,12 +302,12 @@ function initAppContent(layers) {
 	var pointLayers = [];
 	
 	var arrExemptions = [];
-	$.each(POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS.split("|"), function(index, value) {
+	$.each(config.point_layers_not_to_be_shown_as_tabs.split("|"), function(index, value) {
 		arrExemptions.push($.trim(value).toLowerCase());
 	});
 	
 	var supportingLayersThatAreClickable = [];
-	$.each(SUPPORTING_LAYERS_THAT_ARE_CLICKABLE.split("|"), function(index, value) {
+	$.each(config.supporting_layers_that_are_clickable.split("|"), function(index, value) {
 		supportingLayersThatAreClickable.push($.trim(value).toLowerCase());
 	});
 		
@@ -352,7 +351,7 @@ function initAppContent(layers) {
 	
 	var contentLayer;
 	var colorScheme;
-	var colorOrder = COLOR_ORDER.split(",");
+	var colorOrder = config.color_order.split(",");
 	var colorIndex;
 	$.each(pointLayers,function(index,value) {
 		_map.removeLayer(_map.getLayer($.grep(_map.graphicsLayerIds, function(n,i){return _map.getLayer(n).id == getID(value)})[0]));
@@ -483,8 +482,8 @@ function initAppContent(layers) {
 
     $('#map').keydown(function(e){
         oldCenter = _map.extent.getCenter();
-        deltaX = _map.extent.getWidth() * PAN_PERCENT;
-        deltaY = _map.extent.getHeight() * PAN_PERCENT;
+        deltaX = _map.extent.getWidth() * config.pan_percent;
+        deltaY = _map.extent.getHeight() * config.pan_percent;
         if (e.which == 37) {
             var newCenter = oldCenter.offset(-deltaX,0)
             _map.centerAt(newCenter)
@@ -579,7 +578,7 @@ function getAppConfig(config, queryParameters) {
     // The object returned is merged with the existing configuration object, overwriting
     // any hardcoded configuration parameters.  Then initialize the App.
     esri.request({
-        url: config.sharing_url + "/" + config.appid + "/data",
+        url: config.default_sharing_url + "/" + config.appid + "/data",
         content: {f: "json"},
         callbackParamName: "callback"
     }).then(
@@ -590,6 +589,7 @@ function getAppConfig(config, queryParameters) {
             }
         },
         function(error) {
+            //TODO: Check for permission problem and then try logging in first
             console.log("Error retreiving app config: ", error.message);
             initApp(config, queryParameters)
         }
@@ -859,7 +859,7 @@ function loadBookmarks() {
 		var name = $(this).html();
 		var extent = new esri.geometry.Extent($.grep(_bookmarks,function(n,i){return n.name == name})[0].extent);
 		_map.setExtent(extent);	
-		$("#bookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
+		$("#bookmarksTogText").html(config.bookmarks_alias+' &#x25BC;');
 		$("#bookmarksDiv").slideToggle();
         $("#bookmarksToggle").focus();
     });
@@ -868,7 +868,7 @@ function loadBookmarks() {
 		var name = $(this).html();
 		var extent = new esri.geometry.Extent($.grep(_bookmarks,function(n,i){return n.name == name})[0].extent);
 		_map.setExtent(extent);	
-		$("#mobileBookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
+		$("#mobileBookmarksTogText").html(config.bookmarks_alias+' &#x25BC;');
 		$("#mobileBookmarksDiv").slideToggle();
     });
 
@@ -877,11 +877,11 @@ function loadBookmarks() {
 function hideBookmarks(){
 	if ($("#mobileBookmarksDiv").css('display') === 'block') {
 		$("#mobileBookmarksDiv").slideToggle()
-		$("#mobileBookmarksTogText").html(BOOKMARKS_ALIAS + ' &#x25BC;')
+		$("#mobileBookmarksTogText").html(config.bookmarks_alias + ' &#x25BC;')
 	}
 	if ($("#bookmarksDiv").css('display') === 'block') {
 		$("#bookmarksDiv").slideToggle()
-		$("#bookmarksTogText").html(BOOKMARKS_ALIAS + ' &#x25BC;')
+		$("#bookmarksTogText").html(config.bookmarks_alias + ' &#x25BC;')
 	}
 	else 
 		return
@@ -1076,7 +1076,7 @@ function handleWindowResize() {
 			infoWindow_Close();
 			_selected = null;
 		}
-        if (EMBED) {
+        if (config.embed) {
             $("#banner").hide();
         } else {
             $("#banner").show();
@@ -1243,11 +1243,11 @@ function buildPopup(feature, geometry, baseLayerClick)
 	if (picture) {
 		var pDiv = $("<div></div>").addClass("infoWindowPictureDiv");
 		var mobilePDiv = $("<div></div>").addClass("mobilePictureDiv");
-		if (DETAILS_PANEL && !mobile) {
+		if (config.details_panel && !mobile) {
 			$(pDiv).append($(new Image()).attr("src", picture));
 			$(pDiv).css("cursor", "pointer");
 		}
-		else if (DETAILS_PANEL && mobile) {
+		else if (config.details_panel && mobile) {
 			if (website) {
 				var mobileA = $("<a></a>").attr("href", website).attr("target","_blank").attr("tabindex","-1");
 				$(mobileA).append($(new Image()).attr("src", picture));
@@ -1294,7 +1294,7 @@ function buildPopup(feature, geometry, baseLayerClick)
 			$('#mobileSupportedLayersView').append($("<div class='mobileFeatureCredits'></div>").html("Photo: " + credits));				
 	}
 	
-	if (!DETAILS_PANEL) {
+	if (!config.details_panel) {
 		if(!shortDesc)
 			$('.mobileFeatureTitle').after($('<hr style="margin-left: 20px; margin-right: 20px;">'));
 
@@ -1312,7 +1312,7 @@ function buildPopup(feature, geometry, baseLayerClick)
 		}
 		
 	}
-	else if (DETAILS_PANEL && mobile){
+	else if (config.details_panel && mobile){
 		$(contentDiv).prepend($('<div style="margin-left: -50px" class="mobileFeatureTitle">'+title+'</div>'));
 		if(!shortDesc)
 			$('.mobileFeatureTitle').after($('<hr style="margin-left: 20px; margin-right: 20px;">'));
@@ -1391,7 +1391,7 @@ function buildPopup(feature, geometry, baseLayerClick)
         showDetails(feature);
     });
 	
-	if (DETAILS_PANEL && headerIsVisible()) {
+	if (config.details_panel && headerIsVisible()) {
 		$(".infoWindowPictureDiv").click(function(e) {
 			showDetails(feature);
 		});	
@@ -1457,7 +1457,7 @@ function buildMobileSlideView(featureNumber){
 			$(mobileContentDiv).append($("<div class='mobileFeatureCredits'></div>").html("Photo: " + credits));			
 		}
 		
-		if (!DETAILS_PANEL) {
+		if (!config.details_panel) {
 			var desc1 = atts.getValueCI(FIELDNAME_DESC1);
 			if (desc1) {
 				$(mobileContentDiv).append($("<div class='mobileFeatureDesc'></div>").html(desc1));

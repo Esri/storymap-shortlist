@@ -44,8 +44,6 @@
 <script type="text/javascript">var djConfig = {parseOnLoad: true};</script>
 <script type="text/javascript" src="http://js.arcgis.com/3.13/"></script>
 <script type="text/javascript" src="colorbox/jquery.colorbox-min.js"></script>
-<script type="text/javascript" src="app/main.js"></script>
-<script type="text/javascript" src="app/units.js"></script>
 
 <!--Google Analytics Start-->
 <script type="text/javascript">
@@ -63,44 +61,55 @@
 </script>
 <!--Google Analytics End-->
 
-<script type="text/javascript">
-var version = '1.4';
-/******************************************************
-********************  config section ******************
-*******************************************************/
-var EMBED = false  //false => include banner; true => no black NPS banner in header
-var WEBMAP_ID = "7b930930c5a842b9aad33fd57973c913"; //BELA demo on portal
-//var WEBMAP_ID = "de0de30ac9444e12899ef04431355685"; // BELA on AGOL
-var APP_ID = "0436a313fa104ea489595daf90f9d023"; // FIXME maptour from portal
-//var WEBMAP_ID = "0436a313fa104ea489595daf90f9d023"; // FIXME on AGOL
+	<script type="text/javascript">
+		var version = '1.4';
+		var config = {
+			// Define where the app and map should come from (arcgis.com or private Portal)
+			default_sharing_url: "http://gisportal.nps.gov/arcgis/sharing/content/items",
+			default_proxy_url: "http://gisportal.nps.gov/arcgis/sharing/proxy",
+			//default_sharing_url: "//www.arcgis.com/sharing/content/items",
+			//default_proxy_url: "//www.arcgis.com/sharing/proxy",
 
-var BOOKMARKS_ALIAS = "Zoom";
-var COLOR_ORDER = "green,red,blue,purple"; // will only use as many colors as you have tabs
-var DETAILS_PANEL = false;  // specifies whether or not popups have a link to a separate Details panel
-//
-// Specify shapefile or CSV point layer(s) on your map that do NOT define a tab in the shortlist.
-// If there's more than one layer, use the "|" character as delimiter
-var POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS = "";
+			// Application to open. if no other is given (optional)
+			// Currently app must be shared with everyone
+			//appid: "0436a313fa104ea489595daf90f9d023", // FIXME maptour from portal
+			//appid: "0436a313fa104ea489595daf90f9d023", // FIXME on AGOL
 
-// Specify shapefile or CSV layer(s) in your map that will be clickable in the Shortlist
-// If there's more than one layer, use the "|" character as delimiter
-var SUPPORTING_LAYERS_THAT_ARE_CLICKABLE = "";
+			// Map to open if no other is given. ignored if valid app_id is provided
+			// Currently map must be shared with everyone
+			webmap: "7b930930c5a842b9aad33fd57973c913", //BELA demo on portal
+			//webmap: "de0de30ac9444e12899ef04431355685", // BELA on AGOL (FIXME: this map generates an itemNotFound error)
 
-// Location button that locates user (on supported browsers)
-var GEOLOCATOR = false;
+			// Text to display on the zoom to bookmark control
+			bookmarks_alias: "Zoom",
 
-// Percent of the Height/Width to pan with each arrow key
-var PAN_PERCENT = 0.15
+			// Color of the map pins in order of the tabs
+			// will only use as many colors as you have tabs, and will cycle if you have more tabs than colors
+			color_order: "green,red,blue,purple",
 
-// Uncomment and edit to use Portal for ArcGIS
-var DEFAULT_SHARING_URL = "http://gisportal.nps.gov/arcgis/sharing/content/items";
-var DEFAULT_PROXY_URL = "http://gisportal.nps.gov/arcgis/sharing/proxy";
+			// Specifies whether or not popups have a link to a separate Details panel
+			details_panel: false,
 
-/******************************************************
-******************  end config section ****************
-*******************************************************/
+			// Specify point layer(s) in your map that do NOT define a tab in the shortlist.
+			// If there's more than one layer, use the "|" character as delimiter
+			point_layers_not_to_be_shown_as_tabs: "",
 
-</script>
+			// Specify layer(s) in your map that will be clickable in the Shortlist
+			// If there's more than one layer, use the "|" character as delimiter
+			supporting_layers_that_are_clickable: "",
+
+			// Show a location button that shows/hides the user's GPS location (on supported browsers)
+			geolocator: false,
+
+			// Percent of the Height/Width to pan with each arrow key
+			pan_percent: 0.15,
+
+			// Is app embeded?  !embed => include banner; true => no banner/header
+			embed: false
+		};
+	</script>
+	<script type="text/javascript" src="app/units.js"></script>
+	<script type="text/javascript" src="app/main.js"></script>
 
 </head>
 
