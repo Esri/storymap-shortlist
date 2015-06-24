@@ -84,43 +84,59 @@ var _subtitle;
 dojo.addOnLoad(function() {_dojoReady = true;init()});
 jQuery(document).ready(function() {_jqueryReady = true;init()});
 
-/* init comes in two parts because of async call to 
-   createMap. */
+/* init comes in three parts because of async calls getApp and createMap. */
 
 function init() {
-	
-	if (!_jqueryReady) return;
-	if (!_dojoReady) return;
-	
-	var queryString = new Object();
-	var temp = esri.urlToObject(document.location.href).query;
-	if (temp) {
-		$.each(temp, function(index, value) {
-			if (value) {
-				queryString[index.toLowerCase()] = value;
-			} else {
-				queryString[index.toLowerCase()] = index;
-			}
-		});
-	}
 
-	EMBED = queryString["embed"] ? $.trim((queryString["embed"])).toLowerCase() != "false" : EMBED;
-	WEBMAP_ID = queryString["webmap"] ? queryString["webmap"] : WEBMAP_ID;
-	BOOKMARKS_ALIAS = queryString["bookmarks_alias"] ? queryString["bookmarks_alias"] : BOOKMARKS_ALIAS;
-	COLOR_ORDER = queryString["color_order"] ? queryString["color_order"] : COLOR_ORDER;
-	DETAILS_PANEL = queryString["details_panel"] ? $.trim((queryString["details_panel"])).toLowerCase() == "true" : DETAILS_PANEL;
-	POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS = queryString["point_layers_not_to_be_shown_as_tabs"] ? 
-											queryString["point_layers_not_to_be_shown_as_tabs"] : 
-											POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS;
-	SUPPORTING_LAYERS_THAT_ARE_CLICKABLE = queryString["supporting_layers_that_are_clickable"] ?
-											queryString["supporting_layers_that_are_clickable"] :
-											SUPPORTING_LAYERS_THAT_ARE_CLICKABLE;
-	GEOLOCATOR = queryString["geolocator"] ? queryString["geolocator"] : GEOLOCATOR;
-	// Note:  If using a proxy server (required for remove CSV access),
-	//        you'll need to uncomment the following line and provide
-	//        a valid proxy server url. 										
-	//esri.config.defaults.io.proxyUrl = YOUR_PROXY_URL_HERE;
-    UNIT = queryString["unit"] ? queryString["unit"] : UNIT;
+    if (!_jqueryReady) return;
+    if (!_dojoReady) return;
+
+    // Start with hard coded configuration
+    //TODO: reorg configuration parameters from index.html and above into a config object
+    var config = {
+        appid: APP_ID,
+        sharing_url: DEFAULT_SHARING_URL
+    };
+
+    var queryParameters = GetQueryParameters();
+
+    config.appid = queryParameters["appid"] || config.appid;
+    if (config.appid) {
+        getAppConfig(config, queryParameters);
+        // getAppConfig() will eventually call initApp()
+    } else {
+        initApp(config, queryParameters)
+    }
+    // Note:  If using a proxy server (required for remove CSV access),
+    //        you'll need to uncomment the following line and provide
+    //        a valid proxy server url.
+    //esri.config.defaults.io.proxyUrl = YOUR_PROXY_URL_HERE;
+}
+
+function initApp(config, queryParameters) {
+    // Add the query parameters to the config object
+    $.extend(config, queryParameters);
+
+    //TODO: rewrite using a config object
+    console.log(config);
+
+    //Retrieve the map
+    esri.arcgis.utils.createMap(WEBMAP_ID, "map", {
+        mapOptions: {
+            slider: false,
+            wrapAround180:false
+        },
+        ignorePopups: true
+    }).then(
+        function(response) {
+            initMap(config, response);
+        },
+        function(error) {
+            console.log("Map creation failed: ", dojo.toJson(error));
+            //FIXME: This is fatal, so put something in the browser
+        }
+    );
+
     fixheader(UNIT);
 
 	$("#bookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
@@ -171,81 +187,6 @@ function init() {
 	if (window.DEFAULT_PROXY_URL)
 		esri.config.defaults.io.proxyurl = DEFAULT_PROXY_URL;
 
-	var mapDeferred = esri.arcgis.utils.createMap(WEBMAP_ID, "map", {
-		mapOptions: {
-			slider: false,
-			wrapAround180:false
-		},
-		ignorePopups: true
-	});
-	
-	mapDeferred.addCallback(function(response) {
-		_title = response.itemInfo.item.title;
-		_subtitle = response.itemInfo.item.snippet;
-		
-		document.title = _title;
-        if (_subtitle) {
-            $("#title").html(_subtitle);
-            $('#mobileTitle').html(_subtitle)
-        } else {
-            $("#title").html(_title);
-            $('#mobileTitle').html(_title)
-        }
-
-		_map = response.map;
-		  
-		dojo.connect(_map, 'onExtentChange', refreshList);
-
-		// click action on the map where there's no graphic 
-		// causes a deselect.
-
-		dojo.connect(_map, 'onClick', function(event){
-			if (event.graphic == null && headerIsVisible()) {
-				unselect();
-			}
-			$('#mobileTitlePage').css('display', 'none');
-			hideBookmarks();
-		});
-		
-		dojo.connect(_map, 'onZoomEnd', function(){
-			var level = _map.getLevel();
-			if (level > -1 && level === _map.getMaxZoom()) {
-				$('#zoomIn').addClass('disableControls');
-			}
-			else 
-				if (level > -1 && level === _map.getMinZoom()) {
-					$('#zoomOut').addClass('disableControls');
-				}
-				else {
-					$('#zoomIn').removeClass('disableControls');
-					$('#zoomOut').removeClass('disableControls');
-				}
-		})
-		
-		_bookmarks = response.itemInfo.itemData.bookmarks;
-		if (_bookmarks) {
-			loadBookmarks();
-			$("#bookmarksCon").show();
-			$("#mobileBookmarksCon").show();
-			handleWindowResize(); // additional call to re-size tab bar
-		}
-		
-		var layers = response.itemInfo.itemData.operationalLayers; 
-		
-		if(_map.loaded){
-			initMap(layers);
-		} else {
-			dojo.connect(_map,"onLoad",function(){
-				initMap(layers);
-			});
-		}
-		
-	});
-	
-	mapDeferred.addErrback(function(error) {
-	  console.log("Map creation failed: ", dojo.toJson(error));
-	});
-	
 	dojo.connect(dojo.byId('returnIcon'), 'onclick', showMobileList);
 	
 	dojo.connect(dojo.byId('returnHiddenBar'), 'onclick', showMobileList);
@@ -293,7 +234,70 @@ function init() {
 		$('#locateButton').css('display', 'block');
 }
 
-function initMap(layers) {
+function initMap(config, mapItem) {
+    _title = mapItem.itemInfo.item.title;
+    _subtitle = mapItem.itemInfo.item.snippet;
+
+    document.title = _title;
+    if (_subtitle) {
+        $("#title").html(_subtitle);
+        $('#mobileTitle').html(_subtitle)
+    } else {
+        $("#title").html(_title);
+        $('#mobileTitle').html(_title)
+    }
+
+    _map = mapItem.map;
+
+    dojo.connect(_map, 'onExtentChange', refreshList);
+
+    // click action on the map where there's no graphic
+    // causes a deselect.
+
+    dojo.connect(_map, 'onClick', function(event){
+        if (event.graphic == null && headerIsVisible()) {
+            unselect();
+        }
+        $('#mobileTitlePage').css('display', 'none');
+        hideBookmarks();
+    });
+
+    dojo.connect(_map, 'onZoomEnd', function(){
+        var level = _map.getLevel();
+        if (level > -1 && level === _map.getMaxZoom()) {
+            $('#zoomIn').addClass('disableControls');
+        }
+        else
+        if (level > -1 && level === _map.getMinZoom()) {
+            $('#zoomOut').addClass('disableControls');
+        }
+        else {
+            $('#zoomIn').removeClass('disableControls');
+            $('#zoomOut').removeClass('disableControls');
+        }
+    })
+
+    _bookmarks = mapItem.itemInfo.itemData.bookmarks;
+    if (_bookmarks) {
+        loadBookmarks();
+        $("#bookmarksCon").show();
+        $("#mobileBookmarksCon").show();
+        handleWindowResize(); // additional call to re-size tab bar
+    }
+
+    var layers = mapItem.itemInfo.itemData.operationalLayers;
+
+    if(_map.loaded){
+        initAppContent(layers);
+    } else {
+        dojo.connect(_map,"onLoad",function(){
+            initAppContent(layers);
+        });
+    }
+
+}
+
+function initAppContent(layers) {
 	
 	var supportLayers = [];
 	var pointLayers = [];
@@ -530,6 +534,66 @@ function initMap(layers) {
 		}
 	});
 	modal_InfoWindow_Init();
+}
+
+function GetQueryParameters() {
+    var queryString = {};
+    var temp = esri.urlToObject(document.location.href).query;
+    if (temp) {
+        $.each(temp, function (index, value) {
+            if (value) {
+                queryString[index.toLowerCase()] = value;
+            } else {
+                queryString[index.toLowerCase()] = index;
+            }
+        });
+    }
+    return cleanQueryParameters(queryString);
+}
+
+function cleanQueryParameters(queryParameters) {
+    // This function will transmogrify the query parameters object to create bools from strings, and
+    // to morf parameter names to support different names for options.
+
+    //TODO: this is mostly unecessary now.  cleanup.
+    /*
+    EMBED = queryString["embed"] ? $.trim((queryString["embed"])).toLowerCase() != "false" : EMBED;
+    WEBMAP_ID = queryString["webmap"] ? queryString["webmap"] : WEBMAP_ID;
+    BOOKMARKS_ALIAS = queryString["bookmarks_alias"] ? queryString["bookmarks_alias"] : BOOKMARKS_ALIAS;
+    COLOR_ORDER = queryString["color_order"] ? queryString["color_order"] : COLOR_ORDER;
+    DETAILS_PANEL = queryString["details_panel"] ? $.trim((queryString["details_panel"])).toLowerCase() == "true" : DETAILS_PANEL;
+    POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS = queryString["point_layers_not_to_be_shown_as_tabs"] ?
+        queryString["point_layers_not_to_be_shown_as_tabs"] :
+        POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS;
+    SUPPORTING_LAYERS_THAT_ARE_CLICKABLE = queryString["supporting_layers_that_are_clickable"] ?
+        queryString["supporting_layers_that_are_clickable"] :
+        SUPPORTING_LAYERS_THAT_ARE_CLICKABLE;
+    GEOLOCATOR = queryString["geolocator"] ? queryString["geolocator"] : GEOLOCATOR;
+    UNIT = queryString["unit"] ? queryString["unit"] : UNIT;
+    */
+    return queryParameters;
+}
+
+function getAppConfig(config, queryParameters) {
+    // Async call to portal or AGOL to get the data from the app configuration item
+    // The object returned is merged with the existing configuration object, overwriting
+    // any hardcoded configuration parameters.  Then initialize the App.
+    esri.request({
+        url: config.sharing_url + "/" + config.appid + "/data",
+        content: {f: "json"},
+        callbackParamName: "callback"
+    }).then(
+        function(response) {
+            if (response && response.values) {
+                $.extend(config, response.values);
+                initApp(config, queryParameters)
+            }
+        },
+        function(error) {
+            console.log("Error retreiving app config: ", error.message);
+            initApp(config, queryParameters)
+        }
+    );
 }
 
 /******************************************************
