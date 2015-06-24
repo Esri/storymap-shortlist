@@ -1,50 +1,56 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
 
-<title>NPS Shortlist Storymap</title>
+	<title>NPS Shortlist Storymap</title>
 
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta charset="utf-8" />
+	<meta charset="utf-8"/>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-title" content="NPS Shortlist Storymap">
 	<meta name="application-name" content="NPS Shortlist Storymap">
 	<meta name="author" content="National Park Service">
 	<meta name="description" content="This story map was created with the NPS version of the Esri Shortlist template.">
-	<meta name="keywords" content="US federal government, Department of Interior, National Park Service, map, digital, web, mobile, Harpers Ferry Center, NPMap, national park, Leaflet, CartoDB, Mapbox, Bing, Google, MapQuest, Esri">
+	<meta name="keywords"
+				content="US federal government, Department of Interior, National Park Service, map, digital, web, mobile, Harpers Ferry Center, NPMap, national park, Leaflet, CartoDB, Mapbox, Bing, Google, MapQuest, Esri">
 	<meta name="msapplication-TileColor" content="#222222">
 	<meta name="msapplication-TileImage" content="http://www.nps.gov/npmap/assets/img/windows-8-tile.png">
 	<base target="_parent">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 	<link rel="shortcut icon" href="http://www.nps.gov/npmap/favicon.ico">
-	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://www.nps.gov/npmap/assets/img/apple-touch-icon-144x144-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://www.nps.gov/npmap/assets/img/apple-touch-icon-114x114-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://www.nps.gov/npmap/assets/img/apple-touch-icon-72x72-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" href="http://www.nps.gov/npmap/assets/img/apple-touch-icon-57x57-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="144x144"
+				href="http://www.nps.gov/npmap/assets/img/apple-touch-icon-144x144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114"
+				href="http://www.nps.gov/npmap/assets/img/apple-touch-icon-114x114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72"
+				href="http://www.nps.gov/npmap/assets/img/apple-touch-icon-72x72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed"
+				href="http://www.nps.gov/npmap/assets/img/apple-touch-icon-57x57-precomposed.png">
 	<!-- Facebook sharing -->
 	<meta property="og:title" content="NPS Shortlist Storymap"/>
-	<meta property="og:description" content="This story map was created with the NPS version of the Esri Shortlist template."/>
+	<meta property="og:description"
+				content="This story map was created with the NPS version of the Esri Shortlist template."/>
 	<meta property="og:image" content="images/ArrowheadNoBackground.png">
 
-<link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.13/esri/css/esri.css" />
-<link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.13/dijit/themes/claro/claro.css">
-<link rel="stylesheet" type="text/css" href="colorbox/colorbox.css">
-<link rel="stylesheet" type="text/css" href="lib/idangerous.swiper.css">
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" type="text/css" href="css/responsive.css">
-<!--[if lt IE 9]>
-	<link rel="stylesheet" type="text/css" href="css/ie8-and-down.css" />
-<![endif]-->
-<link rel="stylesheet" type="text/css" href="css/npstheme.css">
+	<link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.13/esri/css/esri.css"/>
+	<link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.13/dijit/themes/claro/claro.css">
+	<link rel="stylesheet" type="text/css" href="colorbox/colorbox.css">
+	<link rel="stylesheet" type="text/css" href="lib/idangerous.swiper.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/responsive.css">
+	<!--[if lt IE 9]>
+	<link rel="stylesheet" type="text/css" href="css/ie8-and-down.css"/>
+	<![endif]-->
+	<link rel="stylesheet" type="text/css" href="css/npstheme.css">
 
-<script type="text/javascript" src="lib/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="lib/IconSpecs.js"></script>
-<script type="text/javascript" src="lib/common/helper_functions.js"></script>
-<script type="text/javascript" src="lib/jquery.animate-colors-min.js"></script>
-<script type="text/javascript" src="lib/idangerous.swiper.js"></script>
-<script type="text/javascript">var djConfig = {parseOnLoad: true};</script>
-<script type="text/javascript" src="http://js.arcgis.com/3.13/"></script>
-<script type="text/javascript" src="colorbox/jquery.colorbox-min.js"></script>
+	<script type="text/javascript" src="lib/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="lib/IconSpecs.js"></script>
+	<script type="text/javascript" src="lib/common/helper_functions.js"></script>
+	<script type="text/javascript" src="lib/jquery.animate-colors-min.js"></script>
+	<script type="text/javascript" src="lib/idangerous.swiper.js"></script>
+	<script type="text/javascript">var djConfig = {parseOnLoad: true};</script>
+	<script type="text/javascript" src="http://js.arcgis.com/3.13/"></script>
+	<script type="text/javascript" src="colorbox/jquery.colorbox-min.js"></script>
 
 	<script type="text/javascript">
 		var version = '1.4';
@@ -105,68 +111,70 @@
 
 <body class="claro">
 
-    <!-- Header Section-->
-		<div id="banner">
-			<div id="parkShortName"></div>
-			<div id="parkDetailName">
-				<div id="unitType"></div>
-				<div id="parkLocation"></div>
-			</div>
-			<div class="orgLogo">
-				<h2><a href="http://www.nps.gov" target="blank">National Park Service</a></h2>
-				<div class = "orgLogoDiv">
-					<a href="http://www.nps.gov" target="blank">
-						<img src="images/ArrowheadNoBackground.png" height="55" alt="National Park Service Arrowhead">
-					</a>
-				</div>
-			</div>
-			<div class="mapTitle">
-				<div class="titleArea">
-					<h1 id="title">Shortlist Story Map</h1>
-				</div>
-				<div class="social">
-					<i class="shareIcon share_facebook socialIcon-facebook-squared-1" title="Share on Facebook" tabindex="0"></i>
-					<i class="shareIcon share_twitter socialIcon-twitter-1" title="Share on Twitter" tabindex="0"></i>
-					<i class="shareIcon share_bitly socialIcon-link" title="Share a short link" tabindex="0"></i>
-					<div class="popover">
-						<div class="arrow"></div>
-						<div class="popover-content" id="bitlyContent">
-							<div style="width:150px; height:30px">
-								<div id="bitlyLoad" style="position:absolute; top: 16px; left: 24px; width:130px; text-align:center;">
-									<img src="images/loader/loader-upload.gif" alt="Loading" />
-								</div>
-								<input id="bitlyInput" type="text" value="" style="display: none; width: 150px;">
-							</div>
+<!-- Header Section-->
+<div id="banner">
+	<div id="parkShortName"></div>
+	<div id="parkDetailName">
+		<div id="unitType"></div>
+		<div id="parkLocation"></div>
+	</div>
+	<div class="orgLogo">
+		<h2><a href="http://www.nps.gov" target="blank">National Park Service</a></h2>
+
+		<div class="orgLogoDiv">
+			<a href="http://www.nps.gov" target="blank">
+				<img src="images/ArrowheadNoBackground.png" height="55" alt="National Park Service Arrowhead">
+			</a>
+		</div>
+	</div>
+	<div class="mapTitle">
+		<div class="titleArea">
+			<h1 id="title">Shortlist Story Map</h1>
+		</div>
+		<div class="social">
+			<i class="shareIcon share_facebook socialIcon-facebook-squared-1" title="Share on Facebook" tabindex="0"></i>
+			<i class="shareIcon share_twitter socialIcon-twitter-1" title="Share on Twitter" tabindex="0"></i>
+			<i class="shareIcon share_bitly socialIcon-link" title="Share a short link" tabindex="0"></i>
+
+			<div class="popover">
+				<div class="arrow"></div>
+				<div class="popover-content" id="bitlyContent">
+					<div style="width:150px; height:30px">
+						<div id="bitlyLoad" style="position:absolute; top: 16px; left: 24px; width:130px; text-align:center;">
+							<img src="images/loader/loader-upload.gif" alt="Loading"/>
 						</div>
+						<input id="bitlyInput" type="text" value="" style="display: none; width: 150px;">
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
+</div>
 
-    <div id="mobileTitlePage">
-			<div id="mobileTitle"></div>
-      <!-- <a href="http://www.nps.gov" target="blank"><img src="images/ArrowheadNoBackground.png" height="55" alt="National Park Service Arrowhead"></a> -->
-    </div>
+<div id="mobileTitlePage">
+	<div id="mobileTitle"></div>
+	<!-- <a href="http://www.nps.gov" target="blank"><img src="images/ArrowheadNoBackground.png" height="55" alt="National Park Service Arrowhead"></a> -->
+</div>
 
- 	<div id="mainWindow">	
-        <div id="divStrip">
-            <div id="tabs"></div>
-            <div id="bookmarksCon">
-                <div id="bookmarksToggle" tabindex="0"><p id="bookmarksTogText"></p></div>
-                <div id="bookmarksDiv">
-                </div>
-            </div>
-        </div>
-		<div id="mobileBookmarksCon">
-        	<div id="mobileBookmarksToggle" tabindex="0"><p id="mobileBookmarksTogText"></p></div>
-            <div id="mobileBookmarksDiv"></div>
+<div id="mainWindow">
+	<div id="divStrip">
+		<div id="tabs"></div>
+		<div id="bookmarksCon">
+			<div id="bookmarksToggle" tabindex="0"><p id="bookmarksTogText"></p></div>
+			<div id="bookmarksDiv">
+			</div>
 		</div>
-        
-        <div id="paneLeft">
-            <ul id="myList" class="tilelist"></ul>
-			<div class="noFeature">
+	</div>
+	<div id="mobileBookmarksCon">
+		<div id="mobileBookmarksToggle" tabindex="0"><p id="mobileBookmarksTogText"></p></div>
+		<div id="mobileBookmarksDiv"></div>
+	</div>
+
+	<div id="paneLeft">
+		<ul id="myList" class="tilelist"></ul>
+		<div class="noFeature">
 			<span class="noFeatureText">
-				<!--There are no features within the current map extent.  
+				<!--There are no features within the current map extent.
 				Click on the home button to return to the initial extent.-->
 				None of these places are in your current map extent.
 				Zoom out to see places.
@@ -175,49 +183,50 @@
 				<span class='icon-home'></span>
 			</div>-->
 		</div>
-        </div>
+	</div>
 
-		<div id="map" tabindex="0">
-			<div id="zoomToggle">
-				<div id="zoomIn" tabindex="0">+</div>
-				<div id="zoomExtent" tabindex="0">
-					<img id="zoomExtentImg" src="images/npmap_home.png" alt="Zoom map to initial extents">
-				</div>
-				<div id="zoomOut" tabindex="0">-</div>
-				<div id="locateButton" tabindex="0">
-					<img id="locateImage" src="images/location-arrow.png" alt="Show current location on map">
-				</div>
-			</div><!--?zoomToggle-->
-
-			<div id="hoverInfo"></div>
-		</div>
-		
-		<div id="mobileThemeBar" tabindex="0">
-			<div id="navThemeLeft" tabindex="0">
-				<span class='icon-arrow-left'></span>
+	<div id="map" tabindex="0">
+		<div id="zoomToggle">
+			<div id="zoomIn" tabindex="0">+</div>
+			<div id="zoomExtent" tabindex="0">
+				<img id="zoomExtentImg" src="images/npmap_home.png" alt="Zoom map to initial extents">
 			</div>
-			<div id="navThemeRight" tabindex="0">
-				<span class='icon-arrow-right'></span>
-			</div>
-			<div class="swiper-container">
-  				<div class="swiper-wrapper"></div>
-			</div>
-			<div id='returnIcon' tabindex="0">
-				<i class='icon-list'></i>
-			</div>
-			<div id="returnHiddenBar" tabindex="0"></div>
-			<div id="centerMapIconContainer" tabindex="0">
-				<div id='centerMapIcon'>
-					<i class='icon-contract'></i>
-				</div>
+			<div id="zoomOut" tabindex="0">-</div>
+			<div id="locateButton" tabindex="0">
+				<img id="locateImage" src="images/location-arrow.png" alt="Show current location on map">
 			</div>
 		</div>
-		
-		<div id="mobilePaneList">
-            <ul id="mobileList" class="mobileTileList"></ul>
-			<div class="noFeature">
+		<!--?zoomToggle-->
+
+		<div id="hoverInfo"></div>
+	</div>
+
+	<div id="mobileThemeBar" tabindex="0">
+		<div id="navThemeLeft" tabindex="0">
+			<span class='icon-arrow-left'></span>
+		</div>
+		<div id="navThemeRight" tabindex="0">
+			<span class='icon-arrow-right'></span>
+		</div>
+		<div class="swiper-container">
+			<div class="swiper-wrapper"></div>
+		</div>
+		<div id='returnIcon' tabindex="0">
+			<i class='icon-list'></i>
+		</div>
+		<div id="returnHiddenBar" tabindex="0"></div>
+		<div id="centerMapIconContainer" tabindex="0">
+			<div id='centerMapIcon'>
+				<i class='icon-contract'></i>
+			</div>
+		</div>
+	</div>
+
+	<div id="mobilePaneList">
+		<ul id="mobileList" class="mobileTileList"></ul>
+		<div class="noFeature">
 			<span class="noFeatureText">
-				<!--There are no features within the current map extent.  
+				<!--There are no features within the current map extent.
 				Click on the home button to return to the initial extent.-->
 				None of these places are in your current map extent.
 				Zoom out to see places.
@@ -226,36 +235,37 @@
 				<span class='icon-home'></span>
 			</div>-->
 		</div>
-        </div>
-		
-		<div id="mobileFeature">
-			<div class="swiper-container">
-  				<div class="swiper-wrapper"></div>
-			</div>
-		</div>
-		
-		<div id="mobileSupportedLayersView"></div>
-		
-		<div id="mobilePaneFader"></div>
-       
- 	</div>
+	</div>
 
-    <div id="whiteOut">
-        <img id="loader" src="images/loader/loader.gif" alt="Application is loading..."/>
-    </div>
-
-		<!-- Fatal error box -->
-		<div id="fatalError">
-			<table border="0">
-				<tr>
-					<td width="70px" align="center" id="fatalError-icon"></td>
-					<td id="fatalError-msg">
-						<b class="error-title"></b>
-						<p class="error-msg"></p>
-					</td>
-				</tr>
-			</table>
+	<div id="mobileFeature">
+		<div class="swiper-container">
+			<div class="swiper-wrapper"></div>
 		</div>
+	</div>
+
+	<div id="mobileSupportedLayersView"></div>
+
+	<div id="mobilePaneFader"></div>
+
+</div>
+
+<div id="whiteOut">
+	<img id="loader" src="images/loader/loader.gif" alt="Application is loading..."/>
+</div>
+
+<!-- Fatal error box -->
+<div id="fatalError">
+	<table border="0">
+		<tr>
+			<td width="70px" align="center" id="fatalError-icon"></td>
+			<td id="fatalError-msg">
+				<b class="error-title"></b>
+
+				<p class="error-msg"></p>
+			</td>
+		</tr>
+	</table>
+</div>
 
 </body>
 
