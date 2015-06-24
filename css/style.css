@@ -1259,7 +1259,7 @@ ul.mobileTileList .blurb {
 }
 
 #fatalError-icon {
-    background: url('../../resources/images/warning-icon.png') 0 0px;
+    background: url('../images/warning-icon.png') 0 0px;
     width: 75px;
     height: 75px;
     background-repeat: no-repeat !important;

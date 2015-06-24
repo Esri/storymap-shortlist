@@ -120,9 +120,9 @@ function initApp(config, queryParameters) {
 
     //Retrieve the map
     if (!config.webmap) {
-        console.log("No map provided");
-        //FIXME: This is fatal, so put something in the browser
-        return
+        var errorTitle = "No map provided";
+        initError(errorTitle, error.message);
+        return false;
     }
     esri.arcgis.utils.createMap(config.webmap, "map", {
         mapOptions: {
@@ -136,8 +136,9 @@ function initApp(config, queryParameters) {
         },
         function(error) {
             //TODO: Check for permission problem and then try logging in first
-            console.log("Map creation failed: ", dojo.toJson(error));
-            //FIXME: This is fatal, so put something in the browser
+            var errorTitle = "Map creation failed";
+            initError(errorTitle, error.message);
+            return false;
         }
     );
     if (config.unit) fixheader(config.unit);
@@ -1841,6 +1842,13 @@ function resizeMobileElements(){
 	$('.mobileTileList.blurb').css('width', '100%').css('width', '-=125px');
 	if(headerIsHidden())
 		$('#map').css('height', '48%').css('height', '-=20px');
+}
+
+function initError(errorTitle, errorMessage){
+    $('#loader').hide();
+    $("#fatalError .error-title").html(errorTitle);
+    $("#fatalError .error-msg").html(errorMessage);
+    $("#fatalError").show();
 }
 
 function prependURLHTTP(url)
