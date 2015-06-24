@@ -258,3 +258,12 @@
 #returnIcon:hover{
   color:#DDC78F;
 }
+
+#locateButton {
+    background-color: #74746A;
+}
+
+#locateButton:hover{
+    background-color: #626159;
+}
+
