@@ -116,6 +116,7 @@ function init() {
 function initApp(config, queryParameters) {
     // Add the query parameters to the config object
     $.extend(config, queryParameters);
+    sanitizeConfig();
 
     //TODO: remove this after testing
     console.log(config);
@@ -601,6 +602,29 @@ function getAppConfig(config, queryParameters) {
             initApp(config, queryParameters)
         }
     );
+}
+
+function sanitizeConfig() {
+    // checks for and cleans up invalid user input into the global config object
+    //Pan Percent
+    if (typeof(config.pan_percent) == "string") {
+        config.pan_percent = Number(config.pan_percent);
+    }
+    if (!config.pan_percent || !typeof(config.pan_percent) == "number" || config.pan_percent <= 0) {
+        config.pan_percent = 0.15;
+    }
+    if (config.pan_percent > 1) {
+        config.pan_percent = config.pan_percent / 100.0;
+    }
+    // Bookmark Text
+    if (!config.bookmarks_alias) {
+        config.bookmarks_alias = "Zoom To";
+    }
+    // Color Order
+    if (!config.color_order) {
+        config.color_order = "green,red,blue,purple";
+    }
+    //TODO: remove any items that are not in ColorSchemes
 }
 
 /******************************************************
