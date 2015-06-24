@@ -16,13 +16,13 @@
             "tooltip": "URL to the Unit's web page"
         }, {
             "type": "string",
-            "fieldName": "title",
+            "fieldName": "caption",
             "label": "Title Text:",
             "tooltip": "",
-            "placeHolder": "Defaults to map name"
+            "placeHolder": "Defaults to map summary"
         }, {
             "type": "paragraph",
-            "value": "Select the following social media icons to appear in the banner"
+            "value": "Which social media icons do you want?"
         }, {
             "type": "boolean",
             "fieldName": "show_facebook",
@@ -48,7 +48,7 @@
           "type": "string",
           "fieldName": "bookmarks_alias",
           "label": "Bookmarks:",
-          "tooltip": "Text to display on the zoom to bookmark control. (Map must have bokmarks defined).",
+          "tooltip": "Text to display on the zoom to bookmark control. (Map must have bookmarks defined).",
           "placeHolder": "Zoom"
         }, {
           "type": "string",

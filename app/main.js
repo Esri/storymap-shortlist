@@ -72,9 +72,6 @@ var _firstLoad = true;
 var _dojoReady = false;
 var _jqueryReady = false;
 
-var _title;
-var _subtitle;
-
 /******************************************************
 ************************* init ************************
 *******************************************************/
@@ -235,17 +232,19 @@ function initApp(config, queryParameters) {
 }
 
 function initMap(config, mapItem) {
-    _title = mapItem.itemInfo.item.title;
-    _subtitle = mapItem.itemInfo.item.snippet;
-
-    document.title = _title;
-    if (_subtitle) {
-        $("#title").html(_subtitle);
-        $('#mobileTitle').html(_subtitle)
-    } else {
-        $("#title").html(_title);
-        $('#mobileTitle').html(_title)
+    if (!config.caption) {
+        config.caption = config.title;  //Automatic property of appid (defaults to map snippet)
     }
+    if (!config.caption) {
+        config.caption = mapItem.itemInfo.item.snippet
+    }
+    if (!config.caption) {
+        config.caption = mapItem.itemInfo.item.title
+    }
+
+    document.title = config.caption;
+    $("#title").html(config.caption);
+    $('#mobileTitle').html(config.caption);
 
     _map = mapItem.map;
 
@@ -1768,8 +1767,8 @@ function displayLocationPin(point)
 
 function shareFacebook()
 {
-	var options = '&p[title]=' + encodeURIComponent(_title)
-					+ '&p[summary]=' + encodeURIComponent(_subtitle)
+	var options = '&p[title]=' + encodeURIComponent("National Park Service Short List Story Map")
+					+ '&p[summary]=' + encodeURIComponent(config.caption)
 					+ '&p[url]=' + encodeURIComponent(document.location.href)
 					+ '&p[images][0]=' + encodeURIComponent($("meta[property='og:image']").attr("content"));
 	
@@ -1782,7 +1781,7 @@ function shareFacebook()
 
 function shareTwitter()
 {
-	var options = 'text=' + encodeURIComponent(_title)
+	var options = 'text=' + encodeURIComponent(config.caption)
 					+ '&url=' + encodeURIComponent(document.location.href)
 					+ '&related=EsriStoryMaps'
 					+ '&hashtags=storymap'; 
