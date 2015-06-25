@@ -324,8 +324,8 @@
 "MUWO":{"name":"Muir Woods","type":"National Monument","state":"California"},
 "MUSH":{"name":"Muscle Shoals","type":"National Heritage Area","state":"Alabama"},
 "NATC":{"name":"Natchez","type":"National Historical Park","state":"Mississippi"},
-"NATT":{"name":"Natchez Trace","type":"National Scenic Trail","state":"Mississippi"}
-"NATR":{"name":"Natchez Trace","type":"Parkway","state":"AL,MS,TN"}
+"NATT":{"name":"Natchez Trace","type":"National Scenic Trail","state":"Mississippi"},
+"NATR":{"name":"Natchez Trace","type":"Parkway","state":"AL,MS,TN"},
 "AVIA":{"name":"National Aviation","type":"Heritage Area","state":"Ohio"},
 "NACE":{"name":"National Capital Parks-East","type":"","state":"District of Columbia"},
 "NAMA":{"name":"National Mall & Memorial Parks","type":"","state":"District of Columbia"},
