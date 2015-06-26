@@ -223,7 +223,7 @@ function init() {
 				var match =  $.grep(_response.itemInfo.itemData.operationalLayers, function(v){
 					return v.id==lid.split('_')[0]; }); 
 				if(match && match.length){ 
-					if(match[0].title == SUPPORTING_LAYERS_THAT_ARE_CLICKABLE){
+					if(match[0].title.toLowerCase() == SUPPORTING_LAYERS_THAT_ARE_CLICKABLE.toLowerCase()){
 						SUPPORTING_LAYERS_THAT_ARE_CLICKABLE = _map.getLayer(lid).name;
 						return false;
 					}
@@ -515,7 +515,7 @@ function init() {
 			var list = new dojo.DeferredList(requests);
 			list.then(function(results){
 				if (_map.loaded ) {
-						organizeLayers(results);
+					organizeLayers(results);
 				}
 			});
 			
@@ -670,7 +670,12 @@ function initMap(layers) {
 	$.each(layers, function(index,value){
 		if(!value.visibleAtMapScale && value.type == "Feature Layer" && value.url)
 			return;
-			
+		if(value.id === 'labels'){
+			if(value.featureLayers[0].graphics[0].attributes.getValueCI(FIELDNAME_TAB))
+				_map.removeLayer(_map.getLayer(value.id));
+			else
+				return;
+		}	
 		var graphicAtts;
 		var geomType;
 
@@ -679,12 +684,43 @@ function initMap(layers) {
 			graphicTitle = value.name;
 			geomType = value.geometryType;
 		}else{
-			graphicAtts = getFeatureSet(value).features[0].attributes;
-			graphicTitle = value.title;
-			geomType = value.featureCollection.layers[0].featureSet.geometryType;
+			if(value.visible && value.featureCollection){
+				graphicAtts = getFeatureSet(value).features[0].attributes;
+				graphicTitle = value.title;
+				geomType = value.featureCollection.layers[0].featureSet.geometryType;
+			}else{
+				return;
+			}
 		}
+		
+		$.grep(_map.graphicsLayerIds, function(n,i){
+			if(_map.getLayer(n) && _map.getLayer(n).id){
+				if(_map.getLayer(n).id == getID(value)){
+					var mapLayerId = null;
+					if(_map.getLayer(n).id.split('_').length > 2){
+						mapLayerId = _map.getLayer(n).id.split('_').slice(0,-1).join('_');
+					}
+					else if(_map.getLayer(n).id.split('_').length == 2 && _map.getLayer(n).id.indexOf('csv') == -1){
+						mapLayerId = _map.getLayer(n).id.split('_').slice(0,-1)[0];
+					} else {
+						mapLayerId = _map.getLayer(n).id;
+					}
+					var match =  $.grep(_response.itemInfo.itemData.operationalLayers, function(v){
+						return v.id==mapLayerId;
+					});
+					if(match && match.length) {					
+						graphicTitle = match[0].title;
+					} 
+				}
+			}else{
+				return;
+			}
+		});
+		
+		if(!graphicAtts)
+			return;
 
-		if (value.url == null || value.type == "CSV" || value.type == "Feature Layer" || value.layerType == "ArcGISFeatureLayer") {
+		if (value.id.indexOf('mapNotes') == -1 && (value.url == null || value.type == "CSV" || value.type == "Feature Layer" || value.layerType == "ArcGISFeatureLayer")) {
 			if(!value.graphics){
 				_map.removeLayer(_map.getLayer(value.id));
 				return;
@@ -742,6 +778,8 @@ function initMap(layers) {
 			// assign extra method to handle case sensitivity
 			value.attributes.getValueCI = getValueCI; 
 		});
+		
+		var supportLayerName = supportLayer.name;
 
 		if ($.inArray(supportLayer.name.toLowerCase(), supportingLayersThatAreClickable) > -1) {
 			dojo.connect(supportLayer, "onMouseOver", baselayer_onMouseOver);
@@ -767,8 +805,11 @@ function initMap(layers) {
 					_map.getLayer(n).setVisibility(false);
 					var mapLayerId = null;
 					if(_map.getLayer(n).id.split('_').length > 2){
-						mapLayerId = _map.getLayer(n).id.split('_').slice(0,-1).join('_'); 
-					} else{
+						mapLayerId = _map.getLayer(n).id.split('_').slice(0,-1).join('_');
+					}
+					else if(_map.getLayer(n).id.split('_').length == 2 && _map.getLayer(n).id.indexOf('csv') == -1){
+						mapLayerId = _map.getLayer(n).id.split('_').slice(0,-1)[0];
+					} else {
 						mapLayerId = _map.getLayer(n).id;
 					}
 					var match =  $.grep(_response.itemInfo.itemData.operationalLayers, function(v){
@@ -1733,9 +1774,8 @@ function postSelection(skipPopup) {
 		
 		if(!skipPopup)
 			buildPopup(_selected, _selected.geometry);
-		
-		// light up the corresponding tile.
 
+		// light up the corresponding tile.
 		var tile = findTile(_selected.attributes.getValueCI(FIELDNAME_ID));
 		$(tile).stop().animate({'background-color' : COLOR_FULL});
 	}
