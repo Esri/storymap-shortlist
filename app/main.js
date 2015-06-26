@@ -574,7 +574,7 @@ function cleanQueryParameters(queryParameters) {
 
     // This function will transmogrify the query parameters object to create bools from strings
     // For booleans: existance of the query parameter with no value or any value except "false" implies true
-    toggles = ['embed', 'details_panel', 'geolocator'];
+    toggles = ['embed', 'details_panel', 'geolocator', 'show_facebook', 'show_twitter', 'show_bitly'];
     toggles.forEach(function(param){
         var value = queryParameters[param];
         if (typeof(value) == "string") {
