@@ -1222,3 +1222,47 @@ ul.mobileTileList .blurb {
 	white-space: nowrap;
 	font-family: 'frutiger-bold', sans-serif;
 }
+
+/*
+ * Error box
+ */
+
+#fatalError {
+    position: absolute;
+    display: none;
+    z-index: 3000;
+    top: 50%;
+    left: 0px;
+    width: 100%;
+}
+
+#fatalError > table {
+    margin-top: -85px;
+    margin-left:-247px;
+    max-width: 490px;
+    min-height: 85px;
+    background-color: white;
+    border: 2px solid #428BC9;
+    padding:0px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#fatalError .error-title {
+    margin-right: 12px;
+}
+
+#fatalError .error-msg {
+    margin-top: 8px;
+    padding-bottom: 8px;
+    margin-right: 8px;
+}
+
+#fatalError-icon {
+    background: url('../images/warning-icon.png') 0 0px;
+    width: 75px;
+    height: 75px;
+    background-repeat: no-repeat !important;
+    background-size: 60px 60px;
+    background-position: 5px 10px;
+}

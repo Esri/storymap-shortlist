@@ -1,171 +1,179 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
+	<title>NPS Shortlist Storymap</title>
 
-<title>Shortlist</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta charset="utf-8"/>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-title" content="NPS Shortlist Storymap">
+	<meta name="application-name" content="NPS Shortlist Storymap">
+	<meta name="author" content="National Park Service">
+	<meta name="description" content="This story map was created with the NPS version of the Esri Shortlist template.">
+	<meta name="keywords"
+				content="US federal government, Department of Interior, National Park Service, map, digital, web, mobile, Harpers Ferry Center, NPMap, national park, Leaflet, CartoDB, Mapbox, Bing, Google, MapQuest, Esri">
+	<meta name="msapplication-TileColor" content="#222222">
+	<meta name="msapplication-TileImage" content="http://www.nps.gov/npmap/assets/img/windows-8-tile.png">
+	<base target="_parent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	<link rel="shortcut icon" href="http://www.nps.gov/npmap/favicon.ico">
+	<link rel="apple-touch-icon-precomposed" sizes="144x144"
+				href="http://www.nps.gov/npmap/assets/img/apple-touch-icon-144x144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114"
+				href="http://www.nps.gov/npmap/assets/img/apple-touch-icon-114x114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72"
+				href="http://www.nps.gov/npmap/assets/img/apple-touch-icon-72x72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed"
+				href="http://www.nps.gov/npmap/assets/img/apple-touch-icon-57x57-precomposed.png">
+	<!-- Facebook sharing -->
+	<meta property="og:title" content="NPS Shortlist Storymap"/>
+	<meta property="og:description"
+				content="This story map was created with the NPS version of the Esri Shortlist template."/>
+	<meta property="og:image" content="images/ArrowheadNoBackground.png">
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=10,chrome=1">
-		
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.13/esri/css/esri.css"/>
+	<link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.13/dijit/themes/claro/claro.css">
+	<link rel="stylesheet" type="text/css" href="colorbox/colorbox.css">
+	<link rel="stylesheet" type="text/css" href="lib/idangerous.swiper.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/responsive.css">
+	<!--[if lt IE 9]>
+	<link rel="stylesheet" type="text/css" href="css/ie8-and-down.css"/>
+	<![endif]-->
+	<link rel="stylesheet" type="text/css" href="css/npstheme.css">
 
-<link type="image/ico" rel="shortcut icon" href="//resources.esri.com/favicon.ico">
-<link type="image/ico" rel="icon"  href="//resources.esri.com/favicon.ico">
+	<script type="text/javascript" src="lib/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="lib/IconSpecs.js"></script>
+	<script type="text/javascript" src="lib/common/helper_functions.js"></script>
+	<script type="text/javascript" src="lib/jquery.animate-colors-min.js"></script>
+	<script type="text/javascript" src="lib/idangerous.swiper.js"></script>
+	<script type="text/javascript">var djConfig = {parseOnLoad: true};</script>
+	<script type="text/javascript" src="http://js.arcgis.com/3.13/"></script>
+	<script type="text/javascript" src="colorbox/jquery.colorbox-min.js"></script>
 
-<!-- 
-	To correctly reference your application in search engine:
-	 - create and fill out extensively an ArcGIS.com item that link to your final application
-	 - edit the following four tags as well as the upper title tag on line 4
--->
-<meta name="description" content="This story map was created with the Esri Shortlist application.">
+	<script type="text/javascript">
+		var version = '1.4';
+		var config = {
+			// Define where the app and map should come from (arcgis.com or private Portal)
+			//default_sharing_url: "http://gisportal.nps.gov/arcgis/sharing/content/items",
+			//default_proxy_url: "http://gisportal.nps.gov/arcgis/sharing/proxy",
+			default_sharing_url: "//www.arcgis.com/sharing/content/items",
+			default_proxy_url: "//www.arcgis.com/sharing/proxy",
 
-<!-- Facebook sharing -->
-<meta property="og:title" content="Shortlist"/>
-<meta property="og:description" content="This story map was created with the Esri Shortlist application."/>
-<meta property="og:image" content="images/esri-globe.png">
+			// Application to open. if no other is given (optional)
+			// Currently app must be shared with everyone
+			//appid: "6d15eedf8f72411f843866b0f1481b09",
+			appid: "1c49fa8ce2924320a2a58b89cdc03c69",
 
-<link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.13/esri/css/esri.css" />
-<link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.13/dijit/themes/claro/claro.css">
-<link rel="stylesheet" type="text/css" href="colorbox/colorbox.css">
-<link rel="stylesheet" type="text/css" href="lib/idangerous.swiper.css">
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" type="text/css" href="css/responsive.css">
-<!--[if lt IE 9]>
-	<link rel="stylesheet" type="text/css" href="css/ie8-and-down.css" />
-<![endif]-->
-<link rel="stylesheet" type="text/css" href="css/npstheme.css">
+			// Map to open if no other is given. ignored if valid app_id is provided
+			// Currently map must be shared with everyone
+			//webmap: "7b930930c5a842b9aad33fd57973c913", //BELA demo on portal
+			webmap: "de0de30ac9444e12899ef04431355685", // BELA on AGOL (TODO: this map generates an itemNotFound error)
 
-<script type="text/javascript" src="lib/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="lib/IconSpecs.js"></script>
-<script type="text/javascript" src="lib/common/helper_functions.js"></script>
-<script type="text/javascript" src="lib/jquery.animate-colors-min.js"></script>
-<script type="text/javascript" src="lib/idangerous.swiper.js"></script>
-<script type="text/javascript">var djConfig = {parseOnLoad: true};</script>
-<script type="text/javascript" src="http://js.arcgis.com/3.13/"></script>
-<script type="text/javascript" src="colorbox/jquery.colorbox-min.js"></script>
-<script type="text/javascript" src="app/main.js"></script>
-<script type="text/javascript" src="app/units.js"></script>
+			// Text to display on the zoom to bookmark control
+			bookmarks_alias: "Zoom",
 
-<!--Google Analytics Start-->
-<script type="text/javascript">
-  if (window.location.href.toLowerCase().indexOf("storymaps.esri.com") >= 0) {
-	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', 'UA-26529417-1']);
-	  _gaq.push(['_trackPageview']);
-	
-	  (function() {
-		 var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  })();
-  }
-</script>
-<!--Google Analytics End-->
+			// Color of the map pins in order of the tabs
+			// will only use as many colors as you have tabs, and will cycle if you have more tabs than colors
+			color_order: "green,red,blue,purple",
 
-<script type="text/javascript">
-var version = '1.4';
-/******************************************************
-********************  config section ******************
-*******************************************************/
-var EMBED = false  //false => include banner; true => no black NPS banner in header
-//var WEBMAP_ID = "7b930930c5a842b9aad33fd57973c913"; //BELA demo on portal
-var WEBMAP_ID = "de0de30ac9444e12899ef04431355685"; // BELA on AGOL
+			// Specifies whether or not popups have a link to a separate Details panel
+			details_panel: false,
 
-var BOOKMARKS_ALIAS = "Zoom";
-var COLOR_ORDER = "green,red,blue,purple"; // will only use as many colors as you have tabs
-var DETAILS_PANEL = false;  // specifies whether or not popups have a link to a separate Details panel
-//
-// Specify shapefile or CSV point layer(s) on your map that do NOT define a tab in the shortlist.
-// If there's more than one layer, use the "|" character as delimiter
-var POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS = "";
+			// Specify point layer(s) in your map that do NOT define a tab in the shortlist.
+			// If there's more than one layer, use the "|" character as delimiter
+			point_layers_not_to_be_shown_as_tabs: "",
 
-// Specify shapefile or CSV layer(s) in your map that will be clickable in the Shortlist
-// If there's more than one layer, use the "|" character as delimiter
-var SUPPORTING_LAYERS_THAT_ARE_CLICKABLE = "";
+			// Specify layer(s) in your map that will be clickable in the Shortlist
+			// If there's more than one layer, use the "|" character as delimiter
+			supporting_layers_that_are_clickable: "",
 
-// Location button that locates user (on supported browsers)
-var GEOLOCATOR = false;
+			// Show a location button that shows/hides the user's GPS location (on supported browsers)
+			geolocator: false,
 
-// Percent of the Height/Width to pan with each arrow key
-var PAN_PERCENT = 0.15
+			// Percent of the Height/Width to pan with each arrow key
+			pan_percent: 15,
 
-// Uncomment and edit to use Portal for ArcGIS
-//var DEFAULT_SHARING_URL = "http://gisportal.nps.gov/arcgis/sharing/content/items";
-//var DEFAULT_PROXY_URL = "http://gisportal.nps.gov/arcgis/sharing/proxy";
+			// Show Social Media Icons
+			show_facebook: true,
+			show_twitter: true,
+			show_bitly: true,
 
-/******************************************************
-******************  end config section ****************
-*******************************************************/
-
-</script>
+			// Is app embeded?  !embed => include banner; true => no banner/header
+			embed: false
+		};
+	</script>
+	<script type="text/javascript" src="app/units.js"></script>
+	<script type="text/javascript" src="app/main.js"></script>
 
 </head>
 
 <body class="claro">
 
-    <!-- Header Section-->
-		<div id="banner">
-			<div id="parkShortName"></div>
-			<div id="parkDetailName">
-				<div id="unitType"></div>
-				<div id="parkLocation"></div>
-			</div>
-			<div class="orgLogo">
-				<h2><a href="http://www.nps.gov" target="blank">National Park Service</a></h2>
-				<div class = "orgLogoDiv">
-					<a href="http://www.nps.gov" target="blank">
-						<img src="images/ArrowheadNoBackground.png" height="55" alt="National Park Service Arrowhead">
-					</a>
-				</div>
-			</div>
-			<div class="mapTitle">
-				<div class="titleArea">
-					<h1 id="title">Shortlist Story Map</h1>
-				</div>
-				<div class="social">
-					<i class="shareIcon share_facebook socialIcon-facebook-squared-1" title="Share on Facebook" tabindex="0"></i>
-					<i class="shareIcon share_twitter socialIcon-twitter-1" title="Share on Twitter" tabindex="0"></i>
-					<i class="shareIcon share_bitly socialIcon-link" title="Share a short link" tabindex="0"></i>
-					<div class="popover">
-						<div class="arrow"></div>
-						<div class="popover-content" id="bitlyContent">
-							<div style="width:150px; height:30px">
-								<div id="bitlyLoad" style="position:absolute; top: 16px; left: 24px; width:130px; text-align:center;">
-									<img src="images/loader/loader-upload.gif" alt="Loading" />
-								</div>
-								<input id="bitlyInput" type="text" value="" style="display: none; width: 150px;">
-							</div>
+<!-- Header Section-->
+<div id="banner">
+	<div id="parkShortName"></div>
+	<div id="parkDetailName">
+		<div id="unitType"></div>
+		<div id="parkLocation"></div>
+	</div>
+	<div class="orgLogo">
+		<h2><a href="http://www.nps.gov" target="blank">National Park Service</a></h2>
+
+		<div class="orgLogoDiv">
+			<a href="http://www.nps.gov" target="blank">
+				<img src="images/ArrowheadNoBackground.png" alt="National Park Service Arrowhead">
+			</a>
+		</div>
+	</div>
+	<div class="mapTitle">
+		<div class="titleArea">
+			<h1 id="title">Shortlist Story Map</h1>
+		</div>
+		<div class="social">
+			<i class="shareIcon share_facebook socialIcon-facebook-squared-1" title="Share on Facebook" tabindex="0"></i>
+			<i class="shareIcon share_twitter socialIcon-twitter-1" title="Share on Twitter" tabindex="0"></i>
+			<i class="shareIcon share_bitly socialIcon-link" title="Share a short link" tabindex="0"></i>
+
+			<div class="popover">
+				<div class="arrow"></div>
+				<div class="popover-content" id="bitlyContent">
+					<div style="width:150px; height:30px">
+						<div id="bitlyLoad" style="position:absolute; top: 16px; left: 24px; width:130px; text-align:center;">
+							<img src="images/loader/loader-upload.gif" alt="Loading"/>
 						</div>
+						<input id="bitlyInput" type="text" value="" style="display: none; width: 150px;">
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
+</div>
 
-    <div id="mobileTitlePage">
-			<div id="mobileTitle"></div>
-      <!-- <a href="http://www.nps.gov" target="blank"><img src="images/ArrowheadNoBackground.png" height="55" alt="National Park Service Arrowhead"></a> -->
-    </div>
+<div id="mobileTitlePage">
+	<div id="mobileTitle"></div>
+	<!-- <a href="http://www.nps.gov" target="blank"><img src="images/ArrowheadNoBackground.png" alt="National Park Service Arrowhead"></a> -->
+</div>
 
- 	<div id="mainWindow">	
-        <div id="divStrip">
-            <div id="tabs"></div>
-            <div id="bookmarksCon">
-                <div id="bookmarksToggle" tabindex="0"><p id="bookmarksTogText"></p></div>
-                <div id="bookmarksDiv">
-                </div>
-            </div>
-        </div>
-		<div id="mobileBookmarksCon">
-        	<div id="mobileBookmarksToggle" tabindex="0"><p id="mobileBookmarksTogText"></p></div>
-            <div id="mobileBookmarksDiv"></div>
+<div id="mainWindow">
+	<div id="divStrip">
+		<div id="tabs"></div>
+		<div id="bookmarksCon">
+			<div id="bookmarksToggle" tabindex="0"><p id="bookmarksTogText"></p></div>
+			<div id="bookmarksDiv">
+			</div>
 		</div>
-        
-        <div id="paneLeft">
-            <ul id="myList" class="tilelist"></ul>
-			<div class="noFeature">
+	</div>
+	<div id="mobileBookmarksCon">
+		<div id="mobileBookmarksToggle" tabindex="0"><p id="mobileBookmarksTogText"></p></div>
+		<div id="mobileBookmarksDiv"></div>
+	</div>
+
+	<div id="paneLeft">
+		<ul id="myList" class="tilelist"></ul>
+		<div class="noFeature">
 			<span class="noFeatureText">
-				<!--There are no features within the current map extent.  
+				<!--There are no features within the current map extent.
 				Click on the home button to return to the initial extent.-->
 				None of these places are in your current map extent.
 				Zoom out to see places.
@@ -174,51 +182,50 @@ var PAN_PERCENT = 0.15
 				<span class='icon-home'></span>
 			</div>-->
 		</div>
-        </div>
+	</div>
 
-        <div id="map" tabindex="0">
-            <div id="zoomToggle">
-                <div id="zoomIn" tabindex="0">+</div>
-                <div id="zoomExtent" tabindex="0">
-					<img id="zoomExtentImg" src="images/npmap_home.png" alt="Zoom map to initial extents">
-				</div>
-                <div id="zoomOut" tabindex="0">-</div>
-				<div id="locateButton" tabindex="0">
-					<img id="locateImage" src="images/locateButton.png" alt="Show current location on map">
-				</div>
-				
-            </div><!--?zoomToggle-->    
-			
-            <div id="hoverInfo"></div>
-			
-		</div>
-		
-		<div id="mobileThemeBar" tabindex="0">
-			<div id="navThemeLeft" tabindex="0">
-				<span class='icon-arrow-left'></span>
+	<div id="map" tabindex="0">
+		<div id="zoomToggle">
+			<div id="zoomIn" tabindex="0">+</div>
+			<div id="zoomExtent" tabindex="0">
+				<img id="zoomExtentImg" src="images/npmap_home.png" alt="Zoom map to initial extents">
 			</div>
-			<div id="navThemeRight" tabindex="0">
-				<span class='icon-arrow-right'></span>
-			</div>
-			<div class="swiper-container">
-  				<div class="swiper-wrapper"></div>
-			</div>
-			<div id='returnIcon' tabindex="0">
-				<i class='icon-list'></i>
-			</div>
-			<div id="returnHiddenBar" tabindex="0"></div>
-			<div id="centerMapIconContainer" tabindex="0">
-				<div id='centerMapIcon'>
-					<i class='icon-contract'></i>
-				</div>
+			<div id="zoomOut" tabindex="0">-</div>
+			<div id="locateButton" tabindex="0">
+				<img id="locateImage" src="images/location-arrow.png" alt="Show current location on map">
 			</div>
 		</div>
-		
-		<div id="mobilePaneList">
-            <ul id="mobileList" class="mobileTileList"></ul>
-			<div class="noFeature">
+		<!--?zoomToggle-->
+
+		<div id="hoverInfo"></div>
+	</div>
+
+	<div id="mobileThemeBar" tabindex="0">
+		<div id="navThemeLeft" tabindex="0">
+			<span class='icon-arrow-left'></span>
+		</div>
+		<div id="navThemeRight" tabindex="0">
+			<span class='icon-arrow-right'></span>
+		</div>
+		<div class="swiper-container">
+			<div class="swiper-wrapper"></div>
+		</div>
+		<div id='returnIcon' tabindex="0">
+			<i class='icon-list'></i>
+		</div>
+		<div id="returnHiddenBar" tabindex="0"></div>
+		<div id="centerMapIconContainer" tabindex="0">
+			<div id='centerMapIcon'>
+				<i class='icon-contract'></i>
+			</div>
+		</div>
+	</div>
+
+	<div id="mobilePaneList">
+		<ul id="mobileList" class="mobileTileList"></ul>
+		<div class="noFeature">
 			<span class="noFeatureText">
-				<!--There are no features within the current map extent.  
+				<!--There are no features within the current map extent.
 				Click on the home button to return to the initial extent.-->
 				None of these places are in your current map extent.
 				Zoom out to see places.
@@ -227,24 +234,38 @@ var PAN_PERCENT = 0.15
 				<span class='icon-home'></span>
 			</div>-->
 		</div>
-        </div>
-		
-		<div id="mobileFeature">
-			<div class="swiper-container">
-  				<div class="swiper-wrapper"></div>
-			</div>
-		</div>
-		
-		<div id="mobileSupportedLayersView"></div>
-		
-		<div id="mobilePaneFader"></div>
-       
- 	</div>
+	</div>
 
-    <div id="whiteOut">
-        <img id="loader" src="images/loader/loader.gif" alt="Application is loading..."/>
-    </div>
-    
+	<div id="mobileFeature">
+		<div class="swiper-container">
+			<div class="swiper-wrapper"></div>
+		</div>
+	</div>
+
+	<div id="mobileSupportedLayersView"></div>
+
+	<div id="mobilePaneFader"></div>
+
+</div>
+
+<div id="whiteOut">
+	<img id="loader" src="images/loader/loader.gif" alt="Application is loading..."/>
+</div>
+
+<!-- Fatal error box -->
+<div id="fatalError">
+	<table border="0">
+		<tr>
+			<td width="70px" align="center" id="fatalError-icon"></td>
+			<td id="fatalError-msg">
+				<b class="error-title"></b>
+
+				<p class="error-msg"></p>
+			</td>
+		</tr>
+	</table>
+</div>
+
 </body>
 
 </html>

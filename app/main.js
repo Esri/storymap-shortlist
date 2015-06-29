@@ -34,8 +34,6 @@ var FIELDNAME_LAYER = "Layer";
 var FIELDNAME_FULLSIZEURL = "Large_URL";  //1024x768
 var FIELDNAME_CREDITS = "Credits";
 
-var UNIT = '';  // TODO: make this a configurable setting
-
 var _lutIconSpecs = {
 	tiny:new IconSpecs(22,28,3,8),
 	medium:new IconSpecs(24,30,3,8),
@@ -74,9 +72,6 @@ var _firstLoad = true;
 var _dojoReady = false;
 var _jqueryReady = false;
 
-var _title;
-var _subtitle;
-
 /******************************************************
 ************************* init ************************
 *******************************************************/
@@ -84,46 +79,72 @@ var _subtitle;
 dojo.addOnLoad(function() {_dojoReady = true;init()});
 jQuery(document).ready(function() {_jqueryReady = true;init()});
 
-/* init comes in two parts because of async call to 
-   createMap. */
+/* init comes in three parts because of async calls getApp and createMap. */
 
 function init() {
-	
-	if (!_jqueryReady) return;
-	if (!_dojoReady) return;
-	
-	var queryString = new Object();
-	var temp = esri.urlToObject(document.location.href).query;
-	if (temp) {
-		$.each(temp, function(index, value) {
-			if (value) {
-				queryString[index.toLowerCase()] = value;
-			} else {
-				queryString[index.toLowerCase()] = index;
-			}
-		});
-	}
+    if (!_jqueryReady) return;
+    if (!_dojoReady) return;
 
-	EMBED = queryString["embed"] ? $.trim((queryString["embed"])).toLowerCase() != "false" : EMBED;
-	WEBMAP_ID = queryString["webmap"] ? queryString["webmap"] : WEBMAP_ID;
-	BOOKMARKS_ALIAS = queryString["bookmarks_alias"] ? queryString["bookmarks_alias"] : BOOKMARKS_ALIAS;
-	COLOR_ORDER = queryString["color_order"] ? queryString["color_order"] : COLOR_ORDER;
-	DETAILS_PANEL = queryString["details_panel"] ? $.trim((queryString["details_panel"])).toLowerCase() == "true" : DETAILS_PANEL;
-	POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS = queryString["point_layers_not_to_be_shown_as_tabs"] ? 
-											queryString["point_layers_not_to_be_shown_as_tabs"] : 
-											POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS;
-	SUPPORTING_LAYERS_THAT_ARE_CLICKABLE = queryString["supporting_layers_that_are_clickable"] ?
-											queryString["supporting_layers_that_are_clickable"] :
-											SUPPORTING_LAYERS_THAT_ARE_CLICKABLE;
-	GEOLOCATOR = queryString["geolocator"] ? queryString["geolocator"] : GEOLOCATOR;
-	// Note:  If using a proxy server (required for remove CSV access),
-	//        you'll need to uncomment the following line and provide
-	//        a valid proxy server url. 										
-	//esri.config.defaults.io.proxyUrl = YOUR_PROXY_URL_HERE;
-    UNIT = queryString["unit"] ? queryString["unit"] : UNIT;
-    fixheader(UNIT);
+    // This function is responsible for setting up the configuration object, then calling the initApp()
+    
+    // Three configuration options control where we get other configuration options
+    // We need the query parameters in case the defaults were overwritten
+    var queryParameters = GetQueryParameters();
 
-	$("#bookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
+    config.default_sharing_url = queryParameters["default_sharing_url"] || config.default_sharing_url;
+    config.default_proxy_url = queryParameters["default_proxy_url"] || config.default_proxy_url;
+    config.appid = queryParameters["appid"] || config.appid;
+
+    //TODO: sanity check these three options, and be prepared to fail gracefully
+
+    // These configuration options are required for getting the app and map items
+    esri.arcgis.utils.arcgisUrl = config.default_sharing_url;
+    esri.config.defaults.io.proxyurl = config.default_proxy_url;
+
+    // Get the app configuration from AGOL/Portal
+    if (config.appid) {
+        getAppConfig(config, queryParameters);
+        // getAppConfig() will eventually call initApp()
+    } else {
+        initApp(config, queryParameters)
+    }
+}
+
+function initApp(config, queryParameters) {
+    // Add the query parameters to the config object
+    $.extend(config, queryParameters);
+    sanitizeConfig();
+
+    //TODO: remove this after testing
+    console.log(config);
+
+    //Retrieve the map
+    if (!config.webmap) {
+        var errorTitle = "No map provided";
+        initError(errorTitle, error.message);
+        return false;
+    }
+    esri.arcgis.utils.createMap(config.webmap, "map", {
+        mapOptions: {
+            slider: false,
+            wrapAround180:false
+        },
+        ignorePopups: true
+    }).then(
+        function(response) {
+            initMap(config, response);
+        },
+        function(error) {
+            //TODO: Check for permission problem and then try logging in first
+            var errorTitle = "Map creation failed";
+            initError(errorTitle, error.message);
+            return false;
+        }
+    );
+
+    // Configure Header and other items not dependent on map
+    if (config.unit) fixheader(config.unit);
+    setupSocialMediaIcons();
 
 	handleWindowResize();
 	$(this).resize(handleWindowResize);	
@@ -143,109 +164,30 @@ function init() {
 	
 	$(document).bind('cbox_complete', function(){
 		$(".details .rightDiv").height($(".details").height() - $(".details .title").height() - 40);
-	});  
-	
-	$("#bookmarksToggle").click(function(){
+	});
+
+    $("#bookmarksTogText").html(config.bookmarks_alias+' &#x25BC;');
+    $("#bookmarksToggle").click(function(){
 		if ($("#bookmarksDiv").css('display')=='none'){
-		  $("#bookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25B2;');
+		  $("#bookmarksTogText").html(config.bookmarks_alias+' &#x25B2;');
 		}
 		else{
-		  $("#bookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
+		  $("#bookmarksTogText").html(config.bookmarks_alias+' &#x25BC;');
 		}
 		$("#bookmarksDiv").slideToggle();
 	});
-	$("#mobileBookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
+	$("#mobileBookmarksTogText").html(config.bookmarks_alias+' &#x25BC;');
 	$("#mobileBookmarksToggle").click(function(){
 		if ($("#mobileBookmarksDiv").css('display')=='none'){
-		  $("#mobileBookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25B2;');
+		  $("#mobileBookmarksTogText").html(config.bookmarks_alias+' &#x25B2;');
 		}
 		else{
-		  $("#mobileBookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
+		  $("#mobileBookmarksTogText").html(config.bookmarks_alias+' &#x25BC;');
 		}
 		$("#mobileBookmarksDiv").slideToggle();
 	});
+    
 
-	if (window.DEFAULT_SHARING_URL)
-		esri.arcgis.utils.arcgisUrl = DEFAULT_SHARING_URL;
-	
-	if (window.DEFAULT_PROXY_URL)
-		esri.config.defaults.io.proxyurl = DEFAULT_PROXY_URL;
-
-	var mapDeferred = esri.arcgis.utils.createMap(WEBMAP_ID, "map", {
-		mapOptions: {
-			slider: false,
-			wrapAround180:false
-		},
-		ignorePopups: true
-	});
-	
-	mapDeferred.addCallback(function(response) {
-		_title = response.itemInfo.item.title;
-		_subtitle = response.itemInfo.item.snippet;
-		
-		document.title = _title;
-        if (_subtitle) {
-            $("#title").html(_subtitle);
-            $('#mobileTitle').html(_subtitle)
-        } else {
-            $("#title").html(_title);
-            $('#mobileTitle').html(_title)
-        }
-
-		_map = response.map;
-		  
-		dojo.connect(_map, 'onExtentChange', refreshList);
-
-		// click action on the map where there's no graphic 
-		// causes a deselect.
-
-		dojo.connect(_map, 'onClick', function(event){
-			if (event.graphic == null && headerIsVisible()) {
-				unselect();
-			}
-			$('#mobileTitlePage').css('display', 'none');
-			hideBookmarks();
-		});
-		
-		dojo.connect(_map, 'onZoomEnd', function(){
-			var level = _map.getLevel();
-			if (level > -1 && level === _map.getMaxZoom()) {
-				$('#zoomIn').addClass('disableControls');
-			}
-			else 
-				if (level > -1 && level === _map.getMinZoom()) {
-					$('#zoomOut').addClass('disableControls');
-				}
-				else {
-					$('#zoomIn').removeClass('disableControls');
-					$('#zoomOut').removeClass('disableControls');
-				}
-		})
-		
-		_bookmarks = response.itemInfo.itemData.bookmarks;
-		if (_bookmarks) {
-			loadBookmarks();
-			$("#bookmarksCon").show();
-			$("#mobileBookmarksCon").show();
-			handleWindowResize(); // additional call to re-size tab bar
-		}
-		
-		var layers = response.itemInfo.itemData.operationalLayers; 
-		
-		if(_map.loaded){
-			initMap(layers);
-		} else {
-			dojo.connect(_map,"onLoad",function(){
-				initMap(layers);
-			});
-		}
-		
-	});
-	
-	mapDeferred.addErrback(function(error) {
-	  console.log("Map creation failed: ", dojo.toJson(error));
-	});
-	
 	dojo.connect(dojo.byId('returnIcon'), 'onclick', showMobileList);
 	
 	dojo.connect(dojo.byId('returnHiddenBar'), 'onclick', showMobileList);
@@ -289,22 +231,87 @@ function init() {
 			}
 		}
 	});   
-	if(GEOLOCATOR == 'true' || GEOLOCATOR == true)
+	if(config.geolocator)
 		$('#locateButton').css('display', 'block');
 }
 
-function initMap(layers) {
+function initMap(config, mapItem) {
+    if (!config.caption) {
+        config.caption = config.title;  //Automatic property of appid (defaults to map snippet)
+    }
+    if (!config.caption) {
+        config.caption = mapItem.itemInfo.item.snippet
+    }
+    if (!config.caption) {
+        config.caption = mapItem.itemInfo.item.title
+    }
+
+    document.title = config.caption;
+    $("#title").html(config.caption);
+    $('#mobileTitle').html(config.caption);
+
+    _map = mapItem.map;
+
+    dojo.connect(_map, 'onExtentChange', refreshList);
+
+    // click action on the map where there's no graphic
+    // causes a deselect.
+
+    dojo.connect(_map, 'onClick', function(event){
+        if (event.graphic == null && headerIsVisible()) {
+            unselect();
+        }
+        $('#mobileTitlePage').css('display', 'none');
+        hideBookmarks();
+    });
+
+    dojo.connect(_map, 'onZoomEnd', function(){
+        var level = _map.getLevel();
+        if (level > -1 && level === _map.getMaxZoom()) {
+            $('#zoomIn').addClass('disableControls');
+        }
+        else
+        if (level > -1 && level === _map.getMinZoom()) {
+            $('#zoomOut').addClass('disableControls');
+        }
+        else {
+            $('#zoomIn').removeClass('disableControls');
+            $('#zoomOut').removeClass('disableControls');
+        }
+    })
+
+    _bookmarks = mapItem.itemInfo.itemData.bookmarks;
+    if (_bookmarks) {
+        loadBookmarks();
+        $("#bookmarksCon").show();
+        $("#mobileBookmarksCon").show();
+        handleWindowResize(); // additional call to re-size tab bar
+    }
+
+    var layers = mapItem.itemInfo.itemData.operationalLayers;
+
+    if(_map.loaded){
+        initAppContent(layers);
+    } else {
+        dojo.connect(_map,"onLoad",function(){
+            initAppContent(layers);
+        });
+    }
+
+}
+
+function initAppContent(layers) {
 	
 	var supportLayers = [];
 	var pointLayers = [];
 	
 	var arrExemptions = [];
-	$.each(POINT_LAYERS_NOT_TO_BE_SHOWN_AS_TABS.split("|"), function(index, value) {
+	$.each(config.point_layers_not_to_be_shown_as_tabs.split("|"), function(index, value) {
 		arrExemptions.push($.trim(value).toLowerCase());
 	});
 	
 	var supportingLayersThatAreClickable = [];
-	$.each(SUPPORTING_LAYERS_THAT_ARE_CLICKABLE.split("|"), function(index, value) {
+	$.each(config.supporting_layers_that_are_clickable.split("|"), function(index, value) {
 		supportingLayersThatAreClickable.push($.trim(value).toLowerCase());
 	});
 		
@@ -348,7 +355,7 @@ function initMap(layers) {
 	
 	var contentLayer;
 	var colorScheme;
-	var colorOrder = COLOR_ORDER.split(",");
+	var colorOrder = config.color_order.split(",");
 	var colorIndex;
 	$.each(pointLayers,function(index,value) {
 		_map.removeLayer(_map.getLayer($.grep(_map.graphicsLayerIds, function(n,i){return _map.getLayer(n).id == getID(value)})[0]));
@@ -479,8 +486,8 @@ function initMap(layers) {
 
     $('#map').keydown(function(e){
         oldCenter = _map.extent.getCenter();
-        deltaX = _map.extent.getWidth() * PAN_PERCENT;
-        deltaY = _map.extent.getHeight() * PAN_PERCENT;
+        deltaX = _map.extent.getWidth() * config.pan_percent;
+        deltaY = _map.extent.getHeight() * config.pan_percent;
         if (e.which == 37) {
             var newCenter = oldCenter.offset(-deltaX,0)
             _map.centerAt(newCenter)
@@ -530,6 +537,97 @@ function initMap(layers) {
 		}
 	});
 	modal_InfoWindow_Init();
+}
+
+function GetQueryParameters() {
+    var queryString = {};
+    var temp = esri.urlToObject(document.location.href).query;
+    if (temp) {
+        $.each(temp, function (index, value) {
+            if (value) {
+                queryString[index.toLowerCase()] = value;
+            } else {
+                // A parameter with no value is treated as a boolean toggle being turned on.
+                queryString[index.toLowerCase()] = true;
+            }
+        });
+    }
+    return cleanQueryParameters(queryString);
+}
+
+function cleanQueryParameters(queryParameters) {
+    // This function will morph old parameter names to the config names coded in the app.
+    var old_new_name_map = {
+        // newname : [list of old names],
+        webmap: ['webmap_id']
+    };
+    $.each(old_new_name_map, function(key, value) {
+        if (!queryParameters.hasOwnProperty(key)) {
+            value.forEach(function (oldname) {
+                if (queryParameters.hasOwnProperty(oldname)) {
+                    queryParameters[key] = queryParameters[oldname];
+                    delete queryParameters[oldname];
+                }
+            });
+        }
+    });
+
+    // This function will transmogrify the query parameters object to create bools from strings
+    // For booleans: existance of the query parameter with no value or any value except "false" implies true
+    toggles = ['embed', 'details_panel', 'geolocator', 'show_facebook', 'show_twitter', 'show_bitly'];
+    toggles.forEach(function(param){
+        var value = queryParameters[param];
+        if (typeof(value) == "string") {
+            queryParameters[param] = $.trim((value)).toLowerCase() != "false"
+        }
+    });
+    return queryParameters;
+}
+
+function getAppConfig(config, queryParameters) {
+    // Async call to portal or AGOL to get the data from the app configuration item
+    // The object returned is merged with the existing configuration object, overwriting
+    // any hardcoded configuration parameters.  Then initialize the App.
+    esri.request({
+        url: config.default_sharing_url + "/" + config.appid + "/data",
+        content: {f: "json"},
+        callbackParamName: "callback"
+    }).then(
+        function(response) {
+            if (response && response.values) {
+                $.extend(config, response.values);
+                initApp(config, queryParameters)
+            }
+        },
+        function(error) {
+            //TODO: Check for permission problem and then try logging in first
+            console.log("Error retreiving app config: ", error.message);
+            initApp(config, queryParameters)
+        }
+    );
+}
+
+function sanitizeConfig() {
+    // checks for and cleans up invalid user input into the global config object
+    //Pan Percent
+    if (typeof(config.pan_percent) == "string") {
+        config.pan_percent = Number(config.pan_percent);
+    }
+    if (!config.pan_percent || !typeof(config.pan_percent) == "number" || config.pan_percent <= 0) {
+        config.pan_percent = 0.15;
+    }
+    if (config.pan_percent > 1) {
+        config.pan_percent = config.pan_percent / 100.0;
+    }
+    // Bookmark Text
+    if (!config.bookmarks_alias) {
+        config.bookmarks_alias = "Zoom To";
+    }
+    // Color Order
+    if (!config.color_order) {
+        config.color_order = "green,red,blue,purple";
+    }
+    //TODO: remove any items that are not in ColorSchemes
 }
 
 /******************************************************
@@ -768,13 +866,16 @@ function SortByNumber(a, b){
 }
 
 function fixheader(unitcode) {
-    if (unitcode in units) {
-        $("#parkShortName").html(units[unitcode].name);
+    if (unitcode.toUpperCase() in units) {
+        var url = config.uniturl || "http://www.nps.gov/" + unitcode;
+        var html = '<a href="'+ url + '" target=blank>' + units[unitcode].name +'</a>';
+        $("#parkShortName").html(html);
         $("#unitType").html(units[unitcode].type);
         $("#parkLocation").html(units[unitcode].state);
     } else {
         var headerparts = unitcode.split("|");
-        $("#parkShortName").html(headerparts[0]);
+        var html2 = config.uniturl ? '<a href="'+ config.uniturl + '" target=blank>' + headerparts[0] +'</a>' : headerparts[0]
+        $("#parkShortName").html(html2);
         if (headerparts.length > 1) {
             $("#unitType").html(headerparts[1]);
         }
@@ -782,6 +883,12 @@ function fixheader(unitcode) {
             $("#parkLocation").html(headerparts[2]);
         }
     }
+}
+
+function setupSocialMediaIcons() {
+    if (!config.show_facebook) $('.share_facebook').hide()
+    if (!config.show_twitter) $('.share_twitter').hide()
+    if (!config.show_bitly) $('.share_bitly').hide()
 }
 
 function loadBookmarks() {
@@ -795,7 +902,7 @@ function loadBookmarks() {
 		var name = $(this).html();
 		var extent = new esri.geometry.Extent($.grep(_bookmarks,function(n,i){return n.name == name})[0].extent);
 		_map.setExtent(extent);	
-		$("#bookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
+		$("#bookmarksTogText").html(config.bookmarks_alias+' &#x25BC;');
 		$("#bookmarksDiv").slideToggle();
         $("#bookmarksToggle").focus();
     });
@@ -804,7 +911,7 @@ function loadBookmarks() {
 		var name = $(this).html();
 		var extent = new esri.geometry.Extent($.grep(_bookmarks,function(n,i){return n.name == name})[0].extent);
 		_map.setExtent(extent);	
-		$("#mobileBookmarksTogText").html(BOOKMARKS_ALIAS+' &#x25BC;');
+		$("#mobileBookmarksTogText").html(config.bookmarks_alias+' &#x25BC;');
 		$("#mobileBookmarksDiv").slideToggle();
     });
 
@@ -813,11 +920,11 @@ function loadBookmarks() {
 function hideBookmarks(){
 	if ($("#mobileBookmarksDiv").css('display') === 'block') {
 		$("#mobileBookmarksDiv").slideToggle()
-		$("#mobileBookmarksTogText").html(BOOKMARKS_ALIAS + ' &#x25BC;')
+		$("#mobileBookmarksTogText").html(config.bookmarks_alias + ' &#x25BC;')
 	}
 	if ($("#bookmarksDiv").css('display') === 'block') {
 		$("#bookmarksDiv").slideToggle()
-		$("#bookmarksTogText").html(BOOKMARKS_ALIAS + ' &#x25BC;')
+		$("#bookmarksTogText").html(config.bookmarks_alias + ' &#x25BC;')
 	}
 	else 
 		return
@@ -1012,7 +1119,7 @@ function handleWindowResize() {
 			infoWindow_Close();
 			_selected = null;
 		}
-        if (EMBED) {
+        if (config.embed) {
             $("#banner").hide();
         } else {
             $("#banner").show();
@@ -1028,7 +1135,7 @@ function handleWindowResize() {
 			$("#tabs").width($("body").width());
 		}
 		
-		$("#paneLeft").height($("#mainWindow").height() - 35);
+		$("#paneLeft").height($("#mainWindow").height() - $('#divStrip').height());
 		
 		if($("body").width() <= TWO_COLUMN_THRESHOLD || ($("body").width() <= 1024 && $("body").height() <= 768))
 			$("#paneLeft").width(LEFT_PANE_WIDTH_TWO_COLUMN)
@@ -1179,11 +1286,11 @@ function buildPopup(feature, geometry, baseLayerClick)
 	if (picture) {
 		var pDiv = $("<div></div>").addClass("infoWindowPictureDiv");
 		var mobilePDiv = $("<div></div>").addClass("mobilePictureDiv");
-		if (DETAILS_PANEL && !mobile) {
+		if (config.details_panel && !mobile) {
 			$(pDiv).append($(new Image()).attr("src", picture));
 			$(pDiv).css("cursor", "pointer");
 		}
-		else if (DETAILS_PANEL && mobile) {
+		else if (config.details_panel && mobile) {
 			if (website) {
 				var mobileA = $("<a></a>").attr("href", website).attr("target","_blank").attr("tabindex","-1");
 				$(mobileA).append($(new Image()).attr("src", picture));
@@ -1230,7 +1337,7 @@ function buildPopup(feature, geometry, baseLayerClick)
 			$('#mobileSupportedLayersView').append($("<div class='mobileFeatureCredits'></div>").html("Photo: " + credits));				
 	}
 	
-	if (!DETAILS_PANEL) {
+	if (!config.details_panel) {
 		if(!shortDesc)
 			$('.mobileFeatureTitle').after($('<hr style="margin-left: 20px; margin-right: 20px;">'));
 
@@ -1248,7 +1355,7 @@ function buildPopup(feature, geometry, baseLayerClick)
 		}
 		
 	}
-	else if (DETAILS_PANEL && mobile){
+	else if (config.details_panel && mobile){
 		$(contentDiv).prepend($('<div style="margin-left: -50px" class="mobileFeatureTitle">'+title+'</div>'));
 		if(!shortDesc)
 			$('.mobileFeatureTitle').after($('<hr style="margin-left: 20px; margin-right: 20px;">'));
@@ -1327,7 +1434,7 @@ function buildPopup(feature, geometry, baseLayerClick)
         showDetails(feature);
     });
 	
-	if (DETAILS_PANEL && headerIsVisible()) {
+	if (config.details_panel && headerIsVisible()) {
 		$(".infoWindowPictureDiv").click(function(e) {
 			showDetails(feature);
 		});	
@@ -1393,7 +1500,7 @@ function buildMobileSlideView(featureNumber){
 			$(mobileContentDiv).append($("<div class='mobileFeatureCredits'></div>").html("Photo: " + credits));			
 		}
 		
-		if (!DETAILS_PANEL) {
+		if (!config.details_panel) {
 			var desc1 = atts.getValueCI(FIELDNAME_DESC1);
 			if (desc1) {
 				$(mobileContentDiv).append($("<div class='mobileFeatureDesc'></div>").html(desc1));
@@ -1673,8 +1780,8 @@ function displayLocationPin(point)
 
 function shareFacebook()
 {
-	var options = '&p[title]=' + encodeURIComponent(_title)
-					+ '&p[summary]=' + encodeURIComponent(_subtitle)
+	var options = '&p[title]=' + encodeURIComponent("National Park Service Short List Story Map")
+					+ '&p[summary]=' + encodeURIComponent(config.caption)
 					+ '&p[url]=' + encodeURIComponent(document.location.href)
 					+ '&p[images][0]=' + encodeURIComponent($("meta[property='og:image']").attr("content"));
 	
@@ -1687,7 +1794,7 @@ function shareFacebook()
 
 function shareTwitter()
 {
-	var options = 'text=' + encodeURIComponent(_title)
+	var options = 'text=' + encodeURIComponent(config.caption)
 					+ '&url=' + encodeURIComponent(document.location.href)
 					+ '&related=EsriStoryMaps'
 					+ '&hashtags=storymap'; 
@@ -1747,6 +1854,13 @@ function resizeMobileElements(){
 	$('.mobileTileList.blurb').css('width', '100%').css('width', '-=125px');
 	if(headerIsHidden())
 		$('#map').css('height', '48%').css('height', '-=20px');
+}
+
+function initError(errorTitle, errorMessage){
+    $('#loader').hide();
+    $("#fatalError .error-title").html(errorTitle);
+    $("#fatalError .error-msg").html(errorMessage);
+    $("#fatalError").show();
 }
 
 function prependURLHTTP(url)
