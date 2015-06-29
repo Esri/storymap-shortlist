@@ -93,7 +93,7 @@ function init() {
 
     config.default_sharing_url = queryParameters["default_sharing_url"] || config.default_sharing_url;
     config.default_proxy_url = queryParameters["default_proxy_url"] || config.default_proxy_url;
-    config.appid = queryParameters["app_id"] || config.appid;
+    config.appid = queryParameters["appid"] || config.appid;
 
     //TODO: sanity check these three options, and be prepared to fail gracefully
 
