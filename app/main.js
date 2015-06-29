@@ -121,7 +121,8 @@ function initApp(config, queryParameters) {
     //Retrieve the map
     if (!config.webmap) {
         var errorTitle = "No map provided";
-        initError(errorTitle, error.message);
+        var subtitle = config.appid ? "The appid is invalid or inaccessible" : "and no appid either";
+        initError(errorTitle, subtitle);
         return false;
     }
     esri.arcgis.utils.createMap(config.webmap, "map", {
