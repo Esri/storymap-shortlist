@@ -147,7 +147,7 @@ function init() {
     });	
 	
 	$(document).bind('cbox_complete', function(){
-		$(".details .rightDiv").height($(".details").height() - $(".details .title").height() - 40);
+		$(".details .rightDiv").height($(".details").height() - $(".details .detailsTitle").height() - 40);
 	});  
 	
 	$("#bookmarksToggle").click(function(){
