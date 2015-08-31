@@ -326,8 +326,9 @@ function init() {
 					}
 
 					$.grep(_newThemes, function(theme, index){
-						if(theme.id === featAtts.getValueCI(FIELDNAME_TAB))
-						theme.features.push(graphic);
+						if(theme.id === featAtts.getValueCI(FIELDNAME_TAB)){
+							theme.features.push(graphic);
+						}
 					});
 
 				});
@@ -339,7 +340,7 @@ function init() {
 						//create a feature collection
 				        var featureCollection = {
 				          "layers":[{
-				          		"id": theme.id,
+				          		"id": String(theme.id),
 								"layerDefinition": null,
 								"featureSet": featServiceFeatureSet
 					       }]
@@ -348,8 +349,8 @@ function init() {
 			        	featServiceFeatureSet.geometryType = "esriGeometryPoint";
 			        	featureCollection.layers[0].layerDefinition = createLayerDefinition(fields);
 
-						var newLayer = new esri.layers.GraphicsLayer({id: theme.id});
-						newLayer.title = theme.id;
+						var newLayer = new esri.layers.GraphicsLayer({id: String(theme.id)});
+						newLayer.title = String(theme.id);
 						newLayer.featureCollection = featureCollection;
 						newLayers.push(newLayer);
 					});
@@ -477,7 +478,7 @@ function init() {
 								//create a feature collection
 						        featureCollection = {
 						          "layers":[{
-						          		"id": theme.id,
+						          		"id": String(theme.id),
 										"layerDefinition": null,
 										"featureSet": featServiceFeatureSet
 							       }]
@@ -487,8 +488,8 @@ function init() {
 					        	createLayerDefinition(fields);
 					        	featureCollection.layers[0].layerDefinition = createLayerDefinition(fields);
 
-								var newLayer = new esri.layers.GraphicsLayer({id: theme.id});
-								newLayer.title = theme.id;
+								var newLayer = new esri.layers.GraphicsLayer({id: String(theme.id)});
+								newLayer.title = String(theme.id);
 								newLayer.featureCollection = featureCollection;
 								newLayers.push(newLayer);
 							});
@@ -686,7 +687,7 @@ function initMap(layers) {
 		}else{
 			if(value.visible && value.featureCollection){
 				graphicAtts = getFeatureSet(value).features[0].attributes;
-				graphicTitle = value.title;
+				graphicTitle = String(value.title);
 				geomType = value.featureCollection.layers[0].featureSet.geometryType;
 			}else{
 				return;
@@ -719,7 +720,6 @@ function initMap(layers) {
 
 		if(!graphicAtts)
 			return;
-
 		if (value.id.indexOf('mapNotes') == -1 && (value.url == null || value.type == "CSV" || value.type == "Feature Layer" || value.layerType == "ArcGISFeatureLayer")) {
 			if(!value.graphics){
 				_map.removeLayer(_map.getLayer(value.id));
@@ -832,7 +832,7 @@ function initMap(layers) {
 		}
 		if(_pointsInOneLayer){
 				$.each(_newThemes, function(index, theme){
-					if(layerId === theme.id){
+					if(layerId === String(theme.id)){
 						newLayers.push(value);
 						return false;
 					}
