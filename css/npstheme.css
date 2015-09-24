@@ -68,7 +68,7 @@
   padding: 0 0 0 25px;
 }
 
-#parkShortName a:link, a:visited  {
+#parkShortName a:link, #parkShortName a:visited {
     color: #fff;
     text-decoration: none;
 }
@@ -128,7 +128,7 @@
     padding-right: 15px
 }
 
-.orgLogo h2 a:link, a:visited  {
+.orgLogo h2 a:link, .orgLogo h2 a:visited {
     color: #fff;
     text-decoration: none;
 }
