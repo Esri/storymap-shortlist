@@ -147,8 +147,10 @@ function init() {
     });
 
 	$(document).bind('cbox_complete', function(){
-		$(".details .rightDiv").height($(".details").height() - $(".details .title").height() - 70);
+		$(".details .rightDiv").height($(".details").height() - $(".detailsTitle").height() - 50);
 	});
+
+	$('.noFeatureText').html('None of these places are in your current map extent.  Zoom out to see places.');
 
 	$("#bookmarksToggle").click(function(){
 		if ($("#bookmarksDiv").css('display')=='none'){
