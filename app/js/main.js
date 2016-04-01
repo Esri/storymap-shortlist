@@ -183,6 +183,7 @@ function init() {
         proxyUrl: ""
     });*/
         
+        //comment out this line below if use addProxyRule
 		esri.config.defaults.io.proxyUrl = DEFAULT_PROXY_URL;
 
 	var mapDeferred = esri.arcgis.utils.createMap(WEBMAP_ID, "map", {
