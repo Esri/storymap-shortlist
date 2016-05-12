@@ -2293,13 +2293,10 @@ function displayLocationPin(point)
 
 function shareFacebook()
 {
-	var options = '&p[title]=' + encodeURIComponent($('#title').text())
-					+ '&p[summary]=' + encodeURIComponent($('#subtitle').text())
-					+ '&p[url]=' + encodeURIComponent(document.location.href)
-					+ '&p[images][0]=' + encodeURIComponent($("meta[property='og:image']").attr("content"));
+	var options = encodeURIComponent(document.location.href);
 
 	window.open(
-		'http://www.facebook.com/sharer.php?s=100' + options,
+		'https://www.facebook.com/sharer/sharer.php?u=' + options,
 		'',
 		'toolbar=0,status=0,width=626,height=436'
 	);
