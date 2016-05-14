@@ -176,6 +176,14 @@ function init() {
 		esri.arcgis.utils.arcgisUrl = DEFAULT_SHARING_URL;
 
 	if (DEFAULT_PROXY_URL)
+         //If you are storing login information (username and password or client_id and client_secret) in the proxy you will want to use the following addProxyRule option, so that requests to the resources with the specified URL prefix are routed through the proxy.
+        
+        /*esri.addProxyRule({
+        urlPrefix: "", 
+        proxyUrl: ""
+    });*/
+        
+        //comment out this line below if use addProxyRule
 		esri.config.defaults.io.proxyUrl = DEFAULT_PROXY_URL;
 
 	var mapDeferred = esri.arcgis.utils.createMap(WEBMAP_ID, "map", {
