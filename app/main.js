@@ -1787,7 +1787,7 @@ function shareFacebook()
 					+ '&p[images][0]=' + encodeURIComponent($("meta[property='og:image']").attr("content"));
 	
 	window.open(
-		'http://www.facebook.com/sharer.php?s=100' + options, 
+		'http://www.facebook.com/sharer/sharer.php?s=100' + options,
 		'Facebook sharing', 
 		'toolbar=0,status=0,width=626,height=436'
 	);
