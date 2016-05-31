@@ -969,9 +969,9 @@ function buildPopup(feature, geometry, baseLayerClick)
 			if (!(website.indexOf("http") >= 0)) {
 				website = "http://"+website;
 			}
-			$(contentDiv).append($('<div class="address"><a href="'+website+'" target="_blank">Website</a></div>').css("padding-top", 10));
+			$(contentDiv).append($('<div class="address"><a href="'+website+'" target="_blank">Launch</a></div>').css("padding-top", 10));
 			if(baseLayerClick && mobile)
-				$('#mobileSupportedLayersView').append($('<div class="mobileFeatureAddress"><a href="'+website+'" target="_blank">Website</a></div>').css("padding-top", 10));
+			    $('#mobileSupportedLayersView').append($('<div class="mobileFeatureAddress"><a href="' + website + '" target="_blank">Launch</a></div>').css("padding-top", 10));
 		}
 		
 	}
@@ -1393,7 +1393,7 @@ function shareFacebook()
 					+ '&p[images][0]=' + encodeURIComponent($("meta[property='og:image']").attr("content"));
 	
 	window.open(
-		'http://www.facebook.com/sharer.php?s=100' + options, 
+		'http://www.facebook.com/sharer/sharer.php?s=100' + options,
 		'Facebook sharing', 
 		'toolbar=0,status=0,width=626,height=436'
 	);
