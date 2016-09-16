@@ -1,0 +1,25 @@
+.builderHelp .modal-logo {
+	position: absolute;
+	top: -19px;
+	left: -20px;
+	width: 48px;
+	height: 48px;
+	background: url(../../../../resources/tpl/builder/icons/builder-tour.png);
+	background-repeat: no-repeat;
+	background-position: 0 -41px;
+	background-size: 40px;
+	border: 4px solid #FFF;
+	border-radius: 24px;
+}
+
+.builderHelp p {
+	margin-top: 10px;
+}
+
+.builderHelp h3 {
+	margin: 20px 0 10px 0;
+}
+
+.builderHelp a {
+	color: #428bca;
+}

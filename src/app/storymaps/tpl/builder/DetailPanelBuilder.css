@@ -1,0 +1,113 @@
+.detailContainer.swiper-container {
+	margin-top: -53px;
+}
+
+.detail-btn-add {
+	display: none;
+	right: 55px;
+	font-size: 44px;
+	color: #428BC9;
+	top: 3px;
+}
+
+/*.detailFeatureTitle {
+	margin-top: 0 !important;
+}*/
+
+.detailFeatureTitle.notNumbered {
+	margin-top: 10px !important;
+}
+
+.detailFeatureTitle p {
+	-webkit-margin-before: 0;
+	-webkit-margin-after: 0;
+	-webkit-margin-start: 0;
+	-webkit-margin-end: 0;
+}
+
+.noTitle{
+	font-family: 'open_sansregular', sans-serif;
+}
+
+.imagePicker {
+	max-width: 300px;
+	height: 200px;
+	background-color: #dadada;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+	position: relative;
+	cursor: pointer;
+}
+
+.imagePicker span{
+	font-size: 1.3em;
+	top: 65px;
+	position: absolute;
+	left: 60px;
+	color: #555;
+}
+
+.medium-editor-placeholder:after {
+	color: black;
+	font-family: 'open_sansregular', sans-serif;
+	font-weight: normal !important;
+}
+
+.editLocationContainer {
+	position: absolute;
+	height: 40px;
+	width: 100%;
+	bottom: 40px;
+	outline: none;
+}
+
+.setLocation {
+	position: absolute;
+	right: 30px;
+}
+
+.editLocation {
+	position: absolute;
+	right: 30px;
+	display: none;
+}
+
+.updateLocation {
+	position: absolute;
+	right: 120px;
+	display: none;
+}
+
+.cancelLocation {
+	position: absolute;
+	right: 30px;
+	display: none;
+}
+
+#search {
+	display: block;
+	position: absolute;
+	z-index: 2;
+	bottom: 26px;
+	left: 10px;
+}
+
+.arcgisSearch .searchMenu {
+	bottom: 100% !important;
+	top: auto !important;
+}
+
+.detailFeatureDesc {
+	width: 100%;
+	height: auto;
+	min-height: 100px;
+}
+
+.detailFeatureDesc p {
+  margin-top: 10px;
+}
+
+.detailFeatureDesc p:first-of-type {
+  margin-top: inherit;
+}

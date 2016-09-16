@@ -1,0 +1,21 @@
+.map .esriSimpleSlider .home-location-save-btn.btn {
+	height: 31px;
+	border-radius: 0 5px 5px 0;
+	color: #0079c1;
+	background-color: #fff;
+	border-color: #0079c1;
+}
+
+.map .esriSimpleSlider .home-location-save-btn {
+	position: absolute;
+	top: 29px;
+	left: 30px;
+	display: none;
+}
+
+.home-location-save-logo {
+	background: url(../../../../resources/tpl/builder/icons/builder-save.png);
+	background-repeat: no-repeat;
+	margin-top: -4px;
+	margin-left: -10px;
+}

@@ -1,0 +1,113 @@
+/* Adapted from Medium Editor Flat theme
+ * https://github.com/yabwe/medium-editor/blob/master/src/sass/themes/flat.scss
+ * CSS grabed in Story Map Cascade in chrome dev tools
+ */
+
+
+/*
+ * Overrides
+ */
+.medium-editor-placeholder:after {
+  white-space: inherit !important;
+  margin: 0 !important;
+}
+/*
+ * Style
+ */
+.medium-toolbar-arrow-under:after {
+  top: 32px !important;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAMCAYAAACA0IaCAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAwNy8yOS8xNizKUXAAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzbovLKMAAABVElEQVQokZ3Qz0oCURTH8e8VJ4NIJcJdfxaDA7MZNV2LPkAa1KJ2vlbQK/gOQQ8QtAsKWkTiHcaUMahrnDZ3ZBhUqgPDXGbO78O5BxEByBljbuQfZYy5BnLWQQFOEATlOI6Hf4HiOB4GQVAGHOuQA7aBiuu6vtb69jeQ1vrOdV0fqNh8LpmsAOwDVc/zOqPR6H4TNB6PHzzP6wBVmysACnvXPLALHAB13/dPtdaPq6AwDJ9rtVoPqNv+XSAvIiSYSoGHQKPVap1NJpOXNDSdTl/b7fY50LB9RZtTSywFOrbhCDjpdrsXs9nsTURkPp+HvV7vCmja/8Vk8UsjOWTAEnAMNPv9/mUURU+DwWAAtOz3UhYSETteqpRSyZV3gDKwZxf8CbwDEfABGMmE82RKREQptbABgAWwBXwB8TqI5eJWVGpCx76/AbMO2oilwOQRO/jawA95E2er1dRzagAAAABJRU5ErkJggg==') !important;
+  width: 19px !important;
+  height: 12px !important;
+  margin-left: -9px !important;
+  border: none !important;
+  border-style: none !important;
+}
+.medium-toolbar-arrow-over:before {
+  /*border-color: transparent transparent @medium-editor-bgcolor transparent !important;*/
+  /* make it under */
+  border-color: transparent transparent #ffffff transparent !important;
+}
+.medium-editor-toolbar {
+  background-color: #ffffff !important;
+  -webkit-box-shadow: 0px 0px 8px 0 rgba(0, 0, 0, 0.8) !important;
+  -moz-box-shadow: 0px 0px 8px 0 rgba(0, 0, 0, 0.8) !important;
+  box-shadow: 0px 0px 8px 0 rgba(0, 0, 0, 0.8) !important;
+  border-radius: 2px !important;
+}
+.medium-editor-toolbar li {
+  padding: 0 !important;
+}
+.medium-editor-toolbar li .medium-editor-button-last {
+  border-right: none !important;
+}
+/* so get the style in block toolbar */
+.medium-editor-action {
+  width: 36px !important;
+  min-width: inherit !important;
+  height: 32px !important;
+  border: none !important;
+  /*border-right: 1px solid #CCC !important;*/
+  background-color: transparent !important;
+  color: #000000 !important;
+  transition: background-color 0.2s ease-in, color 0.2s ease-in !important;
+  padding: 0 5px !important;
+}
+.medium-editor-action:hover {
+  background-color: #d3d3d3 !important;
+  color: #000000 !important;
+}
+.medium-editor-button-active {
+  background-color: #b3b3b3 !important;
+  color: #000000 !important;
+}
+.medium-editor-toolbar-form .medium-editor-toolbar-input {
+  height: 32px !important;
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+.medium-editor-toolbar-form .medium-editor-toolbar-input::-webkit-input-placeholder {
+  color: #000000 !important;
+  color: rgba(0, 0, 0, 0.8) !important;
+}
+.medium-editor-toolbar-form .medium-editor-toolbar-input:-moz-placeholder {
+  /* Firefox 18- */
+  color: #000000 !important;
+  color: rgba(0, 0, 0, 0.8) !important;
+}
+.medium-editor-toolbar-form .medium-editor-toolbar-input::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #000000 !important;
+  color: rgba(0, 0, 0, 0.8) !important;
+}
+.medium-editor-toolbar-form .medium-editor-toolbar-input:-ms-input-placeholder {
+  color: #000000 !important;
+  color: rgba(0, 0, 0, 0.8) !important;
+}
+.medium-editor-toolbar-form a {
+  color: #000000 !important;
+}
+.medium-editor-toolbar-anchor-preview {
+  background: #FFF !important;
+  box-shadow: 0px 0px 8px 0 rgba(0, 0, 0, 0.8) !important;
+}
+.medium-editor-toolbar-anchor-preview a {
+  color: #000 !important;
+  margin: 5px !important;
+}
+.medium-editor-placeholder:after {
+  font-family: 'open_sans', sans-serif !important;
+  color: #cccccc !important;
+}
+
+
+/* dirty override for the Anchor dialog, would be solve by using the Anchor plugin */
+.medium-editor-toolbar-form {
+  height: 32px;
+}
+
+.medium-editor-toolbar-form input {
+  height: 25px !important;
+  margin-top: -4px;
+  vertical-align: 3px;
+}

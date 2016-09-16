@@ -1,0 +1,16 @@
+.layer-picker{
+	padding-left: 35px;
+}
+
+.layer-info{
+	padding: 10px 35px;
+}
+
+.tab-field-picker{
+	padding: 15px 35px;
+}
+
+.disableTabSelector {
+	cursor: not-allowed;
+	opacity: 0.7;
+}

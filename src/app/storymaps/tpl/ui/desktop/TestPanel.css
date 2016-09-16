@@ -1,0 +1,17 @@
+.testPanel {
+	position: absolute;
+	top: 200px;
+	left: 0;
+	width: 200px;
+	height: 100px;
+	background-color: #FFF;
+	border: 1px solid black;
+	font-size: 1.2em;
+	display: none !important;
+}
+
+.testPanel .userInput {
+	outline: 1px dashed grey;
+	margin: 5px;
+	padding: 5px;
+}

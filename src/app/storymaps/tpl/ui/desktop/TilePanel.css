@@ -1,0 +1,218 @@
+#divStrip {
+	width: 100%;
+	height: auto;
+	margin: auto;
+	overflow: visible;
+	background-color: #444;
+	margin: 0px;
+	padding: 0px;
+	z-index: 101;
+}
+
+#tabs {
+	height: 100%;
+	padding-left: 17px;
+	overflow: hidden;
+}
+
+/*.tab {
+	float: left;
+	background-color: #666;
+	height: 35px;
+	font-size: 18px;
+	width: auto;
+	color: #d8d8d8;
+	cursor: pointer;
+	padding: 5px 15px 20px 15px;
+	margin: 0px 5px 0 3px;
+	border: none;
+	border-radius: 6px 6px 0 0;
+}*/
+
+/*.tab:hover {
+	color: #FFFFFF;
+}
+
+.tab-selected {
+	color: #FFFFFF;
+	cursor: default;
+	/*font-weight: 600;*/
+/*}*/
+
+/*
+ * Left Pane (contains feature tiles)
+ */
+#paneLeft {
+	/* initial width -- will be re-calculated in app */
+	width: 520px;
+	height: 100%;
+	overflow: hidden;
+	background-color: #C7C7C7;
+	padding: 8px;
+	border-top-width: 10px;
+	border-top-style: solid;
+	display: block;
+}
+
+#paneLeft .noFeature{
+	position: absolute;
+	height: 80%;
+	width: 50%;
+	bottom: 0;
+	display: none;
+}
+
+#paneLeft .noFeatureText{
+	top: 20%;
+	position: absolute;
+	width: 200px;
+	text-align: center;
+}
+
+ul.tilelist {
+	/* initial width -- will be re-calculated in app */
+	width: 495px;
+	padding-left: 17px;
+	padding-bottom: 10px;
+	display: inline-block;
+	overflow: auto;
+	position: absolute;
+	top: 18px;
+	left: 0;
+}
+
+ul.tilelist li {
+	list-style-type: none;
+	margin: 3px;
+	width: 150px;
+	height: 150px;
+	float: left;
+	font-size: 10px;
+	background-color: #F9F9F9;
+	cursor: pointer;
+	position: relative;
+}
+
+ul.tilelist:hover li{
+
+}
+
+ul.tilelist li:hover{
+	box-shadow: 3px 3px 15px #666;
+	background-color: #FFF;
+}
+
+ul.tilelist > a {
+	display: block;
+	position: relative;
+	text-decoration: none;
+	color: #FFFFFF;
+	width: 98px;
+	height: 75px;
+}
+
+ul.tilelist img {
+	max-width: 150px;
+	max-height: 113px;
+}
+
+.tileImage {
+	/*background-size: cover;*/
+	background-size: contain;
+	background-repeat: no-repeat;
+	width: 150px;
+	height: 113px;
+}
+
+.tileImage i{
+	font-size: 65px;
+	margin-left: auto;
+	left: 38px;
+	position: relative;
+	top: 25px;
+}
+
+ul.tilelist p {
+	margin: 0px;
+	margin-left: -40px;
+	margin-top: -10px;
+}
+
+ul.tilelist .footer {
+	padding-left: 5px;
+	position: absolute;
+	top: 118px;
+	left: 0px;
+}
+
+ul.tilelist .num {
+	width: 20px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	float: left;
+	border: solid;
+	border-width: thin;
+	color: white;
+	font-size: 11px;
+	text-align: center;
+	font-family: 'calibri';
+	font-weight: bold;
+}
+
+ul.tilelist .longNum {
+	width: 20px;
+}
+
+ul.tilelist .blurb {
+	width: 116px;
+	height: 30px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	word-wrap: break-word;
+	float: left;
+	margin-left: 4px;
+	text-align: left;
+	font-family: 'open_sansregular', sans-serif;
+}
+
+.unNumBlurb {
+	width: 136px !important;
+}
+
+ul.tilelist .longNumBlurb {
+	width: 106px;
+}
+
+.unlocated {
+	position: absolute;
+	top: 2px;
+	display: block;
+	height: 100%;
+	width: 100%;
+	outline: none;
+	background-repeat: no-repeat;
+	background-image: url(../../../../../resources/tpl/builder/icons/no-location.png);
+}
+
+.organize {
+	background: repeating-linear-gradient( 45deg, #999, #999 10px, #c4c9ce 10px, #c4c9ce 20px );
+}
+
+/*
+ * Scrollbar
+ */
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #888;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+
+::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}

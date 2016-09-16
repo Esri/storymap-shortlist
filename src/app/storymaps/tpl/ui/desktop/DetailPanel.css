@@ -1,0 +1,282 @@
+.detailContainer {
+	/*position: absolute;
+	top: 0;
+	left: 0;*/
+	width: inherit;
+	height: inherit;
+	width: inherit;
+	display: none;
+}
+
+.detailContainer.swiper-container{
+	margin-top: -18px;
+	margin-left: -8px;
+}
+
+.detailBackground {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: inherit;
+	height: inherit;
+	background-color: #999;
+	opacity: 0.6;
+	cursor: pointer;
+}
+
+.detailView {
+	opacity: 1;
+	width: inherit;
+	background-color: white;
+	overflow-y: hidden;
+	overflow-x: hidden;
+}
+
+.slick-list {
+	height: inherit !important;
+}
+
+.detailView-small {
+	width: 336px !important;
+}
+
+.detailView-medium {
+	width: 491px !important;
+}
+
+.detailView-large {
+	width: 664px !important;
+}
+
+@font-face {
+	font-family: 'Ionicons';
+	src: url('../../../../../resources/tpl/viewer/font/font/ionicons.eot');
+	src: url('../../../../../resources/tpl/viewer/font/font/ionicons.eot?#iefix') format('embedded-opentype'),
+		url('../../../../../resources/tpl/viewer/font/font/ionicons.woff') format('woff'),
+		url('../../../../../resources/tpl/viewer/font/font/ionicons.ttf') format('truetype'),
+		url('../../../../../resources/tpl/viewer/font/font/ionicons.svg#ionicons') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="ion-"]:before, [class*=" ion-"]:before {
+	font-family: "Ionicons";
+	font-style: normal;
+	font-weight: normal;
+	speak: none;
+
+	display: inline-block;
+	text-decoration: inherit;
+	width: 1em;
+	margin-right: .2em;
+	text-align: center;
+	/* opacity: .8; */
+
+	/* For safety - reset parent styles, that can break glyph codes*/
+	font-variant: normal;
+	text-transform: none;
+
+	/* fix buttons height, for twitter bootstrap */
+	line-height: 1em;
+
+	/* Animation center compensation - margins should be symmetric */
+	/* remove if not needed */
+	margin-left: .2em;
+
+	/* you can be more comfortable with increased icons size */
+	/* font-size: 120%; */
+
+	/* Font smoothing. That was taken from TWBS */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	/* Uncomment for 3D effect */
+	/* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+
+/*
+ * Detail Feature Info Pane
+ */
+#detailFeature{
+	display: block;
+	visibility: hidden;
+	position: absolute;
+	bottom: 0;
+	overflow-y: auto;
+	overflow-x: hidden;
+	width: 100%;
+	background-color: #fff;
+}
+
+.detailClose {
+	position: absolute;
+	z-index: 99999999;
+	right: 0px;
+	top: 10px;
+	border: 0;
+	padding: 0;
+	margin: 0;
+	overflow: visible;
+	display: block;
+	bottom: initial!important;
+	width: 50px!important;
+	height: 50px;
+	font-family: "Ionicons";
+	font-size: 35px;
+	background-color: transparent;
+	color: #8c8c8c;
+	opacity: 0.8;
+	/*background: url('../../../../../resources/tpl/viewer/icons/media-fullscreen-close.png') !important;*/
+	/*color: transparent!important;*/
+}
+
+.detailClose:hover{
+	opacity: 1;
+}
+
+.detailClose:hover {
+	/*background-position-y: -39px!important;*/
+}
+
+.detailHeader {
+	/*margin-right: 95px;*/
+	margin-bottom: 12px;
+	border-top: 10px;
+	border-top-style: solid;
+}
+
+.detailFeatureNum{
+	width:36px;
+	margin-left: 10px;
+	margin-top: 10px;
+	border:solid;
+	border-width:thin;
+	color:white;
+	font-size:20px;
+	text-align:center;
+	font-family: 'calibri';
+	font-weight: bold;
+}
+
+.detailFeatureTitle{
+	color: #333;
+	font-family: 'open_sanssemibold', sans-serif;
+	font-size: 22px;
+	text-align: left;
+	padding-left: 60px;
+	padding-top: 15px;
+	margin-top: -45px;
+	margin-right: 125px;
+	line-height: 26px;
+}
+
+.notNumbered{
+	padding-top: 0;
+	padding-left: 10px;
+	margin-top: 10px;
+}
+
+.detailPictureDiv {
+	margin-bottom: -5px;
+	overflow-x: hidden;
+	/*text-align: left;*/
+	text-align: center;
+	/*position: fixed;*/
+}
+
+.detailPictureDiv img{
+	width: auto;
+	height: auto;
+	margin: auto;
+	cursor: pointer;
+	/*padding-left: 5px;
+	padding-right: 5px;*/
+	/*max-height: 298px;*/
+}
+
+.detailTextContainer {
+	overflow-y: auto;
+	position: absolute !important;
+}
+
+.detailFeatureDesc{
+	color: #000;
+	font-family: 'open_sansregular', sans-serif;
+	font-size: 14px;
+	text-align: left;
+	padding-left: 20px;
+	padding-right: 20px;
+	font-weight: normal;
+	margin-top: 20px;
+	margin-bottom: -5px;
+}
+
+.detailFeatureDesc a{
+	color: blue;
+	font-weight: bold;
+}
+
+.website {
+	color:blue;
+	font-weight:bold;
+	font-family: 'open_sansregular', sans-serif;
+	font-size: 14px;
+	text-align: left;
+	padding-left: 20px;
+	padding-right: 20px;
+	margin-top: 20px;
+	margin-bottom: -5px;
+	display: none;
+}
+
+.website a {
+	color:blue;
+	font-weight:bold;
+	font-family: 'open_sansregular', sans-serif;
+	font-size: 14px;
+	text-align: left;
+	padding-right: 20px;
+	margin-top: 20px;
+	margin-bottom: -5px;
+}
+
+.detail-btn-container {
+	position: absolute;
+	display: block;
+	z-index: 99;
+	opacity: 0.8;
+	color: #8c8c8c;
+	font-size: 23px;
+	width: 30px;
+	height: 50px;
+	top: 20px;
+}
+
+.detail-btn-container:not(.disabled):hover {
+	opacity: 1;
+	cursor: pointer;
+}
+
+.detail-btn-left {
+	right: 95px;
+}
+
+.detail-btn-right {
+	right: 55px;
+}
+
+.detail-btn-left .detail-btn {
+	font-family: "Ionicons";
+	/*background-position: 27px 0;*/
+}
+
+.detail-btn-right .detail-btn {
+	font-family: "Ionicons";
+	/*background-position: -27px -27px;*/
+}
+
+.ion-android-close:before { content: '\f2d7'; }
+.ion-chevron-down:before { content: '\f123'; }
+.ion-chevron-left:before { content: '\f124'; }
+.ion-chevron-right:before { content: '\f125'; }
+.ion-chevron-up:before { content: '\f126'; }

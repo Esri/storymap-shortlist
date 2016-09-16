@@ -1,0 +1,355 @@
+/*
+ * Builder mask never display in viewer
+ */
+
+.builder-mask {
+	display: none;
+}
+
+html,body {
+	height:100%;
+	width:100%;
+	margin:auto;
+}
+
+body {
+	background-color:#fff;
+	color:#333;
+	font-size:14px;
+	overflow:hidden;
+	font-family: 'open_sansregular', sans-serif;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+}
+
+b, strong {
+	font-family: 'open_sanssemibold', sans-serif;
+	font-weight: bold;
+}
+
+a:hover{
+	text-decoration:underline;
+}
+
+#mainWindow {
+	width:100%;
+	height:100%;
+	position:relative;
+}
+
+#mainStagePanel{
+	position: absolute;
+	top: 0;
+}
+
+/*
+ * Map area and components
+ */
+#map {
+	position:absolute;
+	top:35px;
+	border:none;
+	padding:0;
+	height:100%;
+	width:100%;
+	overflow:hidden;
+	outline: none !important;
+}
+
+#zoomToggle{
+	position: absolute;
+	left: 20px;
+	top: 15px;
+	text-align: center;
+	border: 1px solid #57585A;
+	background-color: #FFF;
+	color: #4C4C4C;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
+	z-index:5;
+}
+
+#zoomIn{
+	top:15px;
+	width: 30px;
+	height: 30px;
+	font-size: 24px;
+	font-family: 'open_sansregular', sans-serif;
+	cursor: pointer;
+	border-bottom: 1px solid #57585A;
+	-webkit-border-radius: 5px 5px 0 0;
+	border-radius: 5px 5px 0 0;
+}
+
+#zoomIn:hover{
+	background-color: #eee;
+}
+
+#zoomExtent{
+	top:15px;
+	width: 30px;
+	height: 30px;
+	font-size: 24px;
+	font-family: 'open_sansregular', sans-serif;
+	line-height: 25px;
+	cursor: pointer;
+	-webkit-border-radius: 5px 5px 0 0;
+	border-radius: 5px 5px 0 0;
+}
+
+#zoomExtent:hover{
+	background-color: #eee;
+}
+
+#zoomExtentImg{
+	position: relative;
+	top: 5px;
+}
+
+#zoomOut{
+	top:75px;
+	width: 30px;
+	height: 30px;
+	font-size: 24px;
+	font-family: verdana,helvetica;
+	cursor: pointer;
+	border-top: 1px solid #57585A;
+	-webkit-border-radius: 0 0 5px 5px;
+	border-radius: 0 0 5px 5px;
+}
+
+#zoomOut:hover{
+	background-color: #eee;
+}
+
+#locateButton{
+	display: none;
+	position: absolute;
+	top: 100px;
+	left: -1px;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	border: 1px solid #57585A;
+	background-color: #FFF;
+	color: #4C4C4C;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+#locateButton img{
+	margin-top: 6px;
+}
+
+.disableControls{
+	background-color: #f4f4f4;
+	color: #bbb;
+	cursor: default !important;
+}
+
+.multiTip{
+	border: 1px solid #444;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.esriPopup .sizer {
+	min-width: 280px;
+}
+
+/*
+ * Popup tunning
+ */
+
+.esriPopup.app-hidden {
+	display: none !important;
+}
+
+/*.mapContainer .esriPopup .actionList {*/
+.esriPopup .actionsPane {
+	display: none !important;
+}
+
+.esriPopup .titleButton.prev {
+	right: 55px !important;
+}
+
+.esriPopup .titleButton.next {
+	right: 31px !important;
+}
+
+.esriPopup .title {
+	color: transparent;
+}
+
+.esriPopup.light .titlePane {
+	height: 21px;
+}
+
+.esriPopup.light .titleButton {
+	top: 4px;
+}
+
+.esriPopup .titleButton.close {
+	opacity: 1.0 !important;
+}
+
+.esriPopup .maximize {
+	display: none;
+}
+
+/* Somehow there is a conflict */
+.esriPopup .titlePane .spinner {
+	display: none !important;
+}
+
+.infoWindowLink {
+	color:#336699;
+	cursor:pointer;
+	font-weight:bold;
+}
+
+.infoWindowLink:hover {
+	text-decoration:underline;
+}
+
+.infoWindowPictureDiv {
+	width: 100%;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+
+.infoWindowPictureDiv img {
+	max-width: 245px;
+	max-height: 200px;
+}
+
+/*
+ * Loader/Intro/Error Screen
+ */
+#whiteOut {
+	position:absolute;
+	width:100%;
+	height:100%;
+	background-color:#FFF;
+	z-index:100;
+	top:0px;
+}
+
+#loader {
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin-top:-40px;
+	margin-left:-40px;
+}
+
+#errorBox {
+	display: none;
+	position: absolute;
+	top: 0;
+	background-color:#FFF;
+	width:100%;
+	height:100%;
+	z-index:2000;
+}
+
+/*
+ * Scrollbar
+ */
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #888;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+
+::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+/*
+ * Mobile Bookmark Component
+ */
+#mobileBookmarksCon{
+	position:absolute;
+	width:auto;
+	right:0px;
+	top:-5px;
+	z-index:100;
+	display:none;
+}
+
+#mobileBookmarksDiv{
+	display:none;
+	background-color: #666;
+	max-height:450px;
+	border-radius: 0 0 6px 6px;
+	overflow:auto;
+	padding:10px;
+	font-family: 'open_sansregular', sans-serif;
+}
+
+#mobileBookmarksDiv a {
+	color: #FFF;
+	cursor:pointer;
+	font-family: 'open_sansregular', sans-serif;
+	font-weight:normal;
+}
+
+#mobileBookmarksToggle{
+	position:relative;
+	background-color: #666;
+	margin-top:6px;
+	width:auto;
+	height:28px;
+	cursor:pointer;
+	z-index:100;
+	color: #FFF;
+	font-family: 'open_sansregular', sans-serif;
+}
+
+#mobileBookmarksToggle.closed {
+	border-radius: 0 0 6px 6px;
+}
+
+#mobileBookmarksToggle.open {
+	border-radius: 0 0 0 0;
+}
+
+#mobileBookmarksTogText{
+	position:relative;
+	margin:auto;
+	margin-left:2px;
+	margin-top:0px;
+	padding:5px;
+	color: #FFF;
+	font-family: 'open_sansregular', sans-serif;
+}
+
+.mapCommandLocation {
+	display: none !important;
+}
+
+#mobileBuilderOverlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: none;
+	z-index: 1100;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background-color: #E5E5E5;
+	-webkit-box-shadow: inset 0px 0px 82px 19px rgba(0,0,0,0.3);
+	-moz-box-shadow: inset 0px 0px 82px 19px rgba(0,0,0,0.3);
+	box-shadow: inset 0px 0px 82px 19px rgba(0,0,0,0.3);
+}

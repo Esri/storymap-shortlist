@@ -1,0 +1,10 @@
+#oneLayer {
+	display: block;
+	padding-top: 30px;
+}
+
+#multiLayers {
+	display: block;
+	padding-top: 50px;
+	padding-bottom: 30px;
+}

@@ -1,0 +1,10 @@
+.multiTip {
+	min-width: 60px;
+	max-width: 200px;
+	border:2px #444 solid;
+	overflow:hidden;
+	word-wrap: break-word;
+	font-size:12px;
+	text-align:center;
+	border-radius:5px;
+}
