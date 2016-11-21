@@ -1,9 +1,9 @@
 define([
-        "./PortalVersionTest",
-        "esri/IdentityManager",
-        "storymaps/common/utils/CommonHelper",
-        "dojo/topic"
-    ],
+		"./PortalVersionTest",
+		"esri/IdentityManager",
+		"storymaps/common/utils/CommonHelper",
+		"dojo/topic"
+	],
 	function(
 		PortalVersionTest,
 		IdentityManager,
@@ -70,7 +70,7 @@ define([
 				return;
 			}
 
-			if ( ! app.data.getStoryLength() ) {
+			if ( ! app.data.getStoryLength() && ! app.appCfg.noStoryLengthRequired) {
 				console.log('Skipping the initialization of My Stories until the story has content');
 				return;
 			}
@@ -155,10 +155,14 @@ define([
 			if ( ! app.mystories )
 				return;
 
-      if (! app.mystories.init) {
-        myStoriesInit();
-        return;
-      }
+			if (! app.mystories.init) {
+				myStoriesInit();
+				return;
+			}
+
+			if (! app.mystories.check) {
+				return;
+			}
 
 			app.mystories.isChecking = true;
 			app.mystories.hasCheckErrors = false;

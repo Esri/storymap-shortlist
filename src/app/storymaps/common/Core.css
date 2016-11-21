@@ -104,7 +104,7 @@ a:hover{
 
 .esriSignInDialog {
 	z-index: 2000  !important;
-} 
+}
 
 /*
  * Error box
@@ -178,9 +178,9 @@ a:hover{
  */
 
 #my-stories-hidden-container {
-	position: absolute; 
-	bottom: -800px; 
-	left: 0; 
+	position: absolute;
+	bottom: -800px;
+	left: 0;
 	visibility: hidden;
 }
 
@@ -191,8 +191,8 @@ a:hover{
  	text-align: left;
 }
 
-/* something seems to go wrong during the build and this is rule from bootstrap is removed */ 
-input[type="radio"], 
+/* something seems to go wrong during the build and this is rule from bootstrap is removed */
+input[type="radio"],
 input[type="checkbox"] {
 	margin: 4px 0 0;
 }

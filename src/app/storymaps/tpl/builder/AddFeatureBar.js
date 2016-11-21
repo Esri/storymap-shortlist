@@ -69,7 +69,7 @@ define([
 
 				_icon.onload = function(){
 					_context.drawImage(_icon, 0, 0);
-					_context.font = _myCanvas.width/2 + "pt Calibri";
+					_context.font = _myCanvas.width/2 + "pt";
 				};
 				$('#myList').addClass('builder');
 			};
@@ -117,7 +117,7 @@ define([
 
 			};
 
-			this.addFeature = function(params, updateLocate, geometry)
+			this.addFeature = function(params, updateLocate, geometry, hideSlide)
 			{
 				if(params && params.type == 'click')
 					params = null;
@@ -135,15 +135,20 @@ define([
 					}
 				});*/
 				var shortlistLayer = app.map.getLayer(app.data.getShortlistLayerId());
-
+				var maxShortlistLayerObjectId = -1;
+				if(shortlistLayer.graphics.length)
+					maxShortlistLayerObjectId = Math.max.apply(Math,shortlistLayer.graphics.map(function(o){return o.attributes.__OBJECTID;}));
+				var newShortlistID = shortlistLayer.graphics.length+1;
 				var tabFeatures = $.grep(shortlistLayer.graphics, function(e){ return e.attributes.tab_id == themeIndex; });
+				app.detailPanelBuilder.addSlide(tabFeatures.length + 1, newShortlistID, params);
 
 				var tabFeaturesLength = tabFeatures.length;
-				var colorOrder = app.cfg.COLOR_ORDER.split(",");
-				var activeColor = $.grep(app.cfg.COLOR_SCHEMES, function(e){ return e.name == colorOrder[themeIndex]; });
+				var colorIndex = themeIndex;
+				if(colorIndex > 7)
+					colorIndex = colorIndex % 7;
 				//Need to do for each tab/swiper, not here
-				var tabColor = app.data.getStory()[themeIndex].color;
-				var placeName = params && params.name ? params.name : 'Place Name';
+				var tabColor = app.data.getStory()[colorIndex].color;
+				var placeName = params && params.name ? params.name : 'Unnamed Place';
 				var picUrl = params && params.thumb_url ? params.thumb_url : null;
 				var newTile;
 				if(!picUrl)
@@ -164,7 +169,6 @@ define([
 					}*/
 				}
 				container.find('#myList').append(newTile);
-				var newShortlistID = shortlistLayer.graphics.length+1;
 				$(newTile).data('shortlist-id', newShortlistID);
 				$(newTile).on('click', function(){
 					var thisTile = this;
@@ -180,12 +184,13 @@ define([
 
 				$(newTile).on('mouseout', app.ui.tilePanel.tile_onMouseOut);
 
-				app.detailPanelBuilder.addSlide(tabFeatures.length + 1, newShortlistID, params);
-				app.detailPanelBuilder.showSlide(newShortlistID);
+				if(!hideSlide)
+					app.detailPanelBuilder.showSlide(newShortlistID);
+
 
 				var geom;
 				var atts = {
-					__OBJECTID: newShortlistID,
+					__OBJECTID: maxShortlistLayerObjectId + 1,
 					name: params && params.name ? params.name : '',
 					description: params && params.description ? params.description: '',
 					pic_url: params && params.pic_url ? params.pic_url : '',
@@ -425,7 +430,7 @@ define([
 				/*else{
 					$('#organizeFeatures').show();
 				}*/
-				topic.publish("BUILDER_INCREMENT_COUNTER");
+				//topic.publish("BUILDER_INCREMENT_COUNTER");
 			};
 
 			this.updateNumber = function()
@@ -457,7 +462,7 @@ define([
 
 			this.addMapIcon = function(feature, color, updateColor)
 			{
-				var spec = app.cfg.lutIconSpecs.tiny;
+				var spec = app.ui.mainView.lutIconSpecs.tiny;
 				var coloredIcon;
 				var newIconColor = color;
 
@@ -465,8 +470,7 @@ define([
 				newCanvas.width = _icon.width;
 				newCanvas.height = _icon.height;
 				var newContext = newCanvas.getContext('2d');
-				//newContext.font = "bold " + newCanvas.width/2.7 + "pt Calibri";
-				newContext.font = "bold " + newCanvas.width/3.8 + "pt Calibri";
+				newContext.font = newCanvas.width/3.8 + "pt open_sanssemibold, sans-serif";
 				newContext.drawImage(_myCanvas, 0, 0);
 
 				// examine every pixel,
@@ -556,49 +560,50 @@ define([
 
 				_imagePicker.present(cfg).then(function(data) {
 					$('body').addClass('loadingPlaces');
-					var minX = 180;
-					var minY = 90;
-					var maxX = -180;
-					var maxY = -90;
 
 					if (! data) {
 						return;
 					}
 
+					var extentChange = false;
+					var tempGraphicsLayer = new GraphicsLayer();
 					$.each(data, function(i, feat){
-						_this.addFeature(feat, false);
+						_this.addFeature(feat, false, null, true);
+
 
 						if(feat.lng && feat.lat) {
-							if(feat.lng > maxX)
-								maxX = feat.lng;
-							if(feat.lng < minX)
-								minX = feat.lng;
-							if(feat.lat > maxY)
-								maxY = feat.lat;
-							if(feat.lat < minY)
-								minY = feat.lat;
+							var pt = new Point(feat.lng, feat.lat, new SpatialReference({ wkid:4326 }));
+							var newGraphic = new Graphic(pt);
+							tempGraphicsLayer.graphics.push(newGraphic);
+							extentChange = true;
 						}
 
 					});
 
-					if(app.data.getWebAppData().getGeneralOptions().extentMode == "default")
-						_builderView.updateShortlistExtent();
+					var newExtent;
+					if(tempGraphicsLayer.graphics.length > 1)
+						newExtent = graphicsUtils.graphicsExtent(tempGraphicsLayer.graphics);
 
-					if(data.length > 1 && minX != 180 && minY != 90 && maxX != -180 && maxY != -90){
-						var newExtent = new Extent(minX, minY, maxX, maxY, new SpatialReference({ wkid:4326 }));
-						app.map.setExtent(newExtent, true);
-						app.map.getLayer(app.data.getShortlistLayerId()).redraw();
-					}
+					setTimeout(function(){
+						if(app.data.getWebAppData().getGeneralOptions().extentMode == "default")
+							_builderView.updateShortlistExtent();
 
-					var themeIndex = $('.entry.active').index();
-					var currentDetailContainer = $('.detailContainer')[themeIndex];
-					$(currentDetailContainer).hide();
+						if(data.length > 1 && extentChange){
+							var projectExtent = webMercatorUtils.project(newExtent, app.map);
+							app.map.setExtent(projectExtent, true);
+							app.map.getLayer(app.data.getShortlistLayerId()).redraw();
+						}
+					}, 500);
+
 					$('#editorDialogInlineMedia').hide();
 
 					_this.updateLocatedFeatures();
 					setTimeout(function(){
+						var themeIndex = $('.entry.active').index();
+						var currentDetailContainer = $('.detailContainer')[themeIndex];
+						$(currentDetailContainer).hide();
 						$('body').removeClass('loadingPlaces');
-					}, 500);
+					}, 0);
 				});
 			}
 
@@ -771,7 +776,7 @@ define([
 				$('#organizeFeatures').hide();
 				$('#completeOrganization').show();
 				$('#locateFeatures').hide();
-				app.detailPanelBuilder.buildSlides(true);
+				app.detailPanelBuilder.buildUnlocatedSlides();
 			}
 
 			function initUI()

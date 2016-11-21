@@ -5,7 +5,11 @@ function loadJS(url, isExternal)
 	else
 		url += '?v=' + app.version + (!app.isProduction ? '&_=' + new Date().getTime() : '');
 
-	document.write("<script language='javascript' type='text/javascript' src='" + url + "'><\/script>");
+	var ref = window.document.getElementsByTagName('script')[0];
+	var script = window.document.createElement('script');
+	script.src = url;
+	script.async = false;
+	ref.parentNode.insertBefore(script, ref);
 }
 
 function loadCSS(url, isExternal)
@@ -49,6 +53,9 @@ function defineDojoConfig()
 		//cacheBust: ! app.isProduction,
 		packages: [
 			{
+				name: 'app',
+				location: path1 + 'app'
+			},{
 				name: 'storymaps',
 				location: path1 + 'app/storymaps'
 			},
@@ -90,7 +97,6 @@ if( app.isProduction ) {
 loadCSS(app.pathJSAPI + "esri/css/esri.css", true);
 loadCSS(app.pathJSAPI + "dijit/themes/claro/claro.css", true);
 //loadCSS(app.pathJSAPI + "esri/themes/calcite/dijit/calcite.css", true);
-
 
 loadJS(app.pathJSAPI + 'init.js', true);
 loadJS('app/config.js');

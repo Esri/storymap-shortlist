@@ -9,6 +9,8 @@ define(["esri/geometry/screenUtils",
 			var _this = this;
 			var _mainView = mainView;
 			var _helper = new Helper();
+			var _iOS = /iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+			var _scroll = false;
 
 			this.tileClick = true;
 
@@ -33,7 +35,7 @@ define(["esri/geometry/screenUtils",
 			};
 
 			this.setTabClick = function(){
-				$.each($('.entry'), function(index){
+				$.each($('.entry.visible'), function(index){
 					$(this).click(function(){
 						_mainView.selected = null;
 						_mainView.activateLayer(index);
@@ -46,8 +48,14 @@ define(["esri/geometry/screenUtils",
 
 			this.clearTilePanel = function()
 			{
+				if(_iOS){
+					$.each($('#mobileList').find('img'), function(i, tile){
+						$(tile).attr('src', 'data:image/gif;base64,' + 'R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=');
+					});
+					$("#mobileList").empty();
+				}
 				$("#myList").empty();
-			}
+			};
 
 			//TODO seperate mobile to appropriate component?
 			this.buildTilePanel = function(){
@@ -91,7 +99,7 @@ define(["esri/geometry/screenUtils",
 						$(img).append('<i class=" fa fa-camera" aria-hidden="true"></i>');
 					}
 					footer = $('<div class="footer"></div>');
-					var titleText = value.attributes.name || 'Place Name';
+					var titleText = value.attributes.name || 'Unnamed Place';
 					title = $('<div class="blurb">'+ titleText +'</div>');
 					if(WebApplicationData.getGeneralOptions().numberedIcons){
 						if(value.attributes.number < 100){
@@ -117,8 +125,6 @@ define(["esri/geometry/screenUtils",
 					}
 					$("#myList").append(tile);
 				});
-
-
 
 				// event handlers have to be re-assigned every time you load the list...
 				_this.setTileEvents();
@@ -152,11 +158,13 @@ define(["esri/geometry/screenUtils",
 
 			this.setTileEvents = function()
 			{
-				console.log("SET TILE EVENTS")
 				$("ul.tilelist li").mouseover(_this.tile_onMouseOver);
 				$("ul.tilelist li").mouseout(_this.tile_onMouseOut);
 				$("ul.tilelist li").click(_this.tile_onClick);
-				//$("ul.tilelist li").keydown(tile_keydown);
+				$("ul.tilelist li").on('touchmove', function(){
+					_scroll = true;
+				});
+				$("ul.tilelist li").on('touchend', _this.tile_onClick);
 			};
 
 			this.refreshList = function() {
@@ -216,9 +224,9 @@ define(["esri/geometry/screenUtils",
 				var match = $.grep(app.layerCurrent.graphics, function(v){
 					return v.attributes.shortlist_id==$(_this).data('shortlist-id');
 				});
-				match[0].symbol.setWidth(app.cfg.lutIconSpecs.medium.getWidth());
-				match[0].symbol.setHeight(app.cfg.lutIconSpecs.medium.getHeight());
-				match[0].symbol.setOffset(app.cfg.lutIconSpecs.medium.getOffsetX(), app.cfg.lutIconSpecs.medium.getOffsetY());
+				match[0].symbol.setWidth(_mainView.lutIconSpecs.medium.getWidth());
+				match[0].symbol.setHeight(_mainView.lutIconSpecs.medium.getHeight());
+				match[0].symbol.setOffset(_mainView.lutIconSpecs.medium.getOffsetX(), _mainView.lutIconSpecs.medium.getOffsetY());
 				match[0].draw();
 
 				if (!_helper.isIE())
@@ -240,9 +248,9 @@ define(["esri/geometry/screenUtils",
 				var match = $.grep(app.layerCurrent.graphics, function(v){
 					return v.attributes.shortlist_id==$(_this).data('shortlist-id');
 				});
-				match[0].symbol.setWidth(app.cfg.lutIconSpecs.tiny.getWidth());
-				match[0].symbol.setHeight(app.cfg.lutIconSpecs.tiny.getHeight());
-				match[0].symbol.setOffset(app.cfg.lutIconSpecs.tiny.getOffsetX(), app.cfg.lutIconSpecs.tiny.getOffsetY());
+				match[0].symbol.setWidth(_mainView.lutIconSpecs.tiny.getWidth());
+				match[0].symbol.setHeight(_mainView.lutIconSpecs.tiny.getHeight());
+				match[0].symbol.setOffset(_mainView.lutIconSpecs.tiny.getOffsetX(), _mainView.lutIconSpecs.tiny.getOffsetY());
 				match[0].draw();
 				if(app.mapTips)
 					app.mapTips.clean(true);
@@ -251,6 +259,10 @@ define(["esri/geometry/screenUtils",
 			this.tile_onClick = function(e) {
 				if($('body').hasClass('organizeFeatures'))
 					return;
+				if(_scroll){
+					_scroll = false;
+					return;
+				}
 				if(e.which == 1 || e.which == 2 || e.which == 3){
 					_this.tileClick = true;
 				}else{

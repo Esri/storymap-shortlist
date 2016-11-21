@@ -71,7 +71,6 @@
 						'lib-build/tpl'
 					],
 					exclude: [
-						'underscore',
 						'lib-build/normalize'
 						//'i18n'
 					],
@@ -186,7 +185,7 @@
 					files: [{
 						expand: true,
 						cwd: 'src',
-						src:['app/main-app.js', 'app/main-config.js'],
+						src:['app/main-app.js', 'app/main-config.js', 'app/custom-scripts.js'],
 						dest: 'deploy/'
 					}]
 				},
@@ -203,6 +202,12 @@
 						cwd: 'src/lib-app/bootstrap/fonts/',
 						src:['**'],
 						dest: 'deploy/resources/lib/bootstrap/fonts/'
+					},
+					{
+						expand: true,
+						cwd: 'src/lib-app/font-awesome/fonts/',
+						src:['**'],
+						dest: 'deploy/resources/lib/font-awesome/fonts/'
 					},
 					{
 						expand: true,
@@ -243,7 +248,7 @@
 					{
 						expand: true,
 						cwd: 'src/lib-app/',
-						src:['jquery-ui.min.css', 'jquery.js', 'jquery-ui.min.js', 'jquery.ui.touch-punch.js'],
+						src:['jquery-ui.min.css', 'jquery.js', 'jquery-ui.min.js', 'jquery.ui.touch-punch.js', 'lazysizes.min.js'],
 						dest: 'deploy/resources/lib/'
 					},
 					{
@@ -254,9 +259,9 @@
 					},
 					{
 						expand: true,
-						cwd: 'src/lib-app/ZeroClipboard/',
-						src:['ZeroClipboard.swf'],
-						dest: 'deploy/resources/lib/ZeroClipboard/'
+						cwd: 'src/lib-app/clipboard/',
+						src:['clipboard.js'],
+						dest: 'deploy/resources/lib/clipboard/'
 					},
 					{
 						expand: true,
@@ -293,6 +298,12 @@
 							name: 'Bootstrap images path',
 							search: '../lib-app/bootstrap/fonts/',
 							replace: '../resources/lib/bootstrap/fonts/',
+							flags: 'g'
+						},
+						{
+							name: 'Fontawesome fonts path',
+							search: '../lib-app/font-awesome/fonts/',
+							replace: '../resources/lib/font-awesome/fonts/',
 							flags: 'g'
 						},
 						{

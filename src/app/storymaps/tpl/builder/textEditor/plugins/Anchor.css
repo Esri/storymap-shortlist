@@ -1,17 +1,17 @@
 .medium-editor-toolbar-anchor-creation .medium-editor-toolbar-save {
-  vertical-align: -3px;
-  margin: 0 5px;
-  color: #4c4c4c !important;
+	vertical-align: -3px;
+	margin: 0 5px;
+	color: #4c4c4c !important;
 }
 
 .medium-editor-toolbar-anchor-creation .medium-editor-toolbar-save:hover {
-  color: #000 !important;
+	color: #000 !important;
 }
 
 .medium-editor-toolbar-anchor-creation .medium-editor-toolbar-close {
-  display: none;
+	display: none;
 }
 
 .medium-editor-toolbar-anchor-creation input {
-  width: 182px !important;
+	width: 182px !important;
 }

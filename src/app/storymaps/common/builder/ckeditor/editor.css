@@ -43,7 +43,7 @@ body
 
 /*
 body.error-no-content {
-	color: #F00 !important;	
+	color: #F00 !important;
 }
 */
 
@@ -150,7 +150,7 @@ figure
 	display: block; /* For IE8 */
 	/* Storymaps */
 	/*display: inline-block;*/
-	max-width: 100%; 
+	max-width: 100%;
 }
 
 /* Storymaps */
@@ -192,7 +192,7 @@ a[data-storymaps] {
 /*
  * Iframe style
  */
- 
+
 iframe {
 	border: none;
 }

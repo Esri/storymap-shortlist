@@ -16,6 +16,9 @@ define(["../../core/Helper",
 			var _swiperSlides ={};
 			var _slidesRefreshing = false;
 			var _webApplicationData = WebApplicationData;
+			var _iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+			var _android = /(android)/i.test(navigator.userAgent);
+			var _iOSSwiper = {};
 
 			_this.loaded = false;
 			_this.viewed = false;
@@ -39,24 +42,14 @@ define(["../../core/Helper",
 					themeIndex = 0;
 
 					var themes = [];
-					/*var shortlistLayerId = $.grep(app.map.graphicsLayerIds, function(e){
-						if(e.split('_').slice(0,-1).join('_') == saveData.getShortlistLayerId())
-							return e;
-						else if(e == saveData.getShortlistLayerId())
-							return e;
-						else{
-							return false;
-						}
-					});*/
+
 					var shortlistLayer = app.map.getLayer(app.data.getShortlistLayerId());
-					$.each(shortlistLayer.graphics, function(index, graphic){
-						if(!themes[graphic.attributes.tab_id]){
-							var newThemeObject = {
-								title: "tab "+(themes.length+1),
-								features: []
-							};
-							themes.push(newThemeObject);
-						}
+					$.each(app.data.getStory(), function(index, tab){
+						var newThemeObject = {
+							title: tab.title ? tab.title : "tab "+(themes.length+1),
+							features: []
+						};
+						themes.push(newThemeObject);
 					});
 
 					$.each(shortlistLayer.graphics, function(index, graphic){
@@ -69,22 +62,109 @@ define(["../../core/Helper",
 
 
 				if(!_slideContainersLoaded){
-					$.each(themes, function(index){
-						if(index === 0)
-							$(container).prepend(detailPanel({ }));
-						else {
-							var prevDetPanel = $(container).find(' .detailContainer')[index-1];
-							$(prevDetPanel).after(detailPanel({ }));
-						}
+					if(_iOS){
+						$(container).prepend(detailPanel({ }));
+						var detailView = $('.detailView')[0];
 
-						var detailView = $('.detailView')[index];
+						$(detailView).attr("id","detailView0");
+						_iOSSwiper = new Swiper($('.detailContainer')[0], {
+							speed: 0,
+							setWrapperSize: true
+						});
+						_iOSSwiper.init();
+						_slideContainersLoaded = true;
+						container.find(".detailClose").click(function(){
+							container.find(".detailContainer").hide();
+							if(app.ui.mobileIntro.screenSize == 'small')
+								app.ui.mobileFeatureList.showMobileList();
+							_mainView.unselect();
+						});
 
-						$(detailView).attr("id","detailView"+index);
-						_swipers[index] = {};
-						_swiperSlides[String(index)] = [];
-					});
+						container.find($(".detail-btn-left")[0]).click(function(){
+							var features = app.layerCurrent.graphics;
+							var nextFeature = null;
+							var mapFeatures = [];
+							$.each(features, function(index, feat){
+								if(app.map.extent.contains(feat.geometry)){
+									mapFeatures.push(feat);
+								}
+							});
+							var featIndex = null;
+							$.grep(mapFeatures,function(n, index){if(n.attributes.shortlist_id == app.ui.mainView.selected.attributes.shortlist_id){featIndex = index;}});
+							if(featIndex !== 0)
+								nextFeature = mapFeatures[featIndex - 1];
+							else{
+								nextFeature = mapFeatures[mapFeatures.length - 1];
+							}
+							_mainView.unselect();
+							_mainView.selected = nextFeature;
+							_mainView.selectSymbol();
+							_this.buildSlide();
+						});
+
+						container.find($(".detail-btn-right")[0]).click(function(){
+							var features = app.layerCurrent.graphics;
+							var nextFeature = null;
+							var mapFeatures = [];
+							$.each(features, function(index, feat){
+								if(app.map.extent.contains(feat.geometry)){
+									mapFeatures.push(feat);
+								}
+							});
+							var featIndex = null;
+							$.grep(mapFeatures,function(n, index){if(n.attributes.shortlist_id == app.ui.mainView.selected.attributes.shortlist_id){featIndex = index;}});
+							if(featIndex !== mapFeatures.length - 1)
+								nextFeature = mapFeatures[featIndex + 1];
+							else{
+								nextFeature = mapFeatures[0];
+							}
+							_mainView.unselect();
+							_mainView.selected = nextFeature;
+							_mainView.selectSymbol();
+							_this.buildSlide();
+						});
+
+						container.find(".detailPictureDiv img").click(function(){
+							var features = app.layerCurrent.graphics;
+							var nextFeature = null;
+							var mapFeatures = [];
+							$.each(features, function(index, feat){
+								if(app.map.extent.contains(feat.geometry)){
+									mapFeatures.push(feat);
+								}
+							});
+							var featIndex = null;
+							$.grep(mapFeatures,function(n, index){if(n.attributes.shortlist_id == app.ui.mainView.selected.attributes.shortlist_id){featIndex = index;}});
+							if(featIndex !== mapFeatures.length - 1)
+								nextFeature = mapFeatures[featIndex + 1];
+							else{
+								nextFeature = mapFeatures[0];
+							}
+							_mainView.unselect();
+							_mainView.selected = nextFeature;
+							_mainView.selectSymbol();
+							_this.buildSlide();
+						});
+					}else{
+						$.each(themes, function(index){
+							if(index === 0)
+								$(container).prepend(detailPanel({ }));
+							else {
+								var prevDetPanel = $(container).find(' .detailContainer')[index-1];
+								$(prevDetPanel).after(detailPanel({ }));
+							}
+
+							var detailView = $('.detailView')[index];
+
+							$(detailView).attr("id","detailView"+index);
+							_swipers[index] = {};
+							_swiperSlides[String(index)] = [];
+						});
+					}
 				}
 
+				if(_iOS)
+					return;
 				_slideContainersLoaded = true;
 
 				if(_swiperSlides[String(themeIndex)].length)
@@ -98,7 +178,89 @@ define(["../../core/Helper",
 				//$(currentDetailContainer).css('display','none');
 
 				_i = 0;
-				_this.buildSlides(themes);
+				if(!_iOS)
+					_this.buildSlides(themes);
+			};
+
+			// For iOS BS
+			this.buildSlide = function()
+			{
+				var themeIndex = $('.entry.active').index();
+				if(themeIndex < 0)
+					themeIndex = 0;
+				_iOSSwiper.removeAllSlides();
+				container.find('#detailView0').append(detailSlide());
+				var currentDetailContainer = $('.detailContainer')[0];
+				var newSlide = $(currentDetailContainer).find('.swiper-slide')[0];
+				$(newSlide).addClass('swiper-no-swiping');
+				var atts = app.ui.mainView.selected.attributes;
+
+				var name =  atts.name;
+
+				var description = atts.description;
+				var picture = atts.pic_url;
+				var website = _helper.prependURLHTTP(atts.website);
+
+				if(app.data.getWebAppData().getGeneralOptions().numberedIcons){
+					$(newSlide).find('.detailFeatureNum').css('background-color', app.data.getStory()[themeIndex].color);
+					$(newSlide).find('.detailFeatureNum').text(atts.number);
+				} else{
+					$(newSlide).find('.detailFeatureNum').hide();
+					$(newSlide).find('.detailFeatureTitle').addClass('notNumbered');
+				}
+
+				if(name){
+					$(newSlide).find('.detailFeatureTitle').html(name);
+				}
+
+				if(picture){
+					picture = atts.thumb_url ? atts.thumb_url : atts.pic_url;
+					$(newSlide).find('img').attr('src', picture);
+					$(newSlide).find('img').on('touchend', function(){
+						var features = app.layerCurrent.graphics;
+						var nextFeature = null;
+						var mapFeatures = [];
+						$.each(features, function(index, feat){
+							if(app.map.extent.contains(feat.geometry)){
+								mapFeatures.push(feat);
+							}
+						});
+						var featIndex = null;
+						$.grep(mapFeatures,function(n, index){if(n.attributes.shortlist_id == app.ui.mainView.selected.attributes.shortlist_id){featIndex = index;}});
+						if(featIndex !== mapFeatures.length - 1)
+							nextFeature = mapFeatures[featIndex + 1];
+						else{
+							nextFeature = mapFeatures[0];
+						}
+						_mainView.unselect();
+						_mainView.selected = nextFeature;
+						_mainView.selectSymbol();
+						_this.buildSlide();
+					});
+				}
+
+				if (description) {
+					$(newSlide).find('.description').html(description);
+				}
+
+				if (website) {
+					$(newSlide).find('.website').append('<a href='+ website + ' target="_blank" >More info</a>');
+					$('.website').show();
+				}
+
+				$(newSlide).data('shortlist-id', atts.shortlist_id);
+
+				var borderColor = app.data.getStory()[themeIndex].color;
+				$('#detailView0').find('.detailHeader').css('border-top-color', borderColor);
+
+				_this.resize();
+
+				$('#mobilePaneList').hide();
+				setTimeout(function(){
+					$(currentDetailContainer).show();
+					$(currentDetailContainer).css('z-index', 99);
+				}, 0);
+
 			};
 
 			this.buildSlides = function(themes)
@@ -110,14 +272,26 @@ define(["../../core/Helper",
 					themeIndex = 0;
 				var currentTheme = _themes[themeIndex];
 				var features = currentTheme.features;
-				var colorOrder = app.cfg.COLOR_ORDER.split(",");
-				//var slideStorage = $("<div></div");
+				if(features[0] && features[0].attributes && features[0].attributes.number){
+					features.sort(function(a,b){
+						return parseInt(a.attributes.number) - parseInt(b.attributes.number);
+					});
+				}
 
 				for(; _i < features.length; _i++){
 
 					var currentDetailContainer = $('.detailContainer')[themeIndex];
 					container.find('#detailView' + themeIndex).append(detailSlide());
 					var newSlide = $(currentDetailContainer).find('.swiper-slide')[_i];
+
+					// Allow highlighting of text in detail panel with mouse click
+					$(newSlide).on('mousedown', function(){
+						$(this).addClass('swiper-no-swiping');
+					});
+
+					$(newSlide).on('mouseup', function(){
+						$(this).removeClass('swiper-no-swiping');
+					});
 
 					var atts = features[_i].attributes;
 
@@ -140,7 +314,13 @@ define(["../../core/Helper",
 					}
 
 					if(picture){
-						$(newSlide).find('img').attr('src', picture);
+						if(_android){
+							picture = atts.thumb_url ? atts.thumb_url : atts.pic_url;
+							$(newSlide).find('img').attr('src', picture);
+						}
+						else{
+							$(newSlide).find('img').attr('src', picture);
+						}
 					}
 
 					if (description) {
@@ -154,8 +334,6 @@ define(["../../core/Helper",
 
 					$(newSlide).data('shortlist-id', atts.shortlist_id);
 
-					$('#detailView'+themeIndex).append(newSlide);
-					//$(slideStorage).append(detailContentDiv)
 					_swiperSlides[String(themeIndex)].push(newSlide);
 
 					if(_i%10===0 && _i+1 < features.length){
@@ -166,14 +344,14 @@ define(["../../core/Helper",
 						return false;
 					}
 
+
 					if((_i+1) == features.length){
 						//_swiperSlides[themeIndex] = (slideStorage);
 						var newSwiper = new Swiper($('.detailContainer')[themeIndex], {
 							speed: 0,
-							setWrapperSize: true,
-							lazyLoading: true,
-							lazyLoadingInPrevNext: true
+							setWrapperSize: true
 						});
+
 						_swipers[themeIndex] = newSwiper;
 
 						newSwiper.init();
@@ -275,8 +453,7 @@ define(["../../core/Helper",
 							}
 						});
 
-						_this.refreshSlides();
-
+						//_this.refreshSlides();
 						_swipers[themeIndex].update();
 
 						prepSwiperDisplay();
@@ -292,7 +469,7 @@ define(["../../core/Helper",
 				var themeIndex = $('.entry.active').index();
 				if(themeIndex<0)
 					themeIndex = 0;
-				setTimeout(function(){
+				//setTimeout(function(){
 					//$('.detailContainer').css('z-index', -9999);
 					$('.detailContainer').show();
 					_swipers[themeIndex].slideNext();
@@ -300,7 +477,7 @@ define(["../../core/Helper",
 
 					_this.resize();
 					$('.detailContainer').hide();
-				}, 0);
+				//}, 0);
 			}
 
 			this.showDetails = function(selected)
@@ -309,14 +486,16 @@ define(["../../core/Helper",
 				if(selected == null)
 					return;
 
+				prepSwiperDisplay();
 				var themeIndex = $('.entry.active').index();
 				if(themeIndex<0)
 					themeIndex = 0;
 
 				var currentDetailContainer = $('.detailContainer')[themeIndex];
-				$(currentDetailContainer).show();
-				//$('.detailContainer').css('z-index', -99);
-				$('#mobilePaneList').css('visibility', 'hidden');
+				var currentSwiper = _swipers[themeIndex];
+				//$(currentDetailContainer).show();
+				$('#mobilePaneList').hide();
+				//$('#mobilePaneList').css('visibility', 'hidden');
 				var selectedSlideIndex;
 
 				$.each($('#detailView'+themeIndex).find($('.swiper-slide')), function(index, slide){
@@ -328,19 +507,31 @@ define(["../../core/Helper",
 					$('.detailFeatureTitle').addClass('notNumbered');
 				}
 
-				if(selectedSlideIndex > -1)
+				_swipers[themeIndex].on('onSlideChangeEnd', function(){
+					$(currentDetailContainer).show();
+					$(currentDetailContainer).css('z-index', 99);
+				});
+				if(selectedSlideIndex === 0 && currentSwiper.activeIndex === 0){
+					$(currentDetailContainer).show();
+					$(currentDetailContainer).css('z-index', 99);
+				}
+				else{
 					setTimeout(function(){
 						_swipers[themeIndex].slideTo(selectedSlideIndex, 0);
-						$(currentDetailContainer).css('z-index', 99);
 					}, 0);
-
-				if(_swipers[themeIndex].slides.length ==1){
+				}
+				if(_swipers[themeIndex].slides.length == 1){
 					$('.detail-btn-container').hide();
 				} else {
 					$('.detail-btn-container').show();
 				}
 
 				_swipers[themeIndex].update();
+
+				/*setTimeout(function(){
+					$(currentDetailContainer).show();
+					$(currentDetailContainer).css('z-index', 99);
+				}, 0);*/
 
 				// Sometimes image for slide does not load properly
 				// Issue #166
@@ -356,11 +547,16 @@ define(["../../core/Helper",
 			this.refreshSlides = function()
 			{
 				_slidesRefreshing = true;
-				if(!app.data.getWebAppData().getGeneralOptions().filterByExtent  && !app.isInBuilder)
+				if(!app.data.getWebAppData().getGeneralOptions().filterByExtent  && !app.isInBuilder){
+					_slidesRefreshing = false;
 					return;
+				}
+
 				var themeIndex = $('.entry.active').index();
 				if(themeIndex<0)
 					themeIndex = 0;
+				if(!_swipers[themeIndex] || !_swipers[themeIndex].init || !_swiperSlides || !_swiperSlides[String(themeIndex)] || !Object.keys(_swiperSlides[String(themeIndex)].length))
+					return;
 
 				$('.detailContainer').css('z-index', '0');
 
@@ -368,13 +564,16 @@ define(["../../core/Helper",
 
 				$(currentDetailContainer).css('z-index','99');
 
-				if(!_themes)
+				if(!_themes){
+					_slidesRefreshing = false;
 					return;
+				}
 				var currentTheme = _themes[themeIndex];
 				var features = currentTheme.features;
 				var selectedSlideIndex = null;
 
-				_swipers[themeIndex].removeAllSlides();
+				if(_swipers[themeIndex].slides)
+					_swipers[themeIndex].removeAllSlides();
 
 				$.each(features, function(index, feature){
 					if(app.map.extent.contains(feature.geometry)){
@@ -404,6 +603,7 @@ define(["../../core/Helper",
 						}
 					});
 				}
+
 				_swipers[themeIndex].update();
 
 				if(selectedSlideIndex != null){

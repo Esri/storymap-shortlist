@@ -1,11 +1,12 @@
-define(["dojo/cookie", 
-		"dojo/has", 
+define(["dojo/cookie",
+		"dojo/has",
 		"dojo/Deferred",
 		"dojo/DeferredList",
 		"./SocialSharing",
+		"esri/IdentityManager",
 		"esri/request",
 		"esri/dijit/Search",
-        "esri/tasks/locator",
+		"esri/tasks/locator",
 		"esri/urlUtils",
 		"esri/arcgis/utils",
 		"esri/geometry/webMercatorUtils",
@@ -14,13 +15,14 @@ define(["dojo/cookie",
 		"esri/geometry/Polygon",
 		"esri/layers/ArcGISDynamicMapServiceLayer",
 		"esri/layers/ArcGISTiledMapServiceLayer",
-		"esri/layers/OpenStreetMapLayer"], 
+		"esri/layers/OpenStreetMapLayer"],
 	function(
-		cookie, 
-		has, 
+		cookie,
+		has,
 		Deferred,
 		DeferredList,
 		SocialSharing,
+		IdentityManager,
 		esriRequest,
 		Search,
 		Locator,
@@ -38,11 +40,11 @@ define(["dojo/cookie",
 			isMobile: function()
 			{
 				return navigator.userAgent.match(/iPhone|iPad|iPod/i)
-						|| navigator.userAgent.match(/Android/i) 
+						|| navigator.userAgent.match(/Android/i)
 						|| navigator.userAgent.match(/BlackBerry/i)
 						|| navigator.userAgent.match(/IEMobile/i);
 			},
-			switchToBuilder: function() 
+			switchToBuilder: function()
 			{
 				if( document.location.search.match(/appid/) )
 					document.location = SocialSharing.cleanURL(document.location.protocol + '//' + document.location.host + document.location.pathname + document.location.search, true) + "&edit" + document.location.hash;
@@ -66,22 +68,22 @@ define(["dojo/cookie",
 				var urlParams = urlUtils.urlToObject(document.location.search).query;
 				if ( urlParams )
 					return urlParams;
-				
+
 				if( ! this.browserSupportHistory() && ! urlParams )
 					return urlUtils.urlToObject(document.location.hash).query || {};
-				
+
 				return {};
 			},
 			getWebmapID: function(isProd)
 			{
 				var urlParams = this.getUrlParams();
-				
+
 				if( app.indexCfg && app.indexCfg.webmap )
 					return app.indexCfg.webmap;
-				
+
 				if ( this.isArcGISHosted() || ! isProd )
 					return urlParams.webmap;
-				
+
 				// Only authorize URL params outside of arcgis.com if a webmap owner is specified
 				if( app.indexCfg.authorizedOwners && app.indexCfg.authorizedOwners.length > 0 && app.indexCfg.authorizedOwners[0] )
 					return urlParams.webmap;
@@ -89,13 +91,13 @@ define(["dojo/cookie",
 			getAppID: function(isProd)
 			{
 				var urlParams = this.getUrlParams();
-				
+
 				if( app.indexCfg && app.indexCfg.appid )
 					return app.indexCfg.appid;
-				
+
 				if ( this.isArcGISHosted() || ! isProd )
 					return urlParams.appid;
-				
+
 				// Only authorize URL params outside of arcgis.com if a webmap/app owner is specified
 				if( app.indexCfg.authorizedOwners && app.indexCfg.authorizedOwners.length > 0 && app.indexCfg.authorizedOwners[0] )
 					return urlParams.appid;
@@ -114,21 +116,21 @@ define(["dojo/cookie",
 			{
 				if( ! item.extent || item.extent.length != 2 )
 					return null;
-							
+
 				var bottomLeft = webMercatorUtils.geographicToWebMercator(
 					new Point(
 						item.extent[0][0],
 						item.extent[0][1]
 					)
 				);
-						
+
 				var topRight = webMercatorUtils.geographicToWebMercator(
 					new Point(
 						item.extent[1][0],
 						item.extent[1][1]
 					)
 				);
-				
+
 				return new Extent({
 					xmax: topRight.x,
 					xmin: bottomLeft.x,
@@ -143,9 +145,9 @@ define(["dojo/cookie",
 			{
 				if( ! extent || ! extent.spatialReference )
 					return null;
-				
+
 				var extentWgs = extent.spatialReference.wkid == 4326 ? extent : webMercatorUtils.webMercatorToGeographic(extent);
-				
+
 				return [
 					[Math.round(extentWgs.xmin*10000)/10000, Math.round(extentWgs.ymin*10000)/10000],
 					[Math.round(extentWgs.xmax*10000)/10000, Math.round(extentWgs.ymax*10000)/10000]
@@ -153,7 +155,7 @@ define(["dojo/cookie",
 			},
 			serializedExtentEquals: function(extent1, extent2)
 			{
-				return extent1 
+				return extent1
 						&& extent2
 						&& extent1.length == extent2.length
 						&& extent1.length == 2
@@ -176,7 +178,7 @@ define(["dojo/cookie",
 					return new ArcGISDynamicMapServiceLayer(layer.url);
 				else if (layer.id == "OpenStreetMap")
 					return new OpenStreetMapLayer();
-				
+
 				return new ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer");
 			},
 			extentToPolygon: function(extent)
@@ -184,10 +186,10 @@ define(["dojo/cookie",
 				var p = new Polygon(extent.spatialReference);
 				p.addRing(
 					[
-						[extent.xmin, extent.ymin], 
-						[extent.xmin, extent.ymax], 
-						[extent.xmax, extent.ymax], 
-						[extent.xmax, extent.ymin], 
+						[extent.xmin, extent.ymin],
+						[extent.xmin, extent.ymax],
+						[extent.xmax, extent.ymax],
+						[extent.xmax, extent.ymin],
 						[extent.xmin, extent.ymin]
 					]
 				);
@@ -198,56 +200,56 @@ define(["dojo/cookie",
 				var mapWidth = map.width;
 				var mapHeight = map.height;
 				var lods = map._params.lods;
-				
+
 				if ( ! lods )
 					return -1;
-				
+
 				for (var l = lods.length - 1; l >= 0; l--) {
 					if( mapWidth * map._params.lods[l].resolution > extent.getWidth() && mapHeight * map._params.lods[l].resolution > extent.getHeight() )
 						return l;
 				}
-				
+
 				return -1;
 			},
 			getPortalUser: function()
 			{
 				var esriCookie = cookie('esri_auth');
-				
+
 				if( ! esriCookie )
 					return;
-				
+
 				esriCookie = JSON.parse(esriCookie.replace('"ssl":undefined','"ssl":""'));
-				
+
 				// Cookie has to be set on the same organization
-				if( esriCookie.urlKey 
-						&& esriCookie.customBaseUrl 
+				if( esriCookie.urlKey
+						&& esriCookie.customBaseUrl
 						&& (esriCookie.urlKey + '.' + esriCookie.customBaseUrl).toLowerCase() != document.location.hostname.toLowerCase())
 					return;
-				
+
 				return esriCookie ? esriCookie.email : null;
 			},
 			getPortalRole: function()
 			{
 				var esriCookie = cookie('esri_auth');
-				
+
 				if( ! esriCookie )
 					return;
-				
+
 				esriCookie = JSON.parse(esriCookie.replace('"ssl":undefined','"ssl":""'));
-				
+
 				// If the cookie is not set on the same organization
-				if( esriCookie.urlKey 
-						&& esriCookie.customBaseUrl 
+				if( esriCookie.urlKey
+						&& esriCookie.customBaseUrl
 						&& (esriCookie.urlKey + '.' + esriCookie.customBaseUrl).toLowerCase() != document.location.hostname.toLowerCase())
 					return;
-				
+
 				return esriCookie ? esriCookie.role : null;
 			},
 			getAppViewModeURL: function()
 			{
-				return document.location.protocol 
-					+ '//' + document.location.host 
-					+ document.location.pathname 
+				return document.location.protocol
+					+ '//' + document.location.host
+					+ document.location.pathname
 					+ '?appid=' + app.data.getWebAppItem().id;
 			},
 			getWebmapViewerLinkFromSharingURL: function(sharingUrl)
@@ -262,6 +264,9 @@ define(["dojo/cookie",
 			getItemURL: function(id)
 			{
 				return this.getPortalURL() + '/home/item.html?id=' + id;
+			},
+			getItemId: function() {
+				return app.data && app.data.getWebAppItem && app.data.getWebAppItem().id;
 			},
 			getMyContentURL: function()
 			{
@@ -278,9 +283,9 @@ define(["dojo/cookie",
 			},
 			browserSupportAttachementUsingFileReader: function()
 			{
-				return !! window.FileReader 
-						&& !! window.FormData 
-						&& !! this.browserSupportCanvas() 
+				return !! window.FileReader
+						&& !! window.FormData
+						&& !! this.browserSupportCanvas()
 						&& !! window.Blob
 						/*&& has("ie") != 10*/; // IE10 unexpectedly fail to do the addAttachment request (with CORS or proxy)
 			},
@@ -293,7 +298,7 @@ define(["dojo/cookie",
 			{
 				if( ! window.FileReader )
 					return false;
-				
+
 				var f = new window.FileReader();
 				return !! ('readAsArrayBuffer' in f);
 			},
@@ -308,13 +313,13 @@ define(["dojo/cookie",
 			addCSSRule: function(style, styleNodeIdAttr, targetIframeNode)
 			{
 				var target = "head";
-				
+
 				if( has("ie") <= 8 )
 					return;
-				
+
 				if ( targetIframeNode )
 					target = targetIframeNode.contents().find("head");
-				
+
 				if ( styleNodeIdAttr ) {
 					var styleNode = $(target).find("#" + styleNodeIdAttr).eq(0);
 					if ( styleNode.length ) {
@@ -322,7 +327,7 @@ define(["dojo/cookie",
 						return;
 					}
 				}
-				
+
 				$("<style>")
 					.prop("type", "text/css")
 					.attr("id", styleNodeIdAttr)
@@ -333,7 +338,7 @@ define(["dojo/cookie",
 			{
 				if( ! x || x === "" )
 					return "";
-				
+
 				var r = x.replace('#','').match(/../g),g=[],i;
 				for(i in r){
 					g.push(parseInt(r[i],16));
@@ -345,61 +350,61 @@ define(["dojo/cookie",
 			{
 				if ( ! url || url === "" || url.match(/^mailto:/) )
 					return url;
-				
+
 				if ( ! /^(https?:\/\/)|^(\/\/)/i.test(url) )
 					return 'http://' + url;
-				
+
 				return url;
 			},
 			convertURLHTTPS: function(url)
 			{
 				if ( ! url || url === "" || url.match(/^mailto:/) )
 					return url;
-				
+
 				url = url.replace(/http:\/\//, 'https://');
 				url = url.replace(/^\/\//, 'https://');
-				
+
 				if ( ! /^(https:\/\/)/i.test(url) ) {
 					return 'https://' + url;
 				}
-				
+
 				return url;
 			},
 			convertURLHTTP: function(url)
 			{
 				if ( ! url || url === "" || url.match(/^mailto:/) )
 					return url;
-				
+
 				url = url.replace(/https:\/\//, 'http://');
 				url = url.replace(/^\/\//, 'http://');
-				
+
 				if ( ! /^(http:\/\/)/i.test(url) ) {
 					return 'http://' + url;
 				}
-				
+
 				return url;
 			},
 			checkImageURL: function(url)
 			{
 				return url && url.match(/((\.png)|(\.jp(e)?g))$/i);
 			},
-			createGeocoder: function(p) 
+			createGeocoder: function(p)
 			{
 				var resultDeferred = new Deferred();
-				
+
 				if ( ! p || ! p.map || ! p.domNode ) {
 					resultDeferred.resolve();
 					return resultDeferred;
 				}
-				
+
 				if ( ! app.cfg.HELPER_SERVICES.geocode ) {
 					resultDeferred.resolve();
 					return resultDeferred;
 				}
-				
+
 				// Query each geocode service to configure the search widget
 				var requests = [];
-				
+
 				$.each(app.cfg.HELPER_SERVICES.geocode, function(index, geocoder){
 					var geocodeRequest = esriRequest({
 						url: geocoder.url,
@@ -409,7 +414,7 @@ define(["dojo/cookie",
 					});
 					requests.push(geocodeRequest);
 				});
-				
+
 				var requestList = new DeferredList(requests);
 				requestList.then(
 					function(responses){
@@ -418,18 +423,18 @@ define(["dojo/cookie",
 							if(! response[0]) {
 								return;
 							}
-							
+
 							if(! response[1] || ! response[1].singleLineAddressField) {
 								return;
 							}
-							
+
 							var newSource = {};
 							newSource.singleLineFieldName = response[1].singleLineAddressField.name;
-							
+
 							var newLocator = new Locator(app.cfg.HELPER_SERVICES.geocode[index].url);
 							newSource.name = app.cfg.HELPER_SERVICES.geocode[index].name ? app.cfg.HELPER_SERVICES.geocode[index].name : response[1].name;
 							newSource.locator = newLocator;
-							
+
 							sources.push(newSource);
 						});
 
@@ -440,20 +445,20 @@ define(["dojo/cookie",
 								allPlaceholder: p.placeHolder,
 								enableButtonMode: p.enableButtonMode
 							}, p.domNode);
-							
+
 							var searchSources = search.get("sources");
 							$.each(sources, function(index, source){
 								searchSources.push(source);
 							});
 							search.set("sources", searchSources);
-							
+
 							search.startup();
-							
+
 							resultDeferred.resolve(search);
 						}
 					}
 				);
-				
+
 				return resultDeferred;
 			},
 			// Returns a function, that, as long as it continues to be invoked, will not
@@ -465,17 +470,17 @@ define(["dojo/cookie",
 			{
 				var timeout;
 				return function() {
-					var context = this, 
+					var context = this,
 						args = arguments;
-						
+
 					clearTimeout(timeout);
-					
+
 					timeout = setTimeout(function() {
 						timeout = null;
 						if (!immediate)
 							func.apply(context, args);
 					}, wait);
-					
+
 					if (immediate && !timeout)
 						func.apply(context, args);
 				};
@@ -492,7 +497,7 @@ define(["dojo/cookie",
 						}
 						else {
 							// BIG assumptions here: That both arrays are same length, that
-							// the members of those arrays are _essentially_ the same, and 
+							// the members of those arrays are _essentially_ the same, and
 							// that those array members are in the same order...
 							for(var i = 0; i < a.length; i++) {
 								objectGraphPath.push("[" + i.toString() + "]");
@@ -501,11 +506,11 @@ define(["dojo/cookie",
 							}
 						}
 					}
-					else if(a.constructor == Object || (a.constructor != Number && 
-							a.constructor != String && a.constructor != Date && 
+					else if(a.constructor == Object || (a.constructor != Number &&
+							a.constructor != String && a.constructor != Date &&
 							a.constructor != RegExp && a.constructor != Function &&
 							a.constructor != Boolean)) {
-						// we can safely assume that the objects have the 
+						// we can safely assume that the objects have the
 						// same property lists, else why compare them?
 						for(var property in a) {
 							objectGraphPath.push(("." + property));
@@ -525,6 +530,85 @@ define(["dojo/cookie",
 					}
 				})(objectA, objectB);
 				return propertyChanges;
+			},
+
+			// ----- file upload helpers ----- //
+
+			possiblyAddToken: function(url) {
+
+				if (!this.needsToken(url)) {
+					return url;
+				}
+
+				// might as well refresh the token...?
+				url = this.removeToken(url);
+
+				var token = '';
+
+				if (app.portal && app.portal.getPortalUser()) {
+					token = app.portal.getPortalUser().credential.token;
+				}
+				else if (IdentityManager.findCredential(document.location.origin)) {
+					token = IdentityManager.findCredential(document.location.origin).token;
+				}
+				else if (IdentityManager.findCredential(app.portal.url)) {
+					token = IdentityManager.findCredential(app.portal.url).token;
+				}
+				else {
+					token = this.getCookieToken();
+				}
+				return url + '?token=' + token;
+			},
+
+			isAppResource: function(url, appItem) {
+				if (!appItem) {
+					appItem = app.data && app.data.getWebAppItem && app.data.getWebAppItem();
+				}
+				if (!appItem) {
+					return false;
+				}
+				return appItem
+					&& appItem.id
+					&& url
+					&& url.match(new RegExp('\/sharing\/rest\/content\/items\/' + appItem.id + '\/resources\/'));
+			},
+
+			needsToken: function(url) {
+				var appItem = app.data && app.data.getWebAppItem && app.data.getWebAppItem();
+				if (!appItem) {
+					return false;
+				}
+				return this.isAppResource(url, appItem) && appItem.access !== 'public';
+			},
+
+			getCookieToken: function() {
+				var esriCookie = cookie('esri_auth');
+
+				if(!esriCookie) {
+					return;
+				}
+
+				esriCookie = JSON.parse(esriCookie.replace('"ssl":undefined','"ssl":""'));
+
+				// Cookie has to be set on the same organization
+				if(esriCookie.urlKey && esriCookie.customBaseUrl
+						&& (esriCookie.urlKey + '.' + esriCookie.customBaseUrl).toLowerCase() != document.location.hostname.toLowerCase()) {
+					return;
+				}
+
+				return esriCookie ? esriCookie.token : null;
+			},
+
+			possiblyRemoveToken: function(url) {
+				if (!this.needsToken(url)) {
+					return url;
+				}
+				return this.removeToken(url);
+
+			},
+
+			removeToken: function(url) {
+				return url.split('?token=')[0];
 			}
 		};
 	}

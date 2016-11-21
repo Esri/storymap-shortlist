@@ -28,6 +28,9 @@ else {
 					Core,
 					MainView
 				){
+
+					require(['app/custom-scripts']);
+
 		 			if (app.isInBuilder) {
 						require([
 								"storymaps/common/builder/Builder",

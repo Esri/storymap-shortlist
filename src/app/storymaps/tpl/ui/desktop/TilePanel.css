@@ -49,8 +49,8 @@
 	overflow: hidden;
 	background-color: #C7C7C7;
 	padding: 8px;
-	border-top-width: 10px;
-	border-top-style: solid;
+	/*border-top-width: 10px;
+	border-top-style: solid;*/
 	display: block;
 }
 
@@ -63,10 +63,13 @@
 }
 
 #paneLeft .noFeatureText{
-	top: 20%;
+	top: 15%;
 	position: absolute;
-	width: 200px;
+	width: 300px;
 	text-align: center;
+	line-height: 1.5em;
+	font-family: 'open_sans', sans-serif;
+	font-size: 22px;
 }
 
 ul.tilelist {
@@ -117,8 +120,9 @@ ul.tilelist img {
 }
 
 .tileImage {
-	/*background-size: cover;*/
-	background-size: contain;
+	background-size: cover;
+	background-position: 50% 50%;
+	/*background-size: contain;*/
 	background-repeat: no-repeat;
 	width: 150px;
 	height: 113px;
@@ -155,12 +159,12 @@ ul.tilelist .num {
 	color: white;
 	font-size: 11px;
 	text-align: center;
-	font-family: 'calibri';
+	font-family: 'open_sanssemibold', sans-serif;
 	font-weight: bold;
 }
 
 ul.tilelist .longNum {
-	width: 20px;
+	width: 24px;
 }
 
 ul.tilelist .blurb {

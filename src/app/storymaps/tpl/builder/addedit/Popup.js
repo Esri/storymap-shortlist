@@ -215,7 +215,7 @@ define(["lib-build/tpl!./Popup",
 
 				app.map.getLayer(app.data.getShortlistLayerId()).redraw();
 				$('.num').css('background-color', color);
-				$('#paneLeft').css('border-top-color', color);
+				$('#contentPanel').css('border-top-color', color);
 				$('.detailContainer').eq(themeIndex).find('.detailFeatureNum').css('background-color', color);
 
 				topic.publish("BUILDER_INCREMENT_COUNTER", 1);

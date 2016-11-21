@@ -120,9 +120,9 @@ define(["lib-build/tpl!./BuilderView",
 				_migrationPopup;
 
 
-				app.detailPanelBuilder = new DetailPanelBuilder($('#contentPanel'), _media);
-				app.addFeatureBar = new AddFeatureBar($('#contentPanel'), _media);
-				app.initScreenIsOpen = true;
+			app.detailPanelBuilder = new DetailPanelBuilder($('#contentPanel'), _media);
+			app.addFeatureBar = new AddFeatureBar($('#contentPanel'), _media);
+			app.initScreenIsOpen = true;
 
 			this.init = function(settingsPopup)
 			{
@@ -174,34 +174,32 @@ define(["lib-build/tpl!./BuilderView",
 					});
 
 				updateAddButtonStatus();
-
-
 			};
 
-	  this.storyDataReady = function()
-	  {
-		app.initScreenIsOpen = false;
-		var basemapGallery = dijit.byId('basemapGallery');
-		if(basemapGallery)
-		  basemapGallery.destroyRecursive(true);
-
-		basemapGallery = new BasemapGallery(
+			this.storyDataReady = function()
 			{
-				showArcGISBasemaps: true,
-				map: app.map
-			},
-			"basemapGallery"
-		);
-		basemapGallery.startup();
+				app.initScreenIsOpen = false;
+				var basemapGallery = dijit.byId('basemapGallery');
+				if(basemapGallery)
+					basemapGallery.destroyRecursive(true);
 
-		$("#basemapChooser .dijitTitlePaneTextNode").html('Change Basemap');
-		$("#basemapChooser").show();
+				basemapGallery = new BasemapGallery(
+					{
+						showArcGISBasemaps: true,
+						map: app.map
+					},
+					"basemapGallery"
+				);
+				basemapGallery.startup();
 
-		var currentExtent = app.map.extent;
+				$("#basemapChooser .dijitTitlePaneTextNode").html('Change Basemap');
+				$("#basemapChooser").show();
+
+				var currentExtent = app.map.extent;
 
 				// Very lame but the title isn't saved in the new map layer
 				basemapGallery.on("selection-change",function(){
-		  currentExtent = app.map.extent;
+					currentExtent = app.map.extent;
 					var basemap = basemapGallery.getSelected();
 					var newBasemapJSON = [];
 
@@ -235,9 +233,9 @@ define(["lib-build/tpl!./BuilderView",
 					setTimeout(function(){
 						app.map.setExtent(currentExtent);
 					}, 500);
-		});
+				});
 
-		firstAdd();
+				firstAdd();
 
 
 				if(true){ //app.isDirectCreation && _firstLoad){
@@ -249,7 +247,7 @@ define(["lib-build/tpl!./BuilderView",
 					_this.initPopupComplete(config);
 				}
 
-	  };
+			};
 
 			this.updateUI = function(forceStoryInit)
 			{
@@ -260,23 +258,23 @@ define(["lib-build/tpl!./BuilderView",
 				//$(".builder-content-panel").toggle(!! storyInit);
 			};
 
-	  //
-	  // Story serialization
-	  //
+			//
+			// Story serialization
+			//
 
-	  this.preWebmapSave = function()
-	  {
-		var shortlistLayer = app.map.getLayer(app.data.getShortlistLayerId());
-		var operShortlistLayer = $.grep(app.data.getWebMap().itemData.operationalLayers, function(e){
-		  return e.id == WebApplicationData.getShortlistLayerId().split('_').slice(0,-1).join('_') || e.id ==  app.data.getShortlistLayerId().split('_').slice(0,-1).join('_');
-		});
-		if(!operShortlistLayer[0]){
-			operShortlistLayer = $.grep(app.data.getWebMap().itemData.operationalLayers, function(e){
-			  return e.id == WebApplicationData.getShortlistLayerId() || e.id ==  app.data.getShortlistLayerId();
-			});
-		}
-		operShortlistLayer[0].featureCollection = WebMapHelper.serializeGraphicsLayerToFeatureCollection(shortlistLayer);
-	  };
+			this.preWebmapSave = function()
+			{
+				var shortlistLayer = app.map.getLayer(app.data.getShortlistLayerId());
+				var operShortlistLayer = $.grep(app.data.getWebMap().itemData.operationalLayers, function(e){
+					return e.id == WebApplicationData.getShortlistLayerId().split('_').slice(0,-1).join('_') || e.id ==  app.data.getShortlistLayerId().split('_').slice(0,-1).join('_');
+				});
+				if(!operShortlistLayer[0]){
+					operShortlistLayer = $.grep(app.data.getWebMap().itemData.operationalLayers, function(e){
+						return e.id == WebApplicationData.getShortlistLayerId() || e.id ==  app.data.getShortlistLayerId();
+					});
+				}
+				operShortlistLayer[0].featureCollection = WebMapHelper.serializeGraphicsLayerToFeatureCollection(shortlistLayer);
+			};
 
 			//
 			// Add
@@ -285,7 +283,7 @@ define(["lib-build/tpl!./BuilderView",
 			this.buildWebMap = function()
 			{
 				return BuilderHelper.getBlankWebmapJSON();
-			}
+			};
 
 			function firstAdd(title)
 			{
@@ -303,7 +301,7 @@ define(["lib-build/tpl!./BuilderView",
 					//TODO populate with config colors info.  Also border for #paneLeft
 					var colorOrder = app.cfg.COLOR_ORDER.split(",");
 					var activeColor = $.grep(app.cfg.COLOR_SCHEMES, function(e){ return e.name == colorOrder[0]; });
-					$('#paneLeft').css('border-top-color', activeColor[0].color);
+					$('#contentPanel').css('border-top-color', activeColor[0].color);
 					var colors = {
 						header: '#444',
 						tabText: '#d8d8d8',
@@ -394,7 +392,7 @@ define(["lib-build/tpl!./BuilderView",
 					entry: app.data.getStoryByIndex(cfg.entryIndex),
 					entryIndex: cfg.entryIndex,
 					syncMaps: WebApplicationData.getMapOptions().mapsSync ? !cfg.entryIndex : 1
-				})
+				});
 
 				return popupDeferred;
 			}
@@ -485,36 +483,202 @@ define(["lib-build/tpl!./BuilderView",
 			};
 
 			this.openMigrationPopup = function(pointLayers, layers){
-				_migrationPopup.present(pointLayers, layers).then(function(migrate){
-					if(!migrate){
-						var itemResponse = app.maps[app.data.getWebAppData().getWebmap()].response.itemInfo.item;
-						app.ui.headerDesktop.setTitleAndSubtitle(itemResponse.title, itemResponse.description);
-						app.data.getWebAppData().setTitle(itemResponse.title);
-						if(itemResponse.description){
-							app.data.getWebAppData().setSubtitle(itemResponse.description);
+				_migrationPopup.present(pointLayers, layers).then(function(obj){
+					if(!obj.migrate){
+						if(app.maps[app.data.getWebAppData().getWebmap()].response.itemInfo.item.owner != app.data.getWebAppItem().owner){
+							cloneUnownedMap(obj.pointLayers, obj.layers);
+						} else{
+							var itemResponse = app.maps[app.data.getWebAppData().getWebmap()].response.itemInfo.item;
+							var description = itemResponse.snippet ? itemResponse.snippet : itemResponse.description;
+							app.ui.headerDesktop.setTitleAndSubtitle(app.data.getWebAppItem().title, description);
+							app.data.getWebAppData().setTitle(app.data.getWebAppItem().title);
+							if(description){
+								app.data.getWebAppData().setSubtitle(description);
+							}
+							if(app.data.getResponse().itemInfo.itemData.bookmarks && app.data.getResponse().itemInfo.itemData.bookmarks.length){
+								var settings = {
+									extentMode: "customHome",
+									numberedIcons: false,
+									filterByExtent: true,
+									bookmarks: true,
+									bookmarksAlias: app.cfg.BOOKMARKS_ALIAS
+								};
+								app.data.getWebAppData().setGeneralOptions(settings);
+								app.ui.navBar.initBookmarks();
+							}
+							//var config = {};
+							//_this.initPopupComplete(config);
+							_this.storyDataReady();
+							app.detailPanelBuilder.init(app.ui.mainView, _this);
+							app.isWebMapFirstSave = true;
+							//_this.initMapExtentSave();
+							Core.appInitComplete(WebApplicationData);
 						}
-						if(app.data.getResponse().itemInfo.itemData.bookmarks && app.data.getResponse().itemInfo.itemData.bookmarks.length){
-							var settings = {
-								extentMode: "customHome",
-								numberedIcons: false,
-								filterByExtent: true,
-								bookmarks: true,
-								bookmarksAlias: 'Zoom'
-							};
-							app.data.getWebAppData().setGeneralOptions(settings);
-							app.ui.navBar.initBookmarks();
-						}
-						//var config = {};
-						//_this.initPopupComplete(config);
-						_this.storyDataReady();
-						app.detailPanelBuilder.init(app.ui.mainView);
-						//_this.initMapExtentSave();
-						Core.appInitComplete(WebApplicationData);
 					}else{
-
+						app.isWebMapFirstSave = true;
 					}
 				});
 			};
+
+			function cloneUnownedMap(pointLayers, layers){
+				var newWebmap = _this.buildWebMap();
+				app.data.getWebAppData().setTitle(app.data.getWebAppItem().title);
+				newWebmap.item.title = app.data.getResponse().itemInfo.item.title + ' - Shortlist builder';
+				app.data.getResponse().itemInfo.item.title = newWebmap.item.title;
+				if(app.data.getWebAppItem().description  || app.data.getWebAppItem().snippet){
+					var description = app.data.getWebAppItem().snippet ? app.data.getWebAppItem().snippet : app.data.getWebAppItem().description;
+					app.data.getWebAppData().setSubtitle(description);
+					newWebmap.item.description = description;
+				} else if(app.data.getResponse().itemInfo.item.description  || app.data.getResponse().itemInfo.item.snippet){
+					var description = app.data.getResponse().itemInfo.item.snippet ? app.data.getResponse().itemInfo.item.snippet : app.data.getResponse().itemInfo.item.description;
+					app.data.getWebAppData().setSubtitle(description);
+					newWebmap.item.description = description;
+				}
+				app.ui.headerDesktop.setTitleAndSubtitle(app.data.getWebAppData().getTitle(), app.data.getWebAppData().getSubtitle());
+				//TODO just use item and item data as is?
+				newWebmap.item.extent = app.data.getResponse().itemInfo.item.extent;
+				newWebmap.itemData.spatialReference = app.data.getResponse().itemInfo.itemData.spatialReference;
+				newWebmap.itemData.baseMap = app.data.getResponse().itemInfo.itemData.baseMap;
+
+				app.mapItem = app.data.getResponse().itemInfo;
+
+				if(app.data.getResponse().itemInfo.itemData.bookmarks && app.data.getResponse().itemInfo.itemData.bookmarks.length)
+					newWebmap.itemData.bookmarks = app.data.getResponse().itemInfo.itemData.bookmarks;
+
+				app.data.getWebAppData().setOriginalWebmap(app.data.getWebAppData().getWebmap());
+
+				app.map.destroy();
+				app.map = null;
+				var mapPromise = _mainView.loadWebmap(newWebmap, 'map');
+				mapPromise.then(function(response){
+					app.data.setResponse(response);
+					app.map = mapPromise.results[0].map;
+					var genSettings = app.data.getWebAppData().getGeneralOptions();
+					genSettings.extentMode = "customHome";
+					app.data.getWebAppData().setGeneralOptions(genSettings);
+
+					_this.storyDataReady();
+
+					app.data.getWebAppData().setDefaultMapOptions();
+					var colorOrder = app.cfg.COLOR_ORDER.split(",");
+					var activeColor = $.grep(app.cfg.COLOR_SCHEMES, function(e){ return e.name == colorOrder[0]; });
+					$('#contentPanel').css('border-top-color', activeColor[0].color);
+					var colors = {
+						header: '#444',
+						tabText: '#d8d8d8',
+						tab: '#666',
+						tabTextActive: '#fff',
+						tabActive: activeColor[0].color,
+						tabTextHover: '#fff',
+						tabHover: '#666'
+					};
+					var entryIndex = 0;
+					var firstEntry = {};
+
+					firstEntry.title = 'Tab 1';
+					app.ui.navBar.init(
+						[firstEntry],
+						entryIndex,
+						colors,
+						app.data.getWebAppData()
+					);
+
+					var originalOperationalLayers = [];
+					$.each(layers, function(index, layer){
+						var operationalLayer = $.grep(app.data.getWebMap().itemData.operationalLayers, function(n){ return n.id == layer.id.slice(0, -2); });
+						var layerType;
+						if(layer.layerType){
+							layerType = layer.layerType;
+						}else{
+							layerType = layer.type;
+						}
+						if(layer.url && (layerType === 'ArcGISFeatureLayer' || layerType === 'Feature Layer' || layer.tileMap || layer.tileInfo) && !layer.id.match(/^csv_/)){
+							operationalLayer = $.grep(app.data.getWebMap().itemData.operationalLayers, function(e){ return e.id ==  layer.id; });
+						}
+						if(operationalLayer[0]){
+							originalOperationalLayers.push(operationalLayer[0]);
+							app.map.addLayer(layer);
+						}
+					});
+
+					$.each(pointLayers, function(index, layer){
+						var operationalLayer = $.grep(app.data.getWebMap().itemData.operationalLayers, function(n){ return n.id == layer.id.slice(0, -2); });
+						var layerType;
+						if(layer.layerType){
+							layerType = layer.layerType;
+						}else{
+							layerType = layer.type;
+						}
+						if(layer.url && (layerType === 'ArcGISFeatureLayer' || layerType === 'Feature Layer') && !layer.id.match(/^csv_/)){
+							operationalLayer = $.grep(app.data.getWebMap().itemData.operationalLayers, function(e){ return e.id ==  layer.id; });
+						}
+						if(operationalLayer[0]){
+							originalOperationalLayers.push(operationalLayer[0]);
+							app.map.addLayer(layer);
+						}
+					});
+
+					pointLayers.reverse();
+
+					app.data.setWebMap(mapPromise.results[0].itemInfo);
+					app.addFeatureBar.addLayer(true);
+					$.each(originalOperationalLayers, function(index, layer){
+						app.data.getWebMap().itemData.operationalLayers.push(layer);
+					});
+
+					var webMapItem = app.data.getWebMap();
+
+					lang.mixin(
+						webMapItem.item,
+						{
+							uploaded: Date.now(),
+							modified: Date.now(),
+							owner: app.data.getWebAppItem().owner,
+							access: 'private'
+						}
+					);
+					_this.updateUI();
+					_core.appInitComplete(app.data.getWebAppData());
+
+					var shortlistLayer = app.map.getLayer(app.data.getShortlistLayerId());
+
+					var baseMapLayerUpdated = false;
+
+					var baseMapLayer = app.map.getLayer(app.data.getWebMap().itemData.baseMap.baseMapLayers[0].id);
+					baseMapLayer.on('update-end', function(){
+						if(baseMapLayerUpdated)
+							return;
+						baseMapLayerUpdated = true;
+					});
+
+					$("#loadingIndicator").show();
+
+					if(app.data.getResponse().itemInfo.itemData.bookmarks && app.data.getResponse().itemInfo.itemData.bookmarks.length){
+						var settings = {
+							extentMode: 'customHome',
+							numberedIcons: false,
+							filterByExtent: true,
+							bookmarks: true,
+							bookmarksAlias: app.cfg.BOOKMARKS_ALIAS
+						};
+						app.data.getWebAppData().setGeneralOptions(settings);
+						app.ui.navBar.initBookmarks();
+					}
+
+					//_mapExtentSave.init();
+
+					setTimeout(function(){
+						_core.displayApp();
+						_mainView.activateLayer(0);
+						app.map.setExtent(app.map._params.extent, true);
+						topic.publish("BUILDER_INCREMENT_COUNTER", 1);
+						app.data.getWebAppItem().typeKeywords.push('Shortlist-migration');
+						app.maps[response.itemInfo.item.id] = _mainView.getMapConfig(response);
+						// Make sure shortlist layer is above all other layers (i.e. mapnotes);
+						app.map.reorderLayer(shortlistLayer, app.map.graphicsLayerIds.length - 1);
+					}, 800);
+				});
+			}
 
 			function appLoadingTimeout(){
 				$("#loadingMessage").html(
@@ -638,7 +802,7 @@ define(["lib-build/tpl!./BuilderView",
 						app.data.getWebAppData().setDefaultMapOptions();
 						var colorOrder = app.cfg.COLOR_ORDER.split(",");
 						var activeColor = $.grep(app.cfg.COLOR_SCHEMES, function(e){ return e.name == colorOrder[0]; });
-						$('#paneLeft').css('border-top-color', activeColor[0].color);
+						$('#contentPanel').css('border-top-color', activeColor[0].color);
 						var colors = {
 							header: '#444',
 							tabText: '#d8d8d8',
@@ -692,7 +856,7 @@ define(["lib-build/tpl!./BuilderView",
 						if(!shortlistLayerId.length){
 							var colorOrder = app.cfg.COLOR_ORDER.split(",");
 							var activeColor = $.grep(app.cfg.COLOR_SCHEMES, function(e){ return e.name == colorOrder[0]; });
-							$('#paneLeft').css('border-top-color', activeColor[0].color);
+							$('#contentPanel').css('border-top-color', activeColor[0].color);
 							var colors = {
 								header: '#444',
 								tabText: '#d8d8d8',
@@ -715,7 +879,9 @@ define(["lib-build/tpl!./BuilderView",
 							if(!app.data.getWebAppData().getGeneralOptions() && !app.data.getWebAppData().getGeneralOptions().bookmarks)
 								app.data.getWebAppData().setDefaultGeneralOptions();
 							app.data.getWebAppData().setDefaultMapOptions();
-							_this.initMapExtentSave();
+							setTimeout(function(){
+								_this.initMapExtentSave();
+							}, 2500);
 							return;
 						}
 						app.data.setShortlistLayerId(shortlistLayerId[0]);
@@ -797,6 +963,7 @@ define(["lib-build/tpl!./BuilderView",
 				}
 
 				if(app.data.getWebAppData().getGeneralOptions().extentMode == "default"){
+					app.appCfg.mapExtentFit = true;
 					$.each(app.data.getStory(), function(index){
 						app.data.setStory(index, null, null, newExtent);
 					});
@@ -806,6 +973,7 @@ define(["lib-build/tpl!./BuilderView",
 					app.data.getWebAppData().setMapExtent(shortlistExtent);
 				}
 				if(app.data.getWebAppData().getGeneralOptions().extentMode == "customTheme"){
+					app.appCfg.mapExtentFit = false;
 					var tabIndex = $('.entry.active').index();
 					app.data.setStory(tabIndex, null, null, newExtent);
 					WebApplicationData.setTabs(app.data.getStory());
@@ -832,12 +1000,14 @@ define(["lib-build/tpl!./BuilderView",
 				generalSettings.extentMode = mode;
 				app.data.getWebAppData().setGeneralOptions(generalSettings);
 				if(mode == "default"){
+					app.appCfg.mapExtentFit = true;
 					if(_mapExtentSave.initDone)
 						_mapExtentSave.hideAlways();
 					_this.updateShortlistExtent();
 					$('.tab-cfg-location').hide();
 				}
 				if(mode == "customHome"){
+					app.appCfg.mapExtentFit = false;
 					if(!_mapExtentSave.initDone)
 						_this.initMapExtentSave();
 					_mapExtentSave.reinit();

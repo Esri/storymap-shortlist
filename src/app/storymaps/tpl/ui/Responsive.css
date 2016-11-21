@@ -14,6 +14,10 @@ body.mobile-view #divStrip{
 	display: none !important;
 }
 
+body.mobile-view #contentPanel{
+	border-top: none;
+}
+
 body.mobile-view .detailContainer,
 body.mobile-view #mobilePaneList{
 	display: none;
@@ -25,7 +29,15 @@ body.mobile-view #paneLeft{
 }
 
 body.mobile-view .detailContainer{
-	margin-top: -8px;
+	margin-top: 5px;
+}
+
+body.mobile-view .detailHeader{
+	border-top: 10px solid;
+}
+
+body.mobile-view .notNumbered{
+	margin-top: 10px;
 }
 
 body.mobile-view .mobileView,

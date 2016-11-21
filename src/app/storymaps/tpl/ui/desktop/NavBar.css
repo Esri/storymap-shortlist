@@ -153,26 +153,32 @@
 #bookmarksCon{
 	position: absolute;
 	right: 10px;
-	top: 37px;
-	width: 160px;
+	top: 47px;
+	/*width: 160px;*/
+	width: auto;
+	max-width: 200px;
 	display: none;
 }
 
 #bookmarksButton{
 	background-color: #777;
-	width: 160px;
+	/*width: 160px;*/
 }
 
 #bookmarksDiv{
 	display: none;
-	width: 160px;
+	/*width: 160px;*/
 	background-color:#666;
 	max-height:450px;
 	/*overflow:auto;*/
 	padding:10px;
 	border-radius: 0 0 6px 6px;
 	position: relative;
-	right: 5px;
+	/*right: 5px;*/
+}
+
+#bookmarksDiv p {
+	margin-bottom: 10px;
 }
 
 #bookmarksDiv a {
@@ -185,20 +191,20 @@
 
 #bookmarksToggle{
 	position:relative;
-	float:right;
+	/*float:right;*/
 	height:28px;
 	cursor:pointer;
 	z-index:100;
 	color:#fff;
 	font-family: 'open_sansregular', sans-serif;
-	margin: 0px 5px 0 3px;
+	/*margin: 0px 5px 0 3px;*/
 	padding: 0px 12px 10px 6px;
 	font-weight: 400;
 	border: none;
 	background-color: #666;
 	height: auto;
 	line-height: 35px;
-	width: 160px;
+	/*width: 160px;*/
 }
 
 #bookmarksToggle.closed{

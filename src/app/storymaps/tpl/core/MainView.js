@@ -87,6 +87,8 @@ define(["lib-build/css!./MainView",
 			var _icon;
 			var _myCanvas;
 			var _firstMapLoad = 0;
+			var _iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+			var _urlParams = CommonHelper.getUrlParams();
 
 			this.init = function(core)
 			{
@@ -140,13 +142,15 @@ define(["lib-build/css!./MainView",
 
 				// Canvas icons
 				_myCanvas = document.createElement('canvas');
+
 				_context = _myCanvas.getContext('2d');
 				_icon = new Image();
 				_icon.src = app.cfg.ICON_SRC;
 
+
 				_icon.onload = function(){
 					_context.drawImage(_icon, 0, 0);
-					_context.font = _myCanvas.width/2 + "pt Calibri";
+					_context.font = _myCanvas.width/3.8 + "pt open_sanssemibold, sans-serif";
 				};
 
 				_this.themeSelected = false;
@@ -154,16 +158,6 @@ define(["lib-build/css!./MainView",
 				/*
 				 * Desktop UI
 				 */
-				/*app.ui.testPanel = new TestPanel(
-					$("#testPanel"),
-					app.isInBuilder,
-					function(data) {
-						if ( data != WebApplicationData.getStoryTestPanel() )
-							topic.publish("BUILDER_INCREMENT_COUNTER", 1);
-
-						WebApplicationData.setStoryTestPanel(data);
-					}
-				);*/
 
 				app.ui.mainView = this;
 
@@ -318,8 +312,11 @@ define(["lib-build/css!./MainView",
 						// HERE-EXTENT
 						if(app.data.getWebAppData().getTabs() && app.data.getWebAppData().getTabs()[0] && app.data.getWebAppData().getTabs()[0].extent){
 							var tabExtent = new Extent(app.data.getWebAppData().getTabs()[0].extent);
+							var fitExtent = app.data.getWebAppData().getSettings().generalOptions.extentMode == 'default' ? true : false;
+							if(fitExtent)
+								app.appCfg.mapExtentFit = true;
 							setTimeout(function(){
-								app.map.setExtent(tabExtent, true);
+								app.map.setExtent(tabExtent, fitExtent);
 							}, 500);
 						}
 						else if(app.isDirectCreationFirstSave){
@@ -327,7 +324,7 @@ define(["lib-build/css!./MainView",
 						}
 						else{
 							setTimeout(function(){
-								app.map.setExtent(app.map._params.extent, true);
+								app.map.setExtent(app.map._params.extent);
 							}, 500);
 						}
 						// TODO place after app is done loading and changing extents
@@ -342,22 +339,22 @@ define(["lib-build/css!./MainView",
 											app.ui.detailPanel.refreshSlides();
 										//}, 5000)
 
-										if(_this.selected){
+										/*if(_this.selected){
 											setTimeout(function(){
 												if(app.ui.detailPanel.loaded)
 													app.ui.detailPanel.showDetails(_this.selected);
 											}, 0);
-										}
+										}*/
 									}
 								} else {
-									if(app.ui.detailPanel.loaded){
+									/*if(app.ui.detailPanel.loaded){
 										if(_this.selected){
 											setTimeout(function(){
 												if(app.ui.detailPanel.loaded)
 													app.ui.detailPanel.showDetails(_this.selected);
 											}, 0);
 										}
-									}
+									}*/
 								}
 							}, 0);
 						});
@@ -447,8 +444,7 @@ define(["lib-build/css!./MainView",
 					: app.data.getWebAppData().getShortlistLayerId()+"_0";
 				app.data.getWebAppData().setShortlistLayerId(shortlistLayerId);
 				var shortlistLayer = app.map.getLayer(app.data.getWebAppData().getShortlistLayerId());
-
-
+				shortlistLayer.setScaleRange(0,0);
 
 				$.each(shortlistLayer.graphics, function(index, graphic){
 					if(graphic.attributes.locationSet && graphic.attributes.name && graphic.attributes.name != "Unnamed Place" && graphic.attributes.pic_url && !app.isInBuilder){
@@ -461,6 +457,7 @@ define(["lib-build/css!./MainView",
 				shortlistLayer.on("mouse-over", _this.layer_onMouseOver);
 				shortlistLayer.on("mouse-out", _this.layer_onMouseOut);
 				shortlistLayer.on("click", _this.layer_onClick);
+
 				var supportingLayers = [];
 				$.each(app.map.graphicsLayerIds, function(index, id){
 					if(id !== shortlistLayer.id)
@@ -477,9 +474,13 @@ define(["lib-build/css!./MainView",
 						app.ui.mobileIntro.fillList(index, theme, themes);
 						app.ui.mobileFeatureList.addTheme(theme);
 
+						var colorIndex = index;
+						if(colorIndex > 7)
+							colorIndex = colorIndex % 7;
+
 						var colorOrder = app.cfg.COLOR_ORDER.split(",");
 						var colorScheme = $.grep(app.cfg.COLOR_SCHEMES, function(n){
-							return n.name.toLowerCase() == $.trim(colorOrder[index].toLowerCase());
+							return n.name.toLowerCase() == $.trim(colorOrder[colorIndex].toLowerCase());
 						})[0];
 						var color = theme.color || colorScheme.color;
 
@@ -569,14 +570,14 @@ define(["lib-build/css!./MainView",
 					$('#navThemeRight').addClass('hideButtons');
 					$('#nav-bar').show();
 					$('#nav-bar .entries').hide();
-					$('#bookmarksCon').css({'top': 0});
 				}
 
 				_core.handleWindowResize();
 
 				_this.activateLayer(0);
-				if(app.isInBuilder)
+				if(app.isInBuilder){
 					app.detailPanelBuilder.buildSlides();
+				}
 				$('.entryLbl').css("outline-style", 'none');
 
 				//app.map.infoWindow.on("hide",infoWindow_onHide);
@@ -663,6 +664,7 @@ define(["lib-build/css!./MainView",
 						graphic.hide();
 					}
 				});
+
 				var layer = new esri.layers.GraphicsLayer();
 				layer.graphics = tabFeatures;
 
@@ -710,7 +712,7 @@ define(["lib-build/css!./MainView",
 					"NavBarActive"
 				);
 
-				$('#paneLeft').css('border-top-color', app.data.getStory()[index].color);
+				$('#contentPanel').css('border-top-color', app.data.getStory()[index].color);
 				$('.detailHeader').css('border-top-color', app.data.getStory()[index].color);
 
 				var timeoutTime = index === 0 ? 500 : 100;
@@ -726,6 +728,9 @@ define(["lib-build/css!./MainView",
 
 				if(app.isInBuilder)
 					app.addFeatureBar.updateLocatedFeatures();
+				else{
+					app.ui.detailPanel.refreshSlides();
+				}
 			};
 
 			this.unselect = function()
@@ -740,9 +745,9 @@ define(["lib-build/css!./MainView",
 				// return the soon-to-be formerly selected graphic icon to normal
 				// size & dim the corresponding tile.
 				if (_this.selected  && _this.selected.symbol && _this.selected.symbol.setWidth) {
-					_this.selected.symbol.setWidth(app.cfg.lutIconSpecs.tiny.getWidth());
-					_this.selected.symbol.setHeight(app.cfg.lutIconSpecs.tiny.getHeight());
-					_this.selected.symbol.setOffset(app.cfg.lutIconSpecs.tiny.getOffsetX(), app.cfg.lutIconSpecs.tiny.getOffsetY());
+					_this.selected.symbol.setWidth(_this.lutIconSpecs.tiny.getWidth());
+					_this.selected.symbol.setHeight(_this.lutIconSpecs.tiny.getHeight());
+					_this.selected.symbol.setOffset(_this.lutIconSpecs.tiny.getOffsetX(), _this.lutIconSpecs.tiny.getOffsetY());
 					_this.selected.draw();
 					if(app.mapTips)
 						app.mapTips.clean(true);
@@ -766,7 +771,11 @@ define(["lib-build/css!./MainView",
 					if(app.isInBuilder)
 						app.detailPanelBuilder.showSlide(_this.selected.attributes.shortlist_id);
 					else {
-						app.ui.detailPanel.showDetails(_this.selected);
+						if(_iOS)
+							app.ui.detailPanel.buildSlide(_this.selected);
+						else{
+							app.ui.detailPanel.showDetails(_this.selected);
+						}
 					}
 
 					app.ui.mobileIntro.hide();
@@ -792,7 +801,7 @@ define(["lib-build/css!./MainView",
 						if(app.mapTips)
 							app.mapTips.clean(true);
 						if(_this.selected)
-							selectSymbol();
+							_this.selectSymbol();
 						return;
 					}
 
@@ -819,18 +828,18 @@ define(["lib-build/css!./MainView",
 						visible: true
 					});
 
-					selectSymbol();
+					_this.selectSymbol();
 				}, 100);
 			};
 
-			function selectSymbol()
+			this.selectSymbol = function()
 			{
 				// make the selected location's icon LARGE
-				if(_this.selected.symbol.width == app.cfg.lutIconSpecs.large.getWidth())
+				if(_this.selected.symbol.width == _this.lutIconSpecs.large.getWidth())
 					return;
-				_this.selected.symbol.setWidth(app.cfg.lutIconSpecs.large.getWidth());
-				_this.selected.symbol.setHeight(app.cfg.lutIconSpecs.large.getHeight());
-				_this.selected.symbol.setOffset(app.cfg.lutIconSpecs.large.getOffsetX(), app.cfg.lutIconSpecs.large.getOffsetY());
+				_this.selected.symbol.setWidth(_this.lutIconSpecs.large.getWidth());
+				_this.selected.symbol.setHeight(_this.lutIconSpecs.large.getHeight());
+				_this.selected.symbol.setOffset(_this.lutIconSpecs.large.getOffsetX(), _this.lutIconSpecs.large.getOffsetY());
 				_this.selected.draw();
 
 				// calling moveToFront directly after messing
@@ -908,46 +917,46 @@ define(["lib-build/css!./MainView",
 			};
 
 			this.buildLayer = function(arr,color) {
-				var spec = app.cfg.lutIconSpecs.tiny;
+				var spec = _this.lutIconSpecs.tiny;
 				var coloredIcon;
-				$.each(arr, function(index, point) {
-					var newCanvas = document.createElement('canvas');
-					newCanvas.width = _icon.width;
-					newCanvas.height = _icon.height;
-					var newContext = newCanvas.getContext('2d');
-					//newContext.font = "bold " + newCanvas.width/2.7 + "pt Calibri";
-					newContext.font = "bold " + newCanvas.width/3.8 + "pt Calibri";
-					newContext.drawImage(_myCanvas, 0, 0);
-					var newIconColor = color;
+				var newCanvas = document.createElement('canvas');
+				newCanvas.width = _icon.width;
+				newCanvas.height = _icon.height;
+				var newContext = newCanvas.getContext('2d');
+				newContext.font = newCanvas.width/3.8 + "pt pt open_sanssemibold, sans-serif";
+				newContext.drawImage(_myCanvas, 0, 0);
+				var newIconColor = color;
 
-					// examine every pixel,
-					// change any old rgb to the new-rgb
-					if(!coloredIcon){
-						// pull the entire image into an array of pixel data
-						var imageData = newContext.getImageData(0, 0, _myCanvas.width, _myCanvas.height);
-						// Due to browser iconsistency, we need to find the value the browser interprets
-						// for a pixel we know contains the color we will look to replace.
-						var iconColor = getPixel(imageData, 4804);
-						if(iconColor[0] !=hexToRgb(newIconColor).r && iconColor[1] != hexToRgb(newIconColor).g && iconColor[1] != hexToRgb(newIconColor).b)
+				// examine every pixel,
+				// change any old rgb to the new-rgb
+				if(!coloredIcon){
+					// pull the entire image into an array of pixel data
+					var imageData = newContext.getImageData(0, 0, _myCanvas.width, _myCanvas.height);
+					// Due to browser iconsistency, we need to find the value the browser interprets
+					// for a pixel we know contains the color we will look to replace.
+					var iconColor = getPixel(imageData, 4804);
+					if(iconColor[0] !=hexToRgb(newIconColor).r && iconColor[1] != hexToRgb(newIconColor).g && iconColor[1] != hexToRgb(newIconColor).b)
+					{
+						for (var i=0;i<imageData.data.length;i+=4)
 						{
-							for (var i=0;i<imageData.data.length;i+=4)
-							{
-								// is this pixel the old rgb?
-								if(imageData.data[i]==iconColor[0] &&
-									imageData.data[i+1]==iconColor[1] &&
-									imageData.data[i+2]==iconColor[2]
-								){
-									// change to your new rgb
-									imageData.data[i]=hexToRgb(newIconColor).r;
-									imageData.data[i+1]=hexToRgb(newIconColor).g;
-									imageData.data[i+2]=hexToRgb(newIconColor).b;
-								}
+							// is this pixel the old rgb?
+							if(imageData.data[i]==iconColor[0] &&
+								imageData.data[i+1]==iconColor[1] &&
+								imageData.data[i+2]==iconColor[2]
+							){
+								// change to your new rgb
+								imageData.data[i]=hexToRgb(newIconColor).r;
+								imageData.data[i+1]=hexToRgb(newIconColor).g;
+								imageData.data[i+2]=hexToRgb(newIconColor).b;
 							}
-							// put the altered data back on the canvas
-							newContext.putImageData(imageData,0,0);
 						}
-						coloredIcon = imageData;
+						// put the altered data back on the canvas
+						newContext.putImageData(imageData,0,0);
 					}
+					coloredIcon = imageData;
+				}
+				$.each(arr, function(index, point) {
+
 
 					if(index > 0)
 						newContext.putImageData(coloredIcon,0,0);
@@ -961,6 +970,7 @@ define(["lib-build/css!./MainView",
 
 					point.setSymbol(createSymbol(index, newCanvas, spec));
 				});
+				app.map.getLayer(app.data.getWebAppData().getShortlistLayerId()).show();
 			};
 
 			function getPixel(imgData, index) {
@@ -1019,21 +1029,24 @@ define(["lib-build/css!./MainView",
 				_this.selected = null;
 				$('#mobileTitlePage').css('display', 'none');
 				var popup = $('.esriPopup')[0];
-				if(app.ui.mobileIntro.screenSize != 'small'){
-					app.map.infoWindow.on('set-features', function(){
-						$(popup).show();
-					});
 
+				app.map.infoWindow.on('set-features', function(){
+					if(app.ui.mainView.selected)
+						return;
+					$('.esriPopup').removeClass('app-hidden');
+					$(popup).show();
+				});
+				if(app.ui.mobileIntro.screenSize != 'small'){
 					if(app.mapTips)
 						app.mapTips.clean();
 				}
 				else {
-					$(popup).hide();
+					/*$(popup).hide();
 					var graphic = event.graphic;
 					//TODO map tips for support layers
 					var point = {};
 					point.geometry = screenUtils.toMapPoint(app.map.extent, app.map.width, app.map.height, event.screenPoint);
-					_this.buildMapSupportHoverTips(graphic.attributes.name, point);
+					_this.buildMapSupportHoverTips(graphic.attributes.name, point);*/
 				}
 
 			}
@@ -1051,7 +1064,8 @@ define(["lib-build/css!./MainView",
 
 				$('#mobileTitlePage').css('display', 'none');
 				var popup = $('.esriPopup');
-				$(popup).hide();
+				//$(popup).hide();
+				$(popup).addClass('app-hidden');
 
 				// IE
 				setTimeout(function(){
@@ -1079,9 +1093,9 @@ define(["lib-build/css!./MainView",
 						//do nothing
 					}
 					else {
-						graphic.symbol.setWidth(app.cfg.lutIconSpecs.medium.getWidth());
-						graphic.symbol.setHeight(app.cfg.lutIconSpecs.medium.getHeight());
-						graphic.symbol.setOffset(app.cfg.lutIconSpecs.medium.getOffsetX(), app.cfg.lutIconSpecs.medium.getOffsetY());
+						graphic.symbol.setWidth(_this.lutIconSpecs.medium.getWidth());
+						graphic.symbol.setHeight(_this.lutIconSpecs.medium.getHeight());
+						graphic.symbol.setOffset(_this.lutIconSpecs.medium.getOffsetX(), _this.lutIconSpecs.medium.getOffsetY());
 						graphic.draw();
 
 						if (!_helper.isIE())
@@ -1099,9 +1113,9 @@ define(["lib-build/css!./MainView",
 				app.map.setMapCursor("default");
 				var graphic = event.graphic;
 				if (graphic != _this.selected) {
-					graphic.symbol.setWidth(app.cfg.lutIconSpecs.tiny.getWidth());
-					graphic.symbol.setHeight(app.cfg.lutIconSpecs.tiny.getHeight());
-					graphic.symbol.setOffset(app.cfg.lutIconSpecs.tiny.getOffsetX(), app.cfg.lutIconSpecs.tiny.getOffsetY());
+					graphic.symbol.setWidth(_this.lutIconSpecs.tiny.getWidth());
+					graphic.symbol.setHeight(_this.lutIconSpecs.tiny.getHeight());
+					graphic.symbol.setOffset(_this.lutIconSpecs.tiny.getOffsetX(), _this.lutIconSpecs.tiny.getOffsetY());
 					graphic.draw();
 				}
 				if(app.mapTips)
@@ -1118,7 +1132,7 @@ define(["lib-build/css!./MainView",
 
 				var values = {
 					bookmarks: false,
-					bookmarksAlias: "Zoom",
+					bookmarksAlias: app.cfg.BOOKMARKS_ALIAS,
 					extentMode: "customHome",
 					filterByExtent: true,
 					numberedIcons: false,
@@ -1148,8 +1162,8 @@ define(["lib-build/css!./MainView",
 
 					if(layer.geometryType == 'esriGeometryPoint' && layer.id.toLowerCase().indexOf("mapnotes") == -1){
 						potentialShortlistLayers.push(layer);
-
 					}
+					//TODO account for feature service and layer/graphics load
 					if (layer.url && (layerType === 'ArcGISFeatureLayer' || layerType === 'Feature Layer') && !layer.id.match(/^csv_/)) {
 						featureService = true;
 						featServLayerID = layer;
@@ -1164,10 +1178,9 @@ define(["lib-build/css!./MainView",
 				app.map._params.extent = new Extent(JSON.parse(JSON.stringify(app.map.extent.toJson())));
 				app.data.getWebAppData().setMapExtent(newExtent);
 
-				$('.builder-share')
-					.css('pointer-events', 'none')
-					.css('cursor', 'default')
-					.css('opacity', '0.5');
+				$('.builder-share').toggleClass('disabled', true);
+
+				app.isWebMapFirstSave = true;
 
 				if(!potentialShortlistLayers.length){
 					var config = {};
@@ -1191,6 +1204,7 @@ define(["lib-build/css!./MainView",
 						app.data.getWebAppData().setGeneralOptions(settings);
 						app.ui.navBar.initBookmarks();
 					}
+
 					_core.appInitComplete(WebApplicationData);
 				}else{
 					$.each(potentialShortlistLayers, function(i, layer){
@@ -1335,6 +1349,7 @@ define(["lib-build/css!./MainView",
 					app.initScreenIsOpen = true;
 				//TODO give error message if in builder and port is less than 900 px wide.
 				// 'Story isn't saved yet' text turns to totem text
+				var themeIndex = $('.entry.active').index();
 				if(!cfg.isMobileView){
 					if(app.isInBuilder  && $('#mobileBuilderOverlay').css('display') == 'block' && app.addFeatureBar.loaded)
 						$('#mobileBuilderOverlay').attr('style','display: none !important');
@@ -1342,9 +1357,15 @@ define(["lib-build/css!./MainView",
 					app.ui.mobileIntro.screenSize = 'desktop';
 					$('#navThemeLeft').css('visibility', 'hidden');
 					$('#navThemeRight').css('visibility', 'hidden');
-					//$('.detailHeader').css({'position': 'static'});
-					//$('.textContainer').css({'position': 'static'});
 					$("#mobileBookmarksCon").hide();
+
+					if(app.data.getStory()[themeIndex] && app.data.getStory()[themeIndex].color){
+						$('#contentPanel').css({'border-top-width': '10px',
+					 							'border-top-style': 'solid',
+												'border-top-color': app.data.getStory()[themeIndex].color});
+						$('.detailHeader').css('border-top', '0px');
+						$('.notNumbered').css('margin-top', '20px');
+					}
 
 					var heightViewport = $("body").height();
 					var heightAroundMap = 0;
@@ -1352,15 +1373,17 @@ define(["lib-build/css!./MainView",
 						var itemObj = $(item);
 						heightAroundMap += itemObj.is(':visible') ? itemObj.outerHeight() : 0;
 					});
-					$("#contentPanel").height(heightViewport - heightAroundMap);
-					$("#paneLeft").height($("#contentPanel").height() - $('#tabs').height());
-					var headerHeight = app.data.getWebAppData().getHeader().compactSize ? '60px' : '110px';
-					$('#header').height(headerHeight);
+					$("#contentPanel").height(heightViewport - heightAroundMap + 10);
+					$("#paneLeft").height($("#contentPanel").height() - $('#tabs').height() - 20);
+					if(!_urlParams.embed && _urlParams.embed !== '' && !app.cfg.embed && !_urlParams.forceEmbed && !app.indexCfg.forceEmbed){
+						var headerHeight = app.data.getWebAppData().getHeader().compactSize ? '60px' : '110px';
+						$('#header').height(headerHeight);
+					}
 					$(".tilelist").height($("#paneLeft").height() - (app.isInBuilder ? 70 : 48));
-					$(".tilelist").css('top', app.isInBuilder ? 60 : 38);
+					$(".tilelist").css('top', app.isInBuilder ? 50 : 28);
 					$("#paneLeft .noFeature").width($('#paneLeft').width());
-					$("#paneLeft").width() == app.cfg.LEFT_PANE_WIDTH_TWO_COLUMN ? $('#paneLeft .noFeatureText').css('margin-left', '50px') : $('#paneLeft .noFeatureText').css('margin-left', '150px');
-					$("#map").height(cfg.height);
+					$("#paneLeft").width() == app.cfg.LEFT_PANE_WIDTH_TWO_COLUMN ? $('#paneLeft .noFeatureText').css('margin-left', '20px') : $('#paneLeft .noFeatureText').css('margin-left', '100px');
+					$("#map").height(cfg.height - 10);
 					$("#map").css('top', 0);
 					app.ui.navBar.resize();
 
@@ -1373,6 +1396,7 @@ define(["lib-build/css!./MainView",
 							if(_this.selected && !app.map.extent.contains(_this.selected.geometry))
 								app.mapTips.clean(true);
 						}, 0);
+						$('#paneLeft .noFeatureText').css('margin-left', '20px');
 						app.ui.tilePanel.resize(app.cfg.LEFT_PANE_WIDTH_TWO_COLUMN);
 						if(app.isInBuilder)
 							app.detailPanelBuilder.resize();
@@ -1387,6 +1411,7 @@ define(["lib-build/css!./MainView",
 							if(app.map)
 								app.map.resize();
 						}, 0);
+						$('#paneLeft .noFeatureText').css('margin-left', '100px');
 						app.ui.tilePanel.resize(app.cfg.LEFT_PANE_WIDTH_THREE_COLUMN);
 						if(app.isInBuilder)
 							app.detailPanelBuilder.resize();
@@ -1401,6 +1426,7 @@ define(["lib-build/css!./MainView",
 							if(app.map)
 								app.map.resize();
 						}, 0);
+						$('#paneLeft .noFeatureText').css('margin-left', '170px');
 						app.ui.tilePanel.resize(app.cfg.LEFT_PANE_WIDTH_FOUR_COLUMN);
 						if(app.isInBuilder)
 							app.detailPanelBuilder.resize();
@@ -1413,7 +1439,16 @@ define(["lib-build/css!./MainView",
 						$('#mobileBuilderOverlay').attr('style','display: block !important');
 
 					app.ui.mobileIntro.resizeMobileElements();
-					if(app.cfg.BOOKMARKS)
+
+					if(app.data.getStory()[themeIndex] && app.data.getStory()[themeIndex].color){
+						$('.detailHeader').css({'border-top-width': '10px',
+					 							'border-top-style': 'solid',
+												'border-top-color': app.data.getStory()[themeIndex].color});
+						$('#contentPanel').css('border-top', '0px');
+						$('.notNumbered').css('margin-top', '10px');
+					}
+
+					if(app.data.getWebAppData().getSettings().generalOptions && app.data.getWebAppData().getSettings().generalOptions.bookmarks)
 						$("#mobileBookmarksCon").show();
 					$('#header').height('0');
 					if( app.mapTips )
@@ -1476,6 +1511,38 @@ define(["lib-build/css!./MainView",
 			{
 				topic.publish("CORE_UPDATE_EXTENT", new Extent(app.data.getWebAppData().getMapExtent()));
 			}
+
+			function iconSpecs(width,height,offset_x,offset_y)
+			{
+
+				var _width = width;
+				var _height = height;
+				var _offset_x = offset_x;
+				var _offset_y = offset_y;
+
+				this.getWidth = function() {
+					return _width;
+				};
+
+				this.getHeight = function() {
+					return _height;
+				};
+
+				this.getOffsetX = function() {
+					return _offset_x;
+				};
+
+				this.getOffsetY = function() {
+					return _offset_y;
+				};
+
+			}
+
+			this.lutIconSpecs= {
+				tiny: new iconSpecs(31,34,6,13),
+				medium: new iconSpecs(34,38,7,15),
+				large: new iconSpecs(44,48,9,20)
+			},
 
 			this.prepareMobileViewSwitch = function()
 			{

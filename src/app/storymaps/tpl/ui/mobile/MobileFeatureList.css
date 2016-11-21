@@ -63,9 +63,11 @@ ul.mobileTileList > a {
 	height: 75px;
 }
 
-ul.mobileTileList img {
-	max-width:100px;
-	max-height:75px;
+.mobileTileListImg {
+	height: inherit;
+	background-size: cover;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
 	margin:3px 5px 0 7px;
 }
 

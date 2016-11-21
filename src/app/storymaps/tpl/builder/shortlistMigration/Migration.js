@@ -91,7 +91,7 @@ define(["lib-build/tpl!./Migration",
 				_btnBack.click(onClickBack);
 
 				container.find('.viewMigrationSelectorContainer input').on('change', function() {
-				   updateSubmitButton();
+					updateSubmitButton();
 				});
 			}
 
@@ -212,7 +212,7 @@ define(["lib-build/tpl!./Migration",
 				}else{
 					container.find('.modal-body').append(fieldPicker({}));
 					container.find('.viewMigrationFieldSelector fieldNameSelect').on('change', function() {
-					   updateSubmitButton();
+						updateSubmitButton();
 					});
 				}
 				$('#fieldNameSelect').empty();
@@ -382,12 +382,14 @@ define(["lib-build/tpl!./Migration",
 			function presentLayerPicker()
 			{
 				var migrate = $('input[name=optradio]:checked', '.viewMigrationSelectorContainer').val();
-
 				migrate = parseInt(migrate);
-
+				var obj = {};
+				obj.migrate = migrate;
+				obj.pointLayers = _pointLayers;
+				obj.layers = _layers;
 				if(!migrate){
 					_popupDeferred.resolve(
-						parseInt(migrate)
+						obj
 					);
 					container.modal('hide');
 				}else{
@@ -410,6 +412,14 @@ define(["lib-build/tpl!./Migration",
 
 					if(_pointLayers.length == 1)
 						$('.layer-info').hide();
+
+					var pointLayers = [];
+
+					$.each(_pointLayers, function(index, layer){
+						if(layer.graphics.length)
+							pointLayers.push(layer);
+					});
+					_pointLayers = pointLayers;
 
 					$.each(_pointLayers, function(index, layer){
 						var layerName = $.grep(app.data.getWebMap().itemData.operationalLayers, function(e){ return e.id ==  layer.id.slice(0, -2); });
@@ -496,11 +506,11 @@ define(["lib-build/tpl!./Migration",
 				newWebmap.item.title = app.data.getResponse().itemInfo.item.title + ' - Shortlist builder';
 				app.data.getResponse().itemInfo.item.title = newWebmap.item.title;
 				if(app.data.getWebAppItem().description  || app.data.getWebAppItem().snippet){
-					var description = app.data.getWebAppItem().description ? app.data.getWebAppItem().description : app.data.getWebAppItem().snippet;
+					var description = app.data.getWebAppItem().snippet ? app.data.getWebAppItem().snippet : app.data.getWebAppItem().description;
 					app.data.getWebAppData().setSubtitle(description);
 					newWebmap.item.description = description;
 				} else if(app.data.getResponse().itemInfo.item.description  || app.data.getResponse().itemInfo.item.snippet){
-					var description = app.data.getResponse().itemInfo.item.description ? app.data.getResponse().itemInfo.item.description : app.data.getResponse().itemInfo.item.snippet;
+					var description = app.data.getResponse().itemInfo.item.snippet ? app.data.getResponse().itemInfo.item.snippet : app.data.getResponse().itemInfo.item.description;
 					app.data.getWebAppData().setSubtitle(description);
 					newWebmap.item.description = description;
 				}
@@ -537,7 +547,7 @@ define(["lib-build/tpl!./Migration",
 					app.data.getWebAppData().setDefaultMapOptions();
 					var colorOrder = app.cfg.COLOR_ORDER.split(",");
 					var activeColor = $.grep(app.cfg.COLOR_SCHEMES, function(e){ return e.name == colorOrder[0]; });
-					$('#paneLeft').css('border-top-color', activeColor[0].color);
+					$('#contentPanel').css('border-top-color', activeColor[0].color);
 					var colors = {
 						header: '#444',
 						tabText: '#d8d8d8',
@@ -605,67 +615,71 @@ define(["lib-build/tpl!./Migration",
 
 					var shortlistLayer = app.map.getLayer(app.data.getShortlistLayerId());
 
-					// Make sure shortlist layer is above all other layers (i.e. mapnotes);
-					app.map.reorderLayer(shortlistLayer, app.map.graphicsLayerIds.length - 2);
-					// Except for movable graphic layer for editing location
-					app.map.reorderLayer(app.map.getLayer('tempIconLayer'), app.map.graphicsLayerIds.length - 1);
+					var baseMapLayerUpdated = false;
 
-					$.each(_selectedLayers, function(index, layer){
+					var baseMapLayer = app.map.getLayer(app.data.getWebMap().itemData.baseMap.baseMapLayers[0].id);
+					baseMapLayer.on('update-end', function(){
+						if(baseMapLayerUpdated)
+							return;
+						baseMapLayerUpdated = true;
+						$.each(_selectedLayers, function(index, layer){
 
-						$('body').addClass('loadingPlaces');
+							$('body').addClass('loadingPlaces');
 
-						if(index === 0){
-							$('.entryLbl').eq(0).text(layer.alias);
-							app.data.setStory(0, layer.alias);
-							app.data.getWebAppData().setTabs(app.data.getStory());
-						}
-						if(index > 0){
-							app.ui.navBar.onClickAdd(null, layer.alias);
-						}
-						$.each(layer.graphics, function(i, graphic){
-							var newAttributes = {
-								__OBJECTID: shortlistLayer.graphics.length+1,
-								name: '',
-								description: '',
-								pic_url: '',
-								thumb_url: '',
-								shortlist_id: shortlistLayer.graphics.length+1,
-								number: i+1,
-								tab_id: index,
-								locationSet: parseInt(1)
-							};
-							if(graphic.attributes.number)
-								newAttributes.number = graphic.attributes.number;
-							if(graphic.attributes.Number)
-								newAttributes.number = graphic.attributes.Number;
-							if(graphic.attributes.NUMBER)
-								newAttributes.number = graphic.attributes.NUMBER;
-							newAttributes.name = graphic.attributes[title];
-							$.each(descFields, function(ind, field){
-								//newAttributes.description += '<div class="detailFeatureDesc" style="min-height: 0;" >' + graphic.attributes[field] + '</div>';
-								if(graphic.attributes[field])
-									newAttributes.description +=  graphic.attributes[field] + '<br><br>';
-							});
-							if(link != "none"){
-								if(graphic.attributes[link])
-									newAttributes.description += '<a href=' + graphic.attributes[link] + ' target="_blank">More info</a>';
+							if(index === 0){
+								$('.entryLbl').eq(0).text(layer.alias);
+								app.data.setStory(0, layer.alias);
+								app.data.getWebAppData().setTabs(app.data.getStory());
 							}
-							if(imageUrl != "none")
-								newAttributes.pic_url = graphic.attributes[imageUrl];
-							if(thumbUrl != "none")
-								newAttributes.thumb_url = graphic.attributes[thumbUrl];
-							if(thumbUrl == "none" && imageUrl != "none")
-								newAttributes.thumb_url = graphic.attributes[imageUrl];
+							if(index > 0){
+								app.ui.navBar.onClickAdd(null, layer.alias);
+							}
+
+							$.each(layer.graphics, function(i, graphic){
+								var newAttributes = {
+									__OBJECTID: shortlistLayer.graphics.length+1,
+									name: '',
+									description: '',
+									pic_url: '',
+									thumb_url: '',
+									shortlist_id: shortlistLayer.graphics.length+1,
+									number: i+1,
+									tab_id: index,
+									locationSet: parseInt(1)
+								};
+								if(graphic.attributes.number)
+									newAttributes.number = graphic.attributes.number;
+								if(graphic.attributes.Number)
+									newAttributes.number = graphic.attributes.Number;
+								if(graphic.attributes.NUMBER)
+									newAttributes.number = graphic.attributes.NUMBER;
+								newAttributes.name = graphic.attributes[title];
+								$.each(descFields, function(ind, field){
+									//newAttributes.description += '<div class="detailFeatureDesc" style="min-height: 0;" >' + graphic.attributes[field] + '</div>';
+									if(graphic.attributes[field])
+										newAttributes.description +=  ('<p>' + graphic.attributes[field] + '</p>');
+								});
+								if(link != "none"){
+									if(graphic.attributes[link])
+										newAttributes.description += '<p><a href=' + graphic.attributes[link] + ' target="_blank">More info</a></p>';
+								}
+								if(imageUrl != "none")
+									newAttributes.pic_url = graphic.attributes[imageUrl];
+								if(thumbUrl != "none")
+									newAttributes.thumb_url = graphic.attributes[thumbUrl];
+								if(thumbUrl == "none" && imageUrl != "none")
+									newAttributes.thumb_url = graphic.attributes[imageUrl];
 
 
-							var sms = new SimpleMarkerSymbol();
-							var newGraphic = new Graphic(graphic.geometry, sms, newAttributes);
-							var c = app.addFeatureBar.addMapIcon(newGraphic, app.data.getStory()[index].color);
-							shortlistLayer.add(c);
-							//app.addFeatureBar.addFeature(newAttributes, false, graphic.geometry);
+								var sms = new SimpleMarkerSymbol();
+								var newGraphic = new Graphic(graphic.geometry, sms, newAttributes);
+								var c = app.addFeatureBar.addMapIcon(newGraphic, app.data.getStory()[index].color);
+								shortlistLayer.add(c);
+								//app.addFeatureBar.addFeature(newAttributes, false, graphic.geometry);
+							});
 						});
 					});
-					app.detailPanelBuilder.buildAllSlides();
+
 					$("#loadingIndicator").show();
 
 					if(app.data.getResponse().itemInfo.itemData.bookmarks && app.data.getResponse().itemInfo.itemData.bookmarks.length){
@@ -674,7 +688,7 @@ define(["lib-build/tpl!./Migration",
 							numberedIcons: false,
 							filterByExtent: true,
 							bookmarks: true,
-							bookmarksAlias: 'Zoom'
+							bookmarksAlias: app.cfg.BOOKMARKS_ALIAS
 						};
 						app.data.getWebAppData().setGeneralOptions(settings);
 						app.ui.navBar.initBookmarks();
@@ -683,13 +697,18 @@ define(["lib-build/tpl!./Migration",
 					//_mapExtentSave.init();
 
 					setTimeout(function(){
+						app.detailPanelBuilder.buildAllSlides();
 						$('body').removeClass('loadingPlaces');
 						core.displayApp();
 						_mainView.activateLayer(0);
 						app.map.setExtent(app.map._params.extent, true);
 						topic.publish("BUILDER_INCREMENT_COUNTER", 1);
 						app.data.getWebAppItem().typeKeywords.push('Shortlist-migration');
-					}, 500);
+						// Except for movable graphic layer for editing location
+						app.map.reorderLayer(app.map.getLayer('tempIconLayer'), app.map.graphicsLayerIds.length - 1);
+						// Make sure shortlist layer is above all other layers (i.e. mapnotes);
+						app.map.reorderLayer(shortlistLayer, app.map.graphicsLayerIds.length - 2);
+					}, 800);
 				});
 
 			}
@@ -751,10 +770,9 @@ define(["lib-build/tpl!./Migration",
 			{
 				if(container.find('.modal-body').hasClass('migrationQuestion')){
 					presentLayerPicker();
-					return;
-					/*setTimeout(function(){
+					if(!container.find('.layer-picker .opt-checkbox:checkbox:checked').length)
 						updateSubmitButton();
-					}, 50);*/
+					return;
 				}
 
 				if(container.find('.modal-body').hasClass('layerSelector')){

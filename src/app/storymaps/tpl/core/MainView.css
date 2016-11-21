@@ -43,6 +43,10 @@ a:hover{
 	top: 0;
 }
 
+#contentPanel {
+	border-top: 10px solid;
+}
+
 /*
  * Map area and components
  */

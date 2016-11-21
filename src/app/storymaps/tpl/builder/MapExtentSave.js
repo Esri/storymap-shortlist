@@ -57,12 +57,11 @@ define([
 			{
 				_this.hide();
 				app.data.getWebMap().item.extent = _builderView.serializeExtentToItem(app.map.extent);
-				//app.map._params.extent = new Extent(JSON.parse(JSON.stringify(app.map.extent.toJson())));
-				app.data.getWebAppData().setMapExtent(app.map.extent);
+				app.data.getWebAppData().setMapExtent(new Extent(app.map.extent));
 				$.each(app.data.getStory(), function(index){
 					app.data.setStory(index, null, null, app.map.extent);
 				});
-				//app.map.setExtent(app.map.extent, true);
+
 				topic.publish("BUILDER_INCREMENT_COUNTER", 1);
 			}
 

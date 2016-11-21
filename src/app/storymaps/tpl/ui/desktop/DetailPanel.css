@@ -141,21 +141,18 @@
 .detailHeader {
 	/*margin-right: 95px;*/
 	margin-bottom: 12px;
-	border-top: 10px;
-	border-top-style: solid;
 }
 
 .detailFeatureNum{
-	width:36px;
+	width: 40px;
 	margin-left: 10px;
-	margin-top: 10px;
-	border:solid;
-	border-width:thin;
-	color:white;
-	font-size:20px;
-	text-align:center;
-	font-family: 'calibri';
-	font-weight: bold;
+	margin-top: 20px;
+	border: solid;
+	border-width: thin;
+	color: white;
+	font-size: 20px;
+	text-align: center;
+	font-family: 'open_sanssemibold', sans-serif;
 }
 
 .detailFeatureTitle{
@@ -164,20 +161,22 @@
 	font-size: 22px;
 	text-align: left;
 	padding-left: 60px;
-	padding-top: 15px;
+	padding-top: 17px;
 	margin-top: -45px;
 	margin-right: 125px;
 	line-height: 26px;
+	word-wrap: break-word;
 }
 
 .notNumbered{
 	padding-top: 0;
 	padding-left: 10px;
-	margin-top: 10px;
+	margin-top: 20px;
 }
 
 .detailPictureDiv {
 	margin-bottom: -5px;
+	min-height: 100px;
 	overflow-x: hidden;
 	/*text-align: left;*/
 	text-align: center;
@@ -197,6 +196,7 @@
 .detailTextContainer {
 	overflow-y: auto;
 	position: absolute !important;
+	width: 100%;
 }
 
 .detailFeatureDesc{
@@ -206,14 +206,21 @@
 	text-align: left;
 	padding-left: 20px;
 	padding-right: 20px;
+	padding-bottom: 15px;
 	font-weight: normal;
 	margin-top: 20px;
 	margin-bottom: -5px;
+	word-wrap: break-word;
+}
+
+.detailFeatureDesc p {
+  margin-top: 10px;
 }
 
 .detailFeatureDesc a{
 	color: blue;
 	font-weight: bold;
+	margin-top: 20px;
 }
 
 .website {
@@ -273,6 +280,10 @@
 .detail-btn-right .detail-btn {
 	font-family: "Ionicons";
 	/*background-position: -27px -27px;*/
+}
+
+.swiper-lazy-preloader {
+	top: 55px !important;
 }
 
 .ion-android-close:before { content: '\f2d7'; }

@@ -45,6 +45,7 @@ define(["lib-build/css!./ViewConfigure",
 				lblPosition3Explain: i18n.commonMedia.mediaConfigure.lblPosition3Explain,
 				lblPosition3Explain2: i18n.commonMedia.mediaConfigure.lblPosition3Explain2,
 				lblPosition4Explain: i18n.commonMedia.mediaConfigure.lblPosition4Explain,
+        lblURLHelp: i18n.commonMedia.mediaConfigure.lblURLHelp,
 				unloadLbl: i18n.commonMedia.mediaConfigure.unloadLbl,
 				unloadHelp: i18n.commonMedia.mediaConfigure.unloadHelp,
 				embedProtocolLabel: i18n.commonMedia.mediaConfigure.embedProtocolLabel,
@@ -58,6 +59,7 @@ define(["lib-build/css!./ViewConfigure",
 			{
 				var media = params.media,
 					imgCfg = null;
+				this.imageSizes = null;
 
 				// Convert the generic structure of service connector
 				if ( params.fromService ) {
@@ -70,15 +72,18 @@ define(["lib-build/css!./ViewConfigure",
 								url: params.media.pic_url
 							}
 						};
-					else
+					else {
+						this.imageSizes = params.media.sizes;
 						media = {
 							type: 'image',
 							image: {
 								title: params.media.description || params.media.name,
 								titleDisplay: 'caption',
-								url: params.media.pic_url
+								url: params.media.pic_url || (this.imageSizes ? this.imageSizes[0].url : params.media.picUrl),
+								sizes: params.media.sizes
 							}
 						};
+					}
 				}
 
 				// Get image cfg in edit mode
@@ -235,7 +240,7 @@ define(["lib-build/css!./ViewConfigure",
 								if (thumbUrl) {
 									container.find('.mediaThumbURLError').fadeIn();
 								}
-								
+
 								saveBtn.html(saveBtnLbl);
 								resultDeferred.resolve(true);
 							};
@@ -293,6 +298,10 @@ define(["lib-build/css!./ViewConfigure",
 						url: container.find('.mediaURL').val().trim(),
 						type: _mediaType
 					};
+
+					if (this.imageSizes) {
+						lang.mixin(data, {sizes: this.imageSizes});
+					}
 
 				if ( cfg.mode == "inlineText" ) {
 					if ( _mediaType == "image" ) {
@@ -474,7 +483,7 @@ define(["lib-build/css!./ViewConfigure",
 					trigger: 'hover'
 				});
 
-				container.find('.maximizeHelp, .unloadHelp').tooltip({
+				container.find('.maximizeHelp, .unloadHelp, .configureHelp').tooltip({
 					html: true,
 					trigger: 'hover'
 				});

@@ -8,8 +8,10 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
-		<link type="image/ico" rel="shortcut icon" href="//resources.esri.com/favicon.ico">
-		<link type="image/ico" rel="icon"  href="//resources.esri.com/favicon.ico">
+		<meta name="viewport" content="width=device-width">
+
+		<link type="image/ico" rel="shortcut icon" href="resources.esri.com/favicon.ico">
+		<link type="image/ico" rel="icon"  href="resources.esri.com/favicon.ico">
 
 		<!--
 			To correctly reference your Map Series in search engine:
@@ -44,23 +46,6 @@
 				//  whose application are allowed to be viewed by this Map Series deployment
 				// This is the Portal username of the Series owner (e.g. ["user1"], ["user1", "user2"])
 				authorizedOwners: ["*"]
-
-				// ***************** To be removed for release ************************
-				,
-				sharingurl: "//story.mapsdevext.arcgis.com/sharing/content/items",
-				//sharingurl: "//arcgis.com/sharing/content/items",
-				//"http://www.example.com/arcgis/sharing/content/items",
-				//"//monoprice.esri.com/arcgis/sharing/content/items",
-				//"//story.maps.arcgis.com/sharing/content/items",
-				//"//active.mapsdevext.arcgis.com/sharing/content/items",
-				//"//story.mapsdevext.arcgis.com/sharing/content/items",
-				username: "",
-				password: "",
-
-				// AGOL prod owned by Greg
-				//oAuthAppId: "Etm5wsV4V9zELwGi",
-				// AGOL dev owned by Greg
-				oAuthAppId: "G45kEg97MwtvGdmY"
 			};
 			// Optionally sharing and proxy URLs can be configured in app/config.js. This is only required
 			//  when the webmap is not hosted on ArcGIS Online or a Portal for ArcGIS instance and the application isn't deployed as /home/MapSeries/ or /apps/MapSeries/.
@@ -76,7 +61,7 @@
 
 		<script type="text/javascript">
 			var app = {
-				version: '2.0.0-beta-091516',
+				version: '2.0.2',
 				pathJSAPI: '//js.arcgis.com/3.18/'
 			};
 		</script>
@@ -136,7 +121,7 @@
 
 			<div id="mainStagePanel">
 
-				<div class="needsclick" id="map">
+				<div id="map">
 					<div id="search"></div>
 				</div>
 				<div id="builderLandingOverlay"></div>
@@ -258,13 +243,5 @@
 
 		<script type="text/javascript" src="app/main-config.js"></script>
 
-		<script type="text/javascript">
-			require(["dojo/topic"], function(topic) {
-				// The application is ready
-				topic.subscribe("tpl-ready", function(){
-					/* */
-				});
-			});
-		</script>
 	</body>
 </html>

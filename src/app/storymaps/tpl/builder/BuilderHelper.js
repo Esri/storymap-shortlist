@@ -11,7 +11,7 @@ define([],
 			{
 				return {
 					id: "shortlist-layer" + new Date().getTime(),
-					title: "Shortlist layer",
+					title: "Shortlist layer (DO NOT REMOVE)",
 					visibility: true,
 					opacity: 1,
 					featureCollection: {

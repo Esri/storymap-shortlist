@@ -277,7 +277,7 @@ define(["dojo/_base/lang"],
 					numberedIcons: false,
 					filterByExtent: true,
 					bookmarks: false,
-					bookmarksAlias: 'Zoom'
+					bookmarksAlias: app.cfg.BOOKMARKS_ALIAS
 				});
 			},
 

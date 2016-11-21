@@ -22,7 +22,9 @@ define({
 				mystories: "My Stories"
 			},
 			inlineFieldEdit: {
-				editMe: "Edit me!"
+				editMe: "Edit me!",
+				enterTitle: "Enter title...",
+				enterSubtitle: "Enter optional subtitle..."
 			},
 			builderPanel: {
 				panelHeader: "%TPL_NAME% Builder",
@@ -108,14 +110,20 @@ define({
 			},
 			settingsHeader: {
 				title: "Header",
-				logoEsri: "Esri logo",
-				logoNone: "No logo",
-				logoCustom: "Custom logo",
-				logoCustomPlaceholder: "URL (max 250x50 pixels)",
-				logoCustomTargetPlaceholder: "Click-through link",
-				logoSocialExplain: "Customize the header link.",
-				logoSocialText: "Text",
-				logoSocialLink: "Link",
+				logoEsriRadio: "Esri logo",
+				logoNoneRadio: "No logo",
+				logoCustomRadio: "My logo",
+				logoCustomLabel: "Image:",
+				logoCustomUploadHelp: "Logos look best if they have a width:height ratio between 1:1 and 5:1. If a linked logo draws slowly, save a copy and upload it here.",
+				logoCustomUploadTooltip: "Use an uploaded logo",
+				logoCustomUploadButton: "Upload a logo",
+				logoUploadSizeError: "GIF dimensions too large. Please resize to ${PIXEL-WIDTH} pixels wide.",
+				logoCustomLinkTooltip: "Link to a logo",
+				logoCustomLinkPlaceholder: "Image URL",
+				logoUploadGenericError: "Logo can be a .bmp, .gif, .jpg, .jpeg, or .png file. Gifs must be less than 250px wide and 10Mb in size.",
+				logoCustomTargetPlaceholder: "Web page to open when logo is clicked",
+				logoSocialText: "Tagline:",
+				logoLink: "Link:",
 				lblSmallHeader: "Use compact header (no subtitle)"
 			},
 			header: {
@@ -134,7 +142,7 @@ define({
 	"fi": 1,
 	"fr": 1,
 	"he": 1,
-	"hr": 1, 
+	"hr": 1,
 	"it": 1,
 	"ja": 1,
 	"ko": 1,
@@ -153,6 +161,6 @@ define({
 	"tr": 1,
 	"vi": 1,
 	"zh-cn": 1,
-	"zh-hk": 1, 
-	"zh-tw": 1 
+	"zh-hk": 1,
+	"zh-tw": 1
 });

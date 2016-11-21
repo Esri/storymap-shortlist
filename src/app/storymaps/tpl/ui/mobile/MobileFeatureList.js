@@ -1,7 +1,8 @@
 define([
 		"lib-build/css!./MobileFeatureList",
-		"lib-build/css!lib-app/Swiper/swiper.min",
-		"lib-app/Swiper/swiper"
+		"lib-build/css!lib-app/Swiper/swiper",
+		"lib-app/Swiper/swiper",
+		"lib-app/lazysizes.min"
 	],
 	function(){
 		return function MobileFeatureList(container, isInBuilder, saveData, mainView)
@@ -11,6 +12,8 @@ define([
 			var _swiper = null;
 			var _swiperContainer = $('#mobileThemeBarSlider');
 			app.scrollList;
+			var _iOS = /iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+			var _android = /(android)/i.test(navigator.userAgent);
 
 			this.init = function()
 			{
@@ -48,16 +51,17 @@ define([
 				$('#mobileFeature').css('visibility', 'hidden');
 				$('#mobileSupportedLayersView').css('visibility', 'hidden');
 				$('#mobileThemeBarSlider').css('display', 'block');
-				$('#mobilePaneList').css('visibility', 'visible');
+				//$('#mobilePaneList').css('visibility', 'visible');
+				$('#mobilePaneList').show();
 				$('#returnIcon').css('display', 'none');
 				$('#returnHiddenBar').css('display', 'none');
 				$('#centerMapIconContainer').css('display', 'none');
 				$('#navThemeLeft').css('visibility', 'visible');
 				$('#navThemeRight').css('visibility', 'visible');
 				if (_mainView.selected) {
-					_mainView.selected.symbol.setWidth(app.cfg.lutIconSpecs.tiny.getWidth());
-					_mainView.selected.symbol.setHeight(app.cfg.lutIconSpecs.tiny.getHeight());
-					_mainView.selected.symbol.setOffset(app.cfg.lutIconSpecs.tiny.getOffsetX(), app.cfg.lutIconSpecs.tiny.getOffsetY());
+					_mainView.selected.symbol.setWidth(_mainView.lutIconSpecs.tiny.getWidth());
+					_mainView.selected.symbol.setHeight(_mainView.lutIconSpecs.tiny.getHeight());
+					_mainView.selected.symbol.setOffset(_mainView.lutIconSpecs.tiny.getOffsetX(), _mainView.lutIconSpecs.tiny.getOffsetY());
 					_mainView.selected.draw();
 				}
 
@@ -99,10 +103,19 @@ define([
 				var mobileTile = $(tile).clone();
 				$(mobileTile).data('shortlist-id', value.attributes.shortlist_id);
 				var picUrl = value.attributes.thumb_url ? value.attributes.thumb_url : value.attributes.pic_url;
-				var mobileImg = $('<div style="height: 75px; margin-bottom: 8px;"><img src="'+picUrl+'"></div>');
+				var mobileImg;
+				/*if(_iOS || _android){
+					mobileImg = $('<div style="height: 75px; margin-bottom: 8px;"><div class="lazyload mobileTileListImg" data-src="'+picUrl+'"; ></div></div>');
+				}else{
+					mobileImg = $('<div style="height: 75px; margin-bottom: 8px;"><div class="mobileTileListImg" src="'+picUrl+'"></div></div>');
+				}*/
+				mobileImg = $('<div style="height: 75px; max-width: 100px; margin-bottom: 8px;"><div class="mobileTileListImg"></div></div>');
+				$(mobileImg).find('.mobileTileListImg').css('background-image', 'url(' + picUrl + ')');
 				$(mobileTile).append(mobileImg);
-				$("#mobilePaneList ul.mobileTileList li").on('tap', app.ui.tilePanel.tile_onClick);
-				$("#mobilePaneList ul.mobileTileList li").on('click', app.ui.tilePanel.tile_onClick);
+
+				$(mobileTile).on('tap', app.ui.tilePanel.tile_onClick);
+				$(mobileTile).on('click', app.ui.tilePanel.tile_onClick);
+
 				$('#mobileList').append(mobileTile);
 			};
 

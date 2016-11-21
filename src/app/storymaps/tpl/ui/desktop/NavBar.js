@@ -219,7 +219,14 @@ define(["lib-build/tpl!./NavBar",
 						$("#mobileBookmarksToggle").addClass('closed');
 						$("#mobileBookmarksDiv").css('display', 'none');
 					});
+					if(!app.isInBuilder && app.data.getWebAppData().getTabs() && Object.keys(app.data.getWebAppData().getTabs()).length == 1)
+						$('#bookmarksCon').css({'top': '10px'});
 				}
+
+				$('#nav-bar').show();
+				$('#bookmarksDiv').show();
+				$('#bookmarksCon').width($('#bookmarksDiv').outerWidth());
+				$('#bookmarksDiv').hide();
 				_this.bookmarksLoaded = true;
 			};
 
@@ -442,9 +449,12 @@ define(["lib-build/tpl!./NavBar",
 					_entries[index] = newTab;
 				}
 				var colorOrder = app.cfg.COLOR_ORDER.split(",");
-				var activeColor = $.grep(app.cfg.COLOR_SCHEMES, function(e){ return e.name == colorOrder[index]; });
+				var colorIndex = index;
+				if(colorIndex > 7)
+					colorIndex = colorIndex % 7;
+				var activeColor = $.grep(app.cfg.COLOR_SCHEMES, function(e){ return e.name == colorOrder[colorIndex]; });
 				newTab.color = activeColor;
-				$('#paneLeft').css('border-top-color', activeColor[0].color);
+				$('#contentPanel').css('border-top-color', activeColor[0].color);
 
 				app.ui.tilePanel.clearTilePanel();
 				var colors = {
