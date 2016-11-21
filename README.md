@@ -101,24 +101,7 @@ The Shortlist data are stored in a Web Application Item in ArcGIS Online and its
 The image that you include in your Shortlist using the builder are not copied in ArcGIS Online. You have to make sure that those medias as well as the webmap you are using are and will remain accessible to your audience.
 
 #### Can I deploy Shorlist on Portal for ArcGIS?
-Shortlist is not included in Portal for ArcGIS. We are planning to include it in Portal for ArcGIS 10.5.1.
-
-Steps:
-- [Download the latest version](http://links.esri.com/storymaps/shortlist_template_zip)
-
- - Log into Portal for ArcGIS and open My Content > Add Item > Application > Web Mapping Application > Configurable. Configure the URL to `https://portal.domain.com/arcgis/apps/Shortlist`. More details in the following documentation [publishing a new web application item](http://resources.arcgis.com/en/help/main/10.2/index.html#/Adding_applications/019300000031000000/).
- - Create a new group that will reference the template available in your Portal
- - Share the newly created item with that group
- - Open My Organization > Edit Settings > Map  and set the `Web App Templates` to the newly created group. More details in the following documentation [configuring the web application gallery](http://resources.arcgis.com/en/help/main/10.2/index.html#/Configure_map_viewer/017s00000024000000/)
- - Now when you share a web map, the template should be an option
-
-_Note that the archive you downloaded is using the ArcGIS API for JavaScript hosted in ArcGIS Online. This can create some incompatibility with your Portal, if you run into issue, please see the next section to update it._
-
-Also note that the web application gallery preview feature redirects to the StoryMaps website, the target page can be modified in `app/config.js > HELP_URL_PORTAL`.
-
-To edit the ArcGIS API for JavaScript, edit `index.html` and locate `pathJSAPI` around line 64. The URL is `//webadaptor.domain.com/arcgis/jsapi/jsapi` where arcgis is the name of your Web Adaptor.
-
-When deployed on a Portal for ArcGIS instance, the application doesn't require any external service to function. But by default the template will still include the header social buttons and Shortlist author are able to import pictures from the some online pictures hosting services. These options can be disabled individually through the configuration file `app/config.js`.
+Shortlist is not included in Portal for ArcGIS. We are planning to include it in Portal for ArcGIS 10.5.1
 
 #### Can I use the builder with the downloadable?
 Yes, when the template is configured with an application ID, adding the URL parameter 'edit' will open the builder. You will be prompted for user authentication through the Identity Manager.
@@ -163,7 +146,6 @@ This will create a new `node-modules` folder in your project root with all the t
 
 ### How to use the application from the source code
  * Make accessible the Shortlist folder on a web server. Use your favorite server or run one with `grunt server`, this will start a server on port `8080`
- * If using a Portal for ArcGIS instance configure the sharing url `app/config.js` (last property)
  * Use the URL parameter `appid` to specify the web item to be loaded, e.g.: http://localhost:8080/?appid=ABCD (configuring index.html > configOptions.appid is not supported in development mode)
 
 ### How to build application from the source code
