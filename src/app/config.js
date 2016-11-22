@@ -58,6 +58,16 @@ app.cfg = {
 	TWO_COLUMN_THRESHOLD: 1000,
 	THREE_COLUMN_THRESHOLD: 1450,
 
+	//
+	// Layouts
+	//
+
+	LAYOUTS: [
+		{
+			id: "foo",
+		}
+	],
+
 	/*
 	 * Builder
 	 */
