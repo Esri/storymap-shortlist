@@ -43,7 +43,7 @@ define(["lib-build/tpl!./Popup",
 					container.find('.btnCancel').show();
 				}
 				else if(_mode == "add"){
-					container.find(".modal-title").text("Insert an image");
+					container.find(".modal-title").text("CHOOSE IMAGE");
 					container.find('.btnSubmit')
 						.html("Add")
 						.hide();
@@ -54,7 +54,7 @@ define(["lib-build/tpl!./Popup",
 				_viewMediaSelector.present({
 					mode: cfg.mode,
 					webmaps: null,
-					media: cfg.mode == "edit" ? cfg.edit.media : null,
+					media: cfg.mode == "edit" ? cfg.edit.media : cfg.media,
 					keepLastDataSource: true
 				}, function(){});
 
@@ -64,13 +64,16 @@ define(["lib-build/tpl!./Popup",
 				return _dialogDeferred;
 			};
 
-			function updateSubmitButton()
+			function updateSubmitButton(mode)
 			{
-				var imageSelected;
+				if(mode && mode != 'image')
+					_mode = mode;
+				if($(container).find('.opt-select-all-container').css('display') == 'none' && $(container).find('.mediaSelectorConfigureContainer').css('display') == 'none')
+					_mode = 'add';
+				var imageSelected = false;
 				var data = _viewMediaSelector.getData();
-					imageSelected = false;
 
-				if (data && data.media && data.media.image) {
+				if (data && data.media && data.media.image && data.media.image.url && data.media.image.thumb_url) {
 					imageSelected = true;
 				}
 				else if (data && data.length) {
@@ -81,7 +84,7 @@ define(["lib-build/tpl!./Popup",
 					"disabled",
 					! imageSelected
 				);
-
+				// TODO need to know the view, if URL, dont onClickSubmit()
 				if (imageSelected && _mode == 'add') {
 					onClickSubmit();
 				}

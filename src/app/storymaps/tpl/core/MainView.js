@@ -89,6 +89,8 @@ define(["lib-build/css!./MainView",
 			var _firstMapLoad = 0;
 			var _iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 			var _urlParams = CommonHelper.getUrlParams();
+			_this.mapIsPanning = false;
+			_this.mapIsZooming = false;
 
 			this.init = function(core)
 			{
@@ -312,7 +314,7 @@ define(["lib-build/css!./MainView",
 						// HERE-EXTENT
 						if(app.data.getWebAppData().getTabs() && app.data.getWebAppData().getTabs()[0] && app.data.getWebAppData().getTabs()[0].extent){
 							var tabExtent = new Extent(app.data.getWebAppData().getTabs()[0].extent);
-							var fitExtent = app.data.getWebAppData().getSettings().generalOptions.extentMode == 'default' ? true : false;
+							var fitExtent = true;//app.data.getWebAppData().getSettings().generalOptions.extentMode == 'default' ? true : false;
 							if(fitExtent)
 								app.appCfg.mapExtentFit = true;
 							setTimeout(function(){
@@ -327,6 +329,7 @@ define(["lib-build/css!./MainView",
 								app.map.setExtent(app.map._params.extent);
 							}, 500);
 						}
+
 						// TODO place after app is done loading and changing extents
 						app.map.on('extent-change', function(){
 							setTimeout(function(){
@@ -415,7 +418,10 @@ define(["lib-build/css!./MainView",
 
 			function initMap() {
 				app.map.resize();
+
 				app.map.on('click',function(e){
+					if(_this.mapIsPanning || _this.mapIsZooming)
+						return;
 					if(app.mapTips){
 						if(!e.graphic){
 							app.mapTips.clean(true);
@@ -678,6 +684,7 @@ define(["lib-build/css!./MainView",
 				shortlistLayer.redraw();
 
 				app.ui.mobileFeatureList.setColor();
+
 				if(app.mapTips)
 					app.mapTips.clean(true);
 				_this.preSelection();
@@ -841,6 +848,7 @@ define(["lib-build/css!./MainView",
 				_this.selected.symbol.setHeight(_this.lutIconSpecs.large.getHeight());
 				_this.selected.symbol.setOffset(_this.lutIconSpecs.large.getOffsetX(), _this.lutIconSpecs.large.getOffsetY());
 				_this.selected.draw();
+				app.map.getLayer(app.data.getWebAppData().getShortlistLayerId()).redraw();
 
 				// calling moveToFront directly after messing
 				// with the symbol causes problems, so I
@@ -853,7 +861,7 @@ define(["lib-build/css!./MainView",
 						console.log("problem with 'moveToFront()'...");
 					}
 				},10);
-			}
+			};
 
 			this.buildMapHoverTips = function(content, point){
 				if(app.mapTips && ($('body').hasClass('mobile-view') || !point.attributes.locationSet)){
@@ -912,6 +920,8 @@ define(["lib-build/css!./MainView",
 
 			this.moveGraphicToFront = function(graphic)
 			{
+				if(!graphic)
+					return;
 				var dojoShape = graphic.getDojoShape();
 				if (dojoShape) dojoShape.moveToFront();
 			};
@@ -1053,7 +1063,7 @@ define(["lib-build/css!./MainView",
 
 			this.layer_onClick = function(event)
 			{
-				if ($('body').hasClass('pickLocation'))
+				if ($('body').hasClass('pickLocation') || _this.mapIsZooming || _this.mapIsPanning)
 					return;
 				// IE fire an extra event after the renderer is updated that we need to filter
 				_filterMouseHoverEvent = true;
@@ -1079,9 +1089,8 @@ define(["lib-build/css!./MainView",
 
 			this.layer_onMouseOver = function(event)
 			{
-				if (_filterMouseHoverEvent || $('body').hasClass('pickLocation'))
+				if (_filterMouseHoverEvent || $('body').hasClass('pickLocation') || _this.mapIsZooming || _this.mapIsPanning)
 					return;
-
 				if (_helper.isMobile()) return;
 				app.map.setMapCursor("pointer");
 				var graphic = event.graphic;
@@ -1090,6 +1099,8 @@ define(["lib-build/css!./MainView",
 					return;
 				else{
 					if (graphic == _this.selected && _this.selected.hidden === true) {
+						if(app.isInBuilder)
+							return;
 						//do nothing
 					}
 					else {
@@ -1107,17 +1118,21 @@ define(["lib-build/css!./MainView",
 
 			this.layer_onMouseOut = function(event)
 			{
-				if ($('body').hasClass('pickLocation'))
+				if ($('body').hasClass('pickLocation')  || _this.mapIsZooming || _this.mapIsPanning)
+					return;
+				var graphic = event.graphic;
+				if(graphic == _this.selected && app.isInBuilder)
 					return;
 				if (_helper.isMobile()) return;
 				app.map.setMapCursor("default");
-				var graphic = event.graphic;
+
 				if (graphic != _this.selected) {
 					graphic.symbol.setWidth(_this.lutIconSpecs.tiny.getWidth());
 					graphic.symbol.setHeight(_this.lutIconSpecs.tiny.getHeight());
 					graphic.symbol.setOffset(_this.lutIconSpecs.tiny.getOffsetX(), _this.lutIconSpecs.tiny.getOffsetY());
 					graphic.draw();
 				}
+
 				if(app.mapTips)
 					app.mapTips.clean();
 			};
@@ -1146,7 +1161,7 @@ define(["lib-build/css!./MainView",
 					if(!baseMapLayerIds[0])
 						layers.push(app.map.getLayer(id));
 				});
-				var featServUrl = [];
+				var featServLayer = [];
 				var featServLayerIndex = [];
 				var featureService;
 
@@ -1160,17 +1175,67 @@ define(["lib-build/css!./MainView",
 						layerType = layer.type;
 					}
 
-					if(layer.geometryType == 'esriGeometryPoint' && layer.id.toLowerCase().indexOf("mapnotes") == -1){
+					if(layer.geometryType == 'esriGeometryPoint' && layer.id.toLowerCase().indexOf("mapnotes") == -1  && layer.graphics.length){
 						potentialShortlistLayers.push(layer);
 					}
 					//TODO account for feature service and layer/graphics load
 					if (layer.url && (layerType === 'ArcGISFeatureLayer' || layerType === 'Feature Layer') && !layer.id.match(/^csv_/)) {
 						featureService = true;
 						featServLayerID = layer;
-						featServUrl.push(layer.url);
+						featServLayer.push(layer);
 						featServLayerIndex.push(index);
 					}
 				});
+
+				var layersChecked = false;
+				if(featServLayer.length && !layersChecked){
+					layersChecked = true;
+					var mapUpdated = false;
+					app.map.on('update-end', function(){
+						if(mapUpdated)
+							return;
+						mapUpdated = true;
+						$.each(featServLayer, function(i, layer){
+							if(layer.geometryType == 'esriGeometryPoint' && layer.id.toLowerCase().indexOf("mapnotes") == -1  && layer.graphics.length){
+								potentialShortlistLayers.push(layer);
+							}
+						});
+						if(!potentialShortlistLayers.length){
+							var config = {};
+							builderView.initPopupComplete(config);
+							//builderView.initMapExtentSave();
+							app.detailPanelBuilder.init(app.ui.mainView, builderView);
+							app.data.getWebAppData().setTitle(app.data.getResponse().itemInfo.item.title);
+							app.data.getWebAppData().setSubtitle(app.data.getResponse().itemInfo.item.description);
+							//app.data.getWebMap().item.extent = builderView.serializeExtentToItem(app.map.extent);
+							//app.map._params.extent = new Extent(JSON.parse(JSON.stringify(app.map.extent.toJson())));
+							//app.data.getWebAppData().setMapExtent(app.map.extent);
+							app.ui.headerDesktop.setTitleAndSubtitle(app.data.getWebAppData().getTitle(), app.data.getWebAppData().getSubtitle());
+							if(app.data.getResponse().itemInfo.itemData.bookmarks && app.data.getResponse().itemInfo.itemData.bookmarks.length){
+								var settings = {
+									extentMode: "default",
+									numberedIcons: false,
+									filterByExtent: true,
+									bookmarks: true,
+									bookmarksAlias: 'Zoom'
+								};
+								app.data.getWebAppData().setGeneralOptions(settings);
+								app.ui.navBar.initBookmarks();
+							}
+
+							_core.appInitComplete(WebApplicationData);
+						}else{
+							$.each(potentialShortlistLayers, function(i, layer){
+								var index = layers.indexOf(layer);
+								layers.splice(index, 1);
+							});
+							builderView.openMigrationPopup(potentialShortlistLayers, layers);
+							$("#loadingIndicator").hide();
+							clearTimeout(app.loadingTimeout);
+							app.loadingTimeout = null;
+						}
+					});
+				}
 
 				var webmapExtent = app.data.getWebMap().item.extent;
 				var newExtent = new Extent(webmapExtent[0][0], webmapExtent[0][1], webmapExtent[1][0], webmapExtent[1][1], new SpatialReference({ wkid:4326 }));
@@ -1182,7 +1247,7 @@ define(["lib-build/css!./MainView",
 
 				app.isWebMapFirstSave = true;
 
-				if(!potentialShortlistLayers.length){
+				if(!potentialShortlistLayers.length && !featServLayer.length){
 					var config = {};
 					builderView.initPopupComplete(config);
 					//builderView.initMapExtentSave();
@@ -1206,7 +1271,7 @@ define(["lib-build/css!./MainView",
 					}
 
 					_core.appInitComplete(WebApplicationData);
-				}else{
+				}else if(!featServLayer.length){
 					$.each(potentialShortlistLayers, function(i, layer){
 						var index = layers.indexOf(layer);
 						layers.splice(index, 1);
@@ -1355,6 +1420,7 @@ define(["lib-build/css!./MainView",
 						$('#mobileBuilderOverlay').attr('style','display: none !important');
 					//TODO in components
 					app.ui.mobileIntro.screenSize = 'desktop';
+					$('#mobilePaneList').hide();
 					$('#navThemeLeft').css('visibility', 'hidden');
 					$('#navThemeRight').css('visibility', 'hidden');
 					$("#mobileBookmarksCon").hide();
@@ -1393,7 +1459,7 @@ define(["lib-build/css!./MainView",
 							$("#mainStagePanel").css("left", (app.cfg.LEFT_PANE_WIDTH_TWO_COLUMN + 16));
 							if(app.map)
 								app.map.resize();
-							if(_this.selected && !app.map.extent.contains(_this.selected.geometry))
+							if(_this.selected && !app.map.extent.contains(_this.selected.geometry) && app.mapTips)
 								app.mapTips.clean(true);
 						}, 0);
 						$('#paneLeft .noFeatureText').css('margin-left', '20px');

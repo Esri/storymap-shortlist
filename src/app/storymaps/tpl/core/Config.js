@@ -27,7 +27,9 @@ define([],
 			noFastClick: true,
 			deleteProtect: true,
 			noStoryLengthRequired: true,
-			disableImageUpload: true
+			disableImageUpload: true,
+			disableImageImportUpload: true,
+			disableFBWarning: true
 		};
 
 		return {

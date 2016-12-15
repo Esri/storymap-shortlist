@@ -148,12 +148,12 @@ define(["esri/geometry/screenUtils",
 
 			this.findTile = function(id)
 			{
-				return $.grep($(container).find($("ul.tilelist li")),function(n){return n.id == "item"+id;})[0];
+				return $.grep($(container).find($("ul.tilelist li")),function(n){return $(n).data('shortlist-id') == id;})[0];
 			};
 
 			this.findMobileTile = function(id)
 			{
-				return $.grep($("ul.mobileTileList li"),function(n){return n.id == "item"+id;})[0];
+				return $.grep($("ul.mobileTileList li"),function(n){return $(n).data('shortlist-id') == id;})[0];
 			};
 
 			this.setTileEvents = function()
@@ -224,14 +224,15 @@ define(["esri/geometry/screenUtils",
 				var match = $.grep(app.layerCurrent.graphics, function(v){
 					return v.attributes.shortlist_id==$(_this).data('shortlist-id');
 				});
-				match[0].symbol.setWidth(_mainView.lutIconSpecs.medium.getWidth());
-				match[0].symbol.setHeight(_mainView.lutIconSpecs.medium.getHeight());
-				match[0].symbol.setOffset(_mainView.lutIconSpecs.medium.getOffsetX(), _mainView.lutIconSpecs.medium.getOffsetY());
-				match[0].draw();
-
-				if (!_helper.isIE())
-					_mainView.moveGraphicToFront(match[0]);
-				_mainView.buildMapHoverTips(match[0].attributes.name, match[0]);
+				if(match[0]){
+					match[0].symbol.setWidth(_mainView.lutIconSpecs.medium.getWidth());
+					match[0].symbol.setHeight(_mainView.lutIconSpecs.medium.getHeight());
+					match[0].symbol.setOffset(_mainView.lutIconSpecs.medium.getOffsetX(), _mainView.lutIconSpecs.medium.getOffsetY());
+					match[0].draw();
+					if (!_helper.isIE())
+						_mainView.moveGraphicToFront(match[0]);
+					_mainView.buildMapHoverTips(match[0].attributes.name, match[0]);
+				}
 			};
 
 			this.tile_onMouseOut = function() {
@@ -248,10 +249,12 @@ define(["esri/geometry/screenUtils",
 				var match = $.grep(app.layerCurrent.graphics, function(v){
 					return v.attributes.shortlist_id==$(_this).data('shortlist-id');
 				});
-				match[0].symbol.setWidth(_mainView.lutIconSpecs.tiny.getWidth());
-				match[0].symbol.setHeight(_mainView.lutIconSpecs.tiny.getHeight());
-				match[0].symbol.setOffset(_mainView.lutIconSpecs.tiny.getOffsetX(), _mainView.lutIconSpecs.tiny.getOffsetY());
-				match[0].draw();
+				if(match[0]){
+					match[0].symbol.setWidth(_mainView.lutIconSpecs.tiny.getWidth());
+					match[0].symbol.setHeight(_mainView.lutIconSpecs.tiny.getHeight());
+					match[0].symbol.setOffset(_mainView.lutIconSpecs.tiny.getOffsetX(), _mainView.lutIconSpecs.tiny.getOffsetY());
+					match[0].draw();
+				}
 				if(app.mapTips)
 					app.mapTips.clean(true);
 			};

@@ -274,6 +274,8 @@ define([
 					var dv = swiper.slides[swiper.activeIndex];
 					var id = $(dv).data('shortlist-id');
 					var id2 = $.grep(app.layerCurrent.graphics,function(n){return n.attributes.shortlist_id == id;})[0];
+					if(id2 && id2.attributes && !id2.attributes.locationSet)
+						$(dv).find('.editLocation').hide();
 					_mainView.selected = id2;
 					_swipers[themeIndex].update();
 
@@ -320,16 +322,11 @@ define([
 				container.find($(".detail-btn-left")[themeIndex]).click(function(){
 					var themeIndex = $('.entry.active').index();
 					var currentSwiper = _swipers[themeIndex];
-					if(currentSwiper.activeIndex === 0)
-						currentSwiper.slideTo(currentSwiper.slides.length - 1, 0);
-					else {
-						currentSwiper.slidePrev();
-					}
 					if($('.arcgisSearch').css('display') == 'block'){
 						if(_movableIcon)
 							_movableIcon.clean();
 						_search.hide();
-						$('body').removeClass('pickLocation');
+						cancelLocationUpdate();
 						app.map.getLayer('tempIconLayer').remove(app.map.getLayer('tempIconLayer').graphics[0]);
 						app.map.setMapCursor("auto");
 						var currentSlide = _swipers[themeIndex].slides[_swipers[themeIndex].activeIndex];
@@ -347,6 +344,11 @@ define([
 						}
 						var shortlistLayer = app.map.getLayer(app.data.getShortlistLayerId());
 						shortlistLayer.redraw();
+					}
+					if(currentSwiper.activeIndex === 0)
+						currentSwiper.slideTo(currentSwiper.slides.length - 1, 0);
+					else {
+						currentSwiper.slidePrev();
 					}
 					if($('body').hasClass('locateFeatures removeSlide')){
 						var removeSlideIndex = _swipers[themeIndex].activeIndex == _swipers[themeIndex].slides.length - 1 ? 0 : _swipers[themeIndex].activeIndex + 1;
@@ -368,19 +370,13 @@ define([
 				container.find($(".detail-btn-right")[themeIndex]).click(function(){
 					var themeIndex = $('.entry.active').index();
 					var currentSwiper = _swipers[themeIndex];
-					if(currentSwiper.activeIndex == currentSwiper.slides.length - 1)
-						currentSwiper.slideTo(0, 0);
-					else {
-						currentSwiper.slideNext();
-					}
 					if($('.arcgisSearch').css('display') == 'block'){
 						if(_movableIcon)
 							_movableIcon.clean();
 						_search.hide();
-						$('body').removeClass('pickLocation');
+						cancelLocationUpdate();
 						app.map.getLayer('tempIconLayer').remove(app.map.getLayer('tempIconLayer').graphics[0]);
 						app.map.setMapCursor("auto");
-						var themeIndex = $('.entry.active').index();
 						var currentSlide = _swipers[themeIndex].slides[_swipers[themeIndex].activeIndex];
 						var currentGraphic = $.grep(app.layerCurrent.graphics, function(e){ return e.attributes.shortlist_id ==  ($(currentSlide).data('shortlist-id') - 1); });
 						if(_search.highlightGraphic)
@@ -396,6 +392,11 @@ define([
 						}
 						var shortlistLayer = app.map.getLayer(app.data.getShortlistLayerId());
 						shortlistLayer.redraw();
+					}
+					if(currentSwiper.activeIndex == currentSwiper.slides.length - 1)
+						currentSwiper.slideTo(0, 0);
+					else {
+						currentSwiper.slideNext();
 					}
 					if($('body').hasClass('locateFeatures removeSlide')){
 						var removeSlideIndex = _swipers[themeIndex].activeIndex === 0 ? _swipers[themeIndex].slides.length - 1 : _swipers[themeIndex].activeIndex - 1;
@@ -757,20 +758,20 @@ define([
 
 			function prepSwiperDisplay()
 			{
+				$('body').addClass('loadingPlaces');
 				var themeIndex = $('.entry.active').index();
 				if(themeIndex<0)
 					themeIndex = 0;
-				//setTimeout(function(){
-					$('.detailContainer').css('z-index', 99999999);
-					$('.detailContainer').show();
-					_swipers[themeIndex].update();
-					_swipers[themeIndex].slideNext();
-					_swipers[themeIndex].slidePrev();
-					_swipers[themeIndex].update();
-					_this.resize();
-					$('.detailContainer').hide();
-					$('.detailContainer').css('z-index', 0);
-				//}, 0);
+				$('.detailContainer').css('z-index', 99999999);
+				$('.detailContainer').show();
+				_swipers[themeIndex].update();
+				_swipers[themeIndex].slideNext();
+				_swipers[themeIndex].slidePrev();
+				_swipers[themeIndex].update();
+				_this.resize();
+				$('.detailContainer').hide();
+				$('.detailContainer').css('z-index', 0);
+				$('body').removeClass('loadingPlaces');
 			}
 
 			function openSearchWidget(featureId)
@@ -833,7 +834,6 @@ define([
 					_pointLayer.add(tempIcon);
 					_pointLayer.graphics[0].show();
 					_movableIcon = new MovableGraphic(app.map, _pointLayer, _pointLayer.graphics[0], onMoveEndCallback);
-					//app.mapTips.clean(true);
 				}
 			}
 
@@ -856,7 +856,8 @@ define([
 				var themeIndex = $('.entry.active').index();
 				var currentSlide = _swipers[themeIndex].slides[_swipers[themeIndex].activeIndex];
 
-				app.mapTips.clean(true);
+				if(app.mapTips)
+					app.mapTips.clean(true);
 
 				_movedGraphic = graphic;
 
@@ -922,7 +923,8 @@ define([
 				shortlistLayer.redraw();
 				app.addFeatureBar.updateLocatedFeatures();
 				app.map.setMapCursor("auto");
-				app.mapTips.clean(true);
+				if(app.mapTips)
+					app.mapTips.clean(true);
 				app.ui.mainView.buildMapTips();
 
 				_builderView.updateShortlistExtent();
@@ -967,7 +969,37 @@ define([
 			function presentImagePicker()
 			{
 				var cfg = {};
-				cfg.mode='add';
+				cfg.mode = 'add';
+				var themeIndex = $('.entry.active').index();
+				var currentSlide = _swipers[themeIndex].slides[_swipers[themeIndex].activeIndex];
+				var currentGraphic = $.grep(app.layerCurrent.graphics, function(e){ return e.attributes.shortlist_id ==  $(currentSlide).data('shortlist-id'); });
+
+				if(currentGraphic[0].attributes && currentGraphic[0].attributes.pic_url){
+					cfg = {
+						media: {
+							type: 'image',
+							image: {
+
+							}
+						},
+						mode: 'add'
+					};
+					cfg.media.pic_url = currentGraphic[0].attributes.pic_url;
+				}
+				if(currentGraphic[0].attributes && currentGraphic[0].attributes.thumb_url){
+					if(!cfg.media){
+						cfg = {
+							media: {
+								type: 'image',
+								image: {
+
+								}
+							},
+							mode: 'add'
+						};
+					}
+					cfg.media.thumb_url = currentGraphic[0].attributes.thumb_url;
+				}
 				_imagePicker.present(cfg).then(function(media){
 					_this.updateSlide(media);
 				});

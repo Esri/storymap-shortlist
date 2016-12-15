@@ -2,10 +2,12 @@
   <div class="header">
     <div>
       <span class="drop-label"><%= lblDrop %></span>
-      <button type="button" class="btn btn-sm btn-default btn-file">
+      <!-- this used to be a button, but firefox wouldn't open
+        a file-input nested inside a button -->
+      <div class="btn btn-sm btn-default btn-file">
         <span class=""><%= lblUploadButton %></span>
         <input class="file-input" type="file" accept=".png,.jpeg,.jpg,.gif,.bmp"></input>
-      </button>
+      </div>
       <span class="uploadHelp fa fa-info-circle" data-toggle="tooltip" data-title="<%= infoUpload %>"></span>
       <span class="uploadWait smallLoader hidden"></span>
     </div>

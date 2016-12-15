@@ -265,6 +265,7 @@ define(["../../core/Helper",
 
 			this.buildSlides = function(themes)
 			{
+				_slidesRefreshing = true;
 				_this.loaded = false;
 				_themes = themes;
 				var themeIndex = $('.entry.active').index();
@@ -360,6 +361,9 @@ define(["../../core/Helper",
 						newSwiper.on('onSlideChangeEnd', function(swiper){
 							if(!_slidesRefreshing)
 								_mainView.preSelection();
+							else{
+								return;
+							}
 
 							var themeIndex = $('.entry.active').index();
 							if(themeIndex<0)
@@ -372,7 +376,7 @@ define(["../../core/Helper",
 
 								_mainView.selected = id2;
 
-								if(!app.map.extent.contains(_mainView.selected.geometry) && !app.data.getWebAppData().getGeneralOptions().filterByExtent || app.isInBuilder){
+								if(_mainView.selected && !app.map.extent.contains(_mainView.selected.geometry) && !app.data.getWebAppData().getGeneralOptions().filterByExtent || app.isInBuilder){
 									app.map.centerAt(_mainView.selected.geometry);
 								}
 							}
@@ -462,6 +466,7 @@ define(["../../core/Helper",
 				}
 				_this.loaded = true;
 				_this.viewed = false;
+				_slidesRefreshing = false;
 			};
 
 			function prepSwiperDisplay()
@@ -640,8 +645,9 @@ define(["../../core/Helper",
 					var currentSlide;
 					if(themeIndex<0)
 						themeIndex = 0;
+					var currentSwiper;
 					if(!$.isEmptyObject(_swipers[themeIndex])){
-						var currentSwiper = _swipers[themeIndex];
+						currentSwiper = _swipers[themeIndex];
 						currentSlide = currentSwiper.slides[currentSwiper.activeIndex];
 					}
 					$(currentSlide).height($('#paneLeft').outerHeight() - 5);
@@ -652,6 +658,14 @@ define(["../../core/Helper",
 					$('.detailPictureDiv img').css('max-height', parseInt(imgMaxHeight)+'px');
 					$('.detailContainer').width($("#paneLeft").outerWidth());
 					$('.detailContainer').height($("#paneLeft").outerHeight());
+
+					if(currentSwiper){
+						setTimeout(function(){
+							_swipers[themeIndex].slideTo(currentSwiper.activeIndex);
+							currentSwiper.update();
+							_swipers[themeIndex].slideTo(currentSwiper.activeIndex);
+						}, 800);
+					}
 				}, 0);
 			};
 

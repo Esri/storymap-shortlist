@@ -40,6 +40,8 @@ define(["lib-build/tpl!./BuilderView",
 		"esri/layers/GraphicsLayer",
 		"esri/geometry/webMercatorUtils",
 		"esri/geometry/Extent",
+		"esri/SpatialReference",
+		"esri/config",
 		"dojo/Deferred",
 		"dojo/topic",
 		"dojo/has",
@@ -89,6 +91,8 @@ define(["lib-build/tpl!./BuilderView",
 		GraphicsLayer,
 		webMercatorUtils,
 		Extent,
+		SpatialReference,
+		esriConfig,
 		Deferred,
 		topic,
 		has,
@@ -192,7 +196,7 @@ define(["lib-build/tpl!./BuilderView",
 				);
 				basemapGallery.startup();
 
-				$("#basemapChooser .dijitTitlePaneTextNode").html('Change Basemap');
+				$("#basemapChooser .dijitTitlePaneTextNode").text('Change Basemap');
 				$("#basemapChooser").show();
 
 				var currentExtent = app.map.extent;
@@ -902,6 +906,24 @@ define(["lib-build/tpl!./BuilderView",
 
 					topic.publish("CORE_UPDATE_UI");
 
+					app.map.on('pan-start', function(){
+						app.ui.mainView.mapIsPanning = true;
+					});
+					app.map.on('pan-end', function(){
+						setTimeout(function(){
+							app.ui.mainView.mapIsPanning = false;
+						}, 800);
+					});
+
+					app.map.on('zoom-start', function(){
+						app.ui.mainView.mapIsZooming = true;
+					});
+					app.map.on('zoom-end', function(){
+						setTimeout(function(){
+							app.ui.mainView.mapIsZooming = false;
+						}, 800);
+					});
+
 					// Toggle off some components that would otherwise be desperately empty
 					//$("body").addClass("isBuilderLanding");
 
@@ -967,13 +989,13 @@ define(["lib-build/tpl!./BuilderView",
 					$.each(app.data.getStory(), function(index){
 						app.data.setStory(index, null, null, newExtent);
 					});
-					app.data.getWebMap().item.extent = _this.serializeExtentToItem(shortlistExtent);
+					_this.serializeExtentToItem(shortlistExtent);
 					app.map._params.extent =  newExtent;
 					app.data.getWebAppData().setTabs(app.data.getStory());
 					app.data.getWebAppData().setMapExtent(shortlistExtent);
 				}
 				if(app.data.getWebAppData().getGeneralOptions().extentMode == "customTheme"){
-					app.appCfg.mapExtentFit = false;
+					app.appCfg.mapExtentFit = true;
 					var tabIndex = $('.entry.active').index();
 					app.data.setStory(tabIndex, null, null, newExtent);
 					WebApplicationData.setTabs(app.data.getStory());
@@ -988,10 +1010,15 @@ define(["lib-build/tpl!./BuilderView",
 
 				var extentWgs = extent.spatialReference.wkid == 4326 ? extent : webMercatorUtils.webMercatorToGeographic(extent);
 
-				return [
-					[extentWgs.xmin, extentWgs.ymin],
-					[extentWgs.xmax, extentWgs.ymax]
-				];
+				if(extent.spatialReference.wkid != 4326 && extent.spatialReference.wkid != 102100){
+					var sr = new SpatialReference(4326);
+					esriConfig.defaults.geometryService.project([extent], sr).then(function(features){
+						extentWgs = features[0];
+						app.data.getWebMap().item.extent = [[extentWgs.xmin, extentWgs.ymin],[extentWgs.xmax, extentWgs.ymax]];
+					});
+				}else{
+					app.data.getWebMap().item.extent = [[extentWgs.xmin, extentWgs.ymin],[extentWgs.xmax, extentWgs.ymax]];
+				}
 			};
 
 			function updateExtentMode(mode)
@@ -1007,7 +1034,7 @@ define(["lib-build/tpl!./BuilderView",
 					$('.tab-cfg-location').hide();
 				}
 				if(mode == "customHome"){
-					app.appCfg.mapExtentFit = false;
+					app.appCfg.mapExtentFit = true;
 					if(!_mapExtentSave.initDone)
 						_this.initMapExtentSave();
 					_mapExtentSave.reinit();
@@ -1068,6 +1095,7 @@ define(["lib-build/tpl!./BuilderView",
 			/*jshint -W098 */
 			this.resize = function(cfg)
 			{
+				_sharePopup.updateMyStoriesPosition();
 				//
 			};
 

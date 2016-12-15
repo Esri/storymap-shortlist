@@ -365,6 +365,7 @@ define([
 				$('#addFeature').show();
 				$('#importFeature').show();
 				$('#organizeFeatures').show();
+				$('body').removeClass('locateFeatures');
 				_this.updateLocatedFeatures();
 
 				$('#completeOrganization').hide();
@@ -372,7 +373,7 @@ define([
 				$('#moveFeaturesContainer').hide();
 
 				$('#myList').find('li').off();
-				$('body').removeClass('locateFeatures');
+
 
 				$('#myList').find('li').click(app.ui.tilePanel.tile_onClick);
 				$('#myList').find('li').mouseover(app.ui.tilePanel.tile_onMouseOver);
@@ -412,7 +413,7 @@ define([
 
 				$('.unlocatedFeatures').text(unlocatedFeatures.length);
 
-				if(unlocatedFeatures.length > 0 && !$('body').hasClass('organizeFeatures')){
+				if(unlocatedFeatures.length > 0 && !$('body').hasClass('organizeFeatures') && !$('body').hasClass('locateFeatures')){
 					$('#locateFeatures').show();
 					//_this.exitOrganizeMode();
 				}
@@ -519,7 +520,7 @@ define([
 					return graphic;
 				}
 
-			}
+			};
 
 			function getPixel(imgData, index) {
 				var i = index*4, d = imgData.data;
@@ -765,10 +766,6 @@ define([
 
 			function showUnlocatedFeatures()
 			{
-				//TODO update details panel slides to only contain unlocated features
-				// will be easier for author to add location by cycling through slides
-				// use detailPanelBuilder.buildSlides and pass parameter to filter by unlocated features
-				// when 'done' button is clicked, rebuild slides
 				$('body').addClass('locateFeatures');
 				$('.located').hide();
 				$('#addFeature').hide();
@@ -792,6 +789,10 @@ define([
 				container.find('#locateFeatures').on('click', showUnlocatedFeatures);
 				container.find('#completeOrganization').on('click', _this.exitOrganizeMode);
 				container.find('#deleteFeatures').on('click', deleteFeatures);
+				container.find('#locateFeatures').tooltip({
+					html: true,
+					trigger: 'hover'
+				});
 			}
 		};
 	}

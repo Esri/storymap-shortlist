@@ -140,9 +140,13 @@ define([
       }
       this.dragging = true;
       evt = evt.originalEvent || evt;
-      var walker, options;
-      if ((walker = evt.dataTransfer) && (walker = walker.items) && walker.length) {
-        options = this.getDragClassAndMsg(walker);
+      var dt = evt.dataTransfer, options;
+      if (dt) {
+        if (dt.files && dt.files.length) {
+          options = this.getDragClassAndMsg(dt.files);
+        } else if (dt.items && dt.items.length) {
+          options = this.getDragClassAndMsg(dt.items);
+        }
       }
       this.setUploaderTimerOrClass(options);
     },

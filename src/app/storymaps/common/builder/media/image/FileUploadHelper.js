@@ -245,26 +245,31 @@ define([
 
     getOwnerItemUrl: function() {
       var appItem = this.getAppItem();
-      var portalSharingUrl = app.portal && app.portal.portalUrl;
+      var portalSharingUrl = this.getSharingUrl();
       if (!appItem || !portalSharingUrl) {
         return false;
       }
 
-      var ownerUrl = portalSharingUrl + 'content/users/' + appItem.owner;
+      var ownerUrl = portalSharingUrl + '/content/users/' + appItem.owner;
       var folder = appItem.ownerFolder;
-
       return ownerUrl + (folder ? '/' + folder : '') + '/items/' + appItem.id;
+    },
+
+    getSharingUrl: function() {
+      var portal = app.portal;
+      if (!portal) {
+        return false;
+      }
+      return '//' + portal.portalHostname.replace(/\//g, '') + '/sharing/rest';
     },
 
     getResourcesUrl: function() {
       var appItem = this.getAppItem();
-      var portalSharingUrl = app.portal && app.portal.portalUrl;
+      var portalSharingUrl = this.getSharingUrl();
       if (!appItem || !portalSharingUrl) {
         return false;
       }
-
-      return portalSharingUrl + 'content/items/' + appItem.id + '/resources';
-
+      return portalSharingUrl + '/content/items/' + appItem.id + '/resources';
     },
 
     getPlainResources: function() {

@@ -71,6 +71,9 @@ define([
 				if(_this.screenSize == 'desktop' && !_mainView.selected){
 					app.ui.mobileFeatureList.showMobileList();
 				}
+				setTimeout(function(){
+					app.ui.detailPanel.resize();
+				}, 50);
 				var mapHeight = $(window).height() * 0.48 - 20;
 				$('#map').css('height', mapHeight);
 				$('#map').css({'top': 0});
@@ -89,6 +92,9 @@ define([
 				$('#returnHiddenBar').css('width', '100%').css('width', '-=80px');
 				$('#mobilePaneList').css('height', '52%').css('height', '-=20px');
 				$('.mobileTileList.blurb').css('width', '100%').css('width', '-=125px');
+				setTimeout(function(){
+					app.ui.detailPanel.resize();
+				}, 50);
 
 				_this.screenSize = 'small';
 			};

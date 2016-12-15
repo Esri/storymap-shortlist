@@ -94,7 +94,7 @@ define({
 				lblURLPH: "Link should end with .jpg, .png, .gif, or .bmp",
 				lblURLError: "This image does not seem to be valid. Please specify a direct link to an image file (your URL will usually end with .jpg or .png). Links to a web page that contains an image won't work.",
 				lblURLCheck: "Checking image...",
-				lblLabel: "Image Caption",
+				lblLabel: "Image caption",
 				lblLabel1: "Caption",
 				lblLabel2: "Hover text",
 				lblLabel3: "None",
@@ -107,7 +107,7 @@ define({
 				lblPosition3: "Fit",
 				lblPosition4: "Stretch",
 				lblPosition5: "Custom",
-        lblURLHelp: "For best results, images should be less than 400 KB. Use compressed JPG images at 80% quality and these recommended image widths: 2000 pixels for main stage or narrative panel with maximize button, 1000 pixels for narrative panel without maximize button.<br><br>If a linked image draws slowly, upload it to your story for better results.",
+				lblURLHelp: "For best results, images should be less than 400 KB. Use compressed JPG images at 80% quality and these recommended image widths: 2000 pixels for main stage or narrative panel with maximize button, 1000 pixels for narrative panel without maximize button.<br><br>If a linked image draws slowly, upload it to your story for better results.",
 				tooltipDimension: "The value can be specified in 'px' or '%'",
 				tooltipDimension2: "The value has to be specified in 'px'",
 				lblPosition2Explain: "(may crop)",
@@ -117,8 +117,8 @@ define({
 				unloadLbl: "Unload when reader navigates away",
 				unloadHelp: "If the web page has audio or video media, keep this option checked to stop that content from playing when the reader navigates away. Uncheck it for example to keep a soundtrack playing as the reader advances through the story.<br />If the web page is an application, uncheck this option so that the story does not reload if the reader returns to it.",
 				embedProtocolLabel: "Load page over a secure connection (HTTPS)",
-				embedProtocolWarning1: "Your story is configured to load over a secure connection (https), so web page show in the story must also use a secure connection. If the page does not load it may be because it is not available over a secure connection or that it cannot be included in your story (some websites restrict this). You may need to create a hyperlink to open the page in a new browser tab.",
-				embedProtocolWarning2: "Your story is configured to load over an insecure connection (http), so you can choose to load this page over a secure (recommended) or insecure connection. If the page does not load, it may be because it does not support the connection type you selected or that it cannot be included in your story (some websites restrict this). You may need to create a hyperlink to open the page in a new browser tab."
+				embedProtocolWarning1: "If this page does not load in your story, it can't be embedded for web security reasons. As an alternative, add a link in your narrative to open the page in a new browser tab. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>Learn more</a>",
+				embedProtocolWarning2: "If this page does not load in your story, uncheck this option and try again. If the page still does not load, it can't be embedded for web security reasons. As an alternative, add a link in your narrative to open the page in a new browser tab. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>Learn more</a>"
 			},
 			editorActionGeocode: {
 				lblTitle: "Locate an address or place",
@@ -137,6 +137,7 @@ define({
 		}
 	}),
 	"ar": 1,
+	"bs": 1,
 	"cs": 1,
 	"da": 1,
 	"de": 1,
@@ -147,6 +148,7 @@ define({
 	"fr": 1,
 	"he": 1,
 	"hr": 1,
+	"id": 1,
 	"it": 1,
 	"ja": 1,
 	"ko": 1,

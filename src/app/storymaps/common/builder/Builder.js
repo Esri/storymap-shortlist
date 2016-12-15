@@ -575,12 +575,12 @@ define(["lib-build/css!./Builder",
 				simulatorPreview.attr('src', logoURL);
 			}
 			// strip tokens from inline images in sections
-			var sections = data && data.values && data.values.story && data.values.story.sections;
-			if (sections) {
-				_.each(sections, function(section) {
-					var jqSection = $(section.content);
-					_.each(jqSection.find('img'), function(img) {
-						section.content = stripTokensFromUrls(section.content, img.src);
+			var entries = data && data.values && data.values.story && data.values.story.entries;
+			if (entries) {
+				_.each(entries, function(entry) {
+					var jqEntry = $(entry.description);
+					_.each(jqEntry.find('img'), function(img) {
+						entry.description = stripTokensFromUrls(entry.description, img.src);
 					});
 				});
 			}

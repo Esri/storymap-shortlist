@@ -67,6 +67,7 @@ define(["lib-build/tpl!./Selector",
 				_selectedView = null;
 				_selectedViewParams = null;
 				_mode = cfg.mode;
+				_views.home.updateParams({});
 
 				if ( cfg.mode == "edit" && cfg.media && cfg.media.type == "image" ) {
 					showView('configure', {
@@ -75,10 +76,11 @@ define(["lib-build/tpl!./Selector",
 					});
 				}
 				else if (cfg.keepLastDataSource && _hasPreviouslyImported && _mediaView != null) {
-					showView(_mediaView, { isReturning: true });
+					cfg.isReturning = true;
+					showView(_mediaView, cfg);
 				}
 				else
-					showView('home');
+					showView('home', cfg);
 			};
 
 			this.checkError = function(saveBtn)
@@ -146,7 +148,8 @@ define(["lib-build/tpl!./Selector",
 					return;
 
 				params = params || {};
-				params.mode = _mode;
+				params.mode = params.mode || _mode;
+				_mode = params.mode;
 
 				if ( view == 'home' )
 					_hasPreviouslyImported = false;
@@ -165,6 +168,7 @@ define(["lib-build/tpl!./Selector",
 				backButton.toggle(_selectedView != 'home');
 
 				if ( view != 'home' ) {
+					_views.home.updateParams(params);
 					backButton.off('click').click(function(){
 						var previousView = _previousViews.pop() || { name: 'home' };
 						showView(previousView.name || 'home', previousView.params, true);
@@ -172,7 +176,7 @@ define(["lib-build/tpl!./Selector",
 				}
 
 				container.find('.selectorView').hide();
-				if(! _selectedViewParams || ! _selectedViewParams.fromService || ! app.appCfg.mediaPickerSkipConfigure) {
+				if(! _selectedViewParams || ! _selectedViewParams.fromService || ! app.appCfg.mediaPickerSkipConfigure || _selectedViewParams.mode == 'showURL') {
 					_views[view].present(params);
 				}
 
@@ -188,7 +192,7 @@ define(["lib-build/tpl!./Selector",
 						.toggle(view == 'configure' || _mode == "import");
 				}
 
-				onDataChangeCallback && onDataChangeCallback();
+				onDataChangeCallback && onDataChangeCallback(_mode);
 			}
 
 			function init()

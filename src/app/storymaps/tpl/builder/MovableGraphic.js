@@ -41,7 +41,7 @@ define(["dojo/has", "dojo/touch", "dojo/on", "dojo/_base/array", "dojo/_base/con
 
 				var event3 = on(layer._div.rawNode, touch.press, function(event) {
 					// Prevent using another point as a start location on desktop - does not work on touch
-					if (event.graphic == graphic || has("touch") || has("ie") == 10 || has("trident") == 7) {
+					if (event.graphic == graphic || event.target.e_graphic ||  has("touch") || has("ie") == 10 || has("trident") == 7) {
 						map.disablePan();
 
 						_editPointLayer = true;
