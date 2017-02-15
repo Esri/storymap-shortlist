@@ -1,0 +1,226 @@
+#nav-bar {
+	display: none;
+	width: 100%;
+	cursor: default;
+	position: relative;
+	z-index: 3;
+}
+
+.disableUse{
+	cursor: not-allowed !important;
+}
+
+.nav-bar.isTab {
+	/*height: 40px;*/
+}
+
+.nav-bar .entries,
+.nav-bar .builder {
+	display: inline-block;
+}
+
+.nav-bar .entries {
+	margin: 0 10px -4px 20px;
+}
+
+/*
+ * Tab & bullet entries
+ */
+
+.nav-bar .nav-tabs {
+	border-bottom: none;
+}
+
+/*
+ * Tab entries
+ */
+
+.nav-bar.isTab .nav-tabs > li > a,
+.nav-bar.isTab .dropdown-toggle {
+	font-size: 18px;
+	margin: 3px 5px 0px 3px;
+	padding: 3px 12px 6px 12px;
+	font-weight: normal;
+	border: none;
+	border-radius: 6px 6px 0 0;
+}
+
+.nav-bar.isTab .entry:first-child .entryLbl {
+	margin-left: 0;
+}
+
+.nav-bar .nav-tabs .visible {
+	display: block;
+}
+
+.nav-bar .nav-tabs li {
+	display: none;
+}
+
+.nav-bar .nav-tabs li.visible {
+	display: block;
+}
+
+.nav-bar .hidden-entry {
+	opacity: 0.4;
+}
+
+.nav-bar .tooltip.in {
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+
+.nav-bar .entry.active .entryLbl{
+	color: #fff !important;
+}
+
+/*
+ * Styling
+ */
+
+
+/* Visible entries, all entries hover and dropdown */
+
+.nav-bar .nav-tabs > li > a,
+.nav-bar .nav-tabs li > a:hover,
+.nav-bar .dropdown-toggle {
+	color: #FFF;
+}
+
+
+/* Visible entries and dropdown */
+
+.nav-bar .nav-tabs > li > a,
+.nav-bar .dropdown-toggle {
+	background-color: #5F788B;
+}
+
+
+/* Active entry and hover */
+
+.nav-bar .nav-tabs li.active > a,
+.nav-bar .nav-tabs .dropdown:hover > a,
+.nav-bar .nav-tabs li:not(.active) > a:hover {
+	background-color: #58ACCB;
+}
+
+
+/*
+ * More toggle
+ */
+
+ .nav-bar .dropdown.open .dropdown-menu {
+	right: 4px;
+	max-height: 250px;
+	overflow-y: auto;
+}
+
+/*
+ * More toggle - Tab
+ */
+
+.nav-bar.isTab .dropdown .dropdown-toggle {
+	border: none;
+	font-size: 12px;
+	padding-bottom: 8px;
+	padding-top: 9px;
+	cursor: pointer;
+}
+
+.nav-bar.isTab .dropdown .caret {
+	vertical-align: 2px;
+}
+
+/*
+ * Builder
+ */
+
+.nav-bar .builder-content-panel {
+	display: none;
+	vertical-align: top;
+	padding-right: 10px;
+	margin-top: 5px;
+}
+
+.builder-organize.disabled{
+	cursor: not-allowed !important;
+}
+
+/*
+ * Bookmarks
+ */
+
+#bookmarksCon{
+	position: absolute;
+	right: 10px;
+	top: 47px;
+	/*width: 160px;*/
+	width: auto;
+	max-width: 200px;
+	display: none;
+}
+
+#bookmarksButton{
+	background-color: #777;
+	/*width: 160px;*/
+}
+
+#bookmarksDiv{
+	display: none;
+	/*width: 160px;*/
+	background-color:#666;
+	max-height:450px;
+	/*overflow:auto;*/
+	padding:10px;
+	border-radius: 0 0 6px 6px;
+	position: relative;
+	/*right: 5px;*/
+}
+
+#bookmarksDiv p {
+	margin-bottom: 10px;
+}
+
+#bookmarksDiv a {
+	color:#FFFFFF;
+	cursor:pointer;
+	font-family: 'open_sansregular', sans-serif;
+	font-weight:normal;
+	width: 160px;
+}
+
+#bookmarksToggle{
+	position:relative;
+	/*float:right;*/
+	height:28px;
+	cursor:pointer;
+	z-index:100;
+	color:#fff;
+	font-family: 'open_sansregular', sans-serif;
+	/*margin: 0px 5px 0 3px;*/
+	padding: 0px 12px 10px 6px;
+	font-weight: 400;
+	border: none;
+	background-color: #666;
+	height: auto;
+	line-height: 35px;
+	/*width: 160px;*/
+}
+
+#bookmarksToggle.closed{
+	border-radius: 0 0 6px 6px;
+}
+
+#bookmarksToggle.open{
+	border-radius: 0 0 0 0;
+}
+
+#bookmarksTogText{
+	position:relative;
+	margin:auto;
+	margin-left:2px;
+	margin-top:0px;
+	padding:5px;
+	color:#fff;
+	font-family: 'open_sansregular', sans-serif;
+}

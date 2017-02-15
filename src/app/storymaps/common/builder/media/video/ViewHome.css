@@ -1,0 +1,44 @@
+.videoSelectorHome {
+	padding: 25px 0;
+}
+
+.videoSelectorHome .videoSelectorTable {
+	width: 100%;
+	text-align: center;
+	font-size: 22px;
+	color: #444;
+}
+
+.videoSelectorHome .videoSelectorTable .fa {
+	font-size: 26px;
+	margin-right: 4px;
+}
+
+.videoSelectorHome .videoSelectorTable .btn-container {
+	padding: 10px 0;
+	width: 32%; /* the alignment was looking funny with auto */
+}
+
+.mediaSelector.smallSize .videoSelectorHome .videoSelectorTable .btn-container {
+	padding: 15px 0;
+}
+
+.videoSelectorHome .videoSelectorTable .btn-container.disabled {
+	opacity: 0.4;
+	cursor: default !important;
+}
+
+.videoSelectorHome .videoSelectorTable .btn-container.disabled a {
+	cursor: default !important;
+}
+
+.videoSelectorHome .videoSelectorTable .btn-container:hover {
+	background-color: #BDD1E2;
+	cursor: pointer;
+	border-radius: 10px;
+}
+
+.facebook-warning {
+	text-align: center;
+	font-size: 80%;
+}

@@ -1,0 +1,51 @@
+.videoSelectorView {
+	padding-bottom: 10px;
+}
+
+.videoSelectorView .icon {
+	font-size: 20px;
+	vertical-align: middle;
+}
+
+.videoSelectorView .title {
+	font-size: 18px;
+	vertical-align: middle;
+	margin: 0 3px;
+}
+
+.viewYoutubeContainer .videoSelectorView,
+.viewVimeoContainer .videoSelectorView
+{
+	margin-bottom: -15px;
+}
+
+.videoSelectorView .url {
+	width: 325px;
+}
+
+.mediaSelector.smallSize .videoSelectorView .url {
+	width: 300px;
+}
+
+.videoSelectorView .loadingMsg {
+	font-size: 14px;
+	color: #30750a;
+	font-weight: bold;
+	vertical-align: 2px;
+}
+
+.videoSelectorView .loadingMsg .glyphicon-ok {
+	margin-left: 4px;
+}
+
+.videoSelectorView .errorMsg {
+	display: none;
+	font-size: 14px;
+	color: #c43d40;
+	font-weight: bold;
+	margin-top: 20px;
+}
+
+.videoSelectorView .result-container {
+	padding: 10px;
+}

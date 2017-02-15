@@ -1,0 +1,14 @@
+.geocoderBtn {
+	position: absolute;
+	top: 125px;
+	border: none !important;
+	left: 20px;
+}
+
+.mapContainer.has-locator .geocoderBtn {
+	top: 170px;
+}
+
+.mapContainer .searchGroup.hasButtonMode.searchCollapsed .searchBtn {
+	padding: 5px;
+}

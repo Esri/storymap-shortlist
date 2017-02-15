@@ -1,0 +1,37 @@
+#locateFeatures {
+	display: none;
+	outline: none;
+	background-repeat: no-repeat;
+	background-size: 30px;
+	background-image: url(../../../../resources/tpl/builder/icons/no-location.png);
+}
+
+.unlocatedFeatures {
+	margin-left: 23px;
+	font-family: 'open_sanssemibold', sans-serif;
+	font-size: 16px;
+}
+
+#completeOrganization {
+	display: none;
+}
+
+#deleteFeatures {
+	display: none;
+}
+
+#organizeFeatures {
+	display: none;
+}
+
+#myList li.selected{
+	background-color: #d0c79e;
+}
+
+#moveFeaturesContainer {
+	display: none;
+}
+
+.disabledTab {
+	opacity:0.6;
+}

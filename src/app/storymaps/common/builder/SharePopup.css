@@ -1,0 +1,329 @@
+/*
+ * Dialog
+ */
+
+.builderShare .modal-dialog {
+	width: 900px;
+	max-width: 100%;
+}
+
+.builderShare .modal-body {
+	overflow: visible;
+}
+
+.builderShare .modal-logo {
+	position: absolute;
+	top: -20px;
+	left: -20px;
+	width: 48px;
+	height: 48px;
+	background: url(../_resources/icons/builder-share.png);
+	background-position: 0 -42px;
+	background-repeat: no-repeat;
+	border: 4px solid #FFF;
+	border-radius: 24px;
+}
+
+.builderShare .modal-footer {
+	margin-top: 15px;
+}
+
+.builderShare .hide {
+	display: none;
+}
+
+/*
+ * Sharing buttons
+ */
+
+.builderShare .app-sharing-container {
+	display: block;
+	text-align: center;
+	font-size: 1.5em;
+}
+
+.builderShare .app-sharing-wrapper {
+	position: relative;
+	display: none;
+	text-align: center;
+	margin-left: -6px;
+}
+
+.builderShare .app-sharing-wrapper.enabled {
+	display: inline-block;
+}
+
+.builderShare .app-sharing-wrapper:first-child .app-sharing-icon {
+	border-left-width: 1px;
+	border-radius: 6px 0 0 6px;
+	padding: 3px 8px 6px 8px;
+	vertical-align: 1px;
+}
+
+.builderShare .app-sharing-wrapper.lastBtn .app-sharing-icon {
+	border-right-width: 1px;
+	border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.builderShare .locked {
+	cursor: default;
+	opacity: 0.5;
+	pointer-events: none;
+}
+
+.builderShare .app-sharing-icon {
+	background: transparent;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #C1CCD2;
+	border-radius: 0px;
+	border-left-width: 0px;
+	border-right-width: 1px;
+	color: #396e8b;
+	display: inline-block;
+	font-size: 2.4rem;
+	padding: 1px 6px 1px;
+}
+
+.builderShare .app-sharing-icon.active {
+    background: #396e8b;
+    color: white;
+}
+
+.builderShare .tooltip-content {
+	font-size: 1.8em;
+}
+
+/* the user icon */
+.builderShare .glyphicon-user:before {
+	font-size: 2rem;
+	margin-right: 4px;
+}
+
+.builderShare .app-sharing-private {
+	font-family: 'open_sansregular', sans-serif;
+}
+
+.builderShare .app-sharing-loading {
+	position: absolute;
+	display: none;
+	top: 0px;
+	left: 50%;
+	width: 33px;
+	height: 39px;
+	margin-left: -17px;
+	background: url(../../../../resources/tpl/viewer/icons/loading-light.gif);
+	background-size: 33px 39px;
+	background-repeat: no-repeat;
+}
+
+.builderShare .app-sharing-container .tooltip-inner {
+	text-align: center;
+}
+
+/*
+ * Preview / view live
+ */
+
+.builderShare .preview-container {
+	position: absolute;
+	margin-top: 5px;
+}
+
+/*
+ * Sharing action result
+ */
+
+.builderShare .sharing-action-result {
+	display: inline-block;
+	padding: 5px;
+	border-radius: 4px;
+	margin-top: 4px;
+	color: #a94442;
+	background-color: #f2dede;
+	border-color: #ebccd1;
+	font-weight: bold;
+}
+
+.builderShare .sharing-action-result.status-ok {
+	color: #3c763d;
+	background-color: #dff0d8;
+	border-color: #d6e9c6;
+}
+
+/*
+ * Story Status
+ */
+
+.builderShare .story-status {
+	width: 85%;
+	text-align: center;
+	font-size: 120%;
+	margin-top: 30px;
+	margin-left: auto;
+	margin-right: auto;
+	color: #CC3333;
+}
+
+
+/*
+ * Views
+ */
+
+.builderShare .views {
+	width: 100%;
+	height: 300px;
+	padding-top: 30px;
+}
+
+.builderShare .views .view {
+	display: none;
+	width: 100%;
+}
+
+.builderShare .views .view.active {
+	display: block;
+}
+
+/*
+ * View toggle
+ */
+
+.builderShare .view-toggle-container {
+	width: 100%;
+	text-align: center;
+	margin: 40px 0 -10px 0;
+}
+
+/*
+ * View: private story call to action
+ */
+
+.builderShare .private-story-call-to-action {
+	text-align: center;
+	font-size: 1.8em;
+	color: #339933;
+	margin-top: 85px;
+}
+
+/*
+ * View: My Stories
+ */
+
+.builderShare .sharing-container {
+	width: 100%;
+	text-align: center;
+	margin: 5px 0 0 0;
+}
+
+.builderShare #my-stories-frame {
+	width: 100%;
+	height: 285px;
+	border: none;
+}
+
+/*
+ * My stories -- checking loading indicator
+ */
+
+.builderShare .story-checking-container {
+	width: 100%;
+	text-align: center;
+	font-weight: bold;
+	font-size: 130%;
+	color: #396e8b;
+	margin: 80px 0 110px 0;
+}
+
+/*
+ * View: socialize
+ */
+
+.builderShare .view-share {
+	margin-top: 25px;
+}
+
+.builderShare .view-share .socialize-title,
+.builderShare .view-share .embed-title {
+	font-size: 1.3em;
+	color: #4B8BC9;
+	margin: 15px 0 20px 0;
+}
+
+.builderShare .view-share .btn-bitlylink-open {
+	display: none !important;
+}
+
+.builderShare .view-share .social-container {
+	font-size: 2.8em;
+	margin-top: 15px;
+}
+
+.builderShare .share-url-container {
+	display: inline-block;
+}
+
+.builderShare .share-url-container .bitlylink {
+	font-size: 26px;
+	width: 340px;
+	height: 46px;
+	padding-left: 27px;
+}
+
+.builderShare .share-url-container .share-btn {
+	height: 44px;
+	padding-top: 6px;
+}
+
+.builderShare .social-container .shareIcon:nth-child(2) {
+	margin-left: 10px;
+}
+
+
+.builderShare .share-embed-container .embedTextarea {
+	height: 86px;
+}
+
+.builderShare .share-embed-container .embed-explain {
+	display: none;
+}
+
+.builderShare .my-stories-call {
+	margin-top: 25px;
+	color: #555;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*
+ * Footer
+ */
+
+.builderShare .footer-msg {
+	float: left;
+}
+
+.builderShare .footer-msg a {
+	color: #428bca;
+	font-weight: normal;
+	vertical-align: -5px;
+}
+
+/*
+ * Firefox trick
+ */
+
+#my-stories-hidden-container.active {
+	display: block;
+	z-index: 999;
+	visibility: visible !important;
+	bottom: inherit !important;
+}
+
+#my-stories-hidden-container #my-stories-frame {
+	border: none;
+	width: 100%;
+	height: 100%;
+}

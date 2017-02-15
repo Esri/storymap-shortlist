@@ -1,0 +1,166 @@
+/*
+ * Mobile features list
+ */
+#mobilePaneList{
+	display: none;
+	position: absolute;
+	bottom: 0;
+	overflow-y: auto;
+	overflow-x: hidden;
+	width: 100%;
+	background-color:#fff;
+	-webkit-overflow-scrolling: touch;
+}
+
+#mobilePaneList .noFeature{
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	bottom: 0;
+	display: none;
+}
+
+#mobilePaneList .noFeatureText{
+	top: 30%;
+	left: 50%;
+	position: absolute;
+	width: 200px;
+	margin-left: -100px;
+	text-align: center;
+}
+
+ul.mobileTileList {
+	margin-top:0px;
+	-webkit-padding-start: 0px;
+	margin-left: 0;
+	padding-left: 0;
+	-webkit-overflow-scrolling: touch;
+}
+
+ul.mobileTileList li {
+	list-style-type: none;
+	box-shadow: 1px 1px 3px #000;
+	-webkit-box-shadow: 1px 1px 3px #000;
+	margin: 2px;
+	width: 100%;
+	font-family: 'open_sanssemibold', sans-serif;
+	font-size:14px;
+	cursor:pointer;
+	position:relative;
+	overflow: hidden;
+}
+
+/*ul.mobileTileList li:hover {
+	background-color: #E7E7E7;
+}*/
+
+ul.mobileTileList > a {
+	display: block;
+	position: relative;
+	text-decoration: none;
+	color: #FFFFFF;
+	width: 98px;
+	height: 75px;
+}
+
+.mobileTileListImg {
+	height: inherit;
+	background-size: cover;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	margin:3px 5px 0 7px;
+}
+
+ul.mobileTileList p {
+	margin: 0px;
+	margin-left: -40px;
+	margin-top: -10px;
+}
+
+ul.mobileTileList .mobileInfo {
+	position:absolute;
+	top:113px;
+	width: 40%;
+}
+
+ul.mobileTileList .num {
+	width:30px;
+	position: absolute;
+	left: 117px;
+	top: 3px;
+	border:solid;
+	border-width:thin;
+	color:white;
+	font-size:14px;
+	text-align:center;
+}
+
+ul.mobileTileList .blurb {
+	height: 70px;
+	position: absolute;
+	left: 117px;
+	top: 24px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/*
+ * Mobile Theme/Nav Bar
+ */
+#mobileThemeBar{
+	visibility: hidden;
+	width: 100%;
+	top: 48%;
+	height: 40px;
+	background-color: rgb(68, 68, 68);
+	position: absolute;
+	color: #FFF;
+}
+
+#mobileThemeSliderContainer{
+	height: 40px;
+}
+
+.mobileThemeTitle {
+	cursor: default;
+	font-size: 18px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-family: 'open_sanssemibold', sans-serif;
+	text-align: center;
+	float: left;
+}
+
+#navThemeLeft{
+	top: 0;
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	color: #ccc;
+	font-weight: bold;
+	font-size: 28px;
+	z-index: 50;
+	cursor: pointer;
+}
+
+#navThemeLeft:hover{
+	color: #fff;
+}
+
+#navThemeRight{
+	top: 0;
+	right: 0;
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	color: #ccc;
+	font-weight: bold;
+	font-size: 28px;
+	z-index: 50;
+	cursor: pointer;
+}
+
+#navThemeRight:hover{
+	color: #fff;
+}

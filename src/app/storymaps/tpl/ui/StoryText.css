@@ -1,0 +1,244 @@
+.section {
+	word-wrap: break-word;
+	word-break: break-word;
+}
+
+.section img {
+	max-width: 100%;
+}
+
+/*
+ * Map Actions
+ * Partially duplicated in storymaps/common/builder/ckeditor/editor.css
+ */
+
+.section a:not([data-storymaps]) {
+	text-decoration: underline;
+}
+
+/*
+.section a:not([data-storymaps]):hover {
+	text-decoration: none;
+}
+*/
+
+/*
+.section a:not([data-storymaps]):after {
+	display:inline-block;
+	font-family: 'Glyphicons Halflings';
+	content: "\e164";
+	margin-left: 2px;
+	font-size: 70%;
+}
+*/
+
+.section a[data-storymaps] {
+ 	border-bottom: 1px dashed #555;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+/*
+ * Inline media
+ */
+
+figure {
+	margin: 15px 0;
+	display: block; /* For IE8 */
+	max-width: 100%;
+}
+
+figure img {
+	max-width: 100%;
+}
+
+figure figcaption {
+	text-align: left;
+	display: block; /* For IE8 */
+	font-size: 0.85em;
+	color: #ADADAD;
+	margin-top: 6px;
+}
+
+/*
+ * Image full screen V1.0
+ */
+
+/*
+ * Extra wrapper around image and full screen button
+ *  for proper alignement of full screen button in all text centering
+ */
+
+.image-wrapper {
+	display: inline-block;
+	position: relative;
+	cursor: default;
+	pointer-events: none;
+	min-width: 36px;
+	min-height: 36px;
+	max-width: 100%;
+}
+
+.btn-fullscreen {
+	display: inline-block;
+	position: absolute;
+	right: 10px;
+	width: 26px;
+	height: 26px;
+	background: url('../../../../resources/tpl/viewer/icons/media-fullscreen.png') 0 0;
+	opacity: 0.6;
+	margin-top: 10px;
+}
+
+.btn-fullscreen:hover {
+	opacity: 1.0;
+	cursor: pointer;
+}
+
+/*
+ * The container is supposed to be an image-container except when ckeditor bug and decide to use a p
+ * (seems to happen a lot when playing with alignement)
+ */
+/*.image-container*/.has-width:not(.float-right) .btn-fullscreen {
+	vertical-align: top;
+}
+
+/* sometimes the RTE get rid of the fullscreen class so assume user wants that */
+p.has-width.float-right img {
+	cursor: pointer;
+}
+
+.image-container.has-width.float-right {
+	text-align: right !important;
+}
+
+.image-container:not(.activate-fullscreen) .btn-fullscreen {
+	display: none;
+}
+
+p:not(.activate-fullscreen) > .image-wrapper > .btn-fullscreen {
+	display: none;
+}
+
+.image-container.activate-fullscreen > .image-wrapper,
+.image-container.activate-fullscreen > span > .image-wrapper,
+.image-container.activate-fullscreen > p > .image-wrapper,
+/* that should not happen */
+figure > .image-wrapper {
+	cursor: pointer;
+	pointer-events: all;
+}
+
+p[tabindex='0'] > .image-wrapper {
+	cursor: pointer;
+	pointer-events: all;
+}
+
+/*
+ * Image included in a link
+ * The full screen button is not honored but the link is
+ */
+
+.image-container > a > .image-wrapper {
+	cursor: pointer;
+	pointer-events: all;
+}
+
+.image-container > a > .image-wrapper img {
+	pointer-events: none;
+}
+
+.image-container > a > .image-wrapper .btn-fullscreen {
+	display: none;
+}
+
+/*
+ * Image full screen compatibility for V1.0-beta
+ */
+
+.btn-fullscreen-container {
+ 	display: block;
+}
+
+.btn-fullscreen-container > span {
+ 	display: block;
+}
+
+/*
+ * Image full screen modal
+ */
+
+#cboxContent {
+	position: initial !important;
+}
+
+/* Title of the full screen box */
+#cboxTitle {
+	padding: 0 25px;
+	overflow: hidden;
+	height: 19px;
+	bottom: 20px !important;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+#cboxClose {
+	top: 0px;
+	bottom: initial !important;
+	width: 39px !important;
+	height: 39px;
+	background: url('../../../../resources/tpl/viewer/icons/media-fullscreen-close.png') !important;
+	color: transparent !important;
+}
+
+#cboxClose:hover {
+	background-position-y: -39px !important;
+}
+
+/*
+ * Iframe
+ */
+
+.iframe-container.custom iframe {
+	max-width: 100%;
+}
+
+/*
+ * Main Stage BACK
+ */
+
+.mediaBackContainer {
+	display: none;
+	position: absolute;
+	top: 0px;
+	text-align:center;
+	z-index: 30;
+}
+
+.backButton {
+	display:inline-block;
+	border: 1px solid #428BC9;
+	border-top: none;
+	background-color: #FFF;
+	color: #000;
+	font-size: 20px;
+	padding: 9px 18px 6px 15px;
+	cursor: pointer;
+	z-index: 30;
+	box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+.backArrow {
+	display: inline-block;
+	width: 28px;
+	height: 28px;
+	background: url('../../../../resources/tpl/viewer/icons/mainmedia-back.png');
+	margin-right: 6px;
+}
+
+.backLbl {
+	font-size: 1.2em;
+	vertical-align: 6px;
+	font-family: 'open_sanssemibold', sans-serif;
+	text-transform: uppercase;
+}

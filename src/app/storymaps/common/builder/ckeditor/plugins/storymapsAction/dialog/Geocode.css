@@ -1,0 +1,22 @@
+.editorDialogGeocode {
+	z-index: 9996;
+}
+
+.editorDialogGeocode .mapDiv {
+	position: relative;
+}
+
+.editorDialogGeocode .map {
+	width: 100% !important;
+}
+
+.editorDialogGeocode .searchGroup {
+	display: block;
+	position: absolute;
+	top: 20px;
+	left: 70px;
+}
+
+.editorDialogGeocode .mapMarker {
+	margin-top: 5px;
+}

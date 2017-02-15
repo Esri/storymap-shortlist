@@ -1,0 +1,52 @@
+.imageSelectorHome {
+	padding: 25px 0;
+}
+
+.imageSelectorHome .imageSelectorTable {
+	width: 100%;
+	text-align: center;
+	font-size: 22px;
+	color: #444;
+}
+
+.imageSelectorHome .imageSelectorTable .fa {
+	font-size: 26px;
+	margin-right: 4px;
+}
+
+.imageSelectorHome .btn-container.disabled {
+	display: none !important;
+}
+
+.imageSelectorHome.two-choices .imageSelectorTable {
+	width: 100%;
+}
+
+.imageSelectorHome .imageSelectorTable .btn-container {
+	padding: 10px 0;
+	width: auto;
+}
+
+.mediaSelector.smallSize .imageSelectorHome .imageSelectorTable .btn-container {
+	padding: 15px 0;
+}
+
+.imageSelectorHome .imageSelectorTable .btn-container.disabled {
+	opacity: 0.4;
+	cursor: default !important;
+}
+
+.imageSelectorHome .imageSelectorTable .btn-container.disabled a {
+	cursor: default !important;
+}
+
+.imageSelectorHome .imageSelectorTable .btn-container:hover {
+	background-color: #BDD1E2;
+	cursor: pointer;
+	border-radius: 10px;
+}
+
+.facebook-warning {
+	text-align: center;
+	font-size: 80%;
+}
