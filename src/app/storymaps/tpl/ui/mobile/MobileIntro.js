@@ -45,25 +45,31 @@ define([
 
 			this.fillList = function(index, theme, themes)
 			{
-				// initMap, after contentLayers are set if more than one tab layer
-				if(index === 0)
-					$('#mobileIntro').append('<ul id="mobileThemeList" style=" height: 80px; line-height: 80px;" class="mobileTileList introList">');
-
-				var introList = $('<li class="mobileTitleThemes">').append('<span style="width: 100%;margin-left: 30px; margin-right: 30px; vertical-align: middle; line-height: 20px; display: inline-block;">' + theme.title + '</span>');
-				introList.on('click', function(){
-					_this.selectMobileTheme(index);
-				});
-				if(index === 0)
-					$(introList).css('border-width', '2px 0px 1px 0px');
-				if(index == (themes.length - 1))
-					$(introList).css('border-width', '1px 0px 2px 0px');
-				$('#mobileThemeList').append(introList);
 
 				// if only one layer
-				/*$('#mobileIntro').append("<br><hr></hr>");
-				$('#mobileIntro').append('<ul id="mobileThemeList" class="mobileTileList">');
-				var introList = $('<li class="mobileTitleTheme" onclick="selectMobileTheme(' + 0 + ')">').append('<div class="startButton"> Start </div>');
-				$('#mobileThemeList').append(introList);*/
+				if(themes.length == 1){
+					$('#mobileIntro').append("<br><hr></hr>");
+					$('#mobileIntro').append('<ul id="mobileThemeList" class="mobileTileList">');
+					var introList = $('<li class="mobileTitleTheme">').append('<div class="startButton"> Start </div>');
+					introList.on('click', function(){
+						_this.selectMobileTheme(0);
+					});
+					$('#mobileThemeList').append(introList);
+				}else{
+					// initMap, after contentLayers are set if more than one tab layer
+					if(index === 0)
+						$('#mobileIntro').append('<ul id="mobileThemeList" style=" height: 80px; line-height: 80px;" class="mobileTileList introList">');
+
+					var introList = $('<li class="mobileTitleThemes">').append('<span style="width: 100%;margin-left: 30px; margin-right: 30px; vertical-align: middle; line-height: 20px; display: inline-block;">' + theme.title + '</span>');
+					introList.on('click', function(){
+						_this.selectMobileTheme(index);
+					});
+					if(index === 0)
+						$(introList).css('border-width', '2px 0px 1px 0px');
+					if(index == (themes.length - 1))
+						$(introList).css('border-width', '1px 0px 2px 0px');
+					$('#mobileThemeList').append(introList);
+				}
 			};
 
 			this.resizeMobileElements = function()

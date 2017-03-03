@@ -23,13 +23,18 @@ define([],
 			mediaPickerConfigureForceMode: 'shortlist',
 			disableAutoPlay: true,
 			noAppTitleInitScreen: true,
-			mapExtentFit: false,
+			mapExtentFit: true,
 			noFastClick: true,
-			deleteProtect: true,
+			deleteProtect: app.isProduction ? true : false,
 			noStoryLengthRequired: true,
-			disableImageUpload: true,
+			disableImageUpload: false,
 			disableImageImportUpload: true,
-			disableFBWarning: true
+			disableFBWarning: true,
+			disableBuilderTour: true,
+			imageUploadThumbWidth: 250,
+			useImageEXIF: true,
+			noAppThemes: true,
+			disableGalleryCreationSaveGeocoders: true
 		};
 
 		return {

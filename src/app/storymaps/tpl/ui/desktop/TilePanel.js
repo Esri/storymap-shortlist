@@ -1,9 +1,10 @@
 define(["esri/geometry/screenUtils",
 		"../../core/Helper",
+		"storymaps/common/utils/CommonHelper",
 		"lib-build/tpl!./TilePanel",
 		"lib-build/css!./TilePanel",
 		"../../core/WebApplicationData"],
-	function(screenUtils, Helper, tilePanel){
+	function(screenUtils, Helper, CommonHelper, tilePanel){
 		return function TilePanel(container, mainView, WebApplicationData)
 		{
 			var _this = this;
@@ -71,10 +72,13 @@ define(["esri/geometry/screenUtils",
 
 				if(!app.layerCurrent || !app.layerCurrent.graphics || !app.layerCurrent.graphics.length)
 					return;
+				var atts = app.layerCurrent.graphics[0].attributes;
 
-				if(app.layerCurrent.graphics[0].attributes.number){
+				var numberAttribute = atts.number ? 'number' : atts.Number ? 'Number' : atts.NUMBER ? 'NUMBER' : null;
+
+				if(numberAttribute){
 					app.layerCurrent.graphics.sort(function(a,b){
-						return parseInt(a.attributes.number) - parseInt(b.attributes.number);
+						return parseInt(a.attributes[numberAttribute]) - parseInt(b.attributes[numberAttribute]);
 					});
 				}
 
@@ -88,26 +92,36 @@ define(["esri/geometry/screenUtils",
 					}
 					tile = $('<li tabindex="0" id="item'+value.attributes.shortlist_id+'" style="display:'+display+'">');
 					img = $('<div class="tileImage"></div>');
-					if(value.attributes.thumb_url){
-						$(img).css('background-image', 'url(' + value.attributes.thumb_url + ')');
+					var atts = value.attributes;
+					var thumbUrl = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'thumb_url';})[0]];
+					var picUrl = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'pic_url';})[0]];
+					if(thumbUrl){
+						if(thumbUrl.indexOf("sharing/rest/content/items/") > -1)
+							thumbUrl = CommonHelper.possiblyAddToken(thumbUrl);
+						$(img).css('background-image', 'url(' + thumbUrl + ')');
 						$(img).find('i').hide();
 					}
-					else if(value.attributes.pic_url) {
-						$(img).css('background-image', 'url(' + value.attributes.pic_url + ')');
+					else if(picUrl) {
+						thumbUrl = picUrl;
+						if(thumbUrl.indexOf("sharing/rest/content/items/") > -1)
+							thumbUrl = CommonHelper.possiblyAddToken(thumbUrl);
+						$(img).css('background-image', 'url(' + thumbUrl + ')');
 						$(img).find('i').hide();
 					} else{
 						$(img).append('<i class=" fa fa-camera" aria-hidden="true"></i>');
 					}
 					footer = $('<div class="footer"></div>');
-					var titleText = value.attributes.name || 'Unnamed Place';
+					var name = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'name';})[0]];
+					var titleText = name || 'Unnamed Place';
 					title = $('<div class="blurb">'+ titleText +'</div>');
 					if(WebApplicationData.getGeneralOptions().numberedIcons){
+						var featNumber = app.layerCurrent.graphics[index].attributes.number || app.layerCurrent.graphics[index].attributes.Number || app.layerCurrent.graphics[index].attributes.NUMBER;
 						if(value.attributes.number < 100){
-							num = $('<div class="num" style="background-color:'+app.layerCurrent.color+'">'+value.attributes.number+'</div>');
+							num = $('<div class="num" style="background-color:'+app.layerCurrent.color+'">'+featNumber+'</div>');
 						}
 						else{
-							num = $('<div class="num longNum" style="background-color:'+app.layerCurrent.color+'">'+value.attributes.number+'</div>');
-							title = $('<div class="blurb longNumBlurb">'+value.attributes.name+'</div>');
+							num = $('<div class="num longNum" style="background-color:'+app.layerCurrent.color+'">'+featNumber+'</div>');
+							title = $('<div class="blurb longNumBlurb">'+name+'</div>');
 						}
 						$(footer).append(num);
 					}
@@ -117,7 +131,7 @@ define(["esri/geometry/screenUtils",
 					app.ui.mobileFeatureList.buildList(index, value, tile);
 					$(tile).append(img);
 					if(app.isInBuilder){
-						if(value.attributes.locationSet)
+						if(value.attributes.locationSet || app.data.getWebAppData().getIsExternalData())
 							$(tile).addClass('located');
 						else{
 							$(tile).find('.tileImage').append('<div class="unlocated" style="outline: none;"></div>');
@@ -231,7 +245,9 @@ define(["esri/geometry/screenUtils",
 					match[0].draw();
 					if (!_helper.isIE())
 						_mainView.moveGraphicToFront(match[0]);
-					_mainView.buildMapHoverTips(match[0].attributes.name, match[0]);
+					var atts = match[0].attributes;
+					var name = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'name';})[0]];
+					_mainView.buildMapHoverTips(name, match[0]);
 				}
 			};
 
@@ -283,7 +299,7 @@ define(["esri/geometry/screenUtils",
 				if(!_mainView.themeSelected)
 					app.ui.mobileFeatureList.selectTheme(0);
 				_mainView.themeSelected = true;
-			}
+			};
 
 			/******************************************************
 			****************** 508 *******************************

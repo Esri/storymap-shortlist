@@ -1,3 +1,36 @@
 .settings-mapoptions {
 	margin-top: 10px;
 }
+
+.settings-mapoptions .checkbox:first-of-type {
+	margin-top: -10px;
+}
+
+.settings-mapoptions.radio+.radio, .checkbox+.checkbox {
+	margin-top: 0;
+}
+
+.extentModeTooltip {
+	left: 5px;
+	top: -14px;
+	position: relative;
+}
+
+.bookmarksContainer {
+	margin-top: 20px;
+}
+
+.bookmarksContainer span, .bookmarksContainer img{
+	opacity: 1;
+	cursor: pointer;
+}
+
+.bookmarkTooltip{
+	position: absolute;
+	top: 142px;
+	left: 125px;
+}
+
+.tooltip-inner {
+	min-width: 100px;
+}

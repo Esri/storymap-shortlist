@@ -39,10 +39,12 @@ define(["lib-build/tpl!./InitPopup",
 
 			function showNextView()
 			{
-				_initCompleteDeferred.resolve({
-					ok: true,
-					pickWebmap: false
-				});
+				if(_initCompleteDeferred){
+					_initCompleteDeferred.resolve({
+						ok: true,
+						pickWebmap: false
+					});
+				}		
 			}
 
 			function enterEvent(e)

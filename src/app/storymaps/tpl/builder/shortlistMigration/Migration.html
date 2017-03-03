@@ -3,31 +3,34 @@
 	<div class="modal-content">
 		<div class="modal-logo edit"></div>
 		<div class="modal-header">
-			<h4 class="modal-title">Welcome to the Shortlist Builder</h4>
+			<h4 class="modal-title"><%= welcome %></h4>
 		</div>
 
 		<div class="modal-body">
 
 			<div class="tab-pane viewMigrationSelectorContainer">
-				<div class="importQuestion">
-					Your web map contains point data.  Do you want to import those points into your Shortlist as places?
-				</div>
+				<div class="importQuestion"><%= importQuestion %></div>
 
 				<div class="radio">
 					<label class="opt-radio-import">
-						<input type="radio" name="optradio" value="1" checked=true/>
-						Yes
+						<input type="radio" name="optradio" value="import" checked=true/>
+						<%= importOption %>
 					</label>
-					<div class="importExplain">You will be able to edit, manage and add to your places in the Shorlist Builder.  A copy of your web map
-					is automatically created so your original data is not modified.</div>
+					<div class="importExplain"><%= importExplainYes %></div>
+				</div>
+				<div class="radio">
+					<label class="opt-radio-import">
+						<input type="radio" name="optradio" value="as-is" />
+						<%= asIsOption %>
+					</label>
+					<div class="importExplain"><%= asIsText %></div>
 				</div>
 				<div class="radio">
 					<label class="opt-radio-import">
 						<input type="radio" name="optradio" value="0" />
-						No
+						<%= no %>
 					</label>
-					<div class="importExplain">Your points will be displayed on your Shortlist map but won't be used as places.  Instead you'll add your
-					places into your Shortlist in the Builder.</div>
+					<div class="importExplain"><%= importExplainNo %></div>
 				</div>
 
 			</div>

@@ -1,9 +1,9 @@
 .settings-generaloptions {
-	margin-top: 10px;
+	margin-top: 60px;
 }
 
 .settings-generaloptions .opt-container {
-	margin-top: 15px;
+	margin-top: 25px;
 }
 
 .settings-generaloptions .container-padding {
@@ -26,12 +26,6 @@
 	margin-top: -35px;
 }
 
-.extentModeTooltip {
-	left: 5px;
-	top: -14px;
-	position: relative;
-}
-
 .opt-more-infoLink-alias-cont {
 	display: none;
 	margin-left: 25px;
@@ -41,15 +35,4 @@
 .checkbox.disabled, .checkbox.disabled div, .checkbox.disabled label, .checkbox.disabled checkbox, .checkbox.disabled input{
 	opacity: 0.8;
 	cursor: not-allowed;
-}
-
-.bookmarksContainer span, .bookmarksContainer img{
-	opacity: 1;
-	cursor: pointer;
-}
-
-.bookmarkTooltip{
-	position: absolute;
-	top: 139px;
-	left: 125px;
 }

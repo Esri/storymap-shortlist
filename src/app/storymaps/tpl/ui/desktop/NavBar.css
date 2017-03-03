@@ -3,7 +3,7 @@
 	width: 100%;
 	cursor: default;
 	position: relative;
-	z-index: 3;
+	z-index: 99;
 }
 
 .disableUse{
@@ -113,6 +113,7 @@
 	right: 4px;
 	max-height: 250px;
 	overflow-y: auto;
+	width: auto;
 }
 
 /*

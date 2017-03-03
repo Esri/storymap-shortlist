@@ -77,12 +77,16 @@ function defineDojoConfig()
 			['underscore', 'lib-build/lodash']
 		]
 	};
+
+	if (location.search.match(/locale=([\w\-]+)/)) {
+		window.dojoConfig.locale = RegExp.$1;
+	}
 }
 
 app.isProduction = false;
 
 defineDojoConfig();
-window.dojoConfig.locale = 'en';
+
 
 app.isInBuilder = getUrlVar('edit') || getUrlVar('fromScratch') || getUrlVar('fromscratch');
 app.indexCfg = configOptions;

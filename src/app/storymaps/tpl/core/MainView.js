@@ -32,6 +32,7 @@ define(["lib-build/css!./MainView",
 		"esri/geometry/Point",
 		"esri/geometry/screenUtils",
 		"esri/geometry/Extent",
+		"esri/dijit/Search",
 		"esri/SpatialReference",
 		"lib-build/css!../ui/Common",
 		"lib-build/css!../ui/mobile/Common",
@@ -69,6 +70,7 @@ define(["lib-build/css!./MainView",
 		Point,
 		screenUtils,
 		Extent,
+		Search,
 		SpatialReference
 	){
 		/**
@@ -89,32 +91,13 @@ define(["lib-build/css!./MainView",
 			var _firstMapLoad = 0;
 			var _iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 			var _urlParams = CommonHelper.getUrlParams();
+			var _builtThemes = null;
 			_this.mapIsPanning = false;
 			_this.mapIsZooming = false;
 
 			this.init = function(core)
 			{
 				_core = core;
-
-				//----------------------------------------------
-				// Development - TODO to be removed for release
-				//----------------------------------------------
-				/*
-				if ( app.isProduction ) {
-					require(["esri/IdentityManager", "dojo/on"], function(IdentityManager, on){
-						CommonHelper.isArcGISHosted = function(){ return true; };
-
-						on(IdentityManager, 'dialog-create', function(){
-							on(IdentityManager.dialog, 'show', function(){
-								IdentityManager.dialog.txtUser_.set('value', window.configOptions.username);
-								IdentityManager.dialog.txtPwd_.set('value', window.configOptions.password);
-								IdentityManager.dialog.btnSubmit_.onClick();
-							});
-						});
-					});
-				}
-				*/
-				//----------------------------------------------
 
 				// Do not allow builder under IE 10
 				if( app.isInBuilder && has("ie") && has("ie") < 10) {
@@ -229,8 +212,9 @@ define(["lib-build/css!./MainView",
 				// If the app has been loaded but it's blank it means user come from the gallery
 				// FromScratch doesn't get here
 				// From the webmap has the webmap id
-				app.isGalleryCreation = ! app.data.getWebAppData().getOriginalData()
-					|| ! Object.keys(app.data.getWebAppData().getOriginalData().values).length;
+
+				app.isGalleryCreation = ! app.data.getWebAppData().getWebmap();/*! app.data.getWebAppData().getOriginalData()
+					|| ! Object.keys(app.data.getWebAppData().getOriginalData().values).length;*/
 			};
 
 			this.loadFirstWebmap = function(webmapIdOrJSON)
@@ -279,16 +263,326 @@ define(["lib-build/css!./MainView",
 
 			this.getMapConfig = function(response)
 			{
+				var geocoder = app.data.getWebAppData().getGeneralOptions().geocoder ? app.data.getWebAppData().getGeneralOptions().geocoder : false;
 				return {
 					response: response,
 					mapCommand: new MapCommand(
 						response.map,
 						resetEntryMapExtent,
 						_core.zoomToDeviceLocation,
-						app.data.getWebAppData().getLocateBtn()
+						app.data.getWebAppData().getGeneralOptions().locateButton
+					),
+					geocoder: new Geocoder(
+						response.map,
+						app.isInBuilder,
+						geocoder,
+						populateSearchLayerTitles(response)
 					)
 				};
 			};
+
+			function populateSearchLayerTitles(response) {
+				var itemData = response.itemInfo.itemData;
+				var appProps = itemData.applicationProperties;
+				var searchOptions = appProps && appProps.viewing && appProps.viewing.search;
+				var opLyrs = itemData.operationalLayers || [];
+				if (!searchOptions) {
+					return;
+				}
+
+				searchOptions.layers.forEach(function(searchLyrInfo) {
+					_.find(opLyrs, function(opLyrInfo) {
+						if (opLyrInfo.id === searchLyrInfo.id) {
+							searchLyrInfo.name = opLyrInfo.name;
+							searchLyrInfo.title = opLyrInfo.title;
+							return true;
+						}
+					});
+				});
+				return searchOptions;
+			}
+
+			this.processExternalData = function(){
+				var layers = [];
+				$.each(app.map.graphicsLayerIds, function(i, id){
+					var possibleLayer = app.map.getLayer(id);
+					if(possibleLayer.graphics && possibleLayer.geometryType === 'esriGeometryPoint')
+						layers.push(possibleLayer);
+				});
+				layers.reverse();
+				var featServUrl = [];
+				var featServLayerIndex = [];
+
+				var featServLayerID = null;
+				var layerType;
+				var layerFound = false;
+
+				$.each(layers, function(index, layer){
+					if(layer.layerType){
+						layerType = layer.layerType;
+					}else{
+						layerType = layer.type;
+					}
+					if (layer.url && (layerType === 'ArcGISFeatureLayer' || layerType === 'Feature Layer') && !layer.id.match(/^csv_/)) {
+						featServLayerID = layer;
+						featServUrl.push(layer.url);
+						featServLayerIndex.push(index);
+					}
+
+
+					if(layer.graphics.length < 1){
+						layer.on('update-end', function(){
+							if(layerFound){
+								/*if(_builtThemes){
+									$.each(_builtThemes, function(index, theme){
+										_this.buildLayer(
+											theme.features,
+											theme.color
+										);
+									});
+								}*/
+								buildThemes(layer, featServLayerIndex);
+								return;
+							}
+							var fields = layer.fields;
+							var tabField;
+							$.each(fields, function(index, field){
+								if(field.name.toLowerCase() == 'tab_name')
+									tabField = true;
+							});
+							if(tabField){
+								buildThemes(layer, featServLayerIndex);
+								layerFound = true;
+							}
+							if(!tabField && index == layers.length - 1){
+								var message = i18n.builder.migration.migrationPattern.badData;
+								message += '  (<a href="http://links.esri.com/storymaps/shortlist_layer_template" target="_blank" download="">'+i18n.builder.migration.migrationPattern.downloadTemplate+'</a>)';
+								$("#fatalError .error-msg").html(message);
+								$("#fatalError").show();
+								return;
+							}
+						});
+						app.map.on('zoom-start', function(){
+							layer.hide();
+						});
+						app.map.on('zoom-end', function(){
+							layer.show();
+						});
+						/*dojo.connect(layer, 'onUpdateEnd', function(){
+							var fields = layer.fields;
+							var tabField;
+							$.each(fields, function(index, field){
+								if(field.name.toLowerCase() == 'tab_name')
+									tabField = true;
+							});
+							if(tabField){
+								buildThemes(layer, featServLayerIndex);
+								layerFound = true;
+							}
+							if(!tabField && index == layers.length - 1){
+								var message = i18n.builder.migration.migrationPattern.badData;
+								message += '  (<a href="http://links.esri.com/storymaps/shortlist_layer_template" target="_blank" download="">'+i18n.builder.migration.migrationPattern.downloadTemplate+'</a>)';
+								$("#fatalError .error-msg").html(message);
+								$("#fatalError").show();
+								return;
+							}
+						});*/
+					}else{
+						if(layerFound)
+							return;
+						var fields = layer.fields;
+						var tabField;
+						$.each(fields, function(index, field){
+							if(field.name.toLowerCase() == 'tab_name')
+								tabField = true;
+						});
+						if(tabField){
+							buildThemes(layer, featServLayerIndex);
+							layerFound = true;
+						}
+						if(!tabField && index == layers.length - 1){
+							var message = i18n.builder.migration.migrationPattern.badData;
+							message += '  (<a href="http://links.esri.com/storymaps/shortlist_layer_template" target="_blank" download="">'+i18n.builder.migration.migrationPattern.downloadTemplate+'</a>)';
+							$("#fatalError .error-msg").html(message);
+							$("#fatalError").show();
+							return;
+						}
+
+					}
+				});
+				$('home-location-save-btn').remove();
+			};
+
+			function buildThemes(layer, featServLayerIndex)
+			{
+				var themes = [];
+				var newThemes = [];
+				var fields = layer.fields;
+
+				var name = false;
+				var pic = false;
+				var featureNumber = null;
+				$.each(fields, function(index, field){
+					if(field.name.toLowerCase() == 'name')
+						name = true;
+					if(field.name.toLowerCase() == 'pic_url')
+						pic = true;
+					if(field.name.toLowerCase() == 'number')
+						featureNumber = field.name;
+				});
+
+				// If layer does not contain a name or pic field, we return error.
+				// Since this is an existing web map, we assume location is present.
+				if(!name || !pic){
+					var message = i18n.builder.migration.migrationPattern.badData;
+					message += '  (<a href="http://links.esri.com/storymaps/shortlist_layer_template" target="_blank" download="">'+i18n.builder.migration.migrationPattern.downloadTemplate+'</a>)';
+					$("#fatalError .error-msg").html(message);
+					$("#fatalError").show();
+					return;
+				}
+				app.data.setShortlistLayerId(layer.id);
+				app.data.getWebAppData().setShortlistLayerId(layer.id);
+				layer.setScaleRange(0,0);
+				layer.on("mouse-over", _this.layer_onMouseOver);
+				layer.on("mouse-out", _this.layer_onMouseOut);
+				layer.on("click", _this.layer_onClick);
+
+				var supportingLayers = [];
+				$.each(app.map.graphicsLayerIds, function(index, id){
+					if(id !== layer.id)
+						supportingLayers.push(app.map.getLayer(id));
+				});
+				$.each(supportingLayers, function(index, supportingLayer){
+					supportingLayer.on('click', baselayer_onClick);
+				});
+
+				if(app.isInBuilder){
+					app.map.on('pan-start', function(){
+						app.ui.mainView.mapIsPanning = false;
+					});
+					app.map.on('pan-end', function(){
+						setTimeout(function(){
+							app.ui.mainView.mapIsPanning = false;
+						}, 800);
+					});
+
+					app.map.on('zoom-start', function(){
+						app.ui.mainView.mapIsZooming = false;
+					});
+					app.map.on('zoom-end', function(){
+						setTimeout(function(){
+							app.ui.mainView.mapIsZooming = false;
+						}, 800);
+					});
+				}
+
+				app.map.on('click',function(e){
+					if(_this.mapIsPanning || _this.mapIsZooming)
+						return;
+					if(app.mapTips){
+						if(!e.graphic){
+							app.mapTips.clean(true);
+							if(_this.selected && !app.isInBuilder)
+								_this.selected.hidden = true;
+						}else{
+							if(_this.selected)
+								_this.selected.hidden = false;
+						}
+					}
+				});
+
+				app.map.reorderLayer(layer, app.map.graphicsLayerIds.length);
+
+				$.each(layer.graphics, function(index, graphic){
+					var atts = layer.graphics[index].attributes;
+					var tabField = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'tab_name';})[0]];
+					if(!tabField)
+						return;
+					if(newThemes.indexOf(tabField) < 0) {
+						newThemes.push(tabField);
+						themes.push({
+							features:[],
+							extent: null,
+							title: tabField
+						});
+						var themeIndex = themes.length - 1;
+						themes[themeIndex].id = themeIndex;
+						var color;
+						if(!app.data.getWebAppData().getTabs()[themeIndex] || !app.data.getWebAppData().getTabs()[themeIndex].color){
+							var colorIndex = themeIndex;
+							if(colorIndex > 7)
+								colorIndex = colorIndex % 7;
+
+							var colorOrder = app.cfg.COLOR_ORDER.split(",");
+							var colorScheme = $.grep(app.cfg.COLOR_SCHEMES, function(n){
+								return n.name.toLowerCase() == $.trim(colorOrder[colorIndex].toLowerCase());
+							})[0];
+							color = colorScheme.color;
+						} else{
+							color = app.data.getWebAppData().getTabs()[themeIndex].color;
+						}
+
+						themes[themes.length - 1].color = color;
+						app.data.setStory(themeIndex, tabField, color);
+					}
+					$.grep(themes,function(n, i){if(n.title == tabField){
+						graphic.attributes.tab_id = i;
+						graphic.attributes.shortlist_id = themes[i].features.length + 1;
+						if(!featureNumber)
+							graphic.attributes.number = themes[i].features.length + 1;
+						else{
+							graphic.attributes.number = graphic.attributes[featureNumber];
+						}
+						n.features.push(graphic);
+					}});
+				});
+				if(featureNumber){
+					//order features
+					layer.graphics.sort(SortByNumber);
+				}
+				var colors = {
+					header: '#444',
+					tabText: '#d8d8d8',
+					tab: '#666',
+					tabTextActive: '#fff',
+					tabActive: app.data.getStory()[0].color,
+					tabTextHover: '#fff',
+					tabHover: '#666'
+				};
+				app.ui.navBar.init(themes, 0, colors, app.data.getWebAppData());
+
+				if(themes.length == 1 && !app.isInBuilder)
+					$(".entries").css("display", "none");
+
+				$.each(themes, function(index, theme){
+					_this.buildLayer(
+						theme.features/*.sort(SortByNumber)*/,
+						theme.color
+					);
+				});
+
+				$.each(themes, function(index, theme){
+					app.ui.mobileIntro.fillList(index, theme, themes);
+					var oneTheme = false;
+					if(themes.length == 1){
+						oneTheme = true;
+						$('#navThemeLeft').addClass('hideButtons');
+						$('#navThemeRight').addClass('hideButtons');
+					}
+					app.ui.mobileFeatureList.addTheme(theme, oneTheme);
+				});
+
+				_this.activateLayer(0, themes);
+				$('#basemapChooser').remove();
+				_core.appInitComplete(WebApplicationData);
+				if(app.data.getWebAppData().getIsExternalData() && app.isWebMapFirstSave){
+					setTimeout(function(){
+						_core.displayApp();
+					}, 0);
+				}
+
+
+			}
 
 			function storyDataReady()
 			{
@@ -300,6 +594,10 @@ define(["lib-build/css!./MainView",
 					data: WebApplicationData.getStoryTestPanel()
 				});*/
 
+				if(app.data.getWebAppData().getIsExternalData()){
+					app.data.getWebAppData().setMapExtent(app.maps[app.data.getWebAppData().getWebmap()].response.map.extent);
+				}
+
 				if(app.data.getWebAppData().getGeneralOptions().bookmarks && app.maps[app.data.getWebAppData().getWebmap()].response.itemInfo.itemData.bookmarks && app.maps[app.data.getWebAppData().getWebmap()].response.itemInfo.itemData.bookmarks.length)
 					app.ui.navBar.initBookmarks();
 
@@ -307,12 +605,17 @@ define(["lib-build/css!./MainView",
 					app.mapItem = app.maps[app.data.getWebAppData().getWebmap()].response.itemInfo;
 				}
 
+				//TODO add ORG geocoders
+				if(app.data.getWebAppData().getGeneralOptions().geocoder && !app.isInBuilder){
+					app.maps[app.data.getWebAppData().getWebmap()].geocoder.toggle(true);
+				}
+
 				if(!app.map)
 					return;
 
 					setTimeout(function(){
 						// HERE-EXTENT
-						if(app.data.getWebAppData().getTabs() && app.data.getWebAppData().getTabs()[0] && app.data.getWebAppData().getTabs()[0].extent){
+						/*if(app.data.getWebAppData().getTabs() && app.data.getWebAppData().getTabs()[0] && app.data.getWebAppData().getTabs()[0].extent){
 							var tabExtent = new Extent(app.data.getWebAppData().getTabs()[0].extent);
 							var fitExtent = true;//app.data.getWebAppData().getSettings().generalOptions.extentMode == 'default' ? true : false;
 							if(fitExtent)
@@ -320,11 +623,41 @@ define(["lib-build/css!./MainView",
 							setTimeout(function(){
 								app.map.setExtent(tabExtent, fitExtent);
 							}, 500);
+						}*/
+						if(app.data.getWebAppData().getMapExtent()){
+							setTimeout(function(){
+								var handle = app.map.on('extent-change', function(){
+									handle.remove();
+									_core.displayApp();
+								});
+								app.map.setExtent(new Extent(app.data.getWebAppData().getMapExtent()), true);
+							}, 500);
+						}
+						else if(app.data.getWebAppData().getTabs() && app.data.getWebAppData().getTabs()[0] && app.data.getWebAppData().getTabs()[0].extent){
+							var tabExtent = new Extent(app.data.getWebAppData().getTabs()[0].extent);
+							var fitExtent = true;//app.data.getWebAppData().getSettings().generalOptions.extentMode == 'default' ? true : false;
+							if(fitExtent)
+								app.appCfg.mapExtentFit = true;
+							var handle = app.map.on('extent-change', function(){
+								handle.remove();
+								_core.displayApp();
+							});
+							setTimeout(function(){
+								app.map.setExtent(tabExtent, fitExtent);
+							}, 500);
 						}
 						else if(app.isDirectCreationFirstSave){
+							var handle = app.map.on('extent-change', function(){
+								handle.remove();
+								_core.displayApp();
+							});
 							app.map.centerAndZoom([0,0], 3);
 						}
 						else{
+							var handle = app.map.on('extent-change', function(){
+								handle.remove();
+								_core.displayApp();
+							});
 							setTimeout(function(){
 								app.map.setExtent(app.map._params.extent);
 							}, 500);
@@ -361,10 +694,10 @@ define(["lib-build/css!./MainView",
 								}
 							}, 0);
 						});
-						if ( ! app.isDirectCreation )
+						/*if ( ! app.isDirectCreation )
 							setTimeout(function(){
 								_core.displayApp();
-							}, 500);
+							}, 500);*/
 					}, 750);
 
 				app.ui.mobileIntro.setTitle();
@@ -375,7 +708,6 @@ define(["lib-build/css!./MainView",
 					});
 				}
 
-				//HERE
 				var shortlistLayerId = $.grep(app.map.graphicsLayerIds, function(e){
 					if(e.split('_').slice(0,-1).join('_') == WebApplicationData.getShortlistLayerId())
 						return e;
@@ -386,22 +718,6 @@ define(["lib-build/css!./MainView",
 					}
 				});
 				app.data.setShortlistLayerId(shortlistLayerId[0]);
-
-
-
-				//var shortlistLayer = new esri.layers.FeatureLayer(webmapShortlistLayer.featureCollection.layers[0]);
-				//shortlistLayer.id = "shortlistLayer";
-				if(!app.map){
-					setTimeout(function(){
-						//app.map.addLayer(shortlistLayer);
-					}, 500);
-				} else{
-					//app.map.addLayer(shortlistLayer);
-				}
-				//app.layerCurrent = shortlistLayer;
-				/*shortlistLayer.on("mouse-over", _this.layer_onMouseOver);
-				shortlistLayer.on("mouse-out", _this.layer_onMouseOut);
-				shortlistLayer.on("click", _this.layer_onClick);*/
 
 				if(app.map.loaded){
 					initMap();
@@ -417,6 +733,10 @@ define(["lib-build/css!./MainView",
 			}
 
 			function initMap() {
+				if(app.data.getWebAppData().getIsExternalData()){
+					_this.processExternalData();
+					return;
+				}
 				app.map.resize();
 
 				app.map.on('click',function(e){
@@ -445,16 +765,25 @@ define(["lib-build/css!./MainView",
 					});
 				});
 
-				var shortlistLayerId = app.map.getLayer(app.data.getWebAppData().getShortlistLayerId()) ?
-					app.data.getWebAppData().getShortlistLayerId()
-					: app.data.getWebAppData().getShortlistLayerId()+"_0";
-				app.data.getWebAppData().setShortlistLayerId(shortlistLayerId);
+				if(!app.data.getWebAppData().getIsExternalData()){
+					var shortlistLayerId = app.map.getLayer(app.data.getWebAppData().getShortlistLayerId()) ?
+						app.data.getWebAppData().getShortlistLayerId()
+						: app.data.getWebAppData().getShortlistLayerId()+"_0";
+					app.data.getWebAppData().setShortlistLayerId(shortlistLayerId);
+				}
 				var shortlistLayer = app.map.getLayer(app.data.getWebAppData().getShortlistLayerId());
 				shortlistLayer.setScaleRange(0,0);
 
 				$.each(shortlistLayer.graphics, function(index, graphic){
 					if(graphic.attributes.locationSet && graphic.attributes.name && graphic.attributes.name != "Unnamed Place" && graphic.attributes.pic_url && !app.isInBuilder){
 						themes[graphic.attributes.tab_id].features.push(graphic);
+					}
+					if(app.data.getWebAppData().getIsExternalData()){
+						var atts = graphic.attributes;
+						var tabName = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'tab_name';})[0]];
+						$.grep(themes,function(n, i){if(n.title == tabName){ graphic.attributes.tab_id = i;}});
+						themes[graphic.attributes.tab_id].features.push(graphic);
+						graphic.attributes.shortlist_id = themes[graphic.attributes.tab_id].features.length/* + 1*/;
 					}else if(app.isInBuilder){
 						themes[graphic.attributes.tab_id].features.push(graphic);
 					}
@@ -507,11 +836,8 @@ define(["lib-build/css!./MainView",
 						}
 
 						app.data.setStory(index, theme.title, theme.color);
-
-						//tabLayer.color = colorScheme.color;
-						//tabLayer.title = value.alias || value.title || value.name;
 					});
-					if(!app.isDirectCreationFirstSave){
+					if(!app.isDirectCreationFirstSave && !app.data.getWebAppData().getIsExternalData()){
 						var colors = {
 							header: '#444',
 							tabText: '#d8d8d8',
@@ -541,7 +867,7 @@ define(["lib-build/css!./MainView",
 						app.ui.tilePanel.createTab(index, theme);
 						//app.ui.mobileTileList.createSlide(value.title);
 						//app.ui.mobileIntro.fillList(index, value);
-						app.ui.mobileFeatureList.addTheme(theme);
+						app.ui.mobileFeatureList.addTheme(theme, true);
 
 						var colorOrder = app.cfg.COLOR_ORDER.split(",");
 						var colorScheme = $.grep(app.cfg.COLOR_SCHEMES, function(n){
@@ -564,8 +890,6 @@ define(["lib-build/css!./MainView",
 							//WebApplicationData.setTabs(tabSettings);
 							app.detailPanelBuilder.addDetailPanelSwiper(index);
 						}
-						//tabLayer.color = colorScheme.color;
-						//tabLayer.title = value.alias || value.title || value.name;
 					});
 					$(".tab").css("display", "none");
 					$('#mobileIntro').append("<br><hr></hr>");
@@ -651,23 +975,45 @@ define(["lib-build/css!./MainView",
 				app.map.reorderLayer(app.data.getWebAppData().getShortlistLayerId(), app.map.graphicsLayerIds.length - 1);
 			}
 
-			this.activateLayer = function(index) {
+			this.activateLayer = function(index, builtThemes) {
 				var tabFeatures = [];
-
+				if(builtThemes)
+					_builtThemes = builtThemes;
 				var shortlistLayer = app.map.getLayer(app.data.getShortlistLayerId());
+
 				$.each(shortlistLayer.graphics,function(i,graphic){
-					if(graphic.attributes.tab_id == index){
-						if((app.isInBuilder && graphic.attributes.locationSet) || (graphic.attributes.locationSet && graphic.attributes.name && graphic.attributes.name != "Unnamed Place" && graphic.attributes.pic_url)){
-							graphic.show();
-							tabFeatures.push(graphic);
-						} else{
-							if(app.isInBuilder)
-								tabFeatures.push(graphic);
-							graphic.hide();
-						}
-					}
-					else{
+					if(graphic.attributes.tab_id != index){
 						graphic.hide();
+					}else{
+						var atts = graphic.attributes;
+						if(app.data.getWebAppData().getIsExternalData()){
+							if(app.isInBuilder){
+								graphic.show();
+								tabFeatures.push(graphic);
+							}else{
+								var name = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'name';})[0]];
+								var picURL = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'name';})[0]];
+								if(name && picURL){
+									graphic.show();
+									tabFeatures.push(graphic);
+								}
+							}
+						}else{
+							if(!app.isInBuilder && graphic.attributes.locationSet && graphic.attributes.name && graphic.attributes.name != "Unnamed Place" && graphic.attributes.pic_url){
+								graphic.show();
+								tabFeatures.push(graphic);
+							}
+							else if(app.isInBuilder){
+								tabFeatures.push(graphic);
+								if(graphic.attributes.locationSet)
+									graphic.show();
+								else{
+									graphic.hide();
+								}
+							}else{
+								graphic.hide();
+							}
+						}
 					}
 				});
 
@@ -711,13 +1057,15 @@ define(["lib-build/css!./MainView",
 				app.ui.navBar.showEntryIndex(index);
 
 				// Active entry
-				CommonHelper.addCSSRule(
-					".nav-bar .entry.active > .entryLbl, \
-					.nav-bar .dropdown.active .dropdown-toggle { \
-						background-color: " + app.data.getStory()[index].color  + " !important; \
-					}",
-					"NavBarActive"
-				);
+				setTimeout(function(){
+					CommonHelper.addCSSRule(
+						".nav-bar .entry.active > .entryLbl, \
+						.nav-bar .dropdown.active .dropdown-toggle { \
+							background-color: " + app.data.getStory()[index].color  + " !important; \
+						}",
+						"NavBarActive"
+					);
+				}, 0);
 
 				$('#contentPanel').css('border-top-color', app.data.getStory()[index].color);
 				$('.detailHeader').css('border-top-color', app.data.getStory()[index].color);
@@ -725,15 +1073,15 @@ define(["lib-build/css!./MainView",
 				var timeoutTime = index === 0 ? 500 : 100;
 				setTimeout(function(){
 
-					if(app.isInBuilder){
+					if(app.isInBuilder && !app.data.getWebAppData().getIsExternalData()){
 						//TODO if in builder mode, build slides in builder detail panel
 					} else {
-						app.ui.detailPanel.buildFeatureViews();
+						app.ui.detailPanel.buildFeatureViews(_builtThemes);
 					}
 
 				}, timeoutTime);
 
-				if(app.isInBuilder)
+				if(app.isInBuilder && !app.data.getWebAppData().getIsExternalData())
 					app.addFeatureBar.updateLocatedFeatures();
 				else{
 					app.ui.detailPanel.refreshSlides();
@@ -767,15 +1115,15 @@ define(["lib-build/css!./MainView",
 				if (_this.selected == null) {
 					app.map.infoWindow.hide();
 				} else {
-					if(!_this.selected.attributes.locationSet && !app.isInBuilder)
+					if(!_this.selected.attributes.locationSet && !app.isInBuilder && !app.data.getWebAppData().getIsExternalData())
 						return;
-					if(!app.map.extent.contains(_this.selected.geometry) && _this.selected.attributes.locationSet){
+					if(!app.map.extent.contains(_this.selected.geometry) && (_this.selected.attributes.locationSet || app.data.getWebAppData().getIsExternalData())){
 						app.map.centerAt(_this.selected.geometry);
 					}
 					setTimeout(function(){
 						_this.buildMapTips();
 					}, 250);
-					if(app.isInBuilder)
+					if(app.isInBuilder && !app.data.getWebAppData().getIsExternalData())
 						app.detailPanelBuilder.showSlide(_this.selected.attributes.shortlist_id);
 					else {
 						if(_iOS)
@@ -793,7 +1141,7 @@ define(["lib-build/css!./MainView",
 
 			this.buildMapTips = function(content){
 				setTimeout(function(){
-					if(!_this.selected || !_this.selected.attributes || _this.selected.hidden || !_this.selected.attributes.locationSet/*|| !_this.selected.visible*/){
+					if(!_this.selected || !_this.selected.attributes || _this.selected.hidden || (!_this.selected.attributes.locationSet && !app.data.getWebAppData().getIsExternalData())/*|| !_this.selected.visible*/){
 						if(app.mapTips)
 							app.mapTips.clean(true);
 						return;
@@ -814,9 +1162,11 @@ define(["lib-build/css!./MainView",
 
 					if(content)
 						app.mapTips.clean(true);
-					if(!_this.selected.attributes.name)
+					var atts = _this.selected.attributes;
+					var name = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'name';})[0]];
+					if(!name)
 						_this.selected.attributes.name = 'Unnamed Place';
-					var labelContent = content ? content : _this.selected.attributes.name;
+					var labelContent = content ? content : name;
 					app.mapTips = new MultiTips({
 						map: app.map,
 						content: labelContent,
@@ -864,14 +1214,16 @@ define(["lib-build/css!./MainView",
 			};
 
 			this.buildMapHoverTips = function(content, point){
-				if(app.mapTips && ($('body').hasClass('mobile-view') || !point.attributes.locationSet)){
+				if(app.mapTips && ($('body').hasClass('mobile-view') || (!point.attributes.locationSet && !app.data.getWebAppData().getIsExternalData()))){
 					app.mapTips.clean(true);
 					return;
 				}
 				/*if(app.mapTips)
 					app.mapTips.clean(true);*/
 				var offsetTop = point == _this.selected ? 44 : 33;
-				if(!point.attributes.name)
+				var atts = point.attributes;
+				var name = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'name';})[0]];
+				if(!name)
 					point.attributes.name = 'Unnamed Place';
 				app.mapTips = new MultiTips({
 					map: app.map,
@@ -1112,7 +1464,9 @@ define(["lib-build/css!./MainView",
 						if (!_helper.isIE())
 							_this.moveGraphicToFront(graphic);
 					}
-					_this.buildMapHoverTips(graphic.attributes.name, graphic);
+					var atts = graphic.attributes;
+					var name = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'name';})[0]];
+					_this.buildMapHoverTips(name, graphic);
 				}
 			};
 
@@ -1141,6 +1495,7 @@ define(["lib-build/css!./MainView",
 			{
 				var layers = [];
 				var potentialShortlistLayers = [];
+
 				$.each(app.map.graphicsLayerIds, function(i, id){
 					layers.push(app.map.getLayer(id));
 				});
@@ -1151,12 +1506,14 @@ define(["lib-build/css!./MainView",
 					extentMode: "customHome",
 					filterByExtent: true,
 					numberedIcons: false,
+					geocoder: false,
+					locateButton: false
 				};
 
 				app.data.getWebAppData().setGeneralOptions(values);
 
 				$.each(app.map.layerIds, function(i, id){
-					var baseMapLayers = app.maps[app.data.getWebAppData().getWebmap()].response.itemInfo.itemData.baseMap.baseMapLayers;
+					var baseMapLayers = app.data.getResponse().itemInfo.itemData.baseMap.baseMapLayers;
 					var baseMapLayerIds = $.grep(baseMapLayers, function(n){ return n.id == id;});
 					if(!baseMapLayerIds[0])
 						layers.push(app.map.getLayer(id));
@@ -1178,8 +1535,9 @@ define(["lib-build/css!./MainView",
 					if(layer.geometryType == 'esriGeometryPoint' && layer.id.toLowerCase().indexOf("mapnotes") == -1  && layer.graphics.length){
 						potentialShortlistLayers.push(layer);
 					}
+
 					//TODO account for feature service and layer/graphics load
-					if (layer.url && (layerType === 'ArcGISFeatureLayer' || layerType === 'Feature Layer') && !layer.id.match(/^csv_/)) {
+					if (layer.geometryType == 'esriGeometryPoint' && layer.url && (layerType === 'ArcGISFeatureLayer' || layerType === 'Feature Layer') /*&& !layer.id.match(/^csv_/)*/) {
 						featureService = true;
 						featServLayerID = layer;
 						featServLayer.push(layer);
@@ -1188,8 +1546,13 @@ define(["lib-build/css!./MainView",
 				});
 
 				var layersChecked = false;
-				if(featServLayer.length && !layersChecked){
+				var mapConfigSet = false;
+				var layersManaged = false;
+				if(!layersChecked){
 					layersChecked = true;
+					if(featServLayer.length){
+					}
+
 					var mapUpdated = false;
 					app.map.on('update-end', function(){
 						if(mapUpdated)
@@ -1222,9 +1585,18 @@ define(["lib-build/css!./MainView",
 								app.data.getWebAppData().setGeneralOptions(settings);
 								app.ui.navBar.initBookmarks();
 							}
-
+							app.addFeatureBar.addLayer();
+							builderView.storyDataReady();
 							_core.appInitComplete(WebApplicationData);
+							_core.displayApp();
+							/*setTimeout(function(){
+								console.log("***");
+								app.maps[app.data.getResponse().itemInfo.item.id] = _this.getMapConfig(app.data.getResponse());
+								mapConfigSet = true;
+							}, app.data.getWebAppData().getAppGeocoders() ? 0 : 1000);*/
 						}else{
+							if(layersManaged)
+								return;
 							$.each(potentialShortlistLayers, function(i, layer){
 								var index = layers.indexOf(layer);
 								layers.splice(index, 1);
@@ -1247,7 +1619,9 @@ define(["lib-build/css!./MainView",
 
 				app.isWebMapFirstSave = true;
 
-				if(!potentialShortlistLayers.length && !featServLayer.length){
+				var pointFeatServLayer = $.grep(featServLayer, function(n){ return n.geometryType == 'esriGeometryPoint'; });
+
+				if(!potentialShortlistLayers.length && !pointFeatServLayer.length){
 					var config = {};
 					builderView.initPopupComplete(config);
 					//builderView.initMapExtentSave();
@@ -1269,9 +1643,13 @@ define(["lib-build/css!./MainView",
 						app.data.getWebAppData().setGeneralOptions(settings);
 						app.ui.navBar.initBookmarks();
 					}
-
 					_core.appInitComplete(WebApplicationData);
-				}else if(!featServLayer.length){
+					setTimeout(function(){
+						app.maps[app.data.getResponse().itemInfo.item.id] = _this.getMapConfig(app.data.getResponse());
+						mapConfigSet = true;
+					}, app.data.getWebAppData().getAppGeocoders() ? 0 : 1000);
+				}else if(!featServLayer.length && !layersManaged){
+					layersManaged = true;
 					$.each(potentialShortlistLayers, function(i, layer){
 						var index = layers.indexOf(layer);
 						layers.splice(index, 1);
@@ -1286,19 +1664,15 @@ define(["lib-build/css!./MainView",
 			function initUI()
 			{
 				// App has been configured
-				if ( ! WebApplicationData.isBlank() ){
+				if ( ! WebApplicationData.isBlank() && WebApplicationData.getWebmap() ){
 					_core.appInitComplete(WebApplicationData);
 				}
-				// No data and in builder mode -> open the FS creation popup
+				// No data and in builder mode -> open migration
 				else if ( app.isInBuilder && app.data.getWebAppData().getWebmap() ) {
-					//TODO load web map and look for possible shortlist layers
-					// if none, create shortlist layer and launch builder
-					// otherwise launch migration tool
-
+					app.isGalleryCreation = true;
 					var mapPromise = _this.loadWebmap(app.data.getWebAppData().getWebmap(), 'map');
 					mapPromise.then(function(response){
 						app.data.setResponse(response);
-						app.maps[response.itemInfo.item.id] = _this.getMapConfig(response);
 						app.map = mapPromise.results[0].map;
 						app.data.setWebMap(mapPromise.results[0].itemInfo);
 						builderView.updateUI();
@@ -1317,21 +1691,22 @@ define(["lib-build/css!./MainView",
 						);
 				}
 				// No data in view mode
-				/*else if( CommonHelper.getAppID(_core.isProd()) ) {
-					if( app.data.userIsAppOwner() ){
+				else if( CommonHelper.getAppID(_core.isProd()) ) {
+					if( app.data.userIsAppOwner()){
 						//app.ui.loadingIndicator.setMessage(i18n.viewer.loading.loadBuilder);
-						//setTimeout(function(){
-							CommonHelper.switchToBuilder();
-						//}, 1200);
+						if(!app.isInBuilder){
+							setTimeout(function(){
+								CommonHelper.switchToBuilder();
+							}, 1200);
+						}
 					}
 					else
 						_core.initError("notConfiguredDesktop");
-				}*/
+				}
 				// No data in preview mode (should not happen)
 				else {
-					//TODO MARK add appInitComplete, commented out below to load
-					//_core.initError("noLayer");
-					//_core.appInitComplete();
+					if(!app.isInBuilder)
+						_core.initError("noLayer");
 				}
 
 				// gallery creation
@@ -1343,15 +1718,24 @@ define(["lib-build/css!./MainView",
 						app.data.setResponse(response);
 						app.map = mapPromise.results[0].map;
 						app.data.setWebMap(mapPromise.results[0].itemInfo);
-						app.maps[response.itemInfo.item.id] = _this.getMapConfig(response);
+
+						var mapId = response.itemInfo.item.id.length ? response.itemInfo.item.id : response.map.id;
 
 						builderView.updateUI();
 						_core.appInitComplete(WebApplicationData);
 
 						//storyDataReady();
+						if(!app.data.getWebAppData().getWebmap() && app.data.getWebAppItem().id){
+							app.data.getWebAppData().setWebmap(mapId);
+							setTimeout(function(){
+								app.maps[mapId] = _this.getMapConfig(response);
+							}, app.data.getWebAppData().getAppGeocoders() ? 0 : 1000);
+						}
 						builderView.storyDataReady();
 
 						_core.displayApp();
+
+
 					});
 				}
 			}
@@ -1390,9 +1774,9 @@ define(["lib-build/css!./MainView",
 
 			function SortByNumber(a, b)
 			{
-			  var aNumber = a.attributes.number || a.attributes.shortlist_id;
-			  var bNumber = b.attributes.number || b.attributes.shortlist_id;
-			  return ((aNumber < bNumber) ? -1 : ((aNumber > bNumber) ? 1 : 0));
+				var aNumber = a.attributes.number || a.attributes.shortlist_id;
+				var bNumber = b.attributes.number || b.attributes.shortlist_id;
+				return ((aNumber < bNumber) ? -1 : ((aNumber > bNumber) ? 1 : 0));
 			}
 
 			/*
@@ -1405,7 +1789,7 @@ define(["lib-build/css!./MainView",
 			// Layout only
 			this.updateUI = function()
 			{
-				// TODO
+
 			};
 
 			this.resize = function(cfg)
@@ -1416,7 +1800,7 @@ define(["lib-build/css!./MainView",
 				// 'Story isn't saved yet' text turns to totem text
 				var themeIndex = $('.entry.active').index();
 				if(!cfg.isMobileView){
-					if(app.isInBuilder  && $('#mobileBuilderOverlay').css('display') == 'block' && app.addFeatureBar.loaded)
+					if(app.isInBuilder  && $('#mobileBuilderOverlay').css('display') == 'block' && (app.addFeatureBar.loaded || app.data.getWebAppData().getIsExternalData()))
 						$('#mobileBuilderOverlay').attr('style','display: none !important');
 					//TODO in components
 					app.ui.mobileIntro.screenSize = 'desktop';
@@ -1445,8 +1829,8 @@ define(["lib-build/css!./MainView",
 						var headerHeight = app.data.getWebAppData().getHeader().compactSize ? '60px' : '110px';
 						$('#header').height(headerHeight);
 					}
-					$(".tilelist").height($("#paneLeft").height() - (app.isInBuilder ? 70 : 48));
-					$(".tilelist").css('top', app.isInBuilder ? 50 : 28);
+					$(".tilelist").height($("#paneLeft").height() - ((app.isInBuilder && !app.data.getWebAppData().getIsExternalData()) ? 70 : 48));
+					$(".tilelist").css('top', app.isInBuilder && !app.data.getWebAppData().getIsExternalData() ? 50 : 28);
 					$("#paneLeft .noFeature").width($('#paneLeft').width());
 					$("#paneLeft").width() == app.cfg.LEFT_PANE_WIDTH_TWO_COLUMN ? $('#paneLeft .noFeatureText').css('margin-left', '20px') : $('#paneLeft .noFeatureText').css('margin-left', '100px');
 					$("#map").height(cfg.height - 10);
@@ -1464,7 +1848,7 @@ define(["lib-build/css!./MainView",
 						}, 0);
 						$('#paneLeft .noFeatureText').css('margin-left', '20px');
 						app.ui.tilePanel.resize(app.cfg.LEFT_PANE_WIDTH_TWO_COLUMN);
-						if(app.isInBuilder)
+						if(app.isInBuilder && !app.data.getWebAppData().getIsExternalData())
 							app.detailPanelBuilder.resize();
 						else {
 							app.ui.detailPanel.resize();
@@ -1479,7 +1863,7 @@ define(["lib-build/css!./MainView",
 						}, 0);
 						$('#paneLeft .noFeatureText').css('margin-left', '100px');
 						app.ui.tilePanel.resize(app.cfg.LEFT_PANE_WIDTH_THREE_COLUMN);
-						if(app.isInBuilder)
+						if(app.isInBuilder && !app.data.getWebAppData().getIsExternalData())
 							app.detailPanelBuilder.resize();
 						else{
 							app.ui.detailPanel.resize();
@@ -1494,7 +1878,7 @@ define(["lib-build/css!./MainView",
 						}, 0);
 						$('#paneLeft .noFeatureText').css('margin-left', '170px');
 						app.ui.tilePanel.resize(app.cfg.LEFT_PANE_WIDTH_FOUR_COLUMN);
-						if(app.isInBuilder)
+						if(app.isInBuilder && !app.data.getWebAppData().getIsExternalData())
 							app.detailPanelBuilder.resize();
 						else{
 							app.ui.detailPanel.resize();
@@ -1552,6 +1936,11 @@ define(["lib-build/css!./MainView",
 
 				$(window).resize();
 
+				// Need to save to create web map for map command and search
+				if(app.isGalleryCreation){
+
+				}
+
 				var disableSharingLinks =  app.data.getWebAppData().isBlank() || app.data.getWebAppItem().access == "private";
 				if ( app.ui.headerDesktop )
 					app.ui.headerDesktop.toggleSocialBtnAppSharing(disableSharingLinks);
@@ -1575,7 +1964,8 @@ define(["lib-build/css!./MainView",
 
 			function resetEntryMapExtent()
 			{
-				topic.publish("CORE_UPDATE_EXTENT", new Extent(app.data.getWebAppData().getMapExtent()));
+				var extent = app.data.getWebAppData().getMapExtent() ? app.data.getWebAppData().getMapExtent() : app.data.getWebAppData().getTabs() && app.data.getWebAppData().getTabs()[0].extent ? app.data.getWebAppData().getTabs()[0].extent : null;
+				topic.publish("CORE_UPDATE_EXTENT", new Extent(extent));
 			}
 
 			function iconSpecs(width,height,offset_x,offset_y)

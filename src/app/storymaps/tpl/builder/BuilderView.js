@@ -1,5 +1,4 @@
 define(["lib-build/tpl!./BuilderView",
-		"lib-build/tpl!./BasemapChooser",
 		"lib-build/css!./BuilderView",
 		"lib-build/css!./Common",
 		"../core/WebApplicationData",
@@ -10,6 +9,7 @@ define(["lib-build/tpl!./BuilderView",
 		"storymaps/common/builder/SharePopup",
 		"../core/Helper",
 		"storymaps/common/utils/CommonHelper",
+		"storymaps/common/builder/media/image/FileUploadHelper",
 		"./BuilderHelper",
 		"storymaps/common/utils/WebMapHelper",
 		"esri/dijit/BasemapGallery",
@@ -21,7 +21,7 @@ define(["lib-build/tpl!./BuilderView",
 		"./settings/ViewGeneralOptions",
 		"./settings/ViewMapOptions",
 		"storymaps/common/builder/settings/ViewHeader",
-		// gloabal map extent save (home button setting)
+		// global map extent save (home button setting)
 		"./MapExtentSave",
 		// Workflow picker
 		"./Workflow",
@@ -35,6 +35,8 @@ define(["lib-build/tpl!./BuilderView",
 		"./addedit/Popup",
 		"./OrganizePopup",
 		"./shortlistMigration/Migration",
+		// Image exif data library
+		'lib-app/exif-js/exif',
 		// Utils
 		"esri/graphicsUtils",
 		"esri/layers/GraphicsLayer",
@@ -50,7 +52,6 @@ define(["lib-build/tpl!./BuilderView",
 	],
 	function (
 		viewTpl,
-		basemapChooser,
 		viewCss,
 		commonCss,
 		WebApplicationData,
@@ -61,6 +62,7 @@ define(["lib-build/tpl!./BuilderView",
 		SharePopup,
 		Helper,
 		CommonHelper,
+		FileUploadHelper,
 		BuilderHelper,
 		WebMapHelper,
 		BasemapGallery,
@@ -86,6 +88,8 @@ define(["lib-build/tpl!./BuilderView",
 		AddEditPopup,
 		OrganizePopup,
 		MigrationPopup,
+		// Exif
+		exif,
 		// Utils
 		graphicsUtils,
 		GraphicsLayer,
@@ -101,15 +105,17 @@ define(["lib-build/tpl!./BuilderView",
 	){
 		return function BuilderView(Core)
 		{
+
 			$("#builder-views").append(viewTpl({ }));
-			$('#map').append(basemapChooser({ }));
 
 			var _this = this,
 				_core = Core,
 				_firstLoad = true,
+				_directCreationFirstLoad = true,
+				_initPopupComplete = false,
 				_settingsPopup = null,
-				//_landingUI = new Landing($("#builderLanding"), firstAdd, function(){ alert("TODO"); }),
-				//_initPopup = new InitPopup($("#initPopup")),
+				_landingUI = new Landing($("#builderLanding"), firstAdd, function(){ alert("TODO"); }),
+				_initPopup = new InitPopup($("#initPopup")),
 				_helpUI = new Help($("#builderHelp")),
 				_sharePopup = new SharePopup($('#sharePopup')),
 				_addEditPopup = new AddEditPopup($('#addEditPopup'), _this),
@@ -121,7 +127,10 @@ define(["lib-build/tpl!./BuilderView",
 				_browseDialog = null,
 				_mainView,
 				_commonHelper = CommonHelper,
-				_migrationPopup;
+				_migrationPopup,
+				_icon,
+				_myCanvas,
+				_context;
 
 
 			app.detailPanelBuilder = new DetailPanelBuilder($('#contentPanel'), _media);
@@ -139,6 +148,7 @@ define(["lib-build/tpl!./BuilderView",
 				topic.subscribe("OPEN_HELP", function(){ _helpUI.present(); });
 				topic.subscribe("HEADER_EDITED", updateTitleStyle);
 				topic.subscribe("UPDATE_EXTENT_MODE", updateExtentMode);
+				topic.subscribe("DIRECT_CREATION_SAVE", hideInitPopup);
 
 				app.builder.openSharePopup = openSharePopup;
 				app.builder.openEditPopup = openEditPopup;
@@ -156,6 +166,16 @@ define(["lib-build/tpl!./BuilderView",
 					.click(openOrganizePopup)
 					//.find(".builder-lbl").html(i18n.builder.organizePopup.title);
 					.find(".builder-lbl").html('Organize Tabs');
+
+				_myCanvas = document.createElement('canvas');
+				_context = _myCanvas.getContext('2d');
+				_icon = new Image();
+				_icon.src = app.cfg.ICON_SRC;
+
+				_icon.onload = function(){
+					_context.drawImage(_icon, 0, 0);
+					_context.font = _myCanvas.width/2 + "pt";
+				};
 
 				_this.showInitPopup();
 			};
@@ -176,6 +196,12 @@ define(["lib-build/tpl!./BuilderView",
 						displayTab: CommonHelper.getUrlParams().debugView || "content" ,
 						sectionIndex: CommonHelper.getUrlParams().debugIndex || 0
 					});
+
+				if(app.data.getWebAppData().getIsExternalData()){
+					$('.tab-cfg-extent-mode').remove();
+					$('.settings-mapoptions').css('margin-top', '40px');
+					$('.bookmarkTooltip').css({'top': '102px'});
+				}
 
 				updateAddButtonStatus();
 			};
@@ -248,7 +274,7 @@ define(["lib-build/tpl!./BuilderView",
 
 					// To display error message for build mobile screen
 					app.initScreenIsOpen = true;
-					_this.initPopupComplete(config);
+					//_this.initPopupComplete(config);
 				}
 
 			};
@@ -260,6 +286,23 @@ define(["lib-build/tpl!./BuilderView",
 
 				//_landingUI.toggle(! storyInit);
 				//$(".builder-content-panel").toggle(!! storyInit);
+
+				if(!storyInit && app.isDirectCreation && _directCreationFirstLoad){
+					_landingUI.toggle(! storyInit);
+					$(".builder-content-panel").toggle(!! storyInit);
+					$('.builder-title-mask').show();
+					//_directCreationFirstLoad = false;
+					app.isWebMapFirstSave = true;
+					_this.initPopupComplete();
+				} else{
+					_this.initPopupComplete();
+				}
+				if(app.data.getWebAppData().getIsExternalData()){
+					$('#myList').height($("#paneLeft").height() - 48);
+					$('.builder-organize').remove();
+					$('.builder-add').remove();
+				}
+				$('#search').hide();
 			};
 
 			//
@@ -278,6 +321,13 @@ define(["lib-build/tpl!./BuilderView",
 					});
 				}
 				operShortlistLayer[0].featureCollection = WebMapHelper.serializeGraphicsLayerToFeatureCollection(shortlistLayer);
+				if(app.isWebMapFirstSave){
+					/*$('.builder-title-mask').hide();
+					$('#builderQuotes').css('display', 'none', '!important');
+					$('#builderLanding').css('display', 'none', '!important');*/
+					app.ui.mainView.activateLayer(0);
+				}
+				manageUploadedMedia();
 			};
 
 			//
@@ -289,9 +339,35 @@ define(["lib-build/tpl!./BuilderView",
 				return BuilderHelper.getBlankWebmapJSON();
 			};
 
+			function manageUploadedMedia()
+			{
+				if(app.data.getWebAppData().getIsExternalData())
+					return;
+				var shortlistMedia = [];
+				var unusedUploads = [];
+				$.each(app.map.getLayer(app.data.getWebAppData().getShortlistLayerId()).graphics, function(i, feature){
+					if(feature.attributes.pic_url.indexOf("sharing/rest/content/items") > -1)
+						shortlistMedia.push(feature.attributes.resource);
+				});
+				if(!shortlistMedia.length)
+					return;
+
+				FileUploadHelper.getStoryResources().then(function(media){
+					$.each(media, function(i, image){
+						var imgUrl = image.picUrl ? image.picUrl : image.sizes[0].url;
+						var foundImg = $.grep(shortlistMedia, function(e){ var featImgUrl = e.picUrl ? e.picUrl : e.sizes[0].url; featImgUrl = decodeURI(featImgUrl); return featImgUrl == imgUrl; });
+						if(!foundImg.length)
+							unusedUploads.push(image);
+					});
+					$.each(unusedUploads, function(i, media){
+						FileUploadHelper.removeResources(media);
+					});
+				});
+			}
+
 			function firstAdd(title)
 			{
-				_this.updateUI(true);
+				_this.updateUI();
 
 				if(title)
 					WebApplicationData.setTitle(title);
@@ -328,6 +404,11 @@ define(["lib-build/tpl!./BuilderView",
 					app.data.getWebMap().item.extent = CommonHelper.serializeExtentToItem(app.map.extent);
 					app.map._params.extent = new Extent(JSON.parse(JSON.stringify(app.map.extent.toJson())));
 
+					if(_directCreationFirstLoad){
+						_directCreationFirstLoad = false;
+						_this.appInitComplete();
+					}
+
 					//_mapExtentSave.show();
 				}
 
@@ -335,7 +416,7 @@ define(["lib-build/tpl!./BuilderView",
 
 			function clickAdd()
 			{
-				_this.updateUI(true);
+				_this.updateUI();
 
 				$("body").removeClass("isBuilderLanding");
 				app.isInitializing = false;
@@ -394,8 +475,7 @@ define(["lib-build/tpl!./BuilderView",
 					displayTab: cfg.displayTab,
 					//webmap: app.data.getWebmap(),
 					entry: app.data.getStoryByIndex(cfg.entryIndex),
-					entryIndex: cfg.entryIndex,
-					syncMaps: WebApplicationData.getMapOptions().mapsSync ? !cfg.entryIndex : 1
+					entryIndex: cfg.entryIndex
 				});
 
 				return popupDeferred;
@@ -440,7 +520,7 @@ define(["lib-build/tpl!./BuilderView",
 						);
 
 						app.detailPanelBuilder.updateThemeSwipers(result);
-						app.addFeatureBar.updateAllFeatures(result);
+						_this.updateAllFeatures(result);
 						app.detailPanelBuilder.buildAllSlides();
 
 						_mainView.activateLayer(result.sectionIndex);
@@ -449,7 +529,7 @@ define(["lib-build/tpl!./BuilderView",
 						topic.publish("BUILDER_INCREMENT_COUNTER", 1); // TODO
 					},
 					function(){
-						_this.updateUI();
+						//_this.updateUI();
 					}
 				);
 			}
@@ -462,6 +542,7 @@ define(["lib-build/tpl!./BuilderView",
 			{
 				return [
 					new ViewGeneralOptions(),
+					new ViewMapOptions(),
 					new ViewHeader({
 						smallSizeOpt: app.appCfg.headerCompactOpt
 					}),
@@ -470,15 +551,14 @@ define(["lib-build/tpl!./BuilderView",
 
 			this.openSettingPopup = function()
 			{
-
-				var emptyHeader = $.isEmptyObject(app.data.getWebAppData().getHeader());
-				if(emptyHeader){
-					var settings = {};
+				if(!app.data.getWebAppData().getHeader().compactSize){
+					var settings = app.data.getWebAppData().getHeader();
 					settings.compactSize = app.appCfg.headerCompactByDefault;
 					WebApplicationData.setHeader(settings);
 				}
 				_settingsPopup.present(
 					[
+						WebApplicationData.getGeneralOptions(),
 						WebApplicationData.getGeneralOptions(),
 						WebApplicationData.getHeader()
 					],
@@ -487,10 +567,17 @@ define(["lib-build/tpl!./BuilderView",
 			};
 
 			this.openMigrationPopup = function(pointLayers, layers){
+
 				_migrationPopup.present(pointLayers, layers).then(function(obj){
-					if(!obj.migrate){
-						if(app.maps[app.data.getWebAppData().getWebmap()].response.itemInfo.item.owner != app.data.getWebAppItem().owner){
+					if(!obj.migrate || obj.migrate == 'as-is'){
+						app.maps[app.data.getResponse().itemInfo.item.id] = _mainView.getMapConfig(app.data.getResponse());
+						if(obj.migrate == 'as-is'){
+							app.data.getWebAppData().setIsExternalData(true);
+							app.isGalleryCreation = false;
+						}
+						if(app.maps[app.data.getWebAppData().getWebmap()].response.itemInfo.item.owner != app.data.getWebAppItem().owner && !app.data.getWebAppData().getIsExternalData()){
 							cloneUnownedMap(obj.pointLayers, obj.layers);
+							app.detailPanelBuilder.init(app.ui.mainView, _this);
 						} else{
 							var itemResponse = app.maps[app.data.getWebAppData().getWebmap()].response.itemInfo.item;
 							var description = itemResponse.snippet ? itemResponse.snippet : itemResponse.description;
@@ -513,15 +600,37 @@ define(["lib-build/tpl!./BuilderView",
 							//var config = {};
 							//_this.initPopupComplete(config);
 							_this.storyDataReady();
-							app.detailPanelBuilder.init(app.ui.mainView, _this);
-							app.isWebMapFirstSave = true;
+
+							if(!obj.migrate){
+								app.isWebMapFirstSave = true;
+								app.addFeatureBar.addLayer();
+								_core.appInitComplete(WebApplicationData);
+								_core.displayApp();
+								app.detailPanelBuilder.init(app.ui.mainView, _this);
+							} else{
+								//PASS THROUGH OPTION
+								if (app.data.getWebAppData().getShortlistLayerId())
+									app.map.removeLayer(app.map.getLayer(app.data.getWebAppData().getShortlistLayerId()));
+								app.data.getWebAppData().clearTabs();
+								$('.tab-cfg-extent-mode').remove();
+								$('.settings-mapoptions').css('margin-top', '40px');
+								$('.bookmarkTooltip').css({'top': '102px'});
+								_this.openNoDataEditMode();
+							}
 							//_this.initMapExtentSave();
-							Core.appInitComplete(WebApplicationData);
 						}
 					}else{
 						app.isWebMapFirstSave = true;
 					}
 				});
+			};
+
+			this.openNoDataEditMode = function(){
+				$('#addFeatureBar').remove();
+				$('#myList').height($("#paneLeft").height() - 48);
+				$('.builder-organize').remove();
+				$('.builder-add').remove();
+				_mainView.processExternalData();
 			};
 
 			function cloneUnownedMap(pointLayers, layers){
@@ -563,7 +672,6 @@ define(["lib-build/tpl!./BuilderView",
 
 					_this.storyDataReady();
 
-					app.data.getWebAppData().setDefaultMapOptions();
 					var colorOrder = app.cfg.COLOR_ORDER.split(",");
 					var activeColor = $.grep(app.cfg.COLOR_SCHEMES, function(e){ return e.name == colorOrder[0]; });
 					$('#contentPanel').css('border-top-color', activeColor[0].color);
@@ -684,6 +792,244 @@ define(["lib-build/tpl!./BuilderView",
 				});
 			}
 
+			this.updateAllFeatures = function(result)
+			{
+				var newShortlistID = 0;
+
+				/*var shortlistLayerId = $.grep(app.map.graphicsLayerIds, function(e){
+					if(e.split('_').slice(0,-1).join('_') == WebApplicationData.getShortlistLayerId())
+						return e;
+					else if(e ==WebApplicationData.getShortlistLayerId())
+						return e;
+					else{
+						return false;
+					}
+				});*/
+
+				var shortlistLayer = app.map.getLayer(app.data.getShortlistLayerId());
+				var graphics = shortlistLayer.graphics;
+				var deletedThemes = {};
+
+				$.each(graphics, function(index, graphic){
+
+					if(graphic.attributes.tab_id in deletedThemes){
+						//do nothing
+					} else{
+						deletedThemes[graphic.attributes.tab_id] = graphic.attributes.tab_id;
+					}
+				});
+
+				if(result){
+					$.each(result.entries, function(index, tab){
+						delete deletedThemes[tab.id];
+					});
+
+					var graphicsCopy = graphics.slice(0);
+					$.each(graphicsCopy, function(index, graphic){
+						if(graphic.attributes.tab_id in deletedThemes){
+							shortlistLayer.remove(graphic);
+						}
+					});
+
+					var tabGraphics = [];
+					$.each(result.entries, function(index, tab){
+						tabGraphics.push($.grep(graphics, function(g){ return g.attributes.tab_id == tab.id; }));
+					});
+
+					$.each(tabGraphics, function(index, tab){
+						$.each(tab, function(i, graphic){
+							graphic.attributes.tab_id = index;
+							/*if(result.entries[graphic.attributes.tab_id] in deletedThemes){
+								Do nothing
+							} else{
+								deletedThemes[graphic.attributes.tab_id];
+							}*/
+						});
+
+						tab.id = index;
+					});
+				}
+
+
+				var tabs = [];
+				var entries = $('#nav-bar').find(".nav-tabs > li:not(.dropdown)");
+
+				$.each(entries, function(){
+					tabs.push([]);
+				});
+
+				$.each(graphics, function(i,graphic){
+					if(parseInt(graphic.attributes.tab_id) > -1)
+						tabs[parseInt(graphic.attributes.tab_id)].push(graphic);
+				});
+
+				var titles = [];
+				var colors = [];
+				var featureNumber = null;
+
+				if(app.data.getWebAppData().getIsExternalData()){
+					if(app.data.getWebAppData().getGeneralOptions().numberedIcons){
+						$('.detailFeatureTitle').removeClass('notNumbered');
+						$('.detailFeatureTitle').css('margin-top', '-45px');
+					}else{
+						$('.detailFeatureTitle').addClass('notNumbered');
+					}
+					var fields = shortlistLayer.fields;
+
+					$.each(fields, function(index, field){
+						if(field.name.toLowerCase() == 'number')
+							featureNumber = field.name;
+					});
+				}
+
+
+				$.each(tabs, function(index, tab){
+					tab.sort(function(a,b){
+						var aNum = a.attributes[$.grep(Object.keys(a.attributes), function(n) {return n.toLowerCase() == 'number';})[0]];
+						var bNum = b.attributes[$.grep(Object.keys(b.attributes), function(n) {return n.toLowerCase() == 'number';})[0]];
+						return parseInt(aNum) - parseInt(bNum);
+					});
+
+					var color = (result && result.entries[index].color) ? result.entries[index].color :  app.data.getStory()[index].color;
+					var title = (result && result.entries[index].title) ? result.entries[index].title : app.data.getStory()[index].title;
+
+					if(!app.data.getWebAppData().getIsExternalData()){
+						$.each(tab, function(i, graphic){
+							graphic.attributes.shortlist_id = newShortlistID;
+							graphic.attributes.number = i+1;
+							//$.each(WebApplicationData.getContentLayers(), function(index, value){
+							var newIcon = _this.addMapIcon(graphic, color);
+							graphic.symbol = newIcon.symbol;
+							newShortlistID++;
+						});
+					}else{
+						$.each(tab, function(i, graphic){
+							//graphic.attributes.shortlist_id = i+1;
+							graphic.attributes.number = featureNumber ? graphic.attributes[featureNumber] : i+1;
+							var newIcon = _this.addMapIcon(graphic, color);
+							graphic.symbol = newIcon.symbol;
+						});
+						$.each($('#detailView' + index + ' .swiper-slide'), function(i, slide){
+							$(slide).find('.detailFeatureNum').text(i+1);
+							$(slide).find('.detailFeatureNum').css('background-color', color);
+							$(slide).find('.detailFeatureNum').toggle(app.data.getWebAppData().getGeneralOptions().numberedIcons);
+						});
+					}
+					titles.push(title);
+					colors.push(color);
+				});
+
+				app.data.clearStory();
+
+				$.each(tabs, function(index){
+					app.data.setStory(index, titles[index], colors[index]);
+				});
+
+				WebApplicationData.setTabs(app.data.getStory());
+				var themeIndex = $('.entry.active').index();
+				if(result)
+					themeIndex = result.sectionIndex;
+
+				app.ui.tilePanel.buildTilePanel();
+
+				shortlistLayer.redraw();
+				if(WebApplicationData.getTitle())
+					topic.publish("BUILDER_INCREMENT_COUNTER");
+			};
+
+			this.addMapIcon = function(feature, color, updateColor)
+			{
+				var spec = app.ui.mainView.lutIconSpecs.tiny;
+				var coloredIcon;
+				var newIconColor = color;
+
+				var newCanvas = document.createElement('canvas');
+				newCanvas.width = _icon.width;
+				newCanvas.height = _icon.height;
+				var newContext = newCanvas.getContext('2d');
+				newContext.font = newCanvas.width/3.8 + "pt open_sanssemibold, sans-serif";
+				newContext.drawImage(_myCanvas, 0, 0);
+
+				// examine every pixel,
+				// change any old rgb to the new-rgb
+				if(!coloredIcon){
+					// pull the entire image into an array of pixel data
+					var imageData = newContext.getImageData(0, 0, _myCanvas.width, _myCanvas.height);
+					// Due to browser iconsistency, we need to find the value the browser interprets
+					// for a pixel we know contains the color we will look to replace.
+					var iconColor = getPixel(imageData, 4804);
+					if(iconColor[0] !=hexToRgb(newIconColor).r || iconColor[1] != hexToRgb(newIconColor).g || iconColor[1] != hexToRgb(newIconColor).b)
+					{
+						for (var i=0;i<imageData.data.length;i+=4)
+						{
+							// is this pixel the old rgb?
+							if(imageData.data[i]==iconColor[0] &&
+								imageData.data[i+1]==iconColor[1] &&
+								imageData.data[i+2]==iconColor[2]
+							){
+								// change to your new rgb
+								imageData.data[i]=hexToRgb(newIconColor).r;
+								imageData.data[i+1]=hexToRgb(newIconColor).g;
+								imageData.data[i+2]=hexToRgb(newIconColor).b;
+							}
+						}
+						// put the altered data back on the canvas
+						newContext.putImageData(imageData,0,0);
+					}
+					coloredIcon = imageData;
+				}
+
+				//if(index > 0)
+					newContext.putImageData(coloredIcon,0,0);
+
+				if(WebApplicationData.getGeneralOptions().numberedIcons){
+					var label = feature.attributes.number;//index + 1;
+					newContext.textAlign = "center";
+					newContext.fillStyle = 'white';
+					newContext.fillText(label, newCanvas.width/3.2, newCanvas.height/2);
+				}
+
+				if(updateColor)
+					feature.setSymbol(createSymbol(newCanvas, spec));
+				else{
+					var graphic = new esri.Graphic(new esri.geometry.Point(feature.geometry), createSymbol(newCanvas, spec), feature.attributes);
+					return graphic;
+				}
+
+			};
+
+			function getPixel(imgData, index) {
+				var i = index*4, d = imgData.data;
+				return [d[i],d[i+1],d[i+2],d[i+3]]; // returns array [R,G,B,A]
+			}
+
+			function hexToRgb(hex) {
+				// Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+				var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+				hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+					return r + r + g + g + b + b;
+				});
+
+				var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+				return result ? {
+					r: parseInt(result[1], 16),
+					g: parseInt(result[2], 16),
+					b: parseInt(result[3], 16)
+				} : null;
+			}
+
+			function createSymbol(newCanvas, spec){
+				var markerSymbol = new esri.symbol.PictureMarkerSymbol(
+					newCanvas.toDataURL(),
+					spec.getWidth(),
+					spec.getHeight()
+				).setOffset(
+					spec.getOffsetX(),
+					spec.getOffsetY()
+				);
+				return markerSymbol;
+			}
+
 			function appLoadingTimeout(){
 				$("#loadingMessage").html(
 					'<div class="mainMessage">'
@@ -694,23 +1040,40 @@ define(["lib-build/tpl!./BuilderView",
 				).fadeIn("slow", function(){ $("#loadingMessage").addClass("loaded"); });
 			}
 
+			function hideInitPopup()
+			{
+				$('.builder-title-mask').hide();
+				$('#builderQuotes').css('display', 'none', '!important');
+				$('#builderLanding').css('display', 'none', '!important');
+			}
+
 			function settingsPopupSave(data)
 			{
-				var updateExtentMode = data.settings[0].extentMode != WebApplicationData.getGeneralOptions().extentMode;
-				var updateIcons = data.settings[0].numberedIcons != WebApplicationData.getGeneralOptions().numberedIcons;
-				var updateBookmarks = data.settings[0].bookmarks != WebApplicationData.getGeneralOptions().bookmarks;
-				var updateBookmarksAlias = data.settings[0].bookmarksAlias != WebApplicationData.getGeneralOptions().bookmarksAlias;
+				var updateExtentMode = data.settings[1].extentMode != app.data.getWebAppData().getGeneralOptions().extentMode;
+				var updateIcons = data.settings[0].numberedIcons != app.data.getWebAppData().getGeneralOptions().numberedIcons;
+				var updateLocateButton = data.settings[1].locateButton != app.data.getWebAppData().getGeneralOptions().locateButton;
+				var updateGeocoder = data.settings[1].geocoder != app.data.getWebAppData().getGeneralOptions().geocoder;
+				var updateBookmarks = data.settings[1].bookmarks != app.data.getWebAppData().getGeneralOptions().bookmarks;
+				var updateBookmarksAlias = data.settings[1].bookmarksAlias != app.data.getWebAppData().getGeneralOptions().bookmarksAlias;
 
-				WebApplicationData.setGeneralOptions(data.settings[0]);
-				WebApplicationData.setHeader(data.settings[1]);
+				// Combine general and map.  Necessary as we split options up after setting data model.  bleh.
+				var generalOptions = data.settings[0];
+				$.extend(generalOptions, data.settings[1]);
+				app.data.getWebAppData().setGeneralOptions(data.settings[0]);
+				app.data.getWebAppData().setHeader(data.settings[2]);
 
 
 				if(updateExtentMode)
-					topic.publish("UPDATE_EXTENT_MODE", data.settings[0].extentMode);
+					topic.publish("UPDATE_EXTENT_MODE", data.settings[1].extentMode);
 				if(updateIcons){
 					setTimeout(function(){
-						app.addFeatureBar.updateAllFeatures();
-						app.detailPanelBuilder.buildAllSlides();
+						_this.updateAllFeatures();
+						if(!app.data.getWebAppData().getIsExternalData()){
+							app.detailPanelBuilder.buildAllSlides();
+						}
+						else{
+							//app.ui.detailPanel.buildSlides();
+						}
 						_mainView.activateLayer($('.entry.active').index());
 
 						setTimeout(function(){
@@ -722,17 +1085,35 @@ define(["lib-build/tpl!./BuilderView",
 						}, 50);
 					}, 50);
 				}
+				if(updateLocateButton){
+					if(!app.maps[app.data.getWebAppData().getWebmap()] && app.maps[app.data.getWebAppData().getOriginalWebmap()])
+						app.maps[app.data.getWebAppData().getOriginalWebmap()].mapCommand.enableLocationButton(data.settings[1].locateButton);
+					else{
+						app.maps[app.data.getWebAppData().getWebmap()].mapCommand.enableLocationButton(data.settings[1].locateButton);
+					}
+				}
+				if(updateGeocoder){
+					if(!app.maps[app.data.getWebAppData().getWebmap()]  && app.maps[app.data.getWebAppData().getOriginalWebmap()])
+						app.maps[app.data.getWebAppData().getOriginalWebmap()].geocoder.toggle(data.settings[1].geocoder);
+					else{
+						if(app.maps[app.data.getWebAppData().getWebmap()])
+							app.maps[app.data.getWebAppData().getWebmap()].geocoder.toggle(data.settings[1].geocoder);
+						else{
+							app.maps.map.geocoder.toggle(data.settings[1].geocoder);
+						}
+					}
+				}
 				if(updateBookmarks){
-					if(!app.ui.navBar.bookmarksLoaded && data.settings[0].bookmarks)
+					if(!app.ui.navBar.bookmarksLoaded && data.settings[1].bookmarks)
 						app.ui.navBar.initBookmarks();
-					else if(app.ui.navBar.bookmarksLoaded && data.settings[0].bookmarks){
+					else if(app.ui.navBar.bookmarksLoaded && data.settings[1].bookmarks){
 						app.ui.navBar.showBookmarks();
 					} else{
 						app.ui.navBar.hideBookmarks();
 					}
 				}
 				if(updateBookmarksAlias){
-					app.ui.navBar.updateBookmarksAlias(data.settings[0].bookmarksAlias);
+					app.ui.navBar.updateBookmarksAlias(data.settings[1].bookmarksAlias);
 				}
 
 				topic.publish("BUILDER_INCREMENT_COUNTER", 1);
@@ -746,9 +1127,17 @@ define(["lib-build/tpl!./BuilderView",
 			// Direct creation first save
 			//
 
+			//TODO first save will now be title, so dont open share popup for that save, only after that
 			function openSharePopup(isFirstSave)
 			{
 				_sharePopup.present(isFirstSave, Core.getHeaderUserCfg());
+				if(isFirstSave && app.isDirectCreationFirstSave){
+					app.maps[app.data.getWebAppData().getWebmap()] = _mainView.getMapConfig(app.data.getResponse());
+					$.each($('.esriSimpleSliderIncrementButton .mapCommandHomeBtn'), function(index, button){
+						if(index !== 0)
+							$(button).parent().remove();
+					});
+				}
 			}
 
 			//
@@ -758,24 +1147,17 @@ define(["lib-build/tpl!./BuilderView",
 			this.showInitPopup = function()
 			{
 				Core.initPopupPrepare();
-				//Core.initPopupFail();
-				return
 
-				//_initPopup.init();
-				//_initPopup.initLocalization();
-
-				/*_initPopup.present().then(
-					initPopupComplete,
-					function()
-					{
-						Core.initPopupFail();
-					}
-				);*/
+				if ( ! has("touch") )
+					_landingUI.focus();
 			};
 
 			this.initPopupComplete = function(config)
 			{
-				if(config.pickWebmap){
+				if(_initPopupComplete && !app.isGalleryCreation)
+					return;
+				_initPopupComplete = true;
+				if(config && config.pickWebmap){
 					Core.initPopupComplete();
 					//_workflow.present();
 					//buildBrowseDialog();
@@ -783,16 +1165,16 @@ define(["lib-build/tpl!./BuilderView",
 					$('#browse-id-dialog').css({top: '25%', left: '25%'});
 					$('#browse-id-dialog').show();
 				} else{
-					Core.displayApp();
+					//Core.displayApp();
 					Core.initPopupComplete();
 					app.data.getWebAppData().setDefaultLayoutOptions();
 
 					_this.buildAddFeatureBar();
 
+
 					if ( app.isDirectCreationFirstSave ) {
 						app.addFeatureBar.addLayer();
 						app.data.getWebAppData().setDefaultGeneralOptions();
-						app.data.getWebAppData().setDefaultMapOptions();
 						app.map.centerAndZoom([0,0], 3);
 						//_this.initMapExtentSave();
 						setTimeout(function(){
@@ -803,7 +1185,6 @@ define(["lib-build/tpl!./BuilderView",
 						}, 500);
 					}
 					if(app.isGalleryCreation){
-						app.data.getWebAppData().setDefaultMapOptions();
 						var colorOrder = app.cfg.COLOR_ORDER.split(",");
 						var activeColor = $.grep(app.cfg.COLOR_SCHEMES, function(e){ return e.name == colorOrder[0]; });
 						$('#contentPanel').css('border-top-color', activeColor[0].color);
@@ -827,10 +1208,9 @@ define(["lib-build/tpl!./BuilderView",
 							WebApplicationData
 						);
 
-						if(!app.data.getWebAppData().getWebmap()){
+						if(app.data.getWebAppData().getWebmap() == 'map'){
 							app.addFeatureBar.addLayer();
 							app.data.getWebAppData().setDefaultGeneralOptions();
-							app.data.getWebAppData().setDefaultMapOptions();
 							app.map.centerAndZoom([0,0], 3);
 							//_this.initMapExtentSave();
 							setTimeout(function(){
@@ -846,7 +1226,7 @@ define(["lib-build/tpl!./BuilderView",
 						}
 
 					}else{
-						//HERE
+						_directCreationFirstLoad = false;
 						var shortlistLayerId = $.grep(app.map.graphicsLayerIds, function(e){
 							if(e.split('_').slice(0,-1).join('_') == WebApplicationData.getShortlistLayerId())
 								return e;
@@ -882,7 +1262,6 @@ define(["lib-build/tpl!./BuilderView",
 							app.addFeatureBar.addLayer(true);
 							if(!app.data.getWebAppData().getGeneralOptions() && !app.data.getWebAppData().getGeneralOptions().bookmarks)
 								app.data.getWebAppData().setDefaultGeneralOptions();
-							app.data.getWebAppData().setDefaultMapOptions();
 							setTimeout(function(){
 								_this.initMapExtentSave();
 							}, 2500);
@@ -892,7 +1271,8 @@ define(["lib-build/tpl!./BuilderView",
 						var shortlistLayer = app.map.getLayer(app.data.getShortlistLayerId());
 						//_this.initMapExtentSave();
 
-						app.layerCurrent = shortlistLayer;
+						if(!app.data.getWebAppData().getIsExternalData())
+							app.layerCurrent = shortlistLayer;
 						shortlistLayer.on("mouse-over", _mainView.layer_onMouseOver);
 						shortlistLayer.on("mouse-out", _mainView.layer_onMouseOut);
 						shortlistLayer.on("click", _mainView.layer_onClick);
@@ -955,7 +1335,7 @@ define(["lib-build/tpl!./BuilderView",
 
 			this.buildAddFeatureBar = function()
 			{
-				if(!app.addFeatureBar.loaded){
+				if(!app.addFeatureBar.loaded && !app.data.getWebAppData().getIsExternalData()){
 					app.addFeatureBar.init(_mainView, _this);
 				}
 			};

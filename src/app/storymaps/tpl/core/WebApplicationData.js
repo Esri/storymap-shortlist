@@ -100,6 +100,21 @@ define(["dojo/_base/lang"],
 			},
 
 			/*
+			* Set data source to external for pass-through/GIS pro
+			* workflow.  All data managed outside of builder
+			 */
+
+			 getIsExternalData: function()
+			 {
+				return _data.values.isExternalData;
+			},
+
+			setIsExternalData: function(isExternalData)
+			{
+				_data.values.isExternalData = isExternalData;
+			},
+
+			/*
 			 * Webmap id
 			 */
 			getWebmap: function()
@@ -186,6 +201,17 @@ define(["dojo/_base/lang"],
 				return "shortlist-classic";
 			},
 
+				/*
+			 * organizational geocoders
+			 */
+			getAppGeocoders: function() {
+				return this.getSettings().appGeocoders;
+			},
+			setAppGeocoders: function(geocoders) {
+				_data.values.settings = _data.values.settings || {};
+				_data.values.settings.appGeocoders = geocoders;
+			},
+
 			/*
 			 * Shortlist
 			 */
@@ -222,6 +248,11 @@ define(["dojo/_base/lang"],
 				_data.values.tabs = tabs;
 			},
 
+			clearTabs: function()
+			{
+				_data.values.tabs = {};
+			},
+
 			clearLayers: function()
 			{
 				_data.values.layers = [];
@@ -254,7 +285,7 @@ define(["dojo/_base/lang"],
 				_data.values.testPanel = testPanel;
 			},
 
-			getLocateBtn: function()
+			getLocateButton: function()
 			{
 				return true;
 			},
@@ -277,26 +308,9 @@ define(["dojo/_base/lang"],
 					numberedIcons: false,
 					filterByExtent: true,
 					bookmarks: false,
-					bookmarksAlias: app.cfg.BOOKMARKS_ALIAS
-				});
-			},
-
-			getMapOptions: function()
-			{
-				var mapOptions = lang.clone(this.getSettings().mapOptions) || {};
-				return mapOptions;
-			},
-			setMapOptions: function(mapOptions)
-			{
-				_data.values.settings = _data.values.settings || {};
-				_data.values.settings.mapOptions = mapOptions;
-			},
-			setDefaultMapOptions: function()
-			{
-				this.setMapOptions({
-					locateBtn: false,
+					bookmarksAlias: app.cfg.BOOKMARKS_ALIAS,
 					geocoder: false,
-					bookmarks: false
+					locateButton: false
 				});
 			},
 

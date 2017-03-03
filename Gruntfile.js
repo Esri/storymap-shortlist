@@ -211,6 +211,12 @@
 					},
 					{
 						expand: true,
+						cwd: 'src/lib-app/medium-editor/',
+						src:['**'],
+						dest: 'deploy/resources/lib/medium-editor/'
+					},
+					{
+						expand: true,
 						cwd: 'src/lib-app/ckeditor/',
 						src:[
 							'config.js',
@@ -262,6 +268,12 @@
 						cwd: 'src/lib-app/clipboard/',
 						src:['clipboard.js'],
 						dest: 'deploy/resources/lib/clipboard/'
+					},
+					{
+						expand: true,
+						cwd: 'src/lib-app/exif-js/',
+						src:['exif.js'],
+						dest: 'deploy/resources/lib/exif-js/'
 					},
 					{
 						expand: true,

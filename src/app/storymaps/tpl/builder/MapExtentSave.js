@@ -19,6 +19,8 @@ define([
 
 			this.init = function()
 			{
+				if(_this.initDone)
+					return;
 				$('#map_zoom_slider').append(viewTpl());
 				initUI();
 			};
@@ -34,6 +36,10 @@ define([
 
 			this.show = function()
 			{
+				if(app.data.getWebAppData().getIsExternalData())
+					return;
+				if($('.home-location-save-btn').find('.esriSimpleSliderIncrementButton'))
+					$('.home-location-save-btn').find('.esriSimpleSliderIncrementButton').remove();
 				$('.home-location-save-btn').show();
 			};
 

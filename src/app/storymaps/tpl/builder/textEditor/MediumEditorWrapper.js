@@ -68,7 +68,6 @@ define([
 				'bold',
 				'italic',
 				'underline',
-				'strikethrough',
 				'anchor'
 			]
 		}

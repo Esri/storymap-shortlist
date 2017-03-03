@@ -1,58 +1,20 @@
 <div class="settings-generaloptions">
-	<table class="tab-cfg">
-		<tr class="tab-cfg-row tab-cfg-extent-mode">
-			<td class="tab-cfg-title" style="outline: none;">
-				<div class="homeLocation">Default map location</div>
-			</td>
-			<td class="tab-cfg-extent-btns">
-				<div class="regular-control" style="display: block;">
-					<span class="btn-group">
-						<button type="button" class="btn btn-default btn-xs btn-primary defaultExtent" data-value="default" data-placement="top" data-title="The location is managed automatically so that all your places are visible">
-							Auto
-						</button>
-						<button type="button" class="btn btn-default btn-xs customHomeExtent" data-value="customHome" data-placement="top" data-title="Set the location using the button that will appear in the map zoom controls">
-							Custom&nbsp;
-						</button>
-					</span>
-				</div>
-			</td>
-			<td>
-				<span class="extentModeTooltip" data-placement="right" data-title="The location people see when they open your Shortlist" >
-					<img class="helpImg" src="resources/tpl/builder/icons/builder-help.png">
-				</span>
-			</td>
-		</tr>
-	</table>
 
 	<div class="generalSettingsButtons">
 		<div class="checkbox opt-container">
 			<label>
 				<input type="checkbox" class="opt-checkbox-numbered-icons" />
-				Show places with numbers
+				<%= numberedPlaces %>
 			</label>
 		</div>
 		<div class="checkbox opt-container">
 			<label>
 				<input type="checkbox" class="opt-checkbox-filter-by-extent" />
-				Only list places visible on the map (only applies in viewer)
+				<%= extentSensitive %>
 			</label>
+			<span class="extentSensitiveTooltip" data-placement="top" data-title="<%= extentSensitiveTooltip %>" >
+				<img class="helpImg" src="resources/tpl/builder/icons/builder-help.png">
+			</span>
 		</div>
-		<div class="bookmarksContainer">
-			<div class="checkbox opt-container" >
-				<label>
-					<input type="checkbox" class="opt-checkbox-bookmarks" />
-					Bookmarks
-				</label>
-				<div class="opt-bookmarks-alias-cont">
-					<label>
-						Menu name
-						<input type="text" class="opt-bookmarks-alias" />
-					</label>
-				</div>
-			</div>
-		</div>
-		<span class="bookmarkTooltip" data-placement="right" data-title="To enable bookmarks in Shortlist, add and manage the web map's bookmarks in the web map viewer" >
-			<img class="helpImg" src="resources/tpl/builder/icons/builder-help.png">
-		</span>
 	</div>
 </div>

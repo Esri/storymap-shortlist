@@ -1,9 +1,10 @@
 define(["../../core/Helper",
+		"storymaps/common/utils/CommonHelper",
 		"lib-build/tpl!./DetailPanel",
 		"lib-build/tpl!./DetailSlide",
 		"lib-build/css!./DetailPanel"
 	],
-	function(Helper, detailPanel, detailSlide){
+	function(Helper, CommonHelper, detailPanel, detailSlide){
 		return function DetailPanel(container, isInBuilder, saveData, mainView, WebApplicationData)
 		{
 			var _mainView = mainView;
@@ -35,31 +36,35 @@ define(["../../core/Helper",
 
 			};
 
-			this.buildFeatureViews = function()
+			this.buildFeatureViews = function(builtThemes)
 			{
 				var themeIndex = $('.entry.active').index();
 				if(themeIndex<0)
 					themeIndex = 0;
 
-					var themes = [];
+					var themes = builtThemes ? builtThemes : [];
 
-					var shortlistLayer = app.map.getLayer(app.data.getShortlistLayerId());
-					$.each(app.data.getStory(), function(index, tab){
-						var newThemeObject = {
-							title: tab.title ? tab.title : "tab "+(themes.length+1),
-							features: []
-						};
-						themes.push(newThemeObject);
-					});
+					if(!themes.length){
+						var shortlistLayer = app.map.getLayer(app.data.getShortlistLayerId());
+						$.each(app.data.getStory(), function(index, tab){
+							var newThemeObject = {
+								title: tab.title ? tab.title : "tab "+(themes.length+1),
+								features: []
+							};
+							themes.push(newThemeObject);
+						});
 
-					$.each(shortlistLayer.graphics, function(index, graphic){
-						if(graphic.attributes.locationSet && graphic.attributes.pic_url && graphic.attributes.name && graphic.attributes.name != "Unnamed Place")
-							themes[graphic.attributes.tab_id].features.push(graphic);
-						else{
-							//graphic.hide();
-						}
-					});
-
+						$.each(shortlistLayer.graphics, function(index, graphic){
+							if(graphic.attributes.locationSet && graphic.attributes.pic_url && graphic.attributes.name && graphic.attributes.name != "Unnamed Place")
+								themes[graphic.attributes.tab_id].features.push(graphic);
+							/*if(app.data.getWebAppData().getIsExternalData()){
+								var tabName = graphic.attributes.tab_name  || graphic.attributes.Tab_Name || graphic.attributes.TAB_NAME;
+								$.grep(themes,function(n, i){if(n.title == tabName){ graphic.attributes.tab_id = i;}});
+								themes[graphic.attributes.tab_id].features.push(graphic);
+								graphic.attributes.shortlist_id = themes[graphic.attributes.tab_id].features.length + 1;
+							}*/
+						});
+					}
 
 				if(!_slideContainersLoaded){
 					if(_iOS){
@@ -147,11 +152,16 @@ define(["../../core/Helper",
 						});
 					}else{
 						$.each(themes, function(index){
-							if(index === 0)
+							if(index === 0  && (!app.isInBuilder || app.data.getWebAppData().getIsExternalData()))
 								$(container).prepend(detailPanel({ }));
 							else {
 								var prevDetPanel = $(container).find(' .detailContainer')[index-1];
 								$(prevDetPanel).after(detailPanel({ }));
+							}
+
+							if(app.isInBuilder && app.data.getWebAppData().getIsExternalData()){
+								$('.detailContainer.swiper-container').addClass('externalData');
+								$('.detail-btn-add').addClass('externalData');
 							}
 
 							var detailView = $('.detailView')[index];
@@ -195,11 +205,54 @@ define(["../../core/Helper",
 				$(newSlide).addClass('swiper-no-swiping');
 				var atts = app.ui.mainView.selected.attributes;
 
-				var name =  atts.name;
+				var name = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'name';})[0]];
 
-				var description = atts.description;
-				var picture = atts.pic_url;
-				var website = _helper.prependURLHTTP(atts.website);
+				var description = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'description';})[0]];
+				var shortDesc = '';
+
+				if(app.data.getWebAppData().getIsExternalData()){
+					shortDesc = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'shortdesc';})[0]];
+					var desc1 = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'desc1';})[0]];
+					var desc2 = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'desc2';})[0]];
+					var desc3 = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'desc3';})[0]];
+					var desc4 = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'desc4';})[0]];
+					var desc5 = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'desc5';})[0]];
+					if(desc1){
+						if(description)
+							description += "<p>" + desc1 + "</p>";
+						else {
+							description = "<p>" + desc1 + "</p>";
+						}
+					}
+					if(desc2){
+						if(description)
+							description += "<p>" + desc2 + "</p>";
+						else {
+							description = "<p>" + desc2 + "</p>";
+						}
+					}
+					if(desc3)
+						if(description)
+							description += "<p>" + desc3 + "</p>";
+						else {
+							description = "<p>" + desc3 + "</p>";
+						}
+					if(desc4)
+						if(description)
+							description += "<p>" + desc4 + "</p>";
+						else {
+							description = "<p>" + desc4 + "</p>";
+						}
+					if(desc5)
+						if(description)
+							description += "<p>" + desc5 + "</p>";
+						else {
+							description = "<p>" + desc5 + "</p>";
+						}
+				}
+				var picture = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'pic_url';})[0]];
+				var thumbnail = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'thumb_url';})[0]];
+				var website = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'website';})[0]];
 
 				if(app.data.getWebAppData().getGeneralOptions().numberedIcons){
 					$(newSlide).find('.detailFeatureNum').css('background-color', app.data.getStory()[themeIndex].color);
@@ -214,7 +267,9 @@ define(["../../core/Helper",
 				}
 
 				if(picture){
-					picture = atts.thumb_url ? atts.thumb_url : atts.pic_url;
+					picture = thumbnail ? thumbnail : picture;
+					if(picture.indexOf("sharing/rest/content/items/") > -1)
+						picture = CommonHelper.possiblyAddToken(picture);
 					$(newSlide).find('img').attr('src', picture);
 					$(newSlide).find('img').on('touchend', function(){
 						var features = app.layerCurrent.graphics;
@@ -237,6 +292,12 @@ define(["../../core/Helper",
 						_mainView.selectSymbol();
 						_this.buildSlide();
 					});
+				}
+
+				if(shortDesc){
+					$(newSlide).find('.shortDesc').html(shortDesc);
+				}else{
+					$(newSlide).find('.shortDesc').remove();
 				}
 
 				if (description) {
@@ -273,10 +334,15 @@ define(["../../core/Helper",
 					themeIndex = 0;
 				var currentTheme = _themes[themeIndex];
 				var features = currentTheme.features;
-				if(features[0] && features[0].attributes && features[0].attributes.number){
-					features.sort(function(a,b){
-						return parseInt(a.attributes.number) - parseInt(b.attributes.number);
-					});
+				if(features[0] && features[0].attributes ){
+					var numberField = features[0].attributes[$.grep(Object.keys(features[0].attributes), function(n) {return n.toLowerCase() == 'number';})[0]];
+					if(numberField){
+						features.sort(function(a,b){
+							var aNum = a.attributes[$.grep(Object.keys(a.attributes), function(n) {return n.toLowerCase() == 'number';})[0]];
+							var bNum = b.attributes[$.grep(Object.keys(b.attributes), function(n) {return n.toLowerCase() == 'number';})[0]];
+							return parseInt(aNum) - parseInt(bNum);
+						});
+					}
 				}
 
 				for(; _i < features.length; _i++){
@@ -296,11 +362,56 @@ define(["../../core/Helper",
 
 					var atts = features[_i].attributes;
 
-					var name =  atts.name;
+					var name = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'name';})[0]];
 
-					var description = atts.description;
-					var picture = atts.pic_url;
-					var website = _helper.prependURLHTTP(atts.website);
+					var description = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'description';})[0]];
+					var shortDesc = '';
+
+					if(app.data.getWebAppData().getIsExternalData()){
+						shortDesc = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'short_desc';})[0]];
+						var desc1 = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'desc1';})[0]];
+						var desc2 = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'desc2';})[0]];
+						var desc3 = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'desc3';})[0]];
+						var desc4 = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'desc4';})[0]];
+						var desc5 = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'desc5';})[0]];
+
+						if(desc1){
+							if(description)
+								description += "<p>" + desc1 + "</p>";
+							else {
+								description = "<p>" + desc1 + "</p>";
+							}
+						}
+						if(desc2){
+							if(description)
+								description += "<p>" + desc2 + "</p>";
+							else {
+								description = "<p>" + desc2 + "</p>";
+							}
+						}
+						if(desc3)
+							if(description)
+								description += "<p>" + desc3 + "</p>";
+							else {
+								description = "<p>" + desc3 + "</p>";
+							}
+						if(desc4)
+							if(description)
+								description += "<p>" + desc4 + "</p>";
+							else {
+								description = "<p>" + desc4 + "</p>";
+							}
+						if(desc5)
+							if(description)
+								description += "<p>" + desc5 + "</p>";
+							else {
+								description = "<p>" + desc5 + "</p>";
+							}
+					}
+					var picture = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'pic_url';})[0]];
+					var thumbnail = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'thumb_url';})[0]];
+					var website = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'website';})[0]];
+					_helper.prependURLHTTP(website);
 
 					if(app.data.getWebAppData().getGeneralOptions().numberedIcons){
 						$(newSlide).find('.detailFeatureNum').css('background-color', app.data.getStory()[themeIndex].color);
@@ -316,12 +427,22 @@ define(["../../core/Helper",
 
 					if(picture){
 						if(_android){
-							picture = atts.thumb_url ? atts.thumb_url : atts.pic_url;
+							picture = thumbnail ? thumbnail : picture;
+							if(picture.indexOf("sharing/rest/content/items/") > -1)
+								picture = CommonHelper.possiblyAddToken(picture);
 							$(newSlide).find('img').attr('src', picture);
 						}
 						else{
+							if(picture.indexOf("sharing/rest/content/items/") > -1)
+								picture = CommonHelper.possiblyAddToken(picture);
 							$(newSlide).find('img').attr('src', picture);
 						}
+					}
+
+					if(shortDesc){
+						$(newSlide).find('.shortDesc').html(shortDesc);
+					}else{
+						$(newSlide).find('.shortDesc').remove();
 					}
 
 					if (description) {
@@ -331,6 +452,8 @@ define(["../../core/Helper",
 					if (website) {
 						$(newSlide).find('.website').append('<a href='+ website + ' target="_blank" >More info</a>');
 						$('.website').show();
+						if(app.data.getWebAppData().getIsExternalData())
+							$('.website').css('margin-top', 0);
 					}
 
 					$(newSlide).data('shortlist-id', atts.shortlist_id);
@@ -365,18 +488,25 @@ define(["../../core/Helper",
 								return;
 							}
 
+							if(_mainView.selected.updated){
+								if(_mainView.selected && !app.map.extent.contains(_mainView.selected.geometry) && !app.data.getWebAppData().getGeneralOptions().filterByExtent /*|| app.isInBuilder*/){
+									app.map.centerAt(_mainView.selected.geometry);
+								}
+								return;
+							}
+
 							var themeIndex = $('.entry.active').index();
 							if(themeIndex<0)
 								themeIndex = 0;
 
-							if(_this.viewed){
+							if(_this.viewed && !_mainView.selected.updated){
 								var dv = newSwiper.slides[newSwiper.activeIndex];
 								var id = $(dv).data('shortlist-id');
 								var id2 = $.grep(app.layerCurrent.graphics,function(n){return n.attributes.shortlist_id == id;})[0];
 
 								_mainView.selected = id2;
 
-								if(_mainView.selected && !app.map.extent.contains(_mainView.selected.geometry) && !app.data.getWebAppData().getGeneralOptions().filterByExtent || app.isInBuilder){
+								if(_mainView.selected && !app.map.extent.contains(_mainView.selected.geometry) && !app.data.getWebAppData().getGeneralOptions().filterByExtent /*|| app.isInBuilder*/){
 									app.map.centerAt(_mainView.selected.geometry);
 								}
 							}
@@ -431,6 +561,7 @@ define(["../../core/Helper",
 						});
 
 						container.find($(".detail-btn-left")[themeIndex]).click(function(){
+							_mainView.selected.updated = false;
 							if(_swipers[themeIndex].activeIndex === 0)
 								_swipers[themeIndex].slideTo(_swipers[themeIndex].slides.length - 1, 0);
 							else {
@@ -439,6 +570,7 @@ define(["../../core/Helper",
 						});
 
 						container.find($(".detail-btn-right")[themeIndex]).click(function(){
+							_mainView.selected.updated = false;
 							if(_swipers[themeIndex].activeIndex == _swipers[themeIndex].slides.length - 1)
 								_swipers[themeIndex].slideTo(0, 0);
 							else {
@@ -450,6 +582,7 @@ define(["../../core/Helper",
 						$('#detailView'+themeIndex).find('.detailHeader').css('border-top-color', borderColor);
 
 						container.find(".detailPictureDiv img").click(function(){
+							_mainView.selected.updated = false;
 							if(_swipers[themeIndex].activeIndex == _swipers[themeIndex].slides.length - 1)
 								_swipers[themeIndex].slideTo(0, 0);
 							else {
@@ -487,9 +620,14 @@ define(["../../core/Helper",
 
 			this.showDetails = function(selected)
 			{
-				_this.resize();
+				if(!app.data.getWebAppData().getGeneralOptions().filterByExtent){
+					_mainView.selected = selected;
+					_mainView.selected.updated = true;
+				}
 				if(selected == null)
 					return;
+
+				_this.resize();
 
 				prepSwiperDisplay();
 				var themeIndex = $('.entry.active').index();
@@ -506,6 +644,7 @@ define(["../../core/Helper",
 				$.each($('#detailView'+themeIndex).find($('.swiper-slide')), function(index, slide){
 					if(parseInt($(slide).data('shortlist-id')) == selected.attributes.shortlist_id){
 						selectedSlideIndex = index;
+						return false;
 					}
 				});
 				if(!_webApplicationData.getGeneralOptions().numberedIcons){
@@ -523,8 +662,10 @@ define(["../../core/Helper",
 				else{
 					setTimeout(function(){
 						_swipers[themeIndex].slideTo(selectedSlideIndex, 0);
+						$(currentDetailContainer).show();
 					}, 0);
 				}
+
 				if(_swipers[themeIndex].slides.length == 1){
 					$('.detail-btn-container').hide();
 				} else {
@@ -542,7 +683,9 @@ define(["../../core/Helper",
 				// Issue #166
 				if($('.swiper-slide-active img').width() === 0){
 					var slideImg = $('.swiper-slide-active img')[0];
-					var imgSrc = $(slideImg).attr('data-src');
+					var imgSrc = $(slideImg).attr('data-src') ? $(slideImg).attr('data-src') : $(slideImg).attr('src');
+					if(imgSrc && imgSrc.indexOf("sharing/rest/content/items/") > -1)
+						imgSrc = CommonHelper.possiblyAddToken(imgSrc);
 					$(slideImg).attr('src', imgSrc);
 				}
 
@@ -551,7 +694,10 @@ define(["../../core/Helper",
 
 			this.refreshSlides = function()
 			{
+				/*if(app.isInBuilder && app.data.getWebAppData().getIsExternalData())
+					return;*/
 				_slidesRefreshing = true;
+
 				if(!app.data.getWebAppData().getGeneralOptions().filterByExtent  && !app.isInBuilder){
 					_slidesRefreshing = false;
 					return;
@@ -560,8 +706,17 @@ define(["../../core/Helper",
 				var themeIndex = $('.entry.active').index();
 				if(themeIndex<0)
 					themeIndex = 0;
-				if(!_swipers[themeIndex] || !_swipers[themeIndex].init || !_swiperSlides || !_swiperSlides[String(themeIndex)] || !Object.keys(_swiperSlides[String(themeIndex)].length))
+
+				if(!_swipers[themeIndex] || !_swipers[themeIndex].init || !_swiperSlides || !_swiperSlides[String(themeIndex)]){
 					return;
+					var objKeysLength = [];
+					$.each(_swiperSlides[String(themeIndex)], function(k){
+						objKeysLength = 1;
+						return false;
+					});
+					if(!objKeysLength)
+						return;
+				}
 
 				$('.detailContainer').css('z-index', '0');
 
@@ -575,6 +730,7 @@ define(["../../core/Helper",
 				}
 				var currentTheme = _themes[themeIndex];
 				var features = currentTheme.features;
+
 				var selectedSlideIndex = null;
 
 				if(_swipers[themeIndex].slides)

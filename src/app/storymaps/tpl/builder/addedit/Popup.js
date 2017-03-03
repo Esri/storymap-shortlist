@@ -88,10 +88,16 @@ define(["lib-build/tpl!./Popup",
 				// Submit
 				updateSubmitButton();
 
+				var title = cfg.entry.title;
 				// Title
 				container.find('.titleContainer')
 					.removeClass('has-feedback has-error')
-					.find('.title').val(cfg.mode == "edit" ? cfg.entry.title : "");
+					.find('.title').val(cfg.mode == "edit" ?  $.parseHTML(title)[0].wholeText : "");
+
+				if(app.data.getWebAppData().getIsExternalData()){
+					container.find('.titleContainer .title').addClass('title-disabled');
+						container.find('.titleContainer .title').attr('disabled', true);
+				}
 
 				container.modal({keyboard: true});
 				return _popupDeferred;
@@ -182,14 +188,14 @@ define(["lib-build/tpl!./Popup",
 
 			function onClickSubmit()
 			{
-				var entryTitle = container.find('.title').val();
+				var entryTitle = container.find('.title').val().replace(/<\/?script>/g,'');
 				var color = '#' + $('#colorpicker').spectrum('get').toHex();
 
 				var themeIndex = $('.entry.active').index();
 
 				if(color != app.data.getStory()[themeIndex].color){
 					$.each(app.layerCurrent.graphics, function(index, graphic){
-						app.addFeatureBar.addMapIcon(graphic, color, true);
+						_builderView.addMapIcon(graphic, color, true);
 					});
 					var layer = app.map.getLayer(app.data.getShortlistLayerId());
 					layer.redraw();
@@ -198,7 +204,11 @@ define(["lib-build/tpl!./Popup",
 				if($('.tab-cfg-location .btn[data-value="default"]').hasClass('btn-primary'))
 					resetExtent();
 
-				app.data.setStory(themeIndex, entryTitle, color);
+				if(!app.data.getWebAppData().getIsExternalData())
+					app.data.setStory(themeIndex, entryTitle, color);
+				else{
+					app.data.setStory(themeIndex, null, color, null, entryTitle);
+				}
 
 				app.data.getWebAppData().setTabs(app.data.getStory());
 
@@ -211,7 +221,21 @@ define(["lib-build/tpl!./Popup",
 					tabTextHover: '#fff',
 					tabHover: '#666'
 				};
-				app.ui.navBar.init(app.data.getStory(), themeIndex, colors, WebApplicationData);
+
+				if(!app.data.getWebAppData().getIsExternalData())
+					app.ui.navBar.init(app.data.getStory(), themeIndex, colors, WebApplicationData);
+				else{
+					var tabsNeeded = [];
+					$.each(app.data.getStory(), function(index){
+						var themeAdded = false;
+						$.grep(app.map.getLayer(app.data.getShortlistLayerId()).graphics,function(n){if(n.attributes.tab_id == app.data.getStory()[index].id){
+							if(!themeAdded)
+								tabsNeeded.push(app.data.getStory()[index]);
+							themeAdded = true;
+						}});
+					});
+					app.ui.navBar.init(tabsNeeded, themeIndex, colors, WebApplicationData);
+				}
 
 				app.map.getLayer(app.data.getShortlistLayerId()).redraw();
 				$('.num').css('background-color', color);

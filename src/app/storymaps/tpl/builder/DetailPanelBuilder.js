@@ -7,12 +7,16 @@ define([
 	"lib-app/jquery-ui.min",
 	"../core/WebApplicationData",
 	"./MovableGraphic",
+	"storymaps/common/utils/CommonHelper",
+	"storymaps/common/builder/media/image/FileUploadHelper",
+	"storymaps/common/builder/media/image/ViewUpload",
 	"esri/geometry/webMercatorUtils",
 	"esri/SpatialReference",
 	"esri/graphic",
 	"esri/geometry/Point",
 	"esri/symbols/SimpleMarkerSymbol",
 	"esri/dijit/Search",
+	"dojo/Deferred",
 	"dojo/topic"],
 	function (
 		detailPanel,
@@ -23,12 +27,16 @@ define([
 		jqueryUI,
 		WebApplicationData,
 		MovableGraphic,
+		CommonHelper,
+		FileUploadHelper,
+		ViewUpload,
 		webMercatorUtils,
 		SpatialReference,
 		Graphic,
 		Point,
 		SimpleMarkerSymbol,
 		Search,
+		Deferred,
 		topic
 	) {
 		return function DetailPanelBuilder(container, imagePicker)
@@ -49,76 +57,46 @@ define([
 			var _titleEditor;
 			var _descEditor;
 
+			var _viewUpload = ViewUpload;
+
 			this.init = function(mainView, builderView)
 			{
-				_mainView = mainView;
+				if(app.data.getWebAppData().getIsExternalData())
+					return;
+				if(_mainView && _search)
+					return;
 				_builderView = builderView;
-				setTimeout(function(){
-					_search = new Search({
-						map: app.map,
-						showInfoWindowOnSelect: true,
-						autoNavigate: false
-					}, 'search');
-					_search.startup();
-					_search.hide();
-					_search.on('search-results', function(e){
-						if(!app.map.extent.contains(e.results[0][0].feature.geometry)){
-
-							if(app.mapTips)
-								app.mapTips.clean(true);
-							setTimeout(function(){
-								app.map.centerAt(e.results[0][0].feature.geometry);
-								app.ui.mainView.buildMapTips();
-							}, 0);
+				if(!_mainView){
+					topic.subscribe("IMAGEUPLOADED", function(uploadResult){
+						var params = {};
+						if(uploadResult && uploadResult.success){
+							var url = uploadResult.picUrl || uploadResult.sizes[0].url;
+							params.url = window.location.protocol + url;
+							if(uploadResult.thumbURL)
+								params.thumb_url = window.location.protocol + uploadResult.thumbUrl;
+							if(uploadResult.lat)
+								params.lat = uploadResult.lat;
+							if(uploadResult.lng)
+								params.lng = uploadResult.lng;
+							params.uploaded = true;
+							params.name = uploadResult.name;
+							// Need to store all info for handling possible removal
+							params.resource = uploadResult;
+							if($('#editorDialogInlineMedia').css('display') == 'block')
+								$('#editorDialogInlineMedia').modal('toggle');
+							_this.updateSlide(params);
 						}
 					});
-					_search.on('select-result', function(e){
-						_search.hide();
-						if(_movableIcon)
-							_movableIcon.clean();
-						var addLocation = $('<div class="addLocationText"><a href="#">Use this location </a> </div>');
-						$('.esriPopup .contentPane').append(addLocation);
-						$('.esriPopup').show();
-						var themeIndex = $('.entry.active').index();
-						var currentSlide = $('.swiper-slide-active')[themeIndex];
-						$('body').removeClass('pickLocation');
-						app.map.getLayer('tempIconLayer').remove(app.map.getLayer('tempIconLayer').graphics[0]);
-						_mapClick.remove();
-						var changedGraphic = $.grep(app.layerCurrent.graphics, function(e){ return e.attributes.shortlist_id ==  $(currentSlide).data('shortlist-id'); });
-						if(!changedGraphic[0].attributes.locationSet)
-							app.map.setMapCursor("crosshair");
-						$(addLocation).on('click', function(){
-							changedGraphic[0].setGeometry(e.result.feature.geometry);
-							changedGraphic[0].attributes.locationSet = 1;
-							changedGraphic[0].show();
-							_search.highlightGraphic.hide();
-							$('.esriPopup').hide();
-
-							var shortlistLayer = app.map.getLayer(app.data.getShortlistLayerId());
-							shortlistLayer.redraw();
-							if(app.mapTips)
-								app.mapTips.clean(true);
-							app.ui.mainView.buildMapTips();
-							app.map.getLayer('tempIconLayer').remove(app.map.getLayer('tempIconLayer').graphics[0]);
-							app.addFeatureBar.updateLocatedFeatures();
-							updateTile(changedGraphic[0]);
-							_builderView.updateShortlistExtent();
-							$(currentSlide).find('.setLocation').hide();
-							$(currentSlide).find('.editLocation').show();
-							$(currentSlide).find('.cancelLocation').hide();
-							$('body').removeClass('pickLocation');
-							$('body').addClass('removeSlide');
-							topic.publish("BUILDER_INCREMENT_COUNTER");
-						});
-						app.map.setMapCursor("auto");
-						//TODO connect to updating location of feature
-					});
+				}
+				_mainView = mainView;
+				setTimeout(function(){
+					_pointLayer = new esri.layers.GraphicsLayer();
+					_pointLayer.id = "tempIconLayer";
+					app.map.addLayer(_pointLayer);
+					app.map.reorderLayer(_pointLayer, app.map.graphicsLayerIds.length - 1);
+					createSearchWidget();
 				}, 500);
 
-				_pointLayer = new esri.layers.GraphicsLayer();
-				_pointLayer.id = "tempIconLayer";
-				app.map.addLayer(_pointLayer);
-				app.map.reorderLayer(_pointLayer, app.map.graphicsLayerIds.length - 1);
 				// Issue #489.	Disable page up/down as it caused problem in detail panel.
 				window.addEventListener("keydown", function(e) {
 					// space and arrow keys
@@ -130,6 +108,8 @@ define([
 
 			this.buildSlides = function(filterUnlocated, i)
 			{
+				if(app.data.getWebAppData().getIsExternalData())
+					return;
 				var shortlistLayer = app.map.getLayer(app.data.getShortlistLayerId());
 				var themeIndex = $('.entry.active').index();
 				if(themeIndex<0)
@@ -171,6 +151,8 @@ define([
 
 			this.buildAllSlides = function()
 			{
+				if(app.data.getWebAppData().getIsExternalData())
+					return;
 				var shortlistLayer = app.map.getLayer(app.data.getShortlistLayerId());
 				var graphics = shortlistLayer.graphics;
 				var tabs = [];
@@ -193,6 +175,8 @@ define([
 
 			this.buildUnlocatedSlides = function()
 			{
+				if(app.data.getWebAppData().getIsExternalData())
+					return;
 				var shortlistLayer = app.map.getLayer(app.data.getShortlistLayerId());
 				var themeIndex = $('.entry.active').index();
 				if(themeIndex<0)
@@ -235,12 +219,16 @@ define([
 
 			this.addDetailPanelSwiper = function(index)
 			{
+				if(app.data.getWebAppData().getIsExternalData() || ($('.detailContainer')  && $('.detailContainer')[index])/*_swipers[index]*/)
+					return;
 				var themeIndex = index;
 				if(!index)
 					themeIndex = 0;
 
 				if(themeIndex == 0){
-					$(container).find('#paneLeft').append(detailPanel({ }));
+					$(container).find('#paneLeft').append(detailPanel({
+
+					}));
 					$(container).find(' .detailView')[themeIndex].setAttribute('id', 'detailView' + themeIndex);
 				}
 				else {
@@ -266,6 +254,8 @@ define([
 				$(currentDetailContainer).hide();
 				newSwiper.update();
 				newSwiper.on('onSlideChangeEnd', function(swiper){
+					if(app.data.getWebAppData().getIsExternalData())
+						return;
 					setNavControls();
 					if($('body').hasClass('loadingPlaces'))
 						return;
@@ -293,18 +283,28 @@ define([
 				});
 
 				container.find(".detailClose").click(function(){
+					if(app.data.getWebAppData().getIsExternalData())
+						return;
+					app.ui.mainView.unselect();
 					if($('.arcgisSearch').css('display') == 'block'){}
 						cancelLocationUpdate();
 					var themeIndex = $('.entry.active').index();
 					var currentSlide = _swipers[themeIndex].slides[_swipers[themeIndex].activeIndex];
-					var currentGraphic = $.grep(app.layerCurrent.graphics, function(e){ return e.attributes.shortlist_id ==  $(currentSlide).data('shortlist-id'); });
-					var currentGraphicAtts = currentGraphic[0].attributes;
+					var shortlistLayer = app.map.getLayer(app.data.getWebAppData().getShortlistLayerId());
+					var currentGraphic = $.grep(shortlistLayer.graphics, function(e){ return e.attributes.shortlist_id ==  $(currentSlide).data('shortlist-id'); });
+					var currentGraphicAtts;
+					if(currentGraphic[0])
+						currentGraphicAtts = currentGraphic[0].attributes;
+					else{
+						return;
+					}
 
-					if(currentGraphicAtts.name || currentGraphicAtts.description || currentGraphicAtts.pic_url || currentGraphicAtts.locationSet){
+					if(currentGraphicAtts && (currentGraphicAtts.name.length || currentGraphicAtts.name == "Unnamed Place" || currentGraphicAtts.description.length || currentGraphicAtts.pic_url.length || currentGraphicAtts.locationSet)){
 						//do nothing
 					}else{
 						var currentTile = app.ui.tilePanel.findTile($(currentSlide).data('shortlist-id'));
 						$(currentTile).remove();
+						shortlistLayer.remove(currentGraphic[0]);
 						app.layerCurrent.remove(currentGraphic[0]);
 						_swipers[themeIndex].removeSlide(_swipers[themeIndex].activeIndex);
 						app.addFeatureBar.updateLocatedFeatures();
@@ -312,20 +312,26 @@ define([
 					container.find(".detailContainer").hide();
 					if(app.ui.mobileIntro.screenSize == 'small')
 						app.ui.mobileFeatureList.showMobileList();
-					app.ui.mainView.unselect();
+
 					if($('body').hasClass('locateFeatures removeSlide') && _swipers[themeIndex].slides.length == 1){
 						_this.buildSlides();
 						app.addFeatureBar.exitOrganizeMode();
 					}
+					if($('body').hasClass('locateFeatures removeSlide') && _swipers[themeIndex].slides.length > 1){
+						_this.buildUnlocatedSlides();
+					}
 				});
 
 				container.find($(".detail-btn-left")[themeIndex]).click(function(){
+					if(app.data.getWebAppData().getIsExternalData())
+						return;
 					var themeIndex = $('.entry.active').index();
 					var currentSwiper = _swipers[themeIndex];
 					if($('.arcgisSearch').css('display') == 'block'){
 						if(_movableIcon)
 							_movableIcon.clean();
-						_search.hide();
+						if(_search)
+							_search.hide();
 						cancelLocationUpdate();
 						app.map.getLayer('tempIconLayer').remove(app.map.getLayer('tempIconLayer').graphics[0]);
 						app.map.setMapCursor("auto");
@@ -368,12 +374,15 @@ define([
 				});
 
 				container.find($(".detail-btn-right")[themeIndex]).click(function(){
+					if(app.data.getWebAppData().getIsExternalData())
+						return;
 					var themeIndex = $('.entry.active').index();
 					var currentSwiper = _swipers[themeIndex];
 					if($('.arcgisSearch').css('display') == 'block'){
 						if(_movableIcon)
 							_movableIcon.clean();
-						_search.hide();
+						if(_search)
+							_search.hide();
 						cancelLocationUpdate();
 						app.map.getLayer('tempIconLayer').remove(app.map.getLayer('tempIconLayer').graphics[0]);
 						app.map.setMapCursor("auto");
@@ -415,11 +424,14 @@ define([
 				});
 
 				container.find($(".detail-btn-add")[themeIndex]).click(function(){
+					if(app.data.getWebAppData().getIsExternalData())
+						return;
 					app.addFeatureBar.addFeature();
 					if($('.arcgisSearch').css('display') == 'block'){
 						if(_movableIcon)
 							_movableIcon.clean();
-						_search.hide();
+						if(_search)
+							_search.hide();
 						$('body').removeClass('pickLocation');
 						app.map.getLayer('tempIconLayer').remove(app.map.getLayer('tempIconLayer').graphics[0]);
 						app.map.setMapCursor("auto");
@@ -451,11 +463,19 @@ define([
 
 			this.addSlide = function(itemNumber, itemId, params, index)
 			{
+				if(!_search)
+					createSearchWidget();
 				var themeIndex = $('.entry.active').index();
 				if(index > -1)
 					themeIndex = index;
 				var currentDetailContainer = $('.detailContainer')[themeIndex];
-				container.find('#detailView' + themeIndex).append(detailPanelSlide());
+				container.find('#detailView' + themeIndex).append(detailPanelSlide({
+					addImage: i18n.builder.detailPanelBuilder.addImage,
+					setLocation: i18n.builder.detailPanelBuilder.setLocation,
+					changeLocation: i18n.builder.detailPanelBuilder.changeLocation,
+					//update: i18n.builder.detailPanelBuilder.update,
+					cancel: i18n.builder.detailPanelBuilder.cancel
+				}));
 				var newSlide = $(currentDetailContainer).find('.swiper-slide')[itemNumber-1];
 
 				// replace with humber of featur
@@ -469,6 +489,17 @@ define([
 					$(newSlide).find('.detailFeatureNum').hide();
 					$(newSlide).find('.detailFeatureTitle').addClass('notNumbered');
 				}
+
+				var noUI = true;
+				var hideResources = true;
+
+				new ViewUpload(
+					$(newSlide),
+					null,
+					noUI,
+					hideResources
+				);
+
 				$(newSlide).find('.detailPictureDiv img').click(presentImagePicker);
 				$(newSlide).find('.detailPictureDiv .imagePicker').click(presentImagePicker);
 				// use real shortlist id
@@ -482,7 +513,10 @@ define([
 						$(newSlide).find('.detailFeatureTitle').removeClass('noTitle');
 					}
 					if(params.pic_url){
-						$(newSlide).find('img').attr('src', params.pic_url);
+						var imgUrl = params.pic_url;
+						if(imgUrl.indexOf("sharing/rest/content/items/") > -1)
+							imgUrl = CommonHelper.possiblyAddToken(imgUrl);
+						$(newSlide).find('img').attr('src', imgUrl);
 						$(newSlide).find('.imagePicker').hide();
 					}
 					if(params.description)
@@ -528,20 +562,20 @@ define([
 						setNavControls();
 					}, 50);
 				};
-
+				//TRANS
 				_titleEditor = new MediumEditorWrapper({
 					container: $(newSlide).find('.detailFeatureTitle'),
 					mode: 'single-line',
-					placeholder: 'Enter place name...',
+					placeholder: i18n.builder.detailPanelBuilder.enterPlaceName + "...",
 					onBlur: function(e){
 						onTextEditorBlur(e, $(newSlide).find('.detailFeatureTitle'));
 					}
 				});
-
+				//TRANS
 				_descEditor = new MediumEditorWrapper({
 					container: $(newSlide).find('.editable'),
 					mode: 'standard',
-					placeholder: 'Enter place description...',
+					placeholder: i18n.builder.detailPanelBuilder.enterPlaceDescription + "...",
 					onBlur: function(e){
 						onTextEditorBlur(e, $(newSlide).find('.description'));
 					}
@@ -568,6 +602,8 @@ define([
 
 			this.showSlide = function(slideID)
 			{
+				if(app.data.getWebAppData().getIsExternalData())
+					return;
 				_this.resize();
 				prepSwiperDisplay();
 				var themeIndex = $('.entry.active').index();
@@ -616,20 +652,41 @@ define([
 				var themeIndex = $('.entry.active').index();
 				_swipers[themeIndex].updating = true;
 				var currentSlide = _swipers[themeIndex].slides[_swipers[themeIndex].activeIndex];
-				$(currentSlide).find('img').attr('src', params.url);
-				$(currentSlide).find('.imagePicker').hide();
 				var changedGraphic = $.grep(app.layerCurrent.graphics, function(e){ return e.attributes.shortlist_id ==  $(currentSlide).data('shortlist-id'); });
+				if(changedGraphic[0].attributes.resource){
+					FileUploadHelper.removeResources(changedGraphic[0].attributes.resource);
+				}
+				if(params.uploaded){
+					changedGraphic[0].attributes.resource = params.resource;
+					var imgUrl = CommonHelper.possiblyAddToken(params.url);
+					$(currentSlide).find('img').attr('src', imgUrl);
+					if(params.name.indexOf("jpeg") > -1)
+						params.name = params.name.slice(0, -5);
+					else{
+						params.name = params.name.slice(0, -4);
+					}
+				}else{
+					$(currentSlide).find('img').attr('src', params.url);
+				}
+				$(currentSlide).find('.imagePicker').hide();
 
 				changedGraphic[0].attributes.pic_url = params.url;
 				if(params.thumb_url)
 					changedGraphic[0].attributes.thumb_url = params.thumb_url;
+				if(params.uploaded  && params.resource && params.resource.thumbUrl)
+					changedGraphic[0].attributes.thumb_url = params.resource.thumbUrl;
 				else{
 					changedGraphic[0].attributes.thumb_url = params.url;
 				}
 
 				var tile = $.grep($('#myList li'), function(e){ return $(e).data('shortlist-id') ==  $(currentSlide).data('shortlist-id'); });
 
-				$(tile).find('.tileImage').css('background-image', 'url('+changedGraphic[0].attributes.thumb_url+')');
+				if(params.uploaded){
+					var thumbUrl = CommonHelper.possiblyAddToken(changedGraphic[0].attributes.thumb_url);
+					$(tile).find('.tileImage').css('background-image', 'url('+thumbUrl+')');
+				}else{
+					$(tile).find('.tileImage').css('background-image', 'url('+changedGraphic[0].attributes.thumb_url+')');
+				}
 				$(tile).find('i').hide();
 
 				if($(currentSlide).find('.detailFeatureTitle').text().length <= 0 && params.name){
@@ -696,14 +753,6 @@ define([
 
 			this.updateThemeSwipers = function(result)
 			{
-				/*$.each($('.detailView'), function(index, detailView){
-					var view = $.grep(result.entries, function(n){return "detailView"+n.id == detailView.id;});
-					if(!view[0])
-						$(detailView).parent().remove();
-				});
-				$.each($('.detailView'), function(index, detailView){
-					$(detailView).attr('id', 'detailView'+index);
-				});*/
 				$.each($('.detailContainer'), function(index, detailContainer){
 					$(detailContainer).remove();
 				});
@@ -720,6 +769,8 @@ define([
 
 			this.resize = function()
 			{
+				if(app.data.getWebAppData().getIsExternalData())
+					return;
 				if(!_swipers.length)
 					return;
 				setTimeout(function(){
@@ -755,6 +806,96 @@ define([
 			{
 
 			};
+
+			function createSearchWidget(){
+				if(!_search){
+					//setTimeout(function(){
+						if(!app.data.getWebAppData().getAppGeocoders())
+							return;
+						var resultDeferred = new Deferred();
+						CommonHelper.createGeocoder({
+							map: app.map,
+							domNode: $('#search')[0]/*,
+							placeHolder: i18n.commonMedia.editorActionGeocode.lblTitle*/
+						}).then(
+							function(geocoder){
+								_search = geocoder;
+								_search.autoNavigate = false;
+								_search.hide();
+
+								_search.on('search-results', function(e){
+									var foundResult;
+									$.each(e.results, function(index, result){
+										if(result.length){
+											$.each(result, function(i, location){
+												if(location.feature.geometry){
+												 	foundResult = location;
+													return false;
+												}
+											});
+										}
+									});
+									if(foundResult && !app.map.extent.contains(foundResult.feature.geometry)){
+										if(app.mapTips)
+											app.mapTips.clean(true);
+										setTimeout(function(){
+											app.map.centerAt(foundResult.feature.geometry);
+											app.ui.mainView.buildMapTips();
+										}, 0);
+									}
+								});
+								_search.on('select-result', function(e){
+									_search.hide();
+									if(_movableIcon)
+										_movableIcon.clean();
+									var addLocation = $('<div class="addLocationText"><a href="#">Use this location </a> </div>');
+									$('.esriPopup .contentPane').append(addLocation);
+									$('.esriPopup').show();
+									var themeIndex = $('.entry.active').index();
+									var currentSlide = $('.swiper-slide-active')[themeIndex];
+									$('body').removeClass('pickLocation');
+									app.map.getLayer('tempIconLayer').remove(app.map.getLayer('tempIconLayer').graphics[0]);
+									if(_mapClick)
+										_mapClick.remove();
+									var changedGraphic = $.grep(app.layerCurrent.graphics, function(e){ return e.attributes.shortlist_id ==  $(currentSlide).data('shortlist-id'); });
+									if(!changedGraphic[0].attributes.locationSet)
+										app.map.setMapCursor("crosshair");
+									$(addLocation).on('click', function(){
+										changedGraphic[0].setGeometry(e.result.feature.geometry);
+										changedGraphic[0].attributes.locationSet = 1;
+										changedGraphic[0].show();
+										_search.highlightGraphic.hide();
+										$('.esriPopup').hide();
+
+										var shortlistLayer = app.map.getLayer(app.data.getShortlistLayerId());
+										shortlistLayer.redraw();
+										if(app.mapTips)
+											app.mapTips.clean(true);
+										app.ui.mainView.buildMapTips();
+										app.map.getLayer('tempIconLayer').remove(app.map.getLayer('tempIconLayer').graphics[0]);
+										app.addFeatureBar.updateLocatedFeatures();
+										updateTile(changedGraphic[0]);
+										_builderView.updateShortlistExtent();
+										$(currentSlide).find('.setLocation').hide();
+										$(currentSlide).find('.editLocation').show();
+										$(currentSlide).find('.cancelLocation').hide();
+										$('body').removeClass('pickLocation');
+										$('body').addClass('removeSlide');
+										topic.publish("BUILDER_INCREMENT_COUNTER");
+									});
+									app.map.setMapCursor("auto");
+									//TODO connect to updating location of feature
+								});
+								resultDeferred.resolve();
+							},
+							function() {
+								resultDeferred.reject();
+							}
+						);
+					//}, app.data.getWebAppData().getAppGeocoders() ? 0 : 500);
+
+				}
+			}
 
 			function prepSwiperDisplay()
 			{
@@ -831,6 +972,7 @@ define([
 					currentGraphic[0].hide();
 					//Make feature marker moveable
 					var tempIcon = new Graphic(currentGraphic[0].geometry, currentGraphic[0].symbol, currentGraphic[0].attributes);
+					_pointLayer = app.map.getLayer('tempIconLayer');
 					_pointLayer.add(tempIcon);
 					_pointLayer.graphics[0].show();
 					_movableIcon = new MovableGraphic(app.map, _pointLayer, _pointLayer.graphics[0], onMoveEndCallback);
@@ -873,16 +1015,19 @@ define([
 
 			function cancelLocationUpdate()
 			{
+				if(app.data.getWebAppData().getIsExternalData())
+					return;
 				if(_movableIcon)
 					_movableIcon.clean();
-				_search.hide();
+				if(_search)
+					_search.hide();
 				$('body').removeClass('pickLocation');
 				app.map.getLayer('tempIconLayer').remove(app.map.getLayer('tempIconLayer').graphics[0]);
 				app.map.setMapCursor("auto");
 				var themeIndex = $('.entry.active').index();
 				var currentSlide = _swipers[themeIndex].slides[_swipers[themeIndex].activeIndex];
 				var currentGraphic = $.grep(app.layerCurrent.graphics, function(e){ return e.attributes.shortlist_id ==  $(currentSlide).data('shortlist-id'); });
-				if(_search.highlightGraphic)
+				if(_search && _search.highlightGraphic)
 					_search.highlightGraphic.hide();
 				$('.esriPopup').hide();
 				$(currentSlide).find('.cancelLocation').hide();

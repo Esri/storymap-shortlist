@@ -36,14 +36,16 @@ define([
 			this.addTheme = function(value, oneTheme)
 			{
 				// initMap, after contentLayers are set if more than one tab layer
-				var themeTitle = ('<div class="mobileThemeTitle swiper-slide"><p style="margin-top: 7px;">' + value.title + '</p></div>');
-				$(_swiperContainer).append(themeTitle);
-				_swiper.update();
 				if(oneTheme){
 					$('#mobileThemeBar .swiper-container').css('display', 'none');
 					$('#navThemeLeft').css('display', 'none');
 					$('#navThemeRight').css('display', 'none');
+					$('#navThemeRight').css('display', 'none');
+				}else{
+					var themeTitle = ('<div class="mobileThemeTitle swiper-slide"><p style="margin-top: 7px;">' + value.title + '</p></div>');
+					$(_swiperContainer).append(themeTitle);
 				}
+				_swiper.update();
 			};
 
 			this.showMobileList = function()
@@ -102,7 +104,10 @@ define([
 
 				var mobileTile = $(tile).clone();
 				$(mobileTile).data('shortlist-id', value.attributes.shortlist_id);
-				var picUrl = value.attributes.thumb_url ? value.attributes.thumb_url : value.attributes.pic_url;
+				var atts = value.attributes;
+				var picUrl = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'thumb_url';})[0]];
+				if(!picUrl)
+					picUrl = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'pic_url';})[0]];
 				var mobileImg;
 				/*if(_iOS || _android){
 					mobileImg = $('<div style="height: 75px; margin-bottom: 8px;"><div class="lazyload mobileTileListImg" data-src="'+picUrl+'"; ></div></div>');
@@ -174,7 +179,6 @@ define([
 			function setNavControls(themeIndex)
 			{
 				// from activateLayer
-
 				if (themeIndex === 0 && _swiper.slides.length > 1) {
 					$('#navThemeLeft').css('display', 'none');
 					$('#navThemeRight').css('display', 'block');

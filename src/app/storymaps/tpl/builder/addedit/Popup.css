@@ -46,6 +46,11 @@
 	margin: 10px 0 15px 0;
 }
 
+.addEditPopup .titleContainer .title.title-disabled{
+	opacity: 0.8;
+	cursor: not-allowed;
+}
+
 /*
  * Views navigation & containers
  */

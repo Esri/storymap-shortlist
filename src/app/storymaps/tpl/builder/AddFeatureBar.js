@@ -4,6 +4,7 @@ define([
 	"../core/WebApplicationData",
 	"../core/Helper",
 	"./BuilderHelper",
+	"storymaps/common/builder/media/image/FileUploadHelper",
 	"esri/geometry/Point",
 	"esri/geometry/Extent",
 	"esri/symbols/SimpleMarkerSymbol",
@@ -21,6 +22,7 @@ define([
 		WebApplicationData,
 		Helper,
 		BuilderHelper,
+		FileUploadHelper,
 		Point,
 		Extent,
 		SimpleMarkerSymbol,
@@ -33,7 +35,6 @@ define([
 		topic,
 		lang
 	){
-		//TODO change name to ManageFeaturesBar
 		return function AddFeatureBar(container, imagePicker)
 		{
 			var _initDone = false;
@@ -41,9 +42,9 @@ define([
 			var _mainView;
 			var _imagePicker = imagePicker;
 			var _helper = new Helper();
-			var _icon;
+			/*var _icon;
 			var _myCanvas;
-			var _context;
+			var _context;*/
 			var _builderView;
 
 			this.loaded = false;
@@ -55,14 +56,22 @@ define([
 				_builderView = builderView;
 				// Use timeout as have to wait for TilePanel component to construct paneLeft
 				setTimeout(function(){
-					container.find('#paneLeft').prepend(viewTpl());
+					container.find('#paneLeft').prepend(viewTpl({
+						add: i18n.builder.addFeatureBar.add,
+						importFeatures: i18n.builder.addFeatureBar.import,
+						organize: i18n.builder.organizePopup.title,
+						done: i18n.builder.addFeatureBar.done,
+						deleteFeature: i18n.builder.addFeatureBar.deleteFeature,
+						move: i18n.builder.addFeatureBar.move,
+						locateFeaturesTooltip: i18n.builder.addFeatureBar.locateFeaturesTooltip
+					}));
 					initUI();
 					initEvents();
 					_this.updateLocatedFeatures();
 				},  0);
 				$('#importFeature').prop('disabled', true);
 
-				_myCanvas = document.createElement('canvas');
+				/*_myCanvas = document.createElement('canvas');
 				_context = _myCanvas.getContext('2d');
 				_icon = new Image();
 				_icon.src = app.cfg.ICON_SRC;
@@ -70,7 +79,7 @@ define([
 				_icon.onload = function(){
 					_context.drawImage(_icon, 0, 0);
 					_context.font = _myCanvas.width/2 + "pt";
-				};
+				};*/
 				$('#myList').addClass('builder');
 			};
 
@@ -81,6 +90,8 @@ define([
 
 			this.addLayer = function(fromWebMap)
 			{
+				if(app.data.getWebAppData().getShortlistLayerId())
+					return;
 				//var shortlistLayer = new esri.layers.GraphicsLayer();
 				var newLayer = BuilderHelper.getNewLayerJSON(BuilderHelper.getFeatureCollectionTemplate(true));
 				app.data.getWebMap().itemData.operationalLayers.push(newLayer);
@@ -226,7 +237,7 @@ define([
 
 				var sms = new SimpleMarkerSymbol();
 				var newGraphic = new Graphic(geom, sms, atts);
-				var c = _this.addMapIcon(newGraphic, app.data.getStory()[themeIndex].color);
+				var c = _builderView.addMapIcon(newGraphic, app.data.getStory()[themeIndex].color);
 
 				shortlistLayer.add(c);
 				app.layerCurrent.add(c);
@@ -237,118 +248,6 @@ define([
 
 				_this.updateLocatedFeatures();
 
-				if(WebApplicationData.getTitle())
-					topic.publish("BUILDER_INCREMENT_COUNTER");
-			};
-
-			this.updateAllFeatures = function(result)
-			{
-				var newShortlistID = 0;
-
-				/*var shortlistLayerId = $.grep(app.map.graphicsLayerIds, function(e){
-					if(e.split('_').slice(0,-1).join('_') == WebApplicationData.getShortlistLayerId())
-						return e;
-					else if(e ==WebApplicationData.getShortlistLayerId())
-						return e;
-					else{
-						return false;
-					}
-				});*/
-
-				var shortlistLayer = app.map.getLayer(app.data.getShortlistLayerId());
-				var graphics = shortlistLayer.graphics;
-				var deletedThemes = {};
-
-				$.each(graphics, function(index, graphic){
-
-					if(graphic.attributes.tab_id in deletedThemes){
-						//do nothing
-					} else{
-						deletedThemes[graphic.attributes.tab_id] = graphic.attributes.tab_id;
-					}
-				});
-
-				if(result){
-					$.each(result.entries, function(index, tab){
-						delete deletedThemes[tab.id];
-					});
-
-					var graphicsCopy = graphics.slice(0);
-					$.each(graphicsCopy, function(index, graphic){
-						if(graphic.attributes.tab_id in deletedThemes){
-							shortlistLayer.remove(graphic);
-						}
-					});
-
-					var tabGraphics = [];
-					$.each(result.entries, function(index, tab){
-						tabGraphics.push($.grep(graphics, function(g){ return g.attributes.tab_id == tab.id; }));
-					});
-
-					$.each(tabGraphics, function(index, tab){
-						$.each(tab, function(i, graphic){
-							graphic.attributes.tab_id = index;
-							/*if(result.entries[graphic.attributes.tab_id] in deletedThemes){
-								Do nothing
-							} else{
-								deletedThemes[graphic.attributes.tab_id];
-							}*/
-						});
-
-						tab.id = index;
-					});
-				}
-
-
-				var tabs = [];
-				var entries = $('#nav-bar').find(".nav-tabs > li:not(.dropdown)");
-
-				$.each(entries, function(){
-					tabs.push([]);
-				});
-
-				$.each(graphics, function(i,graphic){
-					tabs[graphic.attributes.tab_id].push(graphic);
-				});
-
-				var titles = [];
-				var colors = [];
-
-
-				$.each(tabs, function(index, tab){
-					tab.sort(function(a,b){
-						return parseInt(a.attributes.number) - parseInt(b.attributes.number);
-					});
-
-					var color = (result && result.entries[index].color) ? result.entries[index].color :  app.data.getStory()[index].color;
-					var title = (result && result.entries[index].title) ? result.entries[index].title : app.data.getStory()[index].title;
-
-					$.each(tab, function(i, graphic){
-						graphic.attributes.shortlist_id = newShortlistID;
-						graphic.attributes.number = i+1;
-						//$.each(WebApplicationData.getContentLayers(), function(index, value){
-						var newIcon = _this.addMapIcon(graphic, color);
-						graphic.symbol = newIcon.symbol;
-						newShortlistID++;
-					});
-					titles.push(title);
-					colors.push(color);
-				});
-
-				app.data.clearStory();
-
-				$.each(tabs, function(index){
-					app.data.setStory(index, titles[index], colors[index]);
-				});
-
-				WebApplicationData.setTabs(app.data.getStory());
-				var themeIndex = $('.entry.active').index();
-				if(result)
-					themeIndex = result.sectionIndex;
-
-				app.ui.tilePanel.buildTilePanel();
-
-				shortlistLayer.redraw();
 				if(WebApplicationData.getTitle())
 					topic.publish("BUILDER_INCREMENT_COUNTER");
 			};
@@ -448,7 +347,7 @@ define([
 				var themeIndex = $('.entry.active').index();
 				var color = app.data.getStory()[themeIndex].color;
 				$.each(app.layerCurrent.graphics, function(index, graphic){
-					_this.addMapIcon(graphic, color, true);
+					_builderView.addMapIcon(graphic, color, true);
 				});
 				var shortlistLayer = app.map.getLayer(app.data.getShortlistLayerId());
 				shortlistLayer.redraw();
@@ -460,99 +359,6 @@ define([
 				if(WebApplicationData.getTitle())
 					topic.publish("BUILDER_INCREMENT_COUNTER");
 			};
-
-			this.addMapIcon = function(feature, color, updateColor)
-			{
-				var spec = app.ui.mainView.lutIconSpecs.tiny;
-				var coloredIcon;
-				var newIconColor = color;
-
-				var newCanvas = document.createElement('canvas');
-				newCanvas.width = _icon.width;
-				newCanvas.height = _icon.height;
-				var newContext = newCanvas.getContext('2d');
-				newContext.font = newCanvas.width/3.8 + "pt open_sanssemibold, sans-serif";
-				newContext.drawImage(_myCanvas, 0, 0);
-
-				// examine every pixel,
-				// change any old rgb to the new-rgb
-				if(!coloredIcon){
-					// pull the entire image into an array of pixel data
-					var imageData = newContext.getImageData(0, 0, _myCanvas.width, _myCanvas.height);
-					// Due to browser iconsistency, we need to find the value the browser interprets
-					// for a pixel we know contains the color we will look to replace.
-					var iconColor = getPixel(imageData, 4804);
-					if(iconColor[0] !=hexToRgb(newIconColor).r || iconColor[1] != hexToRgb(newIconColor).g || iconColor[1] != hexToRgb(newIconColor).b)
-					{
-						for (var i=0;i<imageData.data.length;i+=4)
-						{
-							// is this pixel the old rgb?
-							if(imageData.data[i]==iconColor[0] &&
-								imageData.data[i+1]==iconColor[1] &&
-								imageData.data[i+2]==iconColor[2]
-							){
-								// change to your new rgb
-								imageData.data[i]=hexToRgb(newIconColor).r;
-								imageData.data[i+1]=hexToRgb(newIconColor).g;
-								imageData.data[i+2]=hexToRgb(newIconColor).b;
-							}
-						}
-						// put the altered data back on the canvas
-						newContext.putImageData(imageData,0,0);
-					}
-					coloredIcon = imageData;
-				}
-
-				//if(index > 0)
-					newContext.putImageData(coloredIcon,0,0);
-
-				if(WebApplicationData.getGeneralOptions().numberedIcons){
-					var label = feature.attributes.number;//index + 1;
-					newContext.textAlign = "center";
-					newContext.fillStyle = 'white';
-					newContext.fillText(label, newCanvas.width/3.2, newCanvas.height/2);
-				}
-
-				if(updateColor)
-					feature.setSymbol(createSymbol(newCanvas, spec));
-				else{
-					var graphic = new esri.Graphic(new esri.geometry.Point(feature.geometry), createSymbol(newCanvas, spec), feature.attributes);
-					return graphic;
-				}
-
-			};
-
-			function getPixel(imgData, index) {
-				var i = index*4, d = imgData.data;
-				return [d[i],d[i+1],d[i+2],d[i+3]]; // returns array [R,G,B,A]
-			}
-
-			function hexToRgb(hex) {
-				// Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
-				var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-				hex = hex.replace(shorthandRegex, function(m, r, g, b) {
-					return r + r + g + g + b + b;
-				});
-
-				var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-				return result ? {
-					r: parseInt(result[1], 16),
-					g: parseInt(result[2], 16),
-					b: parseInt(result[3], 16)
-				} : null;
-			}
-
-			function createSymbol(newCanvas, spec){
-				var markerSymbol = new esri.symbol.PictureMarkerSymbol(
-					newCanvas.toDataURL(),
-					spec.getWidth(),
-					spec.getHeight()
-				).setOffset(
-					spec.getOffsetX(),
-					spec.getOffsetY()
-				);
-				return markerSymbol;
-			}
 
 			function importFeature()
 			{
@@ -631,11 +437,12 @@ define([
 				if($('.dropdown-menu .entry').length > 1){
 					$('#tabSelector').empty();
 					$.each($('.dropdown-menu .entry'), function(index){
+						var title = app.data.getStory()[index].title;
 						if(index == themeIndex)
-							$('#tabSelector').append($('<li class="disabledTab"><a href="#">' + (app.data.getStory()[index].title) + '</a></li>'));
+							$('#tabSelector').append($('<li class="disabledTab"><a href="#">' + (title) + '</a></li>'));
 							//$('#tabSelector').append($('<option disabled = true; value='+index+'>tab '+(index+1)+'</option>'));
 						else{
-							$('#tabSelector').append($('<li class="enabledTab"><a href="#">' + (app.data.getStory()[index].title) + '</a></li>'));
+							$('#tabSelector').append($('<li class="enabledTab"><a href="#">' + (title) + '</a></li>'));
 							//$('#tabSelector').append($('<option value='+index+'>tab '+(index+1)+'</option>'));
 						}
 					});
@@ -676,6 +483,9 @@ define([
 				var shortlistLayer = app.map.getLayer(app.data.getShortlistLayerId());
 				$.each(selectedTiles, function(index, value){
 					var featureToDelete = $.grep(shortlistLayer.graphics, function(e){ return e.attributes.shortlist_id == $(value).data('shortlist-id'); });
+					if(featureToDelete[0].attributes.resource){
+						FileUploadHelper.removeResources(featureToDelete[0].attributes.resource);
+					}
 					shortlistLayer.remove(featureToDelete[0]);
 				});
 
@@ -696,7 +506,7 @@ define([
 				// Update display number/order for all features as tab contents have changed
 				//WebApplicationData.setContentLayers(_shortlistLayers[themeIndex], themeIndex, true);
 
-				_this.updateAllFeatures();
+				_builderView.updateAllFeatures();
 
 				_builderView.updateShortlistExtent();
 
@@ -739,7 +549,7 @@ define([
 					newNumber++;
 				});
 
-				_this.updateAllFeatures();
+				_builderView.updateAllFeatures();
 
 				var themeIndex = $('.entry.active').index();
 				var tabFeatures =[];

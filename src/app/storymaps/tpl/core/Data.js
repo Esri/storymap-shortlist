@@ -119,6 +119,28 @@ define(["./WebApplicationData",
 				_appProxies = appProxies;
 			};
 
+			/*
+			 * Map Series
+			 */
+
+			var _storyStorage = null,
+				_currentStoryIndex = null;
+
+			/*
+			 * Storage type
+			 */
+
+			this.getStoryStorage = function()
+			{
+				return _storyStorage;
+			};
+
+			this.setStoryStorage = function(storyStorage)
+			{
+				_storyStorage = storyStorage;
+			};
+
+
 			this.debug = function()
 			{
 				//
@@ -147,8 +169,6 @@ define(["./WebApplicationData",
 					_tabs[index].color = color;
 				if(extent)
 					_tabs[index].extent = extent;
-
-
 			};
 
 			this.clearStory = function()
@@ -175,7 +195,72 @@ define(["./WebApplicationData",
 			{
 				return ! app.isGalleryCreation
 					|| app.data.getWebMap().item.id;
-			}
+			};
+
+			/**
+			 * Get story entries:
+			 *  - in user defined order
+			 *  - in builder: get all entries
+			 *  - in viewer: get only published section with a past publication date
+			 */
+			this.getStoryEntries = function()
+			{
+				var allEntries = [],
+					filteredEntries = [];
+
+				if ( _storyStorage == "WEBAPP" )
+					allEntries = WebApplicationData.getStoryEntries();
+
+				// Apply maximum number of entries limitation
+				allEntries = allEntries.slice(0, app.cfg.MAX_NB_ENTRIES);
+
+				if ( app.isInBuilder )
+					return allEntries || [];
+
+				// Filter by status
+				$.each(allEntries || [], function(i, entry){
+					if ( entry.status == "PUBLISHED" )
+						filteredEntries.push(entry);
+				});
+
+				return filteredEntries;
+			};
+
+			// TODO those three functions should be refactored
+			this.getImages = function()
+			{
+				// Story Main Stage images
+				var images = $.map(this.getStoryEntries(), function(section){
+					return section.media && section.media.type == "image" && section.media.image ? section.media.image.url : null;
+				});
+
+				// Make the array unique
+				images = $.grep(images, function(image, index) {
+					return index == $.inArray(image, images);
+				});
+
+				return images;
+			};
+
+			this.getAllImageUrls = function() {
+				return _.map(this.getImages().concat(this.getSidebarImages().concat([WebApplicationData.getLogoURL()])), this.getNonProtocolNonDoubleSlashUrl);
+			};
+
+			this.getSidebarImages = function() {
+				var entries = this.getStoryEntries();
+				var imgUrls = [];
+				_.each(entries, function(section) {
+					var jqSection = $(section.description);
+					_.each(jqSection.find('img'), function(img) {
+						imgUrls.push(CommonHelper.possiblyRemoveToken(img.src));
+					});
+				});
+				return imgUrls;
+			};
+
+			this.getNonProtocolNonDoubleSlashUrl = function(url) {
+				return url.replace(/http[s]?\:\/\//, '').replace('//', '/');
+			};
 		};
 	}
 );

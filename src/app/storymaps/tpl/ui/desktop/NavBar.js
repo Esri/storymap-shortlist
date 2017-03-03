@@ -249,14 +249,13 @@ define(["lib-build/tpl!./NavBar",
 			function render(colors, entryIndex)
 			{
 				_entries = _entries || [];
-				setColor(colors);
 				$('.nav-bar').addClass('isTab');
 				//$('#nav-bar').css('background', '#444');
 				var nbEntries = _entries.length,
 					entriesHTML = "";
 
 				$.each(_entries, function(i, entry) {
-					var value = entry.title;
+					var value = entry.alias ? entry.alias : entry.title;
 
 					// Can happen when switching from bullet where title isn't mandatory
 					//if ( ! value )
@@ -274,6 +273,8 @@ define(["lib-build/tpl!./NavBar",
 					entriesHTML
 					+ viewEntryMoreTpl({ entries: entriesHTML })
 				);
+
+				setColor(colors);
 
 				container.find('.entry').click(onTitleClick);
 
@@ -373,7 +374,7 @@ define(["lib-build/tpl!./NavBar",
 				var index = $(this).index();
 
 				navigationCallback(index);
-				if(app.isInBuilder){
+				if(app.isInBuilder && !app.data.getWebAppData().getIsExternalData()){
 					app.addFeatureBar.updateLocatedFeatures();
 					app.addFeatureBar.exitOrganizeMode();
 				}

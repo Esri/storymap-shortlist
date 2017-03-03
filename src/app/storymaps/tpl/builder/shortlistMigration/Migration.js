@@ -32,7 +32,16 @@ define(["lib-build/tpl!./Migration",
 	){
 		return function Migration(container, core, mainView, builderView, webApplicationData)
 		{
+			var downloadLink = '  (<a href="http://links.esri.com/storymaps/shortlist_layer_template" target="_blank" download="">'+i18n.builder.migration.migrationPattern.downloadTemplate+'</a>)';
 			container.append(viewTpl({
+				welcome: i18n.builder.migration.migrationPattern.welcome,
+				importQuestion: i18n.builder.migration.migrationPattern.importQuestion,
+				importExplainYes: i18n.builder.migration.migrationPattern.importExplainYes,
+				importExplainNo: i18n.builder.migration.migrationPattern.importExplainNo,
+				no: i18n.builder.migration.migrationPattern.no,
+				importOption: i18n.builder.migration.migrationPattern.importOption,
+				asIsOption: i18n.builder.migration.migrationPattern.asIsOption,
+				asIsText: i18n.builder.migration.migrationPattern.asIsText + downloadLink,
 				btnCancel: i18n.commonCore.common.cancel,
 				btnBack: i18n.commonCore.common.back
 			}));
@@ -60,6 +69,7 @@ define(["lib-build/tpl!./Migration",
 			{
 				_popupDeferred = new Deferred();
 				_pointLayers = pointLayers;
+
 				_layers = layers;
 
 				// Submit
@@ -210,7 +220,17 @@ define(["lib-build/tpl!./Migration",
 				if($('.viewMigrationFieldSelectorContainer').length){
 					$('.viewMigrationFieldSelectorContainer').show();
 				}else{
-					container.find('.modal-body').append(fieldPicker({}));
+					container.find('.modal-body').append(fieldPicker({
+						nameField: i18n.builder.migration.fieldPicker.nameField,
+						descriptionField: i18n.builder.migration.fieldPicker.descriptionField,
+						urlField: i18n.builder.migration.fieldPicker.urlField,
+						none: i18n.builder.migration.fieldPicker.none,
+						imageFields: i18n.builder.migration.fieldPicker.imageFields,
+						mainImageField: i18n.builder.migration.fieldPicker.mainImageField,
+						thumbImageField: i18n.builder.migration.fieldPicker.thumbImageField,
+						noImageFields: i18n.builder.migration.fieldPicker.noImageFields,
+						tabField: i18n.builder.migration.fieldPicker.tabField
+					}));
 					container.find('.viewMigrationFieldSelector fieldNameSelect').on('change', function() {
 						updateSubmitButton();
 					});
@@ -382,12 +402,14 @@ define(["lib-build/tpl!./Migration",
 			function presentLayerPicker()
 			{
 				var migrate = $('input[name=optradio]:checked', '.viewMigrationSelectorContainer').val();
-				migrate = parseInt(migrate);
+				if(migrate == 0)
+					migrate = parseInt(migrate);
 				var obj = {};
+
 				obj.migrate = migrate;
 				obj.pointLayers = _pointLayers;
 				obj.layers = _layers;
-				if(!migrate){
+				if(!obj.migrate || obj.migrate == 'as-is'){
 					_popupDeferred.resolve(
 						obj
 					);
@@ -406,7 +428,10 @@ define(["lib-build/tpl!./Migration",
 						}, 500);
 						return;
 					}
-					container.find('.modal-body').append(layerPicker({}));
+					container.find('.modal-body').append(layerPicker({
+						pointLayers: i18n.builder.migration.layerPicker.pointLayers,
+						layerInfo: i18n.builder.migration.layerPicker.layerInfo
+					}));
 
 					_pointLayers.reverse();
 
@@ -455,7 +480,10 @@ define(["lib-build/tpl!./Migration",
 				container.find('.modal-title').text('Does your layer contain multiple themes?');
 
 				if(!$('.viewMigrationTabFieldSelectorContainer').length)
-					container.find('.modal-body').append(tabFieldPicker({}));
+					container.find('.modal-body').append(tabFieldPicker({
+						tabField: i18n.builder.migration.fieldPicker.tabField,
+						none: i18n.builder.migration.fieldPicker.none
+					}));
 
 				$('.viewMigrationTabFieldSelectorContainer').show();
 
@@ -482,6 +510,10 @@ define(["lib-build/tpl!./Migration",
 						$(this).prop('selected', true);
 						return false;
 					}
+					if(option.value.toLowerCase() == "tabname" || option.value.toLowerCase() == "tab_id"){
+						$(this).prop('selected', true);
+						return false;
+					}
 				});
 
 				setTimeout(function(){
@@ -499,6 +531,7 @@ define(["lib-build/tpl!./Migration",
 				//Using isGalleryCreation as it saves a new web map for us
 				app.isGalleryCreation = true;
 				_builderView.buildAddFeatureBar();
+
 				app.data.getWebAppData().setDefaultGeneralOptions();
 
 				var newWebmap = _builderView.buildWebMap();
@@ -541,10 +574,15 @@ define(["lib-build/tpl!./Migration",
 					var genSettings = app.data.getWebAppData().getGeneralOptions();
 					genSettings.extentMode = "customHome";
 					app.data.getWebAppData().setGeneralOptions(genSettings);
+					var mapId = response.itemInfo.item.id ? response.itemInfo.item.id : response.map.id;
+					app.maps[mapId] = _mainView.getMapConfig(response);
+					var pointLayer = new esri.layers.GraphicsLayer();
+					pointLayer.id = "tempIconLayer";
+					app.map.addLayer(pointLayer);
+					app.map.reorderLayer(pointLayer, app.map.graphicsLayerIds.length - 1);
 
 					_builderView.storyDataReady();
 
-					app.data.getWebAppData().setDefaultMapOptions();
 					var colorOrder = app.cfg.COLOR_ORDER.split(",");
 					var activeColor = $.grep(app.cfg.COLOR_SCHEMES, function(e){ return e.name == colorOrder[0]; });
 					$('#contentPanel').css('border-top-color', activeColor[0].color);
@@ -609,7 +647,6 @@ define(["lib-build/tpl!./Migration",
 						app.data.getWebMap().itemData.operationalLayers.push(layer);
 					});
 
-					app.maps[response.itemInfo.item.id] = _mainView.getMapConfig(response);
 					_builderView.updateUI();
 					_core.appInitComplete(_webApplicationData);
 
@@ -636,6 +673,7 @@ define(["lib-build/tpl!./Migration",
 							}
 
 							$.each(layer.graphics, function(i, graphic){
+								var locationSet = graphic.geometry && graphic.geometry.x && graphic.geometry.y ? parseInt(1) : 0;
 								var newAttributes = {
 									__OBJECTID: shortlistLayer.graphics.length+1,
 									name: '',
@@ -645,7 +683,7 @@ define(["lib-build/tpl!./Migration",
 									shortlist_id: shortlistLayer.graphics.length+1,
 									number: i+1,
 									tab_id: index,
-									locationSet: parseInt(1)
+									locationSet: locationSet
 								};
 								if(graphic.attributes.number)
 									newAttributes.number = graphic.attributes.number;
@@ -664,16 +702,17 @@ define(["lib-build/tpl!./Migration",
 										newAttributes.description += '<p><a href=' + graphic.attributes[link] + ' target="_blank">More info</a></p>';
 								}
 								if(imageUrl != "none")
-									newAttributes.pic_url = graphic.attributes[imageUrl];
+									newAttributes.pic_url = encodeURI(graphic.attributes[imageUrl]);
 								if(thumbUrl != "none")
-									newAttributes.thumb_url = graphic.attributes[thumbUrl];
+									newAttributes.thumb_url = encodeURI(graphic.attributes[thumbUrl]);
 								if(thumbUrl == "none" && imageUrl != "none")
-									newAttributes.thumb_url = graphic.attributes[imageUrl];
-
+									newAttributes.thumb_url = encodeURI(graphic.attributes[imageUrl]);
+								if(graphic.geometry == null)
+									newAttributes.locationSet = 0;
 
 								var sms = new SimpleMarkerSymbol();
 								var newGraphic = new Graphic(graphic.geometry, sms, newAttributes);
-								var c = app.addFeatureBar.addMapIcon(newGraphic, app.data.getStory()[index].color);
+								var c = _builderView.addMapIcon(newGraphic, app.data.getStory()[index].color);
 								shortlistLayer.add(c);
 								//app.addFeatureBar.addFeature(newAttributes, false, graphic.geometry);
 							});
@@ -688,7 +727,9 @@ define(["lib-build/tpl!./Migration",
 							numberedIcons: false,
 							filterByExtent: true,
 							bookmarks: true,
-							bookmarksAlias: app.cfg.BOOKMARKS_ALIAS
+							bookmarksAlias: app.cfg.BOOKMARKS_ALIAS,
+							locateButton: false,
+							geocoder: false
 						};
 						app.data.getWebAppData().setGeneralOptions(settings);
 						app.ui.navBar.initBookmarks();
@@ -705,9 +746,10 @@ define(["lib-build/tpl!./Migration",
 						topic.publish("BUILDER_INCREMENT_COUNTER", 1);
 						app.data.getWebAppItem().typeKeywords.push('Shortlist-migration');
 						// Except for movable graphic layer for editing location
-						app.map.reorderLayer(app.map.getLayer('tempIconLayer'), app.map.graphicsLayerIds.length - 1);
+						//app.map.reorderLayer(app.map.getLayer('tempIconLayer'), app.map.graphicsLayerIds.length - 1);
 						// Make sure shortlist layer is above all other layers (i.e. mapnotes);
-						app.map.reorderLayer(shortlistLayer, app.map.graphicsLayerIds.length - 2);
+						var graphicsLayerLength = app.map.graphicsLayerIds.length - 1;
+						app.map.reorderLayer(shortlistLayer, graphicsLayerLength);
 					}, 800);
 				});
 
@@ -823,7 +865,6 @@ define(["lib-build/tpl!./Migration",
 					container.find('.modal-body').addClass('migrationQuestion');
 					container.find('.viewMigrationLayerSelectorContainer').hide();
 					container.find('.viewMigrationSelectorContainer').show();
-					container.find('.modal-title').text('Welcome to the Shortlist Builder');
 					_btnBack.hide();
 					updateSubmitButton();
 				}

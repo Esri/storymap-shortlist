@@ -32,6 +32,10 @@
 	overflow-x: hidden;
 }
 
+.detail-btn-add.externalData {
+	display: none !important;
+}
+
 .slick-list {
 	height: inherit !important;
 }
@@ -199,9 +203,19 @@
 	width: 100%;
 }
 
+.shortDesc{
+	color: #333;
+	font-family: 'open_sanssemibold',sans-serif;
+	font-size: 17px;
+	text-align: left;
+	padding-left: 20px;
+	padding-right: 20px;
+	margin-top: 20px;
+	margin-bottom: -10px;
+}
+
 .detailFeatureDesc{
 	color: #000;
-	font-family: 'open_sansregular', sans-serif;
 	font-size: 14px;
 	text-align: left;
 	padding-left: 20px;

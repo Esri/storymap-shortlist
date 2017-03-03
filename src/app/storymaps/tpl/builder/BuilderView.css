@@ -4,6 +4,25 @@
 }
 */
 
+.builder-title-mask {
+	display: none;
+	position: absolute;
+	top: 50px;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
+	box-shadow: inset 0px 0px 82px 19px rgba(0,0,0,0.3);
+	opacity: 1;
+	z-index: 100;
+}
+
+#builderQuotes {
+	display: none;
+	z-index: 100;
+	top: 100px !important;
+}
+
 /*
  * Command panel
  */
@@ -177,7 +196,7 @@ body.layout-bullet .mapConfigOverlay.toc {
 }
 
  .layout-thumbnail .thumb-content {
- 	color: black;
+	color: black;
  }
 
 /* Float specific */
@@ -248,7 +267,7 @@ body.layout-bullet .mapConfigOverlay.toc {
 	right: 5px;
 	bottom: 50px;
 	z-index: 1;
-	display: none;
+	display: block;
 }
 
 body.mobile-view #basemapChooser {
@@ -293,4 +312,8 @@ body.mobile-view #basemapChooser {
 	box-sizing: content-box;
 	-webkit-box-sizing: initial;
 	-moz-box-sizing: initial;
+}
+
+.imageSelectorUpload .resources {
+	display: none !important;
 }

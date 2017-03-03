@@ -133,7 +133,10 @@ define(["dojo/dom-style",
 				array.forEach(settings.pointArray, function(pt, i) {
 					domConstruct.place("<div id='arrow"+i+"' class='mtArrow'></div><div id='multiTip"+i+"' class='multiTip'></div>", mapDiv, "last");
 
-					query('#multiTip'+i)[0].innerHTML = (i === 0 && settings.selected) ? settings.selected.attributes.name : settings.content;
+					var name;
+					if(settings.selected)
+						name = settings.selected.attributes.name || settings.selected.attributes.Name || settings.selected.attributes.NAME;
+					query('#multiTip'+i)[0].innerHTML = (i === 0 && settings.selected) ? name : settings.content;
 
 					var currentTip = $('#multiTip'+i);
 					var currentArrow = $('#arrow'+i);
@@ -213,7 +216,8 @@ define(["dojo/dom-style",
 						var pointScreen = settings.map.toScreen(pt.geometry);
 						pointScreen.x += delta.x;
 						pointScreen.y += delta.y;
-						displayTip(pointScreen, i, settings);
+						var pan = true;
+						displayTip(pointScreen, i, settings, pan);
 					}
 					else
 						hideTip(i);
@@ -231,7 +235,7 @@ define(["dojo/dom-style",
 			function hideTip(index)
 			{
 				if(!dom.byId('multiTip' + index))
-					return
+					return;
 				if(domStyle.get(dom.byId('multiTip' + index), "display") == "none" )
 					return;
 
@@ -375,10 +379,9 @@ define(["dojo/dom-style",
 			function labelRight(scrPt, i, settings, width, height)
 			{
 				var selectedTopOffset = (i === 0 && settings.selected) ? 5 : 0;
-				domStyle.set('multiTip' + i, {
-					top: (scrPt.y - 22 - selectedTopOffset - ((height-10) / 2)) + 'px',
-					left: (scrPt.x + 17 + settings.offsetSide) + 'px'
-				});
+				var ieOffset = 0;
+				if(has('ie') > 0 || (/Trident\/7\./).test(navigator.userAgent))
+					ieOffset += 5;
 
 				domStyle.set('arrow' + i, {
 					left: (scrPt.x + 8 +  settings.offsetSide) + 'px',
@@ -389,15 +392,22 @@ define(["dojo/dom-style",
 					borderRightColor: (i === 0 && settings.selected) ? app.cfg.SELECTED_POPUP_ARROW_COLOR : settings.pointerColor,
 					borderLeft: "none"
 				});
+
+				domStyle.set('multiTip' + i, {
+					top: (scrPt.y - 22 - selectedTopOffset - ieOffset - ((height-10) / 2)) + 'px',
+					left: (scrPt.x + 17 + settings.offsetSide) + 'px'
+				});
 			}
 
 			function labelLeft(scrPt, i, settings, width, height)
 			{
 				var selectedTopOffset = (i === 0 && settings.selected) ? 5 : 0;
-				domStyle.set('multiTip' + i, {
-					top: (scrPt.y - 22 - selectedTopOffset - ((height-10) / 2)) + 'px',
-					left: (scrPt.x - 18 - width - settings.offsetSide) + 'px'
-				});
+				var ieOffsetTop = 0,
+					ieOffsetLeft = 0;
+				if(has('ie') > 0 || (/Trident\/7\./).test(navigator.userAgent)){
+					ieOffsetTop += 5;
+					ieOffsetLeft += 10;
+				}
 
 				domStyle.set('arrow' + i, {
 					left: (scrPt.x - 18 - settings.offsetSide) + 'px',
@@ -407,6 +417,11 @@ define(["dojo/dom-style",
 					borderLeft: "10px solid",
 					borderLeftColor: (i === 0 && settings.selected) ? app.cfg.SELECTED_POPUP_ARROW_COLOR : settings.pointerColor,
 					borderRight: "none"
+				});
+
+				domStyle.set('multiTip' + i, {
+					top: (scrPt.y - 22 - selectedTopOffset - ieOffsetTop - ((height-10) / 2)) + 'px',
+					left: (scrPt.x - 18 - width - ieOffsetLeft - settings.offsetSide) + 'px'
 				});
 			}
 		};

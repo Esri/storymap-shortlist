@@ -58,6 +58,7 @@
 	padding: 5px 0;
 	vertical-align: -7px;
 	font-size: 0.9em;
+  white-space: nowrap;
 }
 
 .settings-header .settings-table .td-input,
@@ -82,6 +83,9 @@
 .settings-header .settings-table .btn-group .btn {
   padding: 4px 10px;
 }
+.settings-header .settings-table .btn-group {
+  width: 72px;
+}
 
 .settings-header .settings-table .btn .fa {
   font-size: 14px;
@@ -97,10 +101,6 @@
   outline: none;
   cursor: inherit;
   display: block;
-}
-
-.settings-header .settings-table .fixed-width {
-  width: 260px;
 }
 
 .settings-header .settings-table .hidden {
@@ -128,11 +128,9 @@
  */
 
 .settings-header .radio {
-	margin-left: 15px;
-}
-
-.settings-header .radio:nth-child(1) {
-	margin-left: 0;
+  margin-right: 10px;
+  padding-top: 0;
+  font-size: 0.9em;
 }
 
 .settings-header #logoInput {

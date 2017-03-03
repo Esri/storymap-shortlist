@@ -10,11 +10,11 @@
 
 		<meta name="viewport" content="width=device-width">
 
-		<link type="image/ico" rel="shortcut icon" href="resources.esri.com/favicon.ico">
-		<link type="image/ico" rel="icon"  href="resources.esri.com/favicon.ico">
+		<link type="image/ico" rel="shortcut icon" href="resources/tpl/viewer/icons/favicon.ico">
+		<link type="image/ico" rel="icon"  href="resources/tpl/viewer/icons/favicon.ico">
 
 		<!--
-			To correctly reference your Map Series in search engine:
+			To correctly reference your Shortlist in search engine:
 			 - create and fill out extensively an ArcGIS Online item that link to your final application
 			 - edit the following four tags as well as the title tag above on line 4
 		-->
@@ -29,7 +29,7 @@
 		<!--
 			This application is released under the Apache License V2.0 by Esri http://www.esri.com/
 			Checkout the project repository on GitHub to access source code, latest revision, developer documentation, FAQ and tips
-			https://github.com/Esri/map-series-storytelling-template-js
+			https://github.com/Esri/shortlist-storytelling-template-js
 		-->
 
 		<script type="text/javascript">
@@ -37,18 +37,18 @@
 			//	 Application configuration (ignored on ArcGIS Online, Portal and during development)
 			//-------------------------------------------------------------------------------------------
 			var configOptions = {
-				// Enter an application ID created through the Map Series builder
+				// Enter an application ID created through the Shortlist builder
 				appid: "",
-				// Optionally to secure Series's access, use an OAuth application ID (example: 6gyOg377fLUhUk6f)
+				// Optionally to secure Shortlist's access, use an OAuth application ID (example: 6gyOg377fLUhUk6f)
 				// User will need to sign-in to access the viewer even if your application is public
 				oAuthAppId: "",
 				// Optionally to be able to use the appid URL parameter, configure here the list of application author
-				//  whose application are allowed to be viewed by this Map Series deployment
-				// This is the Portal username of the Series owner (e.g. ["user1"], ["user1", "user2"])
+				//  whose application are allowed to be viewed by this Shortlist deployment
+				// This is the Portal username of the Shortlist owner (e.g. ["user1"], ["user1", "user2"])
 				authorizedOwners: ["*"]
 			};
 			// Optionally sharing and proxy URLs can be configured in app/config.js. This is only required
-			//  when the webmap is not hosted on ArcGIS Online or a Portal for ArcGIS instance and the application isn't deployed as /home/MapSeries/ or /apps/MapSeries/.
+			//  when the webmap is not hosted on ArcGIS Online or a Portal for ArcGIS instance and the application isn't deployed as /home/Shortlist/ or /apps/Shortlist/.
 			// Optionally Bing Maps key, Geometry and Geocode service's URLs can be configured in app/config.js. This is only required
 			//  if the Organization or Portal for ArcGIS instance default configuration has to be overwritten.
 		</script>
@@ -61,8 +61,8 @@
 
 		<script type="text/javascript">
 			var app = {
-				version: '2.1.0-121516',
-				pathJSAPI: '//js.arcgis.com/3.19/'
+				version: '2.2.2',
+				pathJSAPI: '//js.arcgis.com/3.20/'
 			};
 		</script>
 
@@ -74,6 +74,11 @@
 
 		<!-- Builder top panel is injected here -->
 		<div id="builderPanel" class="hide mainViewAboveMap"></div>
+
+		<div class="builder-title-mask"></div>
+
+		<div id="builderQuotes"></div>
+		<div id="builderLanding"></div>
 
 		<!-- Header -->
 		<div id="header" class="mainViewAboveMap">
@@ -119,10 +124,31 @@
 				<div id="mobileBookmarksDiv"></div>
 			</div>
 
+			<div class="builder builder-content-panel">
+				<div class="builder-content-panel-group builder-add">
+					<div class="builder-btn"></div>
+					<div class="builder-lbl"></div>
+				</div>
+				<div class="builder-content-panel-group builder-organize">
+					<div class="builder-btn"></div>
+					<div class="builder-lbl"></div>
+				</div>
+			</div>
+
 			<div id="mainStagePanel">
 
 				<div id="map">
 					<div id="search"></div>
+					<div id="viewer-search"></div>
+					<!-- For some reason this can't be appended in its own template as part of its own component
+							IE does not initialize it properly, so its in index.html-->
+					<div id="basemapChooser">
+						<div data-dojo-type="dijit/TitlePane" data-dojo-props="closable:false, open:false">
+							<div data-dojo-type="dijit/layout/ContentPane" style="width:380px; height:280px; overflow:auto;">
+								<div id="basemapGallery" ></div>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div id="builderLandingOverlay"></div>
 				<!--<div id="builderQuotes"></div>-->
