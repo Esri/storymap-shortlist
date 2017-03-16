@@ -12,6 +12,7 @@ define(["lib-build/tpl!./BuilderView",
 		"storymaps/common/builder/media/image/FileUploadHelper",
 		"./BuilderHelper",
 		"storymaps/common/utils/WebMapHelper",
+		"esri/arcgis/utils",
 		"esri/dijit/BasemapGallery",
 		// Web map picker
 		"storymaps/common/builder/browse-dialog/js/BrowseIdDlg",
@@ -65,6 +66,7 @@ define(["lib-build/tpl!./BuilderView",
 		FileUploadHelper,
 		BuilderHelper,
 		WebMapHelper,
+		arcgisUtils,
 		BasemapGallery,
 		// Web map picker
 		BrowseIdDlg,
@@ -213,11 +215,20 @@ define(["lib-build/tpl!./BuilderView",
 				if(basemapGallery)
 					basemapGallery.destroyRecursive(true);
 
+				var galleryConfig = {
+					map: app.map,
+					portalUrl: arcgisUtils.arcgisUrl.split('/sharing/')[0]
+				};
+
+				if (app.portal.basemapGalleryGroupQuery) {
+					galleryConfig.basemapsGroup = app.portal.basemapGalleryGroupQuery;
+				}
+				else {
+					galleryConfig.showArcGISBasemaps = true;
+				}
+
 				basemapGallery = new BasemapGallery(
-					{
-						showArcGISBasemaps: true,
-						map: app.map
-					},
+					galleryConfig,
 					"basemapGallery"
 				);
 				basemapGallery.startup();
@@ -246,6 +257,24 @@ define(["lib-build/tpl!./BuilderView",
 						else if ( layer.type == "OpenStreetMap" ) {
 							delete bmLayerJSON.url;
 							bmLayerJSON.type = "OpenStreetMap";
+						}
+						else if ( layer.type == "VectorTileLayer" ) {
+							delete bmLayerJSON.url;
+							bmLayerJSON.type = "VectorTileLayer";
+							bmLayerJSON.layerType = "VectorTileLayer";
+							bmLayerJSON.title = basemap.title;
+							bmLayerJSON.styleUrl = layer.styleUrl;
+							bmLayerJSON.itemId = basemap.itemId;
+						}
+						else if ( layer.type == "WebTiledLayer" ) {
+							delete bmLayerJSON.url;
+							bmLayerJSON.templateUrl = layer.templateUrl;
+							bmLayerJSON.copyright = layer.copyright;
+							bmLayerJSON.fullExtent = layer.fullExtent;
+							bmLayerJSON.subDomains = layer.subDomains;
+							bmLayerJSON.title = basemap.title;
+							bmLayerJSON.type = "WebTiledLayer";
+							bmLayerJSON.layerType = "WebTiledLayer";
 						}
 
 						newBasemapJSON.push(bmLayerJSON);
@@ -1313,7 +1342,8 @@ define(["lib-build/tpl!./BuilderView",
 
 					if(app.data.getWebAppData().getGeneralOptions().extentMode == 'customHome' ){
 						setTimeout(function(){
-							_this.initMapExtentSave();
+							if(!_mapExtentSave.initDone)
+								_this.initMapExtentSave();
 						}, 500);
 					}
 

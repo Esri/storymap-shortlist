@@ -630,7 +630,15 @@ define(["lib-build/css!./MainView",
 									handle.remove();
 									_core.displayApp();
 								});
-								app.map.setExtent(new Extent(app.data.getWebAppData().getMapExtent()), true);
+								var mapExtent = new Extent(app.data.getWebAppData().getMapExtent());
+								if ( app.map.spatialReference.wkid != 102100 && app.map.spatialReference.wkid != 4326 ){
+									mapExtent = esriConfig.defaults.geometryService.project([mapExtent], app.map.spatialReference, function(geom){
+										mapExtent = geom[0];
+										app.map.setExtent(mapExtent, true);
+									});
+								}else{
+									app.map.setExtent(mapExtent, true);
+								}
 							}, 500);
 						}
 						else if(app.data.getWebAppData().getTabs() && app.data.getWebAppData().getTabs()[0] && app.data.getWebAppData().getTabs()[0].extent){
@@ -643,7 +651,14 @@ define(["lib-build/css!./MainView",
 								_core.displayApp();
 							});
 							setTimeout(function(){
-								app.map.setExtent(tabExtent, fitExtent);
+								if ( app.map.spatialReference.wkid != 102100 && app.map.spatialReference.wkid != 4326 ){
+									tabExtent = esriConfig.defaults.geometryService.project([tabExtent], app.map.spatialReference, function(geom){
+										tabExtent = geom[0];
+										app.map.setExtent(tabExtent, fitExtent);
+									});
+								}else{
+									app.map.setExtent(tabExtent, fitExtent);
+								}
 							}, 500);
 						}
 						else if(app.isDirectCreationFirstSave){
@@ -980,6 +995,9 @@ define(["lib-build/css!./MainView",
 				if(builtThemes)
 					_builtThemes = builtThemes;
 				var shortlistLayer = app.map.getLayer(app.data.getShortlistLayerId());
+
+				if(app.isInBuilder)
+					app.detailPanelBuilder.checkTempLayer();
 
 				$.each(shortlistLayer.graphics,function(i,graphic){
 					if(graphic.attributes.tab_id != index){
@@ -1558,55 +1576,66 @@ define(["lib-build/css!./MainView",
 						if(mapUpdated)
 							return;
 						mapUpdated = true;
-						$.each(featServLayer, function(i, layer){
-							if(layer.geometryType == 'esriGeometryPoint' && layer.id.toLowerCase().indexOf("mapnotes") == -1  && layer.graphics.length){
-								potentialShortlistLayers.push(layer);
-							}
-						});
-						if(!potentialShortlistLayers.length){
-							var config = {};
-							builderView.initPopupComplete(config);
-							//builderView.initMapExtentSave();
-							app.detailPanelBuilder.init(app.ui.mainView, builderView);
-							app.data.getWebAppData().setTitle(app.data.getResponse().itemInfo.item.title);
-							app.data.getWebAppData().setSubtitle(app.data.getResponse().itemInfo.item.description);
-							//app.data.getWebMap().item.extent = builderView.serializeExtentToItem(app.map.extent);
-							//app.map._params.extent = new Extent(JSON.parse(JSON.stringify(app.map.extent.toJson())));
-							//app.data.getWebAppData().setMapExtent(app.map.extent);
-							app.ui.headerDesktop.setTitleAndSubtitle(app.data.getWebAppData().getTitle(), app.data.getWebAppData().getSubtitle());
-							if(app.data.getResponse().itemInfo.itemData.bookmarks && app.data.getResponse().itemInfo.itemData.bookmarks.length){
-								var settings = {
-									extentMode: "default",
-									numberedIcons: false,
-									filterByExtent: true,
-									bookmarks: true,
-									bookmarksAlias: 'Zoom'
-								};
-								app.data.getWebAppData().setGeneralOptions(settings);
-								app.ui.navBar.initBookmarks();
-							}
-							app.addFeatureBar.addLayer();
-							builderView.storyDataReady();
-							_core.appInitComplete(WebApplicationData);
-							_core.displayApp();
-							/*setTimeout(function(){
-								console.log("***");
-								app.maps[app.data.getResponse().itemInfo.item.id] = _this.getMapConfig(app.data.getResponse());
-								mapConfigSet = true;
-							}, app.data.getWebAppData().getAppGeocoders() ? 0 : 1000);*/
-						}else{
-							if(layersManaged)
-								return;
-							$.each(potentialShortlistLayers, function(i, layer){
-								var index = layers.indexOf(layer);
-								layers.splice(index, 1);
-							});
-							builderView.openMigrationPopup(potentialShortlistLayers, layers);
-							$("#loadingIndicator").hide();
-							clearTimeout(app.loadingTimeout);
-							app.loadingTimeout = null;
+						checkPointLayers();
+					});
+					var baseMapLayer = app.map.getLayer(app.data.getWebMap().itemData.baseMap.baseMapLayers[0].id);
+					if(baseMapLayer.tileIndexUrl && baseMapLayer.loaded){
+						if(mapUpdated)
+							return;
+						mapUpdated = true;
+						checkPointLayers();
+					}
+				}
+				function checkPointLayers()
+				{
+					$.each(featServLayer, function(i, layer){
+						if(layer.geometryType == 'esriGeometryPoint' && layer.id.toLowerCase().indexOf("mapnotes") == -1  && layer.graphics.length){
+							potentialShortlistLayers.push(layer);
 						}
 					});
+					if(!potentialShortlistLayers.length){
+						var config = {};
+						builderView.initPopupComplete(config);
+						//builderView.initMapExtentSave();
+						app.detailPanelBuilder.init(app.ui.mainView, builderView);
+						app.data.getWebAppData().setTitle(app.data.getResponse().itemInfo.item.title);
+						app.data.getWebAppData().setSubtitle(app.data.getResponse().itemInfo.item.description);
+						//app.data.getWebMap().item.extent = builderView.serializeExtentToItem(app.map.extent);
+						//app.map._params.extent = new Extent(JSON.parse(JSON.stringify(app.map.extent.toJson())));
+						//app.data.getWebAppData().setMapExtent(app.map.extent);
+						app.ui.headerDesktop.setTitleAndSubtitle(app.data.getWebAppData().getTitle(), app.data.getWebAppData().getSubtitle());
+						if(app.data.getResponse().itemInfo.itemData.bookmarks && app.data.getResponse().itemInfo.itemData.bookmarks.length){
+							var settings = {
+								extentMode: "default",
+								numberedIcons: false,
+								filterByExtent: true,
+								bookmarks: true,
+								bookmarksAlias: 'Zoom'
+							};
+							app.data.getWebAppData().setGeneralOptions(settings);
+							app.ui.navBar.initBookmarks();
+						}
+						app.addFeatureBar.addLayer();
+						builderView.storyDataReady();
+						_core.appInitComplete(WebApplicationData);
+						_core.displayApp();
+						/*setTimeout(function(){
+							console.log("***");
+							app.maps[app.data.getResponse().itemInfo.item.id] = _this.getMapConfig(app.data.getResponse());
+							mapConfigSet = true;
+						}, app.data.getWebAppData().getAppGeocoders() ? 0 : 1000);*/
+					}else{
+						if(layersManaged)
+							return;
+						$.each(potentialShortlistLayers, function(i, layer){
+							var index = layers.indexOf(layer);
+							layers.splice(index, 1);
+						});
+						builderView.openMigrationPopup(potentialShortlistLayers, layers);
+						$("#loadingIndicator").hide();
+						clearTimeout(app.loadingTimeout);
+						app.loadingTimeout = null;
+					}
 				}
 
 				var webmapExtent = app.data.getWebMap().item.extent;
@@ -1645,7 +1674,8 @@ define(["lib-build/css!./MainView",
 					}
 					_core.appInitComplete(WebApplicationData);
 					setTimeout(function(){
-						app.maps[app.data.getResponse().itemInfo.item.id] = _this.getMapConfig(app.data.getResponse());
+						if(!mapConfigSet)
+							app.maps[app.data.getResponse().itemInfo.item.id] = _this.getMapConfig(app.data.getResponse());
 						mapConfigSet = true;
 					}, app.data.getWebAppData().getAppGeocoders() ? 0 : 1000);
 				}else if(!featServLayer.length && !layersManaged){

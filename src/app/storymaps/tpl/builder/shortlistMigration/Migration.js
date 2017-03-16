@@ -655,68 +655,14 @@ define(["lib-build/tpl!./Migration",
 					var baseMapLayerUpdated = false;
 
 					var baseMapLayer = app.map.getLayer(app.data.getWebMap().itemData.baseMap.baseMapLayers[0].id);
+
+					if(baseMapLayer.tileIndexUrl && baseMapLayer.loaded)
+						addLayers(shortlistLayer, title, descFields, link, imageUrl, thumbUrl);
 					baseMapLayer.on('update-end', function(){
 						if(baseMapLayerUpdated)
 							return;
 						baseMapLayerUpdated = true;
-						$.each(_selectedLayers, function(index, layer){
-
-							$('body').addClass('loadingPlaces');
-
-							if(index === 0){
-								$('.entryLbl').eq(0).text(layer.alias);
-								app.data.setStory(0, layer.alias);
-								app.data.getWebAppData().setTabs(app.data.getStory());
-							}
-							if(index > 0){
-								app.ui.navBar.onClickAdd(null, layer.alias);
-							}
-
-							$.each(layer.graphics, function(i, graphic){
-								var locationSet = graphic.geometry && graphic.geometry.x && graphic.geometry.y ? parseInt(1) : 0;
-								var newAttributes = {
-									__OBJECTID: shortlistLayer.graphics.length+1,
-									name: '',
-									description: '',
-									pic_url: '',
-									thumb_url: '',
-									shortlist_id: shortlistLayer.graphics.length+1,
-									number: i+1,
-									tab_id: index,
-									locationSet: locationSet
-								};
-								if(graphic.attributes.number)
-									newAttributes.number = graphic.attributes.number;
-								if(graphic.attributes.Number)
-									newAttributes.number = graphic.attributes.Number;
-								if(graphic.attributes.NUMBER)
-									newAttributes.number = graphic.attributes.NUMBER;
-								newAttributes.name = graphic.attributes[title];
-								$.each(descFields, function(ind, field){
-									//newAttributes.description += '<div class="detailFeatureDesc" style="min-height: 0;" >' + graphic.attributes[field] + '</div>';
-									if(graphic.attributes[field])
-										newAttributes.description +=  ('<p>' + graphic.attributes[field] + '</p>');
-								});
-								if(link != "none"){
-									if(graphic.attributes[link])
-										newAttributes.description += '<p><a href=' + graphic.attributes[link] + ' target="_blank">More info</a></p>';
-								}
-								if(imageUrl != "none")
-									newAttributes.pic_url = encodeURI(graphic.attributes[imageUrl]);
-								if(thumbUrl != "none")
-									newAttributes.thumb_url = encodeURI(graphic.attributes[thumbUrl]);
-								if(thumbUrl == "none" && imageUrl != "none")
-									newAttributes.thumb_url = encodeURI(graphic.attributes[imageUrl]);
-								if(graphic.geometry == null)
-									newAttributes.locationSet = 0;
-
-								var sms = new SimpleMarkerSymbol();
-								var newGraphic = new Graphic(graphic.geometry, sms, newAttributes);
-								var c = _builderView.addMapIcon(newGraphic, app.data.getStory()[index].color);
-								shortlistLayer.add(c);
-								//app.addFeatureBar.addFeature(newAttributes, false, graphic.geometry);
-							});
-						});
+						addLayers(shortlistLayer, title, descFields, link, imageUrl, thumbUrl);
 					});
 
 					$("#loadingIndicator").show();
@@ -753,6 +699,68 @@ define(["lib-build/tpl!./Migration",
 					}, 800);
 				});
 
+			}
+
+			function addLayers(shortlistLayer, title, descFields, link, imageUrl, thumbUrl)
+			{
+				$.each(_selectedLayers, function(index, layer){
+
+					$('body').addClass('loadingPlaces');
+
+					if(index === 0){
+						$('.entryLbl').eq(0).text(layer.alias);
+						app.data.setStory(0, layer.alias);
+						app.data.getWebAppData().setTabs(app.data.getStory());
+					}
+					if(index > 0){
+						app.ui.navBar.onClickAdd(null, layer.alias);
+					}
+
+					$.each(layer.graphics, function(i, graphic){
+						var locationSet = graphic.geometry && graphic.geometry.x && graphic.geometry.y ? parseInt(1) : 0;
+						var newAttributes = {
+							__OBJECTID: shortlistLayer.graphics.length+1,
+							name: '',
+							description: '',
+							pic_url: '',
+							thumb_url: '',
+							shortlist_id: shortlistLayer.graphics.length+1,
+							number: i+1,
+							tab_id: index,
+							locationSet: locationSet
+						};
+						if(graphic.attributes.number)
+							newAttributes.number = graphic.attributes.number;
+						if(graphic.attributes.Number)
+							newAttributes.number = graphic.attributes.Number;
+						if(graphic.attributes.NUMBER)
+							newAttributes.number = graphic.attributes.NUMBER;
+						newAttributes.name = graphic.attributes[title];
+						$.each(descFields, function(ind, field){
+							//newAttributes.description += '<div class="detailFeatureDesc" style="min-height: 0;" >' + graphic.attributes[field] + '</div>';
+							if(graphic.attributes[field])
+								newAttributes.description +=  ('<p>' + graphic.attributes[field] + '</p>');
+						});
+						if(link != "none"){
+							if(graphic.attributes[link])
+								newAttributes.description += '<p><a href=' + graphic.attributes[link] + ' target="_blank">More info</a></p>';
+						}
+						if(imageUrl != "none")
+							newAttributes.pic_url = encodeURI(graphic.attributes[imageUrl]);
+						if(thumbUrl != "none")
+							newAttributes.thumb_url = encodeURI(graphic.attributes[thumbUrl]);
+						if(thumbUrl == "none" && imageUrl != "none")
+							newAttributes.thumb_url = encodeURI(graphic.attributes[imageUrl]);
+						if(graphic.geometry == null)
+							newAttributes.locationSet = 0;
+
+						var sms = new SimpleMarkerSymbol();
+						var newGraphic = new Graphic(graphic.geometry, sms, newAttributes);
+						var c = _builderView.addMapIcon(newGraphic, app.data.getStory()[index].color);
+						shortlistLayer.add(c);
+						//app.addFeatureBar.addFeature(newAttributes, false, graphic.geometry);
+					});
+				});
 			}
 
 			function getNewLayerJSON (layer)

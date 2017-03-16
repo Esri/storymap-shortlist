@@ -562,7 +562,7 @@ define([
 						setNavControls();
 					}, 50);
 				};
-				//TRANS
+
 				_titleEditor = new MediumEditorWrapper({
 					container: $(newSlide).find('.detailFeatureTitle'),
 					mode: 'single-line',
@@ -571,7 +571,7 @@ define([
 						onTextEditorBlur(e, $(newSlide).find('.detailFeatureTitle'));
 					}
 				});
-				//TRANS
+
 				_descEditor = new MediumEditorWrapper({
 					container: $(newSlide).find('.editable'),
 					mode: 'standard',
@@ -673,7 +673,7 @@ define([
 				changedGraphic[0].attributes.pic_url = params.url;
 				if(params.thumb_url)
 					changedGraphic[0].attributes.thumb_url = params.thumb_url;
-				if(params.uploaded  && params.resource && params.resource.thumbUrl)
+				else if(params.uploaded  && params.resource && params.resource.thumbUrl)
 					changedGraphic[0].attributes.thumb_url = params.resource.thumbUrl;
 				else{
 					changedGraphic[0].attributes.thumb_url = params.url;
@@ -767,6 +767,14 @@ define([
 					_search.hide();
 			};
 
+			this.checkTempLayer = function()
+			{
+				if(_movableIcon){
+					_movableIcon.clean();
+					app.map.getLayer('tempIconLayer').remove(app.map.getLayer('tempIconLayer').graphics[0]);
+				}
+			};
+
 			this.resize = function()
 			{
 				if(app.data.getWebAppData().getIsExternalData())
@@ -852,13 +860,14 @@ define([
 									$('.esriPopup .contentPane').append(addLocation);
 									$('.esriPopup').show();
 									var themeIndex = $('.entry.active').index();
-									var currentSlide = $('.swiper-slide-active')[themeIndex];
+									var currentDetailContainer = $('.detailContainer')[themeIndex];
+									var currentSlide = $(currentDetailContainer).find('.swiper-slide-active');
 									$('body').removeClass('pickLocation');
 									app.map.getLayer('tempIconLayer').remove(app.map.getLayer('tempIconLayer').graphics[0]);
 									if(_mapClick)
 										_mapClick.remove();
 									var changedGraphic = $.grep(app.layerCurrent.graphics, function(e){ return e.attributes.shortlist_id ==  $(currentSlide).data('shortlist-id'); });
-									if(!changedGraphic[0].attributes.locationSet)
+									if(changedGraphic[0] && !changedGraphic[0].attributes.locationSet)
 										app.map.setMapCursor("crosshair");
 									$(addLocation).on('click', function(){
 										changedGraphic[0].setGeometry(e.result.feature.geometry);

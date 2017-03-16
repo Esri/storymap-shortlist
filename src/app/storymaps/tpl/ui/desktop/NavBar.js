@@ -492,6 +492,7 @@ define(["lib-build/tpl!./NavBar",
 				app.addFeatureBar.exitOrganizeMode();
 
 				app.data.setStory(index, newTab.title, tabColor, extent);
+				app.data.getWebAppData().setTabs(app.data.getStory());
 
 				navigationCallback(index);
 

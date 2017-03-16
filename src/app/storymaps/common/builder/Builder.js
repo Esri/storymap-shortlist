@@ -191,6 +191,11 @@ define(["lib-build/css!./Builder",
 				var originalSources = [];
 				$.each(app.portal.helperServices.geocode, function (index, geocoder) {
 					if (geocoder.url) {
+						if(window.location.protocol == "https:"){
+							if(geocoder.url.indexOf('https') < 0){
+								return;
+							}
+						}
 						ajaxArr.push($.getJSON(geocoder.url + '?f=json'));
 						originalSources.push(geocoder);
 					}

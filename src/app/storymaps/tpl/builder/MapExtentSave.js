@@ -19,7 +19,7 @@ define([
 
 			this.init = function()
 			{
-				if(_this.initDone)
+				if(_this.initDone || $('.home-location-save-btn').length)
 					return;
 				$('#map_zoom_slider').append(viewTpl());
 				initUI();
