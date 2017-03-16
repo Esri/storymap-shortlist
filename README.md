@@ -11,7 +11,7 @@ The Story Map Shortlist app lets you organize points of interest into tabs that 
 [Download](http://links.esri.com/storymaps/shortlist_template_zip) |
 [Shortlist page on Esri Story Maps website](http://storymaps.arcgis.com/en/app-list/shortlist/)
 
-**Latest release is version 2.1.0**, if you want to be informed of new releases, we recommend you to watch this repository ([see GitHub help](https://help.github.com/articles/watching-repositories)). See the [release page](https://github.com/Esri/shortlist-storytelling-template-js/releases) for release notes.
+**Latest release is version 2.2.2**, if you want to be informed of new releases, we recommend you to watch this repository ([see GitHub help](https://help.github.com/articles/watching-repositories)). See the [release page](https://github.com/Esri/shortlist-storytelling-template-js/releases) for release notes.
 
 For more infomation about using and customizing Esri's Storytelling Apps follow the [Story Maps Developers' Corner](https://developerscorner.storymaps.arcgis.com).
 
@@ -66,7 +66,7 @@ Shortlist authoring is supported on Internet Explorer 10 and above, on the most 
 We actively test the application in all major browsers but if you experience difficulties especially with the builder, we recommend that you use [Chrome](https://www.google.com/intl/en_us/chrome/browser/).
 
 ### Tips for your content
-Although any size is supported, a good size and shape for an image referenced via a URL is approximately 800 pixels wide by 600 pixels. Our recommended image size for Story Map Tours (approximately 1000x750 pixels) also works fine. We also recommend JPG format instead of PNG format for smaller overall file size, but both formats are supported. For thumbnail images referenced via URLs we recommend 200 pixels wide by 150 pixels tall.
+Although any size is supported, a good size and shape for an image referenced via a URL is approximately 800 pixels wide by 600 pixels. Our recommended image size for Story Map Tours (approximately 1000x750 pixels) also works fine. We also recommend JPG format instead of PNG format for smaller overall file size, but both formats are supported. For thumbnail images referenced via URLs we recommend 280 pixels wide by 210 pixels tall.  [More info] (http://storymaps.arcgis.com/en/faq/#question49b)
 
 
 ### Security
@@ -240,6 +240,7 @@ Some open-source components of this project are licensed under other License ter
 | jQuery UI Touch Punch | MIT 		|
 | spectrum              | MIT 		|
 | LazySizes             | MIT 		|
+| exif-js               | MIT   |
 
 [](Esri Tags: Storytelling Shortlist ArcGIS-Online Template Map)
 [](Esri Language: JavaScript)
