@@ -240,6 +240,3 @@ Some open-source components of this project are licensed under other License ter
 | spectrum              | MIT 		|
 | LazySizes             | MIT 		|
 | exif-js               | MIT   |
-
-[](Esri Tags: Storytelling Shortlist ArcGIS-Online Template Map)
-[](Esri Language: JavaScript)
