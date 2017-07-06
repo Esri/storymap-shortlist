@@ -20,7 +20,9 @@ define(["esri/geometry/screenUtils",
 			});
 
 			this.init = function(){
-				$(container).prepend(tilePanel({ }));
+				$(container).prepend(tilePanel({
+					noPlaces: i18n.viewer.general.noPlaces
+				}));
 				$('#mainStagePanel').width($('#contentPanel').width() - $('#paneLeft').width());
 				$('#mainStagePanel').css({'left': $('#paneLeft').width()});
 			};

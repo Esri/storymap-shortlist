@@ -7,7 +7,13 @@ define({
     "addEditPopup": {
       "test": "test",
       "add": "adăugare",
-      "edit": "editare"
+      "edit": "editare",
+      "editTab": "EDITARE FILĂ",
+      "addTab": "ADĂUGARE FILĂ",
+      "organizeTabs": "ORGANIZARE FILE",
+      "themeColor": "Culoare temă",
+      "location": "Locaţie",
+      "confirmDeletion": "Confirmaţi ştergerea "
     },
     "landing": {
       "lblAdd": "Cum doriţi să denumiţi lista dvs. preferenţială?",
@@ -17,7 +23,9 @@ define({
     },
     "organizePopup": {
       "title": "Organizare",
-      "tab": "filă"
+      "tab": "filă",
+      "dragNDrop": "Trageţi şi plasaţi file pentru a vă organiza povestea",
+      "lblColTitle": "Titlu"
     },
     "settingsLayoutOptions": {
       "title": "Opţiuni configuraţie",
@@ -35,10 +43,20 @@ define({
       "changeLocation": "Schimbare locaţie",
       "setLocation": "Setare locație",
       "cancel": "Anulare",
-      "addImage": "faceţi clic, trageţi şi plasaţi, pentru a adăuga o imagine",
+      "addImage": "Faceţi clic, trageţi şi plasaţi, pentru a adăuga o imagine",
+      "chooseImage": "ALEGERE IMAGINE",
+      "importImages": "IMPORT IMAGINI",
+      "import": "IMPORT",
       "enterPlaceName": "Introduceţi numele locului",
       "enterPlaceDescription": "Introduceţi descrierea locului",
-      "unnamedPlace": "Loc fără nume"
+      "unnamedPlace": "Loc fără nume",
+      "update": "Actualizare",
+      "useLocation": "Utilizaţi această locaţie",
+      "selectAll": "Selectare globală",
+      "imageSizeHelper": "Pentru rezultate optime, imaginile trebuie să fie mai mici de 400 KB. Dimensiunea şi aspectul recomandată este de 1000 x 750 pixeli (4:3 raport lăţime:înălţime) sau mai mică. Imaginile mai mari pot scădea performanţele. Pentru cea mai bună performanţă utilizaţi fişiere de imagini JPG comprimate la 80% din calitatea imaginii.",
+      "imageSizeHelperUpdated": "Pentru performanţă optimă, imaginile trebuie să fie mai mici de 400 KB. Pentru a reduce dimensiunea fişierului, folosiţi formatul JPG salvat la o calitate a imaginii de 80%. Dacă imaginea are în continuare peste 400 KB, redimensionarea acesteia poate ajuta la reducerea dimensiunii fişierului: se recomandă 1000 de pixeli lăţime x 750 de pixeli înălţime (raport lăţime:înălţime de 4:3).",
+      "thumbnailLink": "Legătură miniatură",
+      "thumbnailHelp": "Dimensiunea şi aspectul miniaturii este de 280 x 210 pixeli (4:3 raport lăţime:înălţime). Miniaturile mai mari pot scădea performanţele. Miniaturile cu raport 4:3 se potrivesc în segmentele tile fără a fi decupate."
     },
     "settings": {
       "numberedPlaces": "Afişare locuri cu numere",
@@ -55,7 +73,13 @@ define({
       "custom": "Personalizat",
       "customTooltip": "Setaţi locaţia utilizând butonul care va apărea în comenzile de zoom ale hărţii",
       "mapLocationTooltip": "Locaţia pe care o văd persoanele atunci când deschid lista dvs. preferenţială",
-      "bookmarksHelp": "Pentru a activa semnele de carte în lista preferenţială, adăugaţi şi administraţi semnele de carte ale hărţii web din aplicaţia de vizualizare a hărţii web"
+      "bookmarksHelp": "Pentru a activa semnele de carte în lista preferenţială, adăugaţi şi administraţi semnele de carte ale hărţii web din aplicaţia de vizualizare a hărţii web",
+      "generalOptions": "Opţiuni generale",
+      "mapOptions": "Opţiuni hartă",
+      "changeBasemap": "Modificare hartă fundal",
+      "saveHomeLocation": "Salvare locație pornire",
+      "choose": "Alegeţi",
+      "headerColor": "Culoare antet"
     },
     "help": {
       "title": "AJUTOR",
@@ -81,7 +105,10 @@ define({
         "asIsOption": "Da, utilizaţi-le aşa cum sunt",
         "asIsText": "Veţi continua să editaţi şi să administraţi locurile dvs. în harta web, nu în aplicaţia de creare a listei de preferinţe.  Actualizările datelor se vor reflecta automat în lista dvs. de preferinţe.  Această opţiune necesită ca datele dvs. să utilizeze acest şablon.",
         "badData": "Stratul tematic de puncte care conţine locurile dvs. nu utilizează şablonul de date solicitat. Vă rugăm să verificaţi cerinţele şablonului.",
-        "downloadTemplate": "Descărcare şablon"
+        "downloadTemplate": "Descărcare şablon",
+        "selectPtData": "ALEGEŢI-VĂ DATELE DE PUNCTE",
+        "multipleThemes": "STRATUL DVS. TEMATIC CONŢINE MAI MULTE TEME",
+        "chooseFields": "ALEGEŢI CÂMPURILE PE CARE AR TREBUIE SĂ LE UTILIZEZE LISTA SCURTĂ"
       },
       "fieldPicker": {
         "nameField": "Câmpul care conţine numele fiecărui loc: ",

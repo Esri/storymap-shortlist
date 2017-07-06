@@ -35,11 +35,14 @@ define({
       "upgradeBrowser": "<a href='http://browsehappy.com/' target='_blank'>Prosimy o zaktualizowanie przeglądarki</a>.",
       "mapLoadingFail": "Wystąpił pewien problem, nie wczytano mapy prawidłowo.",
       "signOut": "Wyloguj się",
-      "attention": "Uwaga!"
+      "attention": "Uwaga!",
+      "noBuilderEdge": "Krótkie listy aplikacji Story Map — Krótka lista można wyświetlać w każdej przeglądarce internetowej. Należy jednak pamiętać, że kreator tej aplikacji nie jest obsługiwany w przeglądarce Windows Edge. Do tworzenia i edycji krótkich list należy używać innych przeglądarek."
     },
     "headerFromCommon": {
       "storymapsText": "mapa narracji (Story Map)",
       "builderButton": "Edytuj",
+      "facebookTooltip": "Udostępnij na Facebooku",
+      "twitterTooltip": "Udostępnij na Twitterze",
       "bitlyTooltip": "Pobierz skrócone łącze do aplikacji",
       "templateTitle": "Skonfiguruj tytuł szablonu",
       "templateSubtitle": "Skonfiguruj podtytuł szablonu",
@@ -52,6 +55,10 @@ define({
       "embed": "Osadzono na stronie internetowej",
       "embedExplain": "Aby umieścić Dziennik na stronie internetowej, skorzystaj z poniższego kodu HTML.",
       "size": "Rozmiar (szerokość/wysokość):"
+    },
+    "general": {
+      "noPlaces": "W tym obszarze nie ma żadnych miejsc. Pomniejsz lub kliknij przycisk Start, aby wyświetlić miejsca.",
+      "start": "Uruchom"
     }
   }
 });

@@ -76,9 +76,9 @@ define(["lib-build/tpl!./ViewMapOptions",
 						trigger: 'hover'
 					});
 				} else{
-					_contentContainer.find('.bookmarksContainer').children().addClass('disabled');
-					_contentContainer.find('.bookmarksContainer').children().prop('disabled', true);
-					_contentContainer.find('.bookmarksContainer').children().click(false);
+					_contentContainer.find('.opt-checkbox-bookmarks').addClass('disabled');
+					_contentContainer.find('.opt-checkbox-bookmarks').prop('disabled', true);
+					_contentContainer.find('.opt-checkbox-bookmarks').click(false);
 					_contentContainer.find('.opt-bookmarks-alias-cont input').prop('disabled', true);
 					_contentContainer.find('.bookmarkTooltip').tooltip({
 						trigger: 'hover'
@@ -136,7 +136,7 @@ define(["lib-build/tpl!./ViewMapOptions",
 			this.initLocalization = function()
 			{
 				//_titleContainer.html(i18n.builder.settingsMapOptions.title);
-				_titleContainer.html('Map options');
+				_titleContainer.html(i18n.builder.settings.mapOptions);
 			};
 		};
 	}

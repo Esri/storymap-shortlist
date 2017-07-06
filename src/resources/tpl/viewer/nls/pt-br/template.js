@@ -35,11 +35,14 @@ define({
       "upgradeBrowser": "<a href='http://browsehappy.com/' target='_blank'>Atualize seu navegador</a>.",
       "mapLoadingFail": "Algo deu errado, o mapa não carregou corretamente.",
       "signOut": "Sair",
-      "attention": "Atenção!"
+      "attention": "Atenção!",
+      "noBuilderEdge": "Listas Restritas do Mapa Histórico podem ser visualizadas em qualquer navegador da web. Entretanto o Construtor de Listas Restritas do Mapa Histórico não é suportado no Windows Edge. Utilize um navegador da web diferente para criar ou editar uma Lista Restrita."
     },
     "headerFromCommon": {
       "storymapsText": "Um mapa histórico",
       "builderButton": "Editar",
+      "facebookTooltip": "Compartilhar no Facebook",
+      "twitterTooltip": "Compartilhar no Twitter",
       "bitlyTooltip": "Obtenha um link curto para o aplicativo",
       "templateTitle": "Configurar título do modelo",
       "templateSubtitle": "Configurar subtítulo do modelo",
@@ -52,6 +55,10 @@ define({
       "embed": "Anexar na página da web",
       "embedExplain": "Utilize o seguinte código HTML para embutir o aplicativo em uma página da web.",
       "size": "Tamanho (largura/altura):"
+    },
+    "general": {
+      "noPlaces": "Nenhum dos lugares estão nesta área.  Reduza ou clique no botão Página Inicial para visualizar lugares.",
+      "start": "Iniciar"
     }
   }
 });

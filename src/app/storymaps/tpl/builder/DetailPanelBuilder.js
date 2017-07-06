@@ -94,7 +94,7 @@ define([
 					_pointLayer.id = "tempIconLayer";
 					app.map.addLayer(_pointLayer);
 					app.map.reorderLayer(_pointLayer, app.map.graphicsLayerIds.length - 1);
-					createSearchWidget();
+					//createSearchWidget();
 				}, 500);
 
 				// Issue #489.	Disable page up/down as it caused problem in detail panel.
@@ -153,6 +153,8 @@ define([
 			{
 				if(app.data.getWebAppData().getIsExternalData())
 					return;
+				if(!_search)
+					createSearchWidget();
 				var shortlistLayer = app.map.getLayer(app.data.getShortlistLayerId());
 				var graphics = shortlistLayer.graphics;
 				var tabs = [];
@@ -473,7 +475,7 @@ define([
 					addImage: i18n.builder.detailPanelBuilder.addImage,
 					setLocation: i18n.builder.detailPanelBuilder.setLocation,
 					changeLocation: i18n.builder.detailPanelBuilder.changeLocation,
-					//update: i18n.builder.detailPanelBuilder.update,
+					update: i18n.builder.detailPanelBuilder.update,
 					cancel: i18n.builder.detailPanelBuilder.cancel
 				}));
 				var newSlide = $(currentDetailContainer).find('.swiper-slide')[itemNumber-1];
@@ -660,9 +662,9 @@ define([
 					changedGraphic[0].attributes.resource = params.resource;
 					var imgUrl = CommonHelper.possiblyAddToken(params.url);
 					$(currentSlide).find('img').attr('src', imgUrl);
-					if(params.name.indexOf("jpeg") > -1)
+					if($(currentSlide).find('.detailFeatureTitle').text().length <= 0 && params.name.indexOf("jpeg") > -1)
 						params.name = params.name.slice(0, -5);
-					else{
+					else if($(currentSlide).find('.detailFeatureTitle').text().length <= 0){
 						params.name = params.name.slice(0, -4);
 					}
 				}else{
@@ -689,14 +691,21 @@ define([
 				}
 				$(tile).find('i').hide();
 
-				if($(currentSlide).find('.detailFeatureTitle').text().length <= 0 && params.name){
-					changedGraphic[0].attributes.name = params.name;
+				if($(currentSlide).find('.detailFeatureTitle').text().length <= 0 && (params.name || params.url)){
+					var urlName;
+					if(params.url){
+						var splitUrl = params.url.split('/');
+						urlName = splitUrl[splitUrl.length - 1];
+						urlName = urlName.split('.')[0];
+					}
+					var name = params.name || urlName;
+					changedGraphic[0].attributes.name = name;
 					_titleEditor.setContent({
-						text: params.name
+						text: name
 					});
 
-					$(tile).find('.blurb').text(params.name);
-					$('#item'+$(currentSlide).data('shortlist-id')).find('.blurb').text(params.name);
+					$(tile).find('.blurb').text(name);
+					$('#item'+$(currentSlide).data('shortlist-id')).find('.blurb').text(name);
 					$(currentSlide).find('.detailFeatureTitle').removeClass('noTitle');
 				}
 
@@ -709,7 +718,9 @@ define([
 				}
 
 				if(params.lat && params.lng && !changedGraphic[0].attributes.locationSet){
-					var newGeom = webMercatorUtils.lngLatToXY(params.lng, params.lat);
+					var newGeom = [params.lng, params.lat];
+					if(app.map.spatialReference.wkid != 4326)
+						newGeom = webMercatorUtils.lngLatToXY(params.lng, params.lat);
 
 					var newPoint = new Point(newGeom[0], newGeom[1], new SpatialReference({ wkid: app.map.spatialReference.wkid }));
 					changedGraphic[0].setGeometry(newPoint);
@@ -817,10 +828,9 @@ define([
 
 			function createSearchWidget(){
 				if(!_search){
-					//setTimeout(function(){
-						if(!app.data.getWebAppData().getAppGeocoders())
-							return;
-						var resultDeferred = new Deferred();
+					if(!app.data.getWebAppData().getAppGeocoders())
+						return;
+					var resultDeferred = new Deferred();
 						CommonHelper.createGeocoder({
 							map: app.map,
 							domNode: $('#search')[0]/*,
@@ -837,7 +847,7 @@ define([
 										if(result.length){
 											$.each(result, function(i, location){
 												if(location.feature.geometry){
-												 	foundResult = location;
+													foundResult = location;
 													return false;
 												}
 											});
@@ -856,7 +866,7 @@ define([
 									_search.hide();
 									if(_movableIcon)
 										_movableIcon.clean();
-									var addLocation = $('<div class="addLocationText"><a href="#">Use this location </a> </div>');
+									var addLocation = $('<div class="addLocationText"><a href="#">' + i18n.builder.detailPanelBuilder.useLocation + '</a> </div>');
 									$('.esriPopup .contentPane').append(addLocation);
 									$('.esriPopup').show();
 									var themeIndex = $('.entry.active').index();
@@ -901,8 +911,6 @@ define([
 								resultDeferred.reject();
 							}
 						);
-					//}, app.data.getWebAppData().getAppGeocoders() ? 0 : 500);
-
 				}
 			}
 

@@ -35,11 +35,14 @@ define({
       "upgradeBrowser": "<a href='http://browsehappy.com/' target='_blank'>Ažurirajte svoj preglednik</a>.",
       "mapLoadingFail": "Nešto nije u redu, karta se nije točno učitala.",
       "signOut": "Odjava",
-      "attention": "Pozor!"
+      "attention": "Pozor!",
+      "noBuilderEdge": "Story Map Shortlists mogu se prikazati u bilo kojem web pregledniku. Međutim, Story Map Shortlist Builder nije podržan za Windows Edge. Upotrijebite drugi web preglednik za stvaranje ili uređivanje Shortlista."
     },
     "headerFromCommon": {
       "storymapsText": "Karta s pričom",
       "builderButton": "Uredi",
+      "facebookTooltip": "Podijeli na Facebooku",
+      "twitterTooltip": "Podijeli na Twitteru",
       "bitlyTooltip": "Dohvatite kratku poveznicu za aplikaciju",
       "templateTitle": "Postavi naslov predloška",
       "templateSubtitle": "Postavi podnaslov predloška",
@@ -52,6 +55,10 @@ define({
       "embed": "Ugradi u web-stranicu",
       "embedExplain": "Upotrijebite sljedeći HTML kod da biste ugradili aplikaciju u web-stranicu.",
       "size": "Veličina (širina/visina):"
+    },
+    "general": {
+      "noPlaces": "U ovom području nema mjesta. Smanjite prikaz ili kliknite na gumb za početni prikaz da biste vidjeli mjesta.",
+      "start": "Pokreni"
     }
   }
 });

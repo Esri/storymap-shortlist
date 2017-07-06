@@ -35,11 +35,14 @@ define({
       "upgradeBrowser": "<a href='http://browsehappy.com/' target='_blank'>Uppdatera webbläsaren</a>.",
       "mapLoadingFail": "Något gick fel, kartan lästes inte in på rätt sätt.",
       "signOut": "Logga ut",
-      "attention": "Obs!"
+      "attention": "Obs!",
+      "noBuilderEdge": "Story Map-snabblistor kan visas i valfri webbläsare. Däremot stöds inte Story Map Shortlist Builder i Windows Edge. Använd därför en annan webbläsare när du behöver skapa eller redigera en snabblista."
     },
     "headerFromCommon": {
       "storymapsText": "En berättelsekarta",
       "builderButton": "Redigera",
+      "facebookTooltip": "Dela på Facebook",
+      "twitterTooltip": "Dela på Twitter",
       "bitlyTooltip": "Hämta en kort länk till applikationen",
       "templateTitle": "Ange malltitel",
       "templateSubtitle": "Ange underrubrik för mallen",
@@ -52,6 +55,10 @@ define({
       "embed": "Bädda in på webbplats",
       "embedExplain": "Använd följande HTML-kod om du vill bädda in programmet på en webbsida.",
       "size": "Storlek (bredd/höjd):"
+    },
+    "general": {
+      "noPlaces": "Det finns inga platser i det här området. Zooma ut eller klicka på knappen Start för att se platser.",
+      "start": "Start"
     }
   }
 });

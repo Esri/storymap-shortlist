@@ -35,11 +35,14 @@ define({
       "upgradeBrowser": "<a href='http://browsehappy.com/' target='_blank'>โปรดอัปเดตเบราว์เซอร์</a>",
       "mapLoadingFail": "มีบางอย่างไม่ถูกต้อง โหลดแผนที่ไม่ถูกต้อง",
       "signOut": "ลงชื่อออก",
-      "attention": "ความสนใจ!"
+      "attention": "ความสนใจ!",
+      "noBuilderEdge": "Story Map Shortlists สามารถดูได้จากเว็บเบราเซอร์ใดก็ได้ อย่างไรก็ตาม Story Map Shortlist Builder ไม่ได้รับการสนับสนุนบน Windows Edge โปรดใช้เว็บเบราเซอร์อื่นเพื่อสร้างหรือแก้ไขรายการโปรด"
     },
     "headerFromCommon": {
       "storymapsText": "A story map",
       "builderButton": "แก้ไข",
+      "facebookTooltip": "แชร์ผ่าน Facebook",
+      "twitterTooltip": "แชร์ผ่าน Twitter",
       "bitlyTooltip": "รับลิ้งแบบสั้นสำหรับโปรแกรมนี้",
       "templateTitle": "ตั้งค่าหัวเรื่องเทมเพลต",
       "templateSubtitle": "ตั้งค่าชื่อรองของเทมเพลต",
@@ -52,6 +55,10 @@ define({
       "embed": "ฝังในหน้าเว็บ",
       "embedExplain": "ใช้โค้ด HTML ต่อไปนี้เพื่อฝังลงบนหน้าเว็บแอพพลิชัน",
       "size": "ขนาด (กว้าง/สูง):"
+    },
+    "general": {
+      "noPlaces": "ไม่มีสถานที่อยู่ในบริเวณนี้ ย่อหรือคลิกปุ่มหน้าแรกเพื่อดูสถานที่",
+      "start": "เริ่ม"
     }
   }
 });

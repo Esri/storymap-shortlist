@@ -35,11 +35,14 @@ define({
       "upgradeBrowser": "<a href='http://browsehappy.com/' target='_blank'>Tarayıcınızı güncelleyin</a>.",
       "mapLoadingFail": "Hata oluştu, harita düzgün şekilde yüklenmedi.",
       "signOut": "Oturumu Kapat",
-      "attention": "Dikkat!"
+      "attention": "Dikkat!",
+      "noBuilderEdge": "Story Map Shortlist ögeleri her web tarayıcısında görüntülenebilir. Ancak, Story Map Shortlist Builder uygulaması Windows Edge’de desteklenmez. Bir Shortlist ögesi oluşturmak veya düzenlemek için farklı bir web tarayıcısı kullanın."
     },
     "headerFromCommon": {
       "storymapsText": "Öykü haritası",
       "builderButton": "Düzenle",
+      "facebookTooltip": "Facebook'ta Paylaş",
+      "twitterTooltip": "Twitter'da Paylaş",
       "bitlyTooltip": "Uygulamaya kısa bağlantı oluşturun",
       "templateTitle": "Şablon başlığını ayarla",
       "templateSubtitle": "Şablon altyazısını ayarla",
@@ -52,6 +55,10 @@ define({
       "embed": "Web sayfasının içine yerleştir",
       "embedExplain": "Uygulamayı bir web sayfasının içine yerleştirmek için aşağıdaki HTML kodunu kullanın.",
       "size": "Boyut (genişlik/yükseklik):"
+    },
+    "general": {
+      "noPlaces": "Bu alanda yer bulunmuyor. Yer görmek için uzaklaştırın veya Ana Sayfa düğmesine tıklayın.",
+      "start": "Başlat"
     }
   }
 });

@@ -35,11 +35,14 @@ define({
       "upgradeBrowser": "<a href='http://browsehappy.com/' target='_blank'>Palun uuendage oma veebibrauserit</a>.",
       "mapLoadingFail": "Midagi läks valesti ning kaarti ei laaditud õigesti.",
       "signOut": "Logi välja",
-      "attention": "Tähelepanu!"
+      "attention": "Tähelepanu!",
+      "noBuilderEdge": "Kaardiloo lühiloendeid saab kuvada kõigis brauserites, aga kaardiloo lühiloendi koostur pole toetatud brauseris Windows Edge. Kasutage lühiloendi loomiseks või redigeerimiseks mõnda muud brauserit."
     },
     "headerFromCommon": {
       "storymapsText": "Kaardilugu",
       "builderButton": "Muuda",
+      "facebookTooltip": "Jaga Facebookis",
+      "twitterTooltip": "Jaga Twitteris",
       "bitlyTooltip": "Tekita kiirlink rakendusele",
       "templateTitle": "Määra mallile pealkiri",
       "templateSubtitle": "Määra mallile alampealkiri",
@@ -52,6 +55,10 @@ define({
       "embed": "Lisa veebilehele",
       "embedExplain": "Kasutage rakenduse veebilehele manustamiseks järgmist HTML-koodi.",
       "size": "Suurus (laius/kõrgus):"
+    },
+    "general": {
+      "noPlaces": "Sellel alal pole kohti.  Kohtade vaatamiseks vähendage või klõpsake nuppu Kodu.",
+      "start": "Alusta"
     }
   }
 });

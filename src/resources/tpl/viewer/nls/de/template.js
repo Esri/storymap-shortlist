@@ -35,11 +35,14 @@ define({
       "upgradeBrowser": "<a href='http://browsehappy.com/' target='_blank'>Aktualisieren Sie Ihren Browser</a>.",
       "mapLoadingFail": "Ein Fehler ist aufgetreten. Die Karte wurde nicht korrekt geladen.",
       "signOut": "Abmelden",
-      "attention": "Achtung!"
+      "attention": "Achtung!",
+      "noBuilderEdge": "Story Map Shortlists können in jedem Webbrowser angezeigt werden. Der Story Map Shortlist-Builder wird jedoch von Windows Edge nicht unterstützt. Verwenden Sie einen anderen Webbrowser, um eine Shortlist zu erstellen oder zu bearbeiten."
     },
     "headerFromCommon": {
       "storymapsText": "Eine Story Map",
       "builderButton": "Bearbeiten",
+      "facebookTooltip": "Auf Facebook freigeben",
+      "twitterTooltip": "Auf Twitter freigeben",
       "bitlyTooltip": "Kurzlink zur Anwendung abrufen",
       "templateTitle": "Vorlagentitel festlegen",
       "templateSubtitle": "Untertitel der Vorlage festlegen",
@@ -52,6 +55,10 @@ define({
       "embed": "In Webseite einbetten",
       "embedExplain": "Verwenden Sie den folgenden HTML-Code, um die Anwendung in eine Webseite einzubetten.",
       "size": "Größe (Breite/Höhe):"
+    },
+    "general": {
+      "noPlaces": "Keine Orte in diesem Bereich. Verkleinern Sie die Ansicht, oder klicken Sie auf die Schaltfläche \"Standardausdehnung\", um Orte anzuzeigen.",
+      "start": "Beginnen"
     }
   }
 });

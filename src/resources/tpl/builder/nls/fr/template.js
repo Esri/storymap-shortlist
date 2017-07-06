@@ -7,7 +7,13 @@ define({
     "addEditPopup": {
       "test": "test",
       "add": "ajouter",
-      "edit": "éditer"
+      "edit": "éditer",
+      "editTab": "MODIFIER L'ONGLET",
+      "addTab": "AJOUTER UN ONGLET",
+      "organizeTabs": "ORGANISER LES ONGLETS",
+      "themeColor": "Couleur thématique",
+      "location": "Emplacement",
+      "confirmDeletion": "Confirmer la suppression de "
     },
     "landing": {
       "lblAdd": "Comment voulez-vous appeler votre Shortlist ?",
@@ -17,7 +23,9 @@ define({
     },
     "organizePopup": {
       "title": "Organiser",
-      "tab": "tab"
+      "tab": "tab",
+      "dragNDrop": "Faites glisser et déplacez des onglets pour organiser votre récit",
+      "lblColTitle": "Titre"
     },
     "settingsLayoutOptions": {
       "title": "Options de mise en page",
@@ -35,10 +43,20 @@ define({
       "changeLocation": "Modifier l'emplacement",
       "setLocation": "Définir l'emplacement",
       "cancel": "Annuler",
-      "addImage": "cliquez, ou faites un glisser-déplacer, pour ajouter une image",
+      "addImage": "Cliquer ou effectuer un glisser-déplacer pour ajouter une image",
+      "chooseImage": "CHOISIR L'IMAGE",
+      "importImages": "IMPORTER DES IMAGES",
+      "import": "IMPORTER",
       "enterPlaceName": "Entrer le nom du lieu",
       "enterPlaceDescription": "Entrer la description du lieu",
-      "unnamedPlace": "Lieu sans nom"
+      "unnamedPlace": "Lieu sans nom",
+      "update": "Mettre à jour",
+      "useLocation": "Utiliser cet emplacement",
+      "selectAll": "Tout sélectionner",
+      "imageSizeHelper": "Pour optimiser les résultats, la taille des images doit être inférieure à 400 Ko. La taille et la forme recommandées sont de 1 000 x 750 pixels (rapport largeur/hauteur de 4:3) au maximum. Les images de plus grande taille risquent de ralentir les performances. Utilisez des images JPG compressées à une qualité de 80 %.",
+      "imageSizeHelperUpdated": "Pour des performances optimales, la taille des fichiers images doit être inférieure à 400 Ko. Pour la réduire, utilisez le format JPG enregistré à une qualité d'image de 80 %. Si la taille de l'image est toujours supérieure à 400 Ko, redimensionnez-la pour la réduire encore davantage : une largeur de 1 000 pixels x hauteur de 750 pixels (rapport largeur/hauteur : 4:3) est recommandée.",
+      "thumbnailLink": "Lien de la miniature",
+      "thumbnailHelp": "La taille et la forme recommandées pour les miniatures sont de 280 x 210 pixels (rapport largeur/hauteur de 4:3). Les miniatures de plus grande taille risquent de ralentir les performances. Les miniatures dont le rapport largeur/hauteur est de 4:3 s'adaptent à leurs tuiles sans être rognées."
     },
     "settings": {
       "numberedPlaces": "Afficher des endroits avec des chiffres",
@@ -55,7 +73,13 @@ define({
       "custom": "Personnalisé",
       "customTooltip": "Définissez l’emplacement grâce au bouton qui apparaît dans les commandes de zoom de la carte",
       "mapLocationTooltip": "Emplacement que les utilisateurs voient lorsqu'ils ouvrent votre Shortlist",
-      "bookmarksHelp": "Pour activer les géosignets dans Shortlist, ajoutez et gérez les géosignets de la carte web dans la visionneuse de carte web"
+      "bookmarksHelp": "Pour activer les géosignets dans Shortlist, ajoutez et gérez les géosignets de la carte web dans la visionneuse de carte web",
+      "generalOptions": "Options générales",
+      "mapOptions": "Options de la carte",
+      "changeBasemap": "Modifier le fond de carte",
+      "saveHomeLocation": "Enregistrer l’emplacement d’accueil",
+      "choose": "Choisir",
+      "headerColor": "Couleur de l'en-tête"
     },
     "help": {
       "title": "AIDE",
@@ -81,7 +105,10 @@ define({
         "asIsOption": "Oui, les utiliser tels quels",
         "asIsText": "Vous continuerez à modifier et à gérer vos emplacements dans votre carte web, pas dans le générateur Shortlist. Les mises à jour que vous effectuez sur les données seront automatiquement répercutées dans votre Shortlist. Cette option nécessite que vos données utilisent ce modèle.",
         "badData": "La couche ponctuelle contenant vos emplacements n’utilise pas le modèle de données requis. Consultez les conditions d'utilisation du modèle.",
-        "downloadTemplate": "Télécharger le modèle"
+        "downloadTemplate": "Télécharger le modèle",
+        "selectPtData": "CHOISISSEZ VOS DONNEES PONCTUELLES",
+        "multipleThemes": "VOTRE COUCHE CONTIENT-ELLE PLUSIEURS THEMES",
+        "chooseFields": "CHOISISSEZ LES CHAMPS QUE SHORTLIST DOIT UTILISER"
       },
       "fieldPicker": {
         "nameField": "Champ contenant le nom de chaque endroit : ",

@@ -35,11 +35,14 @@ define({
       "upgradeBrowser": "<a href='http://browsehappy.com/' target='_blank'>请更新您的浏览器</a>。",
       "mapLoadingFail": "发生了一些错误，地图未正确加载。",
       "signOut": "登出",
-      "attention": "注意!"
+      "attention": "注意!",
+      "noBuilderEdge": "可在任意 Web 浏览器中查看 Story Map Shortlist。但是，Story Map Shortlist 构建器不支持 Windows Edge。请使用其他 Web 浏览器创建或编辑 Shortlist。"
     },
     "headerFromCommon": {
       "storymapsText": "故事地图",
       "builderButton": "编辑",
+      "facebookTooltip": "共享至 Facebook",
+      "twitterTooltip": "共享至 Twitter",
       "bitlyTooltip": "获取应用程序的短链接",
       "templateTitle": "设置模板标题",
       "templateSubtitle": "设置模板子标题",
@@ -52,6 +55,10 @@ define({
       "embed": "嵌入到网页",
       "embedExplain": "使用以下 HTML 代码将应用程序嵌入到网页。",
       "size": "大小(宽度/高度)："
+    },
+    "general": {
+      "noPlaces": "该区域内没有地点。缩小或单击“主页”按钮查看地点。",
+      "start": "启动"
     }
   }
 });

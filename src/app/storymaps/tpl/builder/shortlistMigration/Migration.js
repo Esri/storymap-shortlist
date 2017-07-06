@@ -72,6 +72,9 @@ define(["lib-build/tpl!./Migration",
 
 				_layers = layers;
 
+				if($.isEmptyObject(app.data.getWebAppData().getThemeOptions()))
+					app.data.getWebAppData().setDefaultThemeOptions();
+
 				// Submit
 				updateSubmitButton();
 
@@ -215,7 +218,7 @@ define(["lib-build/tpl!./Migration",
 				}
 
 
-				container.find('.modal-title').text('Choose the fields the Shortlist should use');
+				container.find('.modal-title').text(i18n.builder.migration.migrationPattern.chooseFields);
 				container.find('.viewMigrationLayerSelectorContainer').hide();
 				if($('.viewMigrationFieldSelectorContainer').length){
 					$('.viewMigrationFieldSelectorContainer').show();
@@ -243,19 +246,19 @@ define(["lib-build/tpl!./Migration",
 				$('#fieldNameSelect')
 					.append($("<option></option>")
 						.attr("value",'none')
-						.text('none'));
+						.text(i18n.builder.migration.fieldPicker.none));
 				$('#fieldUrlSelect')
 					.append($("<option></option>")
 						.attr("value",'none')
-						.text('none'));
+						.text(i18n.builder.migration.fieldPicker.none));
 				$('#fieldPicUrlSelect')
 					.append($("<option></option>")
 						.attr("value",'none')
-						.text('none'));
+						.text(i18n.builder.migration.fieldPicker.none));
 				$('#fieldThumbUrlSelect')
 					.append($("<option></option>")
 						.attr("value",'none')
-						.text('none'));
+						.text(i18n.builder.migration.fieldPicker.none));
 				var sortDescriptionFields = false;
 				$.each(_fields, function(index, field){
 					$('#fieldNameSelect')
@@ -415,7 +418,7 @@ define(["lib-build/tpl!./Migration",
 					);
 					container.modal('hide');
 				}else{
-					container.find('.modal-title').text('Choose your point Data');
+					container.find('.modal-title').text(i18n.builder.migration.migrationPattern.selectPtData);
 					_btnBack.show();
 					container.find('.viewMigrationSelectorContainer').hide();
 					if($('.viewMigrationLayerSelectorContainer').length){
@@ -477,7 +480,7 @@ define(["lib-build/tpl!./Migration",
 
 			function presentTabFieldPicker()
 			{
-				container.find('.modal-title').text('Does your layer contain multiple themes?');
+				container.find('.modal-title').text(i18n.builder.migration.migrationPattern.multipleThemes);
 
 				if(!$('.viewMigrationTabFieldSelectorContainer').length)
 					container.find('.modal-body').append(tabFieldPicker({
@@ -496,7 +499,7 @@ define(["lib-build/tpl!./Migration",
 				$('#tabFieldSelect')
 					.append($("<option></option>")
 						.attr("value",'none')
-						.text('none'));
+						.text(i18n.builder.migration.fieldPicker.none));
 				$.each(selectedLayer[0].graphics[0].attributes, function(field){
 					if(field != '__OBJECTID'){
 						$('#tabFieldSelect')
@@ -587,7 +590,7 @@ define(["lib-build/tpl!./Migration",
 					var activeColor = $.grep(app.cfg.COLOR_SCHEMES, function(e){ return e.name == colorOrder[0]; });
 					$('#contentPanel').css('border-top-color', activeColor[0].color);
 					var colors = {
-						header: '#444',
+						header: app.data.getWebAppData().getThemeOptions().headerColor,
 						tabText: '#d8d8d8',
 						tab: '#666',
 						tabTextActive: '#fff',
@@ -770,6 +773,7 @@ define(["lib-build/tpl!./Migration",
 					title: layer.title,
 					visibility: true,
 					opacity: 1,
+					layerType: "ArcGISFeatureLayer",
 					featureCollection: {
 						layers: [
 							layer.featureCollection
@@ -810,7 +814,7 @@ define(["lib-build/tpl!./Migration",
 				if(container.find('.modal-body').hasClass('tabFieldSelector'))
 					disableButton = false;
 
-				_btnSubmit.html('Next');
+				_btnSubmit.html(i18n.commonCore.common.next);
 
 				_btnSubmit.attr("disabled", disableButton);
 

@@ -7,7 +7,13 @@ define({
     "addEditPopup": {
       "test": "test",
       "add": "tilføj",
-      "edit": "redigér"
+      "edit": "redigér",
+      "editTab": "REDIGÉR FANE",
+      "addTab": "TILFØJ FANE",
+      "organizeTabs": "ORGANISÉ FANER",
+      "themeColor": "Temafarve",
+      "location": "Position",
+      "confirmDeletion": "Bekræft sletning af "
     },
     "landing": {
       "lblAdd": "Hvad vil du kalde din Shortlist?",
@@ -17,7 +23,9 @@ define({
     },
     "organizePopup": {
       "title": "Organisér",
-      "tab": "fane"
+      "tab": "fane",
+      "dragNDrop": "Træk og slip faner for at organisere din historie",
+      "lblColTitle": "Titel"
     },
     "settingsLayoutOptions": {
       "title": "Layoutindstillinger",
@@ -35,10 +43,20 @@ define({
       "changeLocation": "Skift position",
       "setLocation": "Angiv placering",
       "cancel": "Annullér",
-      "addImage": "klik eller træk og slip for at tilføje et billede",
+      "addImage": "Klik eller træk og slip for at tilføje et billede",
+      "chooseImage": "VÆLG BILLEDE",
+      "importImages": "IMPORTÉR BILLEDER",
+      "import": "IMPORTÉR",
       "enterPlaceName": "Indtast stednavn",
       "enterPlaceDescription": "Indtast stedbeskrivelse",
-      "unnamedPlace": "Ikke-navngivet sted"
+      "unnamedPlace": "Ikke-navngivet sted",
+      "update": "Opdatér",
+      "useLocation": "Brug denne position",
+      "selectAll": "Markér alle",
+      "imageSizeHelper": "For at opnå de bedste resultater skal billeder være mindre end 400 KB. Den anbefalede størrelse og form er 1000 x 750 pixels (4:3 bredde:højdeforhold) eller mindre. Større billeder kan gøre ydeevnen langsommere. For at opnå den bedste ydeevne skal du bruge komprimerede JPG-billeder med 80 % billedkvalitet.",
+      "imageSizeHelperUpdated": "For at opnå den den bedste ydeevne skal du bruge billeder på mindre end 400 KB. For at reducere filstørrelsen skal du bruge JPG-format, der er gemt ved 80 % af billedkvaliteten. Hvis dit billede fortsat er på mere end 400 KB, kan du reducere filstørrelsen yderligere: 1000 pixels bredt x 750 pixels højt (4:3 bredde:højdeforhold) anbefales.",
+      "thumbnailLink": "Miniature-link",
+      "thumbnailHelp": "Den anbefalede miniaturestørrelse og -form er 280 x 210 pixels (4:3 bredde:højdeforhold). Større miniaturer kan gøre ydeevnen langsommere. Miniaturer med et størrelsesforhold på 4:3 passer til deres tiles uden at blive beskåret."
     },
     "settings": {
       "numberedPlaces": "Vis steder med tal",
@@ -55,7 +73,13 @@ define({
       "custom": "Brugerdefineret",
       "customTooltip": "Angiv positionen ved hjælp af den knap, som bliver vist i kortzoom-kontrolelementerne",
       "mapLocationTooltip": "Den position, som folk før vist, når de åbner din Shortlist",
-      "bookmarksHelp": "Hvis du vil aktivere bogmærker i din Shortlist, skal du tilføje og håndtere webkortets bogmærker i webkortviseren"
+      "bookmarksHelp": "Hvis du vil aktivere bogmærker i din Shortlist, skal du tilføje og håndtere webkortets bogmærker i webkortviseren",
+      "generalOptions": "Generelle indstillinger",
+      "mapOptions": "Indstillinger for kort",
+      "changeBasemap": "Skift baggrundskort",
+      "saveHomeLocation": "Gem hjem-position",
+      "choose": "Vælg",
+      "headerColor": "Header-farve"
     },
     "help": {
       "title": "HJÆLP",
@@ -81,7 +105,10 @@ define({
         "asIsOption": "Ja, brug dem, som de er",
         "asIsText": "Du vil fortsat redigere og administrere dine steder i dit webkort og ikke i Shortlist-builder-programmet. De opdateringer, du foretager af disse data, gengives automatisk i din Shortlist. Denne indstilling kræver, at dine data anvender denne skabelon.",
         "badData": "Det punktlag, der indeholder dine steder, anvender ikke den påkrævede dataskabelon. Gennemse de krav, der gælder for skabelonen.",
-        "downloadTemplate": "Hent skabelon"
+        "downloadTemplate": "Hent skabelon",
+        "selectPtData": "VÆLG DINE PUNKTDATA",
+        "multipleThemes": "INDEHOLDER DIT LAG FLERE TEMAER",
+        "chooseFields": "VÆLG DE FELTER, SOM SHORTLIST'EN SKAL BRUGE"
       },
       "fieldPicker": {
         "nameField": "Felt, der indeholder navnet på hvert sted: ",

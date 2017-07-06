@@ -35,11 +35,14 @@ define({
       "upgradeBrowser": "<a href='http://browsehappy.com/' target='_blank'>Vui lòng cập nhật trình duyệt của bạn</a>.",
       "mapLoadingFail": "Đã xảy ra lỗi, bản đồ không tải đúng.",
       "signOut": "Đăng Xuất",
-      "attention": "Chú ý!"
+      "attention": "Chú ý!",
+      "noBuilderEdge": "Có thể xem Story Map Shortlists trên bất kỳ trình duyệt web nào. Tuy nhiên, Story Map Shortlist Builder không được hỗ trợ trên Windows Edge. Vui lòng sử dụng trình duyệt web khác để tạo hoặc chỉnh sửa Shortlist."
     },
     "headerFromCommon": {
       "storymapsText": "Bản đồ câu chuyện",
       "builderButton": "Chỉnh sửa",
+      "facebookTooltip": "Chia sẻ trên Facebook",
+      "twitterTooltip": "Chia sẻ trên Twitter",
       "bitlyTooltip": "Tải liên kết ngắn đến ứng dụng",
       "templateTitle": "Thiết lập tiêu đề mẫu",
       "templateSubtitle": "Thiết lập phụ đề mẫu",
@@ -52,6 +55,10 @@ define({
       "embed": "Nhúng vào trang web",
       "embedExplain": "Sử dụng mã HTML sau để nhúng ứng dụng vào trang web.",
       "size": "Kích thước (chiều rộng/chiều cao):"
+    },
+    "general": {
+      "noPlaces": "Không có nơi nào trong khu vực này. Phóng lớn hoặc nhấp vào nút Trang chủ để xem các địa điểm.",
+      "start": "Bắt đầu"
     }
   }
 });

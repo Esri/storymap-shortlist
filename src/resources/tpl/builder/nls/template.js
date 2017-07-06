@@ -8,7 +8,13 @@ define({
 			addEditPopup: {
 				test: "test",
 				add: "add",
-				edit: "edit"
+				edit: "edit",
+				editTab: "EDIT TAB",
+				addTab: "ADD TAB",
+				organizeTabs: "ORGANIZE TABS",
+				themeColor: "Theme Color",
+				location: "Location",
+				confirmDeletion: "Confirm deletion of "
 			},
 			landing: {
 				lblAdd: "What do you want to call your Shortlist?",
@@ -18,7 +24,9 @@ define({
 			},
 			organizePopup: {
 				title: "Organize",
-				tab: "tab"
+				tab: "tab",
+				dragNDrop: "Drag and drop tabs to organize your story",
+				lblColTitle: "Title"
 			},
 			settingsLayoutOptions: {
 				title: "Layout options",
@@ -36,10 +44,20 @@ define({
 				changeLocation: "Change location",
 				setLocation: "Set Location",
 				cancel: "Cancel",
-				addImage: "click, or, drag and drop, to add an image",
+				addImage: "Click, or drag and drop, to add an image",
+				chooseImage: "CHOOSE IMAGE",
+				importImages: "IMPORT IMAGES",
+				import: "IMPORT",
 				enterPlaceName: "Enter place name",
 				enterPlaceDescription: "Enter place description",
-				unnamedPlace: "Unnamed place"
+				unnamedPlace: "Unnamed place",
+				update: "Update",
+				useLocation: "Use this location",
+				selectAll: "Select all",
+				imageSizeHelper: 'For best results, images should be less than 400 KB. The recommended size & shape is 1000 x 750 pixels (4:3 width:height ratio) or smaller. Larger images can slow performance. For best performance use compressed JPG images at 80% image quality.',
+				imageSizeHelperUpdated: "For best performance, images should be less than 400 KB. To reduce file size use JPG format saved at 80% image quality. If your image is still over 400 KB, resizing it can further reduce its file size: 1000 pixels wide x 750 pixels tall (4:3 width:height ratio) is recommended.",
+				thumbnailLink: "Thumbnail link",
+				thumbnailHelp: "The recommended thumbnail size & shape is 280 x 210 pixels (4:3 width:height ratio). Larger thumbnails can slow performance. 4:3 aspect ratio thumbnails fit into their tiles without being cropped."
 			},
 			settings: {
 				numberedPlaces: "Show places with numbers",
@@ -56,7 +74,13 @@ define({
 				custom: "Custom",
 				customTooltip: "Set the location using the button that will appear in the map zoom controls",
 				mapLocationTooltip: "The location people see when they open your Shortlist",
-				bookmarksHelp: "To enable bookmarks in Shortlist, add and manage the web map's bookmarks in the web map viewer"
+				bookmarksHelp: "To enable bookmarks in Shortlist, add and manage the web map's bookmarks in the web map viewer",
+				generalOptions: "General options",
+				mapOptions: "Map options",
+				changeBasemap: "Change Basemap",
+				saveHomeLocation: "Save home location",
+				choose: "Choose",
+				headerColor: "Header Color"
 			},
 			help: {
 				title: "HELP",
@@ -82,7 +106,10 @@ define({
 					asIsOption: "Yes, use them as-is",
 					asIsText: "You will continue to edit and manage your places in your web map, not in the Shortlist Builder.  Updates you make to that data will be automatically reflected in your Shortlist.  This option requires that your data uses this template.",
 					badData: "The point layer containing your places does not use the required data template. Please review the requirements of the template.",
-					downloadTemplate: "Download template"
+					downloadTemplate: "Download template",
+					selectPtData: "CHOOSE YOUR POINT DATA",
+					multipleThemes: "DOES YOUR LAYER CONTAIN MULTIPLE THEMES",
+					chooseFields: "CHOOSE THE FIELDS THE SHORTLIST SHOULD USE"
 				},
 				fieldPicker: {
 					nameField: "Field containing the name of each place: ",

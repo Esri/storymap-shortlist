@@ -21,7 +21,9 @@ define([
 			{
 				if(_this.initDone || $('.home-location-save-btn').length)
 					return;
-				$('#map_zoom_slider').append(viewTpl());
+				$('#map_zoom_slider').append(viewTpl({
+					saveExtent: i18n.builder.settings.saveHomeLocation
+				}));
 				initUI();
 			};
 

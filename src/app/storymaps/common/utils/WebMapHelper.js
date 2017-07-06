@@ -37,9 +37,9 @@ define(["esri/request",
 
 				var user = portal.getPortalUser();
 				var rqUrl = this.getSharingURL(portal)
-								+ "content/users/" + user.credential.userId
+								+ "content/users/" + (app.appCfg.useWebmapOwnerAsSave ? item.owner : user.credential.userId)
 								+ (item.ownerFolder ? ("/" + item.ownerFolder) : "")
-								+ "/addItem";
+								+ (item.id ? "/items/" + item.id + "/update" : "/addItem");
 
 				var rqData = {
 					item: item.item,
@@ -150,16 +150,44 @@ define(["esri/request",
 			 */
 			prepareWebmapItemForCloning: function(webmap)
 			{
+
+				var spatialReference = {
+					"latestWkid": 3857,
+					"wkid": 102100
+				};
+
+				if (app.map && app.map.spatialReference) {
+					spatialReference = app.map.spatialReference;
+				}
+
+				if (!webmap.itemData.spatialReference) {
+					webmap.itemData.spatialReference = spatialReference;
+				}
+
+				webmap.itemData.authoringApp = "StoryMapShortlist";
+				webmap.itemData.authoringAppVersion = app.version;
+
+				if (parseFloat(webmap.itemData.version) < 2.9) {
+					webmap.itemData.version = "2.9";
+				}
+
+				delete webmap.itemData._ssl;
 				array.forEach(webmap.itemData.baseMap.baseMapLayers, function(layer){
 					delete layer.errors;
 					delete layer.layerObject;
 					delete layer.resourceInfo;
+					delete layer.firstLayer;
+					delete layer.baseMapLayer;
 				});
 
 				array.forEach(webmap.itemData.operationalLayers, function(layer){
 					delete layer.errors;
 					delete layer.layerObject;
 					delete layer.resourceInfo;
+
+					if (layer.id.indexOf("shortlist-layer") >= 0 && !layer.layerType) {
+						layer.layerType = "ArcGISFeatureLayer";
+					}
 
 					// Graphics layer
 					if( layer.featureCollection && layer.featureCollection.layers ) {

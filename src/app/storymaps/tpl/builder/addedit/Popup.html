@@ -3,7 +3,7 @@
 	<div class="modal-content">
 		<div class="modal-logo"></div>
 		<div class="modal-header">
-			<h4 class="modal-title">EDIT TAB</h4>
+			<h4 class="modal-title"><%= editTab %></h4>
 		</div>
 
 		<div class="modal-body">
@@ -17,7 +17,7 @@
 				<table class="tab-cfg">
 					<tr class="tab-cfg-row ">
 						<td class="tab-cfg-title" style="outline: none;">
-							Theme Color
+							<%= themeColor %>
 						</td>
 						<td class="tab-cfg-btns">
 							<div class="color-control">
@@ -27,16 +27,16 @@
 					</tr>
 					<tr class="tab-cfg-row tab-cfg-location">
 						<td class="tab-cfg-title" style="outline: none;">
-							Location
+							<%= location %>
 						</td>
 						<td class="tab-cfg-btns">
 							<div class="regular-control" style="display: block;">
 								<span class="btn-group">
 									<button type="button" class="btn btn-default btn-xs btn-primary" data-value="default" style="">
-										Auto
+										<%= auto %>
 									</button>
 									<button type="button" class="btn btn-default btn-xs" data-value="custom" data-toggle="tooltip" title="Lets you display a specific map location when this tab is selected">
-										Custom configuration&nbsp;
+										<%= customConfig %> &nbsp;
 									</button>
 								</span>
 							</div>

@@ -35,11 +35,14 @@ define({
       "upgradeBrowser": "<a href='http://browsehappy.com/' target='_blank'>Prašome atnaujinti naršyklę</a>.",
       "mapLoadingFail": "Įvyko klaida ir žemėlapio nepavyko tinkamai įkelti.",
       "signOut": "Atsijungti",
-      "attention": "Dėmesio!"
+      "attention": "Dėmesio!",
+      "noBuilderEdge": "Trumpojo sąrašo žemėlapių pasakojimus galima peržiūrėti bet kurioje naršyklėje. Tačiau jų kūrimo priemonė nepalaikoma programoje Windows Edge. Naudokite kitą interneto naršyklę aplikacijai kurti arba redaguoti."
     },
     "headerFromCommon": {
       "storymapsText": "Žemėlapio pasakojimas",
       "builderButton": "Redaguoti",
+      "facebookTooltip": "Bendrinti Facebook",
+      "twitterTooltip": "Bendrinti Twitter",
       "bitlyTooltip": "Gauti sutrumpintą aplikacijos nuorodą",
       "templateTitle": "Nustatyti šablono pavadinimą",
       "templateSubtitle": "Nustatyti šablono antraštę",
@@ -52,6 +55,10 @@ define({
       "embed": "Įterpti į tinklalapį",
       "embedExplain": "Naudokite šį HTML kodą, kad įterptumėte aplikaciją į tinklalapį.",
       "size": "Dydis (plotis / aukštis):"
+    },
+    "general": {
+      "noPlaces": "Šioje teritorijoje nėra vietovių. Atitolinkite arba spustelėkite mygtuką Pradžia, kad pamatytumėte vietoves.",
+      "start": "Pradėti"
     }
   }
 });

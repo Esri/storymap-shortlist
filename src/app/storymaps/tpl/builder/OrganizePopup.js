@@ -22,7 +22,7 @@ define([
 				_nbRowDeleted = null;
 
 			container.append(viewTpl({
-				title: 'Organize Tabs',
+				title: i18n.builder.addEditPopup.organizeTabs,
 				lblColTitle: i18n.builder.organizePopup.lblColTitle,
 				lblColStatus: i18n.builder.organizePopup.lblColStatus,
 				btnCancel: i18n.commonCore.common.cancel
@@ -45,7 +45,7 @@ define([
 
 				container.find('.organizeHeader').html(
 					//i18n.builder.organizePopup.lblHeader.replace('%LBL_LAYOUT%', app.data.getWebAppData().getLayoutProperties().itemsLbl.toLowerCase())
-					'Drag and drop tabs to organize your story'
+					i18n.builder.organizePopup.dragNDrop
 				);
 
 				// Table entries
@@ -64,11 +64,11 @@ define([
 						title: title,
 						statusVal: '',
 						statusLbl: '',
-						helpDelete: 'delete'
+						helpDelete: i18n.builder.addFeatureBar.deleteFeature
 					});
 					/*statusVal: entry.status,
 					statusLbl: app.builderCfg.STATUS[entry.status],*/
-					helpDelete: 'Delete'
+					//helpDelete: i18n.builder.addFeatureBar.deleteFeature;
 				});
 
 				container.find('.rows').html(contentHTML);
@@ -128,6 +128,7 @@ define([
 			this.close = function()
 			{
 				container.modal('hide');
+				$('.builder-content-panel .builder-organize').toggleClass('active');
 				_resultDeferred.reject();
 			};
 
@@ -170,6 +171,7 @@ define([
 					entries: entriesOnApply,
 					sectionIndex: newSectionIndex
 				});
+				$('.builder-content-panel .builder-organize').toggleClass('active');
 				container.modal('hide');
 			}
 
@@ -178,6 +180,7 @@ define([
 				container.find('.btnApply').click(onClickApply);
 
 				container.on('hide.bs.modal', function () {
+					$('.builder-content-panel .builder-organize').toggleClass('active');
 					_resultDeferred.reject();
 				});
 
@@ -188,7 +191,7 @@ define([
 			{
 				if ( _nbRowDeleted )
 					container.find('.btnApply')
-						.html("Confirm deletion of %NB% %LBL_LAYOUT%"
+						.html(i18n.builder.addEditPopup.confirmDeletion + "%NB% %LBL_LAYOUT%"
 							.replace('%NB%', _nbRowDeleted)
 							.replace('%LBL_LAYOUT%', _nbRowDeleted > 1 ? 'tabs' : 'tab')
 						)

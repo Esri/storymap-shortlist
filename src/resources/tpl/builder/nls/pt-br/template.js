@@ -7,7 +7,13 @@ define({
     "addEditPopup": {
       "test": "testar",
       "add": "adicionar",
-      "edit": "editar"
+      "edit": "editar",
+      "editTab": "GUIA EDITAR",
+      "addTab": "GUIA ADICIONAR",
+      "organizeTabs": "ORGANIZAR GUIAS",
+      "themeColor": "Cor do Tema",
+      "location": "Localização",
+      "confirmDeletion": "Confirmar exclusão de "
     },
     "landing": {
       "lblAdd": "Como você deseja nomear sua Lista Restrita?",
@@ -17,7 +23,9 @@ define({
     },
     "organizePopup": {
       "title": "Organizar",
-      "tab": "guia"
+      "tab": "guia",
+      "dragNDrop": "Arraste e solte as guias para organizar sua história",
+      "lblColTitle": "Título"
     },
     "settingsLayoutOptions": {
       "title": "Opções de layout",
@@ -35,10 +43,20 @@ define({
       "changeLocation": "Alterar localização",
       "setLocation": "Configurar Local",
       "cancel": "Cancelar",
-      "addImage": "clique, ou, arraste e solte, para adicionar uma imagem",
+      "addImage": "Clique ou arraste e solte, para adicionar uma imagem",
+      "chooseImage": "ESCOLHER IMAGEM",
+      "importImages": "IMPORTAR IMAGENS",
+      "import": "IMPORTAR",
       "enterPlaceName": "Insira o nome do local",
       "enterPlaceDescription": "Insira a descrição do local",
-      "unnamedPlace": "Local sem nome"
+      "unnamedPlace": "Local sem nome",
+      "update": "Atualizar",
+      "useLocation": "Utilizar esta localização",
+      "selectAll": "Selecionar todos",
+      "imageSizeHelper": "Para melhores resultados, as imagens devem ter menos que 400 KB. O tamanho & forma recomendados são 1000 x 750 pixels (4:3 proporção de largura:altura) ou menor. Imagens maiores podem diminuir o desempenho. Para obter o melhor desempenho, utilize imagens JPG compactadas com 80% da qualidade de imagem.",
+      "imageSizeHelperUpdated": "Para melhor performance, as imagens devem ter menos que 400 KB. Para reduzir o tamanho do arquivo utilize o formato JPG salvo em 80% de qualidade de imagem. Se sua imagem estiver ainda acima de 400 KB, o tamanho do arquivo pode ser reduzido ao redimensionar a imagem: 1000 pixels de largura x 750 pixels de altura (4:3 relação de largura:altura) é recomendado.",
+      "thumbnailLink": "Link da miniatura",
+      "thumbnailHelp": "O tamanho & forma da miniatura recomendados são 280 x 210 pixels (4:3 proporção de largura:altura). As miniaturas maiores podem diminuir o desempenho. As miniaturas de proporção 4: 3 se encaixam em seus mosaicos sem serem cortadas."
     },
     "settings": {
       "numberedPlaces": "Mostrar lugares com números",
@@ -55,7 +73,13 @@ define({
       "custom": "Personalizar",
       "customTooltip": "Defina o local utilizando o botão que aparecerá nos controles de zoom do mapa",
       "mapLocationTooltip": "O local que as pessoas visualizam quando abrem a sua lista de favoritos",
-      "bookmarksHelp": "Para habilitar os favoritos na Lista Restrita, adicione e gerencie os marcadores de mapa da web no visualizador de mapa da web"
+      "bookmarksHelp": "Para habilitar os favoritos na Lista Restrita, adicione e gerencie os marcadores de mapa da web no visualizador de mapa da web",
+      "generalOptions": "Opções gerais",
+      "mapOptions": "Opções do mapa",
+      "changeBasemap": "Alterar Mapa Base",
+      "saveHomeLocation": "Salvar local inicial",
+      "choose": "Escolher",
+      "headerColor": "Cor do Cabeçalho"
     },
     "help": {
       "title": "AJUDA",
@@ -81,7 +105,10 @@ define({
         "asIsOption": "Sim, utilizá-los como são",
         "asIsText": "Você continuará a editar e gerenciar seus locais no mapa da web, não no Construtor de Lista Restrita.  As atualizações realizadas nestes dados serão automaticamente refletidas na sua Lista Restrita.  Esta opção exige que seus dados utilizem este modelo.",
         "badData": "A camada de ponto que contém seus locais não utiliza o modelo de dados exigido. Revise os requisitos do modelo.",
-        "downloadTemplate": "Modelo de download"
+        "downloadTemplate": "Modelo de download",
+        "selectPtData": "ESCOLHA SEUS DADOS DE PONTO",
+        "multipleThemes": "SUAS CAMADAS CONTÊM MÚLTIPLOS TEMAS",
+        "chooseFields": "ESCOLHA OS CAMPOS QUE A LISTA RESTRITA DEVE UTILIZAR"
       },
       "fieldPicker": {
         "nameField": "O campo contendo o nome de cada local: ",

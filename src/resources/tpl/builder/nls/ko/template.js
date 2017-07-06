@@ -7,7 +7,13 @@ define({
     "addEditPopup": {
       "test": "테스트",
       "add": "추가",
-      "edit": "편집"
+      "edit": "편집",
+      "editTab": "탭 편집",
+      "addTab": "탭 추가",
+      "organizeTabs": "탭 구성",
+      "themeColor": "테마 색상",
+      "location": "위치",
+      "confirmDeletion": "삭제 확인 "
     },
     "landing": {
       "lblAdd": "Shortlist를 어떻게 부르고 싶으신가요?",
@@ -17,7 +23,9 @@ define({
     },
     "organizePopup": {
       "title": "구성",
-      "tab": "탭"
+      "tab": "탭",
+      "dragNDrop": "탭을 드래그 앤 드롭하여 스토리 구성",
+      "lblColTitle": "제목"
     },
     "settingsLayoutOptions": {
       "title": "레이아웃 옵션",
@@ -36,9 +44,19 @@ define({
       "setLocation": "위치 설정",
       "cancel": "취소",
       "addImage": "클릭하거나 드래그 앤 드롭하여 이미지 추가",
+      "chooseImage": "이미지 선택",
+      "importImages": "이미지 가져오기",
+      "import": "가져오기",
       "enterPlaceName": "장소 이름 입력",
       "enterPlaceDescription": "장소 설명 입력",
-      "unnamedPlace": "이름이 정의되지 않은 장소"
+      "unnamedPlace": "이름이 정의되지 않은 장소",
+      "update": "업데이트",
+      "useLocation": "이 위치 사용",
+      "selectAll": "모두 선택",
+      "imageSizeHelper": "최상의 결과를 위해 이미지의 크기는 400KB 미만이어야 합니다. 1000 x 750픽셀(가로 세로 4:3 비율) 이하의 크기와 도형을 사용하는 것이 좋습니다. 이미지가 클수록 성능이 떨어질 수 있습니다. 최상의 성능을 위해 이미지 품질이 80%인 압축된 JPG 이미지를 사용하세요.",
+      "imageSizeHelperUpdated": "최상의 성능을 위해 이미지 크기는 400KB 미만이어야 합니다. 파일 크기를 줄이려면 80% 이미지 품질로 저장된 JPG 형식을 사용하세요. 그래도 이미지가 400KB보다 큰 경우 크기를 조정하면 파일 크기를 더 줄일 수 있습니다. 너비 1000픽셀 x 높이 750픽셀(너비:높이 비율 4:3)의 크기를 사용하는 것이 좋습니다.",
+      "thumbnailLink": "섬네일 링크",
+      "thumbnailHelp": "권장 섬네일 크기와 도형은 280 x 210픽셀(가로 세로 4:3 비율)입니다. 섬네일이 클수록 성능이 떨어질 수 있습니다. 섬네일의 가로 세로 비율이 4:3인 경우 이미지가 잘리지 않고 타일에 맞춰집니다."
     },
     "settings": {
       "numberedPlaces": "번호가 지정된 장소 표시",
@@ -55,7 +73,13 @@ define({
       "custom": "사용자 정의",
       "customTooltip": "맵 확대 컨트롤에 나타나는 버튼을 사용하여 위치를 설정",
       "mapLocationTooltip": "Shortlist를 열었을 때 보게 될 위치",
-      "bookmarksHelp": "Shortlist에서 책갈피를 활성화하려면 웹 맵 뷰어에서 웹 맵의 책갈피를 추가하여 관리"
+      "bookmarksHelp": "Shortlist에서 책갈피를 활성화하려면 웹 맵 뷰어에서 웹 맵의 책갈피를 추가하여 관리",
+      "generalOptions": "일반 옵션",
+      "mapOptions": "맵 옵션",
+      "changeBasemap": "베이스맵 변경",
+      "saveHomeLocation": "홈 위치 저장",
+      "choose": "선택",
+      "headerColor": "헤더 색상"
     },
     "help": {
       "title": "도움말",
@@ -81,7 +105,10 @@ define({
         "asIsOption": "예. 포인트를 그대로 사용합니다.",
         "asIsText": "Shortlist 빌더를 사용하지 않고 웹 맵에서 장소를 편집하고 관리합니다. 해당 데이터를 업데이트하면 Shortlist에 자동으로 반영됩니다. 이 옵션을 사용하려면 데이터가 이 템플릿을 사용해야 합니다.",
         "badData": "장소가 포함된 포인트 레이어에 필요한 데이터 템플릿이 사용되지 않았습니다. 템플릿 요구 사항을 검토하세요.",
-        "downloadTemplate": "템플릿 다운로드"
+        "downloadTemplate": "템플릿 다운로드",
+        "selectPtData": "포인트 데이터 선택",
+        "multipleThemes": "레이어에 여러 테마가 포함됨",
+        "chooseFields": "Shortlist에서 사용해야 하는 필드 선택"
       },
       "fieldPicker": {
         "nameField": "각 장소의 이름이 포함되는 필드: ",

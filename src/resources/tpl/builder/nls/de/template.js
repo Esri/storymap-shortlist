@@ -7,7 +7,13 @@ define({
     "addEditPopup": {
       "test": "Test",
       "add": "Hinzufügen",
-      "edit": "Bearbeiten"
+      "edit": "Bearbeiten",
+      "editTab": "REGISTERKARTE BEARBEITEN",
+      "addTab": "REGISTERKARTE HINZUFÜGEN",
+      "organizeTabs": "REGISTERKARTEN ORGANISIEREN",
+      "themeColor": "Designfarbe",
+      "location": "Ort",
+      "confirmDeletion": "Löschen bestätigen von "
     },
     "landing": {
       "lblAdd": "Welchen Namen möchten Sie Ihrer Shortlist geben?",
@@ -17,7 +23,9 @@ define({
     },
     "organizePopup": {
       "title": "Organisieren",
-      "tab": "Registerkarte"
+      "tab": "Registerkarte",
+      "dragNDrop": "Story durch Verschieben von Registerkarten organisieren",
+      "lblColTitle": "Titel"
     },
     "settingsLayoutOptions": {
       "title": "Layout-Optionen",
@@ -36,9 +44,19 @@ define({
       "setLocation": "Position festlegen",
       "cancel": "Abbrechen",
       "addImage": "Klicken oder per Drag & Drop verschieben, um ein Bild hinzuzufügen",
+      "chooseImage": "BILD AUSWÄHLEN",
+      "importImages": "BILDER IMPORTIEREN",
+      "import": "IMPORTIEREN",
       "enterPlaceName": "Ortsname eingeben",
       "enterPlaceDescription": "Ortsbeschreibung eingeben",
-      "unnamedPlace": "Unbenannter Ort"
+      "unnamedPlace": "Unbenannter Ort",
+      "update": "Aktualisieren",
+      "useLocation": "Diese Position verwenden",
+      "selectAll": "Alle auswählen",
+      "imageSizeHelper": "Um optimale Ergebnisse zu erzielen, sollten Bilder kleiner als 400 KB sein. Die empfohlene Größe und Form beträgt 1.000 x 750 Pixel (Verhältnis 3:2, Breite zu Höhe) oder kleiner. Größere Bilder können die Performance beeinträchtigen. Eine optimale Performance wird erreicht, wenn komprimierte JPG-Bilder mit einer Bildqualität von 80 % verwendet werden.",
+      "imageSizeHelperUpdated": "Für eine optimal Leistungsfähigkeit sollten die Bilder eine Größe von höchstens 400 KB aufweisen. Verwenden Sie zur Verringerung der Dateigröße das JPG-Format, das mit einer Bildqualität von 80 % gespeichert wird. Falls Ihr Bild noch immer eine Größe von mehr als 400 KB aufweist, können Sie mit einer Größenanpassung seine Dateigröße weiterhin reduzieren: 1000 Pixel Breite x 750 Pixel Höhe (ein Breite-Höhe-Verhältnis von 4:3) werden empfohlen.",
+      "thumbnailLink": "Link für Miniaturansicht",
+      "thumbnailHelp": "Die empfohlene Größe und Form für Miniaturansichten beträgt 280 x 210 Pixels (Verhältnis 4:3, Breite zu Höhe). Größere Miniaturansichten können die Performance beeinträchtigen. Miniaturansichten mit einem Seitenverhältnis von 4:3 passen in ihre Kacheln, ohne zugeschnitten werden zu müssen."
     },
     "settings": {
       "numberedPlaces": "Ort mit Ziffern anzeigen",
@@ -55,7 +73,13 @@ define({
       "custom": "Kundschaft",
       "customTooltip": "Legen Sie die Position mit der Schaltfläche fest, die in den Zoomsteuerelementen der Karte angezeigt wird",
       "mapLocationTooltip": "Die Position, die Benutzern angezeigt wird, wenn sie Ihre Shortlist öffnen",
-      "bookmarksHelp": "Um Lesezeichen in Shortlist zu aktivieren, fügen Sie die Lesezeichen im Webkarten-Viewer der Webkarte hinzu und verwalten Sie sie"
+      "bookmarksHelp": "Um Lesezeichen in Shortlist zu aktivieren, fügen Sie die Lesezeichen im Webkarten-Viewer der Webkarte hinzu und verwalten Sie sie",
+      "generalOptions": "Allgemeine Optionen",
+      "mapOptions": "Kartenoptionen",
+      "changeBasemap": "Grundkarte ändern",
+      "saveHomeLocation": "Standardausdehnung speichern",
+      "choose": "Auswählen",
+      "headerColor": "Kopfzeilenfarbe"
     },
     "help": {
       "title": "HILFE",
@@ -81,7 +105,10 @@ define({
         "asIsOption": "Ja, unverändert verwenden",
         "asIsText": "Sie bearbeiten und verwalten Ihre Orte weiterhin in Ihrer Webkarte, nicht in Shortlist Builder. Aktualisierungen, die Sie an den Daten vornehmen, werden automatisch in der Shortlist angezeigt. Diese Option erfordert, dass Ihre Daten diese Vorlage verwenden.",
         "badData": "Der Punkt-Layer mit Ihren Orten verwendet nicht die erforderliche Datenvorlage. Überprüfen Sie die Anforderungen der Vorlage.",
-        "downloadTemplate": "Vorlage herunterladen"
+        "downloadTemplate": "Vorlage herunterladen",
+        "selectPtData": "PUNKTDATEN AUSWÄHLEN",
+        "multipleThemes": "ENTHÄLT IHR LAYER MEHRERE DESIGNS",
+        "chooseFields": "WÄHLEN SIE DIE FELDER AUS, DIE IN DER SHORTLIST ENTHALTEN SEIN SOLLEN"
       },
       "fieldPicker": {
         "nameField": "Feld, das den Namen des jeweiligen Ortes enthält: ",

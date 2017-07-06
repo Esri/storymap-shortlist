@@ -7,7 +7,13 @@ define({
     "addEditPopup": {
       "test": "test",
       "add": "dodaj",
-      "edit": "edytuj"
+      "edit": "edytuj",
+      "editTab": "EDYTUJ KARTĘ",
+      "addTab": "DODAJ KARTĘ",
+      "organizeTabs": "ORGANIZUJ KARTY",
+      "themeColor": "Kolor motywu",
+      "location": "Lokalizacja",
+      "confirmDeletion": "Potwierdź usunięcie "
     },
     "landing": {
       "lblAdd": "Jak chcesz nazwać krótką listę?",
@@ -17,7 +23,9 @@ define({
     },
     "organizePopup": {
       "title": "Organizuj",
-      "tab": "karta"
+      "tab": "karta",
+      "dragNDrop": "Przeciągaj i upuszczaj karty, aby zorganizować narrację",
+      "lblColTitle": "Tytuł"
     },
     "settingsLayoutOptions": {
       "title": "Opcje kompozycji",
@@ -35,10 +43,20 @@ define({
       "changeLocation": "Zmień lokalizację",
       "setLocation": "Skonfiguruj lokalizację",
       "cancel": "Anuluj",
-      "addImage": "kliknij lub przeciągnij i upuść, aby dodać obraz",
+      "addImage": "Kliknij lub przeciągnij i upuść, aby dodać obraz",
+      "chooseImage": "WYBIERZ OBRAZ",
+      "importImages": "IMPORTUJ OBRAZY",
+      "import": "IMPORTUJ",
       "enterPlaceName": "Wprowadź nazwę miejsca",
       "enterPlaceDescription": "Wprowadź opis miejsca",
-      "unnamedPlace": "Miejsce bez nazwy"
+      "unnamedPlace": "Miejsce bez nazwy",
+      "update": "Aktualizuj",
+      "useLocation": "Użyj tej lokalizacji",
+      "selectAll": "Wybierz wszystkie",
+      "imageSizeHelper": "Najlepsze wyniki można uzyskać, gdy wielkość obrazów jest mniejsza niż 400 KB. Zalecana wielkość i kształt to 1000 x 750 pikseli (współczynnik szerokości do wysokości 4:3). Większe obrazy mogą obniżyć wydajność. Najlepiej jest używać skompresowanych obrazów w formacie JPG o jakości na poziomie 80%.",
+      "imageSizeHelperUpdated": "Najlepsze wyniki można uzyskać, gdy wielkość obrazów jest mniejsza niż 400 KB. Aby zmniejszyć wielkość pliku, użyj formatu JPG o jakości na poziomie 80%. Jeśli obraz nadal jest większy niż 400 KB, spróbuj zmniejszyć jego rozmiary. Zalecane rozmiary to 1000 x 750 pikseli (współczynnik szerokości do wysokości 4:3).",
+      "thumbnailLink": "Łącze miniatury",
+      "thumbnailHelp": "Zalecana wielkość i kształt miniatury to 280 x 210 pikseli (współczynnik szerokości do wysokości 4:3). Większe miniatury mogą obniżyć wydajność. Miniatury o współczynniku proporcji 4:3 mieszczą się na kaflach bez przycinania."
     },
     "settings": {
       "numberedPlaces": "Pokaż miejsca z liczbami",
@@ -55,7 +73,13 @@ define({
       "custom": "Niestandardowy",
       "customTooltip": "Skonfiguruj lokalizację przy użyciu przycisku wyświetlanego w obszarze sterowania powiększeniem mapy",
       "mapLocationTooltip": "Lokalizacja widziana przez osoby po otwarciu krótkiej listy",
-      "bookmarksHelp": "Aby włączyć zakładki na krótkiej liście, dodaj zakładki mapy internetowej w przeglądarce map internetowych i zarządzaj nimi"
+      "bookmarksHelp": "Aby włączyć zakładki na krótkiej liście, dodaj zakładki mapy internetowej w przeglądarce map internetowych i zarządzaj nimi",
+      "generalOptions": "Opcje ogólne",
+      "mapOptions": "Opcje mapy",
+      "changeBasemap": "Zmień mapę bazową",
+      "saveHomeLocation": "Zapisz lokalizację początkową",
+      "choose": "Wybierz",
+      "headerColor": "Kolor nagłówka"
     },
     "help": {
       "title": "POMOC",
@@ -81,7 +105,10 @@ define({
         "asIsOption": "Tak, użyj je w bieżącej postaci",
         "asIsText": "Będziesz kontynuować edytowanie miejsc i zarządzanie nimi na mapie internetowej, a nie w kreatorze Krótka lista. Dokonywane aktualizacje danych będą automatycznie odzwierciedlane na krótkiej liście. Ta opcja wymaga, aby dane korzystały z tego szablonu.",
         "badData": "Warstwa punktowa zawierająca miejsca nie korzysta z wymaganego szablonu danych. Przejrzyj wymagania dotyczące tego szablonu.",
-        "downloadTemplate": "Pobierz szablon"
+        "downloadTemplate": "Pobierz szablon",
+        "selectPtData": "WYBIERZ DANE PUNKTOWE",
+        "multipleThemes": "CZY WARSTWA ZAWIERA WIELE MOTYWÓW",
+        "chooseFields": "WYBIERZ POLA, KTÓRE POWINNY BYĆ UŻYWANE NA KRÓTKIEJ LIŚCIE"
       },
       "fieldPicker": {
         "nameField": "Pole zawierające nazwy poszczególnych miejsc: ",

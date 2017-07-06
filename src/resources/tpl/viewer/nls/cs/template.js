@@ -35,11 +35,14 @@ define({
       "upgradeBrowser": "<a href='http://browsehappy.com/' target='_blank'>Aktualizujte svůj prohlížeč</a>.",
       "mapLoadingFail": "Něco se pokazilo, mapa se nenahrála správně.",
       "signOut": "Odhlásit",
-      "attention": "Upozornění!"
+      "attention": "Upozornění!",
+      "noBuilderEdge": "Seznamy map s příběhem lze zobrazit v libovolném prohlížeči. Nástroj pro tvorbu seznamů map s příběhem však není podporován v prohlížeči Windows Edge. K vytvoření nebo úpravě seznamu použijte jiný webový prohlížeč."
     },
     "headerFromCommon": {
       "storymapsText": "Mapa s příběhem",
       "builderButton": "Upravit",
+      "facebookTooltip": "Sdílet na Facebooku",
+      "twitterTooltip": "Sdílet na Twitteru",
       "bitlyTooltip": "Získejte krátký odkaz k aplikaci",
       "templateTitle": "Zadejte název šablony",
       "templateSubtitle": "Zadejte podnadpis šablony",
@@ -52,6 +55,10 @@ define({
       "embed": "Vložit do webové stránky",
       "embedExplain": "Použijte následující kód HTML ke vložení aplikace do webové stránky.",
       "size": "Velikost (šířka/výška):"
+    },
+    "general": {
+      "noPlaces": "V této oblasti se nenacházejí žádná místa. Chcete-li zobrazit místa, oddalte zobrazení nebo klikněte na tlačítko Domů.",
+      "start": "Spustit"
     }
   }
 });

@@ -7,7 +7,13 @@ define({
     "addEditPopup": {
       "test": "テスト",
       "add": "追加",
-      "edit": "編集"
+      "edit": "編集",
+      "editTab": "タブの編集",
+      "addTab": "タブの追加",
+      "organizeTabs": "タブの整理",
+      "themeColor": "テーマ色",
+      "location": "位置",
+      "confirmDeletion": "削除の確認対象 "
     },
     "landing": {
       "lblAdd": "ショートリスト名",
@@ -17,7 +23,9 @@ define({
     },
     "organizePopup": {
       "title": "整理",
-      "tab": "タブ"
+      "tab": "タブ",
+      "dragNDrop": "タブをドラッグ アンド ドロップして、ストーリーを整理します",
+      "lblColTitle": "タイトル"
     },
     "settingsLayoutOptions": {
       "title": "レイアウト オプション",
@@ -36,9 +44,19 @@ define({
       "setLocation": "場所の設定",
       "cancel": "キャンセル",
       "addImage": "クリックまたはドラッグ アンド ドロップして画像を追加",
+      "chooseImage": "画像の選択",
+      "importImages": "画像のインポート",
+      "import": "インポート",
       "enterPlaceName": "場所名を入力",
       "enterPlaceDescription": "場所の説明を入力",
-      "unnamedPlace": "無名の場所"
+      "unnamedPlace": "無名の場所",
+      "update": "更新",
+      "useLocation": "この場所を使用",
+      "selectAll": "すべて選択",
+      "imageSizeHelper": "最適な結果を得るには、画像のサイズを 400 KB 未満にしてください。 推奨されるサイズと形状は 1000 x 750 ピクセル (幅:高さの比が 4:3) またはそれよりも小さな値です。 画像のサイズを大きくすると、パフォーマンスが低下する可能性があります。 パフォーマンスを最適化するには、画質を 80% に圧縮された JPG 画像を使用してください。",
+      "imageSizeHelperUpdated": "最高のパフォーマンスを得るには、画像のサイズを 400 KB 未満にしてください。 ファイル サイズを削減するには、JPG 形式を使用して、画像の品質を 80% で保存します。 それでも画像が 400 KB を超える場合は、サイズを変更すると、ファイル サイズをさらに削減できます。 幅 1000 ピクセル、高さ 750 ピクセル (幅:高さの比が 4:3) をお勧めします。",
+      "thumbnailLink": "サムネイル リンク",
+      "thumbnailHelp": "推奨されるサムネイルのサイズと形状は 280 x 210 ピクセル (幅:高さの比が 4:3) です。 サムネイルのサイズを大きくすると、パフォーマンスが低下する可能性があります。 縦横比 4:3 のサムネイル画像であれば、トリミングされずにタイルに表示されます。"
     },
     "settings": {
       "numberedPlaces": "数字の付いた場所を表示",
@@ -55,7 +73,13 @@ define({
       "custom": "カスタム",
       "customTooltip": "マップ ズーム コントロールに表示されるボタンを使用して場所を設定します。",
       "mapLocationTooltip": "ショートリストを開いたときに表示される場所",
-      "bookmarksHelp": "ショートリストでブックマークを有効にするには、Web マップ ビューアーで Web マップのブックマークを追加および管理します。"
+      "bookmarksHelp": "ショートリストでブックマークを有効にするには、Web マップ ビューアーで Web マップのブックマークを追加および管理します。",
+      "generalOptions": "一般オプション",
+      "mapOptions": "マップ オプション",
+      "changeBasemap": "ベースマップの変更",
+      "saveHomeLocation": "ホーム位置の保存",
+      "choose": "選択",
+      "headerColor": "ヘッダーの色"
     },
     "help": {
       "title": "ヘルプ",
@@ -81,7 +105,10 @@ define({
         "asIsOption": "はい。そのまま使用します。",
         "asIsText": "ショートリスト ビルダーではなく、Web マップで場所を引き続き編集および管理します。そのデータに加えた更新は、ショートリストに自動的に反映されます。このオプションでは、データがこのテンプレートを使用している必要があります。",
         "badData": "場所を含むポイント レイヤーが、必要なデータ テンプレートを使用していません。テンプレートの要件を確認してください。",
-        "downloadTemplate": "テンプレートのダウンロード"
+        "downloadTemplate": "テンプレートのダウンロード",
+        "selectPtData": "ポイント データの選択",
+        "multipleThemes": "レイヤーに複数のテーマが含まれていますか？",
+        "chooseFields": "ショートリストで使用する必要があるフィールドの選択"
       },
       "fieldPicker": {
         "nameField": "各場所の名前を含むフィールド: ",

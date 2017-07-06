@@ -392,13 +392,13 @@ define(["lib-build/tpl!./NavBar",
 				container.find('.builder-edit')
 					.off('click')
 					.click(onClickEdit)
-					.find(".builder-lbl").html('Edit Tab');
+					.find(".builder-lbl").html(i18n.builder.addEditPopup.editTab);
 					//.find(".builder-lbl").html(i18n.builder.addEditPopup.edit);
 
 				container.find('.builder-add')
 					.off('click')
 					.click(_this.onClickAdd)
-					.find(".builder-lbl").html('Add tab');
+					.find(".builder-lbl").html(i18n.builder.addEditPopup.addTab);
 					//.find(".builder-lbl").html(i18n.builder.addEditPopup.add);
 			}
 
@@ -459,7 +459,7 @@ define(["lib-build/tpl!./NavBar",
 
 				app.ui.tilePanel.clearTilePanel();
 				var colors = {
-					header: '#444',
+					header: app.data.getWebAppData().getThemeOptions().headerColor,
 					tabText: '#d8d8d8',
 					tab: '#666',
 					tabTextActive: '#fff',

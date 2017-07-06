@@ -105,6 +105,14 @@ define(["lib-build/css!./MainView",
 					_core.initError("noBuilderIE");
 					return false;
 				}
+
+				var isEdge = navigator.appVersion.indexOf('Edge') > 0 ? true : false;
+				// Or with Edge
+				if( app.isInBuilder && isEdge) {
+					_core.initError("noBuilderEdge");
+					return false;
+				}
+
 				// Do not allow viewer under IE 9
 				else if ( has("ie") && has("ie") <= 8 ) {
 					i18n.viewer.errors.noViewerIE = i18n.viewer.errors.noViewerIE.replace('%VERSION%', 9).replace('%UPGRADE%', i18n.viewer.errors.upgradeBrowser);
@@ -310,6 +318,7 @@ define(["lib-build/css!./MainView",
 						layers.push(possibleLayer);
 				});
 				layers.reverse();
+				app.data.getWebAppData().setShortlistLayerId(layers[0].id);
 				var featServUrl = [];
 				var featServLayerIndex = [];
 
@@ -329,21 +338,8 @@ define(["lib-build/css!./MainView",
 						featServLayerIndex.push(index);
 					}
 
-
 					if(layer.graphics.length < 1){
-						layer.on('update-end', function(){
-							if(layerFound){
-								/*if(_builtThemes){
-									$.each(_builtThemes, function(index, theme){
-										_this.buildLayer(
-											theme.features,
-											theme.color
-										);
-									});
-								}*/
-								buildThemes(layer, featServLayerIndex);
-								return;
-							}
+						on.once(layer, 'update-end', function(){
 							var fields = layer.fields;
 							var tabField;
 							$.each(fields, function(index, field){
@@ -351,7 +347,7 @@ define(["lib-build/css!./MainView",
 									tabField = true;
 							});
 							if(tabField){
-								buildThemes(layer, featServLayerIndex);
+								buildThemes(layer);
 								layerFound = true;
 							}
 							if(!tabField && index == layers.length - 1){
@@ -361,6 +357,21 @@ define(["lib-build/css!./MainView",
 								$("#fatalError").show();
 								return;
 							}
+							var layerGraphics = layer.graphics;
+							var layerFields = layer.fields;
+							app.map.removeLayer(layer);
+							var newLayer = new esri.layers.GraphicsLayer({id: app.data.getWebAppData().getShortlistLayerId()+"_copy"});
+
+							newLayer.graphics = layerGraphics;
+							newLayer.fields = layerFields;
+							app.map.addLayer(newLayer);
+							app.data.getWebAppData().setShortlistLayerId(newLayer.id);
+							buildThemes(newLayer, 0);
+							return;
+						});
+						layer.on('update-end', function(){
+							/*var themeIndex = $('.entry.active').index();
+							_this.activateLayer(themeIndex);*/
 						});
 						app.map.on('zoom-start', function(){
 							layer.hide();
@@ -397,7 +408,16 @@ define(["lib-build/css!./MainView",
 								tabField = true;
 						});
 						if(tabField){
-							buildThemes(layer, featServLayerIndex);
+							var layerGraphics = layer.graphics;
+							var layerFields = layer.fields;
+							app.map.removeLayer(layer);
+							var newLayer = new esri.layers.GraphicsLayer({id: app.data.getWebAppData().getShortlistLayerId()+"_copy"});
+
+							newLayer.graphics = layerGraphics;
+							newLayer.fields = layerFields;
+							app.map.addLayer(newLayer);
+							app.data.getWebAppData().setShortlistLayerId(newLayer.id);
+							buildThemes(newLayer);
 							layerFound = true;
 						}
 						if(!tabField && index == layers.length - 1){
@@ -413,7 +433,7 @@ define(["lib-build/css!./MainView",
 				$('home-location-save-btn').remove();
 			};
 
-			function buildThemes(layer, featServLayerIndex)
+			function buildThemes(layer)
 			{
 				var themes = [];
 				var newThemes = [];
@@ -434,12 +454,17 @@ define(["lib-build/css!./MainView",
 				// If layer does not contain a name or pic field, we return error.
 				// Since this is an existing web map, we assume location is present.
 				if(!name || !pic){
-					var message = i18n.builder.migration.migrationPattern.badData;
-					message += '  (<a href="http://links.esri.com/storymaps/shortlist_layer_template" target="_blank" download="">'+i18n.builder.migration.migrationPattern.downloadTemplate+'</a>)';
-					$("#fatalError .error-msg").html(message);
-					$("#fatalError").show();
-					return;
+					if(app.isInBuilder)
+					{
+						var message = i18n.builder.migration.migrationPattern.badData;
+						message += '  (<a href="http://links.esri.com/storymaps/shortlist_layer_template" target="_blank" download="">'+i18n.builder.migration.migrationPattern.downloadTemplate+'</a>)';
+						$("#fatalError .error-msg").html(message);
+						$("#fatalError").show();
+					}
+
+					return false;
 				}
+
 				app.data.setShortlistLayerId(layer.id);
 				app.data.getWebAppData().setShortlistLayerId(layer.id);
 				layer.setScaleRange(0,0);
@@ -541,7 +566,7 @@ define(["lib-build/css!./MainView",
 					layer.graphics.sort(SortByNumber);
 				}
 				var colors = {
-					header: '#444',
+					header: app.data.getWebAppData().getThemeOptions().headerColor,
 					tabText: '#d8d8d8',
 					tab: '#666',
 					tabTextActive: '#fff',
@@ -559,9 +584,6 @@ define(["lib-build/css!./MainView",
 						theme.features/*.sort(SortByNumber)*/,
 						theme.color
 					);
-				});
-
-				$.each(themes, function(index, theme){
 					app.ui.mobileIntro.fillList(index, theme, themes);
 					var oneTheme = false;
 					if(themes.length == 1){
@@ -569,7 +591,7 @@ define(["lib-build/css!./MainView",
 						$('#navThemeLeft').addClass('hideButtons');
 						$('#navThemeRight').addClass('hideButtons');
 					}
-					app.ui.mobileFeatureList.addTheme(theme, oneTheme);
+					app.ui.mobileFeatureList.addTheme(theme, oneTheme, index);
 				});
 
 				_this.activateLayer(0, themes);
@@ -593,6 +615,9 @@ define(["lib-build/css!./MainView",
 				/*app.ui.testPanel.update({
 					data: WebApplicationData.getStoryTestPanel()
 				});*/
+
+				if($.isEmptyObject(app.data.getWebAppData().getThemeOptions()))
+					app.data.getWebAppData().setDefaultThemeOptions();
 
 				if(app.data.getWebAppData().getIsExternalData()){
 					app.data.getWebAppData().setMapExtent(app.maps[app.data.getWebAppData().getWebmap()].response.map.extent);
@@ -717,6 +742,10 @@ define(["lib-build/css!./MainView",
 
 				app.ui.mobileIntro.setTitle();
 
+				var headerColor = app.data.getWebAppData().getThemeOptions().headerColor;
+				$('#header').css('background-color', headerColor);
+				$('#mobileIntro').css('background-color', headerColor);
+
 				if(WebApplicationData.getTabs()){
 					$.each(WebApplicationData.getTabs(), function(i, tab){
 						app.data.setStory(i, tab.title, tab.color, tab.extent);
@@ -804,9 +833,9 @@ define(["lib-build/css!./MainView",
 					}
 				});
 
+				shortlistLayer.on("click", _this.layer_onClick);
 				shortlistLayer.on("mouse-over", _this.layer_onMouseOver);
 				shortlistLayer.on("mouse-out", _this.layer_onMouseOut);
-				shortlistLayer.on("click", _this.layer_onClick);
 
 				var supportingLayers = [];
 				$.each(app.map.graphicsLayerIds, function(index, id){
@@ -822,7 +851,7 @@ define(["lib-build/css!./MainView",
 					$.each(themes, function(index, theme){
 						app.ui.tilePanel.createTab(index, theme);
 						app.ui.mobileIntro.fillList(index, theme, themes);
-						app.ui.mobileFeatureList.addTheme(theme);
+						app.ui.mobileFeatureList.addTheme(theme, null, index);
 
 						var colorIndex = index;
 						if(colorIndex > 7)
@@ -854,7 +883,7 @@ define(["lib-build/css!./MainView",
 					});
 					if(!app.isDirectCreationFirstSave && !app.data.getWebAppData().getIsExternalData()){
 						var colors = {
-							header: '#444',
+							header: app.data.getWebAppData().getThemeOptions().headerColor,
 							tabText: '#d8d8d8',
 							tab: '#666',
 							tabTextActive: '#fff',
@@ -882,7 +911,7 @@ define(["lib-build/css!./MainView",
 						app.ui.tilePanel.createTab(index, theme);
 						//app.ui.mobileTileList.createSlide(value.title);
 						//app.ui.mobileIntro.fillList(index, value);
-						app.ui.mobileFeatureList.addTheme(theme, true);
+						app.ui.mobileFeatureList.addTheme(theme, true, index);
 
 						var colorOrder = app.cfg.COLOR_ORDER.split(",");
 						var colorScheme = $.grep(app.cfg.COLOR_SCHEMES, function(n){
@@ -909,7 +938,7 @@ define(["lib-build/css!./MainView",
 					$(".tab").css("display", "none");
 					$('#mobileIntro').append("<br><hr></hr>");
 					$('#mobileIntro').append('<ul id="mobileThemeList" class="mobileTileList">');
-					var introList = $('<li class="mobileTitleTheme" onclick="app.ui.mobileIntro.selectMobileTheme(' + 0 + ')">').append('<div class="startButton"> Start </div>');
+					var introList = $('<li class="mobileTitleTheme" onclick="app.ui.mobileIntro.selectMobileTheme(' + 0 + ')">').append('<div class="startButton"> ' + i18n.viewer.general.start + '</div>');
 					$('#mobileThemeList').append(introList);
 					$('#navThemeLeft').addClass('hideButtons');
 					$('#navThemeRight').addClass('hideButtons');
@@ -1000,10 +1029,13 @@ define(["lib-build/css!./MainView",
 					app.detailPanelBuilder.checkTempLayer();
 
 				$.each(shortlistLayer.graphics,function(i,graphic){
-					if(graphic.attributes.tab_id != index){
+					var atts = graphic.attributes;
+					var tabName = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'tab_name';})[0]];
+					if(!app.data.getWebAppData().getIsExternalData() && atts.tab_id != index){
+						graphic.hide();
+					}else if(app.data.getWebAppData().getIsExternalData() && tabName != app.data.getStory()[index].title){
 						graphic.hide();
 					}else{
-						var atts = graphic.attributes;
 						if(app.data.getWebAppData().getIsExternalData()){
 							if(app.isInBuilder){
 								graphic.show();
@@ -1290,6 +1322,7 @@ define(["lib-build/css!./MainView",
 
 			this.moveGraphicToFront = function(graphic)
 			{
+				//IE Edge issue with icons not being selectible
 				if(!graphic)
 					return;
 				var dojoShape = graphic.getDojoShape();
@@ -1315,7 +1348,7 @@ define(["lib-build/css!./MainView",
 					// Due to browser iconsistency, we need to find the value the browser interprets
 					// for a pixel we know contains the color we will look to replace.
 					var iconColor = getPixel(imageData, 4804);
-					if(iconColor[0] !=hexToRgb(newIconColor).r && iconColor[1] != hexToRgb(newIconColor).g && iconColor[1] != hexToRgb(newIconColor).b)
+					if(!(iconColor[0] == hexToRgb(newIconColor).r && iconColor[1] == hexToRgb(newIconColor).g && iconColor[2] == hexToRgb(newIconColor).b))
 					{
 						for (var i=0;i<imageData.data.length;i+=4)
 						{
@@ -1479,8 +1512,9 @@ define(["lib-build/css!./MainView",
 						graphic.symbol.setOffset(_this.lutIconSpecs.medium.getOffsetX(), _this.lutIconSpecs.medium.getOffsetY());
 						graphic.draw();
 
-						if (!_helper.isIE())
+						if (!_helper.isIE()){
 							_this.moveGraphicToFront(graphic);
+						}
 					}
 					var atts = graphic.attributes;
 					var name = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'name';})[0]];
@@ -1604,6 +1638,7 @@ define(["lib-build/css!./MainView",
 						//app.map._params.extent = new Extent(JSON.parse(JSON.stringify(app.map.extent.toJson())));
 						//app.data.getWebAppData().setMapExtent(app.map.extent);
 						app.ui.headerDesktop.setTitleAndSubtitle(app.data.getWebAppData().getTitle(), app.data.getWebAppData().getSubtitle());
+						app.data.getWebAppData().setDefaultThemeOptions();
 						if(app.data.getResponse().itemInfo.itemData.bookmarks && app.data.getResponse().itemInfo.itemData.bookmarks.length){
 							var settings = {
 								extentMode: "default",
@@ -1661,6 +1696,11 @@ define(["lib-build/css!./MainView",
 					//app.map._params.extent = new Extent(JSON.parse(JSON.stringify(app.map.extent.toJson())));
 					//app.data.getWebAppData().setMapExtent(app.map.extent);
 					app.ui.headerDesktop.setTitleAndSubtitle(app.data.getWebAppData().getTitle(), app.data.getWebAppData().getSubtitle());
+					if(parseInt(app.data.getWebMap().itemData.version) < 2.9){
+						app.data.getWebMap().itemData.version = "2.9";
+					}
+					app.data.getWebMap().itemData.authoringApp = "StoryMapShortlist";
+					app.data.getWebMap().itemData.authoringAppVersion = app.version;
 					if(app.data.getResponse().itemInfo.itemData.bookmarks && app.data.getResponse().itemInfo.itemData.bookmarks.length){
 						var settings = {
 							extentMode: "default",
@@ -1699,6 +1739,7 @@ define(["lib-build/css!./MainView",
 				}
 				// No data and in builder mode -> open migration
 				else if ( app.isInBuilder && app.data.getWebAppData().getWebmap() ) {
+
 					app.isGalleryCreation = true;
 					var mapPromise = _this.loadWebmap(app.data.getWebAppData().getWebmap(), 'map');
 					mapPromise.then(function(response){
@@ -1742,7 +1783,8 @@ define(["lib-build/css!./MainView",
 				// gallery creation
 				if ( builderView && !app.data.getWebAppData().getWebmap() ){
 					// call function to create a blank web map to add feature class to
-
+					if($.isEmptyObject(app.data.getWebAppData().getThemeOptions()))
+						app.data.getWebAppData().setDefaultThemeOptions();
 					var mapPromise = _this.loadWebmap(builderView.buildWebMap(), 'map');
 					mapPromise.then(function(response){
 						app.data.setResponse(response);
@@ -1841,7 +1883,7 @@ define(["lib-build/css!./MainView",
 
 					if(app.data.getStory()[themeIndex] && app.data.getStory()[themeIndex].color){
 						$('#contentPanel').css({'border-top-width': '10px',
-					 							'border-top-style': 'solid',
+												'border-top-style': 'solid',
 												'border-top-color': app.data.getStory()[themeIndex].color});
 						$('.detailHeader').css('border-top', '0px');
 						$('.notNumbered').css('margin-top', '20px');
@@ -1922,7 +1964,7 @@ define(["lib-build/css!./MainView",
 
 					if(app.data.getStory()[themeIndex] && app.data.getStory()[themeIndex].color){
 						$('.detailHeader').css({'border-top-width': '10px',
-					 							'border-top-style': 'solid',
+												'border-top-style': 'solid',
 												'border-top-color': app.data.getStory()[themeIndex].color});
 						$('#contentPanel').css('border-top', '0px');
 						$('.notNumbered').css('margin-top', '10px');

@@ -26,7 +26,6 @@ define([
 
 			function onClickApply()
 			{
-				console.log("$$$");
 				_data.present();
 			}
 

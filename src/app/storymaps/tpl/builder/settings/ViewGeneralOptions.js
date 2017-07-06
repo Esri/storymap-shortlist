@@ -50,7 +50,7 @@ define(["lib-build/tpl!./ViewGeneralOptions",
 			this.initLocalization = function()
 			{
 				//_titleContainer.html(i18n.builder.settingsMapOptions.title);
-				_titleContainer.html('General options');
+				_titleContainer.html(i18n.builder.settings.generalOptions);
 			};
 		};
 	}

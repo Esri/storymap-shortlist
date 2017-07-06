@@ -11,9 +11,10 @@ define([],
 			{
 				return {
 					id: "shortlist-layer" + new Date().getTime(),
-					title: "Shortlist layer (DO NOT REMOVE)",
+					title: "Shortlist layer (DO NOT REMOVE OR EDIT)",
 					visibility: true,
 					opacity: 1,
+					layerType: "ArcGISFeatureLayer",
 					featureCollection: {
 						layers: [
 							featureCollection
@@ -135,7 +136,8 @@ define([],
 							"nullable": true,
 							"length": 254
 						}, {
-							"name": "set",
+							//TODO change to locationSet
+							"name": "locationSet",
 							"type": "esriFieldTypeInteger",
 							"alias": "Location Set",
 							"domain": null,
@@ -292,6 +294,14 @@ define([],
 			},
 			getBlankWebmapJSON: function()
 			{
+				var spatialReference = {
+					"latestWkid": 3857,
+					"wkid": 102100
+				};
+
+				if (app.map && app.map.spatialReference) {
+					spatialReference = app.map.spatialReference
+				}
 				return {
 					item: {
 						"id": "",
@@ -337,18 +347,21 @@ define([],
 									"id": "defaultBasemap",
 									"opacity": 1,
 									"visibility": true,
-									"url": "http://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Light_Gray_Base/MapServer"
+									"url": "http://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Light_Gray_Base/MapServer",
+									"layerType": "ArcGISTiledMapServiceLayer"
 								},
 								{
 									"id": "referenceOverlay",
 									"opacity": 1,
 									"visibility": true,
-									"url": "http://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Light_Gray_Reference/MapServer"
+									"url": "http://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Light_Gray_Reference/MapServer",
+									"layerType": "Feature Layer"
 								}
 							],
 							"title": "Light Gray"
 						},
-						"version": "1.9"
+						"spatialReference": spatialReference,
+						"version": "2.9"
 					}
 				};
 			}

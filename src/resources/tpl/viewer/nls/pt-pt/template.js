@@ -35,11 +35,14 @@ define({
       "upgradeBrowser": "<a href='http://browsehappy.com/' target='_blank'>Por favor, atualize o seu navegador</a>.",
       "mapLoadingFail": "Algo correu mal, o mapa não foi carregado correctamente.",
       "signOut": "Terminar Sessão",
-      "attention": "Atenção!"
+      "attention": "Atenção!",
+      "noBuilderEdge": "Story Map Shortlists podem ser visualizadas em qualquer navegador web. No entanto, o Builder de Story Maps Shortlist não é suportado em Windows Edge. Por favor, recorra a outro navegador web para criar ou editar uma Shortlist."
     },
     "headerFromCommon": {
       "storymapsText": "Um story map",
       "builderButton": "Editar",
+      "facebookTooltip": "Partilhar no Facebook",
+      "twitterTooltip": "Partilhar no Twitter",
       "bitlyTooltip": "Obtenha uma ligação curta para a aplicação",
       "templateTitle": "Definir o título do modelo",
       "templateSubtitle": "Definir o subtítulo do modelo",
@@ -52,6 +55,10 @@ define({
       "embed": "Incorporar em página web",
       "embedExplain": "Utilize o seguinte código HTML para incorporar a aplicação numa página web.",
       "size": "Tamanho (largura/altura):"
+    },
+    "general": {
+      "noPlaces": "Não se encontram quaisquer locais nesta área.  Reduza o zoom ou clique no botão Início para visualizar locais.",
+      "start": "Iniciar"
     }
   }
 });

@@ -46,6 +46,10 @@
 	color: #FFF;
 }
 
+#builderPanel .status-msg {
+	overflow: hidden;
+}
+
 /*
 * Title warning
 */

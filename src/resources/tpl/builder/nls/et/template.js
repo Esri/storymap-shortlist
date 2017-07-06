@@ -7,7 +7,13 @@ define({
     "addEditPopup": {
       "test": "Testi",
       "add": "Lisa",
-      "edit": "Redigeeri"
+      "edit": "Redigeeri",
+      "editTab": "MUUDA SAKKI",
+      "addTab": "LISA SAKK",
+      "organizeTabs": "KORRALDA SAKKE",
+      "themeColor": "Temaatiline värv",
+      "location": "Asukoht",
+      "confirmDeletion": "Kinnita kustutamine "
     },
     "landing": {
       "lblAdd": "Millise nime soovite lühinimekirjale anda?",
@@ -17,7 +23,9 @@ define({
     },
     "organizePopup": {
       "title": "Paiguta",
-      "tab": "Vahekaart"
+      "tab": "Vahekaart",
+      "dragNDrop": "Loo korraldamiseks lohistage sakid soovitud kohta",
+      "lblColTitle": "Pealkiri"
     },
     "settingsLayoutOptions": {
       "title": "Paigutuse valikud",
@@ -36,9 +44,19 @@ define({
       "setLocation": "Määra asukoht",
       "cancel": "Loobu",
       "addImage": "Pildi lisamiseks klõpsake või lohistage",
+      "chooseImage": "VALI PILT",
+      "importImages": "IMPORDI PILTE",
+      "import": "IMPORDI",
       "enterPlaceName": "Sisesta koha nimi",
       "enterPlaceDescription": "Sisesta koha kirjeldus",
-      "unnamedPlace": "Nimetu koht"
+      "unnamedPlace": "Nimetu koht",
+      "update": "Uuenda",
+      "useLocation": "Kasuta seda asukohta",
+      "selectAll": "Vali kõik",
+      "imageSizeHelper": "Parimate tulemuste saamiseks peaks piltide maht olema alla 400 KB. Soovitatavad mõõtmed ja paigutus on maksimaalselt 1000 x 750 pikslit (laiuse-kõrguse suhtega 4:3). Suuremad pildid võivad jõudlust aeglustada. Parima jõudluse tagamiseks kasutage tihendatud JPG-pilte 80% kvaliteediga.",
+      "imageSizeHelperUpdated": "Parimate tulemuste saamiseks peaks piltide maht olema alla 400 KB. Faili suuruse vähendamiseks kasutage 80% pildikvaliteediga salvestatud JPG-vormingut. Kui pildi maht on ikka üle 400 KB, võite mahu vähendamiseks muuta pildi suurust, soovitatav suurus on 1000 pikslit lai x 750 pikslit kõrge (4:3 laiuse/kõrguse suhe).",
+      "thumbnailLink": "Pisipildi link",
+      "thumbnailHelp": "Pisipildi soovitatavad mõõtmed ja paigutus on 280 x 210 pikslit (laiuse-kõrguse suhtega 4:3). Suuremad pisipildid võivad jõudlust aeglustada. Pisipildid kuvasuhtega 4:3 mahuvad pildiüksusesse ilma kärpimata."
     },
     "settings": {
       "numberedPlaces": "Kuva kohad koos numbritega",
@@ -55,7 +73,13 @@ define({
       "custom": "Kohandatud",
       "customTooltip": "Seadke asukoht, kasutades kaardisuumi juhtseadiste hulgas kuvatavat nuppu",
       "mapLocationTooltip": "Asukoht, mis kuvatakse lühinimekirja avamisel",
-      "bookmarksHelp": "Lühinimekirjas järjehoidjate lubamiseks tuleb järjehoidjad lisada veebikaardi vaaturis ja neid seal hallata"
+      "bookmarksHelp": "Lühinimekirjas järjehoidjate lubamiseks tuleb järjehoidjad lisada veebikaardi vaaturis ja neid seal hallata",
+      "generalOptions": "Üldised valikud",
+      "mapOptions": "Kaardivalikud",
+      "changeBasemap": "Muuda aluskaarti",
+      "saveHomeLocation": "Salvesta kodu asukoht",
+      "choose": "Valige",
+      "headerColor": "Päise värv"
     },
     "help": {
       "title": "ABI",
@@ -81,7 +105,10 @@ define({
         "asIsOption": "Jah, kasuta neid senisel kujul",
         "asIsText": "Oma asukohti saate endiselt redigeerida ja hallata oma veebikaardil ja mitte lühinimekirjade koosturis.  Nendesse andmetesse sisseviidud uuendused kajastuvad lühinimekirjas automaatselt.  See suvand nõuab, et andmed kasutavad seda malli.",
         "badData": "Teie asukohti sisaldav punktikiht ei kasuta nõutavat andmemalli. Palun vaadake mallile esitatud nõudeid.",
-        "downloadTemplate": "Laadi mall alla"
+        "downloadTemplate": "Laadi mall alla",
+        "selectPtData": "VALIGE OMA PUNKTANDMED",
+        "multipleThemes": "KAS KIHIL ON MITU TEEMAT",
+        "chooseFields": "VALIGE VÄLJAD, MIDA TULEKS LÜHILOENDIS KASUTADA"
       },
       "fieldPicker": {
         "nameField": "Iga asukoha nime sisaldav väli: ",

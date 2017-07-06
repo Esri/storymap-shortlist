@@ -7,7 +7,13 @@ define({
     "addEditPopup": {
       "test": "test",
       "add": "dodaj",
-      "edit": "izmeni"
+      "edit": "izmeni",
+      "editTab": "UREDI KARTICU",
+      "addTab": "DODAJ KARTICU",
+      "organizeTabs": "ORGANIZUJ KARTICE",
+      "themeColor": "Boja teme",
+      "location": "Lokacija",
+      "confirmDeletion": "Potvrdi brisanje "
     },
     "landing": {
       "lblAdd": "Kako želite da nazovete Shortlist?",
@@ -17,7 +23,9 @@ define({
     },
     "organizePopup": {
       "title": "Organizujte",
-      "tab": "kartica"
+      "tab": "kartica",
+      "dragNDrop": "Prevucite i otpustite kartice da organizujete priču",
+      "lblColTitle": "Naslov"
     },
     "settingsLayoutOptions": {
       "title": "Opcije rasporeda",
@@ -35,10 +43,20 @@ define({
       "changeLocation": "Promeni lokaciju",
       "setLocation": "Podesi lokaciju",
       "cancel": "Otkaži",
-      "addImage": "kliknite, ili prevucite i otpustite da biste dodali snimak",
+      "addImage": "Kliknite, ili prevucite i otpustite kako biste dodali sliku",
+      "chooseImage": "ODABERI SNIMAK",
+      "importImages": "UVEZI SNIMKE",
+      "import": "UVEZI",
       "enterPlaceName": "Unesite ime mesta",
       "enterPlaceDescription": "Unesite opis mesta",
-      "unnamedPlace": "Mesto bez naziva"
+      "unnamedPlace": "Mesto bez naziva",
+      "update": "Ažuriraj",
+      "useLocation": "Koristi ovu lokaciju",
+      "selectAll": "Izaberi sve",
+      "imageSizeHelper": "Za najbolje rezultate, snimci bi trebalo da budu manji od 400 KB. Preporučena veličina i oblik je 1000 x 750 piksela (4:3 odnos širina:visina) ili manja. Veći snimci mogu da uspore performanse. Za najbolje performanse koristite komprimovane JPG snimke pri kvalitetu snimka od 80%.",
+      "imageSizeHelperUpdated": "Za najbolje performanse, slike treba da budu manje od 400 KB. kako biste smanjili veličinu datoteka, koristite JPG format sačuvan na 80% kvaliteta slike. Ako slika i dalje premašuje 400 KB, dalje menjanje veličine može dodatno da umanji veličinu datoteke: 1000 piksela širine x 750 piksela visine (4:3 odnos širine:visine) se preporučuje.",
+      "thumbnailLink": "Veza sličice",
+      "thumbnailHelp": "Preporučena veličina i oblik sličice je 280 x 210 piksela (4:3 odnos širina:visina). Veće sličice mogu da uspore performanse. Sličice odnosa dimenzija 4:3 se uklapaju u svoje tajlove bez izrezivanja."
     },
     "settings": {
       "numberedPlaces": "Prikaži mesta sa brojevima",
@@ -55,7 +73,13 @@ define({
       "custom": "Prilagođeno",
       "customTooltip": "Postavite lokaciju korišćenjem dugmeta koje se pojavljuje u kontroli zuma mape",
       "mapLocationTooltip": "Lokacija koju ljudi vide kada otvaraju Shortlist",
-      "bookmarksHelp": "Dodajte i upravljajte obeleživačima veb mape u pregledniku veb mape da biste omogućili obeleživače u Shortlist."
+      "bookmarksHelp": "Dodajte i upravljajte obeleživačima veb mape u pregledniku veb mape da biste omogućili obeleživače u Shortlist.",
+      "generalOptions": "Opšte opcije",
+      "mapOptions": "Opcije mape",
+      "changeBasemap": "Promenite pozadinsku mapu",
+      "saveHomeLocation": "Sačuvaj matičnu lokaciju",
+      "choose": "Odaberi",
+      "headerColor": "Boja zaglavlja"
     },
     "help": {
       "title": "POMOĆ",
@@ -81,7 +105,10 @@ define({
         "asIsOption": "Da, koristi ih kakve jesu",
         "asIsText": "Nastavićete da uređujete i upravljate mestima u veb mapi, ne u Shortlist Builder alatki. Ažuriranja koja napravite na podacima će automatski da budu primenjena u Shortlist aplikaciji. Ova opcija zahteva da vaši podaci koriste ovaj šablon.",
         "badData": "Tačkasti sloj koji sadrži vaša mesta ne koristi zahtevani obrazac podataka. Pregledajte ponovo zahteve obrasca.",
-        "downloadTemplate": "Preuzmi šablon"
+        "downloadTemplate": "Preuzmi šablon",
+        "selectPtData": "IZABERITE PODATKE IZ TAČAKA",
+        "multipleThemes": "DA LI VAŠ SLOJ SADRŽI VIŠE TEMA",
+        "chooseFields": "ODABERITE POLJA KOJA BI SHORTLIST TREBALO DA KORISTI"
       },
       "fieldPicker": {
         "nameField": "Polje koje sadrži ime svakog mesta: ",

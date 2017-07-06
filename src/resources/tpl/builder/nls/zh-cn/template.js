@@ -7,7 +7,13 @@ define({
     "addEditPopup": {
       "test": "测试",
       "add": "添加",
-      "edit": "编辑"
+      "edit": "编辑",
+      "editTab": "编辑选项卡",
+      "addTab": "添加选项卡",
+      "organizeTabs": "组织选项卡",
+      "themeColor": "主题颜色",
+      "location": "位置",
+      "confirmDeletion": "确认删除 "
     },
     "landing": {
       "lblAdd": "为何调用 Shortlist?",
@@ -17,7 +23,9 @@ define({
     },
     "organizePopup": {
       "title": "组织",
-      "tab": "选项卡"
+      "tab": "选项卡",
+      "dragNDrop": "拖放各选项卡以对故事进行组织",
+      "lblColTitle": "标题"
     },
     "settingsLayoutOptions": {
       "title": "布局选项",
@@ -35,10 +43,20 @@ define({
       "changeLocation": "更改位置",
       "setLocation": "设置位置",
       "cancel": "取消",
-      "addImage": "单击或拖放可添加图像",
+      "addImage": "单击或拖放以添加图像",
+      "chooseImage": "选择图像",
+      "importImages": "导入图像",
+      "import": "导入",
       "enterPlaceName": "输入地点名称",
       "enterPlaceDescription": "输入地点说明",
-      "unnamedPlace": "未命名地点"
+      "unnamedPlace": "未命名地点",
+      "update": "更新",
+      "useLocation": "使用此位置",
+      "selectAll": "全选",
+      "imageSizeHelper": "为了获得最佳效果，图像应小于 400 KB。推荐的大小和形状为 1000 x 750 像素(宽高比为 4:3)或更小。较大的图像可能会降低性能。为了获得最佳性能，请使用图像质量为 80％ 的压缩 JPG 图像。",
+      "imageSizeHelperUpdated": "为获得最佳性能，图像应小于 400 KB。要减小图像大小，请将图像保存为图像质量为 80% 的 JPG 格式图像。如果图像仍超过 400 KB，则调整图像尺寸可进一步减小其文件大小：建议 1000 像素宽 x 750 像素高(宽高比为 4:3)。",
+      "thumbnailLink": "缩略图链接",
+      "thumbnailHelp": "缩略图的推荐大小和形状为 280 x 210 像素(宽高比为 4:3)。较大的缩略图可能会降低性能。宽高比为 4:3 的缩略图无需裁剪即适用于切片。"
     },
     "settings": {
       "numberedPlaces": "显示带数字的地点",
@@ -55,7 +73,13 @@ define({
       "custom": "自定义",
       "customTooltip": "使用将显示在地图缩放控件中的按钮设置位置",
       "mapLocationTooltip": "打开 Shortlist 时用户所见位置",
-      "bookmarksHelp": "要在 Shortlist 中启用书签，请在 Web 地图查看器中添加和管理 Web 地图的书签"
+      "bookmarksHelp": "要在 Shortlist 中启用书签，请在 Web 地图查看器中添加和管理 Web 地图的书签",
+      "generalOptions": "常规选项",
+      "mapOptions": "地图选项",
+      "changeBasemap": "更改底图",
+      "saveHomeLocation": "保存主页位置",
+      "choose": "选择",
+      "headerColor": "页眉颜色"
     },
     "help": {
       "title": "帮助",
@@ -81,7 +105,10 @@ define({
         "asIsOption": "是，原样使用它们",
         "asIsText": "您将继续在 Web 地图中编辑和管理地点，而不是在 Shortlist 构建器中进行操作。您对该数据进行的更新将自动在 Shortlist 中体现。该选项需要数据使用此模板。",
         "badData": "包含地点的点图层未使用所需数据模板。请查看模板要求。",
-        "downloadTemplate": "下载模板"
+        "downloadTemplate": "下载模板",
+        "selectPtData": "选择您的点数据",
+        "multipleThemes": "您的图层包含多个主题吗",
+        "chooseFields": "选择 SHORTLIST 应使用的字段"
       },
       "fieldPicker": {
         "nameField": "包含各个地点名称的字段： ",

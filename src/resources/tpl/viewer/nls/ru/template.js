@@ -35,11 +35,14 @@ define({
       "upgradeBrowser": "<a href='http://browsehappy.com/' target='_blank'>Пожалуйста, обновите ваш браузер</a>.",
       "mapLoadingFail": "Произошла ошибка, карта загрузилась некорректно.",
       "signOut": "Выйти",
-      "attention": "Внимание!"
+      "attention": "Внимание!",
+      "noBuilderEdge": "Story Map Shortlists можно просматривать в любом веб-браузере. Но конструктор Story Map Shortlist не поддерживается в Windows Edge. Используйте другой веб-браузер для создания и редактирования Shortlist."
     },
     "headerFromCommon": {
       "storymapsText": "Карта-история",
       "builderButton": "Редактировать",
+      "facebookTooltip": "Разместить в Facebook",
+      "twitterTooltip": "Разместить в Twitter",
       "bitlyTooltip": "Получить короткую ссылку на приложение",
       "templateTitle": "Настроить заголовок шаблона",
       "templateSubtitle": "Настроить подзаголовок шаблона",
@@ -52,6 +55,10 @@ define({
       "embed": "Встроить в веб-страницу",
       "embedExplain": "Используйте HTML-код, чтобы встроить приложение в веб-страницу.",
       "size": "Размер (ширина/высота):"
+    },
+    "general": {
+      "noPlaces": "Нет местоположений в этой области. Отдалите карту или нажмите кнопку На главную, чтобы увидеть местоположения.",
+      "start": "Начать"
     }
   }
 });

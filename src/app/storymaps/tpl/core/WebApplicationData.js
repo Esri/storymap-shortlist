@@ -331,6 +331,23 @@ define(["dojo/_base/lang"],
 				});
 			},
 
+			getThemeOptions: function()
+			{
+				var themeOptions = lang.clone(this.getSettings().themeOptions) || {};
+				return themeOptions;
+			},
+			setThemeOptions: function(theme)
+			{
+				_data.values.settings = _data.values.settings || {};
+				_data.values.settings.themeOptions = theme;
+			},
+			setDefaultThemeOptions: function()
+			{
+				this.setThemeOptions({
+					headerColor: "#444"
+				});
+			},
+
 
 			getColors: function()
 			{
@@ -349,6 +366,9 @@ define(["dojo/_base/lang"],
 			},
 			setHeader: function(header)
 			{
+				//Fix for org logo overriding other logos #647
+				if(app.isInitializing && app.data.getWebAppData().getShortlistLayerId())
+					return;
 				_data.values.settings = _data.values.settings || {};
 				_data.values.settings.header = header;
 			},

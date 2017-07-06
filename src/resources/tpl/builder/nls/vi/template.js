@@ -7,7 +7,13 @@ define({
     "addEditPopup": {
       "test": "kiểm tra",
       "add": "thêm",
-      "edit": "chỉnh sửa"
+      "edit": "chỉnh sửa",
+      "editTab": "HIỆU CHỈNH TAB",
+      "addTab": "THÊM TAB",
+      "organizeTabs": "TỔ CHỨC TAB",
+      "themeColor": "Màu chủ đề",
+      "location": "Vị trí",
+      "confirmDeletion": "Xác nhận xóa "
     },
     "landing": {
       "lblAdd": "Bạn muốn gọi Shortlist của bạn là gì?",
@@ -17,7 +23,9 @@ define({
     },
     "organizePopup": {
       "title": "Tổ chức",
-      "tab": "tab"
+      "tab": "tab",
+      "dragNDrop": "Kéo và thả các tab để tổ chức câu chuyện của bạn",
+      "lblColTitle": "Tiêu đề"
     },
     "settingsLayoutOptions": {
       "title": "Tùy chọn bố cục",
@@ -35,10 +43,20 @@ define({
       "changeLocation": "Thay đổi vị trí",
       "setLocation": "Thiết lập Vị trí",
       "cancel": "Hủy",
-      "addImage": "nhấp chuột, hoặc kéo và thả, để thêm một hình ảnh",
+      "addImage": "Nhấp chuột, hoặc kéo và thả, để thêm một hình ảnh",
+      "chooseImage": "CHỌN HÌNH ẢNH",
+      "importImages": "NHẬP HÌNH ẢNH",
+      "import": "NHẬP",
       "enterPlaceName": "Nhập tên địa điểm",
       "enterPlaceDescription": "Nhập mô tả địa điểm",
-      "unnamedPlace": "Địa điểm không có tên"
+      "unnamedPlace": "Địa điểm không có tên",
+      "update": "Cập nhật",
+      "useLocation": "Sử dụng vị trí này",
+      "selectAll": "Chọn tất cả",
+      "imageSizeHelper": "Để có kết quả tốt nhất, hình ảnh phải nhỏ hơn 400 KB. Kích thước & hình dạng đề nghị là 1000 x 750 pixel (tỷ lệ chiều rộng:chiều cao 4:3) hoặc nhỏ hơn. Hình ảnh lớn hơn có thể làm giảm hiệu suất hiển thị. Để có hiệu quả tốt nhất, hãy sử dụng hình ảnh JPG nén với chất lượng hình ảnh 80%.",
+      "imageSizeHelperUpdated": "Để có hiệu quả tốt nhất, hình ảnh phải dưới 400 KB. Để giảm kích thước tệp tin, sử dụng định dạng JPG đã lưu với chất lượng hình ảnh 80%. Nếu hình ảnh của bạn vẫn trên 400 KB, xác định lại kích thước có thể giảm kích thước tệp tin hơn nữa: nên là rộng 1000 pixel x cao 750 pixel (tỷ lệ rộng:cao 4:3).",
+      "thumbnailLink": "Đường liên kết ngắn gọn",
+      "thumbnailHelp": "Kích thước & hình dạng của ảnh đại diện đề nghị là 280 x 210 pixel (tỷ lệ chiều rộng:chiều cao 4:3). Các ảnh đại diện lớn hơn có thể làm giảm hiệu suất hiển thị. Tỷ lệ tương quan nhỏ gọn 4:3 phù hợp với tiêu đề mà không cần phải cắt ảnh."
     },
     "settings": {
       "numberedPlaces": "Hiển thị những địa điểm có số",
@@ -55,7 +73,13 @@ define({
       "custom": "Tùy chỉnh",
       "customTooltip": "Thiết lập vị trí bằng cách sử dụng nút sẽ xuất hiện trong các nút điều khiển thu phóng bản đồ",
       "mapLocationTooltip": "Vị trí mọi người nhìn thấy khi họ mở Shortlist của bạn",
-      "bookmarksHelp": "Để bật các đánh dấu trong Shortlist, thêm và quản lý đánh dấu của bản đồ web trong trình xem bản đồ web"
+      "bookmarksHelp": "Để bật các đánh dấu trong Shortlist, thêm và quản lý đánh dấu của bản đồ web trong trình xem bản đồ web",
+      "generalOptions": "Các lựa chọn chung",
+      "mapOptions": "Các tùy chọn bản đồ",
+      "changeBasemap": "Thay đổi Bản đồ nền",
+      "saveHomeLocation": "Lưu vị trí nhà",
+      "choose": "Chọn",
+      "headerColor": "Màu sắc Đầu mục"
     },
     "help": {
       "title": "TRỢ GIÚP",
@@ -81,7 +105,10 @@ define({
         "asIsOption": "Có, sử dụng như nguyên trạng",
         "asIsText": "Bạn sẽ tiếp tục chỉnh sửa và quản lý địa điểm của mình trong bản đồ web của bạn, không phải trong Bộ thiết lập Shortlist. Các thông tin bạn cập nhật cho dữ liệu đó sẽ tự động được phản ánh trong Shortlist của bạn. Tùy chọn này yêu cầu dữ liệu của bạn sử dụng mẫu này.",
         "badData": "Lớp điểm chứa địa điểm của bạn thì không sử dụng mẫu dữ liệu yêu cầu. Vui lòng xem lại các yêu cầu về mẫu.",
-        "downloadTemplate": "Tải xuống mẫu"
+        "downloadTemplate": "Tải xuống mẫu",
+        "selectPtData": "CHỌN DỮ LIỆU ĐIỂM CỦA BẠN",
+        "multipleThemes": "LỚP CỦA BẠN CÓ NHIỀU CHỦ ĐỀ KHÔNG",
+        "chooseFields": "CHỌN CÁC TRƯỜNG MÀ SHORTLIST SẼ SỬ DỤNG"
       },
       "fieldPicker": {
         "nameField": "Trường chứa tên của mỗi địa điểm: ",

@@ -7,7 +7,13 @@ define({
     "addEditPopup": {
       "test": "test",
       "add": "přičíst",
-      "edit": "upravit"
+      "edit": "upravit",
+      "editTab": "UPRAVIT KARTU",
+      "addTab": "PŘIDAT KARTU",
+      "organizeTabs": "USPOŘÁDAT KARTY",
+      "themeColor": "Barva motivu",
+      "location": "Poloha",
+      "confirmDeletion": "Potvrdit odstranění položky "
     },
     "landing": {
       "lblAdd": "Jak chcete svůj krátký seznam nazvat?",
@@ -17,7 +23,9 @@ define({
     },
     "organizePopup": {
       "title": "Organizovat",
-      "tab": "tab"
+      "tab": "tab",
+      "dragNDrop": "Uspořádejte svůj příběh přetažením karet.",
+      "lblColTitle": "Název"
     },
     "settingsLayoutOptions": {
       "title": "Možnosti rozvržení",
@@ -35,10 +43,20 @@ define({
       "changeLocation": "Změnit umístění",
       "setLocation": "Nastavit polohu",
       "cancel": "Storno",
-      "addImage": "přidejte obrázek kliknutím nebo přetažením",
+      "addImage": "Přidejte obrázek kliknutím nebo přetažením",
+      "chooseImage": "VYBRAT OBRÁZEK",
+      "importImages": "IMPORTOVAT OBRÁZKY",
+      "import": "IMPORTOVAT",
       "enterPlaceName": "Zadejte název místa.",
       "enterPlaceDescription": "Zadejte popis místa.",
-      "unnamedPlace": "Nepojmenované místo"
+      "unnamedPlace": "Nepojmenované místo",
+      "update": "Aktualizovat",
+      "useLocation": "Použít tuto polohu",
+      "selectAll": "Vybrat vše",
+      "imageSizeHelper": "Pro dosažení nejlepších výsledků by obrázky měly být menší než 400 kB. Doporučená velikost a tvar je 1000 x 750 pixelů (poměr šířky a výšky 4:3) nebo menší. Větší obrázky mohou snižovat výkon. Pro dosažení nejvyššího výkonu používejte komprimované obrázky ve formátu JPG s obrazovou kvalitou 80 %.",
+      "imageSizeHelperUpdated": "Nejlepších výsledků dosáhnete, pokud obrázky budou mít maximální velikost 400 KB. Chcete-li obrázek zmenšit, použijte formát JPG uložený v 80 % kvalitě obrázku. Pokud je váš obrázek stále větší než 400 KB, změňte jeho velikost: doporučujeme šířku 1000 pixelů x výšku 750 pixelů (poměr 4:3 šířka:výška).",
+      "thumbnailLink": "Odkaz miniatury",
+      "thumbnailHelp": "Doporučená velikost a tvar miniatury je 280 x 210 pixelů (poměr šířky a výšky 4:3). Větší miniatury mohou snižovat výkon. Miniatury s poměrem stran 4:3 lze umístit do dlaždic bez ořezávání."
     },
     "settings": {
       "numberedPlaces": "Zobrazit místa s čísly",
@@ -55,7 +73,13 @@ define({
       "custom": "Vlastní",
       "customTooltip": "Nastavte umístění pomocí tlačítka, které se zobrazí v ovládacích prvcích přiblížení mapy.",
       "mapLocationTooltip": "Umístění, které uživatelé vidí, když otevřou váš krátký seznam.",
-      "bookmarksHelp": "Pro aktivaci záložek v krátkém seznamu přidejte a spravujte záložky webové mapy v prohlížeči webové mapy."
+      "bookmarksHelp": "Pro aktivaci záložek v krátkém seznamu přidejte a spravujte záložky webové mapy v prohlížeči webové mapy.",
+      "generalOptions": "Obecné možnosti",
+      "mapOptions": "Možnosti mapy",
+      "changeBasemap": "Změnit podkladovou mapu",
+      "saveHomeLocation": "Uložit domovskou pozici",
+      "choose": "Zvolit",
+      "headerColor": "Barva záhlaví"
     },
     "help": {
       "title": "NÁPOVĚDA",
@@ -81,7 +105,10 @@ define({
         "asIsOption": "Ano, použít je tak, jak jsou",
         "asIsText": "Svá místa budete nadále upravovat a spravovat ve své webové mapě, ne v nástroji pro tvorbu krátkých seznamů. Provedené aktualizace dat se ve vašem krátkém seznamu promítnou automaticky. Tato možnost vyžaduje, aby vaše data používala tuto šablonu.",
         "badData": "Bodová vrstva obsahující vaše místa nepoužívá požadovanou datovou šablonu. Zkontrolujte požadavky šablony.",
-        "downloadTemplate": "Stáhnout šablonu"
+        "downloadTemplate": "Stáhnout šablonu",
+        "selectPtData": "ZVOLIT DATA BODU",
+        "multipleThemes": "OBSAHUJE VAŠE VRSTVA VÍCE MOTIVŮ?",
+        "chooseFields": "ZVOLIT POLE, KTERÁ MAJÍ BÝT POUŽITA V UŽŠÍM SEZNAMU"
       },
       "fieldPicker": {
         "nameField": "Pole obsahující název každého místa: ",

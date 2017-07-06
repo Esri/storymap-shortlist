@@ -35,11 +35,14 @@ define({
       "upgradeBrowser": "<a href='http://browsehappy.com/' target='_blank'>Actualizaţi browserul</a>.",
       "mapLoadingFail": "Ceva nu a mers bine şi harta nu a fost încărcată corect.",
       "signOut": "Ieşire",
-      "attention": "Atenţie!"
+      "attention": "Atenţie!",
+      "noBuilderEdge": "Story Map Shortlists se pot vizualiza în orice browser web. Totuşi, instrumentul de creare Story Map Shortlist nu este acceptat de Windows Edge. Folosiţi un browser web diferit pentru a crea sau edita o listă scurtă."
     },
     "headerFromCommon": {
       "storymapsText": "O hartă informativă",
       "builderButton": "Editare",
+      "facebookTooltip": "Partajare pe Facebook",
+      "twitterTooltip": "Partajare pe Twitter",
       "bitlyTooltip": "Obţinere link scurt către aplicaţie",
       "templateTitle": "Setare titlu şablon",
       "templateSubtitle": "Setare subtitlu şablon",
@@ -52,6 +55,10 @@ define({
       "embed": "Încorporare în pagină web",
       "embedExplain": "Utilizaţi următorul cod HTML pentru a încorpora aplicaţia într-o pagină web.",
       "size": "Dimensiune (lăţime/înălţime):"
+    },
+    "general": {
+      "noPlaces": "Nu există locuri în această zonă. Micşoraţi sau faceţi clic pe butonul Home pentru a vedea locuri.",
+      "start": "Pornire"
     }
   }
 });

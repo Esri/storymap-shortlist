@@ -501,6 +501,7 @@ define([
 						graphic.hide();
 					}
 				});
+
 				app.layerCurrent.graphics = tabFeatures;
 				// TODO update shortlist ids for all features
 				// Update display number/order for all features as tab contents have changed

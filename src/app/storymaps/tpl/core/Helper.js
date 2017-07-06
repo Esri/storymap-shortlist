@@ -12,7 +12,7 @@ define([],
 		};
 
 		this.isIE = function() {
-			return (navigator.appVersion.indexOf("MSIE") > -1) || (navigator.userAgent.match(/Trident.*rv\:11\./));
+			return (navigator.appVersion.indexOf("MSIE") > -1) || (navigator.userAgent.match(/Trident.*rv\:11\./) || navigator.appVersion.indexOf('Edge'));
 		};
 
 		this.isIE8 = function() {

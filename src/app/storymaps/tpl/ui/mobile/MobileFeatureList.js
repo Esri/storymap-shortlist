@@ -1,10 +1,11 @@
 define([
+		"storymaps/common/utils/CommonHelper",
 		"lib-build/css!./MobileFeatureList",
 		"lib-build/css!lib-app/Swiper/swiper",
 		"lib-app/Swiper/swiper",
 		"lib-app/lazysizes.min"
 	],
-	function(){
+	function(CommonHelper){
 		return function MobileFeatureList(container, isInBuilder, saveData, mainView)
 		{
 			var _mainView = mainView;
@@ -33,8 +34,10 @@ define([
 				initEvents();
 			};
 
-			this.addTheme = function(value, oneTheme)
+			this.addTheme = function(value, oneTheme, index)
 			{
+				if($('.mobileThemeTitle')[index])
+					return;
 				// initMap, after contentLayers are set if more than one tab layer
 				if(oneTheme){
 					$('#mobileThemeBar .swiper-container').css('display', 'none');
@@ -114,6 +117,8 @@ define([
 				}else{
 					mobileImg = $('<div style="height: 75px; margin-bottom: 8px;"><div class="mobileTileListImg" src="'+picUrl+'"></div></div>');
 				}*/
+				if(picUrl && picUrl.indexOf("sharing/rest/content/items/") > -1)
+					picUrl = CommonHelper.possiblyAddToken(picUrl);
 				mobileImg = $('<div style="height: 75px; max-width: 100px; margin-bottom: 8px;"><div class="mobileTileListImg"></div></div>');
 				$(mobileImg).find('.mobileTileListImg').css('background-image', 'url(' + picUrl + ')');
 				$(mobileTile).append(mobileImg);

@@ -35,11 +35,14 @@ define({
       "upgradeBrowser": "<a href='http://browsehappy.com/' target='_blank'>Opdater din browser</a>.",
       "mapLoadingFail": "Noget gik galt, kortet blev ikke indlæst korrekt.",
       "signOut": "Log ud",
-      "attention": "Bemærk!"
+      "attention": "Bemærk!",
+      "noBuilderEdge": "Story Map Shortlist'er kan ses i en hvilken som helst webbrowser. Men Story Map Shortlist Builder-programmet understøttes ikke af Windows Edge. Brug en anden webbrowser til at oprette eller redigere en Shortlist."
     },
     "headerFromCommon": {
       "storymapsText": "Et historiekort",
       "builderButton": "Redigér",
+      "facebookTooltip": "Del på Facebook",
+      "twitterTooltip": "Del på Twitter",
       "bitlyTooltip": "Hent et kortere link til applikationen",
       "templateTitle": "Indstil skabelontitel",
       "templateSubtitle": "Indstil skabelonundertitel",
@@ -52,6 +55,10 @@ define({
       "embed": "Indlejr i webside",
       "embedExplain": "Brug følgende HTML-kode til at indlejre journalen i en webside.",
       "size": "Størrelse (bredde/højde):"
+    },
+    "general": {
+      "noPlaces": "Der er ikke nogen steder i dette område. Zoom ud, eller klik på knappen Hjem for at se steder.",
+      "start": "Start"
     }
   }
 });

@@ -35,11 +35,14 @@ define({
       "upgradeBrowser": "<a href='http://browsehappy.com/' target='_blank'>브라우저를 업데이트하세요</a>.",
       "mapLoadingFail": "오류가 발생했습니다. 맵을 올바르게 불러오지 않았습니다.",
       "signOut": "로그아웃",
-      "attention": "주의!"
+      "attention": "주의!",
+      "noBuilderEdge": "Story Map Shortlist는 모든 웹 브라우저에서 볼 수 있습니다. 그러나 Windows Edge에서는 Story Map Shortlist 빌더가 지원되지 않습니다. Shortlist를 생성하거나 편집하려면 다른 웹 브라우저를 사용하세요."
     },
     "headerFromCommon": {
       "storymapsText": "스토리 맵",
       "builderButton": "편집",
+      "facebookTooltip": "Facebook에 공유",
+      "twitterTooltip": "Twitter에 공유",
       "bitlyTooltip": "응용프로그램에 대한 간단한 링크 가져오기",
       "templateTitle": "템플릿 제목 설정",
       "templateSubtitle": "템플릿 부제목 설정",
@@ -52,6 +55,10 @@ define({
       "embed": "웹 페이지에 임베드",
       "embedExplain": "응용프로그램을 웹 페이지에 임베드하려면 다음의 HTML 코드를 사용합니다.",
       "size": "크기(너비/높이):"
+    },
+    "general": {
+      "noPlaces": "이 영역에는 장소가 없습니다.  장소를 확인하려면 축소하거나 홈 버튼을 클릭하세요.",
+      "start": "시작"
     }
   }
 });

@@ -7,7 +7,13 @@ define({
     "addEditPopup": {
       "test": "testas",
       "add": "pridėti",
-      "edit": "redaguoti"
+      "edit": "redaguoti",
+      "editTab": "REDAGUOTI SKIRTUKĄ",
+      "addTab": "PRIDĖTI SKIRTUKĄ",
+      "organizeTabs": "TVARKYTI SKIRTUKUS",
+      "themeColor": "Temos spalva",
+      "location": "Padėtis",
+      "confirmDeletion": "Naikinti "
     },
     "landing": {
       "lblAdd": "Kaip norite pavadinti savo aplikaciją?",
@@ -17,7 +23,9 @@ define({
     },
     "organizePopup": {
       "title": "Tvarkyti",
-      "tab": "skirtukas"
+      "tab": "skirtukas",
+      "dragNDrop": "Nuvilkite skirtukus į norimas vietas ir sutvarkykite pasakojimą.",
+      "lblColTitle": "Pavadinimas"
     },
     "settingsLayoutOptions": {
       "title": "Maketo parinktys",
@@ -35,10 +43,20 @@ define({
       "changeLocation": "Keisti padėtį",
       "setLocation": "Nustatyti padėtį",
       "cancel": "Atšaukti",
-      "addImage": "norėdami pridėti atvaizdą, paspauskite arba nuvilkite",
+      "addImage": "Norėdami pridėti atvaizdą, paspauskite arba nuvilkite",
+      "chooseImage": "PASIRINKTI PAVEIKSLĖLĮ",
+      "importImages": "IMPORTUOTI PAVEIKSLĖLIUS",
+      "import": "IMPORTUOTI",
       "enterPlaceName": "Įveskite vietos pavadinimą",
       "enterPlaceDescription": "Įveskite vietos aprašą",
-      "unnamedPlace": "Vieta be pavadinimo"
+      "unnamedPlace": "Vieta be pavadinimo",
+      "update": "Atnaujinti",
+      "useLocation": "Naudoti šią padėtį",
+      "selectAll": "Pažymėti visus",
+      "imageSizeHelper": "Siekiant geriausių rezultatų paveikslėliai neturėtų viršyti 400 KB. Rekomenduojamas dydis ir forma yra 1000 x 750 pikselių (4:3 pločio:aukščio santykis) arba mažiau. Didesni paveikslėliai gali pristabdyti veikimą. Siekiant didžiausio našumo siūloma naudoti JPG formatu suglaudintus 80% kokybės paveikslėlius.",
+      "imageSizeHelperUpdated": "Kad našumas būtų didžiausias, atvaizdai turėtų būti mažesni nei 400 KB. Norėdami sumažinti failą, naudokite JPG formatą, išsaugotą 80% atvaizdo kokybės. Jei jūsų atvaizdas vis dar didesnis nei 400 KB, pakeitus dydį, failas gali labiau sumažėti: rekomenduojamas 1 000 pikselių plotis x 750 pikselių aukštis (4:3 pločio:aukščio santykis).",
+      "thumbnailLink": "Miniatiūros nuoroda",
+      "thumbnailHelp": "Rekomenduojamas miniatiūros dydis ir forma yra 280 x 210 pikselių (4:3 pločio:aukščio santykis). Didesnės miniatiūros gali pristabdyti veikimą. 4:3 matmenų santykio miniatiūros telpa į savo išklotines, todėl jų nereikia apkarpyti."
     },
     "settings": {
       "numberedPlaces": "Rodyti vietas su numeriais",
@@ -55,7 +73,13 @@ define({
       "custom": "Adaptuotas",
       "customTooltip": "Nustatykite padėtį naudodami mygtuką, kuris bus rodomas prie žemėlapio mastelio keitimo valdiklių",
       "mapLocationTooltip": "Padėtis, kurią žmonės mato atidarę jūsų aplikaciją",
-      "bookmarksHelp": "Norėdami Trumpajame sąraše įjungti žymas, pridėkite jas internetinio žemėlapio peržiūros programoje"
+      "bookmarksHelp": "Norėdami Trumpajame sąraše įjungti žymas, pridėkite jas internetinio žemėlapio peržiūros programoje",
+      "generalOptions": "Bendrosios parinktys",
+      "mapOptions": "Žemėlapio parinktys",
+      "changeBasemap": "Pakeisti pagrindo žemėlapį",
+      "saveHomeLocation": "Išsaugokite pradinę padėtį",
+      "choose": "Pasirinkite",
+      "headerColor": "Antraštės spalva"
     },
     "help": {
       "title": "PAGALBA",
@@ -81,7 +105,10 @@ define({
         "asIsOption": "Taip, naudoti tokius, kokie yra",
         "asIsText": "Vietas ir toliau redaguosite bei valdysite savo internetiniame žemėlapyje, o ne Trumpojo sąrašo kūrimo priemonėje. Šių duomenų atnaujinimai automatiškai atsispindės jūsų aplikacijoje. Norint taikyti šią funkciją, duomenims turi būti naudojamas šis šablonas.",
         "badData": "Taškų sluoksniui, kuriame yra jūsų vietos, nenaudojamas reikiamas duomenų šablonas.",
-        "downloadTemplate": "Atsisiųsti šabloną"
+        "downloadTemplate": "Atsisiųsti šabloną",
+        "selectPtData": "PASIRINKITE TAŠKINIUS DUOMENIS",
+        "multipleThemes": "AR JŪSŲ SLUOKSNYJE YRA KELIOS TEMOS",
+        "chooseFields": "PASIRINKITE, KURIUOS LAUKUS NAUDOTI TRUMPAJAME SĄRAŠE"
       },
       "fieldPicker": {
         "nameField": "Laukas, kuriame yra kiekvienos vietos pavadinimas: ",

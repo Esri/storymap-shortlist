@@ -90,7 +90,7 @@ define(["../../core/Helper",
 							var nextFeature = null;
 							var mapFeatures = [];
 							$.each(features, function(index, feat){
-								if(app.map.extent.contains(feat.geometry)){
+								if(app.map.extent.contains(feat.geometry) || !app.data.getWebAppData().getGeneralOptions().filterByExtent){
 									mapFeatures.push(feat);
 								}
 							});
@@ -103,6 +103,8 @@ define(["../../core/Helper",
 							}
 							_mainView.unselect();
 							_mainView.selected = nextFeature;
+							if(!app.map.extent.contains(nextFeature.geometry))
+								app.map.centerAt(nextFeature.geometry);
 							_mainView.selectSymbol();
 							_this.buildSlide();
 						});
@@ -112,7 +114,7 @@ define(["../../core/Helper",
 							var nextFeature = null;
 							var mapFeatures = [];
 							$.each(features, function(index, feat){
-								if(app.map.extent.contains(feat.geometry)){
+								if(app.map.extent.contains(feat.geometry)|| !app.data.getWebAppData().getGeneralOptions().filterByExtent){
 									mapFeatures.push(feat);
 								}
 							});
@@ -125,6 +127,8 @@ define(["../../core/Helper",
 							}
 							_mainView.unselect();
 							_mainView.selected = nextFeature;
+							if(!app.map.extent.contains(nextFeature.geometry))
+								app.map.centerAt(nextFeature.geometry);
 							_mainView.selectSymbol();
 							_this.buildSlide();
 						});
@@ -134,7 +138,7 @@ define(["../../core/Helper",
 							var nextFeature = null;
 							var mapFeatures = [];
 							$.each(features, function(index, feat){
-								if(app.map.extent.contains(feat.geometry)){
+								if(app.map.extent.contains(feat.geometry) || !app.data.getWebAppData().getGeneralOptions().filterByExtent){
 									mapFeatures.push(feat);
 								}
 							});
@@ -211,7 +215,7 @@ define(["../../core/Helper",
 				var shortDesc = '';
 
 				if(app.data.getWebAppData().getIsExternalData()){
-					shortDesc = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'shortdesc';})[0]];
+					shortDesc = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'short_desc';})[0]];
 					var desc1 = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'desc1';})[0]];
 					var desc2 = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'desc2';})[0]];
 					var desc3 = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'desc3';})[0]];
@@ -270,28 +274,39 @@ define(["../../core/Helper",
 					picture = thumbnail ? thumbnail : picture;
 					if(picture.indexOf("sharing/rest/content/items/") > -1)
 						picture = CommonHelper.possiblyAddToken(picture);
+					var image = $(newSlide).find('img')[0];
+					image.onload = function(){
+						$(this).parent().find('.imageLoadingIndicator').css('display', 'none');
+					};
 					$(newSlide).find('img').attr('src', picture);
-					$(newSlide).find('img').on('touchend', function(){
-						var features = app.layerCurrent.graphics;
-						var nextFeature = null;
-						var mapFeatures = [];
-						$.each(features, function(index, feat){
-							if(app.map.extent.contains(feat.geometry)){
-								mapFeatures.push(feat);
+					//Fix issue with trying to scroll description and touch getting caught on image
+					/*var disableTouch = /iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+					if(!disableTouch)
+					{
+						$(newSlide).find('img').on('touchend', function(){
+							var features = app.layerCurrent.graphics;
+							var nextFeature = null;
+							var mapFeatures = [];
+							$.each(features, function(index, feat){
+								if(app.map.extent.contains(feat.geometry)){
+									mapFeatures.push(feat);
+								}
+							});
+							var featIndex = null;
+							$.grep(mapFeatures,function(n, index){if(n.attributes.shortlist_id == app.ui.mainView.selected.attributes.shortlist_id){featIndex = index;}});
+							if(featIndex !== mapFeatures.length - 1)
+								nextFeature = mapFeatures[featIndex + 1];
+							else{
+								nextFeature = mapFeatures[0];
 							}
+							_mainView.unselect();
+							_mainView.selected = nextFeature;
+							_mainView.selectSymbol();
+							_this.buildSlide();
 						});
-						var featIndex = null;
-						$.grep(mapFeatures,function(n, index){if(n.attributes.shortlist_id == app.ui.mainView.selected.attributes.shortlist_id){featIndex = index;}});
-						if(featIndex !== mapFeatures.length - 1)
-							nextFeature = mapFeatures[featIndex + 1];
-						else{
-							nextFeature = mapFeatures[0];
-						}
-						_mainView.unselect();
-						_mainView.selected = nextFeature;
-						_mainView.selectSymbol();
-						_this.buildSlide();
-					});
+					}*/
+				}else{
+					$(newSlide).find('.imageLoadingIndicator').css('display', 'none');
 				}
 
 				if(shortDesc){
@@ -305,6 +320,7 @@ define(["../../core/Helper",
 				}
 
 				if (website) {
+					$(newSlide).find('.website').empty();
 					$(newSlide).find('.website').append('<a href='+ website + ' target="_blank" >More info</a>');
 					$('.website').show();
 				}
@@ -334,6 +350,7 @@ define(["../../core/Helper",
 					themeIndex = 0;
 				var currentTheme = _themes[themeIndex];
 				var features = currentTheme.features;
+
 				if(features[0] && features[0].attributes ){
 					var numberField = features[0].attributes[$.grep(Object.keys(features[0].attributes), function(n) {return n.toLowerCase() == 'number';})[0]];
 					if(numberField){
@@ -355,6 +372,12 @@ define(["../../core/Helper",
 					$(newSlide).on('mousedown', function(){
 						$(this).addClass('swiper-no-swiping');
 					});
+
+					if(navigator.userAgent.match(/Trident.*rv\:11\./) && navigator.userAgent.match(/Trident.*rv\:11\./).length){
+						$(newSlide).on('pointerdown', function(){
+							$(this).addClass('swiper-no-swiping');
+						});
+					}
 
 					$(newSlide).on('mouseup', function(){
 						$(this).removeClass('swiper-no-swiping');
@@ -426,6 +449,10 @@ define(["../../core/Helper",
 					}
 
 					if(picture){
+						var image = $(newSlide).find('img')[0];
+						image.onload = function(){
+							$(this).parent().find('.imageLoadingIndicator').css('display', 'none');
+						};
 						if(_android){
 							picture = thumbnail ? thumbnail : picture;
 							if(picture.indexOf("sharing/rest/content/items/") > -1)
@@ -437,6 +464,10 @@ define(["../../core/Helper",
 								picture = CommonHelper.possiblyAddToken(picture);
 							$(newSlide).find('img').attr('src', picture);
 						}
+						if(image.complete)
+							$(newSlide).find('.imageLoadingIndicator').hide();
+					}else{
+						$(newSlide).find('.imageLoadingIndicator').css('display', 'none');
 					}
 
 					if(shortDesc){
@@ -560,33 +591,62 @@ define(["../../core/Helper",
 							_mainView.unselect();
 						});
 
+						var isEdge = navigator.appVersion.indexOf('Edge') > 0 ? true : false;
+
 						container.find($(".detail-btn-left")[themeIndex]).click(function(){
 							_mainView.selected.updated = false;
-							if(_swipers[themeIndex].activeIndex === 0)
+							if(_swipers[themeIndex].activeIndex === 0){
+								//Fix/hack for text of detail panel stacking on slide change in Microsoft Edge
+								if(isEdge)
+									$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'visible'});
 								_swipers[themeIndex].slideTo(_swipers[themeIndex].slides.length - 1, 0);
+								if(isEdge)
+									$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'auto'});
+							}
 							else {
+								if(isEdge)
+									$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'visible'});
 								_swipers[themeIndex].slidePrev();
+								if(isEdge)
+									$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'auto'});
 							}
 						});
 
 						container.find($(".detail-btn-right")[themeIndex]).click(function(){
 							_mainView.selected.updated = false;
-							if(_swipers[themeIndex].activeIndex == _swipers[themeIndex].slides.length - 1)
+							if(_swipers[themeIndex].activeIndex == _swipers[themeIndex].slides.length - 1){
+								if(isEdge)
+									$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'visible'});
 								_swipers[themeIndex].slideTo(0, 0);
-							else {
+								if(isEdge)
+									$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'auto'});
+							}else {
+								if(isEdge)
+									$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'visible'});
 								_swipers[themeIndex].slideNext();
+								if(isEdge)
+									$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'auto'});
 							}
 						});
 
-						var borderColor = app.data.getStory()[themeIndex].color
+						var borderColor = app.data.getStory()[themeIndex].color;
 						$('#detailView'+themeIndex).find('.detailHeader').css('border-top-color', borderColor);
 
 						container.find(".detailPictureDiv img").click(function(){
 							_mainView.selected.updated = false;
-							if(_swipers[themeIndex].activeIndex == _swipers[themeIndex].slides.length - 1)
+							if(_swipers[themeIndex].activeIndex == _swipers[themeIndex].slides.length - 1){
+								if(isEdge)
+									$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'visible'});
 								_swipers[themeIndex].slideTo(0, 0);
+								if(isEdge)
+									$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'auto'});
+							}
 							else {
+								if(isEdge)
+									$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'visible'});
 								_swipers[themeIndex].slideNext();
+								if(isEdge)
+									$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'auto'});
 							}
 						});
 
@@ -609,6 +669,7 @@ define(["../../core/Helper",
 					themeIndex = 0;
 				//setTimeout(function(){
 					//$('.detailContainer').css('z-index', -9999);
+
 					$('.detailContainer').show();
 					_swipers[themeIndex].slideNext();
 					_swipers[themeIndex].slidePrev();
@@ -629,7 +690,9 @@ define(["../../core/Helper",
 
 				_this.resize();
 
-				prepSwiperDisplay();
+				if(app.data.getWebAppData().getGeneralOptions().filterByExtent)
+					prepSwiperDisplay();
+
 				var themeIndex = $('.entry.active').index();
 				if(themeIndex<0)
 					themeIndex = 0;
@@ -662,7 +725,9 @@ define(["../../core/Helper",
 				else{
 					setTimeout(function(){
 						_swipers[themeIndex].slideTo(selectedSlideIndex, 0);
-						$(currentDetailContainer).show();
+
+						if(selectedSlideIndex === currentSwiper.activeIndex)
+							$(currentDetailContainer).show();
 					}, 0);
 				}
 
@@ -688,6 +753,8 @@ define(["../../core/Helper",
 						imgSrc = CommonHelper.possiblyAddToken(imgSrc);
 					$(slideImg).attr('src', imgSrc);
 				}
+
+				_this.resize();
 
 				_this.viewed = true;
 			};
@@ -791,11 +858,15 @@ define(["../../core/Helper",
 			{
 				setTimeout(function(){
 					var offset = 40;
+					if(_iOS)
+						offset = 80;
 					if(app.ui.mobileIntro.screenSize == 'small'){
 						$('#paneLeft').css('height', $('#contentPanel').height() - $('#map').height() + 10);
 						$('#paneLeft').css('width', '100%');
 						$('#paneLeft').css({'top': $('#map').height() - 10});
 						offset = 20;
+						if(_iOS)
+							offset = 80;
 					}
 					var themeIndex = $('.entry.active').index();
 					var currentSlide;
@@ -816,11 +887,19 @@ define(["../../core/Helper",
 					$('.detailContainer').height($("#paneLeft").outerHeight());
 
 					if(currentSwiper){
-						setTimeout(function(){
+						if(app.data.getWebAppData().getGeneralOptions().filterByExtent){
+							setTimeout(function(){
+								_swipers[themeIndex].slideTo(currentSwiper.activeIndex);
+								currentSwiper.update();
+								_swipers[themeIndex].slideTo(currentSwiper.activeIndex);
+							}, 800);
+						}
+						else{
 							_swipers[themeIndex].slideTo(currentSwiper.activeIndex);
 							currentSwiper.update();
 							_swipers[themeIndex].slideTo(currentSwiper.activeIndex);
-						}, 800);
+						}
+
 					}
 				}, 0);
 			};

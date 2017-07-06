@@ -13,7 +13,8 @@ define(["lib-build/tpl!./Popup",
 			container.append(viewTpl({
 				lblTitle: "",
 				btnCancel: i18n.commonCore.common.cancel,
-				btnBack: i18n.commonCore.common.back
+				btnBack: i18n.commonCore.common.back,
+				selectAll: i18n.builder.detailPanelBuilder.selectAll
 			}));
 
 			var _cfg = null,
@@ -36,16 +37,16 @@ define(["lib-build/tpl!./Popup",
 				_mode = _cfg.mode;
 
 				if(_mode == "import"){
-					container.find(".modal-title").text("Import images");
+					container.find(".modal-title").text(i18n.builder.detailPanelBuilder.importImages);
 					container.find('.btnSubmit')
-						.html("Import")
+						.html(i18n.builder.detailPanelBuilder.import)
 						.show();
 					container.find('.btnCancel').show();
 				}
 				else if(_mode == "add"){
-					container.find(".modal-title").text("CHOOSE IMAGE");
+					container.find(".modal-title").text(i18n.builder.detailPanelBuilder.chooseImage);
 					container.find('.btnSubmit')
-						.html("Add")
+						.html(i18n.builder.addEditPopup.add)
 						.hide();
 					container.find('.btnCancel').hide();
 					container.find('.opt-select-all-container').hide();

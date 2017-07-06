@@ -45,17 +45,20 @@ define([
 
 			this.fillList = function(index, theme, themes)
 			{
-
 				// if only one layer
 				if(themes.length == 1){
+					if($('#mobileThemeList .mobileTitleTheme')[index])
+						return;
 					$('#mobileIntro').append("<br><hr></hr>");
 					$('#mobileIntro').append('<ul id="mobileThemeList" class="mobileTileList">');
-					var introList = $('<li class="mobileTitleTheme">').append('<div class="startButton"> Start </div>');
+					var introList = $('<li class="mobileTitleTheme">').append('<div class="startButton">' + i18n.builder.initPopup.startBtn + '</div>');
 					introList.on('click', function(){
 						_this.selectMobileTheme(0);
 					});
 					$('#mobileThemeList').append(introList);
 				}else{
+					if($('#mobileThemeList .mobileTitleThemes')[index])
+						return;
 					// initMap, after contentLayers are set if more than one tab layer
 					if(index === 0)
 						$('#mobileIntro').append('<ul id="mobileThemeList" style=" height: 80px; line-height: 80px;" class="mobileTileList introList">');

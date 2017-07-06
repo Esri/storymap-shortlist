@@ -7,7 +7,13 @@ define({
     "addEditPopup": {
       "test": "teste",
       "add": "adicionar",
-      "edit": "editar"
+      "edit": "editar",
+      "editTab": "EDITAR SEPARADOR",
+      "addTab": "ADICIONAR SEPARADOR",
+      "organizeTabs": "ORGANIZAR SEPARADORES",
+      "themeColor": "Cor do Tema",
+      "location": "Localização",
+      "confirmDeletion": "Confirmar a eliminação de "
     },
     "landing": {
       "lblAdd": "Que nome pretende dar à sua Shortlist?",
@@ -17,7 +23,9 @@ define({
     },
     "organizePopup": {
       "title": "Organizar",
-      "tab": "separador"
+      "tab": "separador",
+      "dragNDrop": "Arraste e solte separadores para organizar a sua história.",
+      "lblColTitle": "Título"
     },
     "settingsLayoutOptions": {
       "title": "Ópções de layout",
@@ -35,10 +43,20 @@ define({
       "changeLocation": "Alterar localização",
       "setLocation": "Definir Localização",
       "cancel": "Cancelar",
-      "addImage": "clique, ou arraste e solte, para adicionar uma imagem",
+      "addImage": "Cliqar, ou arrastar e soltar, para adicionar uma imagem",
+      "chooseImage": "SELECIONAR IMAGEM",
+      "importImages": "IMPORTAR IMAGENS",
+      "import": "IMPORTAR",
       "enterPlaceName": "Introduzir nome do local",
       "enterPlaceDescription": "Introduzir descrição do local",
-      "unnamedPlace": "Local sem nome"
+      "unnamedPlace": "Local sem nome",
+      "update": "Atualizar",
+      "useLocation": "Utilizar esta localização",
+      "selectAll": "Selecionar tudo",
+      "imageSizeHelper": "Para melhores resultados, as imagens devem ser menores do que 400 KB. O tamanho & formato recomendado é 1000 x 750 pixeis (rácio 4:3 largura:altura) ou inferior. Imagens maiores podem reduzir o desempenho. Para obter melhores desempenhos, utilize imagens JPG comprimidas com qualidade de imagem de 80%.",
+      "imageSizeHelperUpdated": "Para um melhor desempenho, o tamanho das imagens deve ser inferior a 400 KB. Para reduzir o tamanho dos ficheiros, utilize o formato JPG, guardado com 80% de qualidade de imagem. Caso a sua imagem ainda suplante o limite de 400KB, redimensioná-la poderá reduzir o tamanho do respetivo ficheiro. 1000 pixeis de largura x 750 pixels de altura (rácio 4:3 largura:altura) é a dimensão recomendada.",
+      "thumbnailLink": "Ligação a imagem miniatura",
+      "thumbnailHelp": "O tamanho & formato recomendado para iomagens miniatura é 280 x 210 pixeis (rácio 4:3 largura:altura). Imagens miniatura maiores podem reduzir o desempenho. Imagens miniatura com proporções de aspeto 4:3 encaixam nos respetivos mosaicos sem ser necessário recortar."
     },
     "settings": {
       "numberedPlaces": "Exibir locais com números",
@@ -55,7 +73,13 @@ define({
       "custom": "Personalizar",
       "customTooltip": "Defina a localização utilizando o botão que aparece nos controlos de zoom do mapa",
       "mapLocationTooltip": "A localização que os utilizadores visualizam quando abrem a sua Shortlist",
-      "bookmarksHelp": "Para ativar marcadores, adicione e efetue a gestão dos marcadores do mapa web no visualizador de mapas web"
+      "bookmarksHelp": "Para ativar marcadores, adicione e efetue a gestão dos marcadores do mapa web no visualizador de mapas web",
+      "generalOptions": "Opções gerais",
+      "mapOptions": "Opções de mapa",
+      "changeBasemap": "Mudar mapa base",
+      "saveHomeLocation": "Guardar localização inicial",
+      "choose": "Escolher",
+      "headerColor": "Cor do Cabeçalho"
     },
     "help": {
       "title": "AJUDA",
@@ -81,7 +105,10 @@ define({
         "asIsOption": "Sim, utilizá-los tal como se encontram (as-is)",
         "asIsText": "Continuará a editar e gerir os seus locais no seu mapa web, não no Shortlist Builder.  As atualizações que aplicar a esses dados refletir-se-ão automaticamente na sua Shortlist.  Esta opção requer que os seus dados utilizem este modelo.",
         "badData": "A camada de pontos que contém os seus locais não utiliza o modelo de dados necessário. Por favor, reveja os requisitos do modelo.",
-        "downloadTemplate": "Transferir modelo"
+        "downloadTemplate": "Transferir modelo",
+        "selectPtData": "SELECIONE OS SEUS DADOS DE PONTOS",
+        "multipleThemes": "A SUA CAMADA CONTÉM VÁRIOS TEMAS",
+        "chooseFields": "SELECIONE OS CAMPOS A UTILIZAR PELA SHORTLIST"
       },
       "fieldPicker": {
         "nameField": "Campo que contém o nome de cada local: ",

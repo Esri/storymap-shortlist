@@ -25,12 +25,6 @@
 	cursor: pointer;
 }
 
-.bookmarkTooltip{
-	position: absolute;
-	top: 142px;
-	left: 125px;
-}
-
 .tooltip-inner {
 	min-width: 100px;
 }

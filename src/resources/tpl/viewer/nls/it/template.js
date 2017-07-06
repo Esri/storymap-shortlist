@@ -35,11 +35,14 @@ define({
       "upgradeBrowser": "<a href='http://browsehappy.com/' target='_blank'>Aggiornare il browser</a>.",
       "mapLoadingFail": "Si è verificato un errore. La mappa non è stata caricata correttamente.",
       "signOut": "Disconnetti",
-      "attention": "Attenzione."
+      "attention": "Attenzione.",
+      "noBuilderEdge": "Le Story Map Shortlist possono essere visualizzate in qualsiasi browser. Tuttavia il generatore di Story Map Shortlist non è supportato da Windows Edge. Impiegare un altro browser Web per creare o modificare una shortlist."
     },
     "headerFromCommon": {
       "storymapsText": "Mappa collegata a una storia",
       "builderButton": "Modifica",
+      "facebookTooltip": "Condividi su Facebook",
+      "twitterTooltip": "Condividi su Twitter",
       "bitlyTooltip": "Ottieni un collegamento breve all'applicazione",
       "templateTitle": "Imposta titolo modello",
       "templateSubtitle": "Imposta sottotitolo modello",
@@ -52,6 +55,10 @@ define({
       "embed": "Incorpora nella pagina Web",
       "embedExplain": "Utilizzare il seguente codice HTML per incorporare l'applicazione in una pagina Web.",
       "size": "Dimensioni (larghezza/altezza):"
+    },
+    "general": {
+      "noPlaces": "Nessuna località presente in questa area. Eseguire lo zoom indietro o fare clic sul pulsante Home per vedere località.",
+      "start": "Avvia"
     }
   }
 });

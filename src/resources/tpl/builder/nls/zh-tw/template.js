@@ -7,7 +7,13 @@ define({
     "addEditPopup": {
       "test": "測試",
       "add": "新增",
-      "edit": "編輯"
+      "edit": "編輯",
+      "editTab": "編輯頁籤",
+      "addTab": "新增頁籤",
+      "organizeTabs": "組織頁籤",
+      "themeColor": "主題顏色",
+      "location": "位置",
+      "confirmDeletion": "確認刪除 "
     },
     "landing": {
       "lblAdd": "您的候選名單要取什麼名稱?",
@@ -17,7 +23,9 @@ define({
     },
     "organizePopup": {
       "title": "組織",
-      "tab": "頁籤"
+      "tab": "頁籤",
+      "dragNDrop": "拖放頁籤以組織故事",
+      "lblColTitle": "標題"
     },
     "settingsLayoutOptions": {
       "title": "版面設定選項",
@@ -36,9 +44,19 @@ define({
       "setLocation": "設定位置",
       "cancel": "取消",
       "addImage": "按一下或拖放以新增圖片",
+      "chooseImage": "選擇圖片",
+      "importImages": "匯入圖片",
+      "import": "匯入",
       "enterPlaceName": "輸入地點名稱",
       "enterPlaceDescription": "輸入地點描述",
-      "unnamedPlace": "未指定的地點"
+      "unnamedPlace": "未指定的地點",
+      "update": "更新",
+      "useLocation": "使用此位置",
+      "selectAll": "全選",
+      "imageSizeHelper": "為了獲得最佳結果，圖片必須小於 400 KB。建議的大小和形狀是 1000 x 750 像素　(4:3 寬度:高度比例) 或更小。較大的圖片可能會使效能下降。為獲得最佳效能，請使用 80% 圖片品質的壓縮 JPG 圖片。",
+      "imageSizeHelperUpdated": "為獲得最佳效能，圖片必須少於 400 KB。若要減少檔案大小，請使用以 80% 圖片品質儲存的 JPG 格式。如果圖片仍超過 400 KB，重新調整大小可進一步減少檔案大小: 建議 1000 像素寬 x 750 像素高 (4:3 寬:高比率)。",
+      "thumbnailLink": "縮圖連結",
+      "thumbnailHelp": "建議的縮圖大小和形狀是 280 x 210 像素　(4:3 寬度:高度比例)。較大的縮圖可能會使效能下降。縱橫比為 4:3 的縮圖可填入其圖磚而不會被截斷。"
     },
     "settings": {
       "numberedPlaces": "顯示包含號碼的地點",
@@ -55,7 +73,13 @@ define({
       "custom": "自訂",
       "customTooltip": "使用地圖縮放控制項中將出現的按鈕來設定位置",
       "mapLocationTooltip": "當使用者開啟您的候選名單時所看到的位置",
-      "bookmarksHelp": "若要在候選名單中啟用書籤，請在 Web 地圖檢視器中新增和管理 Web 地圖的書籤"
+      "bookmarksHelp": "若要在候選名單中啟用書籤，請在 Web 地圖檢視器中新增和管理 Web 地圖的書籤",
+      "generalOptions": "一般選項",
+      "mapOptions": "地圖選項",
+      "changeBasemap": "變更底圖",
+      "saveHomeLocation": "儲存住家位置",
+      "choose": "選擇",
+      "headerColor": "頁眉顏色"
     },
     "help": {
       "title": "說明",
@@ -81,7 +105,10 @@ define({
         "asIsOption": "是，依原狀使用它們",
         "asIsText": "您會繼續在 Web 地圖 (非候選名單建立器) 中編輯和管理地點。您對該資料所做的更新會自動反映在候選名單中。此選項會要求您的資料使用此樣板。",
         "badData": "包含您地點的點圖層不會使用必要的資料樣板。請檢閱樣板需求。",
-        "downloadTemplate": "下載樣板"
+        "downloadTemplate": "下載樣板",
+        "selectPtData": "選擇您的點資料",
+        "multipleThemes": "您的圖層是否包含多個主題",
+        "chooseFields": "選擇候選名單應使用的欄位"
       },
       "fieldPicker": {
         "nameField": "包含每個地點名稱的欄位: ",

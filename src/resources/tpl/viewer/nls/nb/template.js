@@ -35,11 +35,14 @@ define({
       "upgradeBrowser": "<a href='http://browsehappy.com/' target='_blank'>Oppdater nettleseren din</a>.",
       "mapLoadingFail": "Noe gikk galt, og kartet ble ikke lastet inn på riktig måte.",
       "signOut": "Logg av",
-      "attention": "Obs!"
+      "attention": "Obs!",
+      "noBuilderEdge": "Story Map Shortlists kan vises i vanlige nettlesere. Story Map Shortlist Builder støttes imidlertid ikke i Windows Edge. Bruk en annen nettleser til å opprette eller redigere en kortliste."
     },
     "headerFromCommon": {
       "storymapsText": "En story map",
       "builderButton": "Rediger",
+      "facebookTooltip": "Del på Facebook",
+      "twitterTooltip": "Del på Twitter",
       "bitlyTooltip": "Få en kort kobling til applikasjonen",
       "templateTitle": "Angi tittel på malen",
       "templateSubtitle": "Angi undertittel for malen",
@@ -52,6 +55,10 @@ define({
       "embed": "Bygg inn på webside",
       "embedExplain": "Bruk følgende HTML-kode for å bygge inn applikasjonen på en webside.",
       "size": "Størrelse (bredde/høyde):"
+    },
+    "general": {
+      "noPlaces": "Det er ingen steder i dette området. Zoom ut eller klikk på Hjem-knappen for å se steder.",
+      "start": "Start"
     }
   }
 });

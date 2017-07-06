@@ -35,11 +35,14 @@ define({
       "upgradeBrowser": "<a href='http://browsehappy.com/' target='_blank'>Atjaunojiet savu pārlūku</a>.",
       "mapLoadingFail": "Radās kļūda — karte netika ielādēta pareizi.",
       "signOut": "Izrakstīties",
-      "attention": "Uzmanību!"
+      "attention": "Uzmanību!",
+      "noBuilderEdge": "Lietotnes Story Map Shortlist sarakstus var skatīt jebkurā Web pārlūkā. Tomēr funkcija Story Map Shortlist Builder nav pieejama pārlūkā Windows Edge. Izvēles sarakstu veidošanai vai rediģēšanai izmantojiet citu Web pārlūku."
     },
     "headerFromCommon": {
       "storymapsText": "Stāsta karte",
       "builderButton": "Labot",
+      "facebookTooltip": "Kopīgot Facebook",
+      "twitterTooltip": "Kopīgot Twitter",
       "bitlyTooltip": "Saņemt īsu saiti uz lietotni",
       "templateTitle": "Iestatīt sagataves virsrakstu",
       "templateSubtitle": "Iestatīt sagataves apakšvirsrakstu",
@@ -52,6 +55,10 @@ define({
       "embed": "Iedarināt tīmekļa lapā",
       "embedExplain": "Izmantojiet šo HTML kodu, lai lietotni iedarinātu tīmekļa lapā.",
       "size": "Izmēri (platums/augstums):"
+    },
+    "general": {
+      "noPlaces": "Šajā teritorijā vietu nav. Lai redzētu vietas, attāliniet vai klikšķiniet uz sākuma pogas.",
+      "start": "Sākt"
     }
   }
 });

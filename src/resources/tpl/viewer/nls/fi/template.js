@@ -35,11 +35,14 @@ define({
       "upgradeBrowser": "<a href='http://browsehappy.com/' target='_blank'>Päivitä selaimesi</a>.",
       "mapLoadingFail": "Tapahtui virhe, eikä kartta latautunut oikein.",
       "signOut": "Kirjaudu ulos",
-      "attention": "Huomio!"
+      "attention": "Huomio!",
+      "noBuilderEdge": "Story Map Shortlist -luetteloita voi tarkastella missä tahansa selaimessa. Windows Edge ei kuitenkaan tue Story Map Shortlist -luontitoimintoa. Käytä toista selainta Shortlistin luontiin tai muokkaamiseen."
     },
     "headerFromCommon": {
       "storymapsText": "Tarinakartta",
       "builderButton": "Muokkaa",
+      "facebookTooltip": "Jaa Facebookissa",
+      "twitterTooltip": "Jaa Twitterissä",
       "bitlyTooltip": "Hanki lyhyt linkki sovellukseen",
       "templateTitle": "Määritä mallin nimi",
       "templateSubtitle": "Määritä mallin alaotsikko",
@@ -52,6 +55,10 @@ define({
       "embed": "Upota Web-sivulle",
       "embedExplain": "Käytä seuraavaa HTML-koodia sovelluksen upottamiseen Web-sivulle.",
       "size": "Koko (leveys/korkeus):"
+    },
+    "general": {
+      "noPlaces": "Tällä alueella ei ole paikkoja. Näytä lisää paikkoja loitontamalla tai napsauttamalla Kotisivu-painiketta.",
+      "start": "Aloita"
     }
   }
 });

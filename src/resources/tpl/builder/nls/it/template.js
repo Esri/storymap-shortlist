@@ -7,7 +7,13 @@ define({
     "addEditPopup": {
       "test": "test",
       "add": "aggiungi",
-      "edit": "modifica"
+      "edit": "modifica",
+      "editTab": "MODIFICA SCHEDA",
+      "addTab": "AGGIUNGI SCHEDA",
+      "organizeTabs": "ORGANIZZA SCHEDE",
+      "themeColor": "Colore tema",
+      "location": "Posizione",
+      "confirmDeletion": "Conferma eliminazione di "
     },
     "landing": {
       "lblAdd": "Come si desidera nominare la Shortlist?",
@@ -17,7 +23,9 @@ define({
     },
     "organizePopup": {
       "title": "Organizza",
-      "tab": "scheda"
+      "tab": "scheda",
+      "dragNDrop": "Trascinare e rilasciare le schede per organizzare la storia",
+      "lblColTitle": "Titolo"
     },
     "settingsLayoutOptions": {
       "title": "Opzioni di layout",
@@ -36,9 +44,19 @@ define({
       "setLocation": "Imposta posizione",
       "cancel": "Annulla",
       "addImage": "Fare clic o trascinare per aggiungere un'immagine",
+      "chooseImage": "SCEGLI IMMAGINE",
+      "importImages": "IMPORTA IMMAGINI",
+      "import": "IMPORTA",
       "enterPlaceName": "Inserisci nome località",
       "enterPlaceDescription": "Inserisci descrizione località",
-      "unnamedPlace": "Località senza nome"
+      "unnamedPlace": "Località senza nome",
+      "update": "Aggiorna",
+      "useLocation": "Usa questa posizione",
+      "selectAll": "Seleziona tutto",
+      "imageSizeHelper": "Per risultati ottimali, utilizzare immagini più piccole di 400 KB. La dimensione e forma consigliata è 1000 x 750 pixel (4:3 rapporto larghezza:altezza) o inferiore. Immagini più grandi possono rallentare le prestazioni. Per prestazioni ottimali, utilizzare immagini JPG compresse con qualità immagine dell'80%.",
+      "imageSizeHelperUpdated": "Per migliorare le prestazioni, la dimensione immagine deve essere inferiore a 400 KB. Per ridurre la dimensione dell'immagine, impiegare il formato JPG salvato all'80% della qualità d'immagine. Se in seguito l'immagine è ancora superiore a 400 KB, si consiglia di ridurne ulteriormente la dimensione ridimensionandola: 1000 pixel largh. x 750 pixel altezza (rapporto 4:3 largh:alt).",
+      "thumbnailLink": "Collegamento anteprima",
+      "thumbnailHelp": "La dimensione e forma anteprima consigliata è 280 x 210 pixel (4:3 rapporto larghezza:altezza). Anteprime più grandi possono rallentare le prestazioni. Anteprime con rapporto prospettico 4:3 si adattano alle tile senza essere ritagliate."
     },
     "settings": {
       "numberedPlaces": "Mostra luoghi con numeri",
@@ -55,7 +73,13 @@ define({
       "custom": "Personalizzata",
       "customTooltip": "Imposta la posizione utilizzando il pulsante che verrà visualizzato nei controlli di zoom della mappa",
       "mapLocationTooltip": "La posizione visualizzata all'apertura della Shortlist",
-      "bookmarksHelp": "Per abilitare i segnalibri nella Shortlist, aggiungere e gestire i segnalibri della mappa Web nel visualizzatore delle mappe Web"
+      "bookmarksHelp": "Per abilitare i segnalibri nella Shortlist, aggiungere e gestire i segnalibri della mappa Web nel visualizzatore delle mappe Web",
+      "generalOptions": "Opzioni generali",
+      "mapOptions": "Opzioni mappa",
+      "changeBasemap": "Cambia mappa di base",
+      "saveHomeLocation": "Salva posizione home",
+      "choose": "Scegli",
+      "headerColor": "Colore intestazione"
     },
     "help": {
       "title": "GUIDA",
@@ -81,7 +105,10 @@ define({
         "asIsOption": "Sì, utilizzarli così come sono",
         "asIsText": "Si continuerà a modificare e gestire i propri luoghi nella mappa Web, non nel generatore Shortlist. Gli aggiornamenti apportati ai dati si riflettono automaticamente nella Shortlist. Questa opzione richiede che i dati utilizzino questo modello.",
         "badData": "Il layer punto contenente i luoghi non utilizza il modello dati richiesto. Rivedere i requisiti del modello.",
-        "downloadTemplate": "Scarica modello"
+        "downloadTemplate": "Scarica modello",
+        "selectPtData": "SCEGLI DATI PUNTO",
+        "multipleThemes": "IL LAYER CONTIENE PIÙ TEMI",
+        "chooseFields": "SCEGLIERE I CAMPI DA UTILIZZARE NELLA SHORTLIST"
       },
       "fieldPicker": {
         "nameField": "Campo contenente il nome di ciascun luogo: ",

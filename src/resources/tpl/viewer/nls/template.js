@@ -36,11 +36,14 @@ define({
 				upgradeBrowser: "<a href='http://browsehappy.com/' target='_blank'>Please update your browser</a>.",
 				mapLoadingFail: "Something went wrong, the map did not load correctly.",
 				signOut: "Sign Out",
-				attention: "Attention!"
+				attention: "Attention!",
+				noBuilderEdge: "Story Map Shortlists can be viewed in any web browser. However the Story Map Shortlist Builder is not supported on Windows Edge. Please use a different web browser to create or edit a Shortlist."
 			},
 			headerFromCommon: {
 				storymapsText: "A story map",
 				builderButton: "Edit",
+				facebookTooltip: "Share on Facebook",
+				twitterTooltip: "Share on Twitter",
 				bitlyTooltip: "Get a short link to the application",
 				templateTitle: "Set template title",
 				templateSubtitle: "Set template subtitle",
@@ -53,6 +56,10 @@ define({
 				embed: "Embed in web page",
 				embedExplain: "Use the following HTML code to embed the application in a web page.",
 				size: "Size (width/height):"
+			},
+			general: {
+				noPlaces: "No places are in this area.  Zoom out or click the Home button to see places.",
+				start: "Start"
 			}
 		}
 	}),

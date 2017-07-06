@@ -25,7 +25,12 @@ define(["lib-build/tpl!./Popup",
 		{
 			container.append(viewTpl({
 				btnCancel: i18n.commonCore.common.cancel,
-				btnBack: i18n.commonCore.common.back
+				btnBack: i18n.commonCore.common.back,
+				editTab: i18n.builder.addEditPopup.editTab,
+				themeColor: i18n.builder.addEditPopup.themeColor,
+				location: i18n.builder.addEditPopup.location,
+				auto: i18n.builder.settings.auto,
+				customConfig: i18n.commonWebmap.selector.customCfg
 			}));
 
 			var _popupDeferred = null,
@@ -92,7 +97,7 @@ define(["lib-build/tpl!./Popup",
 				// Title
 				container.find('.titleContainer')
 					.removeClass('has-feedback has-error')
-					.find('.title').val(cfg.mode == "edit" ?  $.parseHTML(title)[0].wholeText : "");
+					.find('.title').val(cfg.mode == "edit" && title[0] ? $.parseHTML(title)[0].wholeText : "");
 
 				if(app.data.getWebAppData().getIsExternalData()){
 					container.find('.titleContainer .title').addClass('title-disabled');
@@ -213,7 +218,8 @@ define(["lib-build/tpl!./Popup",
 				app.data.getWebAppData().setTabs(app.data.getStory());
 
 				var colors = {
-					header: '#444',
+					// TODO LINK UP TO APP SETTINGS FOR HEADER COLOR (AND ANYWHERE ELSE)
+					header: app.data.getWebAppData().getThemeOptions().headerColor,
 					tabText: '#d8d8d8',
 					tab: '#666',
 					tabTextActive: '#fff',

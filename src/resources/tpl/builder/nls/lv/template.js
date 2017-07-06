@@ -7,7 +7,13 @@ define({
     "addEditPopup": {
       "test": "tests",
       "add": "pievienot",
-      "edit": "labot"
+      "edit": "labot",
+      "editTab": "REDIĢĒT CILNI",
+      "addTab": "PIEVIENOT CILNI",
+      "organizeTabs": "KĀRTOT CILNES",
+      "themeColor": "Tēmas krāsa",
+      "location": "Novietojums",
+      "confirmDeletion": "Apstiprināt dzēšanu šim: "
     },
     "landing": {
       "lblAdd": "Kā vēlaties nosaukt savu atlases sarakstu?",
@@ -17,7 +23,9 @@ define({
     },
     "organizePopup": {
       "title": "Organizēt",
-      "tab": "cilne"
+      "tab": "cilne",
+      "dragNDrop": "Velciet un nometiet cilnes, lai sakārtotu savu stāstu",
+      "lblColTitle": "Virsraksts"
     },
     "settingsLayoutOptions": {
       "title": "Izkārtojuma izvēlnes",
@@ -35,10 +43,20 @@ define({
       "changeLocation": "Mainīt novietojumu",
       "setLocation": "Iestatīt novietojumu",
       "cancel": "Atcelt",
-      "addImage": "lai pievienotu attēlu, noklikšķināt vai vilkt un nomest",
+      "addImage": "Lai pievienotu attēlu, noklikšķiniet vai velciet un nometiet",
+      "chooseImage": "IZVĒLĒTIES ATTĒLU",
+      "importImages": "IMPORTĒT ATTĒLUS",
+      "import": "IMPORTĒT",
       "enterPlaceName": "Ievadiet vietas nosaukumu",
       "enterPlaceDescription": "Ievadiet vietas aprakstu",
-      "unnamedPlace": "Nenosaukta vieta"
+      "unnamedPlace": "Nenosaukta vieta",
+      "update": "Atjaunināt",
+      "useLocation": "Lietot šo izvietojumu",
+      "selectAll": "Izvēlēties visu",
+      "imageSizeHelper": "Labāku rezultātu iegūšanai attēliem ir jābūt mazākiem par 400 KB. Ieteicamais izmērs un forma ir 1000 x 750 pikseļi (platuma:augstuma proporcija 4:3) vai mazāks. Lielāki attēli var palēnināt veiktspēju. Lai veiktspēja būtu labāka, izmantojiet saspiestus JPG attēlus ar 80% attēlu kvalitāti.",
+      "imageSizeHelperUpdated": "Lai panāktu vislabākos rezultātus, attēliem jābūt mazākiem par 400 KB. Samaziniet attēla faila lielumu, lietojot formātu JPG, kas saglabāts ar 80% attēla kvalitāti. Ja jūsu attēls joprojām pārsniedz 400 KB, tā lielumu var papildus samazināt, mainot tā izmērus: ieteicams 1000 pikseļu platums x 750 pikseļu augstums (platuma–augstuma attiecība 4:3).",
+      "thumbnailLink": "Sīktēla saite",
+      "thumbnailHelp": "Ieteicamais sīktēla izmērs un forma ir 280 x 210 pikseļi (platuma:augstuma proporcija 4:3). Lielāki sīktēli var palēnināt veiktspēju. 4:3 proporcijas sīktēli ietilpst mozaīkās bez saspiešanas."
     },
     "settings": {
       "numberedPlaces": "Rādīt vietas ar skaitļiem",
@@ -55,7 +73,13 @@ define({
       "custom": "Pielāgots",
       "customTooltip": "Iestatiet izvietojumu, izmantojot pogu, kas parādās kartes mērogmaiņas vadīklās",
       "mapLocationTooltip": "Izvietojums, ko lietotāji redz, kad atver jūsu atlases sarakstu",
-      "bookmarksHelp": "Lai aktivizētu Shortlist grāmatzīmes, pievienojiet un pārvaldiet tīmekļa kartes grāmatzīmes tīmekļa kartes skatītājā"
+      "bookmarksHelp": "Lai aktivizētu Shortlist grāmatzīmes, pievienojiet un pārvaldiet tīmekļa kartes grāmatzīmes tīmekļa kartes skatītājā",
+      "generalOptions": "Vispārīgās opcijas",
+      "mapOptions": "Kartes opcijas",
+      "changeBasemap": "Mainīt pamatkarti",
+      "saveHomeLocation": "Saglabāt sākuma novietojumu",
+      "choose": "Izvēlieties",
+      "headerColor": "Galvenes krāsa"
     },
     "help": {
       "title": "PALĪDZĪBA",
@@ -81,7 +105,10 @@ define({
         "asIsOption": "Jā, izmantot tās esošajā stāvoklī",
         "asIsText": "Jūs turpināsiet labot un pārvaldīt vietas savā web kartē, nevis Shortlist veidotājā. Šajos datos veiktā atjaunošana tiek automātiski atspoguļota Shortlist atlases sarakstā. Šī izvēlne nosaka, ka jūsu dati izmanto šo sagatavi.",
         "badData": "Punktu slānis, kurā ir jūsu vietas, neizmanto noteikto datu sagatavi. Pārskatiet sagataves prasības.",
-        "downloadTemplate": "Lejupielādēt sagatavi"
+        "downloadTemplate": "Lejupielādēt sagatavi",
+        "selectPtData": "IZVĒLIETIES PUNKTA DATUS",
+        "multipleThemes": "VAI SLĀNIM IR VAIRĀKAS TĒMAS",
+        "chooseFields": "IZVĒLIETIES ATLASES SARAKSTĀ IZMANTOJAMOS LAUKUS"
       },
       "fieldPicker": {
         "nameField": "Lauks ar katras vietas nosaukumu: ",

@@ -35,11 +35,14 @@ define({
       "upgradeBrowser": "<a href='http://browsehappy.com/' target='_blank'>עדכן את הדפדפן</a>.",
       "mapLoadingFail": "משהו השתבש, המפה לא נטענה באופן תקין.",
       "signOut": "יציאה",
-      "attention": "שים לב!"
+      "attention": "שים לב!",
+      "noBuilderEdge": "ניתן להציג Shortlists של מפת סיפור בכל דפדפן אינטרנט. עם זאת, אשף בניית ה-Shortlist של מפת הסיפור אינו נתמך ב-Windows Edge. השתמש בדפדפן אינטרנט אחר כדי ליצור או לערוך Shortlist."
     },
     "headerFromCommon": {
       "storymapsText": "מפת סיפור",
       "builderButton": "ערוך",
+      "facebookTooltip": "שתף ב-Facebook",
+      "twitterTooltip": "שתף ב-Twitter",
       "bitlyTooltip": "קבל קישור קצר לאפליקציה",
       "templateTitle": "קבע כותרת לתבנית",
       "templateSubtitle": "קבע כותרת משנה לתבנית",
@@ -52,6 +55,10 @@ define({
       "embed": "הטמע בדף אינטרנט",
       "embedExplain": "השתמש בקוד ה-HTML הבא כדי להטמיע את האפליקציה בדף אינטרנט.",
       "size": "גודל (רוחב/גובה):"
+    },
+    "general": {
+      "noPlaces": "אין מקומות באזור זה. כדי לראות מקומות, הקטן את התצוגה או לחץ על לחצן הבית.",
+      "start": "התחל"
     }
   }
 });

@@ -7,7 +7,13 @@ define({
     "addEditPopup": {
       "test": "test",
       "add": "lägg till",
-      "edit": "edit"
+      "edit": "edit",
+      "editTab": "REDIGERA FLIK",
+      "addTab": "LÄGG TILL FLIK",
+      "organizeTabs": "ORDNA FLIKAR",
+      "themeColor": "Temafärg",
+      "location": "Plats",
+      "confirmDeletion": "Vill du ta bort "
     },
     "landing": {
       "lblAdd": "Vad vill du kalla din snabblista?",
@@ -17,7 +23,9 @@ define({
     },
     "organizePopup": {
       "title": "Organisera",
-      "tab": "tab"
+      "tab": "tab",
+      "dragNDrop": "Organisera berättelsen genom att dra och släppa flikar",
+      "lblColTitle": "Titel"
     },
     "settingsLayoutOptions": {
       "title": "Layoutalternativ",
@@ -35,10 +43,20 @@ define({
       "changeLocation": "Ändra plats",
       "setLocation": "Ange plats",
       "cancel": "Avbryt",
-      "addImage": "lägg till en bild genom att klicka eller dra och släppa",
+      "addImage": "Lägg till en bild genom att klicka eller dra och släppa",
+      "chooseImage": "VÄLJ BILD",
+      "importImages": "IMPORTERA BILDER",
+      "import": "IMPORTERA",
       "enterPlaceName": "Ange platsens namn",
       "enterPlaceDescription": "Ange platsens beskrivning",
-      "unnamedPlace": "Namnlös plats"
+      "unnamedPlace": "Namnlös plats",
+      "update": "Uppdatera",
+      "useLocation": "Använd den här platsen",
+      "selectAll": "Markera alla",
+      "imageSizeHelper": "För bästa resultat bör bilder vara mindre än 400 KB. Den rekommenderade storleken och formen är 1 000 × 750 pixlar (bredd:höjd-förhållande 4:3) eller mindre. Större bilder kan ge sämre prestanda. För bästa prestanda bör du använda komprimerade JPG-bilder med 80 % bildkvalitet.",
+      "imageSizeHelperUpdated": "För bästa prestanda bör bilder vara mindre än 400 kB. Om du vill minska filstorleken använder du JPG-formatet med 80 % bildkvalitet. Om din bild fortfarande är större än 400 kB, kan du minska filstorleken ytterligare genom att minska dess fysiska storlek: 1 000 pixlars bredd x 750 pixlars höjd (höjd–bredd-förhållandet 4:3) rekommenderas.",
+      "thumbnailLink": "Miniatyrlänk",
+      "thumbnailHelp": "Den rekommenderade storleken och formen för miniatyrbilder är 280 × 210 pixlar (bredd:höjd-förhållande 4:3). Större miniatyrbilder kan ge sämre prestanda. Miniatyrbilder med storleksförhållandet 4:3 passar in i sina tiles utan att beskäras."
     },
     "settings": {
       "numberedPlaces": "Visa platser med siffror",
@@ -55,7 +73,13 @@ define({
       "custom": "Anpassat",
       "customTooltip": "Ange platsen med knappen som visas bland kartans zoomkontroller",
       "mapLocationTooltip": "Den plats som människor ser när de öppnar din snabblista",
-      "bookmarksHelp": "Om du vill aktivera bokmärken i snabblistan, lägger du till och hanterar webbkartans bokmärken i webbkartans visningsprogram"
+      "bookmarksHelp": "Om du vill aktivera bokmärken i snabblistan, lägger du till och hanterar webbkartans bokmärken i webbkartans visningsprogram",
+      "generalOptions": "Allmänna alternativ",
+      "mapOptions": "Kartalternativ",
+      "changeBasemap": "Ändra baskarta",
+      "saveHomeLocation": "Spara startplats",
+      "choose": "Välj",
+      "headerColor": "Rubrikens färg"
     },
     "help": {
       "title": "HJÄLP",
@@ -81,7 +105,10 @@ define({
         "asIsOption": "Ja, använd dem som de är",
         "asIsText": "Du kommer att fortsätta att redigera och hantera dina platser i din webbkarta, inte i Shortlist Builder. Uppdateringar av dina data återspeglas automatiskt i din snabblista. Det här alternativet kräver att dina data använder denna mall.",
         "badData": "Det punktlager som innehåller dina platser använder inte den nödvändiga datamallen. Läs igenom kraven i mallen.",
-        "downloadTemplate": "Hämta mall"
+        "downloadTemplate": "Hämta mall",
+        "selectPtData": "VÄLJ PUNKTDATA",
+        "multipleThemes": "INNEHÅLLER DITT LAGER FLERA TEMAN",
+        "chooseFields": "VÄLJ VILKA FÄLT SNABBLISTAN SKA ANVÄNDA"
       },
       "fieldPicker": {
         "nameField": "Fält som innehåller namnet på varje plats: ",

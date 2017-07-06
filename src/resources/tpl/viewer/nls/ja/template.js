@@ -35,11 +35,14 @@ define({
       "upgradeBrowser": "<a href='http://browsehappy.com/' target='_blank'>ブラウザーを更新してください</a>。",
       "mapLoadingFail": "問題が発生しました。マップを正しく読み込みませんでした。",
       "signOut": "サイン アウト",
-      "attention": "注意"
+      "attention": "注意",
+      "noBuilderEdge": "ストーリー マップ ショートリストは、任意の Web ブラウザーで表示できます。 ただし、ストーリー マップ ショートリスト ビルダーは、Windows Edge ではサポートされていません。 ショートリストを作成または編集するには、別の Web ブラウザーを使用してください。"
     },
     "headerFromCommon": {
       "storymapsText": "ストーリー マップ",
       "builderButton": "編集",
+      "facebookTooltip": "Facebook で共有",
+      "twitterTooltip": "Twitter で共有",
       "bitlyTooltip": "アプリケーションへのショート リンクを取得",
       "templateTitle": "テンプレートのタイトルの設定",
       "templateSubtitle": "テンプレートのサブタイトルの設定",
@@ -52,6 +55,10 @@ define({
       "embed": "Web ページに埋め込む",
       "embedExplain": "アプリケーションを Web ページに埋め込むには、次の HTML コードを使用します。",
       "size": "サイズ (幅/高さ):"
+    },
+    "general": {
+      "noPlaces": "このエリアには場所が表示されていません。  縮小表示するか、[ホーム] ボタンをクリックして場所を表示してください。",
+      "start": "開始"
     }
   }
 });

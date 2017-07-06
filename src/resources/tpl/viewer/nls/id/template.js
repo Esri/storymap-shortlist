@@ -35,11 +35,14 @@ define({
       "upgradeBrowser": "<a href='http://browsehappy.com/' target='_blank'>Harap perbarui browser Anda</a>.",
       "mapLoadingFail": "Terjadi gangguan, peta tidak dimuat dengan benar.",
       "signOut": "Keluar",
-      "attention": "Perhatian!"
+      "attention": "Perhatian!",
+      "noBuilderEdge": "Peta Cerita Shortlists bisa dilihat di web browser mana pun. Namun Builder Peta Cerita Shortlist tidak didukung pada Windows Edge. Harap gunakan web browser yang berbeda untuk membuat atau mengedit Shortlist."
     },
     "headerFromCommon": {
       "storymapsText": "Peta cerita",
       "builderButton": "Edit",
+      "facebookTooltip": "Bagikan ke Facebook",
+      "twitterTooltip": "Bagikan ke Twitter",
       "bitlyTooltip": "Dapatkan tautan singkat ke aplikasi",
       "templateTitle": "Tentukan judul template",
       "templateSubtitle": "Tentukan subjudul template",
@@ -52,6 +55,10 @@ define({
       "embed": "Sematkan di halaman web",
       "embedExplain": "Gunakan kode HTML berikut untuk menyematkan aplikasi di laman web.",
       "size": "Ukuran (lebar/tinggi):"
+    },
+    "general": {
+      "noPlaces": "Tidak ada tempat di area ini. Perkecil atau klik tombol Beranda untuk melihat tempat.",
+      "start": "Mulai"
     }
   }
 });

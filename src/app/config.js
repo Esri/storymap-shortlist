@@ -64,7 +64,7 @@ app.cfg = {
 
 	LAYOUTS: [
 		{
-			id: "foo",
+			id: "foo"
 		}
 	],
 

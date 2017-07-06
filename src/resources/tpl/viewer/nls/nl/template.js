@@ -35,11 +35,14 @@ define({
       "upgradeBrowser": "<a href='http://browsehappy.com/' target='_blank'>Werk uw browser bij</a>.",
       "mapLoadingFail": "Er is een probleem opgetreden. De kaart is niet correct geladen.",
       "signOut": "Afmelden",
-      "attention": "Let op!"
+      "attention": "Let op!",
+      "noBuilderEdge": "Kaartverhaal-shortlists kunnen worden bekeken in elke internetbrowser. Maar de Kaartverhaal-shortlist Builder wordt niet ondersteund in Windows Edge. Gebruik een andere internetbrowser om een shortlist te maken of bewerken."
     },
     "headerFromCommon": {
       "storymapsText": "Een kaartverhaal",
       "builderButton": "Bewerken",
+      "facebookTooltip": "Delen op Facebook",
+      "twitterTooltip": "Delen op Twitter",
       "bitlyTooltip": "Een korte koppeling naar de applicatie maken",
       "templateTitle": "Titel voor template instellen",
       "templateSubtitle": "Subtitel voor template instellen",
@@ -52,6 +55,10 @@ define({
       "embed": "Inbedden in webpagina",
       "embedExplain": "Gebruik de volgende HTML-code om het journaal in een webpagina in te bedden.",
       "size": "Grootte (breedte/hoogte):"
+    },
+    "general": {
+      "noPlaces": "Geen plaatsen in dit gebied. Uitzoomen of klik op de Home-knop om plaatsen te zien.",
+      "start": "Start"
     }
   }
 });
