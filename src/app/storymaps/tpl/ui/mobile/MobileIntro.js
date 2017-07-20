@@ -51,7 +51,7 @@ define([
 						return;
 					$('#mobileIntro').append("<br><hr></hr>");
 					$('#mobileIntro').append('<ul id="mobileThemeList" class="mobileTileList">');
-					var introList = $('<li class="mobileTitleTheme">').append('<div class="startButton">' + i18n.builder.initPopup.startBtn + '</div>');
+					var introList = $('<li class="mobileTitleTheme">').append('<div class="startButton">' + i18n.viewer.general.start + '</div>');
 					introList.on('click', function(){
 						_this.selectMobileTheme(0);
 					});
