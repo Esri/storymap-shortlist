@@ -11,7 +11,7 @@ The Story Map Shortlist app lets you organize points of interest into tabs that 
 [Download](http://links.esri.com/storymaps/shortlist_template_zip) |
 [Shortlist page on Esri Story Maps website](http://storymaps.arcgis.com/en/app-list/shortlist/)
 
-**Latest release is version 2.3.3**, if you want to be informed of new releases, we recommend you to watch this repository ([see GitHub help](https://help.github.com/articles/watching-repositories)). See the [release page](https://github.com/Esri/shortlist-storytelling-template-js/releases) for release notes.
+**Latest release is version 2.4.3**, if you want to be informed of new releases, we recommend you to watch this repository ([see GitHub help](https://help.github.com/articles/watching-repositories)). See the [release page](https://github.com/Esri/shortlist-storytelling-template-js/releases) for release notes.
 
 For more infomation about using and customizing Esri's Storytelling Apps follow the [Story Maps Developers' Corner](https://developerscorner.storymaps.arcgis.com).
 
@@ -99,9 +99,6 @@ This is not a supported use case at that time.
 The Shortlist data are stored in a Web Application Item in ArcGIS Online and its associated Web Map. This include the narrative content, reference to the webmap, reference to picture(s), and the settings.
 
 The image that you include in your Shortlist using the builder are not copied in ArcGIS Online. You have to make sure that those medias as well as the webmap you are using are and will remain accessible to your audience.
-
-#### Can I deploy Shorlist on Portal for ArcGIS?
-Shortlist is not included in Portal for ArcGIS. We are planning to include it in Portal for ArcGIS 10.5.1
 
 #### Can I use the builder with the downloadable?
 Yes, when the template is configured with an application ID, adding the URL parameter 'edit' will open the builder. You will be prompted for user authentication through the Identity Manager.
@@ -207,7 +204,7 @@ Find a bug or want to request a new feature?  Please let us know by submitting a
 Esri welcomes contributions from anyone and everyone. Please see our [guidelines for contributing](https://github.com/esri/contributing).
 
 ## Licensing
-Copyright 2013 Esri
+Copyright 2016, 2017 Esri
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
