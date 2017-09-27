@@ -84,7 +84,7 @@ define({
     "help": {
       "title": "PALĪDZĪBA",
       "shortlistHelp1": "Esiet sveicināts lietotnē Story Map Shortlist! Šī lietotne sniedz iespēju apskates objektus izkārtot cilnēs, lai lietotājiem būtu interesanti iepazīt apkārtni. Šajā veidotājā varat interaktīvi veidot savas vietas.",
-      "shortlistHelp2": "Varat arī izveidot atlases sarakstu no esošas ArcGIS tīmekļa kartes ar iespēju par vietām izmantot kartē esošos punktu datus.",
+      "shortlistHelp2": "Tāpat varat izveidot Shortlist sarakstu no esošas ArcGIS tīmekļa kartes, tostarp izmantot opciju lietot esošos punktu datus kartē kā vietas. Šos punktu datus varat importēt funkcijā Shortlist Builder turpmākai labošanai vai, ja jūsu vietas izmanto <a href='http://links.esri.com/storymaps/shortlist_layer_template' target='_blank'>Shortlist saraksta datu shēmu</a>, darbināt Shortlist sarakstu tieši no šiem datiem tādu, kāds tas ir. Lai uzzinātu vairāk, skatiet <a href='http://links.esri.com/storymaps/faq_shortlist_create_from_webmap' target='_blank'>šos bieži uzdotos jautājumus</a>.",
       "shortlistHelp3": "Lai izveidotu atlases sarakstu no tīmekļa kartes, dodieties uz",
       "shortlistHelp4": "atveriet tīmekļa karti, izveidojiet no tās tīmekļa lietotni un lietotņu galerijā izvēlēties Story Map Shortlist. Ja jūsu tīmekļa kartē ir punktu slāņi, Shortlist veidotājs aicinās  izvēlēties slāņus, ko izmantosiet kā vietas. Ja atlases sarakstu izveidojāt, izmantojot lietotnes oriģinālo, neviesoto versiju, varat savu atlases sarakstu migrēt šajā lietotnes viesotajā versijā, veicot tās pašas darbības.",
       "shortlistHelp5": "Lai iegūtu papildinformāciju",

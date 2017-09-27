@@ -84,7 +84,7 @@ define({
     "help": {
       "title": "도움말",
       "shortlistHelp1": "Story Map Shortlist를 시작합니다. 이 앱에서는 탭으로 구성된 관심 장소를 제공할 수 있으므로 사람들이 지역 내에 무엇이 있는지를 재미있게 찾아볼 수 있습니다. 이 빌더에서는 관심 장소를 대화형으로 작성할 수 있습니다.",
-      "shortlistHelp2": "맵 내의 기존 포인트 데이터를 장소로 사용하는 옵션이 포함되어 있는 기존 ArcGIS 웹 맵에서 Shortlist를 생성할 수도 있습니다.",
+      "shortlistHelp2": "맵 내의 기존 포인트 데이터를 장소로 사용하는 옵션이 포함되어 있는 기존 ArcGIS 웹 맵에서 Shortlist를 생성할 수도 있습니다. 해당 포인트 데이터를 추가로 편집하기 위해 Shortlist 빌더로 가져올 수 있으며, 또는 <a href='http://links.esri.com/storymaps/shortlist_layer_template' target='_blank'>Shortlist 데이터 스키마</a>가 사용된 장소인 경우에는 해당 데이터에서 Shortlist를 '있는 그대로' 직접 만들 수 있습니다. 자세한 내용은 <a href='http://links.esri.com/storymaps/faq_shortlist_create_from_webmap' target='_blank'>이 FAQ</a>를 참고하세요.",
       "shortlistHelp3": "웹 맵에서 Shortlist를 생성하려면",
       "shortlistHelp4": "(으)로 이동하여 웹 맵을 연 다음 웹 맵에서 웹 앱을 생성하고 앱 갤러리에서 Story Map Shortlist를 선택합니다. 웹 맵에 포인트 레이어가 포함되어 있으면 Shortlist 빌더에서 장소로 사용할 레이어를 선택하라는 메시지가 표시됩니다. 기존의 비호스팅 버전 앱을 사용하여 Shortlist를 생성한 경우에는 동일한 단계를 통해 Shortlist를 이 호스팅 버전 앱으로 마이그레이션할 수 있습니다.",
       "shortlistHelp5": "자세한 내용은",

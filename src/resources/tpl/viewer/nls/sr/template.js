@@ -36,7 +36,8 @@ define({
       "mapLoadingFail": "Došlo je do greške, mapa se nije učitala pravilno.",
       "signOut": "Odjavite se",
       "attention": "Napomena!",
-      "noBuilderEdge": "Story Map Shortlist može da bude pregledana u bilo kom veb pregledaču. Međutim,  Story Map Shortlist Builder nije podržan na Windows Edge verziji. Koristite drugi veb pregledač kako biste kreirali ili uredili Shortlist."
+      "noBuilderEdge": "Story Map Shortlist može da bude pregledana u bilo kom veb pregledaču. Međutim,  Story Map Shortlist Builder nije podržan na Windows Edge verziji. Koristite drugi veb pregledač kako biste kreirali ili uredili Shortlist.",
+      "noBuilderAllIE": "Story Map Shortlist može da bude pregledana u bilo kom veb pregledaču. Međutim, Story Map Shortlist Builder nije podržan na Microsoft Edge ili Internet Explorer verziji. Koristite drugi veb pregledač kako biste kreirali ili uredili Shortlist."
     },
     "headerFromCommon": {
       "storymapsText": "Story mapa",

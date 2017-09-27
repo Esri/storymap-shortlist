@@ -84,7 +84,7 @@ define({
     "help": {
       "title": "YARDIM",
       "shortlistHelp1": "Story Map Shortlist uygulamasına hoş geldiniz. Bu uygulama ilgi çeken yerleri sekmeler halinde düzenleyerek sunmanızı ve insanların civarda bulunan yerleri keşfetmesini daha eğlenceli hale getirmenize olanak tanır. Bu Builder içinde yerlerinizde etkileşimli olarak düzenleme yapabilirsiniz.",
-      "shortlistHelp2": "Ayrıca mevcut bir ArcGIS web haritasından da bir Kısa Liste oluşturabilir, haritadaki mevcut nokta verilerini yer olarak kullanma seçeneğinden yararlanabilirsiniz.",
+      "shortlistHelp2": "Varolan bir ArcGIS web haritasından bir Kısa Liste oluşturabilir ve burada, harita üzerindeki mevcut nokta verilerini yerler olarak kullanabilirsiniz. Bu nokta verilerini daha fazla düzenleme için Kısa Liste Oluşturucu'ya aktarabilir veya yerleriniz <a href='http://links.esri.com/storymaps/shortlist_layer_template' target='_blank'>Kısa Liste veri şemasını</a> kullanıyorsa, Kısa Listenizi 'olduğu gibi' doğrudan bu verilerden oluşturabilirsiniz. Bununla ilgili daha fazla bilgi için <a href='http://links.esri.com/storymaps/faq_shortlist_create_from_webmap' target='_blank'>bu SSS'ye</a> bakın.",
       "shortlistHelp3": "Bir web haritasından Kısa Liste oluşturmak için şuraya gidin:",
       "shortlistHelp4": "web haritasını açın, bundan bir web uygulaması oluşturun ve uygulama galerisinden Story Map Shortlist seçeneğini belirleyin. Web haritanızda nokta katmanı varsa, Shortlist Builder yer olarak kullanmak istediğiniz katmanları seçmenizi ister. Uygulamanın barındırılmayan orijinal sürümünü kullanarak bir Kısa Liste oluşturduysanız, aynı adımları uygulayarak Kısa Listenizi uygulamanın barındırılan bu sürümüne geçirebilirsiniz.",
       "shortlistHelp5": "Daha fazla bilgi için",

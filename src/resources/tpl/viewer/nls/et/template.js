@@ -36,7 +36,8 @@ define({
       "mapLoadingFail": "Midagi läks valesti ning kaarti ei laaditud õigesti.",
       "signOut": "Logi välja",
       "attention": "Tähelepanu!",
-      "noBuilderEdge": "Kaardiloo lühiloendeid saab kuvada kõigis brauserites, aga kaardiloo lühiloendi koostur pole toetatud brauseris Windows Edge. Kasutage lühiloendi loomiseks või redigeerimiseks mõnda muud brauserit."
+      "noBuilderEdge": "Kaardiloo lühiloendeid saab kuvada kõigis brauserites, aga kaardiloo lühiloendi koostur pole toetatud brauseris Windows Edge. Kasutage lühiloendi loomiseks või redigeerimiseks mõnda muud brauserit.",
+      "noBuilderAllIE": "Kaardiloo lühiloendeid saab kuvada kõigis brauserites, aga kaardiloo lühiloendi koostur pole toetatud brauserites Microsoft Edge ega Internet Explorer. Kasutage lühiloendi loomiseks või redigeerimiseks mõnda muud brauserit."
     },
     "headerFromCommon": {
       "storymapsText": "Kaardilugu",

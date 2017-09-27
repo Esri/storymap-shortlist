@@ -24,7 +24,7 @@ body {
 }
 
 b, strong {
-	font-family: 'open_sanssemibold',,'Helvetica Neue','Helvetica','Arial',sans-serif;
+	font-family: 'open_sanssemibold','Helvetica Neue','Helvetica','Arial',sans-serif;
 	font-weight: bold;
 }
 

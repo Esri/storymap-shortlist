@@ -122,6 +122,7 @@ define(["lib-build/tpl!./BuilderView",
 				_initPopup = new InitPopup($("#initPopup")),
 				_helpUI = new Help($("#builderHelp")),
 				_sharePopup = new SharePopup($('#sharePopup')),
+				_helper = new Helper(),
 				_addEditPopup = new AddEditPopup($('#addEditPopup'), _this),
 				_media = new Media($('#editorDialogInlineMedia')),
 				_organizePopup = new OrganizePopup($('#organizePopup')),
@@ -435,7 +436,7 @@ define(["lib-build/tpl!./BuilderView",
 								featImgUrl = decodeURI(featImgUrl);
 							}
 
-							return featImgUrl == imgUrl;
+							return featImgUrl.slice(featImgUrl.lastIndexOf('/')) == imgUrl.slice(imgUrl.lastIndexOf('/'));
 						});
 						if(!foundImg.length)
 							unusedUploads.push(image);
@@ -962,7 +963,7 @@ define(["lib-build/tpl!./BuilderView",
 					var fields = shortlistLayer.fields;
 
 					$.each(fields, function(index, field){
-						if(field.name.toLowerCase() == 'number')
+						if(field.name.toLowerCase() == 'number' || field.name.toLowerCase() == 'placenumsl')
 							featureNumber = field.name;
 					});
 				}
@@ -1043,7 +1044,7 @@ define(["lib-build/tpl!./BuilderView",
 					// Due to browser iconsistency, we need to find the value the browser interprets
 					// for a pixel we know contains the color we will look to replace.
 					var iconColor = getPixel(imageData, 4804);
-					if(iconColor[0] !=hexToRgb(newIconColor).r || iconColor[1] != hexToRgb(newIconColor).g || iconColor[1] != hexToRgb(newIconColor).b)
+					if(!(iconColor[0] == hexToRgb(newIconColor).r && iconColor[1] == hexToRgb(newIconColor).g && iconColor[2] == hexToRgb(newIconColor).b))
 					{
 						for (var i=0;i<imageData.data.length;i+=4)
 						{
@@ -1068,7 +1069,7 @@ define(["lib-build/tpl!./BuilderView",
 					newContext.putImageData(coloredIcon,0,0);
 
 				if(WebApplicationData.getGeneralOptions().numberedIcons){
-					var label = feature.attributes.number;//index + 1;
+					var label = feature.attributes.PLACENUMSL ? feature.attributes.PLACENUMSL : feature.attributes.number;//index + 1;
 					newContext.textAlign = "center";
 					newContext.fillStyle = 'white';
 					newContext.fillText(label, newCanvas.width/3.2, newCanvas.height/2);
@@ -1357,9 +1358,14 @@ define(["lib-build/tpl!./BuilderView",
 						var shortlistLayer = app.map.getLayer(app.data.getShortlistLayerId());
 						//_this.initMapExtentSave();
 
-						if(!app.data.getWebAppData().getIsExternalData())
-							Object.assign(app.layerCurrent, shortlistLayer);
-							//app.layerCurrent = shortlistLayer;
+						if(!app.data.getWebAppData().getIsExternalData()){
+							/*if (_helper.isIE() <= 0){
+								Object.assign(app.layerCurrent, shortlistLayer);
+								return;
+							}/*else{
+								app.layerCurrent = lang.clone(shortlistLayer);
+							}*/
+						}
 						shortlistLayer.on("mouse-over", _mainView.layer_onMouseOver);
 						shortlistLayer.on("mouse-out", _mainView.layer_onMouseOut);
 						shortlistLayer.on("click", _mainView.layer_onClick);

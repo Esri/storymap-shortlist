@@ -84,7 +84,7 @@ define({
     "help": {
       "title": "帮助",
       "shortlistHelp1": "欢迎使用 Story Map Shortlist。该应用程序将以选项卡的形式呈现感兴趣的地点，为用户提供探索区域的乐趣。可在构建器中采用交互的方式构建地点。",
-      "shortlistHelp2": "您也可以从现有 ArcGIS Web 地图中创建 Shortlist，其中包括将地图中的现有点数据用作地点的选项。",
+      "shortlistHelp2": "您还可以从现有 ArcGIS web 地图创建 Shortlist，其中包括可将地图中现有点数据用作地点的选项。您可以将该点数据导入到 Shortlist 构建器以进行进一步编辑，或者，如果地点使用 <a href='http://links.esri.com/storymaps/shortlist_layer_template' target='_blank'>Shortlist 数据方案</a>，则直接从该数据“原样”启动 Shortlist。请参阅<a href='http://links.esri.com/storymaps/faq_shortlist_create_from_webmap' target='_blank'>该常见问题解答</a>获取关于此内容的详细信息。",
       "shortlistHelp3": "要从 Web 应用程序中创建 Shortlist，请转至",
       "shortlistHelp4": "打开 Web 地图，从中创建 Web 应用程序，从应用程序库中选择 Story Map Shortlist。如果 Web 地图包含任意点图层，则 Shortlist 构建器将提示您选择希望用作地点的图层。如果创建 Shortlist 的应用程序是原始的非托管版本，则可使用同样的步骤将 Shortlist 迁移到该托管应用程序版本。",
       "shortlistHelp5": "有关详细信息",

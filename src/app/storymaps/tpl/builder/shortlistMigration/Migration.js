@@ -659,8 +659,10 @@ define(["lib-build/tpl!./Migration",
 
 					var baseMapLayer = app.map.getLayer(app.data.getWebMap().itemData.baseMap.baseMapLayers[0].id);
 
-					if(baseMapLayer.tileIndexUrl && baseMapLayer.loaded)
+					if(baseMapLayer.tileIndexUrl && baseMapLayer.loaded){
 						addLayers(shortlistLayer, title, descFields, link, imageUrl, thumbUrl);
+						baseMapLayerUpdated = true;
+					}
 					baseMapLayer.on('update-end', function(){
 						if(baseMapLayerUpdated)
 							return;
@@ -732,17 +734,33 @@ define(["lib-build/tpl!./Migration",
 							tab_id: index,
 							locationSet: locationSet
 						};
+						var dateFields = [];
+						$.each(graphic._layer.fields, function(i, field){
+							if(field.type == 'esriFieldTypeDate')
+								dateFields.push(field.name);
+						});
+						$.each(dateFields, function(i, field){
+							if(graphic.attributes[field]){
+								var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+								var newDate = new Date(graphic.attributes[field]);
+								var newDateString = months[newDate.getMonth()] + ' ' + newDate.getDate() + ', ' + newDate.getFullYear();
+								graphic.attributes[field] = newDateString;
+							}
+						})
 						if(graphic.attributes.number)
 							newAttributes.number = graphic.attributes.number;
 						if(graphic.attributes.Number)
 							newAttributes.number = graphic.attributes.Number;
 						if(graphic.attributes.NUMBER)
 							newAttributes.number = graphic.attributes.NUMBER;
+						if(graphic.attributes.PLACENUMSL)
+							newAttributes.number = graphic.attributes.PLACENUMSL;
 						newAttributes.name = graphic.attributes[title];
 						$.each(descFields, function(ind, field){
 							//newAttributes.description += '<div class="detailFeatureDesc" style="min-height: 0;" >' + graphic.attributes[field] + '</div>';
-							if(graphic.attributes[field])
+							if(graphic.attributes[field]){
 								newAttributes.description +=  ('<p>' + graphic.attributes[field] + '</p>');
+							}
 						});
 						if(link != "none"){
 							if(graphic.attributes[link])

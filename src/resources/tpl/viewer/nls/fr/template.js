@@ -36,7 +36,8 @@ define({
       "mapLoadingFail": "Une erreur s'est produite et la carte n'a pas été chargée correctement.",
       "signOut": "Se déconnecter",
       "attention": "Attention !",
-      "noBuilderEdge": "Les présélections Story Map Shortlists peuvent être affichées dans tout navigateur web. Néanmoins, le générateur Story Map Shortlist n'est pas pris en charge dans Microsoft Edge. Utilisez un autre navigateur web pour créer ou modifier une présélection."
+      "noBuilderEdge": "Les présélections Story Map Shortlists peuvent être affichées dans tout navigateur web. Néanmoins, le générateur Story Map Shortlist n'est pas pris en charge dans Microsoft Edge. Utilisez un autre navigateur web pour créer ou modifier une présélection.",
+      "noBuilderAllIE": "Les présélections Story Map Shortlist peuvent être affichées dans tout navigateur Web. Néanmoins, le générateur Story Map Shortlist n’est pas pris en charge dans Microsoft Edge ou Internet Explorer. Utilisez un autre navigateur Web pour créer ou modifier une présélection."
     },
     "headerFromCommon": {
       "storymapsText": "Story Map",

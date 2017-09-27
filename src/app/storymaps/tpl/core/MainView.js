@@ -338,7 +338,7 @@ define(["lib-build/css!./MainView",
 						featServLayerIndex.push(index);
 					}
 
-					if(layer.graphics.length < 1){
+					if(layer.graphics.length < 1 && layer.visibleAtMapScale){
 						on.once(layer, 'update-end', function(){
 							var fields = layer.fields;
 							var tabField;
@@ -346,10 +346,10 @@ define(["lib-build/css!./MainView",
 								if(field.name.toLowerCase() == 'tab_name')
 									tabField = true;
 							});
-							if(tabField){
+							/*if(tabField){
 								buildThemes(layer);
 								layerFound = true;
-							}
+							}*/
 							if(!tabField && index == layers.length - 1){
 								var message = i18n.builder.migration.migrationPattern.badData;
 								message += '  (<a href="http://links.esri.com/storymaps/shortlist_layer_template" target="_blank" download="">'+i18n.builder.migration.migrationPattern.downloadTemplate+'</a>)';
@@ -447,10 +447,11 @@ define(["lib-build/css!./MainView",
 						name = true;
 					if(field.name.toLowerCase() == 'pic_url')
 						pic = true;
-					if(field.name.toLowerCase() == 'number')
+					if(!featureNumber && field.name.toLowerCase() == 'number')
+						featureNumber = field.name;
+					if(field.name.toLowerCase() == 'placenumsl')
 						featureNumber = field.name;
 				});
-
 				// If layer does not contain a name or pic field, we return error.
 				// Since this is an existing web map, we assume location is present.
 				if(!name || !pic){
@@ -518,6 +519,14 @@ define(["lib-build/css!./MainView",
 
 				app.map.reorderLayer(layer, app.map.graphicsLayerIds.length);
 
+				/*if(featureNumber){
+					$.each(layer.graphics, function(index, graphic){
+						graphic.attributes.number = graphic.attributes[featureNumber];
+					});
+					//order features
+					layer.graphics.sort(SortByNumber);
+				}*/
+
 				$.each(layer.graphics, function(index, graphic){
 					var atts = layer.graphics[index].attributes;
 					var tabField = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'tab_name';})[0]];
@@ -562,6 +571,9 @@ define(["lib-build/css!./MainView",
 					}});
 				});
 				if(featureNumber){
+					$.each(layer.graphics, function(index, graphic){
+						graphic.attributes.number = graphic.attributes[featureNumber];
+					});
 					//order features
 					layer.graphics.sort(SortByNumber);
 				}
@@ -1375,7 +1387,7 @@ define(["lib-build/css!./MainView",
 						newContext.putImageData(coloredIcon,0,0);
 
 					if(WebApplicationData.getGeneralOptions().numberedIcons){
-						var label = point.attributes.number;//index + 1;
+						var label = point.attributes.PLACENUMSL ? point.attributes.PLACENUMSL : point.attributes.number;//index + 1;
 						newContext.textAlign = "center";
 						newContext.fillStyle = 'white';
 						newContext.fillText(label, newCanvas.width/3.2, newCanvas.height/2);
@@ -1848,7 +1860,11 @@ define(["lib-build/css!./MainView",
 			{
 				var aNumber = a.attributes.number || a.attributes.shortlist_id;
 				var bNumber = b.attributes.number || b.attributes.shortlist_id;
-				return ((aNumber < bNumber) ? -1 : ((aNumber > bNumber) ? 1 : 0));
+				if(!!window.chrome){
+					return ((aNumber < bNumber) ? -1 : (aNumber == bNumber) ? -1 : ((aNumber > bNumber) ? 1 : 0));
+				}else{
+					return ((aNumber < bNumber) ? -1 : ((aNumber > bNumber) ? 1 : 0));
+				}
 			}
 
 			/*

@@ -36,7 +36,8 @@ define({
       "mapLoadingFail": "发生了一些错误，地图未正确加载。",
       "signOut": "登出",
       "attention": "注意!",
-      "noBuilderEdge": "可在任意 Web 浏览器中查看 Story Map Shortlist。但是，Story Map Shortlist 构建器不支持 Windows Edge。请使用其他 Web 浏览器创建或编辑 Shortlist。"
+      "noBuilderEdge": "可在任意 Web 浏览器中查看 Story Map Shortlist。但是，Story Map Shortlist 构建器不支持 Windows Edge。请使用其他 Web 浏览器创建或编辑 Shortlist。",
+      "noBuilderAllIE": "可在任意 Web 浏览器中查看 Story Map Shortlist。但是，Story Map Shortlist 构建器不支持 Microsoft Edge 或 Internet Explorer。请使用其他 Web 浏览器创建或编辑 Shortlist。"
     },
     "headerFromCommon": {
       "storymapsText": "故事地图",

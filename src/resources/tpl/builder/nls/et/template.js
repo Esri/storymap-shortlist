@@ -84,7 +84,7 @@ define({
     "help": {
       "title": "ABI",
       "shortlistHelp1": "Tere tulemast rakendusse Story Map Shortlist. See rakendus võimaldab huvipunkte organiseerida vahekaartideks, mis muudab kasutajate jaoks selle piirkonna avastamise huvitavamaks. Selles koosturis saate oma asukohti luua ka interaktiivselt.",
-      "shortlistHelp2": "Lühinimekirja saate luua ka olemasoleval ArcGIS veebikaardil. Seal on ka võimalik kasutada olemasolevaid punktandmeid kaardil kohtadena.",
+      "shortlistHelp2": "Kaardiloo lühiloendi saate luua ka olemasolevast ArcGIS-i veebikaardist (sh võimalus kasutada olemasolevaid kaardi punktiandmeid kohtadena). Need punktiandmed saate importida lühiloendi koosturisse edasiste muudatuste tegemiseks või kui teie kohad kasutavad <a href='http://links.esri.com/storymaps/shortlist_layer_template' target='_blank'>lühiloendi andmete skeemi</a>, võtta lühiloendi andmeteste nende olemasoleval kujul. Lisateabe saamiseks vaadake <a href='http://links.esri.com/storymaps/faq_shortlist_create_from_webmap' target='_blank'>seda KKK-d</a>.",
       "shortlistHelp3": "Veebikaardil lühinimekirja loomiseks avage",
       "shortlistHelp4": "veebikaart, looge seal veebirakendus ja valige rakenduste galeriist rakendus Story Map Shortlist. Kui teie veebikaart sisaldab punktikihte, juhib lühinimekirjade koostur teid kihtide valiku juurde, mida soovite kasutada asukohtadena. Kui kasutasite lühinimekirja loomiseks rakenduse algupärast, ilma majutuseta versiooni, saate oma lühinimekirja samade toimingute abil üle kanda majutusega versiooni.",
       "shortlistHelp5": "Lisateabe saamiseks",

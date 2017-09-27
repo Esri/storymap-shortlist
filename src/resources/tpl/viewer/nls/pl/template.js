@@ -36,7 +36,8 @@ define({
       "mapLoadingFail": "Wystąpił pewien problem, nie wczytano mapy prawidłowo.",
       "signOut": "Wyloguj się",
       "attention": "Uwaga!",
-      "noBuilderEdge": "Krótkie listy aplikacji Story Map — Krótka lista można wyświetlać w każdej przeglądarce internetowej. Należy jednak pamiętać, że kreator tej aplikacji nie jest obsługiwany w przeglądarce Windows Edge. Do tworzenia i edycji krótkich list należy używać innych przeglądarek."
+      "noBuilderEdge": "Krótkie listy aplikacji Story Map — Krótka lista można wyświetlać w każdej przeglądarce internetowej. Należy jednak pamiętać, że kreator tej aplikacji nie jest obsługiwany w przeglądarce Windows Edge. Do tworzenia i edycji krótkich list należy używać innych przeglądarek.",
+      "noBuilderAllIE": "Story Map — Krótka lista to szablon, który można wyświetlać w każdej przeglądarce internetowej. Należy jednak pamiętać, że kreator tej aplikacji nie jest obsługiwany w przeglądarkach Microsoft Edge i Internet Explorer. Do tworzenia i edycji krótkich list należy używać innych przeglądarek."
     },
     "headerFromCommon": {
       "storymapsText": "mapa narracji (Story Map)",

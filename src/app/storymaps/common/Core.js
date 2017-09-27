@@ -260,6 +260,9 @@ define(["lib-build/css!lib-app/bootstrap/css/bootstrap.min",
 
 				definePortalConfig();
 
+				// Pass cookie onto API to avoid infinite redirects
+				IdentityManager.checkSignInStatus(app.portal.portalUrl);
+
 				// If app is configured to use OAuth
 				if ( app.indexCfg.oAuthAppId ) {
 					var info = new ArcGISOAuthInfo({
@@ -780,7 +783,9 @@ define(["lib-build/css!lib-app/bootstrap/css/bootstrap.min",
 			app.builder && app.builder.appInitComplete();
 
 			// Load My Stories in builder or viewer if user is owning the story
-			if ( (app.isInBuilder || app.userCanEdit) && has("ie") != 9 && ! _urlParams.preview ) {
+			var isPreview = (_urlParams.preview === 'true' || _urlParams.preview === '');
+			var isAutoplay = (_urlParams.autoplay === 'true' || _urlParams.autoplay === '');
+			if ( (app.isInBuilder || app.userCanEdit) && has("ie") != 9 && !isPreview && !isAutoplay ) {
 				if ( has("ff") ) {
 					$(".builderShare #my-stories-frame").remove();
 				}
@@ -1038,6 +1043,7 @@ define(["lib-build/css!lib-app/bootstrap/css/bootstrap.min",
 			return ! app.isInBuilder && (
 				(! isProd() && !! CommonHelper.getAppID(isProd()))
 				|| isProd() && app.userCanEdit)
+				&& (_urlParams.autoplay === undefined || _urlParams.autoplay == 'false')
 				&& (_urlParams.preview === undefined || _urlParams.preview == 'false');
 		}
 

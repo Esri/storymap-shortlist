@@ -84,7 +84,7 @@ define({
     "help": {
       "title": "POMOĆ",
       "shortlistHelp1": "Dobrodošli u Story Map Shortlist. Ovaj vam app omogućuje prikazivanje zanimljivih mjesta organiziranih u kartice, što ih čini istraživanje područja zabavnim. Možete interaktivno postaviti svoja mjesta u ovom sastavljaču.",
-      "shortlistHelp2": "Također možete izraditi Shortlist iz potojeće ArcGIS web-karte, uključujući opciju za korištenje postojećih točkastih podataka na karti kao mjesta.",
+      "shortlistHelp2": "Također možete izraditi Shortlist iz potojeće ArcGIS web-karte, uključujući opciju za korištenje postojećih točkastih podataka na karti kao mjesta. Možete uvesti te točkaste podatke u Shortlist Builder za dodatno uređivanje ili ako vaša mjesta koriste <a href='http://links.esri.com/storymaps/shortlist_layer_template' target='_blank'>shemu podataka Shortlist</a>, izvezite svoj Shortlist izravno od tih podataka kakvi jesu. Pogledajte <a href='http://links.esri.com/storymaps/faq_shortlist_create_from_webmap' target='_blank'>Često postavljena pitanja</a> za više informacija.",
       "shortlistHelp3": "Za stvaranje Shortlista iz web-karte idite na",
       "shortlistHelp4": "otvorite web-kartu, izradite web-app od nje i odaberite Story Map Shortlist u galeriji appova. Ako vaša web-karta sadrži točkaste slojeve, sastavljač Shortlist Builder od vas će zatražiti da odaberete slojeve koje želite koristiti kao mjesta. Ako ste izradili Shortlist upotrebom izvorne, nehostirane verzije appa, možete premjestiti svoj Shortlist u ovu hostiranu verziju appa upotrebom istih koraka.",
       "shortlistHelp5": "Za više informacija",

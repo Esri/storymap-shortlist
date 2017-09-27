@@ -84,7 +84,7 @@ define({
     "help": {
       "title": "PAGALBA",
       "shortlistHelp1": "Sveiki! Čia – Trumpojo sąrašo žemėlapio pasakojimas. Ši aplikacija leidžia jums interaktyviai pateikti lankytinas vietas ar objektus skirtukuose.",
-      "shortlistHelp2": "Trumpąjį sąrašą taip pat galite sukurti iš esamo ArcGIS internetinio žemėlapio ir kaip vietas panaudoti esamus žemėlapio taškų duomenis.",
+      "shortlistHelp2": "Galite sukurti Trumpojo sąrašo aplikaciją iš esamo ArcGIS internetinio žemėlapio, įtraukdami parinktį žemėlapyje naudoti esamus taškų duomenis kaip vietas.  Tuos taškų duomenis galite importuoti į Trumpojo sąrašo kūrimo priemonę, kur galėsite ją toliau redaguoti, arba, jei jūsų vietoms naudojama <a href='http://links.esri.com/storymaps/shortlist_layer_template' target='_blank'>Trumpojo sąrašo duomenų schema</a>, sukurti aplikaciją tiesiai iš tų duomenų. Daugiau informacijos apie tai ieškokite <a href='http://links.esri.com/storymaps/faq_shortlist_create_from_webmap' target='_blank'>šis DUK</a>.",
       "shortlistHelp3": "Jei norite Trumpąjį sąrašą kurti iš internetinio žemėlapio, eikite į",
       "shortlistHelp4": "atidarykite internetinį žemėlapį, sukurkite iš jo internetinę aplikaciją ir aplikacijų galerijoje pasirinkite Trumpasis sąrašas. Jei jūsų internetiniame žemėlapyje yra taškų sluoksnių, Trumpojo sąrašo kūrimo priemonė paragins jus pasirinkti tuos sluoksnius, kuriuos norite panaudoti aplikacijoje. Jei Trumpąjį sąrašą sukūrėte naudodami pradinę, netalpinamą aplikacijos versiją, ją galite perkelti į talpinamą aplikacijos versiją atlikdami tokius pačius veiksmus.",
       "shortlistHelp5": "Daugiau informacijos",

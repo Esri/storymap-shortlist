@@ -36,7 +36,8 @@ define({
       "mapLoadingFail": "Υπήρξε κάποιο πρόβλημα, ο χάρτης δεν φορτώθηκε σωστά.",
       "signOut": "Έξοδος",
       "attention": "Προσοχή!",
-      "noBuilderEdge": "Μπορείτε να προβάλλετε τα Story Map Shortlist σε οποιοδήποτε πρόγραμμα περιήγησης στο web. Ωστόσο το Εργαλείο δημιουργίας Story Map Shortlist δεν υποστηρίζεται στο Windows Edge. Χρησιμοποιήστε άλλο πρόγραμμα περιήγησης στο web, για να δημιουργήσετε ή να επεξεργαστείτε μια Shortlist."
+      "noBuilderEdge": "Μπορείτε να προβάλλετε τα Story Map Shortlist σε οποιοδήποτε πρόγραμμα περιήγησης στο web. Ωστόσο το Εργαλείο δημιουργίας Story Map Shortlist δεν υποστηρίζεται στο Windows Edge. Χρησιμοποιήστε άλλο πρόγραμμα περιήγησης στο web, για να δημιουργήσετε ή να επεξεργαστείτε μια Shortlist.",
+      "noBuilderAllIE": "Η προβολή Story Map Shortlist είναι εφικτή σε οποιοδήποτε πρόγραμμα περιήγησης στον Ιστό. Ωστόσο, το Εργαλείο δημιουργίας Story Map Shortlist δεν υποστηρίζεται σε Windows Edge ή Internet Explorer. Χρησιμοποιήστε διαφορετικό πρόγραμμα περιήγησης στον Ιστό για τη δημιουργία ή την επεξεργασία ενός Shortlist."
     },
     "headerFromCommon": {
       "storymapsText": "Ένα story map",

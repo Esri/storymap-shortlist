@@ -36,7 +36,8 @@ define({
       "mapLoadingFail": "Đã xảy ra lỗi, bản đồ không tải đúng.",
       "signOut": "Đăng Xuất",
       "attention": "Chú ý!",
-      "noBuilderEdge": "Có thể xem Story Map Shortlists trên bất kỳ trình duyệt web nào. Tuy nhiên, Story Map Shortlist Builder không được hỗ trợ trên Windows Edge. Vui lòng sử dụng trình duyệt web khác để tạo hoặc chỉnh sửa Shortlist."
+      "noBuilderEdge": "Có thể xem Story Map Shortlists trên bất kỳ trình duyệt web nào. Tuy nhiên, Story Map Shortlist Builder không được hỗ trợ trên Windows Edge. Vui lòng sử dụng trình duyệt web khác để tạo hoặc chỉnh sửa Shortlist.",
+      "noBuilderAllIE": "Có thể xem Story Map Shortlists trên bất kỳ trình duyệt web nào. Tuy nhiên, Story Map Shortlist Builder không được hỗ trợ trên Microsoft Edge hoặc Internet Explorer. Vui lòng sử dụng trình duyệt web khác để tạo hoặc chỉnh sửa Shortlist."
     },
     "headerFromCommon": {
       "storymapsText": "Bản đồ câu chuyện",

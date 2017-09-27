@@ -36,7 +36,8 @@ define({
       "mapLoadingFail": "發生了一些錯誤，地圖未正確載入。",
       "signOut": "登出",
       "attention": "注意!",
-      "noBuilderEdge": "可在任何 Web 瀏覽器中檢視故事地圖候選名單。但 Windows Edge 不支援故事地圖候選名單建立器。請使用不同的 Web 瀏覽器來建立或編輯候選名單。"
+      "noBuilderEdge": "可在任何 Web 瀏覽器中檢視故事地圖候選名單。但 Windows Edge 不支援故事地圖候選名單建立器。請使用不同的 Web 瀏覽器來建立或編輯候選名單。",
+      "noBuilderAllIE": "可在任何 Web 瀏覽器中檢視故事地圖候選名單。但 Microsoft Edge 或 Internet Explorer 不支援故事地圖候選名單建立器。請使用不同的 Web 瀏覽器來建立或編輯候選名單。"
     },
     "headerFromCommon": {
       "storymapsText": "故事地圖",

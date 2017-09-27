@@ -84,7 +84,7 @@ define({
     "help": {
       "title": "BANTUAN",
       "shortlistHelp1": "Selamat datang di Shortlist Peta Cerita. Aplikasi ini memungkinkan Anda menyajikan tempat menarik yang diatur dalam tab, yang membuat orang senang menjelajahi apa saja yang ada di suatu area. Anda dapat menyusun tempat Anda secara interaktif dalam Builder ini.",
-      "shortlistHelp2": "Anda juga dapat membuat Shortlist dari web map ArcGIS yang ada, dengan menyertakan opsi untuk menggunakan data titik yang ada di peta sebagai tempat.",
+      "shortlistHelp2": "Anda juga dapat membuat Shortlist dari web map ArcGIS yang ada, dengan menyertakan opsi untuk menggunakan data titik yang ada di peta sebagai tempat. Anda juga dapat mengimpor data titik tersebut ke Shortlist Builder untuk pengeditan lebih lanjut, atau jika tempat Anda menggunakan <a href='http://links.esri.com/storymaps/shortlist_layer_template' target='_blank'>Skema data shortlist</a>, dorong Shortlist Anda langsung dari data tersebut 'apa adanya'. Lihat <a href='http://links.esri.com/storymaps/faq_shortlist_create_from_webmap' target='_blank'>FAQ ini</a> untuk informasi lebih lanjut tentang ini.",
       "shortlistHelp3": "Untuk membuat Shortlist dari web map, buka",
       "shortlistHelp4": "buka web map, buat aplikasi web darinya, dan pilih Story Map Shortlist dari galeri aplikasi. Jika web map Anda berisi layer titik apa saja, Shortlist Builder akan meminta Anda memilih layer yang ingin Anda gunakan sebagai tempat. Jika Anda membuat Shortlist menggunakan versi aplikasi non-hosted, Anda dapat memigrasikan Shortlist Anda ke versi aplikasi hosted menggunakan langkah yang sama.",
       "shortlistHelp5": "Untuk informasi selengkapnya",

@@ -32,9 +32,17 @@ CKEDITOR.plugins.add('storymapsInlineMedia', {
 				var media = null;
 
 				if ( elemIsImg ) {
-					var mediaImg = elem.children('img').eq(0),
+					var mediaImg = elem.find('img').eq(0),
 						caption = mediaImg.parents('figure').children('figcaption'),
-						title = caption && caption.length ? caption.html() : mediaImg.attr('title');
+						title = caption && caption.length ? caption.html() : mediaImg.attr('title'),
+						figureContainer = mediaImg.parents('figure'),
+						activateFullScreen = false;
+
+					if (figureContainer.length) {
+						activateFullScreen = (figureContainer.find('.activate-fullscreen').length > 0);
+					} else {
+						activateFullScreen = (mediaImg.parents('.activate-fullscreen').length > 0);
+					}
 
 					media = {
 						type: "image",
@@ -44,7 +52,7 @@ CKEDITOR.plugins.add('storymapsInlineMedia', {
 							title: title,
 							width: mediaImg.attr('width'),
 							height: mediaImg.attr('height'),
-							activateFullScreen: mediaImg.parents(".image-container").hasClass("activate-fullscreen")
+							activateFullScreen: activateFullScreen
 						}
 					};
 				}

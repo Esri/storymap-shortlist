@@ -36,7 +36,8 @@ define({
       "mapLoadingFail": "Terjadi gangguan, peta tidak dimuat dengan benar.",
       "signOut": "Keluar",
       "attention": "Perhatian!",
-      "noBuilderEdge": "Peta Cerita Shortlists bisa dilihat di web browser mana pun. Namun Builder Peta Cerita Shortlist tidak didukung pada Windows Edge. Harap gunakan web browser yang berbeda untuk membuat atau mengedit Shortlist."
+      "noBuilderEdge": "Peta Cerita Shortlists bisa dilihat di web browser mana pun. Namun Builder Peta Cerita Shortlist tidak didukung pada Windows Edge. Harap gunakan web browser yang berbeda untuk membuat atau mengedit Shortlist.",
+      "noBuilderAllIE": "Shortlist Peta Cerita dapat dilihat di web browser mana pun. Namun Builder Shortlist Peta Cerita tidak didukung pada Windows Edge atau Internet Explorer. Harap gunakan web browser lain untuk membuat atau mengedit Shortlist."
     },
     "headerFromCommon": {
       "storymapsText": "Peta cerita",

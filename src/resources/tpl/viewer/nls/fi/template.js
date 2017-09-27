@@ -36,7 +36,8 @@ define({
       "mapLoadingFail": "Tapahtui virhe, eikä kartta latautunut oikein.",
       "signOut": "Kirjaudu ulos",
       "attention": "Huomio!",
-      "noBuilderEdge": "Story Map Shortlist -luetteloita voi tarkastella missä tahansa selaimessa. Windows Edge ei kuitenkaan tue Story Map Shortlist -luontitoimintoa. Käytä toista selainta Shortlistin luontiin tai muokkaamiseen."
+      "noBuilderEdge": "Story Map Shortlist -luetteloita voi tarkastella missä tahansa selaimessa. Windows Edge ei kuitenkaan tue Story Map Shortlist -luontitoimintoa. Käytä toista selainta Shortlistin luontiin tai muokkaamiseen.",
+      "noBuilderAllIE": "Story Map Shortlist -luetteloita voi tarkastella missä tahansa selaimessa. Microsoft Edge tai Internet Explorer ei kuitenkaan tue Story Map Shortlist -luontitoimintoa. Käytä toista selainta Shortlistin luontiin tai muokkaamiseen."
     },
     "headerFromCommon": {
       "storymapsText": "Tarinakartta",

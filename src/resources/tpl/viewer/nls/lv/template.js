@@ -36,7 +36,8 @@ define({
       "mapLoadingFail": "Radās kļūda — karte netika ielādēta pareizi.",
       "signOut": "Izrakstīties",
       "attention": "Uzmanību!",
-      "noBuilderEdge": "Lietotnes Story Map Shortlist sarakstus var skatīt jebkurā Web pārlūkā. Tomēr funkcija Story Map Shortlist Builder nav pieejama pārlūkā Windows Edge. Izvēles sarakstu veidošanai vai rediģēšanai izmantojiet citu Web pārlūku."
+      "noBuilderEdge": "Lietotnes Story Map Shortlist sarakstus var skatīt jebkurā Web pārlūkā. Tomēr funkcija Story Map Shortlist Builder nav pieejama pārlūkā Windows Edge. Izvēles sarakstu veidošanai vai rediģēšanai izmantojiet citu Web pārlūku.",
+      "noBuilderAllIE": "Lietotnes Story Map Shortlist sarakstus var skatīt jebkurā tīmekļa pārlūkā. Tomēr funkcija Story Map Shortlist Builder nav pieejama pārlūkā Microsoft Edge vai Internet Explorer. Shortlist sarakstu veidošanai vai labošanai izmantojiet citu tīmekļa pārlūku."
     },
     "headerFromCommon": {
       "storymapsText": "Stāsta karte",

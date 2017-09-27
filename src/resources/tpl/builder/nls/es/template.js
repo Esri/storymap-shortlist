@@ -84,7 +84,7 @@ define({
     "help": {
       "title": "AYUDA",
       "shortlistHelp1": "Bienvenido a Story Map Shortlist. Esta aplicación le permite presentar lugares de interés organizados en pestañas para que los usuarios puedan divertirse explorando lo que hay en una zona. Puede crear los lugares de forma interactiva en este Builder.",
-      "shortlistHelp2": "También puede crear una Shortlist a partir de un mapa web de ArcGIS, con la opción de usar datos de puntos existentes en el mapa como lugares.",
+      "shortlistHelp2": "También puede crear una Shortlist a partir de un mapa web existente de ArcGIS, con la opción de usar datos de puntos existentes en el mapa como lugares. Puede importar esos datos de puntos al Builder de Shortlist para su edición posterior o, si sus ubicaciones utilizan <a href='http://links.esri.com/storymaps/shortlist_layer_template' target='_blank'>el esquema de datos Shortlist</a>, controlar su Shortlist directamente a partir de estos datos \"tal cual\". Consulte <a href='http://links.esri.com/storymaps/faq_shortlist_create_from_webmap' target='_blank'>estas Preguntas frecuentes</a> para obtener más información a este respecto.",
       "shortlistHelp3": "Para crear una Shortlist a partir de un mapa web, vaya a",
       "shortlistHelp4": "abra el mapa web, cree una aplicación web a partir de él y elija Story Map Shortlist en la galería de aplicaciones. Si el mapa web contiene capas de puntos, el Builder de Shortlist le pedirá que seleccione las capas que desea usar como lugares. Si creó una Shortlist usando la versión original no alojada de la aplicación, puede migrarla a esta versión alojada de la aplicación siguiendo los mismos pasos.",
       "shortlistHelp5": "Para obtener más información",

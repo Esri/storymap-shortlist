@@ -36,7 +36,8 @@ define({
       "mapLoadingFail": "Něco se pokazilo, mapa se nenahrála správně.",
       "signOut": "Odhlásit",
       "attention": "Upozornění!",
-      "noBuilderEdge": "Seznamy map s příběhem lze zobrazit v libovolném prohlížeči. Nástroj pro tvorbu seznamů map s příběhem však není podporován v prohlížeči Windows Edge. K vytvoření nebo úpravě seznamu použijte jiný webový prohlížeč."
+      "noBuilderEdge": "Seznamy map s příběhem lze zobrazit v libovolném prohlížeči. Nástroj pro tvorbu seznamů map s příběhem však není podporován v prohlížeči Windows Edge. K vytvoření nebo úpravě seznamu použijte jiný webový prohlížeč.",
+      "noBuilderAllIE": "Zkrácený přehled lze zobrazit v libovolném prohlížeči. Nástroj pro tvorbu seznamů map s příběhem však není podporován v prohlížeči Windows Edge a Internet Explorer. K vytvoření nebo úpravě seznamu použijte jiný webový prohlížeč."
     },
     "headerFromCommon": {
       "storymapsText": "Mapa s příběhem",

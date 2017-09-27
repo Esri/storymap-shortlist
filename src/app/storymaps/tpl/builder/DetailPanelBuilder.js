@@ -71,9 +71,9 @@ define([
 						var params = {};
 						if(uploadResult && uploadResult.success){
 							var url = uploadResult.picUrl || uploadResult.sizes[0].url;
-							params.url = window.location.protocol + url;
-							if(uploadResult.thumbURL)
-								params.thumb_url = window.location.protocol + uploadResult.thumbUrl;
+							//params.url = 'https' + url;
+							//if(uploadResult.thumbURL)
+								//params.thumb_url = window.location.protocol + uploadResult.thumbUrl;
 							if(uploadResult.lat)
 								params.lat = uploadResult.lat;
 							if(uploadResult.lng)
@@ -324,11 +324,36 @@ define([
 					}
 				});
 
+				var isEdge = navigator.appVersion.indexOf('Edge') > 0 ? true : false;
+				var isWin10 = navigator.userAgent.indexOf('Windows NT 10.0') > 0 ? true : false;
+
 				container.find($(".detail-btn-left")[themeIndex]).click(function(){
 					if(app.data.getWebAppData().getIsExternalData())
 						return;
 					var themeIndex = $('.entry.active').index();
 					var currentSwiper = _swipers[themeIndex];
+
+					var currentSlide = _swipers[themeIndex].slides[_swipers[themeIndex].activeIndex];
+					var shortlistLayer = app.map.getLayer(app.data.getWebAppData().getShortlistLayerId());
+					var currentGraphic = $.grep(shortlistLayer.graphics, function(e){ return e.attributes.shortlist_id ==  $(currentSlide).data('shortlist-id'); });
+					var currentGraphicAtts;
+					if(currentGraphic[0])
+						currentGraphicAtts = currentGraphic[0].attributes;
+					else{
+						return;
+					}
+
+					if(currentGraphicAtts && (currentGraphicAtts.name.length || currentGraphicAtts.name == "Unnamed Place" || currentGraphicAtts.description.length || currentGraphicAtts.pic_url.length || currentGraphicAtts.locationSet)){
+						//do nothing
+					}else{
+						var currentTile = app.ui.tilePanel.findTile($(currentSlide).data('shortlist-id'));
+						$(currentTile).remove();
+						shortlistLayer.remove(currentGraphic[0]);
+						app.layerCurrent.remove(currentGraphic[0]);
+						_swipers[themeIndex].removeSlide(_swipers[themeIndex].activeIndex);
+						app.addFeatureBar.updateLocatedFeatures();
+						setNavControls();
+					}
 					if($('.arcgisSearch').css('display') == 'block'){
 						if(_movableIcon)
 							_movableIcon.clean();
@@ -353,11 +378,16 @@ define([
 						var shortlistLayer = app.map.getLayer(app.data.getShortlistLayerId());
 						shortlistLayer.redraw();
 					}
+					//Fix/hack for text of detail panel stacking on slide change in Microsoft Edge
+					if(isEdge || isWin10)
+						$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'visible'});
 					if(currentSwiper.activeIndex === 0)
 						currentSwiper.slideTo(currentSwiper.slides.length - 1, 0);
 					else {
 						currentSwiper.slidePrev();
 					}
+					if(isEdge || isWin10)
+						$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'auto'});
 					if($('body').hasClass('locateFeatures removeSlide')){
 						var removeSlideIndex = _swipers[themeIndex].activeIndex == _swipers[themeIndex].slides.length - 1 ? 0 : _swipers[themeIndex].activeIndex + 1;
 						_swipers[themeIndex].removeSlide(removeSlideIndex);
@@ -404,11 +434,16 @@ define([
 						var shortlistLayer = app.map.getLayer(app.data.getShortlistLayerId());
 						shortlistLayer.redraw();
 					}
+					//Fix/hack for text of detail panel stacking on slide change in Microsoft Edge
+					if(isEdge || isWin10)
+						$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'visible'});
 					if(currentSwiper.activeIndex == currentSwiper.slides.length - 1)
 						currentSwiper.slideTo(0, 0);
 					else {
 						currentSwiper.slideNext();
 					}
+					if(isEdge || isWin10)
+						$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'auto'});
 					if($('body').hasClass('locateFeatures removeSlide')){
 						var removeSlideIndex = _swipers[themeIndex].activeIndex === 0 ? _swipers[themeIndex].slides.length - 1 : _swipers[themeIndex].activeIndex - 1;
 						_swipers[themeIndex].removeSlide(removeSlideIndex);
@@ -516,6 +551,16 @@ define([
 					}
 					if(params.pic_url){
 						var imgUrl = params.pic_url;
+						if(imgUrl.indexOf("sharing/rest/content/items/") > -1){
+							if(imgUrl.indexOf('http') > -1 && imgUrl.indexOf('https') == 5){
+								imgUrl = imgUrl.slice(5);
+							}
+							var multiHttps = (imgUrl.match(/https/g)) || [].length;
+							if(multiHttps.length > 1){
+								imgUrl = imgUrl.slice(6);
+							}
+						}
+
 						if(imgUrl.indexOf("sharing/rest/content/items/") > -1)
 							imgUrl = CommonHelper.possiblyAddToken(imgUrl);
 						$(newSlide).find('img').attr('src', imgUrl);
@@ -660,7 +705,9 @@ define([
 				}
 				if(params.uploaded){
 					changedGraphic[0].attributes.resource = params.resource;
-					var imgUrl = CommonHelper.possiblyAddToken(params.url);
+					var url = params.url ? params.url : params.resource.sizes[0].url;
+					changedGraphic[0].attributes.pic_url = url;
+					var imgUrl = CommonHelper.possiblyAddToken(url);
 					$(currentSlide).find('img').attr('src', imgUrl);
 					if($(currentSlide).find('.detailFeatureTitle').text().length <= 0 && params.name.indexOf("jpeg") > -1)
 						params.name = params.name.slice(0, -5);
@@ -669,10 +716,11 @@ define([
 					}
 				}else{
 					$(currentSlide).find('img').attr('src', params.url);
+					changedGraphic[0].attributes.pic_url = params.url;
 				}
 				$(currentSlide).find('.imagePicker').hide();
 
-				changedGraphic[0].attributes.pic_url = params.url;
+
 				if(params.thumb_url)
 					changedGraphic[0].attributes.thumb_url = params.thumb_url;
 				else if(params.uploaded  && params.resource && params.resource.thumbUrl)
@@ -868,6 +916,8 @@ define([
 										_movableIcon.clean();
 									var addLocation = $('<div class="addLocationText"><a href="#">' + i18n.builder.detailPanelBuilder.useLocation + '</a> </div>');
 									$('.esriPopup .contentPane').append(addLocation);
+									var popup = $('.esriPopup')[0];
+									$(popup).removeClass('app-hidden');
 									$('.esriPopup').show();
 									var themeIndex = $('.entry.active').index();
 									var currentDetailContainer = $('.detailContainer')[themeIndex];

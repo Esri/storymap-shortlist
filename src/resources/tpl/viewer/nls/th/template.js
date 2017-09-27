@@ -36,7 +36,8 @@ define({
       "mapLoadingFail": "มีบางอย่างไม่ถูกต้อง โหลดแผนที่ไม่ถูกต้อง",
       "signOut": "ลงชื่อออก",
       "attention": "ความสนใจ!",
-      "noBuilderEdge": "Story Map Shortlists สามารถดูได้จากเว็บเบราเซอร์ใดก็ได้ อย่างไรก็ตาม Story Map Shortlist Builder ไม่ได้รับการสนับสนุนบน Windows Edge โปรดใช้เว็บเบราเซอร์อื่นเพื่อสร้างหรือแก้ไขรายการโปรด"
+      "noBuilderEdge": "Story Map Shortlists สามารถดูได้จากเว็บเบราเซอร์ใดก็ได้ อย่างไรก็ตาม Story Map Shortlist Builder ไม่ได้รับการสนับสนุนบน Windows Edge โปรดใช้เว็บเบราเซอร์อื่นเพื่อสร้างหรือแก้ไขรายการโปรด",
+      "noBuilderAllIE": "Story Map Shortlists สามารถดูได้จากเว็บเบราเซอร์ใดก็ได้ อย่างไรก็ตาม Story Map Shortlist Builder ไม่รองรับ Microsoft Edge หรือ Internet Explorer โปรดใช้เว็บเบราเซอร์อื่นเพื่อสร้างหรือแก้ไขรายการโปรด"
     },
     "headerFromCommon": {
       "storymapsText": "A story map",

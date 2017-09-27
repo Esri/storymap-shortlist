@@ -84,7 +84,7 @@ define({
     "help": {
       "title": "HELP",
       "shortlistHelp1": "Welkom bij de Story Map Shortlist. Deze app laat u huidige bezienswaardigheden georganiseerd in tabbladen zien, waardoor het leuk is voor mensen om te onderzoeken wat zicht in een gebied bevindt. U kunt uw plaatsen interactief maken in deze Builder.",
-      "shortlistHelp2": "U kunt ook een shortlist maken van een bestaande ArcGIS webmap, met inbegrip van de optie om bestaande puntgegevens te gebruiken in de kaart als plaatsen.",
+      "shortlistHelp2": "U kunt ook een Shortlist maken van een bestaande ArcGIS-webkaart, inclusief de optie om bestaande puntgegevens op de kaart te gebruiken als plaatsen. U kunt die puntgegevens importeren in de Shortlist Builder voor verdere bewerking of, als uw plaatsen <a href='http://links.esri.com/storymaps/shortlist_layer_template' target='_blank'>de Shortlist-gegevensschema gebruiken</a>, direct uw Shortlist gebruiken vanuit die gegevens 'zoals ze zijn'. Zie <a href='http://links.esri.com/storymaps/faq_shortlist_create_from_webmap' target='_blank'>deze veelgestelde vragen</a> voor meer hierover.",
       "shortlistHelp3": "Om een ​​shortlist te maken van een webmap, gaat u naar",
       "shortlistHelp4": "open de webmap, maak er een webapp van en kies Story Map Shortlist uit de galerij van apps. Als uw webmap puntlagen bevat, zal de Shortlist Builder u vragen om lagen te selecteren die u wilt gebruiken als plaatsen. Als u een Shortlist hebt gemaakt met de originele, niet-gehoste versie van de app, dan kunt u uw Shortlist migreren naar deze gehoste versie van de app met behulp van dezelfde stappen.",
       "shortlistHelp5": "Voor meer informatie",

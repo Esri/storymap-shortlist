@@ -84,7 +84,7 @@ define({
     "help": {
       "title": "HJELP",
       "shortlistHelp1": "Velkommen til Story Map Shortlist. Med denne applikasjonen kan du presentere interessante steder ordnet i faner, noe som gjør det morsomt for brukerne å gjøre seg kjent med hva som finnes i området. Du kan interaktivt legge inn lokasjoner i dette byggeverktøyet.",
-      "shortlistHelp2": "Du kan også lage en shortlist fra et eksisterende ArcGIS-webkart, inkludert muligheten til å bruke eksisterende punktdata i kartet som steder.",
+      "shortlistHelp2": "Du kan også lage en Shortlist fra et eksisterende ArcGIS-webkart, inkludert muligheten til å bruke eksisterende punktdata i kartet som steder. Du kan importere disse punktdataene til Shortlist Builder for ytterligere redigering eller hvis stedene dine bruker <a href='http://links.esri.com/storymaps/shortlist_layer_template' target='_blank'>Shortlist-dataskjemaet</a>, overføre Shortlisten direkte fra disse dataene slik de er. Se <a href='http://links.esri.com/storymaps/faq_shortlist_create_from_webmap' target='_blank'>FAQ</a> for mer om dette.",
       "shortlistHelp3": "For å lage en shortlist fra et webkart, går du til",
       "shortlistHelp4": "åpne webkartet, lag en webapp fra det, og velg Story Map Shortlist fra applikasjonsgalleriet. Hvis webkartet inneholder et punktlag, vil Shortlist Builder be deg om å velge de lagene du ønsker å bruke som steder. Hvis du har opprettet en shortlist med den originale, ikke-hostede versjonen av applikasjonen, kan du overføre Shortlist til denne hostede versjonen av applikasjonen med de samme trinnene.",
       "shortlistHelp5": "For mer informasjon",

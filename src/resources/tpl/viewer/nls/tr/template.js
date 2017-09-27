@@ -36,7 +36,8 @@ define({
       "mapLoadingFail": "Hata oluştu, harita düzgün şekilde yüklenmedi.",
       "signOut": "Oturumu Kapat",
       "attention": "Dikkat!",
-      "noBuilderEdge": "Story Map Shortlist ögeleri her web tarayıcısında görüntülenebilir. Ancak, Story Map Shortlist Builder uygulaması Windows Edge’de desteklenmez. Bir Shortlist ögesi oluşturmak veya düzenlemek için farklı bir web tarayıcısı kullanın."
+      "noBuilderEdge": "Story Map Shortlist ögeleri her web tarayıcısında görüntülenebilir. Ancak, Story Map Shortlist Builder uygulaması Windows Edge’de desteklenmez. Bir Shortlist ögesi oluşturmak veya düzenlemek için farklı bir web tarayıcısı kullanın.",
+      "noBuilderAllIE": "Story Map Shortlist ögeleri her web tarayıcısında görüntülenebilir. Ancak, Story Map Shortlist Builder uygulaması Microsoft Edge veya Internet Explorer’da desteklenmez. Bir Shortlist ögesi oluşturmak veya düzenlemek için farklı bir web tarayıcısı kullanın."
     },
     "headerFromCommon": {
       "storymapsText": "Öykü haritası",

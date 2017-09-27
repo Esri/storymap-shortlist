@@ -102,6 +102,14 @@ app.cfg = {
 	// Optional array of server that will leverage CORS (for developement or specific cross domain deployment)
 	CORS_SERVER: [],
 
+	// Optional array of proxy rules
+	PROXY_RULES: [
+		/*{
+			urlPrefix: "http://services.arcgis.com/",
+			proxyUrl: "http://myserver.domain.com/DotNet/proxy.ash"
+		}*/
+	],
+
 	BING_MAPS_KEY: "",
 	HELPER_SERVICES: {
 		geometry: {

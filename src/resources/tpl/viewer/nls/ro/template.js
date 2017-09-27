@@ -36,7 +36,8 @@ define({
       "mapLoadingFail": "Ceva nu a mers bine şi harta nu a fost încărcată corect.",
       "signOut": "Ieşire",
       "attention": "Atenţie!",
-      "noBuilderEdge": "Story Map Shortlists se pot vizualiza în orice browser web. Totuşi, instrumentul de creare Story Map Shortlist nu este acceptat de Windows Edge. Folosiţi un browser web diferit pentru a crea sau edita o listă scurtă."
+      "noBuilderEdge": "Story Map Shortlists se pot vizualiza în orice browser web. Totuşi, instrumentul de creare Story Map Shortlist nu este acceptat de Windows Edge. Folosiţi un browser web diferit pentru a crea sau edita o listă scurtă.",
+      "noBuilderAllIE": "Story Map Shortlists se pot vizualiza în orice browser web. Totuşi, instrumentul de creare Story Map Shortlist nu este acceptat de Microsoft Edge sau Internet Explorer. Folosiţi un browser web diferit pentru a crea sau edita o listă scurtă."
     },
     "headerFromCommon": {
       "storymapsText": "O hartă informativă",

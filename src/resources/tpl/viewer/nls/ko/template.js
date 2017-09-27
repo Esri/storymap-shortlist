@@ -36,7 +36,8 @@ define({
       "mapLoadingFail": "오류가 발생했습니다. 맵을 올바르게 불러오지 않았습니다.",
       "signOut": "로그아웃",
       "attention": "주의!",
-      "noBuilderEdge": "Story Map Shortlist는 모든 웹 브라우저에서 볼 수 있습니다. 그러나 Windows Edge에서는 Story Map Shortlist 빌더가 지원되지 않습니다. Shortlist를 생성하거나 편집하려면 다른 웹 브라우저를 사용하세요."
+      "noBuilderEdge": "Story Map Shortlist는 모든 웹 브라우저에서 볼 수 있습니다. 그러나 Windows Edge에서는 Story Map Shortlist 빌더가 지원되지 않습니다. Shortlist를 생성하거나 편집하려면 다른 웹 브라우저를 사용하세요.",
+      "noBuilderAllIE": "Story Map Shortlist는 모든 웹 브라우저에서 볼 수 있습니다. 그러나 Microsoft Edge 또는 Internet Explorer에서는 Story Map Shortlist 빌더가 지원되지 않습니다. Shortlist를 생성하거나 편집하려면 다른 웹 브라우저를 사용하세요."
     },
     "headerFromCommon": {
       "storymapsText": "스토리 맵",

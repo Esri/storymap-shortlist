@@ -84,7 +84,7 @@ define({
     "help": {
       "title": "OHJE",
       "shortlistHelp1": "Tervetuloa Story Map Shortlististiin. Tämän sovelluksen avulla voit esittää mielenkiintoisia paikkoja välilehtiin järjestettynä, jotta alueen kohteiden tutkiminen on hauskaa. Voit luoda omia paikkoja vuorovaikutteisesti tässä luontitoiminnossa.",
-      "shortlistHelp2": "Voit myös luoda Shortlistin aiemmin luodusta ArcGIS-Web-kartasta. Voit myös käyttää aiemmin luotua pisteaineistoa kartan paikkoina.",
+      "shortlistHelp2": "Voit luoda Shortlistin myös olemassa olevasta ArcGIS-web-kartasta, myös vaihtoehdon käyttää olemassa olevaa pisteaineistoa kartassa paikkoina. Voit tuoda pisteaineiston Shortlist-luontitoimintoon lisämuokkausta varten, tai jos paikoissasi käytetään <a href='http://links.esri.com/storymaps/shortlist_layer_template' target='_blank'>Shortlist-aineistorakennetta</a>, ladata Shortlist-tiedot suoraan aineistosta sellaisenaan. Lisätietoja on <a href='http://links.esri.com/storymaps/faq_shortlist_create_from_webmap' target='_blank'>tässä usein esitettyjen kysymysten</a> osiossa.",
       "shortlistHelp3": "Jos haluat luoda Shortlistin Web-kartasta, siirry",
       "shortlistHelp4": "avaa Web-kartta, luo siitä Web-sovellus ja valitse Story Map Shortlist sovellusgalleriasta. Jos Web-karttasi sisältää pistekarttatasoja, Shortlist-luontitoiminto pyytää sinua valitsemaan karttatasot, joita haluat käyttää paikkoina. Jos olet luonut Shortlistin käyttämällä sovelluksen alkuperäistä versiota, jota ei isännöidä, voit siirtää Shortlistin tähän sovelluksen isännöityyn versioon samojen vaiheiden avulla.",
       "shortlistHelp5": "Lisätietoja on kohdassa",

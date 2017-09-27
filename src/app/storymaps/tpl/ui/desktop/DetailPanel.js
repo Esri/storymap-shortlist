@@ -260,7 +260,7 @@ define(["../../core/Helper",
 
 				if(app.data.getWebAppData().getGeneralOptions().numberedIcons){
 					$(newSlide).find('.detailFeatureNum').css('background-color', app.data.getStory()[themeIndex].color);
-					$(newSlide).find('.detailFeatureNum').text(atts.number);
+					$(newSlide).find('.detailFeatureNum').text(atts.PLACENUMSL ? atts.PLACENUMSL : atts.number);
 				} else{
 					$(newSlide).find('.detailFeatureNum').hide();
 					$(newSlide).find('.detailFeatureTitle').addClass('notNumbered');
@@ -277,6 +277,7 @@ define(["../../core/Helper",
 					var image = $(newSlide).find('img')[0];
 					image.onload = function(){
 						$(this).parent().find('.imageLoadingIndicator').css('display', 'none');
+						_this.resize();
 					};
 					$(newSlide).find('img').attr('src', picture);
 					//Fix issue with trying to scroll description and touch getting caught on image
@@ -438,7 +439,7 @@ define(["../../core/Helper",
 
 					if(app.data.getWebAppData().getGeneralOptions().numberedIcons){
 						$(newSlide).find('.detailFeatureNum').css('background-color', app.data.getStory()[themeIndex].color);
-						$(newSlide).find('.detailFeatureNum').text(atts.number);
+						$(newSlide).find('.detailFeatureNum').text(atts.PLACENUMSL ? atts.PLACENUMSL : atts.number);
 					} else{
 						$(newSlide).find('.detailFeatureNum').hide();
 						$(newSlide).find('.detailFeatureTitle').addClass('notNumbered');
@@ -453,6 +454,16 @@ define(["../../core/Helper",
 						image.onload = function(){
 							$(this).parent().find('.imageLoadingIndicator').css('display', 'none');
 						};
+						if(picture.indexOf("sharing/rest/content/items/") > -1){
+							if(picture.indexOf('http') > -1 && picture.indexOf('https') == 5){
+								picture = picture.slice(5);
+							}
+							var multiHttps = (picture.match(/https/g)) || [].length
+
+							if(multiHttps.length > 1){
+								picture = picture.slice(6);
+							}
+						}
 						if(_android){
 							picture = thumbnail ? thumbnail : picture;
 							if(picture.indexOf("sharing/rest/content/items/") > -1)
@@ -592,39 +603,60 @@ define(["../../core/Helper",
 						});
 
 						var isEdge = navigator.appVersion.indexOf('Edge') > 0 ? true : false;
+						var isWin10 = navigator.userAgent.indexOf('Windows NT 10.0') > 0 ? true : false;
 
 						container.find($(".detail-btn-left")[themeIndex]).click(function(){
+							if(!_mainView.selected){
+								var nextSlideId = _swipers[themeIndex].activeIndex - 1;
+								if(_swipers[themeIndex].activeIndex === 0){
+									nextSlideId = _swipers[themeIndex].slides.length - 1;
+								}
+								var nextSlide = _swipers[themeIndex].slides[nextSlideId];
+								var slideShortlistID = $(nextSlide).data('shortlist-id')
+								var shortlistLayer = app.map.getLayer(app.data.getWebAppData().getShortlistLayerId());
+								app.ui.mainView.selected = $.grep(shortlistLayer.graphics,function(n){return n.attributes.shortlist_id == slideShortlistID;})[0];
+							}
 							_mainView.selected.updated = false;
 							if(_swipers[themeIndex].activeIndex === 0){
 								//Fix/hack for text of detail panel stacking on slide change in Microsoft Edge
-								if(isEdge)
+								if(isEdge || isWin10)
 									$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'visible'});
 								_swipers[themeIndex].slideTo(_swipers[themeIndex].slides.length - 1, 0);
-								if(isEdge)
+								if(isEdge || isWin10)
 									$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'auto'});
 							}
 							else {
-								if(isEdge)
+								if(isEdge || isWin10)
 									$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'visible'});
 								_swipers[themeIndex].slidePrev();
-								if(isEdge)
+								if(isEdge || isWin10)
 									$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'auto'});
 							}
 						});
 
 						container.find($(".detail-btn-right")[themeIndex]).click(function(){
+							if(!_mainView.selected){
+								var nextSlideId = _swipers[themeIndex].activeIndex + 1;
+								if(_swipers[themeIndex].activeIndex === _swipers[themeIndex].slides.length - 1){
+									nextSlideId = 0;
+								}
+								var nextSlide = _swipers[themeIndex].slides[nextSlideId];
+								var slideShortlistID = $(nextSlide).data('shortlist-id')
+								var shortlistLayer = app.map.getLayer(app.data.getWebAppData().getShortlistLayerId());
+								app.ui.mainView.selected = $.grep(shortlistLayer.graphics,function(n){return n.attributes.shortlist_id == slideShortlistID;})[0];
+							}
 							_mainView.selected.updated = false;
 							if(_swipers[themeIndex].activeIndex == _swipers[themeIndex].slides.length - 1){
-								if(isEdge)
+								if(isEdge || isWin10)
 									$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'visible'});
 								_swipers[themeIndex].slideTo(0, 0);
-								if(isEdge)
+								if(isEdge || isWin10)
 									$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'auto'});
 							}else {
-								if(isEdge)
+								if(isEdge || isWin10)
 									$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'visible'});
 								_swipers[themeIndex].slideNext();
-								if(isEdge)
+								if(isEdge || isWin10)
 									$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'auto'});
 							}
 						});
@@ -633,19 +665,29 @@ define(["../../core/Helper",
 						$('#detailView'+themeIndex).find('.detailHeader').css('border-top-color', borderColor);
 
 						container.find(".detailPictureDiv img").click(function(){
+							if(!_mainView.selected){
+								var nextSlideId = _swipers[themeIndex].activeIndex + 1;
+								if(_swipers[themeIndex].activeIndex === _swipers[themeIndex].slides.length - 1){
+									nextSlideId = 0;
+								}
+								var nextSlide = _swipers[themeIndex].slides[nextSlideId];
+								var slideShortlistID = $(nextSlide).data('shortlist-id')
+								var shortlistLayer = app.map.getLayer(app.data.getWebAppData().getShortlistLayerId());
+								app.ui.mainView.selected = $.grep(shortlistLayer.graphics,function(n){return n.attributes.shortlist_id == slideShortlistID;})[0];
+							}
 							_mainView.selected.updated = false;
 							if(_swipers[themeIndex].activeIndex == _swipers[themeIndex].slides.length - 1){
-								if(isEdge)
+								if(isEdge || isWin10)
 									$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'visible'});
 								_swipers[themeIndex].slideTo(0, 0);
-								if(isEdge)
+								if(isEdge || isWin10)
 									$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'auto'});
 							}
 							else {
-								if(isEdge)
+								if(isEdge || isWin10)
 									$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'visible'});
 								_swipers[themeIndex].slideNext();
-								if(isEdge)
+								if(isEdge || isWin10)
 									$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'auto'});
 							}
 						});
@@ -714,13 +756,23 @@ define(["../../core/Helper",
 					$('.detailFeatureTitle').addClass('notNumbered');
 				}
 
+				var isWin10 = navigator.userAgent.indexOf('Windows NT 10.0') > 0 ? true : false;
+				var isEdge = navigator.appVersion.indexOf('Edge') > 0 ? true : false;
+
 				_swipers[themeIndex].on('onSlideChangeEnd', function(){
 					$(currentDetailContainer).show();
 					$(currentDetailContainer).css('z-index', 99);
 				});
 				if(selectedSlideIndex === 0 && currentSwiper.activeIndex === 0){
 					$(currentDetailContainer).show();
+					if(!isEdge && isWin10 && themeIndex == 0){
+						_swipers[themeIndex].slideNext();
+						_swipers[themeIndex].slidePrev();
+					}
+					$(currentDetailContainer).hide();
+					$(currentDetailContainer).show();
 					$(currentDetailContainer).css('z-index', 99);
+
 				}
 				else{
 					setTimeout(function(){
@@ -757,6 +809,7 @@ define(["../../core/Helper",
 				_this.resize();
 
 				_this.viewed = true;
+
 			};
 
 			this.refreshSlides = function()

@@ -36,7 +36,8 @@ define({
       "mapLoadingFail": "משהו השתבש, המפה לא נטענה באופן תקין.",
       "signOut": "יציאה",
       "attention": "שים לב!",
-      "noBuilderEdge": "ניתן להציג Shortlists של מפת סיפור בכל דפדפן אינטרנט. עם זאת, אשף בניית ה-Shortlist של מפת הסיפור אינו נתמך ב-Windows Edge. השתמש בדפדפן אינטרנט אחר כדי ליצור או לערוך Shortlist."
+      "noBuilderEdge": "ניתן להציג Shortlists של מפת סיפור בכל דפדפן אינטרנט. עם זאת, אשף בניית ה-Shortlist של מפת הסיפור אינו נתמך ב-Windows Edge. השתמש בדפדפן אינטרנט אחר כדי ליצור או לערוך Shortlist.",
+      "noBuilderAllIE": "ניתן להציג Shortlists של מפת סיפור בכל דפדפן אינטרנט. עם זאת, אשף בניית ה-Shortlist של מפת הסיפור אינו נתמך ב-Microsoft Edge או ב-Internet Explorer. השתמש בדפדפן אינטרנט אחר כדי ליצור או לערוך Shortlist."
     },
     "headerFromCommon": {
       "storymapsText": "מפת סיפור",

@@ -36,7 +36,8 @@ define({
       "mapLoadingFail": "Noe gikk galt, og kartet ble ikke lastet inn på riktig måte.",
       "signOut": "Logg av",
       "attention": "Obs!",
-      "noBuilderEdge": "Story Map Shortlists kan vises i vanlige nettlesere. Story Map Shortlist Builder støttes imidlertid ikke i Windows Edge. Bruk en annen nettleser til å opprette eller redigere en kortliste."
+      "noBuilderEdge": "Story Map Shortlists kan vises i vanlige nettlesere. Story Map Shortlist Builder støttes imidlertid ikke i Windows Edge. Bruk en annen nettleser til å opprette eller redigere en kortliste.",
+      "noBuilderAllIE": "Story Map Shortlists kan vises i vanlige nettlesere. Story Map Shortlist Builder støttes imidlertid ikke av Microsoft Edge eller Internet Explorer. Bruk en annen webleser til å opprette eller redigere en Shortlist."
     },
     "headerFromCommon": {
       "storymapsText": "En story map",

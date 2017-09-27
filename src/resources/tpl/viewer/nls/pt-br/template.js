@@ -36,7 +36,8 @@ define({
       "mapLoadingFail": "Algo deu errado, o mapa não carregou corretamente.",
       "signOut": "Sair",
       "attention": "Atenção!",
-      "noBuilderEdge": "Listas Restritas do Mapa Histórico podem ser visualizadas em qualquer navegador da web. Entretanto o Construtor de Listas Restritas do Mapa Histórico não é suportado no Windows Edge. Utilize um navegador da web diferente para criar ou editar uma Lista Restrita."
+      "noBuilderEdge": "Listas Restritas do Mapa Histórico podem ser visualizadas em qualquer navegador da web. Entretanto o Construtor de Listas Restritas do Mapa Histórico não é suportado no Windows Edge. Utilize um navegador da web diferente para criar ou editar uma Lista Restrita.",
+      "noBuilderAllIE": "As Listas Restritas do Mapa Histórico podem ser visualizadas em qualquer navegador da web. No entanto, o Construtor de Lista Restrita do Mapa Histórico não é suportado no Microsoft Edge ou Internet Explorer. Utilize um navegador da web diferente para criar ou editar uma Lista Restrita."
     },
     "headerFromCommon": {
       "storymapsText": "Um mapa histórico",

@@ -36,7 +36,8 @@ define({
       "mapLoadingFail": "Algo correu mal, o mapa não foi carregado correctamente.",
       "signOut": "Terminar Sessão",
       "attention": "Atenção!",
-      "noBuilderEdge": "Story Map Shortlists podem ser visualizadas em qualquer navegador web. No entanto, o Builder de Story Maps Shortlist não é suportado em Windows Edge. Por favor, recorra a outro navegador web para criar ou editar uma Shortlist."
+      "noBuilderEdge": "Story Map Shortlists podem ser visualizadas em qualquer navegador web. No entanto, o Builder de Story Maps Shortlist não é suportado em Windows Edge. Por favor, recorra a outro navegador web para criar ou editar uma Shortlist.",
+      "noBuilderAllIE": "As Story Map Shortlists podem ser visualizadas em qualquer navegador web. No entanto, o Story Map Shortlist Builder não é suportado em Microsoft Edge ou Internet Explorer. Por favor, utilize outro navegador web para criar ou editar uma Shortlist."
     },
     "headerFromCommon": {
       "storymapsText": "Um story map",

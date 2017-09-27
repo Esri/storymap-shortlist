@@ -84,7 +84,7 @@ define({
     "help": {
       "title": "說明",
       "shortlistHelp1": "歡迎使用故事地圖候選名單。此應用程式可讓您顯示組織成頁籤的感興趣地點，讓訪客輕鬆地探索區域中的內容。您可以在此建立器中，以互動方式創作您的地點。",
-      "shortlistHelp2": "您也可以從現有的 ArcGIS Web 地圖建立候選名單，包含能在地圖中將現有的點資料作為地點的選項。",
+      "shortlistHelp2": "您也可以從現有的 ArcGIS Web 地圖建立候選名單，包含能在地圖中將現有的點資料作為地點的選項。您可以將該點資料匯入至候選名單建立器以進一步編輯，或如果您的地點使用<a href='http://links.esri.com/storymaps/shortlist_layer_template' target='_blank'>候選名單資料方案</a>，請從該資料直接驅動「原狀的」候選名單。有關詳細資訊，請參閱<a href='http://links.esri.com/storymaps/faq_shortlist_create_from_webmap' target='_blank'>此常見問題集</a>。",
       "shortlistHelp3": "若要從 Web 地圖建立候選名單，請前往",
       "shortlistHelp4": "開啟 Web 地圖、從中建立 Web 應用程式，並從應用程式的圖庫中選擇「故事地圖候選名單」。如果 Web 地圖包含任何點圖層，候選名單建立器將提示您選擇要作為地點的圖層。若要使用原始、非託管版本的應用程式來建立候選名單，可以使用相同的步驟，將候選名單移轉至此託管版本的應用程式。",
       "shortlistHelp5": "如需詳細資訊",

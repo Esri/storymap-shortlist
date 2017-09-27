@@ -36,7 +36,8 @@ define({
       "mapLoadingFail": "Något gick fel, kartan lästes inte in på rätt sätt.",
       "signOut": "Logga ut",
       "attention": "Obs!",
-      "noBuilderEdge": "Story Map-snabblistor kan visas i valfri webbläsare. Däremot stöds inte Story Map Shortlist Builder i Windows Edge. Använd därför en annan webbläsare när du behöver skapa eller redigera en snabblista."
+      "noBuilderEdge": "Story Map-snabblistor kan visas i valfri webbläsare. Däremot stöds inte Story Map Shortlist Builder i Windows Edge. Använd därför en annan webbläsare när du behöver skapa eller redigera en snabblista.",
+      "noBuilderAllIE": "Story Map-snabblistor kan visas i valfri webbläsare. Däremot stöds inte Story Map Shortlist Builder i Microsoft Edge eller Internet Explorer. Använd därför en annan webbläsare när du behöver skapa eller redigera en snabblista."
     },
     "headerFromCommon": {
       "storymapsText": "En berättelsekarta",

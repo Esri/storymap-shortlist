@@ -76,7 +76,7 @@ define(["esri/geometry/screenUtils",
 					return;
 				var atts = app.layerCurrent.graphics[0].attributes;
 
-				var numberAttribute = atts.number ? 'number' : atts.Number ? 'Number' : atts.NUMBER ? 'NUMBER' : null;
+				var numberAttribute = atts.number ? 'number' : atts.Number ? 'Number' : atts.NUMBER ? 'NUMBER' : atts.PLACENUMSL ? 'PLACENUMSL' : null;
 
 				if(numberAttribute){
 					app.layerCurrent.graphics.sort(function(a,b){
@@ -117,7 +117,7 @@ define(["esri/geometry/screenUtils",
 					var titleText = name || 'Unnamed Place';
 					title = $('<div class="blurb">'+ titleText +'</div>');
 					if(WebApplicationData.getGeneralOptions().numberedIcons){
-						var featNumber = app.layerCurrent.graphics[index].attributes.number || app.layerCurrent.graphics[index].attributes.Number || app.layerCurrent.graphics[index].attributes.NUMBER;
+						var featNumber = app.layerCurrent.graphics[index].attributes.number || app.layerCurrent.graphics[index].attributes.Number || app.layerCurrent.graphics[index].attributes.NUMBER || app.layerCurrent.graphics[index].attributes.PLACENUMSL;
 						if(value.attributes.number < 100){
 							num = $('<div class="num" style="background-color:'+app.layerCurrent.color+'">'+featNumber+'</div>');
 						}

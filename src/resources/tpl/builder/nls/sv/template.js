@@ -84,7 +84,7 @@ define({
     "help": {
       "title": "HJÄLP",
       "shortlistHelp1": "Välkommen till Story Map Shortlist. Med den här appen kan du presentera intressanta platser i flikar så att det blir spännande för människor att utforska ett område. Du kan skapa dina platser interaktivt i det här byggverktyget.",
-      "shortlistHelp2": "Du kan också skapa en snabblista från en befintlig ArcGIS-webbkarta, inklusive alternativet att använda befintliga punktdata på kartan som platser.",
+      "shortlistHelp2": "Du kan även skapa en snabblista från en befintlig ArcGIS-webbkarta, inklusive alternativet att använda befintliga punktdata i kartan som platser. Du kan importera dessa punktdata till Shortlist Builder för vidare redigering eller, om platserna använder <a href='http://links.esri.com/storymaps/shortlist_layer_template' target='_blank'>dataschemat Shortlist</a>, driva snabblistan direkt från dessa data i befintligt skick. I <a href='http://links.esri.com/storymaps/faq_shortlist_create_from_webmap' target='_blank'>dessa frågor och svar</a> finns mer information.",
       "shortlistHelp3": "Om du vill skapa en snabblista från en webbkarta, går du till",
       "shortlistHelp4": "öppna kartan, skapa en webbapp från den och välj Story Map Shortlist från appgalleriet. Om din webbkarta innehåller punktlager, uppmanas du av Shortlist Builder att välja vilka lager du vill använda som platser. Om du skapade en snabblista med den ursprungliga, icke-driftade versionen av appen, kan du migrera din snabblista i denna driftade version av appen med samma steg.",
       "shortlistHelp5": "Mer information",

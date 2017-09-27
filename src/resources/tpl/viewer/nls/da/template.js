@@ -36,7 +36,8 @@ define({
       "mapLoadingFail": "Noget gik galt, kortet blev ikke indlæst korrekt.",
       "signOut": "Log ud",
       "attention": "Bemærk!",
-      "noBuilderEdge": "Story Map Shortlist'er kan ses i en hvilken som helst webbrowser. Men Story Map Shortlist Builder-programmet understøttes ikke af Windows Edge. Brug en anden webbrowser til at oprette eller redigere en Shortlist."
+      "noBuilderEdge": "Story Map Shortlist'er kan ses i en hvilken som helst webbrowser. Men Story Map Shortlist Builder-programmet understøttes ikke af Windows Edge. Brug en anden webbrowser til at oprette eller redigere en Shortlist.",
+      "noBuilderAllIE": "Story Map Shortlist'er kan ses i en hvilken som helst webbrowser. Men Story Map Shortlist Builder-programmet understøttes hverken af Windows Edge eller Internet Explorer. Brug en anden webbrowser til at oprette eller redigere en Shortlist."
     },
     "headerFromCommon": {
       "storymapsText": "Et historiekort",

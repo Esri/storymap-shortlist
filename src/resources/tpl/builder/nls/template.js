@@ -85,7 +85,7 @@ define({
 			help: {
 				title: "HELP",
 				shortlistHelp1: "Welcome to the Story Map Shortlist. This app lets you present places of interest organized into tabs, making it fun for people to explore what's in an area. You can author your places interactively in this Builder.",
-				shortlistHelp2: "You can also create a Shortlist from an existing ArcGIS web map, including the option to use existing point data in the map as places.",
+				shortlistHelp2: "You can also create a Shortlist from an existing ArcGIS web map, including the option to use existing point data in the map as places.  You can import that point data into the Shortlist Builder for further editing or, if your places use <a href='http://links.esri.com/storymaps/shortlist_layer_template' target='_blank'>the Shortlist data schema</a>, drive your Shortlist directly from that data 'as is'. See <a href='http://links.esri.com/storymaps/faq_shortlist_create_from_webmap' target='_blank'>this FAQ</a> for more about this.",
 				shortlistHelp3: "To create a Shortlist from a web map, go to",
 				shortlistHelp4: "open the web map, create a web app from it, and choose Story Map Shortlist from the gallery of apps. If your web map contains any point layers, the Shortlist Builder will prompt you to select the layers you want to use as places. If you created a Shortlist using the original, non-hosted version of the app, you can migrate your Shortlist into this hosted version of the app using the same steps.",
 				shortlistHelp5: "For more information",

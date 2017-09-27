@@ -84,7 +84,7 @@ define({
     "help": {
       "title": "NÁPOVĚDA",
       "shortlistHelp1": "Vítejte v aplikaci Mapa s příběhem – Krátký seznam. Tato aplikace vám umožňuje prezentovat zajímavá místa organizovaná do karet, díky čemuž lze snadným a zábavným způsobem prozkoumat jakoukoli oblast. V tomto nástroji pro tvorbu můžete svá místa zájmu vytvářet interaktivně.",
-      "shortlistHelp2": "Krátký seznam můžete také vytvořit z existující webové mapy ArcGIS včetně možnosti použít existující bodová data v mapě jako místa.",
+      "shortlistHelp2": "Zkrácený přehled můžete také vytvořit z existující webové mapy ArcGIS včetně možnosti použít existující bodová data v mapě jako místa. Tato bodová data můžete importovat do nástroje pro tvorbu zkráceného přehledu za účelem další úpravy, nebo, pokud vaše místa používají <a href='http://links.esri.com/storymaps/shortlist_layer_template' target='_blank'>schéma dat zkráceného přehledu</a>, získat zkrácený přehled přímo z dat tak, jak jsou. Pro více informací viz <a href='http://links.esri.com/storymaps/faq_shortlist_create_from_webmap' target='_blank'>časté dotazy</a>.",
       "shortlistHelp3": "K vytvoření krátkého seznamu z webové mapy přejděte do",
       "shortlistHelp4": "otevřete webovou mapu, vytvořte z ní webovou aplikaci a z galerie aplikací zvolte možnost Mapa s příběhem – Krátký seznam. Pokud vaše webová mapa obsahuje bodové vrstvy, nástroj pro tvorbu krátkého seznamu vás požádá, abyste zvolili vrstvy, které chcete použít jako místa. Pokud jste krátký seznam vytvořili pomocí původní, nehostované verze aplikace, můžete svůj krátký seznam stejným postupem přesunout do této hostované verze aplikace.",
       "shortlistHelp5": "Další informace",

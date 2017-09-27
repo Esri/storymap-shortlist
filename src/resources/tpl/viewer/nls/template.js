@@ -37,7 +37,8 @@ define({
 				mapLoadingFail: "Something went wrong, the map did not load correctly.",
 				signOut: "Sign Out",
 				attention: "Attention!",
-				noBuilderEdge: "Story Map Shortlists can be viewed in any web browser. However the Story Map Shortlist Builder is not supported on Windows Edge. Please use a different web browser to create or edit a Shortlist."
+				noBuilderEdge: "Story Map Shortlists can be viewed in any web browser. However the Story Map Shortlist Builder is not supported on Windows Edge. Please use a different web browser to create or edit a Shortlist.",
+				noBuilderAllIE: "Story Map Shortlists can be viewed in any web browser. However the Story Map Shortlist Builder is not supported on Microsoft Edge or Internet Explorer. Please use a different web browser to create or edit a Shortlist."
 			},
 			headerFromCommon: {
 				storymapsText: "A story map",

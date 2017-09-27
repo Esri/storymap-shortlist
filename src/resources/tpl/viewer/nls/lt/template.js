@@ -36,7 +36,8 @@ define({
       "mapLoadingFail": "Įvyko klaida ir žemėlapio nepavyko tinkamai įkelti.",
       "signOut": "Atsijungti",
       "attention": "Dėmesio!",
-      "noBuilderEdge": "Trumpojo sąrašo žemėlapių pasakojimus galima peržiūrėti bet kurioje naršyklėje. Tačiau jų kūrimo priemonė nepalaikoma programoje Windows Edge. Naudokite kitą interneto naršyklę aplikacijai kurti arba redaguoti."
+      "noBuilderEdge": "Trumpojo sąrašo žemėlapių pasakojimus galima peržiūrėti bet kurioje naršyklėje. Tačiau jų kūrimo priemonė nepalaikoma programoje Windows Edge. Naudokite kitą interneto naršyklę aplikacijai kurti arba redaguoti.",
+      "noBuilderAllIE": "Trumpojo sąrašo aplikacijas galima peržiūrėti bet kurioje naršyklėje, tačiau jų kūrimo priemonė nepalaikoma Microsoft Edge ir Internet Explorer naršyklėse. Norėdami kurti ar redaguoti Trumpąjį sąrašą, naudokite kitą interneto naršyklę."
     },
     "headerFromCommon": {
       "storymapsText": "Žemėlapio pasakojimas",

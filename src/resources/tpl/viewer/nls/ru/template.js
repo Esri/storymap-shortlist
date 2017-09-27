@@ -36,7 +36,8 @@ define({
       "mapLoadingFail": "Произошла ошибка, карта загрузилась некорректно.",
       "signOut": "Выйти",
       "attention": "Внимание!",
-      "noBuilderEdge": "Story Map Shortlists можно просматривать в любом веб-браузере. Но конструктор Story Map Shortlist не поддерживается в Windows Edge. Используйте другой веб-браузер для создания и редактирования Shortlist."
+      "noBuilderEdge": "Story Map Shortlists можно просматривать в любом веб-браузере. Но конструктор Story Map Shortlist не поддерживается в Windows Edge. Используйте другой веб-браузер для создания и редактирования Shortlist.",
+      "noBuilderAllIE": "Карту-историю Shortlists можно просматривать в любом веб-браузере. Но конструктор Story Map Shortlist не поддерживается в Microsoft Edge или Internet Explorer. Используйте другой веб-браузер для создания и редактирования Shortlist."
     },
     "headerFromCommon": {
       "storymapsText": "Карта-история",
