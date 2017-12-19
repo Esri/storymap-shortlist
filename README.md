@@ -11,7 +11,7 @@ The Story Map Shortlist app lets you organize points of interest into tabs that 
 [Download](http://links.esri.com/storymaps/shortlist_template_zip) |
 [Shortlist page on Esri Story Maps website](http://storymaps.arcgis.com/en/app-list/shortlist/)
 
-**Latest release is version 2.4.3**, if you want to be informed of new releases, we recommend you to watch this repository ([see GitHub help](https://help.github.com/articles/watching-repositories)). See the [release page](https://github.com/Esri/shortlist-storytelling-template-js/releases) for release notes.
+**Latest release is version 2.5.0**, if you want to be informed of new releases, we recommend you to watch this repository ([see GitHub help](https://help.github.com/articles/watching-repositories)). See the [release page](https://github.com/Esri/shortlist-storytelling-template-js/releases) for release notes.
 
 For more infomation about using and customizing Esri's Storytelling Apps follow the [Story Maps Developers' Corner](https://developerscorner.storymaps.arcgis.com).
 
