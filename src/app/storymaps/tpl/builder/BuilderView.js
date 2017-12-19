@@ -421,6 +421,8 @@ define(["lib-build/tpl!./BuilderView",
 				$.each(app.map.getLayer(app.data.getWebAppData().getShortlistLayerId()).graphics, function(i, feature){
 					if(feature.attributes.pic_url.indexOf("sharing/rest/content/items") > -1)
 						shortlistMedia.push(feature.attributes.resource);
+					else if(feature.attributes.thumb_url.indexOf("sharing/rest/content/items") > -1)
+						shortlistMedia.push(feature.attributes.resource);
 				});
 				if(!shortlistMedia.length)
 					return;
@@ -438,7 +440,19 @@ define(["lib-build/tpl!./BuilderView",
 
 							return featImgUrl.slice(featImgUrl.lastIndexOf('/')) == imgUrl.slice(imgUrl.lastIndexOf('/'));
 						});
-						if(!foundImg.length)
+
+						var thumbUrl = image.thumbFile;
+						var foundThumb = $.grep(shortlistMedia, function(e){
+							var featThumbUrl = e.thumbUrl;
+							if(featThumbUrl.indexOf('%20')){
+
+							}else{
+								featThumbUrl = decodeURI(featThumbUrl);
+							}
+
+							return featThumbUrl.slice(featThumbUrl.lastIndexOf('/')) == thumbUrl.slice(thumbUrl.lastIndexOf('/'));
+						});
+						if(!foundImg.length && !foundThumb.length)
 							unusedUploads.push(image);
 					});
 					$.each(unusedUploads, function(i, media){

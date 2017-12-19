@@ -188,7 +188,7 @@ define(["lib-build/css!lib-app/bootstrap/css/bootstrap.min",
 					// Get the portal instance name
 					var instance = location.pathname.substr(0,appLocation);
 
-					app.indexCfg.sharingurl = "//" + location.host + instance + "/sharing/content/items";
+					app.indexCfg.sharingurl = "//" + location.host + instance + "/sharing/rest/content/items";
 					app.indexCfg.proxyurl =  "//" + location.host + instance +  "/sharing/proxy";
 				}
 				else
@@ -579,19 +579,19 @@ define(["lib-build/css!lib-app/bootstrap/css/bootstrap.min",
 
 					app.userCanEdit = app.data.userIsAppOwner();
 
-					// Prevent app from accessing the cookie in viewer when user is not the owner
-					if ( ! app.isInBuilder && ! app.userCanEdit ) {
-						if( ! document.__defineGetter__ ) {
-							Object.defineProperty(document, 'cookie', {
-								get: function(){ return ''; },
-								set: function(){ return true; }
-							});
-						}
-						else {
-							document.__defineGetter__("cookie", function() { return ''; });
-							document.__defineSetter__("cookie", function() {} );
-						}
-					}
+					//	Prevent app from accessing the cookie in viewer when user is not the owner
+					//if ( ! app.isInBuilder && ! app.userCanEdit ) {
+					//	if( ! document.__defineGetter__ ) {
+					//		Object.defineProperty(document, 'cookie', {
+					//			get: function(){ return ''; },
+					//			set: function(){ return true; }
+					//		});
+					//	}
+					//	else {
+					//		document.__defineGetter__("cookie", function() { return ''; });
+					//		document.__defineSetter__("cookie", function() {} );
+					//	}
+					//}
 
 					if( app.indexCfg.authorizedOwners && app.indexCfg.authorizedOwners.length > 0 && app.indexCfg.authorizedOwners[0] ) {
 						var owner = itemRq.owner,

@@ -146,8 +146,9 @@ CKEDITOR.plugins.add('storymapsInlineMedia', {
 						else {
 							outputEl = CKEDITOR.dom.element.createFromHtml(mediaTpl, editor.document);
 
-							if ( ! (cfg.type == "webpage" && cfg.frameTag) )
-								outputEl.getChildren().$[0].setAttribute('src', cfg.url);
+							if ( ! (cfg.type == "webpage" && cfg.frameTag) ) {
+								outputEl.getChildren().$[0].setAttribute('src', CommonHelper.possiblyAddToken(cfg.url));
+							}
 
 							outputEl.getChildren().$[0].setAttribute('width', DEFAULT_WIDTH);
 

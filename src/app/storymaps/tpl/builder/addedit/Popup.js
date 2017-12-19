@@ -55,7 +55,9 @@ define(["lib-build/tpl!./Popup",
 					showPalette: true,
 					showInput: true,
 					palette: ["#425dac", "#b82323", "#37921e", "#874094", "#000000", "#dc6800", "#dab70c", "#A67455"],
-					preferredFormat: "hex"
+					preferredFormat: "hex",
+					chooseText: i18n.builder.settings.choose,
+					cancelText: i18n.builder.detailPanelBuilder.cancel,
 				});
 
 				container.find('.titleContainer input').on({

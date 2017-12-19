@@ -149,6 +149,7 @@ define(["../../core/Helper",
 							else{
 								nextFeature = mapFeatures[0];
 							}
+
 							_mainView.unselect();
 							_mainView.selected = nextFeature;
 							_mainView.selectSymbol();
@@ -500,6 +501,37 @@ define(["../../core/Helper",
 
 					$(newSlide).data('shortlist-id', atts.shortlist_id);
 
+					$(newSlide).find(".detailPictureDiv img").click(function(){
+						var themeIndex = $('.entry.active').index();
+						if(themeIndex<0)
+							themeIndex = 0;
+						if(!_mainView.selected){
+							var nextSlideId = _swipers[themeIndex].activeIndex + 1;
+							if(_swipers[themeIndex].activeIndex === _swipers[themeIndex].slides.length - 1){
+								nextSlideId = 0;
+							}
+							var nextSlide = _swipers[themeIndex].slides[nextSlideId];
+							var slideShortlistID = $(nextSlide).data('shortlist-id')
+							var shortlistLayer = app.map.getLayer(app.data.getWebAppData().getShortlistLayerId());
+							app.ui.mainView.selected = $.grep(shortlistLayer.graphics,function(n){return n.attributes.shortlist_id == slideShortlistID;})[0];
+						}
+						_mainView.selected.updated = false;
+						if(_swipers[themeIndex].activeIndex == _swipers[themeIndex].slides.length - 1){
+							if(isEdge || isWin10)
+								$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'visible'});
+							_swipers[themeIndex].slideTo(0, 0);
+							if(isEdge || isWin10)
+								$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'auto'});
+						}
+						else {
+							if(isEdge || isWin10)
+								$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'visible'});
+							_swipers[themeIndex].slideNext();
+							if(isEdge || isWin10)
+								$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'auto'});
+						}
+					});
+
 					_swiperSlides[String(themeIndex)].push(newSlide);
 
 					if(_i%10===0 && _i+1 < features.length){
@@ -571,6 +603,7 @@ define(["../../core/Helper",
 							} else {
 								$('.detail-btn-container').show();
 							}
+
 
 							_this.resize();
 							newSwiper.update();
@@ -663,34 +696,6 @@ define(["../../core/Helper",
 
 						var borderColor = app.data.getStory()[themeIndex].color;
 						$('#detailView'+themeIndex).find('.detailHeader').css('border-top-color', borderColor);
-
-						container.find(".detailPictureDiv img").click(function(){
-							if(!_mainView.selected){
-								var nextSlideId = _swipers[themeIndex].activeIndex + 1;
-								if(_swipers[themeIndex].activeIndex === _swipers[themeIndex].slides.length - 1){
-									nextSlideId = 0;
-								}
-								var nextSlide = _swipers[themeIndex].slides[nextSlideId];
-								var slideShortlistID = $(nextSlide).data('shortlist-id')
-								var shortlistLayer = app.map.getLayer(app.data.getWebAppData().getShortlistLayerId());
-								app.ui.mainView.selected = $.grep(shortlistLayer.graphics,function(n){return n.attributes.shortlist_id == slideShortlistID;})[0];
-							}
-							_mainView.selected.updated = false;
-							if(_swipers[themeIndex].activeIndex == _swipers[themeIndex].slides.length - 1){
-								if(isEdge || isWin10)
-									$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'visible'});
-								_swipers[themeIndex].slideTo(0, 0);
-								if(isEdge || isWin10)
-									$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'auto'});
-							}
-							else {
-								if(isEdge || isWin10)
-									$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'visible'});
-								_swipers[themeIndex].slideNext();
-								if(isEdge || isWin10)
-									$('.swiper-slide-active .detailTextContainer').css({'overflow-y': 'auto'});
-							}
-						});
 
 						//_this.refreshSlides();
 						_swipers[themeIndex].update();

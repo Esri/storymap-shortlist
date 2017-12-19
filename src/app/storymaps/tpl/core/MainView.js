@@ -340,6 +340,8 @@ define(["lib-build/css!./MainView",
 
 					if(layer.graphics.length < 1 && layer.visibleAtMapScale){
 						on.once(layer, 'update-end', function(){
+							if(layerFound)
+								return;
 							var fields = layer.fields;
 							var tabField;
 							$.each(fields, function(index, field){
@@ -351,17 +353,21 @@ define(["lib-build/css!./MainView",
 								layerFound = true;
 							}*/
 							if(!tabField && index == layers.length - 1){
+								if(!app.isInBuilder)
+									return;
 								var message = i18n.builder.migration.migrationPattern.badData;
 								message += '  (<a href="http://links.esri.com/storymaps/shortlist_layer_template" target="_blank" download="">'+i18n.builder.migration.migrationPattern.downloadTemplate+'</a>)';
 								$("#fatalError .error-msg").html(message);
 								$("#fatalError").show();
 								return;
 							}
+							if(!tabField)
+								return;
 							var layerGraphics = layer.graphics;
 							var layerFields = layer.fields;
 							app.map.removeLayer(layer);
 							var newLayer = new esri.layers.GraphicsLayer({id: app.data.getWebAppData().getShortlistLayerId()+"_copy"});
-
+							layerFound = true;
 							newLayer.graphics = layerGraphics;
 							newLayer.fields = layerFields;
 							app.map.addLayer(newLayer);

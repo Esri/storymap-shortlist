@@ -321,3 +321,12 @@ body.mobile-view #basemapChooser {
 .imageSelectorUpload .resources {
 	display: none !important;
 }
+
+#builderPanel.more-conflicting-text .appTitle {
+ 	width: 240px;
+ 	height: 26px;
+ 	top: 17px;
+ 	background-size: contain;
+ 	background-repeat: no-repeat;
+  left: 5px;
+ }

@@ -700,7 +700,8 @@ define([
 				_swipers[themeIndex].updating = true;
 				var currentSlide = _swipers[themeIndex].slides[_swipers[themeIndex].activeIndex];
 				var changedGraphic = $.grep(app.layerCurrent.graphics, function(e){ return e.attributes.shortlist_id ==  $(currentSlide).data('shortlist-id'); });
-				if(changedGraphic[0].attributes.resource){
+				// Support uploading main image, but changing thumbnail to a web hosted image
+				if(changedGraphic[0].attributes.resource && changedGraphic[0].attributes.resource.thumb_url == params.thumb_url){
 					FileUploadHelper.removeResources(changedGraphic[0].attributes.resource);
 				}
 				if(params.uploaded){

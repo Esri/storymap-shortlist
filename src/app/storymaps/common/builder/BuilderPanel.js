@@ -459,10 +459,30 @@ define(["lib-build/tpl!./BuilderPanel",
 
 			this.resize = function()
 			{
-				container.find('.status-msg').css(
-					'max-width',
-					$(window).width() - (container.find('.buttons').position().left + container.find('.buttons').outerWidth() + container.find('.status-btns').outerWidth() + 20)
-				);
+				var jqStatusMsg = container.find('.status-msg');
+				var jqStatusBtns = container.find('.status-btns button');
+				container.removeClass('conflicting-text more-conflicting-text');
+				jqStatusBtns.removeClass('btn-xs');
+				jqStatusMsg.css('max-width', 'auto');
+				var btns = container.find('.buttons')[0];
+				var statusMsg = jqStatusMsg[0];
+
+				if (btns && statusMsg) {
+					// unfortunately, we have to keep computing the bounding client rect because it keeps changing.
+					if (btns.getBoundingClientRect().right + 10 >= statusMsg.getBoundingClientRect().left) {
+						container.addClass('conflicting-text');
+					}
+					// do the check again to see if we need to condense some more.
+					if (btns.getBoundingClientRect().right + 10 >= statusMsg.getBoundingClientRect().left) {
+						container.addClass('more-conflicting-text');
+					}
+					// once more to set a max width on the fix message box and make it wrap
+					var btnRight = btns.getBoundingClientRect().right;
+					if (btnRight + 10 >= statusMsg.getBoundingClientRect().left) {
+						jqStatusBtns.addClass('btn-xs');
+						jqStatusMsg.css('max-width', parseInt(statusMsg.getBoundingClientRect().right - btnRight, 10));
+					}
+				}
 			};
 
 			function initLocalization()

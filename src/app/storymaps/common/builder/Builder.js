@@ -893,7 +893,7 @@ define(["lib-build/css!./Builder",
 				text: processForSave()
 			});
 
-			var url = portalUrl + "/sharing/content/users/" + uid + (appItem.ownerFolder ? ("/" + appItem.ownerFolder) : "");
+			var url = portalUrl + "/sharing/rest/content/users/" + uid + (appItem.ownerFolder ? ("/" + appItem.ownerFolder) : "");
 
 			// Updating
 			if ( appItem.id )
@@ -998,7 +998,7 @@ define(["lib-build/css!./Builder",
 								text: JSON.stringify(app.data.getWebAppData().get())
 							});
 
-							var url = portalUrl + "/sharing/content/users/" + uid + (appItem.ownerFolder ? ("/" + appItem.ownerFolder) : "");
+							var url = portalUrl + "/sharing/rest/content/users/" + uid + (appItem.ownerFolder ? ("/" + appItem.ownerFolder) : "");
 
 							// Updating
 							url += "/items/" + appItem.id + "/update";
@@ -1097,7 +1097,7 @@ define(["lib-build/css!./Builder",
 
 			return esriRequest(
 				{
-					url: portalUrl + "/sharing/content/users/" + uid + "/shareItems",
+					url: portalUrl + "/sharing/rest/content/users/" + uid + "/shareItems",
 					handleAs: 'json',
 					content: params
 				},
@@ -1125,7 +1125,7 @@ define(["lib-build/css!./Builder",
 
 			return esriRequest(
 				{
-					url: portalUrl + "/sharing/content/users/" + uid + "/items/" + itemId + "/protect",
+					url: portalUrl + "/sharing/rest/content/users/" + uid + "/items/" + itemId + "/protect",
 					handleAs: 'json',
 					content: params
 				},
@@ -1212,7 +1212,7 @@ define(["lib-build/css!./Builder",
 
 					var saveRq = esriRequest(
 						{
-							url: portalUrl + "/sharing/content/users/" + uid + (appItem.ownerFolder ? ("/" + appItem.ownerFolder) : "") + "/addItem",
+							url: portalUrl + "/sharing/rest/content/users/" + uid + (appItem.ownerFolder ? ("/" + appItem.ownerFolder) : "") + "/addItem",
 							handleAs: 'json',
 							content: appItem
 						},
