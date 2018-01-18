@@ -101,7 +101,7 @@ The Shortlist data are stored in a Web Application Item in ArcGIS Online and its
 The image that you include in your Shortlist using the builder are not copied in ArcGIS Online. You have to make sure that those medias as well as the webmap you are using are and will remain accessible to your audience.
 
 #### Can I deploy Shorlist on Portal for ArcGIS?
-Shortlist is not included in Portal for ArcGIS. We are planning to include it in Portal for ArcGIS 10.5.1.
+Shortlist is not included in Portal for ArcGIS.
 
 Steps:
 - [Download the latest version](http://links.esri.com/storymaps/shortlist_template_zip)
