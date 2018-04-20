@@ -12,7 +12,7 @@ define({
       "open": "Otvori",
       "start": "Početak",
       "loading": "Učitavanje",
-      "disabledAdmin": "Administrator je onemogućio ovu značajku",
+      "disabledAdmin": "Administrator je onemogućio ovu značajku.",
       "width": "Širina",
       "height": "Visina",
       "create": "Izradi",
@@ -57,7 +57,7 @@ define({
     },
     "saveErrorSocial": {
       "title": "Ažuriranje dijeljenja na društvenim mrežama",
-      "panel1": "Poboljšana je prisutnost vaše priče na društvenim medijima, ali naziv stavke u web-aplikaciji ArcGIS nije jednak nazivu vaše priče.",
+      "panel1": "Poboljšana je prisutnost vaše priče na društvenim medijima, ali naziv stavke u ArcGIS web-aplikaciji nije jednak nazivu vaše priče.",
       "panel1tooltip": "Kada odredite naziv, sažetak i sličicu, vaša će priča izgledati ovako:",
       "panel2": "Koji biste naziv upotrijebili na društvenim medijima:",
       "panel2q1": "Naziv priče (preporučeno)",
@@ -109,17 +109,19 @@ define({
     },
     "settingsHeader": {
       "title": "Zaglavlje",
-      "logoEsriRadio": "Esri logotip",
-      "logoNoneRadio": "Nema logotipa",
+      "logoEsriRadio": "Logotip Esri",
+      "logoNoneRadio": "Bez logotipa",
       "logoOrgRadio": "Logotip organizacije",
       "logoCustomRadio": "Moj logotip",
       "logoCustomLabel": "Slika:",
-      "logoCustomUploadHelp": "Logotipi izgledaju najbolje ako im je omjer širine i visine između 1:1 i 5:1. Ako se povezani logotip sporo iscrtava, spremite kopiju i učitajte je ovdje.",
+      "logoCustomUploadHelp": "Poveznica slike logotipa mora početi s HTTPS-om. Logotipi izgledaju najbolje ako im je omjer širine i visine između 1:1 i 5:1. Ako se povezani logotip sporo iscrtava, spremite kopiju i učitajte je ovdje.",
       "logoCustomUploadTooltip": "Upotrijebi učitani logotip",
       "logoCustomUploadButton": "Učitaj logotip",
       "logoUploadSizeError": "Dimenzije GIF-a su prevelike. Promijenite veličinu na ${PIXEL-WIDTH} piksela širine.",
+      "logoCustomLinkHTTPSError": "Poveznica mora početi s HTTPS-om",
       "logoCustomLinkTooltip": "Poveži s logotipom",
       "logoCustomLinkPlaceholder": "URL slike",
+      "logoCustomLinkPlaceholderHTTPS": "https://example.com/logo.jpg",
       "logoUploadGenericError": "Logotip može biti .bmp, .gif, .jpg, .jpeg ili .png datoteka. GIF-ovi moraju biti manji od 250 px širine i 10 Mb veličine.",
       "logoCustomTargetPlaceholder": "Web-stranica koja će se otvoriti kad kliknete na logotip",
       "logoSocialText": "Dodatni tekst:",
@@ -129,6 +131,22 @@ define({
     "header": {
       "title": "Uredite naslov stavke %TPL_NAME%",
       "subtitle": "Uredite podnaslov stavke %TPL_NAME%"
+    },
+    "bannerNotification": {
+      "learnMore": "Saznaj više",
+      "close": "Zatvori",
+      "dontShowAgain": "Nemoj ponovno prikazati ovu poruku"
+    },
+    "httpsTransitionMessage": {
+      "bannerMsg": "Važna poruka o internetskoj sigurnosti i Story Mapsu",
+      "s1h1": "Esri unaprjeđuje sigurnost Story Mapsa",
+      "s1p1": "Vaš Story Maps koji se prikazuje uživo na internetu i internetska zajednica uvijek rade na tome da uspostave i provedu bolju sigurnost. HTTPS, koji osigurava sigurnu vezu za sadržaj koji se prenosi preko interneta, postaje očekivani način pristupa web sadržajima. Najsuvremeniji preglednici sada prikazuju poruke upozorenja kad se upotrebljava HTTP umjesto HTTPS. Zbog tog novog standarda, od ažuriranja ArcGIS Onlinea u lipnju 2018. vaš Story Maps trebat će upotrebljavati HTTPS.",
+      "s1p2": "Praktično govoreći, to znači da se Story Mapu i svom njegovom sadržaju (uključujući slike, slojeve, ugrađene appove i web-mjesta) mora pristupiti pomoću poveznica koje počinju HTTPS-om umjesto HTTP-om. Time se osigurava najbolje iskustvo za čitatelje jer će većina web-preglednika naznačiti da su vaše priče sigurne.",
+      "s2h1": "Što trebam napraviti?",
+      "s2p1": "Esri radi na tome da to bude lak prijelaz za autore i čitatelje Story Mapa. Alati su sada dostupni u sastavljaču Story Map i u Mojim pričama pomoću kojih ćete pronaći nesiguran sadržaj (HTTP) u vašim pričama i koji će vam preporučiti kako to riješiti. Pregledajte svoje priče za nesiguran sadržaj i nadogradite na HTTPS prije lipnja 2018.",
+      "action1": "Zatvori",
+      "action2": "Sada pregledaj moje priče",
+      "action3": "Saznaj više"
     }
   }
 });

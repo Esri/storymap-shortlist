@@ -40,7 +40,7 @@ define({
       "noBuilderAllIE": "Story Map Shortlists kan vises i vanlige nettlesere. Story Map Shortlist Builder støttes imidlertid ikke av Microsoft Edge eller Internet Explorer. Bruk en annen webleser til å opprette eller redigere en Shortlist."
     },
     "headerFromCommon": {
-      "storymapsText": "En story map",
+      "storymapsText": "Et fortellingskart",
       "builderButton": "Rediger",
       "facebookTooltip": "Del på Facebook",
       "twitterTooltip": "Del på Twitter",

@@ -40,7 +40,7 @@ define({
       "noBuilderAllIE": "Story Map-snabblistor kan visas i valfri webbläsare. Däremot stöds inte Story Map Shortlist Builder i Microsoft Edge eller Internet Explorer. Använd därför en annan webbläsare när du behöver skapa eller redigera en snabblista."
     },
     "headerFromCommon": {
-      "storymapsText": "En berättelsekarta",
+      "storymapsText": "En Story Map",
       "builderButton": "Redigera",
       "facebookTooltip": "Dela på Facebook",
       "twitterTooltip": "Dela på Twitter",

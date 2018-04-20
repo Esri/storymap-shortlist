@@ -40,7 +40,7 @@ define({
       "noBuilderAllIE": "Story Map Shortlists können in jedem Webbrowser angezeigt werden. Der Story Map Shortlist-Builder wird jedoch von Microsoft Edge oder Internet Explorer nicht unterstützt. Verwenden Sie einen anderen Webbrowser, um eine Shortlist zu erstellen oder zu bearbeiten."
     },
     "headerFromCommon": {
-      "storymapsText": "Eine Story Map",
+      "storymapsText": "Eine Story-Map",
       "builderButton": "Bearbeiten",
       "facebookTooltip": "Auf Facebook freigeben",
       "twitterTooltip": "Auf Twitter freigeben",

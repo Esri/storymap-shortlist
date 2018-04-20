@@ -40,7 +40,7 @@ define({
       "noBuilderAllIE": "Lietotnes Story Map Shortlist sarakstus var skatīt jebkurā tīmekļa pārlūkā. Tomēr funkcija Story Map Shortlist Builder nav pieejama pārlūkā Microsoft Edge vai Internet Explorer. Shortlist sarakstu veidošanai vai labošanai izmantojiet citu tīmekļa pārlūku."
     },
     "headerFromCommon": {
-      "storymapsText": "Stāsta karte",
+      "storymapsText": "Kartes stāsts",
       "builderButton": "Labot",
       "facebookTooltip": "Kopīgot Facebook",
       "twitterTooltip": "Kopīgot Twitter",

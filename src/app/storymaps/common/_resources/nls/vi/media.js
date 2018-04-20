@@ -27,9 +27,9 @@ define({
       "lblDrop": "Thả ảnh tại đây hoặc",
       "infoUpload": "Ảnh sẽ được lưu trong tài khoản ArcGIS và chỉ có thể truy cập bên trong câu chuyện của bạn.",
       "warningFileTypes": "Ảnh có thể ở định dạng .jpg, .png, .gif, hoặc .bmp",
-      "warningOneFile": "Chấp nhận một tệp mỗi lần.",
+      "warningOneFile": "Chỉ chấp nhận một lần một tệp.",
       "warningFileSize": "Tệp vượt quá kích thước tải lên tối đa cho phép. Vui lòng chọn tệp khác.",
-      "tooltipRemove": "Xóa ảnh không sử dụng này khỏi tài khoản ArcGIS. <br> (Bạn sẽ phải tải lại ảnh nếu muốn sử dụng nó sau này.)"
+      "tooltipRemove": "Xóa ảnh không sử dụng này khỏi tài khoản ArcGIS. <br> (Bạn sẽ phải tải lại ảnh lên lại nếu muốn sử dụng nó sau này.)"
     },
     "imageSelectorFlickr": {
       "userInputLbl": "Tên đăng nhập",
@@ -76,13 +76,14 @@ define({
     },
     "videoSelectorOther": {
       "explain1": "Story map này không thể phát các tệp video thô (như avi, mpeg), nhưng có thể phát các tệp video được lưu trữ có trình phát tích hợp (ví dụ: YouTube hoặc Vimeo).",
-      "explain2": "Hầu hết các dịch vụ lưu trữ video đều được hỗ trợ với chức năng này. Hãy tìm tùy chọn để nhúng video, sao chép mã đã được cung cấp và thêm vào câu chuyện của bạn bằng cách sử dụng tùy chọn nội dung %WEBPAGE%.",
-      "explain3": "Ngoài ra, bạn có thể tự lưu video cùng với trang HTML sử dụng trình phát video như %EXAMPLE%. Sau đó, bạn chỉ cần thêm URL của trang HTML đó vào câu chuyện của bạn như một %WEBPAGE%.",
+      "explain2": "Hầu hết các dịch vụ lưu trữ video đều cung cấp đối tượng này. Hãy tìm tùy chọn để nhúng video, sao chép mã đã cung cấp và thêm vào câu chuyện của bạn bằng cách sử dụng tùy chọn nội dung %WEBPAGE%.",
+      "explain3": "Ngoài ra, bạn có thể tự lưu trữ video cùng với trang HTML sử dụng trình phát video như %EXAMPLE%. Sau đó, bạn cần thêm URL của trang HTML đó vào câu chuyện của bạn như một %WEBPAGE%.",
       "webpage": "Trang web"
     },
     "webpageSelectorHome": {
       "lblUrl": "Liên kết trang web",
       "lblEmbed": "Mã nhúng",
+      "lblMustUseHTTPS": "Liên kết tới nội dung web phải bắt đầu bằng HTTPS",
       "lblOR": "HOẶC",
       "lblError1": "Lỗi, xóa một trong hai trường nhập.",
       "lblError2": "Mã nhúng chỉ có thể chứa một %IFRAMETAG%",
@@ -91,7 +92,9 @@ define({
     "mediaConfigure": {
       "lblURL": "Liên kết hình ảnh",
       "lblURLPH": "Liên kết phải kết thúc bằng .jpg, .png, .gif, hoặc .bmp",
+      "lblURLPHHTTPS": "https://www.example.com/image.jpg",
       "lblURLError": "Hình ảnh này dường như không hợp lệ. Vui lòng chỉ định một liên kết trực tiếp đến tệp hình ảnh (URL của bạn thường sẽ kết thúc bằng .jpg hoặc .png). Các liên kết đến trang web chứa một hình ảnh sẽ không hoạt động.",
+      "lblURLErrorHTTPS": "Liên kết hình ảnh này không hợp lệ. URL phải bắt đầu bằng HTTPS và kết thúc bằng một định dạng hình ảnh được hỗ trợ (.jpg, .png, .gif, .bmp).",
       "lblURLCheck": "Đang kiểm tra hình ảnh...",
       "lblLabel": "Chú thích hình ảnh",
       "lblLabel1": "Chú thích",
@@ -106,7 +109,7 @@ define({
       "lblPosition3": "Đặt vừa",
       "lblPosition4": "Kéo giãn",
       "lblPosition5": "Tùy chỉnh",
-      "lblURLHelp": "Để có kết quả tốt nhất, kích thước hình ảnh phải nhỏ hơn 400 KB. Sử dụng ảnh JPG được nén lại ở mức 80% và chiều rộng khuyến nghị là: 2000 pixel cho giao diện chính hoặc bảng thuyết minh (narrative panel) có nút phóng đại, 1000 pixel cho bảng thuyết minh không có nút phóng đại. <br><br>Nếu ảnh được liên kết vẽ chậm, hãy tải ảnh lên câu chuyện của bạn để xử lý tốt hơn.",
+      "lblURLHelp": "Liên kết hình ảnh phải bắt đầu bằng HTTPS.<br><br>Để có kết quả tốt nhất, kích thước hình ảnh phải nhỏ hơn 400 KB. Sử dụng ảnh JPG được nén lại ở mức 80% chất lượng và chiều rộng hình ảnh khuyến nghị là: 2000 pixel cho giao diện chính hoặc bảng thuyết minh (narrative panel) có nút phóng đại, 1000 pixel cho bảng thuyết minh không có nút phóng đại.<br><br>Nếu liên kết hình ảnh hiển thị chậm, hãy tải ảnh lên câu chuyện của bạn để được xử lý tốt hơn.",
       "tooltipDimension": "Giá trị có thể được chỉ định theo 'px' hoặc '%'",
       "tooltipDimension2": "Giá trị phải được chỉ định bằng 'px'",
       "lblPosition2Explain": "(có thể xén)",

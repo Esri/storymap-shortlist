@@ -16,6 +16,7 @@ define(["lib-build/css!./Builder",
 		"esri/IdentityManager",
 		"esri/request",
 		"dojo/topic",
+		"storymaps/common/ui/bannerNotification/BannerNotification",
 		"lib-app/history.min"],
 	function(
 		viewCss,
@@ -35,7 +36,8 @@ define(["lib-build/css!./Builder",
 		arcgisUtils,
 		IdentityManager,
 		esriRequest,
-		topic)
+		topic,
+		BannerNotification)
 	{
 		var _core = null,
 			_builderView = null,
@@ -96,6 +98,47 @@ define(["lib-build/css!./Builder",
 			};
 
 			app.builder.cleanApp = cleanApp;
+
+			// Show https-transition notification when app loads
+			if (!app.data.isOrga()) {
+				topic.subscribe('tpl-ready', function() {
+					var strings = i18n.commonCore.httpsTransitionMessage;
+					new BannerNotification({
+						id: "httpsTransitionMessage",
+						bannerMsg: strings.bannerMsg,
+						mainMsgHtml: '\
+							<h2>' + strings.s1h1 + '</h2>\
+							<p>' + strings.s1p1 + '</p>\
+							<p>' + strings.s1p2 + '</p>\
+							<h2>' + strings.s2h1 + '</h2>\
+							<p>' + strings.s2p1 + '</p>\
+						',
+						actions: [
+							{
+								primary: true,
+								string: strings.action1,
+								closeOnAction: true
+							},
+							{
+								string: strings.action2,
+								action: function() {
+									window.open('https://storymaps.arcgis.com/en/my-stories/');
+								}
+							},
+							{
+								string: strings.action3,
+								action: function() {
+									window.open('https://links.esri.com/storymaps/web_security_faq');
+								}
+							}
+						],
+						cookie: {
+							domain: window.location.hostname,
+							maxAge: 60 * 60 * 24 * 365
+						}
+					});
+				});
+			}
 		}
 
 		function appInitComplete()
@@ -360,7 +403,7 @@ define(["lib-build/css!./Builder",
 
 			var commonProps = ['header', 'headerText', 'headerTitle', 'panel', 'text', 'textLink', 'media', 'mapControls', 'softText', 'softBtn'];
 			var moreTabProps = ['tab', 'tabActive', 'tabHover', 'tabText', 'tabTextHover', 'tabTextActive'];
-			var moreAccordionProps = ['accordionArrow, accordionArrowHover', 'accordionArrowActive', 'accordionNumber', 'accordionTitle'];
+			var moreAccordionProps = ['accordionArrow', 'accordionArrowHover', 'accordionArrowActive', 'accordionNumber', 'accordionTitle'];
 
 			var found = app.cfg.LAYOUTS.some(function(layout) {
 				if (currentLayout !== layout.id) {
@@ -415,7 +458,7 @@ define(["lib-build/css!./Builder",
 
 					var tabBackground = '#333';
 					var tabText = '#eee';
-					currentColors = lang.mixin({
+					newColors = lang.mixin({
 						// active, selected tab
 						tabActive: tabBackground,
 						tabTextActive: tabText,
@@ -427,7 +470,7 @@ define(["lib-build/css!./Builder",
 						tabTextHover: getColorRGBA(tabText, 0.8),
 						// group to keep selected.
 						group: 'modified'
-					}, newColors);
+					}, currentColors, newColors);
 
 				} else if (layout.id === 'accordion') {
 
@@ -438,7 +481,7 @@ define(["lib-build/css!./Builder",
 							}
 						}
 					}
-					currentColors = lang.mixin({
+					newColors = lang.mixin({
 						// accordion text (doesn't change for active/non-active)
 						// used textLink here instead of button because background is body.background.
 						accordionNumber: currentColors.textLink,
@@ -450,9 +493,9 @@ define(["lib-build/css!./Builder",
 						// arrow color for non-active section on hover
 						accordionArrowHover: getColorRGBA(currentColors.textLink, 0.8),
 						group: 'modified'
-					}, newColors);
+					}, currentColors, newColors);
 				}
-				layout.themes.push(currentColors);
+				layout.themes.push(newColors);
 			});
 		}
 
@@ -1036,12 +1079,12 @@ define(["lib-build/css!./Builder",
 			// Can only be used to add more privilege
 			// Looks like sharing to private imply a unshareItems request first
 			// => don't use it that code to share private without more test
-			if ( sharingMode != "public" && sharingMode != "account" )
+			if ( sharingMode != "public" && sharingMode != "account" && sharingMode != "org")
 				sharingMode = "public";
 
 			// Find items to share - only if they aren't already shared to the proper level
 			var targetItems = [];
-			if( sharingMode == "account" ) {
+			if( sharingMode == "account" || sharingMode == "org") {
 				if( app.data.getWebMap() && app.data.getWebMap().item.access == "private" && app.data.getWebMap().item.owner == app.portal.getPortalUser().username )
 					targetItems.push(app.data.getWebMap().item.id);
 				if ( app.data.getWebAppItem().access == "private" )
@@ -1087,13 +1130,13 @@ define(["lib-build/css!./Builder",
 				items: items,
 				groups: '',
 				everyone: '',
-				account: ''
+				org: ''
 			};
 
 			if ( sharing == "public" )
 				params.everyone = true;
-			if ( sharing == "account" )
-				params.account = true;
+			if ( sharing == "account" || sharing == "org" )
+				params.org = true;
 
 			return esriRequest(
 				{
@@ -1120,7 +1163,7 @@ define(["lib-build/css!./Builder",
 				token: token,
 				groups: '',
 				everyone: '',
-				account: ''
+				org: ''
 			};
 
 			return esriRequest(

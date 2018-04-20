@@ -40,7 +40,7 @@ define({
       "noBuilderAllIE": "Story Map — Krótka lista to szablon, który można wyświetlać w każdej przeglądarce internetowej. Należy jednak pamiętać, że kreator tej aplikacji nie jest obsługiwany w przeglądarkach Microsoft Edge i Internet Explorer. Do tworzenia i edycji krótkich list należy używać innych przeglądarek."
     },
     "headerFromCommon": {
-      "storymapsText": "mapa narracji (Story Map)",
+      "storymapsText": "Mapa narracyjna",
       "builderButton": "Edytuj",
       "facebookTooltip": "Udostępnij na Facebooku",
       "twitterTooltip": "Udostępnij na Twitterze",

@@ -26,7 +26,7 @@ define({
       "lblUploadButton": "דפדף לתמונה",
       "lblDrop": "הורד כאן תמונה או",
       "infoUpload": "תמונות יאוחסנו בחשבון ArcGIS שלך והגישה אליהן תהיה רק מחוץ לסיפור שלך.",
-      "warningFileTypes": "התמונה יכולה להיות בפורמט ‎.jpg, ‏‎.png, ‏‎.gif או ‎.bmp",
+      "warningFileTypes": "תמונה יכולה להיות בפורמט ‎.jpg, ‏‎.png, ‏‎.gif או ‎.bmp",
       "warningOneFile": "קובץ אחד התקבל בכל פעם",
       "warningFileSize": "גודל הקובץ עולה על מגבלת הגודל המקסימלית לטעינה. בחר קובץ אחר.",
       "tooltipRemove": "מחק תמונה זו שאין בה שימוש מחשבון ArcGIS שלך. <br> (יהיה עליך לטעון אותה שוב אם תרצה להשתמש בה בשלב מאוחר יותר.)"
@@ -39,7 +39,7 @@ define({
     "imageSelectorFacebook": {
       "leftHeader": "משתמש פייסבוק",
       "rightHeader": "עמוד פייסבוק",
-      "pageExplain": "דף Facebook הוא מותג/מוצר ציבורי או סלבריטי כגון <b>esrigis</b>. תוכל להשיג את שם הדף לאחר ה-'/' הראשון ב-URL של הדף.",
+      "pageExplain": "A Facebook page is a public brand/product or celebrity like <b>esrigis</b>. You can get the page name after the firstq'/' in the page URL.",
       "pageInputLbl": "שם דף",
       "lookupMsgError": "עמוד לא נמצא",
       "warning": "התמיכה של Facebook נותקה, ${learn}.",
@@ -83,6 +83,7 @@ define({
     "webpageSelectorHome": {
       "lblUrl": "קישור לדף אינטרנט",
       "lblEmbed": "קוד מוטמע",
+      "lblMustUseHTTPS": "קישורים אל תוכן באינטרנט חייבים להתחיל ב-HTTPS",
       "lblOR": "או",
       "lblError1": "שגיאה, נקה אחד משני שדות הקלט.",
       "lblError2": "קוד מוטמע יכול להכיל רק %IFRAMETAG% אחד",
@@ -91,7 +92,9 @@ define({
     "mediaConfigure": {
       "lblURL": "קישור לתמונה",
       "lblURLPH": "הסיומת של הקישור צריכה להיות ‎.jpg, ‏‎.png, ‏‎.gif או ‎.bmp",
+      "lblURLPHHTTPS": "https://www.example.com/image.jpg",
       "lblURLError": "תמונה זו אינה נראית חוקית. ציין קישור ישיר לקובץ תמונה (ה-URL שלך יסתיים בדרך כלל ב-‎.jpg או ‎.png). קישורים לדף אינטרנט שמכיל תמונה לא יפעלו.",
+      "lblURLErrorHTTPS": "הקישור לתמונה אינו חוקי. כתובת ה-URL חייבת להתחיל ב-HTTPS ולהסתיים בסיומת של קובץ תמונה נתמך (.jpg, .png, .gif, .bmp).",
       "lblURLCheck": "בודק תמונה...",
       "lblLabel": "כותרת תמונה",
       "lblLabel1": "תיאור",
@@ -105,8 +108,8 @@ define({
       "lblPosition2": "מלא",
       "lblPosition3": "מותאם",
       "lblPosition4": "מתוח",
-      "lblPosition5": "מותאם אישית",
-      "lblURLHelp": "כדי לקבל את התוצאות הטובות ביותר, תמונות צריכות להיות בגודל של פחות מ-‎400 KB. יש להשתמש בתמונות JPG דחוסות באיכות של 80% ובממדים המומלצים הבאים: 2000 פיקסלים עבור תצוגה ראשית או חלונית סיפור עם לחצן 'הגדל', ‏1000 פיקסלים עבור חלונית סיפור ללא הלחצן 'גדל'.<br><br>אם תמונה מקושרת מצטיירת באיטיות, טען אותה לסיפור שלך כדי לקבל תוצאות טובות יותר.",
+      "lblPosition5": "גודל מותאם",
+      "lblURLHelp": "הקישור לתמונה חייב להתחיל ב-HTTPS.<br><br>לקבלת התוצאות הטובות ביותר, התמונות צריכות להיות בגודל של פחות מ-‎400 KB. יש להשתמש בתמונות JPG דחוסות באיכות של 80% ובממדים המומלצים הבאים: 2,000 פיקסלים עבור תצוגה ראשית או חלונית סיפור עם לחצן 'הגדל', 1,000 פיקסלים עבור חלונית סיפור ללא הלחצן 'הגדל'.<br><br>אם תמונה מקושרת מצטיירת באיטיות, טען אותה לסיפור שלך כדי לקבל תוצאות טובות יותר.",
       "tooltipDimension": "הערך יכול להיות מוגדר בתוך  'px' או '%'",
       "tooltipDimension2": "יש לציין את הערך ב-'px'",
       "lblPosition2Explain": "(יכול להחתך)",

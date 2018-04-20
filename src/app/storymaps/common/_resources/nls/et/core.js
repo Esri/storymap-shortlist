@@ -7,15 +7,15 @@ define({
       "next": "Järgmine",
       "cancel": "Tühista",
       "back": "Tagasi",
-      "apply": "Rakenda",
+      "apply": "Kehtesta",
       "close": "Sulge",
       "open": "Ava",
       "start": "Algus",
       "loading": "Laen",
-      "disabledAdmin": "Administraator on selle võimaluse keelanud",
+      "disabledAdmin": "See funktsionaalsus on administraatori poolt välja lülitatud",
       "width": "Laius",
       "height": "Kõrgus",
-      "create": "Loo",
+      "create": "Koosta",
       "yes": "Jah",
       "no": "Ei",
       "mystories": "Minu lood"
@@ -52,7 +52,7 @@ define({
     "saveError": {
       "title": "Loo salvestamisel ilmnes tõrge",
       "err1Div1": "Lugu ei saa salvestada, sest teil on juba sama nimega üksus.",
-      "err1Div2": "Muutke loo pealkirja ja seejärel salvestage see.",
+      "err1Div2": "Muutke loo pealkirja ning seejärel salvestage see.",
       "btnOk": "Redigeerige loo pealkirja"
     },
     "saveErrorSocial": {
@@ -72,7 +72,7 @@ define({
       "viewlive": "Kuva lugu",
       "btnPrivate": "Privaatne",
       "btnPrivateTooltip": "Lugu on nähtav ainult teile",
-      "btnOrg": "Ettevõte",
+      "btnOrg": "Organisatsioon",
       "btnOrgTooltip": "Lugu on nähtav ainult teie ettevõtte liikmetele",
       "btnPublic": "Avalik",
       "btnPublicTooltip": "Lugu on nähtav kõigile",
@@ -89,7 +89,7 @@ define({
       "notavailable3": "Saate seda lugu jagada %LINK% kaudu.",
       "notavailable4": "Minu lood",
       "notavailable5": "selle üksuse leht",
-      "notavailable6": "Kahjuks pole antud funktsioon arendusrežiimis täielikult toetatud. Sõltuvalt teie juurutamise stsenaariumist võib see funktsioon pärast juurutamist olla toetatud.",
+      "notavailable6": "Kahjuks pole see funktsioon arendusrežiimis täielikult toetatud. Sõltuvalt teie juurutamise stsenaariumist võib see funktsioon pärast juurutamist olla toetatud.",
       "notavailable7": "Külastage kindlasti %MYCONTENT% teie loos olevate kaartide ja kihtide jagamise kinnitamiseks.",
       "notavailable8": "Minu sisu",
       "mystoriesinvite2": "Selleks et oma loo ilmet sotsiaalvõrgustikes täiustada, kasutage portaali ${MYSTORIES}, et lisada kokkuvõte ja pisipilt."
@@ -99,13 +99,13 @@ define({
       "tabError": "Palun kontrollige vigu kõigil vahekaartidel"
     },
     "settingsLayout": {
-      "title": "Paigutus",
+      "title": "Kujundus",
       "explain": "Millist paigutust soovite kasutada?",
       "explainInit": "Saate paigutust igal ajal seadete dialoogiakna kaudu muuta.",
       "viewExample": "Kuva reaalajas näide"
     },
     "settingsTheme": {
-      "title": "Kujundus"
+      "title": "Teema"
     },
     "settingsHeader": {
       "title": "Päis",
@@ -114,12 +114,14 @@ define({
       "logoOrgRadio": "Organisatsiooni logo",
       "logoCustomRadio": "Minu logo",
       "logoCustomLabel": "Pilt:",
-      "logoCustomUploadHelp": "Logod näevad kõige paremad välja, kui nende laiuse ja kõrguse suhe on 1:1 kuni 5:1. Kui lingitud logo joonistatakse liiga aeglaselt, salvestage koopia ja laadige see siia üles.",
+      "logoCustomUploadHelp": "Logo pildi lingi alguses peab olema HTTPS. Logod näevad kõige paremad välja, kui nende laiuse ja kõrguse suhe on 1:1 kuni 5:1. Kui lingitud logo joonistatakse liiga aeglaselt, salvestage koopia ja laadige see siia üles.",
       "logoCustomUploadTooltip": "Kasuta üleslaaditud logo",
       "logoCustomUploadButton": "Laadi logo üles",
       "logoUploadSizeError": "GIF-i mõõtmed on liiga suured. Muutke GIF ${PIXEL-WIDTH} piksli laiuseks.",
+      "logoCustomLinkHTTPSError": "Lingi alguses peab olema HTTPS",
       "logoCustomLinkTooltip": "Lingi logoga",
       "logoCustomLinkPlaceholder": "Pildi URL",
+      "logoCustomLinkPlaceholderHTTPS": "https://example.com/logo.jpg",
       "logoUploadGenericError": "Logo võib olla .bmp, .gif, .jpg, .jpeg või .png laiendiga fail. Gifid peavad olema alla 250 piksli laiused ja kuni 10 Mb suurused.",
       "logoCustomTargetPlaceholder": "Veebileht, mis avaneb logol klõpsates",
       "logoSocialText": "Reklaamlause:",
@@ -129,6 +131,22 @@ define({
     "header": {
       "title": "Muuda malli %TPL_NAME% nime",
       "subtitle": "Muuda malli %TPL_NAME% subtiitrit"
+    },
+    "bannerNotification": {
+      "learnMore": "Lisateave",
+      "close": "Sulge",
+      "dontShowAgain": "Ära kuva enam seda teadet"
+    },
+    "httpsTransitionMessage": {
+      "bannerMsg": "Oluline teade veebiturvalisuse ja kaardilugude kohta",
+      "s1h1": "Esri tegeleb kaardilugude turvalisuse tõstmisega",
+      "s1p1": "Teie kaardilood on veebis reaalajas ja veebikogukond töötab pidevalt selle nimel, et turvalisust parendada ja tõhustada. Interneti kaudu sisu turvalist edastamist võimaldav HTTPS on kujunemas veebisisule juurdepääsu eelistatud viisiks. Enamik moodsaid brausereid kuvavad hoiatusteate, kui HTTPS-i asemel kasutatakse HTTP-d. Selle uue standardi kujunemise tõttu on alates ArcGIS Online’i 2018. aasta juunikuu värskendusest teie kaardilugudel HTTPS-i kasutamine kohustuslik.",
+      "s1p2": "See tähendab, et juurdepääs kaardiloole ja kogu selle sisule (sh piltidele, kihtidele, manusrakendustele ja veebilehtedele) peab toimuma linkidega, mille alguses on HTTPS ja mitte HTTP. Nii tagatakse teie lugejatele parim kasutuskogemus, kuna enamik veebibrausereid näitab, et teie lugude avamine on turvaline.",
+      "s2h1": "Mida ma pean tegema?",
+      "s2p1": "Esri töötab selle nimel, et kaardilugude autoritele ja lugejatele kulgeks üleminek võimalikult lihtsalt. Juba praegu on kaardiloo koosturites ja jaotises Minu lood saadaval tööriistad, mis aitavad leida lugudes ebaturvalist sisu (HTTP) ja annavad soovitusi, mida sellega ette võtta. Palun kontrollige enne 2018. aasta juunit oma lugude sisu üle ja värskendage kogu ebaturvaline sisu uuele standardile HTTPS.",
+      "action1": "Sulge",
+      "action2": "Kontrolli minu lugusid kohe",
+      "action3": "Loe lähemalt"
     }
   }
 });

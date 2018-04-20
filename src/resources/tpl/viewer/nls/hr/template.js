@@ -40,7 +40,7 @@ define({
       "noBuilderAllIE": "Story Map Shortlists mogu se prikazati u bilo kojem web pregledniku. Međutim, Story Map Shortlist Builder nije podržan za Microsoft Edge ili Internet Explorer. Upotrijebite drugi web preglednik za stvaranje ili uređivanje Shortlista."
     },
     "headerFromCommon": {
-      "storymapsText": "Karta s pričom",
+      "storymapsText": "Story Map",
       "builderButton": "Uredi",
       "facebookTooltip": "Podijeli na Facebooku",
       "twitterTooltip": "Podijeli na Twitteru",

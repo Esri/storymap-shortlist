@@ -40,7 +40,7 @@ define({
       "noBuilderAllIE": "कहानी मानचित्र शॉर्टलिस्ट को किसी भी वेब ब्राउज़र में देखा जा सकता है। हालांकि कहानी मानचित्र शॉर्टलिस्ट बिल्डर Microsoft Edge या Internet Explorer पर समर्थित नहीं है। शॉर्टलिस्ट बनाने या संपादित करने के लिए कृपया किसी अलग वेब ब्राउज़र का उपयोग करें।"
     },
     "headerFromCommon": {
-      "storymapsText": "एक कहानी मानचित्र",
+      "storymapsText": "स्टोरी मैप",
       "builderButton": "संपादित करें",
       "facebookTooltip": "Facebook पर साझा करें",
       "twitterTooltip": "Twitter पर साझा करें",

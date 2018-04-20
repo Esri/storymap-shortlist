@@ -85,7 +85,7 @@ define({
       "statusNoErrPrivate": "Hãy chia sẻ câu chuyện của bạn khi bạn đã sẵn sàng!",
       "mystoriesinvite": "Quản lý tất cả các câu chuyện của bạn",
       "notavailable1": "Xin lỗi, chia sẻ câu chuyện của bạn từ Bộ thiết lập không được hỗ trợ do ứng dụng story map không được lưu trữ trong %PRODUCT%.",
-      "notavailable2": "Xin lỗi, chia sẻ câu chuyện của bạn từ Bộ thiết lập không được hỗ trợ do trên phiên bản Portal for ArcGIS này (yêu cầu phiên bản 10.4 trở lên).",
+      "notavailable2": "Xin lỗi, chia sẻ câu chuyện của bạn từ Bộ thiết lập không được hỗ trợ trên phiên bản Portal for ArcGIS này (yêu cầu phiên bản 10.4 trở lên).",
       "notavailable3": "Bạn có thể chia sẻ câu chuyện từ %LINK%.",
       "notavailable4": "Câu chuyện của Tôi",
       "notavailable5": "trang mục của câu chuyện",
@@ -108,18 +108,20 @@ define({
       "title": "Chủ đề"
     },
     "settingsHeader": {
-      "title": "Đầu trang",
+      "title": "Đầu mục",
       "logoEsriRadio": "Logo Esri",
       "logoNoneRadio": "Không có logo",
       "logoOrgRadio": "Logo của tổ chức",
       "logoCustomRadio": "Logo của tôi",
       "logoCustomLabel": "Ảnh:",
-      "logoCustomUploadHelp": "Logo sẽ hiển thị đẹp nhất nếu có tỷ lệ chiều rộng:chiều cao là 1:1 và 5:1. Nếu logo theo dạng liên kết hiển thị chậm, hãy lưu bản sao và tải lên tại đây.",
+      "logoCustomUploadHelp": "Liên kết hình ảnh logo phải bắt đầu bằng HTTPS. Logo sẽ hiển thị đẹp nhất nếu có tỷ lệ chiều rộng:chiều cao là 1:1 và 5:1. Nếu liên kết hình ảnh logo hiển thị chậm, hãy lưu thành bản sao và tải lên tại đây.",
       "logoCustomUploadTooltip": "Sử dụng logo đã tải lên",
       "logoCustomUploadButton": "Tải lên logo",
       "logoUploadSizeError": "Kích thước GIF quá lớn. Vui lòng thay đổi kích thước thành ${PIXEL-WIDTH} pixel chiều rộng.",
+      "logoCustomLinkHTTPSError": "Liên kết phải bắt đầu bằng HTTPS",
       "logoCustomLinkTooltip": "Liên kết với logo",
       "logoCustomLinkPlaceholder": "URL Hình ảnh",
+      "logoCustomLinkPlaceholderHTTPS": "https://example.com/logo.jpg",
       "logoUploadGenericError": "Logo có thể là một tệp .bmp, .gif, .jpg, .jpeg, hoặc .png. Gif phải có chiều rộng dưới 250px và kích thước dưới 10Mb.",
       "logoCustomTargetPlaceholder": "Trang web để mở khi bấm vào logo",
       "logoSocialText": "Khẩu hiệu:",
@@ -129,6 +131,22 @@ define({
     "header": {
       "title": "Chỉnh sửa tiêu đề %TPL_NAME% của bạn",
       "subtitle": "Chỉnh sửa phụ đề %TPL_NAME% của bạn"
+    },
+    "bannerNotification": {
+      "learnMore": "Tìm hiểu Thêm",
+      "close": "Đóng",
+      "dontShowAgain": "Không hiện lại thông báo này"
+    },
+    "httpsTransitionMessage": {
+      "bannerMsg": "Thông báo quan trọng về Bảo mật web và Story Maps",
+      "s1h1": "Esri đang ngày càng làm tăng cường chế độ bảo mật cho Story Maps",
+      "s1p1": "Story Maps của bạn đang hoạt động trên nền web và cộng đồng web vẫn luôn nỗ lực để thiết lập và thực thi bảo mật được tốt hơn. Giao thức HTTPS cung cấp kết nối bảo mật để truyền tải nội dung thông qua internet, đây là phương thức nổi bật hỗ trợ truy cập vào nội dung web. Hiện nay, hầu hết các trình duyệt hiện đại đều hiển thị thông báo khi sử dụng HTTP thay vì HTTPS. Trong tình hình tiêu chuẩn này đang ngày càng mở rộng, bắt đầu từ bản cập nhật ArcGIS Online tháng 6 năm 2018, Story Maps sẽ cần phải sử dụng với giao thức HTTPS.",
+      "s1p2": "Xét về khía cạnh thực tế, điều này có nghĩa là phải truy cập vào Story Map và nội dung của nó (như hình ảnh, lớp dữ liệu, ứng dụng được nhúng vào và trang web) bằng cách sử dụng liên kết bắt đầu với HTTPS thay vì HTTP. Điều này đảm bảo mang đến trải nghiệm tốt hơn cho người xem bởi câu chuyện của bạn sẽ bảo mật hơn khi mở trên các trình duyệt web.",
+      "s2h1": "Bạn cần làm gì?",
+      "s2p1": "Esri đang nỗ lực giúp bước chuyển tiếp này được thực hiện dễ dàng hơn cho các tác giả và người xem Story Maps. Các công cụ hiện đã có sẵn trong Bộ thiết lập Story Map và phần Câu chuyện của tôi sẽ giúp bạn tìm thấy những nội dung không bảo mật (HTTP) bên trong câu chuyện của mình và đưa ra những khuyến nghị về cách xử lý vấn đề. Vui lòng kiểm tra câu chuyện của bạn để tìm nội dung không bảo mật và cập nhật thành HTTPS trước tháng 6 năm 2018.",
+      "action1": "Đóng",
+      "action2": "Kiểm tra câu chuyện của tôi ngay",
+      "action3": "Tìm hiểu thêm"
     }
   }
 });

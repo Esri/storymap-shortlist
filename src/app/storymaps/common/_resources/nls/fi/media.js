@@ -17,7 +17,7 @@ define({
     "imageSelector": {
       "lblStep1": "Valitse palvelu",
       "lblStep2": "Valitse media",
-      "lblStep3": "Määritä"
+      "lblStep3": "Muokkaa"
     },
     "imageSelectorHome": {
       "explain": "Lataa kuvat sosiaalisesta mediasta <br />tai suoraan URL-osoitteesta"
@@ -29,7 +29,7 @@ define({
       "warningFileTypes": "Kuva voi olla jossakin seuraavista muodoista: .jpg, .png, .gif, tai .bmp.",
       "warningOneFile": "Vain yksi tiedosto kerrallaan voidaan käsitellä.",
       "warningFileSize": "Tiedoston koko ylittää palvelimelle ladattavien tiedostojen sallitun enimmäiskoon. Valitse toinen tiedosto.",
-      "tooltipRemove": "Delete this unused image from your ArcGIS account. <br> (You'll need to upload it again if you decide to use it later.)"
+      "tooltipRemove": "Poista tämä käyttämätön kuva ArcGIS-tililtäsi. <br> (Sinun on ladattava se tilillesi uudelleen, jos päätät käyttää sitä myöhemmin.)"
     },
     "imageSelectorFlickr": {
       "userInputLbl": "Käyttäjätunnus",
@@ -83,15 +83,18 @@ define({
     "webpageSelectorHome": {
       "lblUrl": "Web-sivun linkki",
       "lblEmbed": "Upotuskoodi",
+      "lblMustUseHTTPS": "Web-sisällön linkkien on alettava merkkijonolla HTTPS",
       "lblOR": "TAI",
       "lblError1": "Virhe, tyhjennä toinen kahdesta lähtöaineistokentästä.",
       "lblError2": "Upotuskoodi voi sisältää vain yhden merkkijonon %IFRAMETAG%",
-      "configure": "Määritä"
+      "configure": "Muokkaa"
     },
     "mediaConfigure": {
       "lblURL": "Kuvan linkki",
       "lblURLPH": "Linkin lopussa tulee olla jokin seuraavista merkkijonoista: .jpg, .png, .gif, tai .bmp.",
+      "lblURLPHHTTPS": "https://www.example.com/image.jpg",
       "lblURLError": "Kuva ei ole kelvollinen. Määritä suora linkki kuvatiedostoon (URL päättyy yleensä jpg- tai png-tunnisteeseen ). Linkki kuvan sisältävään verkkosivuun ei toimi.",
+      "lblURLErrorHTTPS": "Tämä kuvalinkki ei kelpaa. URL-osoitteen on alettava merkkijonolla HTTPS ja päätyttävä tuettuun kuvatiedoston tunnisteeseen (.jpg, .png, .gif tai .bmp).",
       "lblURLCheck": "Tarkistetaan kuvaa...",
       "lblLabel": "Kuvan seloste",
       "lblLabel1": "Seloste",
@@ -106,7 +109,7 @@ define({
       "lblPosition3": "Sovita",
       "lblPosition4": "Venytä",
       "lblPosition5": "Mukautettu",
-      "lblURLHelp": "Parhaat tulokset saadaan käyttämällä alle 400 kt:n kokoisia kuvia. Käytä pakattuja JPG-kuvia 80 %:n kuvanlaadulla ja seuraavia kuvien suositusleveyksiä: 2 000 kuvapistettä päävaiheessa tai suurennuspainikkeen sisältävissä tarinapaneeleissa ja 1 000 kuvapistettä suurennuspainikkeettomissa tarinapaneeleissa.<br><br>Jos linkitetty kuva piirtyy hitaasti, voit nopeuttaa se piirtymistä lataamalla sen tarinaasi.",
+      "lblURLHelp": "Kuvalinkin on alettava merkkijonolla HTTPS.<br><br>Parhaat tulokset saadaan käyttämällä alle 400 kt:n kokoisia kuvia. Käytä pakattuja JPG-kuvia 80 %:n kuvanlaadulla ja seuraavia kuvien suositusleveyksiä: 2 000 kuvapistettä päävaiheessa tai suurennuspainikkeen sisältävissä tarinapaneeleissa ja 1 000 kuvapistettä suurennuspainikkeettomissa tarinapaneeleissa.<br><br>Jos linkitetty kuva piirtyy hitaasti, voit nopeuttaa se piirtymistä lataamalla sen tarinaasi.",
       "tooltipDimension": "Arvo voidaan määrittää px (pikseli)- tai %-yksiköissä",
       "tooltipDimension2": "Arvo on määritettävä pikseleinä",
       "lblPosition2Explain": "(voi rajautua)",

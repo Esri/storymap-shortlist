@@ -6,7 +6,7 @@ define({
       "save": "Guardar",
       "next": "Seguinte",
       "cancel": "Cancelar",
-      "back": "Anterior",
+      "back": "Voltar",
       "apply": "Aplicar",
       "close": "Fechar",
       "open": "Abrir",
@@ -26,13 +26,13 @@ define({
       "enterSubtitle": "Introduzir subtítulo opcional..."
     },
     "builderPanel": {
-      "panelHeader": "Builder de %TPL_NAME%",
+      "panelHeader": "Builder %TPL_NAME%",
       "buttonSaving": "Guardar",
       "buttonSaved": "Guardado",
       "buttonShare": "Partilhar",
       "buttonSettings": "Configurações",
       "buttonHelp": "Ajuda",
-      "buttonPreview": "Visualizar História",
+      "buttonPreview": "Visualizar história",
       "tooltipFirstSave": "Esta funcionalidade não se encontra disponível até que a aplicação seja guardada.",
       "tooltipNotShared": "Esta funcionalidade não se encontra disponível até que a aplicação seja partilhada.",
       "tooltipNotShared2": "A sua história não é partilhada, apenas você a consegue aceder.",
@@ -68,8 +68,8 @@ define({
     },
     "share": {
       "shareTitle": "Partilhar a sua história",
-      "preview": "Pré-visualizar",
-      "viewlive": "Visualizar História",
+      "preview": "Pré-Visualizar",
+      "viewlive": "Visualizar história",
       "btnPrivate": "Privado",
       "btnPrivateTooltip": "A história apenas pode ser vista por si",
       "btnOrg": "Organização",
@@ -114,12 +114,14 @@ define({
       "logoOrgRadio": "Logótipo da organização",
       "logoCustomRadio": "O meu logótipo",
       "logoCustomLabel": "Imagem:",
-      "logoCustomUploadHelp": "Os logótipos têm melhor aspeto se tiverem um rácio largura:altura entre 1:1 e 5:1. Caso um logótipo com ligação demore a ser representado, guarde uma cópia e carregue-o aqui.",
+      "logoCustomUploadHelp": "A ligação da imagem do logo tem de começar com HTTPS. Os logótipos têm melhor aspeto se tiverem um rácio largura:altura entre 1:1 e 5:1. Caso um logótipo com ligação demore a ser representado, guarde uma cópia e carregue-o aqui.",
       "logoCustomUploadTooltip": "Utilizar um logótipo carregado",
       "logoCustomUploadButton": "Carregar um logótipo",
       "logoUploadSizeError": "Dimensões de GIF demasiado grandes. Por favor, redimensione para ${PIXEL-WIDTH} pixeis de largura.",
+      "logoCustomLinkHTTPSError": "A ligação tem de começar com HTTPS",
       "logoCustomLinkTooltip": "Ligar a um logótipo",
       "logoCustomLinkPlaceholder": "URL de Imagem",
+      "logoCustomLinkPlaceholderHTTPS": "https://example.com/logo.jpg",
       "logoUploadGenericError": "O logótipo pode ser um ficheiro .bmp, .gif, .jpg, .jpeg ou .png. Os gifs têm de ter menos do que 250px de largura e de 10MB de tamanho.",
       "logoCustomTargetPlaceholder": "Página web a abrir quando o logótipo é clicado",
       "logoSocialText": "Slogan:",
@@ -129,6 +131,22 @@ define({
     "header": {
       "title": "Editar o título do seu %TPL_NAME%",
       "subtitle": "Editar o subtítulo do seu %TPL_NAME%"
+    },
+    "bannerNotification": {
+      "learnMore": "Saber Mais",
+      "close": "Fechar",
+      "dontShowAgain": "Não exibir esta mensagem novamente"
+    },
+    "httpsTransitionMessage": {
+      "bannerMsg": "Mensagem Importante acerca de Segurança na Web e Story Maps",
+      "s1h1": "A Esri está a melhorar a segurança dos Story Maps",
+      "s1p1": "Os seus Story Maps existem na web, e a comunidade da web está sempre a trabalhar para estabelecer e implementar melhor segurança. HTTPS, que fornece uma ligação segura para conteúdo transmitido através da Internet, está a emergir como modo habitual de aceder a conteúdo web. A maioria dos navegadores modernos exibe agora mensagens de aviso quando é utilizado HTTP ao invés de HTTPS. Devido a esta norma emergente, a partir da atualização de junho de 2018 ao ArcGIS Online, será necessário que os seus Story Maps utilizem HTTPS.",
+      "s1p2": "Em termos práticos, isto significa que um Story Map e todo o respetivo conteúdo (incluindo imagens, camadas, aplicações incorporadas e sites web) tem de ser acedido através de ligações que começam com HTTPS ao invés de HTTP. Isto garante uma experiência de maior qualidade para os seus leitores, já que a maioria dos navegadores web indicarão que as suas histórias são seguras.",
+      "s2h1": "O que tenho de fazer?",
+      "s2p1": "A Esri está a trabalhar para que esta transição seja simples para autores e leitores de Story Maps. Encontram-se agora disponíveis ferramentas, nos builders de Story Maps e em As Minhas Histórias, que o ajudam a encontrar conteúdo inseguro (HTTP) nas suas histórias e oferecem recomendações sobre como lidar com isso. Por favor, verifique se as suas histórias têm conteúdo inseguro e atualize para HTTPS antes de junho de 2018.",
+      "action1": "Fechar",
+      "action2": "Verificar as minhas histórias agora",
+      "action3": "Obtenha mais informações"
     }
   }
 });

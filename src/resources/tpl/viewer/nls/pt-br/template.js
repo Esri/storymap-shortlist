@@ -40,7 +40,7 @@ define({
       "noBuilderAllIE": "As Listas Restritas do Mapa Histórico podem ser visualizadas em qualquer navegador da web. No entanto, o Construtor de Lista Restrita do Mapa Histórico não é suportado no Microsoft Edge ou Internet Explorer. Utilize um navegador da web diferente para criar ou editar uma Lista Restrita."
     },
     "headerFromCommon": {
-      "storymapsText": "Um mapa histórico",
+      "storymapsText": "Um Mapa Histórico",
       "builderButton": "Editar",
       "facebookTooltip": "Compartilhar no Facebook",
       "twitterTooltip": "Compartilhar no Twitter",

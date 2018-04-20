@@ -58,7 +58,7 @@ define({
       "select": "Deze video selecteren"
     },
     "videoSelectorHome": {
-      "other": "Overig"
+      "other": "Overige"
     },
     "videoSelectorYoutube": {
       "url": "YouTube-videokoppeling",
@@ -83,6 +83,7 @@ define({
     "webpageSelectorHome": {
       "lblUrl": "Webpaginakoppeling",
       "lblEmbed": "Code voor inbedden",
+      "lblMustUseHTTPS": "Koppelingen naar webcontent moeten beginnen met HTTPS",
       "lblOR": "OF",
       "lblError1": "Fout: maak een van de twee velden leeg.",
       "lblError2": "Invoegcode kan maar één %IFRAMETAG% bevatten",
@@ -91,7 +92,9 @@ define({
     "mediaConfigure": {
       "lblURL": "Afbeeldingskoppeling",
       "lblURLPH": "Koppeling moet eindigen met .jpg, .png, .gif of .bmp",
+      "lblURLPHHTTPS": "https://www.example.com/image.jpg",
       "lblURLError": "Deze afbeelding is blijkbaar niet geldig. Geef een directe koppeling naar een afbeeldingsbestand op (uw URL eindigt doorgaans op .jpg of .png). Koppelingen naar een webpagina die een afbeelding bevat, functioneren niet.",
+      "lblURLErrorHTTPS": "Deze afbeeldingskoppeling is niet geldig. De URL moet beginnen met HTTPS en eindigen met een ondersteunde afbeeldingsbestandsextensie (.jpg, .png, .gif, .bmp).",
       "lblURLCheck": "Afbeelding bekijken...",
       "lblLabel": "Bijschrift afbeelding",
       "lblLabel1": "Bijschrift",
@@ -106,14 +109,14 @@ define({
       "lblPosition3": "Passend maken",
       "lblPosition4": "Uitrekken",
       "lblPosition5": "Aangepast",
-      "lblURLHelp": "Voor het beste resultaat moeten de afbeeldingen kleiner zijn dan 400 KB. Gebruik gecomprimeerde JPG-afbeeldingen op 80% kwaliteit en deze aanbevolen afbeeldingsbreedte: 2000 pixels voor het hoofdvenster of verhalende paneel met de knop maximaliseren, 1000 pixels voor verhalend paneel zonder knop maximaliseren.<br><br>Als gekoppelde afbeeldingen langzaam zijn, zullen ze sneller geladen worden als u ze uploadt naar uw verhaal.",
+      "lblURLHelp": "Afbeeldingskoppeling moet beginnen met HTTPS. <br><br>Voor het beste resultaat moeten de afbeeldingen kleiner zijn dan 400 KB. Gebruik gecomprimeerde JPG-afbeeldingen op 80% kwaliteit en deze aanbevolen afbeeldingsbreedte: 2000 pixels voor het hoofdvenster of verhalende paneel met de knop maximaliseren, 1000 pixels voor verhalend paneel zonder knop maximaliseren.<br><br>Als gekoppelde afbeeldingen langzaam zijn, zullen ze sneller geladen worden als u ze uploadt naar uw verhaal.",
       "tooltipDimension": "De waarde kan in 'px' of '%' worden gespecificeerd",
       "tooltipDimension2": "De waarde moet worden opgegeven in 'px'",
       "lblPosition2Explain": "(kan worden bijgesneden)",
       "lblPosition3Explain": "(wordt niet bijgesneden)",
       "lblPosition3Explain2": "(breedte past altijd in het deelvenster)",
       "lblPosition4Explain": "(kan worden vervormd)",
-      "unloadLbl": "Laden ongedaan maken als lezer weggaat",
+      "unloadLbl": "Laden ongedaan maken als de lezer weggaat",
       "unloadHelp": "Houd deze optie aangevinkt als de webpagina audio- of videomedia heeft om te voorkomen dat de content wordt afgespeeld als de lezer weggaat. Haal het vinkje weg om een soundtrack te laten doorspelen als de lezer verdergaat door het verhaal.<br />Als de webpagina een applicatie is, haal het vinkje dan weg zodat de applicatie het niet opnieuw laadt als de lezer terugkeert.",
       "embedProtocolLabel": "Pagina laden d.m.v. een beveiligde verbinding (HTTPS)",
       "embedProtocolWarning1": "Als deze pagina niet in uw verhaal geladen wordt, dan kan het niet geïnbed worden omwille van webbeveiligingsredenen. Voeg als alternatief een koppeling toe aan uw verhaal om de pagina te openen in een nieuw browsertabblad. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>Meer informatie</a>",

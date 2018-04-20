@@ -40,7 +40,7 @@ define({
       "noBuilderAllIE": "Story Map Shortlist는 모든 웹 브라우저에서 볼 수 있습니다. 그러나 Microsoft Edge 또는 Internet Explorer에서는 Story Map Shortlist 빌더가 지원되지 않습니다. Shortlist를 생성하거나 편집하려면 다른 웹 브라우저를 사용하세요."
     },
     "headerFromCommon": {
-      "storymapsText": "스토리 맵",
+      "storymapsText": "스토리맵",
       "builderButton": "편집",
       "facebookTooltip": "Facebook에 공유",
       "twitterTooltip": "Twitter에 공유",

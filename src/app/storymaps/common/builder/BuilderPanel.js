@@ -392,21 +392,22 @@ define(["lib-build/tpl!./BuilderPanel",
 			function updateStatus()
 			{
 				container.find(".status-msg").show();
+				var appAccess = app.data.getWebAppItem().access;
 
 				if( app.isDirectCreationFirstSave || app.isGalleryCreation )
 					container.find(".status-msg").html(i18n.commonCore.builderPanel.status6);
 				else if ( app.mystories && app.mystories.hasCheckErrors ) {
-					if ( app.data.getWebAppItem().access == "public" )
+					if ( appAccess == "public" )
 						container.find(".status-msg").html(i18n.commonCore.builderPanel.status1);
-					else if ( app.data.getWebAppItem().access == "account" )
+					else if ( appAccess == "account" || appAccess == "org")
 						container.find(".status-msg").html(i18n.commonCore.builderPanel.status1);
 					else
 						container.find(".status-msg").html(i18n.commonCore.builderPanel.status2);
 				}
 				else {
-					if ( app.data.getWebAppItem().access == "public" )
+					if ( appAccess == "public" )
 						container.find(".status-msg").html(i18n.commonCore.builderPanel.status3);
-					else if ( app.data.getWebAppItem().access == "account" )
+					else if ( appAccess == "account" || appAccess == "org")
 						container.find(".status-msg").html(i18n.commonCore.builderPanel.status4);
 					else
 						container.find(".status-msg").html(i18n.commonCore.builderPanel.status5);

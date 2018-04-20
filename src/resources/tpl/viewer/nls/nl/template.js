@@ -40,7 +40,7 @@ define({
       "noBuilderAllIE": "Storymap-shortlists kunnen worden bekeken in elke internetbrowser. Maar de Story Map Shortlist Builder wordt niet ondersteund in Windows Edge of Internet Explorer. Gebruik een andere internetbrowser om een shortlist te maken of bewerken."
     },
     "headerFromCommon": {
-      "storymapsText": "Een kaartverhaal",
+      "storymapsText": "Een Story Map",
       "builderButton": "Bewerken",
       "facebookTooltip": "Delen op Facebook",
       "twitterTooltip": "Delen op Twitter",

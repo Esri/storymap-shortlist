@@ -231,7 +231,6 @@ define([
 						var lat,
 						lng,
 						exifData = window.EXIF.readFromBinaryFile(data);
-						console.log('!!!! ', exifData, data, file);
 						if(exifData.GPSLatitude && exifData.GPSLatitude[0]){
 							lat = CommonHelper.convertToDegrees(exifData.GPSLatitude);
 							// EXIF lat/lng values dont come in as true values

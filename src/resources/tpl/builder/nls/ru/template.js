@@ -16,7 +16,7 @@ define({
       "confirmDeletion": "Подтвердите удаление "
     },
     "landing": {
-      "lblAdd": "Зачем вы хотите вызвать Shortlist?",
+      "lblAdd": "Как вы хотите назвать свой Shortlist?",
       "phAdd": "Введите заголовок...",
       "lblOR": "Или",
       "lblHelp": "Пройти ознакомительный тур"

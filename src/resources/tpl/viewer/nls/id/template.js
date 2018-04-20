@@ -40,7 +40,7 @@ define({
       "noBuilderAllIE": "Shortlist Peta Cerita dapat dilihat di web browser mana pun. Namun Builder Shortlist Peta Cerita tidak didukung pada Windows Edge atau Internet Explorer. Harap gunakan web browser lain untuk membuat atau mengedit Shortlist."
     },
     "headerFromCommon": {
-      "storymapsText": "Peta cerita",
+      "storymapsText": "Story Map",
       "builderButton": "Edit",
       "facebookTooltip": "Bagikan ke Facebook",
       "twitterTooltip": "Bagikan ke Twitter",

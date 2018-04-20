@@ -40,7 +40,7 @@ define({
       "noBuilderAllIE": "Le Story Map Shortlist possono essere visualizzate in qualsiasi browser. Tuttavia il generatore di Story Map Shortlist non è supportato da Microsoft Edge o Internet Explorer. Utilizzare un altro browser Web per creare o modificare una shortlist."
     },
     "headerFromCommon": {
-      "storymapsText": "Mappa collegata a una storia",
+      "storymapsText": "Story Map",
       "builderButton": "Modifica",
       "facebookTooltip": "Condividi su Facebook",
       "twitterTooltip": "Condividi su Twitter",

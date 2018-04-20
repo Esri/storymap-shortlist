@@ -53,8 +53,8 @@ define({
       "update": "Posodobi",
       "useLocation": "Uporabi to lokacijo",
       "selectAll": "Izberi vse",
-      "imageSizeHelper": "Za najboljše rezultate morajo biti slike manjše od 400 KB. Priporočena velikost in oblika je 1000 x 750 pikslov (4 : 3 razmerje širina : višina) ali manjša. Večje slike lahko upočasnijo delovanje. Za najboljše delovanje uporabite stisnjene slike JPG pri 80-% kakovosti.",
-      "imageSizeHelperUpdated": "Za najboljše delovanje morajo biti slike manjše od 400 KB. Za zmanjšanje velikosti uporabite format JPG, z 80-% kakovostjo. Če ima vaša slika še vedno več kot 400 KB, jo še bolj zmanjšajte: priporočljivo na 1000 pikslov širine x 750 pikslov višine (4 : 3 razmerje širina : višina).",
+      "imageSizeHelper": "Za najboljše rezultate morajo biti slike manjše od 400 KB. Priporočena velikost in oblika je 1000 x 750 pikslov (4 : 3 razmerje širina : višina) ali manjša. Večje slike lahko upočasnijo delovanje. Za najboljše delovanje uporabite stisnjene slike JPG pri 80 % kakovosti.",
+      "imageSizeHelperUpdated": "Za najboljše delovanje morajo biti slike manjše od 400 KB. Za zmanjšanje velikosti uporabite format JPG, z 80 % kakovostjo. Če ima vaša slika še vedno več kot 400 KB, jo še bolj zmanjšajte: priporočljivo na 1000 pikslov širine x 750 pikslov višine (4 : 3 razmerje širina : višina).",
       "thumbnailLink": "Povezava sličice",
       "thumbnailHelp": "Priporočena velikost in oblika sličice je 280 x 210 pikslov (4 : 3 razmerje širina : višina). Večje sličice lahko upočasnijo delovanje. Sličice z razmerjem 4 : 3 ustrezajo mestu in jih ni potrebno obrezati."
     },

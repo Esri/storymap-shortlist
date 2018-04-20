@@ -72,8 +72,8 @@ app.cfg = {
 	 * Builder
 	 */
 
-	HELP_URL: "http://storymaps.arcgis.com/en/app-list/shortlist/",
-	HELP_URL_PORTAL: "http://storymaps.arcgis.com",
+	HELP_URL: "https://storymaps.arcgis.com/en/app-list/shortlist/",
+	HELP_URL_PORTAL: "https://storymaps.arcgis.com",
 
 	// Control the authorized data source (for initialization and import screen)
 	AUTHORIZED_IMPORT_SOURCE: {

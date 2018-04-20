@@ -33,8 +33,8 @@ define({
       "buttonSettings": "Instellingen",
       "buttonHelp": "Help",
       "buttonPreview": "Verhaal bekijken",
-      "tooltipFirstSave": "Dit is niet beschikbaar tot u opslaat",
-      "tooltipNotShared": "Dit is niet beschikbaar tot u deelt.",
+      "tooltipFirstSave": "Dit is niet beschikbaar totdat u opslaat.",
+      "tooltipNotShared": "Dit is niet beschikbaar totdat u deelt.",
       "tooltipNotShared2": "Uw verhaal is niet gedeeld, alleen u hebt toegang.",
       "noPendingChange": "Geen wijziging in behandeling",
       "unSavedChangePlural": "Wijzigingen in behandeling",
@@ -56,7 +56,7 @@ define({
       "btnOk": "De verhaaltitel bewerken"
     },
     "saveErrorSocial": {
-      "title": "Social media update aangaande het delen",
+      "title": "Delen bijwerken social media",
       "panel1": "De weergave van uw storyâ€™s op social media is verbeterd, maar uw ArcGIS webapplicatietitel is niet hetzelfde als uw verhaaltitel.",
       "panel1tooltip": "Door het definiëren van een titel, samenvatting en thumbnail-afbeelding, komt uw verhaal er als volgt uit te zien:",
       "panel2": "Welke titel zou u willen gebruiken op social media:",
@@ -114,21 +114,39 @@ define({
       "logoOrgRadio": "Organisatielogo",
       "logoCustomRadio": "Mijn logo",
       "logoCustomLabel": "Afbeelding:",
-      "logoCustomUploadHelp": "Logo's zien er het beste uit als ze een breedte-hoogteverhouding hebben tussen 1:1 en 5:1. Als een gekoppeld logo langzaam wordt getekend, sla dan een kopie op en upload het hier.",
+      "logoCustomUploadHelp": "Logo-afbeeldingskoppelingen moeten beginnen met HTTPS. Logo's zien er het beste uit als ze een breedte-hoogteverhouding hebben tussen 1:1 en 5:1. Als een gekoppeld logo langzaam wordt getekend, sla dan een kopie op en upload het hier.",
       "logoCustomUploadTooltip": "Een geüpload logo gebruiken",
       "logoCustomUploadButton": "Een logo uploaden",
       "logoUploadSizeError": "GIF-afmetingen te groot. Graag aanpassen naar ${PIXEL-WIDTH} pixels breed.",
+      "logoCustomLinkHTTPSError": "Koppeling moet beginnen met HTTPS",
       "logoCustomLinkTooltip": "Koppelen aan een logo",
       "logoCustomLinkPlaceholder": "Afbeeldings-URL",
+      "logoCustomLinkPlaceholderHTTPS": "https://example.com/logo.jpg",
       "logoUploadGenericError": "Logo kan een .bmp, .gif, .jpg, .jpeg of .png-bestand zijn. Gif moet kleiner zijn dan 250 pixels breed en 10 Mb groot.",
       "logoCustomTargetPlaceholder": "Webpagina wordt geopend als het logo wordt aangeklikt",
       "logoSocialText": "Tagline:",
       "logoLink": "Link:",
-      "lblSmallHeader": "Compacte header gebruiken (geen subtitel)"
+      "lblSmallHeader": "Compact header gebruiken (geen subtitel)"
     },
     "header": {
       "title": "De titel van uw %TPL_NAME% bewerken",
       "subtitle": "Bewerk de subtitel van uw %TPL_NAME%"
+    },
+    "bannerNotification": {
+      "learnMore": "Meer informatie",
+      "close": "Sluiten",
+      "dontShowAgain": "Dit bericht niet meer weergeven"
+    },
+    "httpsTransitionMessage": {
+      "bannerMsg": "Belangrijk bericht over internetbeveiliging en Story Maps",
+      "s1h1": "Esri verbetert de beveiliging van Story Maps",
+      "s1p1": "Uw Story Maps staan live op het internet en de internetcommunity werkt permanent aan het bepalen en implementeren van betere beveiliging. HTTPS, dat een beviligde verbinding biedt voor content die over het internet verzonden wordt, wordt meer en meer gebruikt als de manier bij uitstek om content op het internet te openen. De meeste moderne browsers tonen nu waarschuwingsberichten als HTTP wordt gebruikt in plaats van HTTPS. Omwille van deze nieuwe norm, en met ingang van de ArcGIS Online update van juni 2018, moet uw Story Maps gebruik maken van HTTPS.",
+      "s1p2": "Praktisch betekent dit dat een Story Map en alle content ervan (inclusief afbeeldingen, lagen, geëmbedde apps en websites) moet worden geopend d.m.v. koppelingen die beginnen met HTTPS in plaats van HTTP. Dit garandeert de beste ervaring voor uw lezers, want de meeste webbrowsers zullen aangeven dat uw verhalen beveiligd zijn.",
+      "s2h1": "Wat moet ik doen?",
+      "s2p1": "Esri zorgt er voor dat dit een eenvoudige overgang wordt voor makers en lezers van Story Maps. Er zijn nu tools beschikbnaar in Story Map builders en My Stories die u in staat stellen om onbeveiligde content (HTTP) in uw verhalen te vinden en aanbevelingen geven voor het corrigeren ervan. Controleer uw verhalen op onbeveiligde content en werkt alles bij naar HTTPS voor juni 2018.",
+      "action1": "Sluiten",
+      "action2": "Controleer nu mijn verhalen",
+      "action3": "Meer weten"
     }
   }
 });

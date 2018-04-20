@@ -40,7 +40,7 @@ define({
       "noBuilderAllIE": "Story Map Shortlists se pot vizualiza în orice browser web. Totuşi, instrumentul de creare Story Map Shortlist nu este acceptat de Microsoft Edge sau Internet Explorer. Folosiţi un browser web diferit pentru a crea sau edita o listă scurtă."
     },
     "headerFromCommon": {
-      "storymapsText": "O hartă informativă",
+      "storymapsText": "O Story Map",
       "builderButton": "Editare",
       "facebookTooltip": "Partajare pe Facebook",
       "twitterTooltip": "Partajare pe Twitter",

@@ -1,15 +1,15 @@
 define({
   "commonMedia": {
     "mediaSelector": {
-      "lblSelect1": "Support",
+      "lblSelect1": "Multimédia",
       "lblSelect2": "Contenu",
       "lblMap": "Carte",
       "lblImage": "Image",
       "lblVideo": "Vidéo",
       "lblExternal": "Page Web",
       "lblUpload": "Charger",
-      "lblLink": "Lier",
-      "disabled": "Cette fonction a été désactivée par l'administrateur",
+      "lblLink": "Lien",
+      "disabled": "Cette entité a été désactivée par l'administrateur",
       "userLookup": "Charger des albums",
       "notImplemented": "Fonction pas encore implémentée.",
       "noData": "Aucun album public trouvé"
@@ -66,7 +66,7 @@ define({
       "lookupMsgError": "Utilisateur introuvable",
       "howToFind": "Comment trouver un nom d'utilisateur YouTube",
       "howToFind2": "Le nom d'utilisateur est affiché sous les vidéos",
-      "found": "Trouvé(e)",
+      "found": "Trouvés",
       "noData": "Aucune vidéo publique trouvée",
       "videoNotChecked": "La vidéo n'a pas été vérifiée sur YouTube mais son adresse semble correcte.",
       "checkFailedAPI": "La vérification YouTube a échoué, vérifiez votre clé d'API YouTube."
@@ -78,11 +78,12 @@ define({
       "explain1": "Cette carte de narration ne lit pas les fichiers vidéo bruts (AVI, MPEG), mais peut lire les vidéos hébergées avec des lecteurs intégrés (YouTube ou Vimeo).",
       "explain2": "La plupart des services d'hébergement de vidéos proposent cette fonctionnalité. Trouvez l'option permettant d'incorporer la vidéo, copiez le code fourni, puis ajoutez-le à votre narration à l'aide de l'option de contenu %WEBPAGE%.",
       "explain3": "L'autre solution consiste à héberger la vidéo dans une page HTML qui utilise un lecteur vidéo tel que %EXAMPLE%. Vous pouvez ensuite ajouter l'URL de cette page HTML dans votre narration en tant que %WEBPAGE%.",
-      "webpage": "Page web"
+      "webpage": "Page Web"
     },
     "webpageSelectorHome": {
       "lblUrl": "Lien de page Web",
       "lblEmbed": "Code incorporé",
+      "lblMustUseHTTPS": "Les liens vers le contenu web doivent commencer par HTTPS",
       "lblOR": "OU",
       "lblError1": "Erreur. Effacez un des deux champs en entrée.",
       "lblError2": "Le code incorporé ne peut contenir qu'un %IFRAMETAG%",
@@ -91,7 +92,9 @@ define({
     "mediaConfigure": {
       "lblURL": "Lien d'image",
       "lblURLPH": "Le lien doit se terminer par .jpg, .png, .gif ou .bmp",
+      "lblURLPHHTTPS": "https://www.example.com/image.jpg",
       "lblURLError": "Cette image ne semble pas valide. Spécifiez un lien direct vers un fichier image (votre URL se terminera généralement par .jpg ou .png). Les liens vers une page Web contenant une image ne fonctionneront pas.",
+      "lblURLErrorHTTPS": "Le lien de cette image n’est pas valide. L’URL doit commencer par HTTPS et se terminer par une extension de fichier image prise en charge (.jpg, .png, .gif, .bmp).",
       "lblURLCheck": "Vérification de l'image...",
       "lblLabel": "Légende de l'image",
       "lblLabel1": "Légende",
@@ -106,7 +109,7 @@ define({
       "lblPosition3": "Ajuster",
       "lblPosition4": "Etirer",
       "lblPosition5": "Personnalisé",
-      "lblURLHelp": "Pour des résultats optimaux, les images ne doivent pas dépasser 400 ko. Utilisez des images JPG compressées à 80 % avec les largeurs recommandées suivantes : 2 000 pixels pour la grande scène ou le panneau de narration avec le bouton Agrandir, 1 000 pixels pour le panneau de narration sans le bouton Agrandir.<br><br>Si une image liée s'affiche lentement, chargez-la dans votre narration pour de meilleurs résultats.",
+      "lblURLHelp": "Le lien de l’image doit commencer par HTTPS.<br><br>Pour des résultats optimaux, les images ne doivent pas dépasser 400 ko. Utilisez des images JPG compressées à 80 % avec les largeurs recommandées suivantes : 2 000 pixels pour la grande scène ou le panneau de narration avec le bouton Agrandir, 1 000 pixels pour le panneau de narration sans le bouton Agrandir.<br><br>Si une image liée s’affiche lentement, chargez-la dans votre récit pour de meilleurs résultats.",
       "tooltipDimension": "La valeur peut être spécifiée en 'px' ou '%'",
       "tooltipDimension2": "La valeur doit être spécifiée en 'px'",
       "lblPosition2Explain": "(peut être rognée)",

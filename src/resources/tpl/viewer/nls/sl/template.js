@@ -58,7 +58,7 @@ define({
       "size": "Velikost (širina/višina):"
     },
     "general": {
-      "noPlaces": "Na tem območju ni krajev. Oddaljite ali kliknite gumb Domov za ogled krajev.",
+      "noPlaces": "Na tem območju ni krajev. Pomanjšajte ali kliknite gumb Domov za ogled krajev.",
       "start": "Začetek"
     }
   }

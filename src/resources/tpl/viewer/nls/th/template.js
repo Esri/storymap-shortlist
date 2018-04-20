@@ -40,7 +40,7 @@ define({
       "noBuilderAllIE": "Story Map Shortlists สามารถดูได้จากเว็บเบราเซอร์ใดก็ได้ อย่างไรก็ตาม Story Map Shortlist Builder ไม่รองรับ Microsoft Edge หรือ Internet Explorer โปรดใช้เว็บเบราเซอร์อื่นเพื่อสร้างหรือแก้ไขรายการโปรด"
     },
     "headerFromCommon": {
-      "storymapsText": "A story map",
+      "storymapsText": "Story Map",
       "builderButton": "แก้ไข",
       "facebookTooltip": "แชร์ผ่าน Facebook",
       "twitterTooltip": "แชร์ผ่าน Twitter",

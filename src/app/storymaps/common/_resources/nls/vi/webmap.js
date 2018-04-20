@@ -22,6 +22,8 @@ define({
       "originalWebmap": "Bản đồ được dùng để xuất bản %TPL_NAME%",
       "browseMaps": "Chọn bản đồ",
       "createMap": "Tạo bản đồ",
+      "noResults": "Không tìm thấy kết quả",
+      "loadingResults": "Đang tải...",
       "current": "Bản đồ hiện tại",
       "select": "Chọn hoặc tạo bản đồ",
       "newMap": "Bản đồ mới được chọn",
@@ -53,7 +55,7 @@ define({
       "hintNavigation": "Điều hướng bản đồ bị tắt."
     },
     "editor": {
-      "loading": "Vui lòng trong khi trình biên tập bản đồ đang được tải",
+      "loading": "Vui long chờ trong khi trình biên tập bản đồ đang được tải",
       "newTitle": "Tạo bản đồ mới",
       "editTitle": "Chỉnh sửa bản đồ",
       "titleLbl": "Tiêu đề",
@@ -64,6 +66,10 @@ define({
       "success": "Bản đồ đã được lưu",
       "successCreate": "Bản đồ đã được tạo",
       "cancelTitle": "Bạn có muốn hủy mọi thay đổi chưa được lưu không?",
+      "close": "Đóng",
+      "save": "Lưu",
+      "confirm": "Vâng, đóng bản đồ",
+      "deny": "Không, vẫn làm việc tiếp",
       "errorDuplicate": "Bạn đã có bản đồ với tiêu đề đó",
       "errorCreate": "Không thể tạo bản đồ. Vui lòng thử lại.",
       "errorSave": "Không thể lưu bản đồ. Vui lòng thử lại.",

@@ -937,6 +937,9 @@ define(["../../core/Helper",
 					}
 					$(currentSlide).height($('#paneLeft').outerHeight() - 5);
 					var titleHeight = $(currentSlide).find('.detailHeader').outerHeight();
+					if ( $(currentSlide).find('.website') ) {
+						offset += 40;
+					}
 					$('.detailTextContainer').height($('#paneLeft').outerHeight() - titleHeight - offset + 'px');
 					$('.detailPictureDiv img').css('max-width', $("#paneLeft").outerWidth());
 					var imgMaxHeight = ($("#paneLeft").outerHeight() - titleHeight - 60) < ($("#paneLeft").outerHeight() * 0.6) ? $("#paneLeft").outerHeight() - titleHeight - 60 : $("#paneLeft").outerHeight() * 0.6;

@@ -57,7 +57,7 @@ define({
     },
     "saveErrorSocial": {
       "title": "Aktualizace sdílení na sociálních sítích",
-      "panel1": "Vzhled vašeho příběhu na sociálních médiích byl aktualizován, název vaší položky webové aplikace ArcGIS se však neshoduje s názvem vašeho příběhu.",
+      "panel1": "Vzhled vašeho příběhu na sociálních sítích byl aktualizován, název položky webové aplikace ArcGIS se však neshoduje s názvem vašeho příběhu.",
       "panel1tooltip": "Pokud definujete název, shrnutí a náhledový obrázek, váš příběh bude vypadat následovně:",
       "panel2": "Název, který chcete použít na sociálních sítích:",
       "panel2q1": "Název příběhu (doporučeno)",
@@ -70,7 +70,7 @@ define({
       "shareTitle": "Sdílejte svůj příběh",
       "preview": "Náhled",
       "viewlive": "Zobrazit příběh",
-      "btnPrivate": "Soukromý",
+      "btnPrivate": "Soukromé",
       "btnPrivateTooltip": "Příběh můžete vidět pouze vy",
       "btnOrg": "Organizace",
       "btnOrgTooltip": "Příběh mohou vidět pouze členové vaší organizace",
@@ -105,7 +105,7 @@ define({
       "viewExample": "Zobrazit živý příklad"
     },
     "settingsTheme": {
-      "title": "Téma"
+      "title": "Motiv"
     },
     "settingsHeader": {
       "title": "Záhlaví",
@@ -114,12 +114,14 @@ define({
       "logoOrgRadio": "Logo organizace",
       "logoCustomRadio": "Moje logo",
       "logoCustomLabel": "Obrázek:",
-      "logoCustomUploadHelp": "Loga vypadají nejlépe, pokud poměr jejich šířky a výšky spadá do rozmezí 1:1 až 5:1. Pokud se odkazované logo načítá pomalu, uložte jeho kopii a nahrajte ji zde.",
+      "logoCustomUploadHelp": "Odkaz na obrázek loga musí začínat řetězcem HTTPS. Loga vypadají nejlépe, pokud poměr jejich šířky k výšce je v rozsahu 1 : 1 až 5 : 1. Pokud se odkazované logo načítá pomalu, uložte jeho kopii a nahrajte ji zde.",
       "logoCustomUploadTooltip": "Použít nahrané logo",
       "logoCustomUploadButton": "Nahrát logo",
       "logoUploadSizeError": "Rozměry obrázku GIF jsou příliš velké. Změňte velikost obrázku na ${PIXEL-WIDTH}.",
+      "logoCustomLinkHTTPSError": "Odkaz musí začínat řetězcem HTTPS",
       "logoCustomLinkTooltip": "Odkaz na logo",
-      "logoCustomLinkPlaceholder": "Adresa URL obrázku",
+      "logoCustomLinkPlaceholder": "URL obrázku",
+      "logoCustomLinkPlaceholderHTTPS": "https://example.com/logo.jpg",
       "logoUploadGenericError": "Jako logo můžete použít soubory ve formátech BMP, GIF, JPG, JPEG a PNG. Soubory ve formátu GIF nesmí být širší než 250 px a nesmí přesahovat velikost 10 MB.",
       "logoCustomTargetPlaceholder": "Webová stránka, která se otevře po kliknutí na logo",
       "logoSocialText": "Slogan:",
@@ -129,6 +131,22 @@ define({
     "header": {
       "title": "Změňte název šablony %TPL_NAME%.",
       "subtitle": "Změňte podnázev šablony %TPL_NAME%."
+    },
+    "bannerNotification": {
+      "learnMore": "Více informací",
+      "close": "Zavřít",
+      "dontShowAgain": "Toto hlášení příště nezobrazovat"
+    },
+    "httpsTransitionMessage": {
+      "bannerMsg": "Důležité upozornění týkající se webové bezpečnosti a map s příběhem",
+      "s1h1": "Společnost Esri zvyšuje zabezpečení map s příběhem",
+      "s1p1": "Vaše mapy s příběhem živě na webu a webová komunita neustále pracují na tom, jak zajistit a implementovat lepší zabezpečení. Protokol HTTPS, který poskytuje bezpečné připojení k obsahu šířenému po internetu, se profiluje jako běžný způsob přístupu k webovému obsahu. Většina moderních prohlížečů dnes zobrazuje varování, když internetová adresa používá protokol HTTP místo HTTPS. Kvůli tomuto vznikajícímu standardu bude nutné, počínaje updatem ArcGIS Online v červnu 2018, aby vaše mapy s příběhem používaly protokol HTTPS.",
+      "s1p2": "V praxi to znamená, že přístup k mapě s příběhem a veškerému jejímu obsahu (včetně obrázků, vrstev, připojených aplikací a webových stránek) musí probíhat prostřednictvím odkazů, které začínají řetězcem HTTPS místo HTTP. Zajistíte tak svým čtenářům ten nejlepší možný zážitek, jelikož většina webových prohlížečů bude hlásit, že vaše příběhy používají zabezpečené připojení.",
+      "s2h1": "Co mám udělat?",
+      "s2p1": "Společnost Esri pracuje na tom, aby pro autory map s příběhem a čtenáře tento přechod proběhl hladce. V nástrojích pro tvorbu map s příběhem a aplikaci Moje příběhy jsou nyní k dispozici pomůcky, které vám umožní najít nezabezpečený obsah (HTTP) ve vašich příbězích a které vám poradí, jak postupovat dál. Zkontrolujte prosím zabezpečení svých příběhů a přejděte na protokol HTTPS do června 2018.",
+      "action1": "Zavřít",
+      "action2": "Chci si prohlédnout svoje příběhy",
+      "action3": "Více informací"
     }
   }
 });

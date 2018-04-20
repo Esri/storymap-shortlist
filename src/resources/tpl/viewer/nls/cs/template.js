@@ -40,7 +40,7 @@ define({
       "noBuilderAllIE": "Zkrácený přehled lze zobrazit v libovolném prohlížeči. Nástroj pro tvorbu seznamů map s příběhem však není podporován v prohlížeči Windows Edge a Internet Explorer. K vytvoření nebo úpravě seznamu použijte jiný webový prohlížeč."
     },
     "headerFromCommon": {
-      "storymapsText": "Mapa s příběhem",
+      "storymapsText": "Mapa s příběhem",
       "builderButton": "Upravit",
       "facebookTooltip": "Sdílet na Facebooku",
       "twitterTooltip": "Sdílet na Twitteru",

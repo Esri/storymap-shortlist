@@ -10,7 +10,7 @@ define({
       "lblUpload": "업로드",
       "lblLink": "링크",
       "disabled": "이 기능은 관리자가 사용하지 않도록 설정했습니다.",
-      "userLookup": "앨범 로드",
+      "userLookup": "앨범 불러오기",
       "notImplemented": "아직 구현되지 않았습니다.",
       "noData": "공개 앨범을 찾을 수 없음"
     },
@@ -29,7 +29,7 @@ define({
       "warningFileTypes": "이미지는.jpg, .png, .gif 또는 .bmp 형식이 가능함",
       "warningOneFile": "한 번에 하나의 파일이 허용됩니다.",
       "warningFileSize": "파일이 허용 가능한 최대 업로드 크기를 초과합니다. 다른 파일을 선택하세요.",
-      "tooltipRemove": "ArcGIS 계정에서 사용하지 않은 이 이미지를 삭제하세요. <br>나중에 사용하기로 결정한 경우 다시 업로드해야 합니다."
+      "tooltipRemove": "ArcGIS 계정에서 사용하지 않은 이 이미지를 삭제하세요. <br> 나중에 사용하기로 결정한 경우 다시 업로드해야 합니다."
     },
     "imageSelectorFlickr": {
       "userInputLbl": "사용자 이름",
@@ -83,6 +83,7 @@ define({
     "webpageSelectorHome": {
       "lblUrl": "웹 페이지 링크",
       "lblEmbed": "코드 포함",
+      "lblMustUseHTTPS": "웹 콘텐츠에 대한 링크는 HTTPS로 시작해야 함",
       "lblOR": "또는",
       "lblError1": "오류가 발생했습니다. 두 개의 입력 필드 중 하나를 지우세요.",
       "lblError2": "코드 포함에는 %IFRAMETAG% 하나만 포함 가능",
@@ -91,7 +92,9 @@ define({
     "mediaConfigure": {
       "lblURL": "이미지 링크",
       "lblURLPH": "링크는.jpg, .png, .gif 또는 .bmp 형식이어야 함",
+      "lblURLPHHTTPS": "https://www.example.com/image.jpg",
       "lblURLError": "이 이미지는 올바른 것 같지 않습니다. 이미지 파일(URL이 대개 .jpg 또는 .png로 끝남)에 대한 직접 링크를 지정하세요. 이미지를 포함하는 웹 페이지 링크는 작동하지 않습니다.",
+      "lblURLErrorHTTPS": "이 이미지 링크는 올바르지 않습니다. URL은 HTTPS로 시작해야 하며 지원되는 이미지 파일 확장자(.jpg, .png, .gif, .bmp)로 끝나야 합니다.",
       "lblURLCheck": "이미지 확인 중...",
       "lblLabel": "이미지 캡션",
       "lblLabel1": "캡션",
@@ -106,7 +109,7 @@ define({
       "lblPosition3": "맞춤",
       "lblPosition4": "늘이기",
       "lblPosition5": "사용자 지정",
-      "lblURLHelp": "최상의 결과를 위해 이미지 크기는 400KB 미만이어야 합니다. 80% 품질의 압축된 JPG 이미지와 권장 이미지 너비(주요 단계 또는 최대화 버튼이 있는 설명 패널의 경우 2000픽셀, 최대화 버튼이 없는 설명 패널의 경우 1000픽셀)를 사용하세요.<br><br>연결된 이미지가 느린 경우 스토리에 업로드하면 더욱 빠르게 불러옵니다.",
+      "lblURLHelp": "이미지 링크는 HTTPS로 시작해야 합니다.<br><br>최상의 결과를 위해 이미지 크기는 400KB 미만이어야 합니다. 80% 품질의 압축된 JPG 이미지와 권장 이미지 너비(주요 단계 또는 최대화 버튼이 있는 설명 패널의 경우 2000픽셀, 최대화 버튼이 없는 설명 패널의 경우 1000픽셀)를 사용하세요.<br><br>연결된 이미지가 느린 경우 스토리에 업로드하면 더욱 빠르게 불러옵니다.",
       "tooltipDimension": "값은 'px' 또는 '%'로 지정할 수 있음",
       "tooltipDimension2": "'px' 단위로 값을 지정해야 함",
       "lblPosition2Explain": "(잘릴 수 있음)",

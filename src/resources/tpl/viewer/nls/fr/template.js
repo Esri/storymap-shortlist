@@ -40,7 +40,7 @@ define({
       "noBuilderAllIE": "Les présélections Story Map Shortlist peuvent être affichées dans tout navigateur Web. Néanmoins, le générateur Story Map Shortlist n’est pas pris en charge dans Microsoft Edge ou Internet Explorer. Utilisez un autre navigateur Web pour créer ou modifier une présélection."
     },
     "headerFromCommon": {
-      "storymapsText": "Story Map",
+      "storymapsText": "Une Story Map",
       "builderButton": "Modifier",
       "facebookTooltip": "Partager sur Facebook",
       "twitterTooltip": "Partager sur Twitter",

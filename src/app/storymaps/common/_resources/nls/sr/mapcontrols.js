@@ -2,12 +2,12 @@ define({
   "commonMapControls": {
     "common": {
       "settings": "Postavke",
-      "openDefault": "Otvori kao podrazumevano"
+      "openDefault": "Otvori prema zadanim postavkama"
     },
     "overview": {
-      "basemapGalleryBtnLabel": "Pozadinska mapa",
-      "expandFactorLabel": "Faktor proširivanja",
-      "expandFactorPopover": "Odnos između veličine pregledne mape i obuhvata prikazanog pravougaonika na preglednoj mapi. Podrazumevana vrednost je 2, što znači da će pregledna mapa da bude bar dva puta veća od opsega pravougaonika."
+      "basemapGalleryBtnLabel": "Kartografska podloga",
+      "expandFactorLabel": "Omjer širenja",
+      "expandFactorPopover": "Odnos između veličine pregledne karte i pravokutnika obuhvata prikazanog na preglednoj karti. Zadana vrijednost je 2, što znači da je pregledna karta barem dvaput veća od pravokutnika obuhvata."
     }
   }
 });

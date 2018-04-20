@@ -998,10 +998,11 @@ define([
 
 				$(currentSlide).find('.cancelLocation').click(cancelLocationChange);
 
+				app.map.reposition();
+
 				if(!currentGraphic[0].attributes.locationSet){
 					app.map.setMapCursor("crosshair");
 					_mapClick = app.map.on('click', function(e){
-
 						currentGraphic[0].setGeometry(e.mapPoint);
 						currentGraphic[0].symbol.setWidth(app.ui.mainView.lutIconSpecs.large.getWidth());
 						currentGraphic[0].symbol.setHeight(app.ui.mainView.lutIconSpecs.large.getHeight());

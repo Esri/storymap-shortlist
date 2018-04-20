@@ -40,7 +40,7 @@ define({
       "noBuilderAllIE": "Story Map Shortlist ögeleri her web tarayıcısında görüntülenebilir. Ancak, Story Map Shortlist Builder uygulaması Microsoft Edge veya Internet Explorer’da desteklenmez. Bir Shortlist ögesi oluşturmak veya düzenlemek için farklı bir web tarayıcısı kullanın."
     },
     "headerFromCommon": {
-      "storymapsText": "Öykü haritası",
+      "storymapsText": "Bir Story Map",
       "builderButton": "Düzenle",
       "facebookTooltip": "Facebook'ta Paylaş",
       "twitterTooltip": "Twitter'da Paylaş",

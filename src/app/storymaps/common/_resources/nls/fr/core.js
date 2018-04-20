@@ -2,7 +2,7 @@ define({
   "commonCore": {
     "common": {
       "add": "Ajouter",
-      "edit": "Modifier",
+      "edit": "Mise à jour",
       "save": "Enregistrer",
       "next": "Suivant",
       "cancel": "Annuler",
@@ -12,7 +12,7 @@ define({
       "open": "Ouvrir",
       "start": "Démarrer",
       "loading": "Chargement en cours",
-      "disabledAdmin": "Cette fonction a été désactivée par l'administrateur",
+      "disabledAdmin": "Cette entité a été désactivée par l'administrateur",
       "width": "Largeur",
       "height": "Hauteur",
       "create": "Créer",
@@ -39,7 +39,7 @@ define({
       "noPendingChange": "Aucune modification en attente",
       "unSavedChangePlural": "Modifications en attente",
       "closeWithPendingChange": "Vouez-vous vraiment confirmer cette opération ? Vos modifications seront perdues.",
-      "saveError": "L'enregistrement a échoué, réessayez",
+      "saveError": "L’enregistrement a échoué, réessayez",
       "status1": "Le récit est partagé, mais comporte des problèmes",
       "status2": "Le récit n'est pas partagé, mais comporte des problèmes",
       "status3": "Le récit est public",
@@ -74,7 +74,7 @@ define({
       "btnPrivateTooltip": "Vous seul pouvez voir le récit",
       "btnOrg": "Organisation",
       "btnOrgTooltip": "Seuls les membres de votre organisation peuvent voir le récit",
-      "btnPublic": "Publique",
+      "btnPublic": "Public",
       "btnPublicTooltip": "Tout le monde peut voir le récit",
       "loadingMessage": "Recherche d'erreurs dans votre récit",
       "viewToggle1": "Afficher le contenu du récit",
@@ -114,12 +114,14 @@ define({
       "logoOrgRadio": "Logo de l’organisation",
       "logoCustomRadio": "Mon logo",
       "logoCustomLabel": "Image :",
-      "logoCustomUploadHelp": "Les logos ont un meilleur rendu lorsque leur rapport largeur/hauteur est compris entre 1:1 et 5:1. Si un logo accessible par un lien s'affiche lentement, enregistrez-en une copie et chargez-la ici.",
+      "logoCustomUploadHelp": "Le lien de l’image d’un logo doit commencer par HTTPS. Les logos ont un meilleur rendu lorsque leur rapport largeur/hauteur est compris entre 1:1 et 5:1. Si un logo accessible par un lien s’affiche lentement, enregistrez-en une copie et chargez-la ici.",
       "logoCustomUploadTooltip": "Utiliser un logo téléchargé",
       "logoCustomUploadButton": "Charger un logo",
       "logoUploadSizeError": "Dimensions du GIF trop importantes. Réduisez-le à une largeur de ${PIXEL-WIDTH} pixels.",
+      "logoCustomLinkHTTPSError": "Le lien doit commencer par HTTPS",
       "logoCustomLinkTooltip": "Lien vers un logo",
-      "logoCustomLinkPlaceholder": "URL de l'image",
+      "logoCustomLinkPlaceholder": "URL de l’image",
+      "logoCustomLinkPlaceholderHTTPS": "https://example.com/logo.jpg",
       "logoUploadGenericError": "Un logo peut être au format BMP, GIF, JPG, JPEG ou PNG. Les fichiers GIF ne doivent pas dépasser une largeur de 250 pixels et une taille de 10 Mo.",
       "logoCustomTargetPlaceholder": "Page web à ouvrir lorsqu'un utilisateur clique sur le logo",
       "logoSocialText": "Balise :",
@@ -129,6 +131,22 @@ define({
     "header": {
       "title": "Modifiez le titre de votre %TPL_NAME%",
       "subtitle": "Modifiez le sous-titre de votre %TPL_NAME%"
+    },
+    "bannerNotification": {
+      "learnMore": "En savoir plus",
+      "close": "Fermer",
+      "dontShowAgain": "Ne plus afficher ce message"
+    },
+    "httpsTransitionMessage": {
+      "bannerMsg": "Message important sur la sécurité web et les Story Maps",
+      "s1h1": "Esri améliore la sécurité des Story Maps",
+      "s1p1": "Vos Story Maps existent sur le Web et la communauté web vise constamment à établir et implémenter une meilleure sécurité. HTTPS, qui offre une connexion sécurisée au contenu transmis via Internet, apparaît désormais comme le moyen d’accès attendu au contenu web. La plupart des navigateurs modernes affichent maintenant des messages d’avertissement lorsque HTTP est employé à la place de HTTPS. En raison de cette nouvelle norme, et à compter de la mise à jour de juin 2018 de ArcGIS Online, vos Story Maps devront utiliser HTTPS.",
+      "s1p2": "Concrètement, cela signifie que l’accès à une Story Map et à la totalité de son contenu (y compris les images, les couches, les applications et les sites Web incorporés) doit s’effectuer via des liens qui commencent par HTTPS et non plus par HTTP. Vos lecteurs bénéficient ainsi d’une meilleure expérience puisque la plupart des navigateurs indiqueront que vos récits sont sécurisés.",
+      "s2h1": "Que dois-je faire ?",
+      "s2p1": "Esri prévoit d’effectuer une transition en douceur pour les auteurs et les lecteurs de Story Map. Des outils sont désormais disponibles dans les générateurs de Story Map et dans Mes récits pour vous permettre de rechercher le contenu non sécurisé (HTTP) dans vos récits ; ils contiennent également des recommandations indiquant comment gérer ce contenu. Il convient de vérifier le contenu non sécurisé de vos récits et de le mettre à jour vers HTTPS avant juin 2018.",
+      "action1": "Fermer",
+      "action2": "Vérifier mes récits maintenant",
+      "action3": "En savoir plus"
     }
   }
 });

@@ -1038,6 +1038,8 @@ define(["lib-build/css!./MainView",
 			}
 
 			this.activateLayer = function(index, builtThemes) {
+				topic.publish("story-tab-navigation", index);
+
 				var tabFeatures = [];
 				if(builtThemes)
 					_builtThemes = builtThemes;
