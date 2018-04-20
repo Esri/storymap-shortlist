@@ -11,7 +11,7 @@ The Story Map Shortlist app lets you organize points of interest into tabs that 
 [Download](http://links.esri.com/storymaps/shortlist_template_zip) |
 [Shortlist page on Esri Story Maps website](http://storymaps.arcgis.com/en/app-list/shortlist/)
 
-**Latest release is version 2.5.0**, if you want to be informed of new releases, we recommend you to watch this repository ([see GitHub help](https://help.github.com/articles/watching-repositories)). See the [release page](https://github.com/Esri/shortlist-storytelling-template-js/releases) for release notes.
+**Latest release is version 2.6.0**, if you want to be informed of new releases, we recommend you to watch this repository ([see GitHub help](https://help.github.com/articles/watching-repositories)). See the [release page](https://github.com/Esri/shortlist-storytelling-template-js/releases) for release notes.
 
 For more infomation about using and customizing Esri's Storytelling Apps follow the [Story Maps Developers' Corner](https://developerscorner.storymaps.arcgis.com).
 
@@ -173,6 +173,34 @@ The deploy folder now contains the built application that you can deploy to your
 ### Issues building the application
 
 The build script perform code validation through [JSHint](http://www.jshint.com/), you can disable those validations by editing Gruntfile.js and look for the following comments `/* Comment out to disable code linting */`.
+
+## Developer guide
+
+This developer guide is intended to developer that wants to modify behavior or add new functionalities to the Shortlist application. If you only need to customize look and feel of the Shortlist, you should be able to do so using the User download.
+It requires basic knowledge of HTML, Javascript and CSS languages.
+
+### Developer extension events
+
+The template fires some events to allow customization with loose integration. This means that you may not need to understand the internals of the application to extend it.
+
+Two events are available (application ready, tab navigation):
+
+    define(["dojo/topic"], function(topic) {
+      // Custom Javascript to be executed while the application is initializing goes here
+
+
+      // The application is ready
+      topic.subscribe("tpl-ready", function(){
+       // Custom Javascript to be executed when the application is ready goes here
+      });
+
+      // Tab navigation.  This is fired anytime the tab is selected/changed.
+      topic.subscribe("story-tab-navigation", function(index){
+       // Custom Javascript to be executed when a tab is selected goes here
+      });
+    });
+
+
 
 ### Design
 Shortlist relies on AMD and Dojo loader [AMD](http://help.arcgis.com/en/webapi/javascript/arcgis/jshelp/#inside_dojo_amd) for application structure.
