@@ -12,7 +12,8 @@ define({
       "disabled": "Diese Funktion wurde vom Administrator deaktiviert",
       "userLookup": "Alben laden",
       "notImplemented": "Noch nicht implementiert.",
-      "noData": "Kein öffentliches Album gefunden"
+      "noData": "Kein öffentliches Album gefunden",
+      "thirdPartyTerms": "Durch die Verwendung eines Drittanbieter-Service stimmen Sie dessen Geschäftsbedingungen zu: "
     },
     "imageSelector": {
       "lblStep1": "Service auswählen",
@@ -20,7 +21,7 @@ define({
       "lblStep3": "Konfigurieren"
     },
     "imageSelectorHome": {
-      "explain": "Bilder über soziale Medien <br /> oder direkt über eine URL laden"
+      "explain": "Bilder von sozialen Medien <br /> oder direkt über eine URL laden"
     },
     "imageSelectorUpload": {
       "lblUploadButton": "Bild suchen",
@@ -35,15 +36,6 @@ define({
       "userInputLbl": "Benutzername",
       "signInMsg2": "Benutzer nicht gefunden",
       "loadingFailed": "Fehler beim Laden"
-    },
-    "imageSelectorFacebook": {
-      "leftHeader": "Facebook-Benutzer",
-      "rightHeader": "Facebook-Seite",
-      "pageExplain": "Eine Facebook-Seite entspricht einer öffentlichen Marke/einem Produkt oder einer prominenten Person wie <b>esrigis</b>. Den Seitennamen können sie dem Text nach dem ersten Schrägstrich ('/') in der Seiten-URL entnehmen.",
-      "pageInputLbl": "Seitenname",
-      "lookupMsgError": "Seite nicht gefunden",
-      "warning": "Facebook wird nicht mehr unterstützt, ${learn}.",
-      "learn": "Weitere Informationen"
     },
     "imageSelectorPicasa": {
       "userInputLbl": "E-Mail oder Google-ID",
@@ -64,7 +56,7 @@ define({
       "url": "YouTube-Video-Link",
       "pageInputLbl": "Benutzername",
       "lookupMsgError": "Benutzer nicht gefunden",
-      "howToFind": "So finden Sie einen YouTube-Benutzernamen",
+      "howToFind": "So finden Sie einen Youtube-Benutzernamen",
       "howToFind2": "Benutzername wird unter Videos angezeigt",
       "found": "Gefunden",
       "noData": "Keine öffentlichen Videos gefunden",
@@ -116,17 +108,22 @@ define({
       "lblPosition3Explain": "(Zuschneiden nicht möglich)",
       "lblPosition3Explain2": "(Breite wird immer an den Bereich angepasst)",
       "lblPosition4Explain": "(Verzerren möglich)",
-      "unloadLbl": "Wird angehalten, wenn Leser zu einem anderen Ort navigiert",
+      "unloadLbl": "Anhalten, wenn Benutzer zu einem anderen Ort navigiert",
       "unloadHelp": "Wenn die Webseite über Audio- oder Video-Medien verfügt, lassen Sie diese Option aktiviert, um die Wiedergabe dieses Inhalts zu beenden, wenn der Leser zu einem anderen Ort navigiert. Deaktivieren Sie sie, um beispielsweise die Wiedergabe eines Soundtracks fortzusetzen, während der Leser durch die Story blättert.<br />Wenn es sich bei der Webseite um eine Anwendung handelt, deaktivieren Sie diese Option, damit die Story nicht erneut geladen wird, wenn der Leser zu ihr zurückkehrt.",
       "embedProtocolLabel": "Seite über eine sichere Verbindung (HTTPS) laden",
       "embedProtocolWarning1": "Wenn diese Seite nicht in Ihre Story geladen werden kann, kann sie aus Gründen der Websicherheit nicht eingebettet werden. Alternativ können Sie Ihrer Zusammenfassung einen Link hinzufügen, um die Seite in einer neuen Browser-Registerkarte zu öffnen. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>Weitere Informationen</a>",
-      "embedProtocolWarning2": "Wenn diese Seite nicht in Ihre Story geladen werden kann, deaktivieren Sie diese Option, und versuchen Sie es erneut. Wenn die Seite trotzdem nicht geladen werden kann, kann sie aus Gründen der Websicherheit nicht eingebettet werden. Alternativ können Sie Ihrer Zusammenfassung einen Link hinzufügen, um die Seite in einer neuen Browser-Registerkarte zu öffnen. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>Weitere Informationen</a>"
+      "embedProtocolWarning2": "Wenn diese Seite nicht in Ihre Story geladen werden kann, deaktivieren Sie diese Option, und versuchen Sie es erneut. Wenn die Seite trotzdem nicht geladen werden kann, kann sie aus Gründen der Websicherheit nicht eingebettet werden. Alternativ können Sie Ihrer Zusammenfassung einen Link hinzufügen, um die Seite in einer neuen Browser-Registerkarte zu öffnen. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>Weitere Informationen</a>",
+      "learn": "Weitere Informationen",
+      "lblAltText": "Alternativer Text",
+      "placeholderAltText": "Geben Sie für sehbehinderte Leser eine Beschreibung dieser Medien ein...",
+      "tooltipAltText": "Stellen Sie eine Beschreibung dieses Medieninhalts bereit, der von Hilfstechnologien wie Sprachausgabe-Software verwendet wird. Eine Beschreibung ist optional, wird jedoch empfohlen, um den Richtlinien für barrierefreie Webinhalte gemäß WCAG und Section 508 zu entsprechen."
     },
     "editorActionGeocode": {
       "lblTitle": "Adresse oder Ort suchen",
-      "mapMarkerExplain": "Beim Klicken auf den Link wird ein Karten-Marker angezeigt"
+      "mapMarkerExplain": "Beim Klicken auf den Link wird ein Karten-Marker angezeigt."
     },
     "editorActions": {
+      "navigate": "Zu einem anderen Eintrag navigieren",
       "remove": "Aktion entfernen",
       "preview": "Vorschau der Aktion anzeigen"
     },
@@ -134,7 +131,7 @@ define({
       "lblTitle": "Inhalt der Hauptanzeige ändern"
     },
     "editorInlineMedia": {
-      "lblTitle": "Bild, Video oder Webseite einfügen"
+      "lblTitle": "Bild, Video oder Website einfügen"
     }
   }
 });

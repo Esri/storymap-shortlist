@@ -36,13 +36,13 @@ define({
       "tooltipFirstSave": "儲存後，此功能才可用。",
       "tooltipNotShared": "分享後，此功能才可用。",
       "tooltipNotShared2": "您的故事未分享，只有您可以存取。",
-      "noPendingChange": "無待決的變更",
-      "unSavedChangePlural": "待決變更",
+      "noPendingChange": "無待決定的變更",
+      "unSavedChangePlural": "待決定的變更",
       "closeWithPendingChange": "是否確定要確認此操作？您的變更將遺失。",
       "saveError": "儲存失敗，請重試",
       "status1": "故事已分享但發生問題",
       "status2": "故事未分享但發生問題",
-      "status3": "故事已公開",
+      "status3": "故事為公開",
       "status4": "故事已在您的組織內部分享",
       "status5": "故事為私有",
       "status6": "故事尚未儲存",
@@ -99,7 +99,7 @@ define({
       "tabError": "請檢查所有索引標籤中的錯誤"
     },
     "settingsLayout": {
-      "title": "版面設定",
+      "title": "版面配置",
       "explain": "想要使用哪種版面設定？",
       "explainInit": "可隨時在設定對話方塊中變更版面設定。",
       "viewExample": "查看即時範例"
@@ -140,13 +140,35 @@ define({
     "httpsTransitionMessage": {
       "bannerMsg": "Web 安全性和 Story Maps 的相關重要資訊",
       "s1h1": "Esri 正在加強 Story Maps 的安全性",
-      "s1p1": "您的 Story Maps 在 Web 上運作，且 Web 社群一直致力於建立和實施更好的安全機制。為透過網際網路傳輸的內容提供安全連線的 HTTPS，正在成為存取 Web 內容的通行方式。若是使用 HTTP 而非 HTTPS，現今大多數的瀏覽器都會顯示警告訊息。基於此新興的標準，從 ArcGIS Online 的 2018 年 6 月更新開始，Story Maps 將需要使用 HTTPS。",
-      "s1p2": "從實務而言，這表示故事地圖及其所有內容 (包含圖片、圖層、內嵌的應用程式和網站) 都必須使用以 HTTPS (而非 HTTP) 開頭的連結存取。如此可確保為您的讀者提供最佳的體驗，因為大多數的 Web 瀏覽器都會指出您的故事是安全的。",
+      "s1p1": "您的 Story Maps 在 Web 上運作，且 Web 社群一直致力於建立和實施更好的安全機制。 為透過網際網路傳輸的內容提供安全連線的 HTTPS，正在成為存取 Web 內容的通行方式。 若是使用 HTTP 而非 HTTPS，現今大多數的瀏覽器都會顯示警告訊息。 基於此新興的標準，我們強烈建議您使用 HTTPS 連結來創作和分享 Story Maps，並在故事地圖的圖片中嵌入 Web 內容或連結時，僅使用 HTTPS URL。",
+      "s1p2": "從實務而言，這表示故事地圖及其所有內容 (包含圖片、圖層、內嵌的應用程式和網站) 都必須使用以 HTTPS (而非 HTTP) 開頭的連結存取。 如此可確保為您的讀者提供最佳的體驗，因為大多數的 Web 瀏覽器都會指出您的故事是安全的。",
       "s2h1": "我需要執行哪些工作?",
-      "s2p1": "Esri 正在努力使故事地圖的作者和讀者都能輕鬆進行此轉移。故事地圖建立器和我的故事現在提供了工具，可協助您在故事中尋找不安全的內容 (HTTP)，並提供如何解決問題的建議。請檢查您的故事是否有不安全的內容，並在 2018 年 6 月之前更新為 HTTPS。",
+      "s2p1": "Esri 正在努力使故事地圖的作者和讀者都能輕鬆進行此轉移。 故事地圖建立器和我的故事現在提供了工具，可協助您在故事中尋找不安全的內容 (HTTP)，並提供如何解決問題的建議。 請檢查您的故事是否有不安全的內容，並盡快更新為 HTTPS。",
       "action1": "關閉",
       "action2": "立即檢查我的故事",
       "action3": "瞭解詳細資訊"
+    },
+    "sectionNavigation": {
+      "select": "選擇項目...",
+      "section": "條目",
+      "thisSection": "此項目",
+      "hiddenSection": "隱藏的項目"
+    },
+    "embedBar": {
+      "share": "分享",
+      "fullScreen": "全螢幕",
+      "exitFullScreen": "退出全螢幕",
+      "enlarge": "放大",
+      "newTab": "在新頁籤中開啟",
+      "tagline": "故事地圖"
+    },
+    "june2018SurveyMessage": {
+      "bannerMsg": "我們是否能詢問您一些事情? 它將有助於形塑 Story Maps 的願景。",
+      "s1h1": "分享您的構想以形塑願景。",
+      "s1p1": "您的意見是我們最重要且唯一的回饋來源，且盡可能獲得您的寶貴意見將有助於改善 Story Maps。 如果您能參加這個三分鐘的調查，我們將不勝感激。",
+      "s2p1": "無論如何，非常感謝您使用 Esri Story Maps!",
+      "action1": "關閉",
+      "action2": "參與調查"
     }
   }
 });

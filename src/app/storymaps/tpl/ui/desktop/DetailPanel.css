@@ -9,7 +9,7 @@
 }
 
 .detailContainer.swiper-container{
-	margin-top: -18px;
+	margin-top: -8px;
 	margin-left: -8px;
 }
 
@@ -246,7 +246,8 @@
 	padding-left: 20px;
 	padding-right: 20px;
 	margin-top: 20px;
-	margin-bottom: -5px;
+	/*margin-bottom: -5px;*/
+	padding-bottom: 15px;
 	display: none;
 }
 
@@ -298,6 +299,10 @@
 
 .swiper-lazy-preloader {
 	top: 55px !important;
+}
+
+.swiper-lazy-preloader.iOS-hidden {
+	display: none;
 }
 
 .ion-android-close:before { content: '\f2d7'; }

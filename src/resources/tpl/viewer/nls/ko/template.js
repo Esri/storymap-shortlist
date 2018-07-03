@@ -44,7 +44,7 @@ define({
       "builderButton": "편집",
       "facebookTooltip": "Facebook에 공유",
       "twitterTooltip": "Twitter에 공유",
-      "bitlyTooltip": "응용프로그램에 대한 간단한 링크 가져오기",
+      "bitlyTooltip": "짧은 링크 가져오기",
       "templateTitle": "템플릿 제목 설정",
       "templateSubtitle": "템플릿 부제목 설정",
       "share": "공유"
@@ -55,7 +55,10 @@ define({
       "open": "열기",
       "embed": "웹 페이지에 임베드",
       "embedExplain": "응용프로그램을 웹 페이지에 임베드하려면 다음의 HTML 코드를 사용합니다.",
-      "size": "크기(너비/높이):"
+      "size": "크기(너비/높이):",
+      "autoplayLabel": "자동 재생 모드",
+      "autoplayExplain1": "자동 재생 모드를 사용하면 스토리가 주기적으로 진행됩니다. 이 모드는 키오스크 또는 공공의 디스플레이 모니터에는 적합하지만 그 이외의 환경에서는 스토리 읽기가 더욱 어려워질 수 있습니다. 소형 디스플레이에서는 이 기능이 지원되지 않습니다.",
+      "autoplayExplain2": "이 모드가 활성화되면 스토리를 재생/일시 중지하고 탐색 속도를 조정하는 컨트롤이 나타납니다."
     },
     "general": {
       "noPlaces": "이 영역에는 장소가 없습니다.  장소를 확인하려면 축소하거나 홈 버튼을 클릭하세요.",

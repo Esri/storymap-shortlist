@@ -20,6 +20,10 @@ app.cfg = {
 		}
 	},
 
+	// Date to enforce HTML sanitization and embed bar for apps created after 6/27/18 (June '18 release)
+	HTML_SANITIZER_DATE: 1530072000000,
+	JUNE_RELEASE_DATE: 1530072000000,
+
 	//
 	// Shortlist
 	//
@@ -74,6 +78,12 @@ app.cfg = {
 
 	HELP_URL: "https://storymaps.arcgis.com/en/app-list/shortlist/",
 	HELP_URL_PORTAL: "https://storymaps.arcgis.com",
+
+	// links to third-party terms of service
+	YOUTUBE_TERMS_LINK: "http://links.esri.com/storymaps/youtube-terms",
+	VIMEO_TERMS_LINK: "http://links.esri.com/storymaps/vimeo-terms",
+	FLICKR_TERMS_LINK: "http://links.esri.com/storymaps/flickr-terms",
+	GOOGLE_TERMS_LINK: "http://links.esri.com/storymaps/google-terms",
 
 	// Control the authorized data source (for initialization and import screen)
 	AUTHORIZED_IMPORT_SOURCE: {

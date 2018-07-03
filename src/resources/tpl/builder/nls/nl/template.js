@@ -54,9 +54,9 @@ define({
       "useLocation": "Deze locatie gebruiken",
       "selectAll": "Alles selecteren",
       "imageSizeHelper": "Voor het beste resultaat moeten de afbeeldingen kleiner zijn dan 400 KB. De aanbevolen grootte en vorm is 1000 x 750 pixels (4:3 breedte:hoogteverhouding) of kleiner. Grotere afbeeldingen kunnen de prestaties vertragen. Gebruik voor het beste resultaat gecomprimeerde JPG-afbeeldingen op 80% beeldkwaliteit.",
-      "imageSizeHelperUpdated": "Voor de beste prestaties moeten afbeeldingen kleiner zijn dan 400 KB. Om de grootte van bestanden te beperken, gebruik de JPG-indeling met 80% beeldkwaliteit. Als uw afbeelding nog steeds groter is dan 400 KB, kunt u de bestandsgrootte ervan verder reduceren door het formaat te wijzigen: 1000 pixels breed x 750 pixels hoog (4:3 breedte:hoogteverhouding) wordt aanbevolen.",
+      "imageSizeHelperUpdated": "Koppeling afbeelding moet beginnen met HTTPS<br><br>Voor de beste prestaties moeten afbeeldingen kleiner zijn dan 400 KB. Gebruik JPG-formaat die is opgeslagen met een beeldkwaliteit van 80% om de bestandsgrootte te verminderen. Als uw afbeelding nog steeds groter is dan 400 kB, kan het formaat van de afbeelding verder worden verkleind: 1000 pixels breed x 750 pixels hoog (verhouding 4:3 breedte:hoogte) wordt aanbevolen.<br><br>Als een gekoppelde afbeelding langzaam tekent of niet beschikbaar is via HTTPS, uploadt u deze naar uw verhaal voor betere resultaten.",
       "thumbnailLink": "Miniatuurkoppeling",
-      "thumbnailHelp": "De aanbevolen miniatuurgrootte en vorm is 280 x 210 pixels (4:3 breedte-hoogteverhouding). Grotere thumbnails kunnen de prestaties vertragen. 4:3 beeldverhouding thumbnails passen in hun tiles zonder te worden bijgesneden."
+      "thumbnailHelp": "Miniatuurkoppeling moet beginnen met HTTPS<br><br>De aanbevolen grootte en vorm van de miniatuur is 280 x 210 pixels (verhouding 4:3 breedte:hoogte). Grotere miniaturen kunnen de prestaties vertragen. De miniaturen van de beeldverhouding van 4:3 passen in hun tegels zonder te worden bijgesneden."
     },
     "settings": {
       "numberedPlaces": "Plaatsen met nummers tonen",
@@ -73,7 +73,7 @@ define({
       "custom": "Aangepast",
       "customTooltip": "Stel de locatie in met behulp van de knop die zal verschijnen in de kaartzoomregelaars",
       "mapLocationTooltip": "De locatie die mensen zien als ze uw Shortlist openen",
-      "bookmarksHelp": "Om bladwijzers in Shortlist mogelijk te maken, moet u de bladwijzer van de webmap toevoegen en beheren in de webmapviewer",
+      "bookmarksHelp": "Om bladwijzers in te schakelen, sluit u de opbouwfunctie voor de shortlist en opent u de webmap die in deze shortlist wordt gebruikt (via ArcGIS My Contents of My Stories) en voegt u er bladwijzers aan toe met behulp van de ArcGIS Map Viewer.",
       "generalOptions": "Algemene opties",
       "mapOptions": "Kaartopties",
       "changeBasemap": "Basiskaart wijzigen",

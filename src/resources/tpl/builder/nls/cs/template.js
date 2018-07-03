@@ -54,9 +54,9 @@ define({
       "useLocation": "Použít tuto polohu",
       "selectAll": "Vybrat vše",
       "imageSizeHelper": "Pro dosažení nejlepších výsledků by obrázky měly být menší než 400 kB. Doporučená velikost a tvar je 1000 x 750 pixelů (poměr šířky a výšky 4:3) nebo menší. Větší obrázky mohou snižovat výkon. Pro dosažení nejvyššího výkonu používejte komprimované obrázky ve formátu JPG s obrazovou kvalitou 80 %.",
-      "imageSizeHelperUpdated": "Nejlepších výsledků dosáhnete, pokud obrázky budou mít maximální velikost 400 KB. Chcete-li obrázek zmenšit, použijte formát JPG uložený v 80 % kvalitě obrázku. Pokud je váš obrázek stále větší než 400 KB, změňte jeho velikost: doporučujeme šířku 1000 pixelů x výšku 750 pixelů (poměr 4:3 šířka:výška).",
+      "imageSizeHelperUpdated": "Odkaz musí začínat řetězcem HTTPS.<br><br>Nejlepšího výkonu dosáhnete, pokud velikost snímků nepřesáhne 400 KB. Pro zmenšení velikosti souboru použijte formát JPG uložený v 80% kvalitě snímku. Pokud má snímek stále více než 400 KB, změňte jeho velikost na doporučené hodnoty: šířka 1000 pixelů x výška 750 pixelů (poměr šířka:výška 4:3).<br><br>Pokud se odkazovaný obrázek vykresluje pomalu nebo není k dispozici pomocí protokolu HTTPS, nahrajte jej přímo do vašeho příběhu. Docílíte tak lepšího výsledku.",
       "thumbnailLink": "Odkaz miniatury",
-      "thumbnailHelp": "Doporučená velikost a tvar miniatury je 280 x 210 pixelů (poměr šířky a výšky 4:3). Větší miniatury mohou snižovat výkon. Miniatury s poměrem stran 4:3 lze umístit do dlaždic bez ořezávání."
+      "thumbnailHelp": "Odkaz miniatury musí začínat řetězcem HTTPS<br><br>Doporučená velikost a tvar miniatury je 280 x 210 pixelů (poměr šířky a výšky 4:3). Větší miniatury mohou snižovat výkon. Miniatury s poměrem stran 4:3 lze umístit do dlaždic bez ořezávání."
     },
     "settings": {
       "numberedPlaces": "Zobrazit místa s čísly",
@@ -73,7 +73,7 @@ define({
       "custom": "Vlastní",
       "customTooltip": "Nastavte umístění pomocí tlačítka, které se zobrazí v ovládacích prvcích přiblížení mapy.",
       "mapLocationTooltip": "Umístění, které uživatelé vidí, když otevřou váš krátký seznam.",
-      "bookmarksHelp": "Pro aktivaci záložek v krátkém seznamu přidejte a spravujte záložky webové mapy v prohlížeči webové mapy.",
+      "bookmarksHelp": "Pro aktivaci záložek zavřete nástroj pro tvorbu zkráceného přehledu a následně otevřete webovou mapu použitou v tomto zkráceném přehledu (pomocí sekcí Můj obsah nebo Moje příběhy) a přidejte do ní záložky pomocí mapového prohlížeče ArcGIS.",
       "generalOptions": "Obecné možnosti",
       "mapOptions": "Možnosti mapy",
       "changeBasemap": "Změnit podkladovou mapu",

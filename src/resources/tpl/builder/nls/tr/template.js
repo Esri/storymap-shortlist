@@ -54,9 +54,9 @@ define({
       "useLocation": "Bu konumu kullan",
       "selectAll": "Tümünü seç",
       "imageSizeHelper": "En iyi sonucu elde etmek için resimlerin 400 KB’den küçük olması gerekir. Önerilen boyut ve şekil 1000 x 750 piksel (en boy oranı 4:3 olan) veya daha küçüğüdür. Daha büyük resimler performansı yavaşlatabilir. En iyi performans için %80 resim kalitesinde sıkıştırılmış olan JPG türü resimler kullanın.",
-      "imageSizeHelperUpdated": "En iyi performans için görüntüler 400 KB’den daha küçük olmalıdır. Dosya boyutunu küçültmek için %80 görüntü kalitesinde kaydedilmiş JPG biçimi kullanın. Görüntü dosyanız hala 400 KB’den büyükse, yeniden boyutlandırma dosya boyutunu daha da azaltabilir: 1000 piksel genişlik x 750 piksel yükseklik (4:3 en boy oranı) önerilir.",
+      "imageSizeHelperUpdated": "Görüntü bağlantısı HTTPS ile başlamalıdır.<br><br>En iyi performans için görüntüler 400 KB’tan daha küçük olmalıdır.  Dosya boyutunu küçültmek için %80 görüntü kalitesinde kaydedilmiş JPG biçimi kullanın. Görüntü dosyanız hala 400 KB’tan büyükse, yeniden boyutlandırma dosya boyutunu daha da azaltabilir: 1000 piksel genişlik x 750 piksel yükseklik (4:3 en boy oranı) önerilir.<br><br>Bağlantılı bir görüntü yavaş açılıyor veya HTTPS yoluyla kullanılamıyorsa, daha iyi sonuçlar için görüntüyü hikayenize yükleyin.",
       "thumbnailLink": "Küçük resim bağlantısı",
-      "thumbnailHelp": "Önerilen küçük resim boyutu ve şekli (en boy oranı 4:3 olan) 280 x 210 pikseldir. Daha büyük küçük resimler performansı yavaşlatabilir. 4:3 en boy oranına sahip küçük resimler kırpılmadan kendi yerlerine sığar."
+      "thumbnailHelp": "Küçük resim bağlantısı HTTPS ile başlamalıdır.<br><br>Önerilen küçük resim boyutu ve şekli (en boy oranı 4:3 olan) 280 x 210 pikseldir. Daha büyük boyuttaki küçük resimler performansı yavaşlatabilir. 4:3 en boy oranına sahip küçük resimler kırpılmadan kendi yerlerine sığar."
     },
     "settings": {
       "numberedPlaces": "Yerleri numaralarla göster",
@@ -73,7 +73,7 @@ define({
       "custom": "Özel",
       "customTooltip": "Harita yaklaştırma kontrollerinde görüntülenen düğmeyi kullanarak konumu belirleyin",
       "mapLocationTooltip": "Kısa Listenizi açan kişilerin gördüğü konum",
-      "bookmarksHelp": "Kısa Listede yer işaretlerini etkinleştirmek için web haritasının yer işaretlerini web haritası görüntüleyiciye ekleyin ve yönetin",
+      "bookmarksHelp": "Yer işaretlerini etkinleştirmek için Kısa Liste Oluşturucu’yu kapatın ve ardından, bu kısa listede kullanılan web haritasını açın (ArcGIS İçeriğim veya Hikayelerim yoluyla) ve ArcGIS Harita Görüntüleyici’yi kullanarak yer işaretlerini buna ekleyin.",
       "generalOptions": "Genel seçenekler",
       "mapOptions": "Harita seçenekleri",
       "changeBasemap": "Altlık Haritayı Değiştir",

@@ -54,9 +54,9 @@ define({
       "useLocation": "Kasuta seda asukohta",
       "selectAll": "Vali kõik",
       "imageSizeHelper": "Parimate tulemuste saamiseks peaks piltide maht olema alla 400 KB. Soovitatavad mõõtmed ja paigutus on maksimaalselt 1000 x 750 pikslit (laiuse-kõrguse suhtega 4:3). Suuremad pildid võivad jõudlust aeglustada. Parima jõudluse tagamiseks kasutage tihendatud JPG-pilte 80% kvaliteediga.",
-      "imageSizeHelperUpdated": "Parimate tulemuste saamiseks peaks piltide maht olema alla 400 KB. Faili suuruse vähendamiseks kasutage 80% pildikvaliteediga salvestatud JPG-vormingut. Kui pildi maht on ikka üle 400 KB, võite mahu vähendamiseks muuta pildi suurust, soovitatav suurus on 1000 pikslit lai x 750 pikslit kõrge (4:3 laiuse/kõrguse suhe).",
+      "imageSizeHelperUpdated": "Pildi lingi alguses peab olema HTTPS.<br><br>Parima jõudluse huvides ei tohiks ühe pildi maht ületada 400 kB. Faili mahu vähendamiseks salvestage pildid JPG formaadis 80% pildikvaliteediga. Kui pildi maht ületab endiselt 400 kB, saab mahtu vähendada suuruse muutmisega: soovitatav suurus on 1000 pikslit lai x 750 pikslit kõrge (laiuse ja kõrguse suhe 4:3).<br><br>Kui lingitud pilt joonistatakse ekraanile aeglaselt või kui see pole HTTPS-i kaudu saadaval, laadige see paremate tulemuste huvides oma loosse üles.",
       "thumbnailLink": "Pisipildi link",
-      "thumbnailHelp": "Pisipildi soovitatavad mõõtmed ja paigutus on 280 x 210 pikslit (laiuse-kõrguse suhtega 4:3). Suuremad pisipildid võivad jõudlust aeglustada. Pisipildid kuvasuhtega 4:3 mahuvad pildiüksusesse ilma kärpimata."
+      "thumbnailHelp": "Pisipildi lingi alguses peab olema HTTPS.<br><br>Pisipildi soovitatav suurus ja kuju on 280 x 210 pikslit (laiuse ja kõrguse suhe 4:3). Suuremad pisipildid võivad jõudlust halvendada. 4:3 kuvasuhtega pisipildid mahuvad paanile ilma kärpimata."
     },
     "settings": {
       "numberedPlaces": "Kuva kohad koos numbritega",
@@ -73,7 +73,7 @@ define({
       "custom": "Kohandatud",
       "customTooltip": "Seadke asukoht, kasutades kaardisuumi juhtseadiste hulgas kuvatavat nuppu",
       "mapLocationTooltip": "Asukoht, mis kuvatakse lühinimekirja avamisel",
-      "bookmarksHelp": "Lühinimekirjas järjehoidjate lubamiseks tuleb järjehoidjad lisada veebikaardi vaaturis ja neid seal hallata",
+      "bookmarksHelp": "Järjehoidjate lubamiseks sulgege lühiloendite koostur. Seejärel avage selles lühiloendis loodud veebikaart (ArcGIS-i lehe Minu sisu või Minu lood kaudu) ja lisage sellele järjehoidjad ArcGIS-i kaardivaaturi kaudu.",
       "generalOptions": "Üldised valikud",
       "mapOptions": "Kaardivalikud",
       "changeBasemap": "Muuda aluskaarti",

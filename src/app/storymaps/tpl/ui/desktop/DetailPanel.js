@@ -205,6 +205,7 @@ define(["../../core/Helper",
 					themeIndex = 0;
 				_iOSSwiper.removeAllSlides();
 				container.find('#detailView0').append(detailSlide());
+				$(".swiper-lazy-preloader").addClass("iOS-hidden");
 				var currentDetailContainer = $('.detailContainer')[0];
 				var newSlide = $(currentDetailContainer).find('.swiper-slide')[0];
 				$(newSlide).addClass('swiper-no-swiping');
@@ -452,9 +453,6 @@ define(["../../core/Helper",
 
 					if(picture){
 						var image = $(newSlide).find('img')[0];
-						image.onload = function(){
-							$(this).parent().find('.imageLoadingIndicator').css('display', 'none');
-						};
 						if(picture.indexOf("sharing/rest/content/items/") > -1){
 							if(picture.indexOf('http') > -1 && picture.indexOf('https') == 5){
 								picture = picture.slice(5);
@@ -474,7 +472,8 @@ define(["../../core/Helper",
 						else{
 							if(picture.indexOf("sharing/rest/content/items/") > -1)
 								picture = CommonHelper.possiblyAddToken(picture);
-							$(newSlide).find('img').attr('src', picture);
+							$(newSlide).find('img').attr('data-src', picture);
+							$(newSlide).find('img').attr('alt', '');
 						}
 						if(image.complete)
 							$(newSlide).find('.imageLoadingIndicator').hide();
@@ -547,7 +546,8 @@ define(["../../core/Helper",
 						//_swiperSlides[themeIndex] = (slideStorage);
 						var newSwiper = new Swiper($('.detailContainer')[themeIndex], {
 							speed: 0,
-							setWrapperSize: true
+							setWrapperSize: true,
+							lazyLoading: true
 						});
 
 						_swipers[themeIndex] = newSwiper;
@@ -809,6 +809,7 @@ define(["../../core/Helper",
 					if(imgSrc && imgSrc.indexOf("sharing/rest/content/items/") > -1)
 						imgSrc = CommonHelper.possiblyAddToken(imgSrc);
 					$(slideImg).attr('src', imgSrc);
+					$(slideImg).attr('alt', '');
 				}
 
 				_this.resize();
@@ -924,7 +925,7 @@ define(["../../core/Helper",
 						$('#paneLeft').css({'top': $('#map').height() - 10});
 						offset = 20;
 						if(_iOS)
-							offset = 80;
+							offset = 110;
 					}
 					var themeIndex = $('.entry.active').index();
 					var currentSlide;
@@ -935,11 +936,9 @@ define(["../../core/Helper",
 						currentSwiper = _swipers[themeIndex];
 						currentSlide = currentSwiper.slides[currentSwiper.activeIndex];
 					}
-					$(currentSlide).height($('#paneLeft').outerHeight() - 5);
+					$(currentSlide).height($('#paneLeft').outerHeight() - 5 + (app.embedBar && app.embedBar.initiated ? -26 : 0));
 					var titleHeight = $(currentSlide).find('.detailHeader').outerHeight();
-					if ( $(currentSlide).find('.website') ) {
-						offset += 40;
-					}
+
 					$('.detailTextContainer').height($('#paneLeft').outerHeight() - titleHeight - offset + 'px');
 					$('.detailPictureDiv img').css('max-width', $("#paneLeft").outerWidth());
 					var imgMaxHeight = ($("#paneLeft").outerHeight() - titleHeight - 60) < ($("#paneLeft").outerHeight() * 0.6) ? $("#paneLeft").outerHeight() - titleHeight - 60 : $("#paneLeft").outerHeight() * 0.6;

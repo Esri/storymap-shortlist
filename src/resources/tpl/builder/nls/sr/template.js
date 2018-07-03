@@ -54,9 +54,9 @@ define({
       "useLocation": "Koristi ovu lokaciju",
       "selectAll": "Izaberi sve",
       "imageSizeHelper": "Za najbolje rezultate, snimci bi trebalo da budu manji od 400 KB. Preporučena veličina i oblik je 1000 x 750 piksela (4:3 odnos širina:visina) ili manja. Veći snimci mogu da uspore performanse. Za najbolje performanse koristite komprimovane JPG snimke pri kvalitetu snimka od 80%.",
-      "imageSizeHelperUpdated": "Za najbolje performanse, slike treba da budu manje od 400 KB. kako biste smanjili veličinu datoteka, koristite JPG format sačuvan na 80% kvaliteta slike. Ako slika i dalje premašuje 400 KB, dalje menjanje veličine može dodatno da umanji veličinu datoteke: 1000 piksela širine x 750 piksela visine (4:3 odnos širine:visine) se preporučuje.",
+      "imageSizeHelperUpdated": "Link snimka mora da počinje sa HTTPS.<br><br>Za najbolje performanse, snimci treba da budu manji od 400 KB. Kako biste smanjili veličinu datoteka, koristite JPG format sačuvan na 80% kvaliteta slike. Ako slika i dalje premašuje 400 KB, dalje menjanje veličine može dodatno da umanji veličinu datoteke: 1000 piksela širine x 750 piksela visine (4:3 odnos širine:visine) se preporučuje.<br><br>Ako se linkovani snimak sporo iscrtava ili nije dostupan putem HTTPS veze, otpremite ga u svoju priču za bolje rezultate.",
       "thumbnailLink": "Veza sličice",
-      "thumbnailHelp": "Preporučena veličina i oblik sličice je 280 x 210 piksela (4:3 odnos širina:visina). Veće sličice mogu da uspore performanse. Sličice odnosa dimenzija 4:3 se uklapaju u svoje tajlove bez izrezivanja."
+      "thumbnailHelp": "Link sličice mora da počinje sa HTTPS.<br><br>Preporučena veličina i oblik sličice je 280 x 210 piksela (4:3 odnos širina:visina). Veće sličice mogu da uspore performanse. Sličice odnosa dimenzija 4:3 se uklapaju u svoje tajlove bez izrezivanja."
     },
     "settings": {
       "numberedPlaces": "Prikaži mesta sa brojevima",
@@ -73,7 +73,7 @@ define({
       "custom": "Prilagođeno",
       "customTooltip": "Postavite lokaciju korišćenjem dugmeta koje se pojavljuje u kontroli zuma mape",
       "mapLocationTooltip": "Lokacija koju ljudi vide kada otvaraju Shortlist",
-      "bookmarksHelp": "Dodajte i upravljajte obeleživačima veb mape u pregledniku veb mape da biste omogućili obeleživače u Shortlist.",
+      "bookmarksHelp": "Da biste omogućili obeleživače, zatvorite Shortlist Builder i zatim otvorite veb mapu korišćenjem ove aplikacije Shortlist (putem ArcGIS Moj sadržaj ili Moje priče) i dodajte obeleživače korišćenjem ArcGIS preglednika mape.",
       "generalOptions": "Opšte opcije",
       "mapOptions": "Opcije mape",
       "changeBasemap": "Promenite pozadinsku mapu",

@@ -1,7 +1,7 @@
 define({
   "commonMedia": {
     "mediaSelector": {
-      "lblSelect1": "Mediji",
+      "lblSelect1": "Datu nesējs",
       "lblSelect2": "Saturs",
       "lblMap": "Karte",
       "lblImage": "Attēls",
@@ -9,10 +9,11 @@ define({
       "lblExternal": "Web lapa",
       "lblUpload": "Augšupielāde",
       "lblLink": "Saite",
-      "disabled": "Administrators ir atspējojis šo iezīmi",
+      "disabled": "Šo elementu ir atspējojis administrators",
       "userLookup": "Ielādēt albumus",
       "notImplemented": "Vēl nav ieviests.",
-      "noData": "Nav atrasts publisks albums"
+      "noData": "Nav atrasts publisks albums",
+      "thirdPartyTerms": "Izmantojot šo trešās puses pakalpojumu, jūs piekrītat tā lietošanas noteikumiem. "
     },
     "imageSelector": {
       "lblStep1": "Izvēlēties servisu",
@@ -36,20 +37,11 @@ define({
       "signInMsg2": "Lietotājs nav atrasts",
       "loadingFailed": "Ielāde neizdevās"
     },
-    "imageSelectorFacebook": {
-      "leftHeader": "Facebook Lietotājs",
-      "rightHeader": "Facebook Lapa",
-      "pageExplain": "Facebook lapa ir publisks zīmols/produkts vai slavenība, piem., <b>esrigis</b>. Jūs varat saņemt lapas nosaukumu, pēc pirmās '/' lapas URL.",
-      "pageInputLbl": "Lapas nosaukums",
-      "lookupMsgError": "Lapa nav atrasta",
-      "warning": "Facebook atbalsts ir pārtraukts, ${learn}.",
-      "learn": "uzzināt vairāk"
-    },
     "imageSelectorPicasa": {
       "userInputLbl": "E-pasts vai Google ID",
       "signInMsg2": "Konts nav atrasts",
       "howToFind": "Picasa ID atrašana",
-      "howToFind2": "Iekopējiet ciparus starp jebkuras Picasa lapas pirmo un otro '/'"
+      "howToFind2": "Iekopējiet ciparus starp jebkuras Picasa lapas pirmo un otro '/'."
     },
     "videoSelectorCommon": {
       "check": "Pārbaudīt",
@@ -97,7 +89,7 @@ define({
       "lblURLErrorHTTPS": "Šī attēla saite nav derīga. Vietrādim URL ir jāsākas ar HTTPS un jābeidzas ar atbalstītu attēla faila paplašinājumu (.jpg, .png, .gif, .bmp).",
       "lblURLCheck": "Notiek attēla pārbaude...",
       "lblLabel": "Attēla paraksts",
-      "lblLabel1": "Virsraksts",
+      "lblLabel1": "Uzraksts",
       "lblLabel2": "Novietot virs teksta",
       "lblLabel3": "Neviens",
       "lblLabelPH": "Ievadiet tekstu...",
@@ -110,7 +102,7 @@ define({
       "lblPosition4": "Izstiept",
       "lblPosition5": "Pielāgots",
       "lblURLHelp": "Attēla saitei ir jāsākas ar HTTPS.<br><br>Lai iegūtu labākos rezultātus, attēliem ir jābūt mazākiem par 400 KB. Izmantojiet saspiestus JPG attēlus ar 80% kvalitāti un šiem ieteiktajiem attēla platumiem: 2000 pikseļu galvenajam posmam vai stāstījuma panelim ar maksimizēšanas pogu, 1000 pikseļu stāstījuma panelim bez maksimizēšanas pogas.<br><br>Ja saistītais attēls atveras lēni, tad augšupielādējiet to stāstā, lai ielāde notiktu ātrāk.",
-      "tooltipDimension": "Vērtību var norādīt 'px' vai '%'",
+      "tooltipDimension": "Vērtība var būt norādīta kā px vai %",
       "tooltipDimension2": "Vērtība ir jānorāda pikseļos",
       "lblPosition2Explain": "(var apgriezt)",
       "lblPosition3Explain": "(netiks apgriezts)",
@@ -120,13 +112,18 @@ define({
       "unloadHelp": "Ja web lapā ir audio vai video multivide, atzīmējiet šo iespēju, lai tā netiktu atskaņota brīdī, kad lasītājs naviģē tālāk. Noņemiet atzīmi, ja vēlaties, lai, piemēram, tiktu turpināta skaņu celiņa atskaņošana, kamēr lasītājs virzās uz priekšu stāstā.<br />Ja web lapa ir lietotne, noņemiet atzīmi pie šīs iespējas, lai stāsts netiktu ielādēts atkārtoti, kad lasītājs atgriežas šajā sadaļā.",
       "embedProtocolLabel": "Ielādēt lapu, izmantojot drošu savienojumu (HTTPS)",
       "embedProtocolWarning1": "Ja šī lapa jūsu stāstā neielādējas, to nevar iegult web drošības iemeslu dēļ. Alternatīva iespēja — stāstījumā ievietojiet saiti, lai lapu atvērtu jaunā pārlūka cilnē. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>Uzzināt vairāk</a>",
-      "embedProtocolWarning2": "Ja šī lapa jūsu stāstā neielādējas, noņemiet atzīmi no šīs iespējas un mēģiniet vēlreiz. Ja lapa joprojām neielādējas, to nevar iegult web drošības iemeslu dēļ. Alternatīva iespēja — stāstījumā ievietojiet saiti, lai lapu atvērtu jaunā pārlūka cilnē. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>Uzzināt vairāk</a>"
+      "embedProtocolWarning2": "Ja šī lapa jūsu stāstā neielādējas, noņemiet atzīmi no šīs iespējas un mēģiniet vēlreiz. Ja lapa joprojām neielādējas, to nevar iegult web drošības iemeslu dēļ. Alternatīva iespēja — stāstījumā ievietojiet saiti, lai lapu atvērtu jaunā pārlūka cilnē. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>Uzzināt vairāk</a>",
+      "learn": "Uzziniet vairāk",
+      "lblAltText": "Alternatīvais teksts",
+      "placeholderAltText": "Ievadiet šīs multivides aprakstu lasītājiem ar redzes traucējumiem…",
+      "tooltipAltText": "Norādiet šī multivides satura aprakstu, ko izmantos palīgtehnoloģijas, piemēram, ekrāna lasītāja programmatūra. Apraksts nav obligāts, bet ir ieteicama atbilstība tīmekļa pieejamības vadlīnijām, piemēram, WCAG un 508. sadaļai."
     },
     "editorActionGeocode": {
       "lblTitle": "Adreses vai vietas noteikšana",
       "mapMarkerExplain": "Noklikšķinot uz saites, lietotājam tiks rādīts kartes punkts"
     },
     "editorActions": {
+      "navigate": "Navigēt uz citu ierakstu",
       "remove": "Noņemt darbību",
       "preview": "Darbības priekšskatījums"
     },

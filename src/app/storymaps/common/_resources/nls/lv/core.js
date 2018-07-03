@@ -2,9 +2,9 @@ define({
   "commonCore": {
     "common": {
       "add": "Pievienot",
-      "edit": "Labot",
+      "edit": "Rediģēt",
       "save": "Saglabāt",
-      "next": "Tālāk",
+      "next": "Nākamais",
       "cancel": "Atcelt",
       "back": "Atpakaļ",
       "apply": "Lietot",
@@ -12,7 +12,7 @@ define({
       "open": "Atvērt",
       "start": "Starts",
       "loading": "Ielādē",
-      "disabledAdmin": "Administrators ir atspējojis šo iezīmi",
+      "disabledAdmin": "Šo elementu ir atspējojis administrators",
       "width": "Platums",
       "height": "Augstums",
       "create": "Izveidot",
@@ -29,7 +29,7 @@ define({
       "panelHeader": "%TPL_NAME% veidotājs",
       "buttonSaving": "Saglabāšana",
       "buttonSaved": "Saglabāts",
-      "buttonShare": "Koplietot",
+      "buttonShare": "Kopīgot",
       "buttonSettings": "Iestatījumi",
       "buttonHelp": "Palīdzība",
       "buttonPreview": "Skatīt stāstu",
@@ -64,7 +64,7 @@ define({
       "panel2q1tooltip": "Ja izvēlēsieties šo opciju, vienības virsraksts tiks modificēts tā, lai atbilstu stāsta virsrakstam, un veidotājā tiks sinhronizētas tālākās izmaiņas.",
       "panel2q2": "Vienības virsraksts",
       "panel3": "Ja sociālajā multividē vēlaties vēl vairāk uzlabot stāsta izskatu, izmantojiet ${MYSTORIES}, lai pievienotu kopsavilkumu un sīktēla attēlu.",
-      "panel4": "Vairs nerādīt brīdinājumus par šo stāstu"
+      "panel4": "Vairāk nerādīt brīdinājumus par šo stāstu"
     },
     "share": {
       "shareTitle": "Koplietojiet stāstu",
@@ -79,7 +79,7 @@ define({
       "loadingMessage": "Pārbaude, vai stāstā nav problēmu",
       "viewToggle1": "Rādīt stāsta saturu",
       "viewToggle2": "Aizvērt stāsta saturu",
-      "socialize": "Socializējies",
+      "socialize": "Socializācija",
       "statusPrivate": "Jūsu stāsts ir privāts. To varat skatīt tikai jūs.",
       "statusError": "Jūsu stāsta saturā ir problēmas, ko lasītāji pamanīs. Varat noteikt un salabot šīs problēmas tālāk.",
       "statusNoErrPrivate": "Koplietojiet savu stāstu, kad būsiet gatavs!",
@@ -139,14 +139,36 @@ define({
     },
     "httpsTransitionMessage": {
       "bannerMsg": "Svarīgs ziņojums par tīmekļa drošību un Kartes stāstiem (Story Maps)",
-      "s1h1": "Esri uzlabo Kartes stāstu drošību",
-      "s1p1": "Jūsu Kartes stāsta  vienības ir pieejamas tiešsaistē tīmeklī, un tīmekļa kopiena pastāvīgi veido un ievieš uzlabotus drošības pasākumus. Protokols HTTPS, kas gādā par drošu savienojumu ar saturu internetā, ir populārākais veids, kā piekļūt tīmekļa saturam. Vairākumā mūsdienīgu pārlūku tagad tiek rādīts brīdinājuma ziņojums, ja vietnē tiek izmantots protokols HTTP, nevis HTTPS. Šī jaunā standarta dēļ jūsu Kartes stāstu vienībās būs jāizmanto protokols HTTPS, sākot ar ArcGIS Online 2018. gada jūnija atjauninājumu.",
-      "s1p2": "Tas nozīmē, ka Kartes stāsta vienībai un visam tās saturam (tostarp attēliem, slāņiem, iegultām lietotnēm un tīmekļa vietnēm) ir jāpiekļūst, izmantojot saites, kas sākas ar HTTPS, nevis HTTP. Tādējādi lasītājiem tiks nodrošināta vislabākā pieredze, jo vairākumā tīmekļa pārlūku lietotājs tiks informēts par to, ka stāsti ir droši.",
+      "s1h1": "Esri uzlabo Kartes stāsta drošību",
+      "s1p1": "Jūsu Kartes stāsti dzīvo tīmeklī, un tīmekļa kopiena vienmēr strādā, lai nodrošinātu un uzlabotu drošību. HTTPS, kas nodrošina drošu savienojumu ar internetā pārraidītu saturu, tiek parādīts kā paredzētais veids, kā piekļūt tīmekļa saturam. Lielākā daļa moderno pārlūku tagad parāda brīdinājuma ziņojumus, ja tiek izmantots HTTP, nevis HTTPS. Šī jaunā standarta dēļ mēs stingri iesakām izmantot HTTPS saites Kartes stāstu autorēšanai un koplietošanai, kā arī izmantot HTTPS vietrāžus URL, iegulstot tīmekļa saturu vai sasaistot ar attēliem Kartes stāstā.",
+      "s1p2": "Praktiski runājot, tas nozīmē, ka Kartes stāstam un visam tā saturam (ieskaitot attēlus, slāņus, iegultās lietotnes un tīmekļa vietnes), ir jānodrošina piekļuve, izmantojot saites, kas sākas ar HTTPS, nevis HTTP. Tas nodrošina labāko pieredzi jūsu lasītājiem, jo lielākā daļa tīmekļa pārlūku norāda, ka jūsu stāsti ir droši.",
       "s2h1": "Kas man jādara?",
-      "s2p1": "Esri strādā pie tā, lai Kartes stāstu autoriem un lasītājiem pāreja būtu vienkārša. Pašlaik Kartes stāsta veidotājos un sadaļā Mani stāsti ir pieejami rīki, kas palīdz stāstos atrast nedrošu saturu (HTTP), kā arī ir pieejami ieteikumi šo problēmu novēršanai. Pārbaudiet, vai jūsu stāstos nav nedroša satura, un jauniniet uz protokolu HTTPS līdz 2018. gada jūnijam.",
+      "s2p1": "Esri strādā, lai padarītu to par vienkāršu pāreju Kartes stāsta autoriem un lasītājiem. Kartes stāstu veidotājos un Manos stāstos ir pieejami rīki, kas jums palīdzēs atrast nedrošo saturu (HTTP) jūsu stāstos un sniegs ieteikumus, kā to risināt. Lūdzu, pārbaudiet savus stāstus uz nedrošu saturu un pēc iespējas ātrāk atjauniniet HTTPS.",
       "action1": "Aizvērt",
       "action2": "Pārbaudīt manus stāstus tūlīt",
       "action3": "Uzziniet vairāk"
+    },
+    "sectionNavigation": {
+      "select": "Izvēlieties ierakstu...",
+      "section": "Ieraksts",
+      "thisSection": "Šis ieraksts",
+      "hiddenSection": "Paslēpts ieraksts"
+    },
+    "embedBar": {
+      "share": "Kopīgošana",
+      "fullScreen": "Pilnekrāna režīms",
+      "exitFullScreen": "Iziet no pilnekrāna režīma",
+      "enlarge": "Palielināt",
+      "newTab": "Atvēriet jaunā cilnē",
+      "tagline": "Kartes stāsts"
+    },
+    "june2018SurveyMessage": {
+      "bannerMsg": "Vai varam jums kaut ko pajautāt? Tas palīdzēs veidot Kartes stāstu nākotni.",
+      "s1h1": "Dalieties savās domās, veidojiet nākotni",
+      "s1p1": "Jūsu ieguldījums ir viens no mūsu svarīgākajiem atsauksmju avotiem, pastāstot vairāk, jūs palīdzēsiet mums uzlabot Kartes stāstus. Mēs būtu pateicīgi, ja jūs varētu piedalīties šajā trīs minūšu aptaujā.",
+      "s2p1": "Kā vienmēr, paldies, ka izmantojat Esri Stāstu kartes!",
+      "action1": "Aizvērt",
+      "action2": "Aizpildīt aptauju"
     }
   }
 });

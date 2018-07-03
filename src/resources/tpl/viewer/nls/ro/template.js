@@ -44,7 +44,7 @@ define({
       "builderButton": "Editare",
       "facebookTooltip": "Partajare pe Facebook",
       "twitterTooltip": "Partajare pe Twitter",
-      "bitlyTooltip": "Obţinere link scurt către aplicaţie",
+      "bitlyTooltip": "Obțineți un link scurt",
       "templateTitle": "Setare titlu şablon",
       "templateSubtitle": "Setare subtitlu şablon",
       "share": "Partajare"
@@ -55,7 +55,10 @@ define({
       "open": "Deschidere",
       "embed": "Încorporare în pagină web",
       "embedExplain": "Utilizaţi următorul cod HTML pentru a încorpora aplicaţia într-o pagină web.",
-      "size": "Dimensiune (lăţime/înălţime):"
+      "size": "Dimensiune (lăţime/înălţime):",
+      "autoplayLabel": "Mod redare automată",
+      "autoplayExplain1": "Modul de redare automată va avansa prin relatarea dvs. la un interval regulat. Această opțiune este ideală pentru un chioșc sau un monitor pentru afișare publică, dar rețineți că în alte situații poate face ca relatarea să fie dificil de urmărit. Această caracteristică nu este acceptată pe ecranele de dimensiuni mici.",
+      "autoplayExplain2": "Când acest mod este activ, sunt afișate butoane pentru a reda/întrerupe relatarea și pentru a regla viteza de navigare."
     },
     "general": {
       "noPlaces": "Nu există locuri în această zonă. Micşoraţi sau faceţi clic pe butonul Home pentru a vedea locuri.",

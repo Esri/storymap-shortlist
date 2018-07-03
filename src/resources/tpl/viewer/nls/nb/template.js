@@ -44,7 +44,7 @@ define({
       "builderButton": "Rediger",
       "facebookTooltip": "Del på Facebook",
       "twitterTooltip": "Del på Twitter",
-      "bitlyTooltip": "Få en kort kobling til applikasjonen",
+      "bitlyTooltip": "Få en kort kobling",
       "templateTitle": "Angi tittel på malen",
       "templateSubtitle": "Angi undertittel for malen",
       "share": "Del"
@@ -55,7 +55,10 @@ define({
       "open": "Åpne",
       "embed": "Bygg inn på webside",
       "embedExplain": "Bruk følgende HTML-kode for å bygge inn applikasjonen på en webside.",
-      "size": "Størrelse (bredde/høyde):"
+      "size": "Størrelse (bredde/høyde):",
+      "autoplayLabel": "Automatisk avspillingsmodus",
+      "autoplayExplain1": "Automatisk avspillingsmodus går videre i fortellingen med gitte intervaller. Dette fungerer utmerket til kiosker eller informasjonsskjermer, men kan i andre sammenhenger gjøre det vanskeligere å lese fortellingen. Denne funksjonen støttes ikke på små skjermer.",
+      "autoplayExplain2": "Når denne modusen er aktivert, vises det kontroller for å spille av/pause historien og justere navigeringshastigheten."
     },
     "general": {
       "noPlaces": "Det er ingen steder i dette området. Zoom ut eller klikk på Hjem-knappen for å se steder.",

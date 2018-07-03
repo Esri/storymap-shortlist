@@ -87,7 +87,7 @@ define({
       "items": {
         "organizationLabel": "내 기관",
         "onlineLabel": "ArcGIS Online",
-        "contentLabel": "내 컨텐츠",
+        "contentLabel": "내 콘텐츠",
         "favoritesLabel": "내 즐겨찾기"
       },
       "title": "맵 선택",

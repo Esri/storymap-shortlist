@@ -54,9 +54,9 @@ define({
       "useLocation": "Diese Position verwenden",
       "selectAll": "Alle auswählen",
       "imageSizeHelper": "Um optimale Ergebnisse zu erzielen, sollten Bilder kleiner als 400 KB sein. Die empfohlene Größe und Form beträgt 1.000 x 750 Pixel (Verhältnis 3:2, Breite zu Höhe) oder kleiner. Größere Bilder können die Performance beeinträchtigen. Eine optimale Performance wird erreicht, wenn komprimierte JPG-Bilder mit einer Bildqualität von 80 % verwendet werden.",
-      "imageSizeHelperUpdated": "Für eine optimal Leistungsfähigkeit sollten die Bilder eine Größe von höchstens 400 KB aufweisen. Verwenden Sie zur Verringerung der Dateigröße das JPG-Format, das mit einer Bildqualität von 80 % gespeichert wird. Falls Ihr Bild noch immer eine Größe von mehr als 400 KB aufweist, können Sie mit einer Größenanpassung seine Dateigröße weiterhin reduzieren: 1000 Pixel Breite x 750 Pixel Höhe (ein Breite-Höhe-Verhältnis von 4:3) werden empfohlen.",
+      "imageSizeHelperUpdated": "Bild-Link muss mit HTTPS beginnen.<br><br>Um eine optimale Performance zu erzielen, sollten Bilder kleiner als 400 KB sein. Verwenden Sie zur Verringerung der Dateigröße das JPG-Format mit einer Bildqualität von 80 %. Falls Ihr Bild noch immer eine Größe von mehr als 400 KB aufweist, können Sie mit einer Größenanpassung seine Dateigröße weiterhin reduzieren: 1000 Pixel Breite x 750 Pixel Höhe (ein Breite-Höhe-Verhältnis von 4:3) werden empfohlen.<br><br>Wenn ein verknüpftes Bild langsam aufgebaut wird oder über HTTPS nicht verfügbar ist, können Sie es in Ihre Story hochladen, um bessere Ergebnisse zu erzielen.",
       "thumbnailLink": "Link für Miniaturansicht",
-      "thumbnailHelp": "Die empfohlene Größe und Form für Miniaturansichten beträgt 280 x 210 Pixels (Verhältnis 4:3, Breite zu Höhe). Größere Miniaturansichten können die Performance beeinträchtigen. Miniaturansichten mit einem Seitenverhältnis von 4:3 passen in ihre Kacheln, ohne zugeschnitten werden zu müssen."
+      "thumbnailHelp": "Link für Miniaturansicht muss mit HTTPS beginnen.<br><br>Die empfohlene Größe und Form für Miniaturansichten beträgt 280 x 210 Pixel (Verhältnis 4:3, Breite zu Höhe). Größere Miniaturansichten können die Performance beeinträchtigen. Miniaturansichten mit einem Seitenverhältnis von 4:3 passen in ihre Kacheln, ohne zugeschnitten werden zu müssen."
     },
     "settings": {
       "numberedPlaces": "Ort mit Ziffern anzeigen",
@@ -73,7 +73,7 @@ define({
       "custom": "Kundschaft",
       "customTooltip": "Legen Sie die Position mit der Schaltfläche fest, die in den Zoomsteuerelementen der Karte angezeigt wird",
       "mapLocationTooltip": "Die Position, die Benutzern angezeigt wird, wenn sie Ihre Shortlist öffnen",
-      "bookmarksHelp": "Um Lesezeichen in Shortlist zu aktivieren, fügen Sie die Lesezeichen im Webkarten-Viewer der Webkarte hinzu und verwalten Sie sie",
+      "bookmarksHelp": "Um Lesezeichen zu aktivieren, schließen Sie den Shortlist Builder, und öffnen Sie dann die Webkarte in dieser Shortlist (über \"Eigene Inhalte\" in ArcGIS oder \"Eigene Storys\"). Fügen Sie anschließend mit dem ArcGIS Map Viewer Lesezeichen hinzu.",
       "generalOptions": "Allgemeine Optionen",
       "mapOptions": "Kartenoptionen",
       "changeBasemap": "Grundkarte ändern",

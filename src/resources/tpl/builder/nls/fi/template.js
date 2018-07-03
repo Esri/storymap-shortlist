@@ -54,9 +54,9 @@ define({
       "useLocation": "Käytä tätä sijaintia",
       "selectAll": "Valitse kaikki",
       "imageSizeHelper": "Paras tulos saadaan, kun kuvat ovat alle 400 kt. Suositeltu koko ja muoto on enintään 1 000 x 750 pikseliä (kuvasuhde 4:3). Tätä kokoa suuremmat kuvat voivat heikentää suorituskykyä. Paras suorituskyky saadaan käyttämällä pakattuja JPG-kuvia, joiden kuvanlaatu on 80 %.",
-      "imageSizeHelperUpdated": "Parhaan suorituskyvyn takaamiseksi kuvien tulisi olla kooltaan alle 400 kt. Voit pienentää kokoa käyttämällä JPG-muotoa, joka on tallennettu 80 %:n kuvanlaadulla. Jos kuvasi on kooltaan edelleen yli 400 kt, sen koon muuttaminen voi edelleen pienentää kuvatiedoston kokoa: 1 000 pikseliä leveä x 750 pikseliä korkea (4:3 leveys:korkeus-suhde) on suositus.",
+      "imageSizeHelperUpdated": "Kuvan linkin on alettava merkkijonolla HTTPS.<br><br>Parhaan suorituskyvyn takaamiseksi kuvien tulisi olla kooltaan alle 400 kt. Voit pienentää kokoa käyttämällä JPG-muotoa, joka on tallennettu 80 %:n kuvanlaadulla. Jos kuvasi on kooltaan edelleen yli 400 kt, sen koon muuttaminen voi edelleen pienentää kuvatiedoston kokoa: 1 000 pikseliä leveä x 750 pikseliä korkea (4:3 leveys:korkeus-suhde) on suositus.<br><br>Jos linkitetty kuva piirtyy hitaasti, voit nopeuttaa sen piirtymistä lataamalla sen tarinaasi.",
       "thumbnailLink": "Pikkukuvan linkki",
-      "thumbnailHelp": "Suositeltu pikkukuvan koko ja muoto on 280 x 210 pikseliä (kuvasuhde 4:3). Tätä kokoa suuremmat pikkukuvat voivat heikentää suorituskykyä. Kuvasuhteen 4:3 pikkukuvat sopivat ruutuihinsa ilman rajausta."
+      "thumbnailHelp": "Pikkukuvan linkin on alettava merkkijonolla HTTPS.<br><br>Suositeltu pikkukuvan koko ja muoto on 280 x 210 pikseliä (kuvasuhde 4:3). Tätä kokoa suuremmat pikkukuvat voivat heikentää suorituskykyä. Kuvasuhteen 4:3 pikkukuvat sopivat ruutuihinsa ilman rajausta."
     },
     "settings": {
       "numberedPlaces": "Näytä paikat, joihin liittyy numeroita",
@@ -73,7 +73,7 @@ define({
       "custom": "Mukautettu",
       "customTooltip": "Määritä sijainti sen painikkeen avulla, joka näkyy kartan zoomauksen ohjausobjekteissa",
       "mapLocationTooltip": "Sijainti, jonka ihmiset näkevät, kun he avaavat Shortlistisi",
-      "bookmarksHelp": "Jos haluat ottaa kirjanmerkit käyttöön Shortlistissa, lisää Web-kartan kirjanmerkit Web-kartan katseluohjelmassa ja hallitse niitä siinä",
+      "bookmarksHelp": "Jos haluat ottaa kirjanmerkit käyttöön, sulje Shortlist-luontitoiminto ja avaa sen jälkeen tässä Shortlistissa käytetty web-kartta (ArcGISin Oma sisältö- tai Omat tarinat -osion kautta) ja lisää siihen kirjanmerkit käyttämällä ArcGIS-kartankatseluohjelmaa.",
       "generalOptions": "Yleiset asetukset",
       "mapOptions": "Kartan asetukset",
       "changeBasemap": "Muuta taustakarttaa",

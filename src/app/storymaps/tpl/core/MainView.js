@@ -3,12 +3,15 @@ define(["lib-build/css!./MainView",
 		"./Data",
 		"./WebApplicationData",
 		"./Helper",
+		"./arcgis-html-sanitizer",
 		// Desktop UI
 		"../ui/desktop/TestPanel",
 		"../ui/desktop/TilePanel",
 		"../ui/desktop/DetailPanel",
 		"../ui/desktop/NavBar",
 		"../ui/desktop/MultiTips",
+		// Autoplay
+		"storymaps/common/ui/autoplay/Autoplay",
 		// Mobile UI
 		"../ui/mobile/MobileIntro",
 		"../ui/mobile/MobileFeatureList",
@@ -34,6 +37,9 @@ define(["lib-build/css!./MainView",
 		"esri/geometry/Extent",
 		"esri/dijit/Search",
 		"esri/SpatialReference",
+		"esri/tasks/query",
+		"esri/graphic",
+		"esri/symbols/SimpleMarkerSymbol",
 		"lib-build/css!../ui/Common",
 		"lib-build/css!../ui/mobile/Common",
 		"lib-build/css!../ui/Responsive",
@@ -45,11 +51,13 @@ define(["lib-build/css!./MainView",
 		Data,
 		WebApplicationData,
 		Helper,
+		Sanitizer,
 		TestPanel,
 		TilePanel,
 		DetailPanel,
 		NavBar,
 		MultiTips,
+		Autoplay,
 		MobileIntro,
 		MobileFeatureList,
 		MapCommand,
@@ -71,7 +79,10 @@ define(["lib-build/css!./MainView",
 		screenUtils,
 		Extent,
 		Search,
-		SpatialReference
+		SpatialReference,
+		Query,
+		Graphic,
+		SimpleMarkerSymbol
 	){
 		/**
 		 * @preserve This application is released under the Apache License V2.0 by Esri http://www.esri.com/
@@ -94,6 +105,8 @@ define(["lib-build/css!./MainView",
 			var _builtThemes = null;
 			_this.mapIsPanning = false;
 			_this.mapIsZooming = false;
+			var _tabIndex = 0;
+			var _currentFeatIndex = 0;
 
 			this.init = function(core)
 			{
@@ -132,6 +145,16 @@ define(["lib-build/css!./MainView",
 
 				// Data Model
 				app.data = new Data();
+
+				// HTML sanitizer
+				app.sanitizer =  new Sanitizer({
+					whiteList: {
+						b: [],
+						i: [],
+						u: [],
+						hr: []
+					}
+				}, true),
 
 				// Canvas icons
 				_myCanvas = document.createElement('canvas');
@@ -208,6 +231,47 @@ define(["lib-build/css!./MainView",
 						});
 					}
 				});
+
+				/*
+				 * Autoplay in viewer mode
+				 */
+				if ( ! app.isInBuilder && _urlParams.autoplay !== undefined && _urlParams.autoplay !== "false" ) {
+					app.ui.autoplay = new Autoplay(
+						$("#autoplay"),
+						// Callback that navigate to the next section
+						function() {
+							var tabFeaturesLength = $(".tilelist li").length;
+
+							if(_currentFeatIndex === 0 || _tabIndex != $(".entry.active").index()){
+									$(".tilelist li")[0].click();
+									_currentFeatIndex = 0;
+									_currentFeatIndex++;
+									_tabIndex = $(".entry.active").index();
+							}
+							else if( _currentFeatIndex <= tabFeaturesLength -1 ) {
+								_currentFeatIndex++;
+								$("#detailView" + _tabIndex + " .swiper-slide-active img").click();
+							} else {
+								if($(".entries .entry.visible").length == _tabIndex - 1){
+									_tabIndex = 0;
+								} else {
+									_tabIndex++;
+								}
+								_currentFeatIndex = 0;
+								$(".entries .entry")[_tabIndex].click();
+							}
+
+							return _tabIndex;
+						}
+					);
+
+					// Start when app is ready
+					topic.subscribe("tpl-ready", function(){
+						if ( ! $("body").hasClass("mobile-view") ) {
+							app.ui.autoplay.start();
+						}
+					});
+				}
 
 				return true;
 			};
@@ -311,6 +375,8 @@ define(["lib-build/css!./MainView",
 			}
 
 			this.processExternalData = function(){
+				if(app.data.getShortlistLayerId())
+					return;
 				var layers = [];
 				$.each(app.map.graphicsLayerIds, function(i, id){
 					var possibleLayer = app.map.getLayer(id);
@@ -332,13 +398,24 @@ define(["lib-build/css!./MainView",
 					}else{
 						layerType = layer.type;
 					}
-					if (layer.url && (layerType === 'ArcGISFeatureLayer' || layerType === 'Feature Layer') && !layer.id.match(/^csv_/)) {
+					if (layer.url && layerType === 'Feature Layer' && !layer.id.match(/^csv_/)) {
 						featServLayerID = layer;
 						featServUrl.push(layer.url);
 						featServLayerIndex.push(index);
+						var query = new Query();
+								query.where = "1=1";
+								query.outFields = ["*"];
+								layer.queryFeatures(
+									query,
+									function(results) {
+										if(results.features.length > 0) {
+											buildFeatureServiceLayer(results);
+										}
+									}
+								);
 					}
 
-					if(layer.graphics.length < 1 && layer.visibleAtMapScale){
+					else if(layer.graphics.length < 1 && layer.visibleAtMapScale){
 						on.once(layer, 'update-end', function(){
 							if(layerFound)
 								return;
@@ -368,6 +445,10 @@ define(["lib-build/css!./MainView",
 							app.map.removeLayer(layer);
 							var newLayer = new esri.layers.GraphicsLayer({id: app.data.getWebAppData().getShortlistLayerId()+"_copy"});
 							layerFound = true;
+
+							if(app.data.getWebAppItem().created > app.cfg.HTML_SANITIZER_DATE){
+								newLayerGraphics = sanitizeWebMapData(layerGraphics);
+							}
 							newLayer.graphics = layerGraphics;
 							newLayer.fields = layerFields;
 							app.map.addLayer(newLayer);
@@ -419,6 +500,10 @@ define(["lib-build/css!./MainView",
 							app.map.removeLayer(layer);
 							var newLayer = new esri.layers.GraphicsLayer({id: app.data.getWebAppData().getShortlistLayerId()+"_copy"});
 
+							if(app.data.getWebAppItem().created > app.cfg.HTML_SANITIZER_DATE){
+								layerGraphics = sanitizeWebMapData(layerGraphics);
+							}
+
 							newLayer.graphics = layerGraphics;
 							newLayer.fields = layerFields;
 							app.map.addLayer(newLayer);
@@ -438,6 +523,58 @@ define(["lib-build/css!./MainView",
 				});
 				$('home-location-save-btn').remove();
 			};
+
+			function sanitizeWebMapData(graphics)
+			{
+				$.each(graphics, function(index, graphic){
+					graphic.attributes = app.sanitizer.sanitize(graphic.attributes);
+				});
+				return graphics;
+			}
+
+			function buildFeatureServiceLayer(results)
+			{
+				var layer = app.map.getLayer(app.data.getWebAppData().getShortlistLayerId());
+				var fields = results.fields;
+				var tabField;
+				$.each(fields, function(index, field){
+					if(field.name.toLowerCase() == 'tab_name')
+						tabField = true;
+				});
+				/*if(tabField){
+					buildThemes(layer);
+					layerFound = true;
+				}*/
+				/*if(!tabField && index == layers.length - 1){
+					if(!app.isInBuilder)
+						return;
+					var message = i18n.builder.migration.migrationPattern.badData;
+					message += '  (<a href="http://links.esri.com/storymaps/shortlist_layer_template" target="_blank" download="">'+i18n.builder.migration.migrationPattern.downloadTemplate+'</a>)';
+					$("#fatalError .error-msg").html(message);
+					$("#fatalError").show();
+					return;
+				}*/
+				if(!tabField)
+					return;
+				var layerGraphics = [];
+				var sms = new SimpleMarkerSymbol();
+				var newLayer = new esri.layers.GraphicsLayer({id: app.data.getWebAppData().getShortlistLayerId()+"_copy"});
+				if(app.data.getWebAppItem().created > app.cfg.HTML_SANITIZER_DATE){
+					results.features = sanitizeWebMapData(results.features);
+				}
+				$.each(results.features, function(index, feature){
+					var graphic = new Graphic(feature.geometry, sms, feature.attributes);
+					newLayer.add(graphic);
+				});
+				layerFound = true;
+				//newLayer.graphics = layerGraphics;
+				newLayer.fields = fields;
+				app.data.getWebAppData().setShortlistLayerId(newLayer.id);
+				app.map.removeLayer(layer);
+				app.map.addLayer(newLayer);
+				buildThemes(newLayer, 0);
+
+			}
 
 			function buildThemes(layer)
 			{
@@ -599,7 +736,7 @@ define(["lib-build/css!./MainView",
 
 				$.each(themes, function(index, theme){
 					_this.buildLayer(
-						theme.features/*.sort(SortByNumber)*/,
+						theme.features,
 						theme.color
 					);
 					app.ui.mobileIntro.fillList(index, theme, themes);
@@ -633,12 +770,15 @@ define(["lib-build/css!./MainView",
 				/*app.ui.testPanel.update({
 					data: WebApplicationData.getStoryTestPanel()
 				});*/
+				//SANITIZE WEBMAP ATTRIBUTES
 
 				if($.isEmptyObject(app.data.getWebAppData().getThemeOptions()))
 					app.data.getWebAppData().setDefaultThemeOptions();
 
 				if(app.data.getWebAppData().getIsExternalData()){
-					app.data.getWebAppData().setMapExtent(app.maps[app.data.getWebAppData().getWebmap()].response.map.extent);
+					var webmapExtent = app.data.getWebMap().item.extent;
+					var newExtent = new Extent(webmapExtent[0][0], webmapExtent[0][1], webmapExtent[1][0], webmapExtent[1][1], new SpatialReference({ wkid:4326 }));
+					app.data.getWebAppData().setMapExtent(newExtent);
 				}
 
 				if(app.data.getWebAppData().getGeneralOptions().bookmarks && app.maps[app.data.getWebAppData().getWebmap()].response.itemInfo.itemData.bookmarks && app.maps[app.data.getWebAppData().getWebmap()].response.itemInfo.itemData.bookmarks.length)
@@ -789,6 +929,10 @@ define(["lib-build/css!./MainView",
 					});
 				}
 
+				on.once(app.map, "update-end", function(){
+					initMap();
+				});
+
 				if (builderView) {
 					builderView.storyDataReady();
 				}
@@ -833,6 +977,12 @@ define(["lib-build/css!./MainView",
 						: app.data.getWebAppData().getShortlistLayerId()+"_0";
 					app.data.getWebAppData().setShortlistLayerId(shortlistLayerId);
 				}
+
+				if(app.data.getWebAppItem().created > app.cfg.HTML_SANITIZER_DATE){
+					var shortlistGraphics = app.map.getLayer(app.data.getWebAppData().getShortlistLayerId()).graphics;
+					shortlistGraphics = sanitizeWebMapData(app.map.getLayer(app.data.getWebAppData().getShortlistLayerId()).graphics);
+				}
+
 				var shortlistLayer = app.map.getLayer(app.data.getWebAppData().getShortlistLayerId());
 				shortlistLayer.setScaleRange(0,0);
 
@@ -980,11 +1130,17 @@ define(["lib-build/css!./MainView",
 				$("#zoomToggle").css("visibility","visible");
 				$("#whiteOut").fadeOut("slow");
 				if($("body").width() > 768){
-					$("#paneLeft").height($("#contentPanel").height() - $('#tabs').height());
+					var heightViewport = $("body").height();
+					var heightAroundMap = 0;
+					$('.mainViewAboveMap, .mainViewBelowMap').each(function(i, item){
+						var itemObj = $(item);
+						heightAroundMap += itemObj.is(':visible') ? itemObj.outerHeight() : 0;
+					});
+					$("#paneLeft").height(heightViewport - heightAroundMap - 25 - $('#tabs').height() + (app.embedBar && app.embedBar.initiated ? 26 : 0));
 					$("#paneLeft").css('top',$('#divStrip').height());
 					$("#map").height($("#contentPanel").height());
 					$("#map").css('top', 0);
-					$(".tilelist").height($("#paneLeft").height() - 25);
+					$(".tilelist").height($("#paneLeft").height() - ((app.isInBuilder && !app.data.getWebAppData().getIsExternalData()) ? 70 : 25) - (app.embedBar && app.embedBar.initiated ? 5 : 0));
 				} else{
 					app.ui.mobileIntro.resizeMobileElements();
 				}
@@ -1389,8 +1545,6 @@ define(["lib-build/css!./MainView",
 					coloredIcon = imageData;
 				}
 				$.each(arr, function(index, point) {
-
-
 					if(index > 0)
 						newContext.putImageData(coloredIcon,0,0);
 
@@ -1400,7 +1554,6 @@ define(["lib-build/css!./MainView",
 						newContext.fillStyle = 'white';
 						newContext.fillText(label, newCanvas.width/3.2, newCanvas.height/2);
 					}
-
 					point.setSymbol(createSymbol(index, newCanvas, spec));
 				});
 				app.map.getLayer(app.data.getWebAppData().getShortlistLayerId()).show();
@@ -1904,6 +2057,7 @@ define(["lib-build/css!./MainView",
 					$('#navThemeLeft').css('visibility', 'hidden');
 					$('#navThemeRight').css('visibility', 'hidden');
 					$("#mobileBookmarksCon").hide();
+					$("#bookmarksDiv").css("max-height", $("#map").height() - 100);
 
 					if(app.data.getStory()[themeIndex] && app.data.getStory()[themeIndex].color){
 						$('#contentPanel').css({'border-top-width': '10px',
@@ -1919,19 +2073,24 @@ define(["lib-build/css!./MainView",
 						var itemObj = $(item);
 						heightAroundMap += itemObj.is(':visible') ? itemObj.outerHeight() : 0;
 					});
-					$("#contentPanel").height(heightViewport - heightAroundMap + 10);
-					$("#paneLeft").height($("#contentPanel").height() - $('#tabs').height() - 20);
+					//$("#contentPanel").height(heightViewport - heightAroundMap - 35 + (app.embedBar && app.embedBar.initiated ? -26 : 0));
+					$("#paneLeft").height(heightViewport - heightAroundMap - 25 - $('#tabs').height() - (app.embedBar && app.embedBar.initiated ? 26 : 0));
 					if(!_urlParams.embed && _urlParams.embed !== '' && !app.cfg.embed && !_urlParams.forceEmbed && !app.indexCfg.forceEmbed){
 						var headerHeight = app.data.getWebAppData().getHeader().compactSize ? '60px' : '110px';
 						$('#header').height(headerHeight);
 					}
-					$(".tilelist").height($("#paneLeft").height() - ((app.isInBuilder && !app.data.getWebAppData().getIsExternalData()) ? 70 : 48));
+					$(".tilelist").height($("#paneLeft").height() - ((app.isInBuilder && !app.data.getWebAppData().getIsExternalData()) ? 70 : 25) + (app.embedBar && app.embedBar.initiated ? 5 : 0));
 					$(".tilelist").css('top', app.isInBuilder && !app.data.getWebAppData().getIsExternalData() ? 50 : 28);
 					$("#paneLeft .noFeature").width($('#paneLeft').width());
 					$("#paneLeft").width() == app.cfg.LEFT_PANE_WIDTH_TWO_COLUMN ? $('#paneLeft .noFeatureText').css('margin-left', '20px') : $('#paneLeft .noFeatureText').css('margin-left', '100px');
-					$("#map").height(cfg.height - 10);
+					$("#map").height(cfg.height - 10 + (app.embedBar && app.embedBar.initiated ? -26 : 0));
 					$("#map").css('top', 0);
 					app.ui.navBar.resize();
+
+					if(app.ui.autoplay){
+						var posLeft = $("#map").width()/2 - $("#autoplay").width()/2;
+						$("#autoplay").css("left", posLeft)
+					}
 
 					if(cfg.width <= app.cfg.TWO_COLUMN_THRESHOLD || (cfg.width <= 1024 && cfg.height <= 768)){
 						setTimeout(function(){
@@ -1984,7 +2143,9 @@ define(["lib-build/css!./MainView",
 					if(app.isInBuilder)
 						$('#mobileBuilderOverlay').attr('style','display: block !important');
 
-					app.ui.mobileIntro.resizeMobileElements();
+					setTimeout(function(){
+						app.ui.mobileIntro.resizeMobileElements();
+					}, 0);
 
 					if(app.data.getStory()[themeIndex] && app.data.getStory()[themeIndex].color){
 						$('.detailHeader').css({'border-top-width': '10px',

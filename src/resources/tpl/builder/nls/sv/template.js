@@ -54,9 +54,9 @@ define({
       "useLocation": "Använd den här platsen",
       "selectAll": "Markera alla",
       "imageSizeHelper": "För bästa resultat bör bilder vara mindre än 400 KB. Den rekommenderade storleken och formen är 1 000 × 750 pixlar (bredd:höjd-förhållande 4:3) eller mindre. Större bilder kan ge sämre prestanda. För bästa prestanda bör du använda komprimerade JPG-bilder med 80 % bildkvalitet.",
-      "imageSizeHelperUpdated": "För bästa prestanda bör bilder vara mindre än 400 kB. Om du vill minska filstorleken använder du JPG-formatet med 80 % bildkvalitet. Om din bild fortfarande är större än 400 kB, kan du minska filstorleken ytterligare genom att minska dess fysiska storlek: 1 000 pixlars bredd x 750 pixlars höjd (höjd–bredd-förhållandet 4:3) rekommenderas.",
+      "imageSizeHelperUpdated": "Bildlänken måste börja med HTTPS.<br><br>För bästa prestanda bör bilder vara mindre än 400 kB. Om du vill minska filstorleken använder du JPG-formatet med 80 % bildkvalitet. Om din bild fortfarande är större än 400 kB, kan du minska filstorleken ytterligare genom att minska dess fysiska storlek: 1 000 pixlars bredd x 750 pixlars höjd (bredd–höjd-förhållandet 4:3) rekommenderas.<br><br>Om en länkad bild ritas långsamt kan du överföra den till din berättelse för bättre resultat.",
       "thumbnailLink": "Miniatyrlänk",
-      "thumbnailHelp": "Den rekommenderade storleken och formen för miniatyrbilder är 280 × 210 pixlar (bredd:höjd-förhållande 4:3). Större miniatyrbilder kan ge sämre prestanda. Miniatyrbilder med storleksförhållandet 4:3 passar in i sina tiles utan att beskäras."
+      "thumbnailHelp": "Appminiatyrbildslänken måste börja med HTTPS.<br><br>Den rekommenderade storleken och formen för appminiatyrbilder är 280 × 210 pixlar (bredd–höjd-förhållandet 4:3). Större appminiatyrbilder kan ge sämre prestanda. Appminiatyrbilder med storleksförhållandet 4:3 passar in i sina tiles utan att beskäras."
     },
     "settings": {
       "numberedPlaces": "Visa platser med siffror",
@@ -73,7 +73,7 @@ define({
       "custom": "Anpassat",
       "customTooltip": "Ange platsen med knappen som visas bland kartans zoomkontroller",
       "mapLocationTooltip": "Den plats som människor ser när de öppnar din snabblista",
-      "bookmarksHelp": "Om du vill aktivera bokmärken i snabblistan, lägger du till och hanterar webbkartans bokmärken i webbkartans visningsprogram",
+      "bookmarksHelp": "Om du vill aktivera bokmärken stänger du Shortlist Builder och öppnar den webbkarta som används i denna snabblista (via ArcGIS My Contents eller Mina berättelser). Lägg därefter till bokmärken med ArcGIS Map Viewer.",
       "generalOptions": "Allmänna alternativ",
       "mapOptions": "Kartalternativ",
       "changeBasemap": "Ändra baskarta",

@@ -33,8 +33,8 @@ define({
       "buttonSettings": "Instellingen",
       "buttonHelp": "Help",
       "buttonPreview": "Verhaal bekijken",
-      "tooltipFirstSave": "Dit is niet beschikbaar totdat u opslaat.",
-      "tooltipNotShared": "Dit is niet beschikbaar totdat u deelt.",
+      "tooltipFirstSave": "Dit is niet beschikbaar tot u opslaat",
+      "tooltipNotShared": "Dit is niet beschikbaar tot u deelt.",
       "tooltipNotShared2": "Uw verhaal is niet gedeeld, alleen u hebt toegang.",
       "noPendingChange": "Geen wijziging in behandeling",
       "unSavedChangePlural": "Wijzigingen in behandeling",
@@ -56,7 +56,7 @@ define({
       "btnOk": "De verhaaltitel bewerken"
     },
     "saveErrorSocial": {
-      "title": "Delen bijwerken social media",
+      "title": "Social media update aangaande het delen",
       "panel1": "De weergave van uw storyâ€™s op social media is verbeterd, maar uw ArcGIS webapplicatietitel is niet hetzelfde als uw verhaaltitel.",
       "panel1tooltip": "Door het definiëren van een titel, samenvatting en thumbnail-afbeelding, komt uw verhaal er als volgt uit te zien:",
       "panel2": "Welke titel zou u willen gebruiken op social media:",
@@ -126,7 +126,7 @@ define({
       "logoCustomTargetPlaceholder": "Webpagina wordt geopend als het logo wordt aangeklikt",
       "logoSocialText": "Tagline:",
       "logoLink": "Link:",
-      "lblSmallHeader": "Compact header gebruiken (geen subtitel)"
+      "lblSmallHeader": "Compacte header gebruiken (geen subtitel)"
     },
     "header": {
       "title": "De titel van uw %TPL_NAME% bewerken",
@@ -140,13 +140,35 @@ define({
     "httpsTransitionMessage": {
       "bannerMsg": "Belangrijk bericht over internetbeveiliging en Story Maps",
       "s1h1": "Esri verbetert de beveiliging van Story Maps",
-      "s1p1": "Uw Story Maps staan live op het internet en de internetcommunity werkt permanent aan het bepalen en implementeren van betere beveiliging. HTTPS, dat een beviligde verbinding biedt voor content die over het internet verzonden wordt, wordt meer en meer gebruikt als de manier bij uitstek om content op het internet te openen. De meeste moderne browsers tonen nu waarschuwingsberichten als HTTP wordt gebruikt in plaats van HTTPS. Omwille van deze nieuwe norm, en met ingang van de ArcGIS Online update van juni 2018, moet uw Story Maps gebruik maken van HTTPS.",
-      "s1p2": "Praktisch betekent dit dat een Story Map en alle content ervan (inclusief afbeeldingen, lagen, geëmbedde apps en websites) moet worden geopend d.m.v. koppelingen die beginnen met HTTPS in plaats van HTTP. Dit garandeert de beste ervaring voor uw lezers, want de meeste webbrowsers zullen aangeven dat uw verhalen beveiligd zijn.",
+      "s1p1": "Uw Story Maps zijn live op internet en de webgemeenschap is altijd bezig om betere beveiliging tot stand te brengen en te implementeren. HTTPS, dat een beveiligde verbinding biedt voor inhoud die via internet wordt uitgezonden, is in opkomst als de verwachte manier om toegang te krijgen tot webcontent. De meeste moderne browsers tonen nu waarschuwingsberichten wanneer HTTP in plaats van HTTPS wordt gebruikt. Vanwege deze nieuwe norm raden we u ten zeerste aan HTTPS-koppelingen te gebruiken voor het schrijven en delen van Story Maps en alleen HTTPS-URL's te gebruiken bij het insluiten van webinhoud of het linken naar afbeeldingen in een Story Map.",
+      "s1p2": "Praktisch gezien betekent dit dat een Story Map en alle bijbehorende inhoud (inclusief afbeeldingen, lagen, ingesloten apps en websites) toegankelijk moeten zijn via koppelingen die beginnen met HTTPS in plaats van HTTP. Dit zorgt voor de beste ervaring voor uw lezers, omdat de meeste webbrowsers aangeven dat uw verhalen veilig zijn.",
       "s2h1": "Wat moet ik doen?",
-      "s2p1": "Esri zorgt er voor dat dit een eenvoudige overgang wordt voor makers en lezers van Story Maps. Er zijn nu tools beschikbnaar in Story Map builders en My Stories die u in staat stellen om onbeveiligde content (HTTP) in uw verhalen te vinden en aanbevelingen geven voor het corrigeren ervan. Controleer uw verhalen op onbeveiligde content en werkt alles bij naar HTTPS voor juni 2018.",
+      "s2p1": "Esri werkt eraan om dit een gemakkelijke overgang te maken voor makers en lezers van de Story Map. Er zijn nu tools beschikbaar in de builders van Story Map en My Stories die u helpen onveilige inhoud (HTTP) in uw verhalen te vinden en aanbevelingen te doen voor de aanpak ervan. Controleer uw verhalen op onveilige inhoud en werk zo snel mogelijk bij naar HTTPS.",
       "action1": "Sluiten",
       "action2": "Controleer nu mijn verhalen",
       "action3": "Meer weten"
+    },
+    "sectionNavigation": {
+      "select": "Selecteer een item...",
+      "section": "Invoer",
+      "thisSection": "Dit item",
+      "hiddenSection": "Verborgen item"
+    },
+    "embedBar": {
+      "share": "Delen",
+      "fullScreen": "Volledig scherm",
+      "exitFullScreen": "Volledig scherm afsluiten",
+      "enlarge": "Vergroten",
+      "newTab": "Openen in een nieuw tabblad",
+      "tagline": "Een Story Map"
+    },
+    "june2018SurveyMessage": {
+      "bannerMsg": "Mogen we u iets vragen? Het zal de toekomst van Story Maps helpen vormgeven.",
+      "s1h1": "Deel u gedachten, vorm de toekomst",
+      "s1p1": "Uw input is onze belangrijkste bron van feedback en als we meer over u weten, helpt dit ons om Story Maps te verbeteren. We zouden het op prijs stellen als u zou kunnen deelnemen aan deze drie minuten durende enquête.",
+      "s2p1": "Bedankt voor het gebruik van Esri Story Maps!",
+      "action1": "Sluiten",
+      "action2": "De enquête invullen"
     }
   }
 });

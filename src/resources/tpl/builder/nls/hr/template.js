@@ -54,9 +54,9 @@ define({
       "useLocation": "Upotrijebi ovu lokaciju",
       "selectAll": "Odaberi sve",
       "imageSizeHelper": "Za najbolje rezultate slike bi trebale biti manje od 400 KB. Preporučena veličina i oblik je 1000 x 750 piksela (4:3 omjer širine:visine) ili manje. Veće slike mogu usporiti radnu učinkovitost. Za najbolju radnu učinkovitost upotrijebite komprimirane JPG slike s 80 % kvalitete slike.",
-      "imageSizeHelperUpdated": "Za najbolju izvedbu slike bi trebale biti manje od 400 KB. Da biste smanjili veličinu datoteke upotrijebite JPG format i spremite na 80 % kvalitete slike. Ako je vaša slika i dalje veća od 400 KB, ponovnom promjenom veličine može se dodatno smanjiti veličina datoteke: preporučuje se 1000 piksela širine x 750 piksela visine (4:3 omjer širina:visina).",
+      "imageSizeHelperUpdated": "Poveznica slike mora početi s HTTPS.<br><br>Za najbolju učinkovitost slike trebaju biti manje od 400 KB. Da biste smanjili veličinu datoteke upotrijebite JPG format spremljen pri 80 % kvalitete slike. Ako je vaša slika i dalje veća od 400 KB, ponovnom promjenom veličine može se dodatno smanjiti veličina datoteke: preporučuje se 1000 piksela širine x 750 piksela visine (4:3 omjer širina:visina).<br><br>Ako se povezana slika sporo iscrtava, učitajte je u priču za bolje rezultate.",
       "thumbnailLink": "Poveznica sličice",
-      "thumbnailHelp": "Preporučena veličina i oblik sličice je 280 x 210 piksela (4:3 omjer širine:visine). Veće sličice mogu usporiti radnu učinkovitost. Sličice s omjerom slike 4:3 stanu u svoje ploče bez rezanja."
+      "thumbnailHelp": "Poveznica sličice mora početi s HTTPS.<br><br>Preporučeni veličina i oblik sličine jesu 280 x 210 piksela (4:3 omjer širina:visina). Veće sličice mogu usporiti radnu učinkovitost. Sličice s omjerom slike 4:3 stanu u svoje ploče bez rezanja."
     },
     "settings": {
       "numberedPlaces": "Prikaži mjesta s brojevima",
@@ -73,7 +73,7 @@ define({
       "custom": "Prilagođeno",
       "customTooltip": "Postavite lokaciju gumbom koji će se pojaviti u kontrolama za uvećanje karte",
       "mapLocationTooltip": "Lokacija koju ljudi vide kada otvore vaš Shortlist",
-      "bookmarksHelp": "Za omogućivanje knjižnih oznaka u Shortlistu dodajte i upravljajte knjižnim oznakama web-karte u pregledniku web-karte",
+      "bookmarksHelp": "Da biste omogućili knjižne oznake, zatvorite sastavljača za Shortlist i otvorite web-kartu koja se upotrebljava u Shortlistu (putem ArcGIS My Contents ili My Stories) i dodajte joj knjižne oznake putem ArcGIS Map Viewera.",
       "generalOptions": "Opće opcije",
       "mapOptions": "Opcije karte",
       "changeBasemap": "Promijeni kartografsku podlogu",

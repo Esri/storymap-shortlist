@@ -44,7 +44,7 @@ define({
       "builderButton": "Edit",
       "facebookTooltip": "Bagikan ke Facebook",
       "twitterTooltip": "Bagikan ke Twitter",
-      "bitlyTooltip": "Dapatkan tautan singkat ke aplikasi",
+      "bitlyTooltip": "Dapatkan tautan pendek",
       "templateTitle": "Tentukan judul template",
       "templateSubtitle": "Tentukan subjudul template",
       "share": "Bagikan"
@@ -55,7 +55,10 @@ define({
       "open": "Buka",
       "embed": "Sematkan di halaman web",
       "embedExplain": "Gunakan kode HTML berikut untuk menyematkan aplikasi di laman web.",
-      "size": "Ukuran (lebar/tinggi):"
+      "size": "Ukuran (lebar/tinggi):",
+      "autoplayLabel": "Mode putar otomatis",
+      "autoplayExplain1": "Mode putar otomatis akan berputar seiring cerita Anda pada interval reguler. Interval ini ideal pada monitor layar kios atau publik, namun perlu diperhatikan bahwa dalam situasi lainnya, cerita mungkin akan lebih sulit dibaca. Fitur ini tidak didukung pada layar kecil.",
+      "autoplayExplain2": "Saat mode ini aktif, ada beberapa kontrol untuk memutar/menjeda cerita dan mengatur kecepatan navigasi."
     },
     "general": {
       "noPlaces": "Tidak ada tempat di area ini. Perkecil atau klik tombol Beranda untuk melihat tempat.",

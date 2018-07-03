@@ -54,9 +54,9 @@ define({
       "useLocation": "Utilizar esta localização",
       "selectAll": "Selecionar tudo",
       "imageSizeHelper": "Para melhores resultados, as imagens devem ser menores do que 400 KB. O tamanho & formato recomendado é 1000 x 750 pixeis (rácio 4:3 largura:altura) ou inferior. Imagens maiores podem reduzir o desempenho. Para obter melhores desempenhos, utilize imagens JPG comprimidas com qualidade de imagem de 80%.",
-      "imageSizeHelperUpdated": "Para um melhor desempenho, o tamanho das imagens deve ser inferior a 400 KB. Para reduzir o tamanho dos ficheiros, utilize o formato JPG, guardado com 80% de qualidade de imagem. Caso a sua imagem ainda suplante o limite de 400KB, redimensioná-la poderá reduzir o tamanho do respetivo ficheiro. 1000 pixeis de largura x 750 pixels de altura (rácio 4:3 largura:altura) é a dimensão recomendada.",
+      "imageSizeHelperUpdated": "A ligação de imagem tem de começar com HTTPS.<br><br>Para melhor desempenho, o tamanho das imagens deve ser inferior a 400 KB. Para reduzir o tamanho dos ficheiros, utilize o formato JPG, guardado com 80% de qualidade de imagem. Caso a sua imagem tenha ainda mais do que 400 KB, redimensioná-la poderá reduzir ainda mais o respetivo tamanho de ficheiro: 1000 pixeis de largura x 750 pixeis de altura ( rácio largura:altura de 4:3) é a dimensão recomendada.<br><br>Caso uma imagem ligada fique lenta ou não se encontre disponível através de HTTPS, carregue-a para a sua história para obter melhores resultados.",
       "thumbnailLink": "Ligação a imagem miniatura",
-      "thumbnailHelp": "O tamanho & formato recomendado para iomagens miniatura é 280 x 210 pixeis (rácio 4:3 largura:altura). Imagens miniatura maiores podem reduzir o desempenho. Imagens miniatura com proporções de aspeto 4:3 encaixam nos respetivos mosaicos sem ser necessário recortar."
+      "thumbnailHelp": "A ligação da imagem de miniatura tem de começar com HTTPS.<br><br>O tamanho e formato recomendado para imagens miniatura é 280 x 210 pixeis (rácio 4:3 largura:altura). Imagens miniatura maiores podem reduzir o desempenho. Imagens miniatura com proporção de aspeto 4:3 encaixam nos respetivos mosaicos sem ser necessário recortar."
     },
     "settings": {
       "numberedPlaces": "Exibir locais com números",
@@ -73,7 +73,7 @@ define({
       "custom": "Personalizar",
       "customTooltip": "Defina a localização utilizando o botão que aparece nos controlos de zoom do mapa",
       "mapLocationTooltip": "A localização que os utilizadores visualizam quando abrem a sua Shortlist",
-      "bookmarksHelp": "Para ativar marcadores, adicione e efetue a gestão dos marcadores do mapa web no visualizador de mapas web",
+      "bookmarksHelp": "Para ativar marcadores, feche o Shortlist Builder e depois abra o mapa web utilizado nesta Shortlist (através de Os Meus Conteúdos ou As Minhas Histórias ArcGIS) e adicione marcadores ao mesmo utilizando o ArcGIS Map Viewer.",
       "generalOptions": "Opções gerais",
       "mapOptions": "Opções de mapa",
       "changeBasemap": "Mudar mapa base",

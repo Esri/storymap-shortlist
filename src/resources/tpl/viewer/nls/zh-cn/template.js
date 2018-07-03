@@ -44,7 +44,7 @@ define({
       "builderButton": "编辑",
       "facebookTooltip": "共享至 Facebook",
       "twitterTooltip": "共享至 Twitter",
-      "bitlyTooltip": "获取应用程序的短链接",
+      "bitlyTooltip": "获取短链接",
       "templateTitle": "设置模板标题",
       "templateSubtitle": "设置模板子标题",
       "share": "共享"
@@ -55,7 +55,10 @@ define({
       "open": "打开",
       "embed": "嵌入到网页",
       "embedExplain": "使用以下 HTML 代码将应用程序嵌入到网页。",
-      "size": "大小(宽度/高度)："
+      "size": "大小(宽度/高度)：",
+      "autoplayLabel": "自动播放模式",
+      "autoplayExplain1": "自动播放模式将以定期的时间间隔播放您的故事。 该模式是自助服务或公共显示屏的理想选择，但请注意，在其他情景下会使故事难以阅读。 小型显示器不支持该功能。",
+      "autoplayExplain2": "激活此模式时，可使用控件播放/暂停故事和调整导航速度。"
     },
     "general": {
       "noPlaces": "该区域内没有地点。缩小或单击“主页”按钮查看地点。",

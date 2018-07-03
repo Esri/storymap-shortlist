@@ -54,9 +54,9 @@ define({
       "useLocation": "使用此位置",
       "selectAll": "全选",
       "imageSizeHelper": "为了获得最佳效果，图像应小于 400 KB。推荐的大小和形状为 1000 x 750 像素(宽高比为 4:3)或更小。较大的图像可能会降低性能。为了获得最佳性能，请使用图像质量为 80％ 的压缩 JPG 图像。",
-      "imageSizeHelperUpdated": "为获得最佳性能，图像应小于 400 KB。要减小图像大小，请将图像保存为图像质量为 80% 的 JPG 格式图像。如果图像仍超过 400 KB，则调整图像尺寸可进一步减小其文件大小：建议 1000 像素宽 x 750 像素高(宽高比为 4:3)。",
+      "imageSizeHelperUpdated": "图像链接必须以 HTTPS 开头。<br><br>为获得最佳性能，图像应小于 400 KB。 要减小图像大小，请将图像保存为图像质量为 80% 的 JPG 格式图像。 如果图像仍超过 400 KB，则调整图像尺寸可进一步减小其文件大小：建议 1000 像素宽 x 750 像素高(宽高比为 4:3)。<br><br>如果已链接图像的绘制速度缓慢或无法通过 HTTPS 使用，则将其上传到您的故事中以获得更好的结果。",
       "thumbnailLink": "缩略图链接",
-      "thumbnailHelp": "缩略图的推荐大小和形状为 280 x 210 像素(宽高比为 4:3)。较大的缩略图可能会降低性能。宽高比为 4:3 的缩略图无需裁剪即适用于切片。"
+      "thumbnailHelp": "缩略图链接必须以 HTTPS 开头。<br><br>建议的缩略图大小和形状为 280 x 210 像素(宽高比为 4:3)。 较大的缩略图可能会降低性能。宽高比为 4:3 的缩略图无需裁剪即适用于切片。"
     },
     "settings": {
       "numberedPlaces": "显示带数字的地点",
@@ -73,7 +73,7 @@ define({
       "custom": "自定义",
       "customTooltip": "使用将显示在地图缩放控件中的按钮设置位置",
       "mapLocationTooltip": "打开 Shortlist 时用户所见位置",
-      "bookmarksHelp": "要在 Shortlist 中启用书签，请在 Web 地图查看器中添加和管理 Web 地图的书签",
+      "bookmarksHelp": "要启用书签，请关闭 Shortlist Builder，然后打开用于此 Shortlist 中的 web 地图(通过 ArcGIS“我的内容”或“我的故事”)，并使用 ArcGIS 地图查看器向其中添加书签。",
       "generalOptions": "常规选项",
       "mapOptions": "地图选项",
       "changeBasemap": "更改底图",

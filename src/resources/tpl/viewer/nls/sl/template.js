@@ -44,7 +44,7 @@ define({
       "builderButton": "Uredi",
       "facebookTooltip": "Deli na Facebooku",
       "twitterTooltip": "Deli na Twitterju",
-      "bitlyTooltip": "Pridobi kratko povezavo do aplikacije",
+      "bitlyTooltip": "Pridobi kratko povezavo",
       "templateTitle": "Nastavi ime predloge",
       "templateSubtitle": "Nastavi podnaslov predloge",
       "share": "Deli"
@@ -55,7 +55,10 @@ define({
       "open": "Odpri",
       "embed": "Vdelaj v spletno stran",
       "embedExplain": "Uporabi naslednjo kodo HTML za vdelavo aplikacije v spletno stran",
-      "size": "Velikost (širina/višina):"
+      "size": "Velikost (širina/višina):",
+      "autoplayLabel": "Način samodejnega predvajanja",
+      "autoplayExplain1": "Način samodejnega predvajanja bo vašo zgodbo prikazoval v rednih intervalih. To je idealno za kiosk ali javno prikazovan zaslon, vendar vedite, da bo zgodbe v drugih situacijah morda težje brati. Ta funkcionalnost ni podprta na majhnih prikazih.",
+      "autoplayExplain2": "Ko je ta način dejaven, so prikazani ukazi za predvajanje/začasno ustavitev zgodbe in prilagoditev hitrosti navigacije."
     },
     "general": {
       "noPlaces": "Na tem območju ni krajev. Pomanjšajte ali kliknite gumb Domov za ogled krajev.",

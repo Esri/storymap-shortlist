@@ -4,7 +4,7 @@ define({
       "add": "Pridėti",
       "edit": "Redaguoti",
       "save": "Įrašyti",
-      "next": "Kitas",
+      "next": "Sekantis",
       "cancel": "Atšaukti",
       "back": "Grįžti",
       "apply": "Taikyti",
@@ -63,7 +63,7 @@ define({
       "panel2q1": "Pasakojimo pavadinimas (rekomenduojama)",
       "panel2q1tooltip": "Pasirinkus šią parinktį, jūsų elemento antraštė bus modifikuota, kad sutaptų su jūsų pasakojimo pavadinimu, o kiti kūrimo priemonėje atlikti keitimai bus sinchronizuojami.",
       "panel2q2": "Elemento antraštė",
-      "panel3": "Jei norite toliau tobulinti pasakojimo išvaizdą socialiniame tinkle, naudokite ${MYSTORIES}, kad pridėtumėte santrauką ir miniatiūros vaizdą.",
+      "panel3": "Jei norite toliau tobulinti pasakojimo išvaizdą socialiniame tinkle, naudokite ${MYSTORIES}, kad pridėtumėte santrauką ir miniatiūros vaizdą.",
       "panel4": "Nebeįspėti manęs apie šį pasakojimą"
     },
     "share": {
@@ -92,7 +92,7 @@ define({
       "notavailable6": "Deja, ši funkcija nėra visiškai palaikoma programavimo režime. Atsižvelgiant į jūsų talpinimo scenarijų, ši funkcija gali būti palaikoma patalpinus.",
       "notavailable7": "Būtinai apsilankykite %MYCONTENT%, kad patvirtintumėte, jog jūsų pasakojime naudojami žemėlapiai ir sluoksniai yra taip pat bendrinami.",
       "notavailable8": "Turinys",
-      "mystoriesinvite2": "Jei norite tobulinti pasakojimo išvaizdą socialiniuose tinkluose, naudokite ${MYSTORIES}, kad pridėtumėte santrauką ir miniatiūros vaizdą."
+      "mystoriesinvite2": "Jei norite tobulinti pasakojimo išvaizdą socialiniuose tinkluose, naudokite ${MYSTORIES}, kad pridėtumėte santrauką ir miniatiūros vaizdą."
     },
     "settings": {
       "header": "Nuostatos",
@@ -105,7 +105,7 @@ define({
       "viewExample": "Peržiūrėti veikiantį pavyzdį"
     },
     "settingsTheme": {
-      "title": "Tema"
+      "title": "Apipavidalinimas"
     },
     "settingsHeader": {
       "title": "Antraštė",
@@ -113,14 +113,14 @@ define({
       "logoNoneRadio": "Logotipo nėra",
       "logoOrgRadio": "Organizacijos logotipas",
       "logoCustomRadio": "Mano logotipas",
-      "logoCustomLabel": "Paveikslėlis:",
+      "logoCustomLabel": "Atvaizdas:",
       "logoCustomUploadHelp": "Logotipo paveikslėlis turi prasidėti HTTPS. Logotipai atrodo geriausiai, jei jų pločio ir aukščio santykis yra nuo 1:1 iki 5:1. Jei susietas logotipas atvaizduojamas lėtai, įrašykite kopiją ir įkelkite ją čia.",
       "logoCustomUploadTooltip": "Naudoti įkeltą logotipą",
       "logoCustomUploadButton": "Įkelti logotipą",
       "logoUploadSizeError": "GIF matmenys per dideli. Pakeiskite dydį, kad plotis pikseliais būtų ${PIXEL-WIDTH}.",
       "logoCustomLinkHTTPSError": "Nuoroda turi prasidėti HTTPS",
       "logoCustomLinkTooltip": "Nuoroda į logotipą",
-      "logoCustomLinkPlaceholder": "Paveikslėlio URL",
+      "logoCustomLinkPlaceholder": "Atvaizdo URL",
       "logoCustomLinkPlaceholderHTTPS": "https://example.com/logo.jpg",
       "logoUploadGenericError": "Logotipas gali būti .bmp, .gif, .jpg, .jpeg arba .png failas. Gif turi būti ne platesnis nei 250 piks. ir ne didesnis nei 10 Mb.",
       "logoCustomTargetPlaceholder": "Tinklalapis, atidaromas paspaudus logotipą",
@@ -134,19 +134,41 @@ define({
     },
     "bannerNotification": {
       "learnMore": "Sužinokite daugiau",
-      "close": "Užverti",
+      "close": "Uždaryti",
       "dontShowAgain": "Daugiau nerodyti šio pranešimo"
     },
     "httpsTransitionMessage": {
-      "bannerMsg": "Svarbus pranešimas apie žiniatinklio saugumą ir žemėlapių pasakojimus",
+      "bannerMsg": "Svarbus pranešimas apie žiniatinklio saugą ir žemėlapių pasakojimus",
       "s1h1": "Esri tobulina žemėlapių pasakojimų saugumą",
-      "s1p1": "Žemėlapių pasakojimai veikia žiniatinklyje, o žiniatinklio bendruomenė visuomet stengiasi sukurti ir įdiegti geresnę saugą. HTTPS, suteikianti saugų ryšį perduodant turinį internetu, atrodo kaip patikima žiniatinklio turinio prieiga. Naujausios naršyklės nuo šiol įspėja, jei vietoj HTTPS yra naudojama HTTP. Dėl įsigaliojančio standarto nuo 2018 m. birželio ArcGIS Online naujinimo jūsų žemėlapių pasakojimai naudos HTTPS.",
-      "s1p2": "Praktiškai tai reiškia, kad žemėlapio pasakojimas ir visas jo turinys (įskaitant paveikslėlius, sluoksnius, įdėtąsias aplikacijas ir svetaines) turi būti pasiekiamas naudojant nuorodas, kurios prasideda HTTPS, o ne HTTP. Tai užtikrina geriausią skaitytojų patirtį, nes daugelis naršyklių nurodys, kad jūsų pasakojimai yra saugūs.",
+      "s1p1": "Jūsų žemėlapių pasakojimai yra internete ir interneto bendruomenė nuolat stengiasi įgyvendinti didesnę saugą. Kaip numatytasis būdas pasiekti interneto turinį, pradedamas naudoti HTTPS, kuris suteikia saugų internetu perduodamo turinio ryšį. Dauguma šiuolaikinių naršyklių rodo įspėjamąjį pranešimą, kai vietoje HTTPS naudojamas HTTP. Dėl šio naujo standarto labai rekomenduojame žemėlapių pasakojimų kūrimui ir saugojimui naudoti HTTPS nuorodas, o įdedant interneto turinį ar susiejant atvaizdus su žemėlapio pasakojimu, naudoti tik HTTPS URL.",
+      "s1p2": "Tiksliau tariant, tai reiškia, kad žemėlapio pasakojimas ir visas jo turinys (įskaitant atvaizdus, sluoksnius, įdėtąsias aplikacijas ir svetaines) turi būti pasiekiamas naudojant nuorodas, prasidedančias HTTPS, o ne HTTP. Tai užtikrina jūsų skaitytojams geriausią patirtį, nes dauguma interneto naršyklių rodys, kad jūsų pasakojimai yra saugūs.",
       "s2h1": "Ką reikia daryti?",
-      "s2p1": "Esri stengiasi, kad žemėlapio pasakojimų autoriams ir skaitytojams pereiti būtų paprasta. Nuo šiol įrankiai yra pasiekiami žemėlapio pasakojimo kūrimo priemonėje ir skyriuje Mano pasakojimai. Taip pasakojimuose bus lengviau rasti nesaugų turinį (HTTP) ir pateikti rekomendacijas, ką daryti. Patikrinkite, ar jūsų pasakojimuose nėra nesaugaus turinio ir iki 2018 m. birželio atnaujinkite jį naudodami HTTPS.",
-      "action1": "Užverti",
+      "s2p1": "Esri stengiasi, kad šis perėjimas žemėlapio pasakojimo autoriams ir skaitytojams būtų lengvas. Dabar žemėlapio pasakojimo kūrimo priemonėse ir Mano pasakojimuose yra įrankių, padedančių jums savo pasakojimuose rasti nesaugų turinį (HTTP) ir pateikti rekomendacijų, ką su juo daryti. Patikrinkite, ar jūsų pasakojimuose yra nesaugaus turinio, ir kuo greičiau atnaujinkite į HTTPS.",
+      "action1": "Uždaryti",
       "action2": "Peržiūrėkite savo pasakojimus jau dabar",
       "action3": "Sužinokite daugiau"
+    },
+    "sectionNavigation": {
+      "select": "Pasirinkite įrašą...",
+      "section": "Įrašas",
+      "thisSection": "Šis įrašas",
+      "hiddenSection": "Paslėptas įrašas"
+    },
+    "embedBar": {
+      "share": "Bendrinti",
+      "fullScreen": "Visas ekranas",
+      "exitFullScreen": "Išjungti viso ekrano rodymo režimą",
+      "enlarge": "Išplėsti",
+      "newTab": "Atidaryti naujame lange",
+      "tagline": "Žemėlapio pasakojimas"
+    },
+    "june2018SurveyMessage": {
+      "bannerMsg": "Ar galime kai ko jūsų paklausti? Tai padės ateityje kurti žemėlapių pasakojimus.",
+      "s1h1": "Pasidalykite savo mintimis ir kurkime ateitį kartu",
+      "s1p1": "Jūsų indėlis yra mūsų svarbiausias atsiliepimų šaltinis, o sužinoję apie jus daugiau, galėsime patobulinti žemėlapių pasakojimus. Būtume dėkingi, jei sudalyvautumėte šioje trijų minučių apklausoje.",
+      "s2p1": "Kaip visada, dėkojame, kad naudojate Esri žemėlapių pasakojimus!",
+      "action1": "Uždaryti",
+      "action2": "Užpildyti apklausą"
     }
   }
 });

@@ -44,7 +44,7 @@ define({
       "builderButton": "Upravit",
       "facebookTooltip": "Sdílet na Facebooku",
       "twitterTooltip": "Sdílet na Twitteru",
-      "bitlyTooltip": "Získejte krátký odkaz k aplikaci",
+      "bitlyTooltip": "Získat krátký odkaz",
       "templateTitle": "Zadejte název šablony",
       "templateSubtitle": "Zadejte podnadpis šablony",
       "share": "Sdílet"
@@ -55,7 +55,10 @@ define({
       "open": "Otevřeno",
       "embed": "Vložit do webové stránky",
       "embedExplain": "Použijte následující kód HTML ke vložení aplikace do webové stránky.",
-      "size": "Velikost (šířka/výška):"
+      "size": "Velikost (šířka/výška):",
+      "autoplayLabel": "Režim automatického přehrávání",
+      "autoplayExplain1": "Režim automatického přehrávání bude příběhem procházet v pravidelných intervalech. Ideální pro použití na výstavních stáncích nebo veřejných monitorech, buďte si však vědomi toho, že v některých případech to může znesnadnit čtení příběhu. Tato funkce není podporována na malých obrazovkách.",
+      "autoplayExplain2": "Je-li tento režim aktivní, budou k dispozici ovládací prvky ke spuštění/pozastavení přehrávání příběhu a k nastavení rychlosti procházení."
     },
     "general": {
       "noPlaces": "V této oblasti se nenacházejí žádná místa. Chcete-li zobrazit místa, oddalte zobrazení nebo klikněte na tlačítko Domů.",

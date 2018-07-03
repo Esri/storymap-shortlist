@@ -55,9 +55,9 @@ define({
 				useLocation: "Use this location",
 				selectAll: "Select all",
 				imageSizeHelper: 'For best results, images should be less than 400 KB. The recommended size & shape is 1000 x 750 pixels (4:3 width:height ratio) or smaller. Larger images can slow performance. For best performance use compressed JPG images at 80% image quality.',
-				imageSizeHelperUpdated: "For best performance, images should be less than 400 KB. To reduce file size use JPG format saved at 80% image quality. If your image is still over 400 KB, resizing it can further reduce its file size: 1000 pixels wide x 750 pixels tall (4:3 width:height ratio) is recommended.",
+				imageSizeHelperUpdated: "Image link must begin with HTTPS.<br><br>For best performance, images should be less than 400 KB. To reduce file size use JPG format saved at 80% image quality. If your image is still over 400 KB, resizing it can further reduce its file size: 1000 pixels wide x 750 pixels tall (4:3 width:height ratio) is recommended.<br><br>If a linked image draws slowly or is not available via HTTPS, upload it to your story for better results.",
 				thumbnailLink: "Thumbnail link",
-				thumbnailHelp: "The recommended thumbnail size & shape is 280 x 210 pixels (4:3 width:height ratio). Larger thumbnails can slow performance. 4:3 aspect ratio thumbnails fit into their tiles without being cropped."
+				thumbnailHelp: "Thumbnail link must begin with HTTPS.<br><br>The recommended thumbnail size & shape is 280 x 210 pixels (4:3 width:height ratio). Larger thumbnails can slow performance. 4:3 aspect ratio thumbnails fit into their tiles without being cropped."
 			},
 			settings: {
 				numberedPlaces: "Show places with numbers",
@@ -74,7 +74,7 @@ define({
 				custom: "Custom",
 				customTooltip: "Set the location using the button that will appear in the map zoom controls",
 				mapLocationTooltip: "The location people see when they open your Shortlist",
-				bookmarksHelp: "To enable bookmarks in Shortlist, add and manage the web map's bookmarks in the web map viewer",
+				bookmarksHelp: "To enable bookmarks, close the Shortlist Builder and then open the web map used in this Shortlist (via ArcGIS My Contents or My Stories) and add bookmarks to it using the ArcGIS Map Viewer.",
 				generalOptions: "General options",
 				mapOptions: "Map options",
 				changeBasemap: "Change Basemap",
@@ -132,6 +132,7 @@ define({
 	}),
 	"ar": 1,
 	"bs": 1,
+	"ca": 1,
 	"cs": 1,
 	"da": 1,
 	"de": 1,
@@ -143,6 +144,7 @@ define({
 	"he": 1,
 	"hi": 1,
 	"hr": 1,
+	"hu": 1,
 	"id": 1,
 	"it": 1,
 	"ja": 1,

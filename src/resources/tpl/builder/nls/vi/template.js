@@ -54,9 +54,9 @@ define({
       "useLocation": "Sử dụng vị trí này",
       "selectAll": "Chọn tất cả",
       "imageSizeHelper": "Để có kết quả tốt nhất, hình ảnh phải nhỏ hơn 400 KB. Kích thước & hình dạng đề nghị là 1000 x 750 pixel (tỷ lệ chiều rộng:chiều cao 4:3) hoặc nhỏ hơn. Hình ảnh lớn hơn có thể làm giảm hiệu suất hiển thị. Để có hiệu quả tốt nhất, hãy sử dụng hình ảnh JPG nén với chất lượng hình ảnh 80%.",
-      "imageSizeHelperUpdated": "Để có hiệu quả tốt nhất, hình ảnh phải dưới 400 KB. Để giảm kích thước tệp tin, sử dụng định dạng JPG đã lưu với chất lượng hình ảnh 80%. Nếu hình ảnh của bạn vẫn trên 400 KB, xác định lại kích thước có thể giảm kích thước tệp tin hơn nữa: nên là rộng 1000 pixel x cao 750 pixel (tỷ lệ rộng:cao 4:3).",
+      "imageSizeHelperUpdated": "Liên kết hình ảnh phải bắt đầu bằng HTTPS.<br><br>Để hoạt động tốt nhất, hình ảnh phải dưới 400 KB. Để giảm kích thước hình ảnh, hãy sử dụng định dạng JPG được lưu ở 80% chất lượng hình ảnh. Nếu hình ảnh của bạn vẫn quá 400 KB, việc thay đổi lại kích thước có thể làm giảm tiếp kích thước tệp: chiều rộng 1000 pixel x chiều cao 750 pixel (tỷ lệ chiều rộng:chiều cao 4:3) được khuyến nghị.<br><br>Nếu hình ảnh được liên kết vẽ chậm hoặc không khả dụng thông qua HTTPS, hãy tải hình ảnh vào câu chuyện để đạt được kết quả tốt hơn.",
       "thumbnailLink": "Đường liên kết ngắn gọn",
-      "thumbnailHelp": "Kích thước & hình dạng của ảnh đại diện đề nghị là 280 x 210 pixel (tỷ lệ chiều rộng:chiều cao 4:3). Các ảnh đại diện lớn hơn có thể làm giảm hiệu suất hiển thị. Tỷ lệ tương quan nhỏ gọn 4:3 phù hợp với tiêu đề mà không cần phải cắt ảnh."
+      "thumbnailHelp": "Liên kết hình thu nhỏ phải bắt đầu bằng HTTPS.<br><br>Kích thước và hình dạng hình thu nhỏ khuyến nghị là 280 x 210 pixel (tỷ lệ chiều rộng:chiều cao 4:3). Hình thu nhỏ có thể làm chậm hiệu suất. Hình thu nhỏ có tỷ lệ khung hình 4:3 sẽ khớp vào tiêu đề mà không bị cắt bớt."
     },
     "settings": {
       "numberedPlaces": "Hiển thị những địa điểm có số",
@@ -73,7 +73,7 @@ define({
       "custom": "Tùy chỉnh",
       "customTooltip": "Thiết lập vị trí bằng cách sử dụng nút sẽ xuất hiện trong các nút điều khiển thu phóng bản đồ",
       "mapLocationTooltip": "Vị trí mọi người nhìn thấy khi họ mở Shortlist của bạn",
-      "bookmarksHelp": "Để bật các đánh dấu trong Shortlist, thêm và quản lý đánh dấu của bản đồ web trong trình xem bản đồ web",
+      "bookmarksHelp": "Để bật đánh dấu, hãy đóng Bộ dựng Shortlist rồi mở bản đồ web được dùng trong Shortlist (qua ArcGIS My Contents hoặc My Stories) và thêm đánh dấu vào bằng ArcGIS Map Viewer.",
       "generalOptions": "Các lựa chọn chung",
       "mapOptions": "Các tùy chọn bản đồ",
       "changeBasemap": "Thay đổi Bản đồ nền",

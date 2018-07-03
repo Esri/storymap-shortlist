@@ -54,9 +54,9 @@ define({
       "useLocation": "Użyj tej lokalizacji",
       "selectAll": "Wybierz wszystkie",
       "imageSizeHelper": "Najlepsze wyniki można uzyskać, gdy wielkość obrazów jest mniejsza niż 400 KB. Zalecana wielkość i kształt to 1000 x 750 pikseli (współczynnik szerokości do wysokości 4:3). Większe obrazy mogą obniżyć wydajność. Najlepiej jest używać skompresowanych obrazów w formacie JPG o jakości na poziomie 80%.",
-      "imageSizeHelperUpdated": "Najlepsze wyniki można uzyskać, gdy wielkość obrazów jest mniejsza niż 400 KB. Aby zmniejszyć wielkość pliku, użyj formatu JPG o jakości na poziomie 80%. Jeśli obraz nadal jest większy niż 400 KB, spróbuj zmniejszyć jego rozmiary. Zalecane rozmiary to 1000 x 750 pikseli (współczynnik szerokości do wysokości 4:3).",
+      "imageSizeHelperUpdated": "Łącze do obrazu musi rozpoczynać się od HTTPS<br><br>Najlepsze wyniki można uzyskać, gdy wielkość obrazów jest mniejsza niż 400 KB. Aby zmniejszyć wielkość pliku, użyj formatu JPG o jakości na poziomie 80%. Jeśli obraz nadal jest większy niż 400 KB, zmniejszenie jego rozmiarów pozwoli na dalszą redukcję wielkości. Zalecane rozmiary to szerokość 1000 pikseli i wysokość 750 pikseli (współczynnik szerokości do wysokości 4:3).<br><br>Jeśli obraz dostępny za pomocą łącza jest wyświetlany powoli lub nie jest dostępny poprzez protokół HTTPS, prześlij go do narracji dla lepszego efektu.",
       "thumbnailLink": "Łącze miniatury",
-      "thumbnailHelp": "Zalecana wielkość i kształt miniatury to 280 x 210 pikseli (współczynnik szerokości do wysokości 4:3). Większe miniatury mogą obniżyć wydajność. Miniatury o współczynniku proporcji 4:3 mieszczą się na kaflach bez przycinania."
+      "thumbnailHelp": "Łącze do miniatury musi rozpoczynać się od HTTPS.<br><br>Zalecana wielkość i kształt miniatury to 280 x 210 pikseli (współczynnik szerokości do wysokości 4:3). Większe miniatury mogą obniżyć wydajność. Miniatury o współczynniku proporcji 4:3 mieszczą się na kaflach bez przycinania."
     },
     "settings": {
       "numberedPlaces": "Pokaż miejsca z liczbami",
@@ -73,7 +73,7 @@ define({
       "custom": "Niestandardowy",
       "customTooltip": "Skonfiguruj lokalizację przy użyciu przycisku wyświetlanego w obszarze sterowania powiększeniem mapy",
       "mapLocationTooltip": "Lokalizacja widziana przez osoby po otwarciu krótkiej listy",
-      "bookmarksHelp": "Aby włączyć zakładki na krótkiej liście, dodaj zakładki mapy internetowej w przeglądarce map internetowych i zarządzaj nimi",
+      "bookmarksHelp": "Aby włączyć zakładki, zamknij Kreator krótkiej listy, a następnie otwórz mapę internetową używaną w aplikacji Krótka lista (za pośrednictwem strony Moje zasoby ArcGIS lub elementu Moje narracje) i dodaj do niej zakładki za pomocą przeglądarki map Map Viewer firmy ArcGIS.",
       "generalOptions": "Opcje ogólne",
       "mapOptions": "Opcje mapy",
       "changeBasemap": "Zmień mapę bazową",

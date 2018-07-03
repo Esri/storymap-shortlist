@@ -17,8 +17,6 @@ function (
 			shortlistHelp5: i18n.builder.help.shortlistHelp5,
 			shortlistHelp6: i18n.builder.help.shortlistHelp6,
 			shortlistFAQ: i18n.builder.help.shortlistFAQ,
-			shortlistBetaFeedback: i18n.builder.help.shortlistBetaFeedback,
-			shortlistBetaFeedback2: i18n.builder.help.shortlistBetaFeedback2,
 			geonetForum: i18n.builder.help.geonetForum,
 			btnClose: i18n.commonCore.common.close
 		}));

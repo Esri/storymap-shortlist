@@ -12,7 +12,8 @@ define({
       "disabled": "תכונה זו הוגדרה כלא זמינה על ידי המנהל",
       "userLookup": "טען אלבומים",
       "notImplemented": "לא נתמך כעת.",
-      "noData": "לא נמצא אלבום ציבורי"
+      "noData": "לא נמצא אלבום ציבורי",
+      "thirdPartyTerms": "על-ידי שימוש בשירות של צד שלישי, אתה מביע הסכמה לתנאי השירות שלו: "
     },
     "imageSelector": {
       "lblStep1": "בחר את השירות",
@@ -26,7 +27,7 @@ define({
       "lblUploadButton": "דפדף לתמונה",
       "lblDrop": "הורד כאן תמונה או",
       "infoUpload": "תמונות יאוחסנו בחשבון ArcGIS שלך והגישה אליהן תהיה רק מחוץ לסיפור שלך.",
-      "warningFileTypes": "תמונה יכולה להיות בפורמט ‎.jpg, ‏‎.png, ‏‎.gif או ‎.bmp",
+      "warningFileTypes": "התמונה יכולה להיות בפורמט ‎.jpg, ‏‎.png, ‏‎.gif או ‎.bmp",
       "warningOneFile": "קובץ אחד התקבל בכל פעם",
       "warningFileSize": "גודל הקובץ עולה על מגבלת הגודל המקסימלית לטעינה. בחר קובץ אחר.",
       "tooltipRemove": "מחק תמונה זו שאין בה שימוש מחשבון ArcGIS שלך. <br> (יהיה עליך לטעון אותה שוב אם תרצה להשתמש בה בשלב מאוחר יותר.)"
@@ -35,15 +36,6 @@ define({
       "userInputLbl": "שם משתמש",
       "signInMsg2": "משתמש לא נמצא",
       "loadingFailed": "טעינה נכשלה"
-    },
-    "imageSelectorFacebook": {
-      "leftHeader": "משתמש פייסבוק",
-      "rightHeader": "עמוד פייסבוק",
-      "pageExplain": "A Facebook page is a public brand/product or celebrity like <b>esrigis</b>. You can get the page name after the firstq'/' in the page URL.",
-      "pageInputLbl": "שם דף",
-      "lookupMsgError": "עמוד לא נמצא",
-      "warning": "התמיכה של Facebook נותקה, ${learn}.",
-      "learn": "מידע נוסף"
     },
     "imageSelectorPicasa": {
       "userInputLbl": "דואר אלקטרוני או Google ID",
@@ -108,7 +100,7 @@ define({
       "lblPosition2": "מלא",
       "lblPosition3": "מותאם",
       "lblPosition4": "מתוח",
-      "lblPosition5": "גודל מותאם",
+      "lblPosition5": "מותאם אישית",
       "lblURLHelp": "הקישור לתמונה חייב להתחיל ב-HTTPS.<br><br>לקבלת התוצאות הטובות ביותר, התמונות צריכות להיות בגודל של פחות מ-‎400 KB. יש להשתמש בתמונות JPG דחוסות באיכות של 80% ובממדים המומלצים הבאים: 2,000 פיקסלים עבור תצוגה ראשית או חלונית סיפור עם לחצן 'הגדל', 1,000 פיקסלים עבור חלונית סיפור ללא הלחצן 'הגדל'.<br><br>אם תמונה מקושרת מצטיירת באיטיות, טען אותה לסיפור שלך כדי לקבל תוצאות טובות יותר.",
       "tooltipDimension": "הערך יכול להיות מוגדר בתוך  'px' או '%'",
       "tooltipDimension2": "יש לציין את הערך ב-'px'",
@@ -120,13 +112,18 @@ define({
       "unloadHelp": "אם דף האינטרנט מכיל מדיה של שמע או וידאו, השאר את האפשרות זו מסומנת כדי למנוע את הפעלת התוכן הזה כשהקורא מנווט למקום אחר. בטל את סימון האפשרות, למשל, כדי לגרום לפסקול להמשיך לנגן בזמן שהקורא מתקדם לאורך הסיפור.<br /‏>אם דף האינטרנט הוא אפליקציה, בטל את סימון האפשרות כדי שהסיפור לא ייטען מחדש אם הקורא יחזור אליה.",
       "embedProtocolLabel": "טען דף באמצעות חיבור מאובטח (HTTPS)",
       "embedProtocolWarning1": "אם הדף הזה לא נטען בסיפור שלך, לא ניתן לשבץ אותו מסיבות הקשורות לאבטחת אינטרנט. כחלופה, הוסף קישור בסיפור שלך לפתיחת הדף בטאב דפדפן חדש. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>למידע נוסף</a>",
-      "embedProtocolWarning2": "אם הדף הזה לא נטען בסיפור שלך, בטל את סימון האפשרות ונסה שוב. אם הדף עדיין לא נטען, לא ניתן לשבץ אותו מסיבות הקשורות לאבטחת אינטרנט. כחלופה, הוסף קישור בסיפור שלך לפתיחת הדף בטאב דפדפן חדש. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>למידע נוסף</a>"
+      "embedProtocolWarning2": "אם הדף הזה לא נטען בסיפור שלך, בטל את סימון האפשרות ונסה שוב. אם הדף עדיין לא נטען, לא ניתן לשבץ אותו מסיבות הקשורות לאבטחת אינטרנט. כחלופה, הוסף קישור בסיפור שלך לפתיחת הדף בטאב דפדפן חדש. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>למידע נוסף</a>",
+      "learn": "מידע נוסף",
+      "lblAltText": "טקסט חלופי",
+      "placeholderAltText": "הזן תיאור של המדיה לטובת קוראים לקויי ראייה...",
+      "tooltipAltText": "הוסף תיאור של תוכן המדיה שישמש את הטכנולוגיות המסייעות כמו תוכנות של קוראי מסך. התיאור הוא אופציונלי, אך מומלץ להוסיפו כדי לעמוד בהנחיות לנגישות באינטרנט כגון WCAG ו-Section 508."
     },
     "editorActionGeocode": {
       "lblTitle": "אתר כתובת או מקום",
       "mapMarkerExplain": "המשתמש יראה סימן מפה בעת לחיצה על הקישור"
     },
     "editorActions": {
+      "navigate": "ניווט אל ערך אחר",
       "remove": "הסר פעולה",
       "preview": "הצג תצוגה מקדימה של פעולה"
     },

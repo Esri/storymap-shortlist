@@ -44,7 +44,7 @@ define({
       "builderButton": "Muuda",
       "facebookTooltip": "Jaga Facebookis",
       "twitterTooltip": "Jaga Twitteris",
-      "bitlyTooltip": "Tekita kiirlink rakendusele",
+      "bitlyTooltip": "Hangi lühike link",
       "templateTitle": "Määra mallile pealkiri",
       "templateSubtitle": "Määra mallile alampealkiri",
       "share": "Jaga"
@@ -55,7 +55,10 @@ define({
       "open": "Ava",
       "embed": "Lisa veebilehele",
       "embedExplain": "Kasutage rakenduse veebilehele manustamiseks järgmist HTML-koodi.",
-      "size": "Suurus (laius/kõrgus):"
+      "size": "Suurus (laius/kõrgus):",
+      "autoplayLabel": "Automaatesituse režiim",
+      "autoplayExplain1": "Automaatesituse režiimis keritakse teie lugu regulaarse intervalliga edasi. See sobib ideaalselt näiteks infokioskis või avalikul ekraanil, ent võtke arvesse, et muudes olukordades võib see muuta loo raskemini loetavaks. Seda funktsiooni ei saa väikeste ekraanide korral kasutada.",
+      "autoplayExplain2": "Kui see režiim on aktiveeritud, saate kasutada loo esitamise või peatamise ja liikumiskiiruse reguleerimise juhtelemente."
     },
     "general": {
       "noPlaces": "Sellel alal pole kohti.  Kohtade vaatamiseks vähendage või klõpsake nuppu Kodu.",

@@ -44,7 +44,7 @@ define({
       "builderButton": "Izmeni",
       "facebookTooltip": "Podelite na mreži Facebook",
       "twitterTooltip": "Podelite na mreži Twitter",
-      "bitlyTooltip": "Nabavite kratki link ka aplikaciji",
+      "bitlyTooltip": "Nabavi kratki link",
       "templateTitle": "Postavi naslov šablona",
       "templateSubtitle": "Postavi podnaslov šablona",
       "share": "Podeli"
@@ -55,7 +55,10 @@ define({
       "open": "Otvori",
       "embed": "Ugradi u veb stranicu",
       "embedExplain": "Koristite sledeći HTML kôd da ugradite aplikaciju u veb stranicu.",
-      "size": "Veličina (širina/visina):"
+      "size": "Veličina (širina/visina):",
+      "autoplayLabel": "Režim automatske reprodukcije",
+      "autoplayExplain1": "Režim automatske reprodukcije će ići kroz priču uobičajenim intervalom. Ovo je idealno na terminalima ili javim ekranima, ali imajte u vidu da u drugim situacijama čitanje priče može da bude otežano. Ova funkcija nije podržana na ekranima malih dimenzija.",
+      "autoplayExplain2": "Kada je ovaj režim aktiviran, postoje kontrole da se priča reprodukuje/pauzira i da se prilagodi brzina navigacije."
     },
     "general": {
       "noPlaces": "Nema mesta u ovoj oblasti. Umanjite ili kliknite na dugme Matična stranica da biste videli mesta.",

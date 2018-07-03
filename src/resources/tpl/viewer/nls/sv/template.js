@@ -44,7 +44,7 @@ define({
       "builderButton": "Redigera",
       "facebookTooltip": "Dela på Facebook",
       "twitterTooltip": "Dela på Twitter",
-      "bitlyTooltip": "Hämta en kort länk till applikationen",
+      "bitlyTooltip": "Hämta en kort länk",
       "templateTitle": "Ange malltitel",
       "templateSubtitle": "Ange underrubrik för mallen",
       "share": "Dela"
@@ -55,7 +55,10 @@ define({
       "open": "Öppna",
       "embed": "Bädda in på webbplats",
       "embedExplain": "Använd följande HTML-kod om du vill bädda in programmet på en webbsida.",
-      "size": "Storlek (bredd/höjd):"
+      "size": "Storlek (bredd/höjd):",
+      "autoplayLabel": "Autouppspelningsläge",
+      "autoplayExplain1": "Autouppspelningsläget bläddrar fram genom din berättelse med ett regelbundet intervall. Detta är idealiskt för informationskiosker och offentliga bildskärmar, men du bör vara medveten om att det i andra situationer kan göra berättelsen svårare att läsa. Funktionen stöds inte på små skärmar.",
+      "autoplayExplain2": "När läget är aktivt finns det kontroller för att spela upp/pausa berättelsen och anpassa navigeringshastigheten."
     },
     "general": {
       "noPlaces": "Det finns inga platser i det här området. Zooma ut eller klicka på knappen Start för att se platser.",

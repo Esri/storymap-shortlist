@@ -54,9 +54,9 @@ define({
       "useLocation": "Naudoti šią padėtį",
       "selectAll": "Pažymėti visus",
       "imageSizeHelper": "Siekiant geriausių rezultatų paveikslėliai neturėtų viršyti 400 KB. Rekomenduojamas dydis ir forma yra 1000 x 750 pikselių (4:3 pločio:aukščio santykis) arba mažiau. Didesni paveikslėliai gali pristabdyti veikimą. Siekiant didžiausio našumo siūloma naudoti JPG formatu suglaudintus 80% kokybės paveikslėlius.",
-      "imageSizeHelperUpdated": "Kad našumas būtų didžiausias, atvaizdai turėtų būti mažesni nei 400 KB. Norėdami sumažinti failą, naudokite JPG formatą, išsaugotą 80% atvaizdo kokybės. Jei jūsų atvaizdas vis dar didesnis nei 400 KB, pakeitus dydį, failas gali labiau sumažėti: rekomenduojamas 1 000 pikselių plotis x 750 pikselių aukštis (4:3 pločio:aukščio santykis).",
+      "imageSizeHelperUpdated": "Atvaizdo nuoroda turi prasidėti HTTPS.<br><br>Norint didžiausio našumo, atvaizdai turi būti ne didesni nei 400 KB. Norėdami sumažinti failą, naudokite JPG formatą, įrašytą 80% vaizdo kokybe. Jei jūsų atvaizdas vis dar viršija 400 KB, pakeitus jo dydį, gali sumažėti failo dydis: rekomenduojama 1 000 pikselių pločio x 750 pikselių aukščio (4:3 pločio:aukščio santykis).<br><br>Jei susietas vaizdas atvaizduojamas lėtai arba neprieinamas per HTTPS, norėdami geresnių rezultatų, įkelkite jį į savo pasakojimą.",
       "thumbnailLink": "Miniatiūros nuoroda",
-      "thumbnailHelp": "Rekomenduojamas miniatiūros dydis ir forma yra 280 x 210 pikselių (4:3 pločio:aukščio santykis). Didesnės miniatiūros gali pristabdyti veikimą. 4:3 matmenų santykio miniatiūros telpa į savo išklotines, todėl jų nereikia apkarpyti."
+      "thumbnailHelp": "Miniatiūros nuoroda turi prasidėti HTTPS.<br><br>Rekomenduojamas miniatiūros dydis ir forma yra 280 x 210 pikselių (4:3 pločio:aukščio santykis). Didesnės miniatiūros gali sumažinti našumą. 4:3 vaizdo formato miniatiūros neapkarpytos telpa į savo išklotines."
     },
     "settings": {
       "numberedPlaces": "Rodyti vietas su numeriais",
@@ -73,7 +73,7 @@ define({
       "custom": "Adaptuotas",
       "customTooltip": "Nustatykite padėtį naudodami mygtuką, kuris bus rodomas prie žemėlapio mastelio keitimo valdiklių",
       "mapLocationTooltip": "Padėtis, kurią žmonės mato atidarę jūsų aplikaciją",
-      "bookmarksHelp": "Norėdami Trumpajame sąraše įjungti žymas, pridėkite jas internetinio žemėlapio peržiūros programoje",
+      "bookmarksHelp": "Norėdami įgalinti žymas, uždarykite trumpojo sąrašo kūrimo priemonę ir atidarykite šiame trumpajame sąraše naudojamą internetinį žemėlapį (per ArcGIS turinį arba Mano pasakojimus) bei pridėkite žymų naudodami ArcGIS žemėlapių peržiūros programą.",
       "generalOptions": "Bendrosios parinktys",
       "mapOptions": "Žemėlapio parinktys",
       "changeBasemap": "Pakeisti pagrindo žemėlapį",

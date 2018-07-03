@@ -31,14 +31,14 @@
 	position: absolute;
 	top: 13px;
 	left: 15px;
-	width: 264px;
+	width: 214px;
 	height: 31px;
-	background: url(../../../../resources/tpl/builder/icons/builder-logo.png);
+	background: url(../../../../resources/tpl/builder/icons/builder-logo2.png);
 	background-repeat: no-repeat;
 }
 
 #builderPanel .buttons {
-	left: 280px;
+	left: 220px;
 }
 
 #builderPanel .builder-save {

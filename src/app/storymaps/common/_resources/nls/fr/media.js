@@ -1,18 +1,19 @@
 define({
   "commonMedia": {
     "mediaSelector": {
-      "lblSelect1": "Multimédia",
+      "lblSelect1": "Support",
       "lblSelect2": "Contenu",
       "lblMap": "Carte",
       "lblImage": "Image",
       "lblVideo": "Vidéo",
       "lblExternal": "Page Web",
       "lblUpload": "Charger",
-      "lblLink": "Lien",
-      "disabled": "Cette entité a été désactivée par l'administrateur",
+      "lblLink": "Lier",
+      "disabled": "Cette fonction a été désactivée par l'administrateur",
       "userLookup": "Charger des albums",
       "notImplemented": "Fonction pas encore implémentée.",
-      "noData": "Aucun album public trouvé"
+      "noData": "Aucun album public trouvé",
+      "thirdPartyTerms": "En utilisant un service tiers, vous acceptez ses conditions d’utilisation : "
     },
     "imageSelector": {
       "lblStep1": "Choisir le service",
@@ -36,15 +37,6 @@ define({
       "signInMsg2": "Utilisateur introuvable",
       "loadingFailed": "Echec du chargement"
     },
-    "imageSelectorFacebook": {
-      "leftHeader": "Utilisateur de Facebook",
-      "rightHeader": "Page Facebook",
-      "pageExplain": "Une page Facebook est une marque, une célébrité ou un produit public, comme <b>esrigis</b>. Vous pouvez obtenir le nom de la page après la première barre oblique inverse '/' de l'URL de la page.",
-      "pageInputLbl": "Nom de page",
-      "lookupMsgError": "Page introuvable",
-      "warning": "La prise en charge de Facebook a été interrompue, ${learn}.",
-      "learn": "en savoir plus"
-    },
     "imageSelectorPicasa": {
       "userInputLbl": "Adresse électronique ou identifiant Google",
       "signInMsg2": "Compte introuvable",
@@ -66,7 +58,7 @@ define({
       "lookupMsgError": "Utilisateur introuvable",
       "howToFind": "Comment trouver un nom d'utilisateur YouTube",
       "howToFind2": "Le nom d'utilisateur est affiché sous les vidéos",
-      "found": "Trouvés",
+      "found": "Trouvé(e)",
       "noData": "Aucune vidéo publique trouvée",
       "videoNotChecked": "La vidéo n'a pas été vérifiée sur YouTube mais son adresse semble correcte.",
       "checkFailedAPI": "La vérification YouTube a échoué, vérifiez votre clé d'API YouTube."
@@ -78,7 +70,7 @@ define({
       "explain1": "Cette carte de narration ne lit pas les fichiers vidéo bruts (AVI, MPEG), mais peut lire les vidéos hébergées avec des lecteurs intégrés (YouTube ou Vimeo).",
       "explain2": "La plupart des services d'hébergement de vidéos proposent cette fonctionnalité. Trouvez l'option permettant d'incorporer la vidéo, copiez le code fourni, puis ajoutez-le à votre narration à l'aide de l'option de contenu %WEBPAGE%.",
       "explain3": "L'autre solution consiste à héberger la vidéo dans une page HTML qui utilise un lecteur vidéo tel que %EXAMPLE%. Vous pouvez ensuite ajouter l'URL de cette page HTML dans votre narration en tant que %WEBPAGE%.",
-      "webpage": "Page Web"
+      "webpage": "Page web"
     },
     "webpageSelectorHome": {
       "lblUrl": "Lien de page Web",
@@ -120,13 +112,18 @@ define({
       "unloadHelp": "Si la page Web comporte un support audio ou vidéo, cette option doit rester activée pour empêcher la lecture du contenu lorsque le lecteur quitte cette section. Désactivez cette option pour continuer la lecture d'une piste audio pendant que le lecteur avance dans le récit.<br />Si la page Web est une application, désactivez cette option pour que le récit ne se recharge pas si le lecteur revient à cette section.",
       "embedProtocolLabel": "Charger la page via une connexion sécurisée (HTTPS)",
       "embedProtocolWarning1": "Si cette page ne se charge pas dans votre récit, elle ne peut pas être incorporée pour des raisons de sécurité Web. Vous pouvez également ajouter un lien dans votre narration afin d'ouvrir la page dans un nouvel onglet du navigateur. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>En savoir plus</a>",
-      "embedProtocolWarning2": "Si cette page ne se charge pas dans votre récit, désélectionnez cette option et réessayez. Si la page ne se charge toujours pas, elle ne peut pas être incorporée pour des raisons de sécurité Web. Vous pouvez également ajouter un lien dans votre narration afin d'ouvrir la page dans un nouvel onglet du navigateur. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>En savoir plus</a>"
+      "embedProtocolWarning2": "Si cette page ne se charge pas dans votre récit, désélectionnez cette option et réessayez. Si la page ne se charge toujours pas, elle ne peut pas être incorporée pour des raisons de sécurité Web. Vous pouvez également ajouter un lien dans votre narration afin d'ouvrir la page dans un nouvel onglet du navigateur. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>En savoir plus</a>",
+      "learn": "En savoir plus",
+      "lblAltText": "Texte de remplacement",
+      "placeholderAltText": "Entrez une description de ce support pour les lecteurs malvoyants...",
+      "tooltipAltText": "Indiquez une description du contenu de ce support qui sera utilisée par les technologies d’assistance, telles que les logiciels de lecteur d’écran. Cette description est facultative mais conseillée à des fins de compatibilité avec les directives en matière d’accessibilité Web, telles que WCAG et Section 508."
     },
     "editorActionGeocode": {
       "lblTitle": "Localiser une adresse ou un lieu",
       "mapMarkerExplain": "L'utilisateur verra un symbole ponctuel cartographique en cliquant sur le lien"
     },
     "editorActions": {
+      "navigate": "Accéder à une autre entrée",
       "remove": "Supprimer l'action",
       "preview": "Prévisualiser l'action"
     },

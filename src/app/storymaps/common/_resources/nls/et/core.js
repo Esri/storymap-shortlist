@@ -7,15 +7,15 @@ define({
       "next": "Järgmine",
       "cancel": "Tühista",
       "back": "Tagasi",
-      "apply": "Kehtesta",
+      "apply": "Rakenda",
       "close": "Sulge",
       "open": "Ava",
       "start": "Algus",
       "loading": "Laen",
-      "disabledAdmin": "See funktsionaalsus on administraatori poolt välja lülitatud",
+      "disabledAdmin": "Administraator on selle võimaluse keelanud",
       "width": "Laius",
       "height": "Kõrgus",
-      "create": "Koosta",
+      "create": "Loo",
       "yes": "Jah",
       "no": "Ei",
       "mystories": "Minu lood"
@@ -52,7 +52,7 @@ define({
     "saveError": {
       "title": "Loo salvestamisel ilmnes tõrge",
       "err1Div1": "Lugu ei saa salvestada, sest teil on juba sama nimega üksus.",
-      "err1Div2": "Muutke loo pealkirja ning seejärel salvestage see.",
+      "err1Div2": "Muutke loo pealkirja ja seejärel salvestage see.",
       "btnOk": "Redigeerige loo pealkirja"
     },
     "saveErrorSocial": {
@@ -72,7 +72,7 @@ define({
       "viewlive": "Kuva lugu",
       "btnPrivate": "Privaatne",
       "btnPrivateTooltip": "Lugu on nähtav ainult teile",
-      "btnOrg": "Organisatsioon",
+      "btnOrg": "Ettevõte",
       "btnOrgTooltip": "Lugu on nähtav ainult teie ettevõtte liikmetele",
       "btnPublic": "Avalik",
       "btnPublicTooltip": "Lugu on nähtav kõigile",
@@ -89,7 +89,7 @@ define({
       "notavailable3": "Saate seda lugu jagada %LINK% kaudu.",
       "notavailable4": "Minu lood",
       "notavailable5": "selle üksuse leht",
-      "notavailable6": "Kahjuks pole see funktsioon arendusrežiimis täielikult toetatud. Sõltuvalt teie juurutamise stsenaariumist võib see funktsioon pärast juurutamist olla toetatud.",
+      "notavailable6": "Kahjuks pole antud funktsioon arendusrežiimis täielikult toetatud. Sõltuvalt teie juurutamise stsenaariumist võib see funktsioon pärast juurutamist olla toetatud.",
       "notavailable7": "Külastage kindlasti %MYCONTENT% teie loos olevate kaartide ja kihtide jagamise kinnitamiseks.",
       "notavailable8": "Minu sisu",
       "mystoriesinvite2": "Selleks et oma loo ilmet sotsiaalvõrgustikes täiustada, kasutage portaali ${MYSTORIES}, et lisada kokkuvõte ja pisipilt."
@@ -99,13 +99,13 @@ define({
       "tabError": "Palun kontrollige vigu kõigil vahekaartidel"
     },
     "settingsLayout": {
-      "title": "Kujundus",
+      "title": "Paigutus",
       "explain": "Millist paigutust soovite kasutada?",
       "explainInit": "Saate paigutust igal ajal seadete dialoogiakna kaudu muuta.",
       "viewExample": "Kuva reaalajas näide"
     },
     "settingsTheme": {
-      "title": "Teema"
+      "title": "Kujundus"
     },
     "settingsHeader": {
       "title": "Päis",
@@ -134,19 +134,41 @@ define({
     },
     "bannerNotification": {
       "learnMore": "Lisateave",
-      "close": "Sulge",
+      "close": "Sule",
       "dontShowAgain": "Ära kuva enam seda teadet"
     },
     "httpsTransitionMessage": {
       "bannerMsg": "Oluline teade veebiturvalisuse ja kaardilugude kohta",
       "s1h1": "Esri tegeleb kaardilugude turvalisuse tõstmisega",
-      "s1p1": "Teie kaardilood on veebis reaalajas ja veebikogukond töötab pidevalt selle nimel, et turvalisust parendada ja tõhustada. Interneti kaudu sisu turvalist edastamist võimaldav HTTPS on kujunemas veebisisule juurdepääsu eelistatud viisiks. Enamik moodsaid brausereid kuvavad hoiatusteate, kui HTTPS-i asemel kasutatakse HTTP-d. Selle uue standardi kujunemise tõttu on alates ArcGIS Online’i 2018. aasta juunikuu värskendusest teie kaardilugudel HTTPS-i kasutamine kohustuslik.",
-      "s1p2": "See tähendab, et juurdepääs kaardiloole ja kogu selle sisule (sh piltidele, kihtidele, manusrakendustele ja veebilehtedele) peab toimuma linkidega, mille alguses on HTTPS ja mitte HTTP. Nii tagatakse teie lugejatele parim kasutuskogemus, kuna enamik veebibrausereid näitab, et teie lugude avamine on turvaline.",
+      "s1p1": "Teie kaardilugude kodu on veebis. Veebikogukond tegeleb pidevalt aina paremate turbemeetmete väljatöötamise ja kasutusele võtmisega. Veebisisule juurdepääsuks kasutatakse üha enam HTTPS-i, mis pakub sisu edastamiseks Internetis turvalist ühendust. Enamik tänapäevaseid brausereid kuvab nüüd hoiatuse, kui HTTPS-i asemel on kasutatud HTTP-d. Selle uue standardi tõttu soovitame teil kindlasti kasutada kaardilugude koostamiseks ja jagamiseks HTTPS-linke ning kaardiloos veebisisu manustamise või piltidega linkimise korral üksnes HTTPS-protokolli kasutavaid URL-e.",
+      "s1p2": "Sisuliselt tähendab see, et kaardilugu ja kogu selle sisu (sh pildid, kihid, manustatud rakendused ja veebisaidid) peaksid juurdepääsu lubamiseks kasutama linke, mille alguses on HTTP asemel HTTPS. Kuna enamik brausereid annab sel juhul märku, et teie lood on turvalised, on kasutajatel teie lugude vaatamisel kindlam tunne.",
       "s2h1": "Mida ma pean tegema?",
-      "s2p1": "Esri töötab selle nimel, et kaardilugude autoritele ja lugejatele kulgeks üleminek võimalikult lihtsalt. Juba praegu on kaardiloo koosturites ja jaotises Minu lood saadaval tööriistad, mis aitavad leida lugudes ebaturvalist sisu (HTTP) ja annavad soovitusi, mida sellega ette võtta. Palun kontrollige enne 2018. aasta juunit oma lugude sisu üle ja värskendage kogu ebaturvaline sisu uuele standardile HTTPS.",
-      "action1": "Sulge",
+      "s2p1": "Esri loodab teha selle ülemineku kaardilugude koostajate ja lugejate jaoks lihtsaks. Kaardilugude koosturites ja lehel Minu lood on nüüd saadaval tööriistad, mis aitavad teil oma lugudest üles leida ebaturvalist sisu (HTTP) ja pakuvad soovitusi probleemi lahendamiseks. Kontrollige lood üle ja viige ebaturvaline sisu esimesel võimalusel üle HTTPS-i kasutamisele.",
+      "action1": "Sule",
       "action2": "Kontrolli minu lugusid kohe",
-      "action3": "Loe lähemalt"
+      "action3": "Lisateave"
+    },
+    "sectionNavigation": {
+      "select": "Vali kirje...",
+      "section": "Sissekanne",
+      "thisSection": "See kirje",
+      "hiddenSection": "Peidetud kirje"
+    },
+    "embedBar": {
+      "share": "Jaga",
+      "fullScreen": "Täisekraan",
+      "exitFullScreen": "Välju täisekraanist",
+      "enlarge": "Kasvav",
+      "newTab": "Avatakse uuel vahelehel",
+      "tagline": "Kaardilugu"
+    },
+    "june2018SurveyMessage": {
+      "bannerMsg": "Kas tohime teilt midagi küsida? See aitab vormida kaardilugude tulevikku.",
+      "s1h1": "Teie mõtted aitavad vormida tulevikku",
+      "s1p1": "Teie arvamused on meie kõige olulisem tagasiside allikas. Mida rohkem me teie kohta teame, seda paremaks saame kaardilugude funktsiooni edaspidi muuta. Meil oleks väga hea meel, kui leiaksite mõne minuti, et vastata järgmise lühikese uuringu küsimustele.",
+      "s2p1": "Täname teid Esri kaardilugude kasutamise eest!",
+      "action1": "Sule",
+      "action2": "Vasta küsitlusele"
     }
   }
 });

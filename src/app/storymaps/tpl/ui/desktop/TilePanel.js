@@ -94,6 +94,7 @@ define(["esri/geometry/screenUtils",
 					}
 					tile = $('<li tabindex="0" id="item'+value.attributes.shortlist_id+'" style="display:'+display+'">');
 					img = $('<div class="tileImage"></div>');
+					$(img).attr('alt', '');
 					var atts = value.attributes;
 					var thumbUrl = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'thumb_url';})[0]];
 					var picUrl = atts[$.grep(Object.keys(atts), function(n) {return n.toLowerCase() == 'pic_url';})[0]];

@@ -34,7 +34,7 @@ define({
       "tooltipContent": "Määratlege nähtavad kihid.",
       "tooltipPopup": "Valige hüpikaken, mis avaneb selle kaardi kuvamisel.",
       "tooltipOverview": "Kuvage koos peamise kaardiga väike ülevaatekaart.",
-      "tooltipLegend": "Kuvage kaardil legend, millest on abi siis, kui kaardil on palju kihte ja sümboleid.",
+      "tooltipLegend": "Kuva kaardil legend, millest on abi siis, kui kaardil on palju kihte ja sümboleid.",
       "mapCfgInvite": "Nende juhtelementide abil saate kaardi konfigureerida",
       "lblLocationAlt": "Pärineb esimeselt kaardilt",
       "tooltipLocationAlt": "Selle kaardi asukoht sünkroniseeritakse sarja esimese kaardiga. Selle toimingu muutmiseks seeria puhul valige Seaded > Kaardi valikud."

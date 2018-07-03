@@ -12,12 +12,13 @@ define({
       "disabled": "Pääkäyttäjä on poistanut tämän toiminnon käytöstä",
       "userLookup": "Lataa albumit",
       "notImplemented": "Ei ole vielä toteutettu.",
-      "noData": "Julkista albumia ei löytynyt"
+      "noData": "Julkista albumia ei löytynyt",
+      "thirdPartyTerms": "Käyttämällä kolmannen osapuolen palvelua suostut sen palveluehtoihin: "
     },
     "imageSelector": {
       "lblStep1": "Valitse palvelu",
       "lblStep2": "Valitse media",
-      "lblStep3": "Muokkaa"
+      "lblStep3": "Määritä"
     },
     "imageSelectorHome": {
       "explain": "Lataa kuvat sosiaalisesta mediasta <br />tai suoraan URL-osoitteesta"
@@ -29,21 +30,12 @@ define({
       "warningFileTypes": "Kuva voi olla jossakin seuraavista muodoista: .jpg, .png, .gif, tai .bmp.",
       "warningOneFile": "Vain yksi tiedosto kerrallaan voidaan käsitellä.",
       "warningFileSize": "Tiedoston koko ylittää palvelimelle ladattavien tiedostojen sallitun enimmäiskoon. Valitse toinen tiedosto.",
-      "tooltipRemove": "Poista tämä käyttämätön kuva ArcGIS-tililtäsi. <br> (Sinun on ladattava se tilillesi uudelleen, jos päätät käyttää sitä myöhemmin.)"
+      "tooltipRemove": "Delete this unused image from your ArcGIS account. <br> (You'll need to upload it again if you decide to use it later.)"
     },
     "imageSelectorFlickr": {
       "userInputLbl": "Käyttäjätunnus",
       "signInMsg2": "Käyttäjää ei löydy",
       "loadingFailed": "Lataus epäonnistui"
-    },
-    "imageSelectorFacebook": {
-      "leftHeader": "Facebook-käyttäjä",
-      "rightHeader": "Facebook-sivu",
-      "pageExplain": "Facebook-sivu on julkinen tuotemerkki tai tunnettu tuote, kuten <b>esrigis</b>. Saat sivun nimen sivun URL-osoitteessa olevan ensimmäisen vinoviivan (/) jälkeen.",
-      "pageInputLbl": "Sivun nimi",
-      "lookupMsgError": "Sivua ei löydy",
-      "warning": "Facebook-tuki on lopetettu, ${learn}.",
-      "learn": "lisätietoja"
     },
     "imageSelectorPicasa": {
       "userInputLbl": "Sähköpostiosoite tai Google-tunnus",
@@ -87,7 +79,7 @@ define({
       "lblOR": "TAI",
       "lblError1": "Virhe, tyhjennä toinen kahdesta lähtöaineistokentästä.",
       "lblError2": "Upotuskoodi voi sisältää vain yhden merkkijonon %IFRAMETAG%",
-      "configure": "Muokkaa"
+      "configure": "Määritä"
     },
     "mediaConfigure": {
       "lblURL": "Kuvan linkki",
@@ -120,13 +112,18 @@ define({
       "unloadHelp": "Jos Web-sivulla on ääni- tai videomediaa, pidä tämä asetus valittuna, jotta sisällön toisto pysähtyy, kun lukija siirtyy pois. Poista valinta, jos haluat toistaa ääniraitaa lukijan edetessä tarinassa.<br />Jos Web-sivu on sovellus, poista valinta, jotta tarina ei lataudu uudelleen, kun lukija palaa tarinaan.",
       "embedProtocolLabel": "Lataa sivu suojatun yhteyden kautta (HTTPS)",
       "embedProtocolWarning1": "Jos tämä sivu ei lataudu tarinassa, sitä ei voi upottaa suojaussyistä. Voit vaihtoehtoisesti lisätä linkin tarinaan, jolloin sivu avautuu uudella välilehdellä selaimessa. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>Lisätietoja</a>",
-      "embedProtocolWarning2": "Jos tämä sivu ei lataudu tarinassa, poista tämän valintaruudun valinta ja yritä uudelleen. Jos sivu ei edelleenkään lataudu, sitä ei voi upottaa suojaussyistä. Voit vaihtoehtoisesti lisätä linkin tarinaan, jolloin sivu avautuu uudella välilehdellä selaimessa. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>Lisätietoja</a>"
+      "embedProtocolWarning2": "Jos tämä sivu ei lataudu tarinassa, poista tämän valintaruudun valinta ja yritä uudelleen. Jos sivu ei edelleenkään lataudu, sitä ei voi upottaa suojaussyistä. Voit vaihtoehtoisesti lisätä linkin tarinaan, jolloin sivu avautuu uudella välilehdellä selaimessa. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>Lisätietoja</a>",
+      "learn": "Lisätietoja",
+      "lblAltText": "Vaihtoehtoinen teksti",
+      "placeholderAltText": "Lisää tämän median kuvaus näkövammaisia lukijoita varten...",
+      "tooltipAltText": "Määritä tämän mediasisällön kuvaus, jota käytetään helppokäyttötekniikoissa, kuten näytönlukuohjelmistoissa. Kuvaus on valinnainen, mutta sen käyttöä suositellaan verkon helppokäyttöisyysohjeiden (esim. WCAG ja Section 508) mukaisesti."
     },
     "editorActionGeocode": {
       "lblTitle": "Paikanna osoite tai paikka",
       "mapMarkerExplain": "Käyttäjä näkee karttamerkit napsauttaessaan linkkiä"
     },
     "editorActions": {
+      "navigate": "Siirry toiseen merkintään",
       "remove": "Poista toiminto",
       "preview": "Esikatsele toiminto"
     },

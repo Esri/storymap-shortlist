@@ -44,7 +44,7 @@ define({
       "builderButton": "Redigér",
       "facebookTooltip": "Del på Facebook",
       "twitterTooltip": "Del på Twitter",
-      "bitlyTooltip": "Hent et kortere link til applikationen",
+      "bitlyTooltip": "Hent et kort link",
       "templateTitle": "Indstil skabelontitel",
       "templateSubtitle": "Indstil skabelonundertitel",
       "share": "Opdatér"
@@ -55,7 +55,10 @@ define({
       "open": "Åbn",
       "embed": "Indlejr i webside",
       "embedExplain": "Brug følgende HTML-kode til at indlejre journalen i en webside.",
-      "size": "Størrelse (bredde/højde):"
+      "size": "Størrelse (bredde/højde):",
+      "autoplayLabel": "Autoplay-tilstand",
+      "autoplayExplain1": "Autoplay-tilstand vil gå frem igennem din historie med et regelmæssigt interval. Det er ideelt på en kiosk-skærm eller offentlig tilgængelig skærm, men du skal være opmærksom på, at dette kan gøre din historie vanskeligere at læse i andre situationer. Denne funktion understøttes ikke på små skærme.",
+      "autoplayExplain2": "Når denne tilstand er aktiv, er der knapper til at afspille din historie eller sætte den på pause og til at justere navigationshastigheden."
     },
     "general": {
       "noPlaces": "Der er ikke nogen steder i dette område. Zoom ud, eller klik på knappen Hjem for at se steder.",

@@ -44,7 +44,7 @@ define({
       "builderButton": "Chỉnh sửa",
       "facebookTooltip": "Chia sẻ trên Facebook",
       "twitterTooltip": "Chia sẻ trên Twitter",
-      "bitlyTooltip": "Tải liên kết ngắn đến ứng dụng",
+      "bitlyTooltip": "Nhận một liên kết rút gọn",
       "templateTitle": "Thiết lập tiêu đề mẫu",
       "templateSubtitle": "Thiết lập phụ đề mẫu",
       "share": "Chia sẻ"
@@ -55,7 +55,10 @@ define({
       "open": "Mở",
       "embed": "Nhúng vào trang web",
       "embedExplain": "Sử dụng mã HTML sau để nhúng ứng dụng vào trang web.",
-      "size": "Kích thước (chiều rộng/chiều cao):"
+      "size": "Kích thước (chiều rộng/chiều cao):",
+      "autoplayLabel": "Chế độ phát tự động",
+      "autoplayExplain1": "Chế độ phát tự động sẽ tiếp tục trong suốt câu chuyện của bạn ở tần suất thường xuyên. Chức năng này lý tưởng trên kiosk hoặc màn hình công cộng, nhưng xin nhớ rằng trong các trường hợp khác, nó có thể khiến cho câu chuyện trở nên khó đọc hơn. Tính năng này không được hỗ trợ trên màn hình nhỏ.",
+      "autoplayExplain2": "Khi chế độ này được kích hoạt, có các nút điều khiển để phát/tạm dừng câu chuyện và điều chỉnh tốc độ điều hướng."
     },
     "general": {
       "noPlaces": "Không có nơi nào trong khu vực này. Phóng lớn hoặc nhấp vào nút Trang chủ để xem các địa điểm.",

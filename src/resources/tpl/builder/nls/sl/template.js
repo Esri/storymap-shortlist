@@ -54,9 +54,9 @@ define({
       "useLocation": "Uporabi to lokacijo",
       "selectAll": "Izberi vse",
       "imageSizeHelper": "Za najboljše rezultate morajo biti slike manjše od 400 KB. Priporočena velikost in oblika je 1000 x 750 pikslov (4 : 3 razmerje širina : višina) ali manjša. Večje slike lahko upočasnijo delovanje. Za najboljše delovanje uporabite stisnjene slike JPG pri 80 % kakovosti.",
-      "imageSizeHelperUpdated": "Za najboljše delovanje morajo biti slike manjše od 400 KB. Za zmanjšanje velikosti uporabite format JPG, z 80 % kakovostjo. Če ima vaša slika še vedno več kot 400 KB, jo še bolj zmanjšajte: priporočljivo na 1000 pikslov širine x 750 pikslov višine (4 : 3 razmerje širina : višina).",
+      "imageSizeHelperUpdated": "Povezava slike se mora začeti s HTTPS.<br><br>Za najboljšo učinkovitost delovanja morajo biti slike manjše od 400 KB. Za zmanjšanje velikosti uporabite format JPG, z 80-% kakovostjo. Če ima vaša slika še vedno več kot 400 KB, jo lahko še bolj zmanjšajte: priporočljivo na 1000 pikslov širine x 750 pikslov višine (4 : 3 razmerje širina : višina).<br><br>Če se slika s povezavo počasi izrisuje ali ni na voljo prek HTTPS, jo za boljše rezultate naložite v svojo zgodbo.",
       "thumbnailLink": "Povezava sličice",
-      "thumbnailHelp": "Priporočena velikost in oblika sličice je 280 x 210 pikslov (4 : 3 razmerje širina : višina). Večje sličice lahko upočasnijo delovanje. Sličice z razmerjem 4 : 3 ustrezajo mestu in jih ni potrebno obrezati."
+      "thumbnailHelp": "Povezava sličice se mora začeti s HTTPS.<br><br>Priporočena velikost in oblika sličice je 280 x 210 pikslov (4 : 3 razmerje širina : višina). Večje sličice lahko upočasnijo učinkovitost delovanja. Sličice z razmerjem 4 : 3 ustrezajo ploščicam in jih ni potrebno obrezati."
     },
     "settings": {
       "numberedPlaces": "Pokaži kraje s številkami",
@@ -73,7 +73,7 @@ define({
       "custom": "Po meri",
       "customTooltip": "Nastavite lokacijo z gumbom, ki se bo prikazal pri ukazih za povečavo karte",
       "mapLocationTooltip": "Lokacija, ki jo vidijo ljudje, ko odprejo vaš Kratki seznam",
-      "bookmarksHelp": "Da omogočite zaznamke v Kratkem seznamu dodajte in upravljajte zaznamke spletne karte v pregledovalniku spletnih kart",
+      "bookmarksHelp": "Da omogočite zaznamke, zaprite graditelja kratkih seznamov in nato odprite spletno karto, uporabljeno v tem kratkem seznamu (prek Moja vsebina ArcGIS ali Moje zgodbe) in mu dodajte zaznamke s pomočjo Pregledovalnika kart ArcGIS.",
       "generalOptions": "Splošne možnosti",
       "mapOptions": "Možnosti karte",
       "changeBasemap": "Spremeni temeljno karto",

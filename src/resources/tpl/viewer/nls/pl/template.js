@@ -44,7 +44,7 @@ define({
       "builderButton": "Edytuj",
       "facebookTooltip": "Udostępnij na Facebooku",
       "twitterTooltip": "Udostępnij na Twitterze",
-      "bitlyTooltip": "Pobierz skrócone łącze do aplikacji",
+      "bitlyTooltip": "Utwórz skrócony link",
       "templateTitle": "Skonfiguruj tytuł szablonu",
       "templateSubtitle": "Skonfiguruj podtytuł szablonu",
       "share": "Udostępnianie"
@@ -55,7 +55,10 @@ define({
       "open": "Otwórz",
       "embed": "Osadzono na stronie internetowej",
       "embedExplain": "Aby umieścić Dziennik na stronie internetowej, skorzystaj z poniższego kodu HTML.",
-      "size": "Rozmiar (szerokość/wysokość):"
+      "size": "Rozmiar (szerokość/wysokość):",
+      "autoplayLabel": "Tryb automatycznego odtwarzania",
+      "autoplayExplain1": "W trybie automatycznego odtwarzania narracja jest prezentowana w stałym tempie. Ten tryb doskonale nadaje się do monitora kiosku internetowego lub wyświetlacza publicznego, ale należy pamiętać, że w innych sytuacjach może pogorszyć czytelność narracji. Ta funkcja nie jest obsługiwana na małych wyświetlaczach.",
+      "autoplayExplain2": "Po włączeniu tego trybu udostępniane są elementy sterujące do włączania odtwarzania/wstrzymywania narracji oraz do regulacji szybkości nawigacji."
     },
     "general": {
       "noPlaces": "W tym obszarze nie ma żadnych miejsc. Pomniejsz lub kliknij przycisk Start, aby wyświetlić miejsca.",

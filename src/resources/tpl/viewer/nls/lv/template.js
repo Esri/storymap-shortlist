@@ -44,7 +44,7 @@ define({
       "builderButton": "Labot",
       "facebookTooltip": "Kopīgot Facebook",
       "twitterTooltip": "Kopīgot Twitter",
-      "bitlyTooltip": "Saņemt īsu saiti uz lietotni",
+      "bitlyTooltip": "Iegūt īso saiti",
       "templateTitle": "Iestatīt sagataves virsrakstu",
       "templateSubtitle": "Iestatīt sagataves apakšvirsrakstu",
       "share": "Kopīgot"
@@ -55,7 +55,10 @@ define({
       "open": "Atvērt",
       "embed": "Iedarināt tīmekļa lapā",
       "embedExplain": "Izmantojiet šo HTML kodu, lai lietotni iedarinātu tīmekļa lapā.",
-      "size": "Izmēri (platums/augstums):"
+      "size": "Izmēri (platums/augstums):",
+      "autoplayLabel": "Automātiskās demonstrēšanas režīms",
+      "autoplayExplain1": "Automātiskās demonstrēšanas režīms jūsu stāstā tiks veikts regulāri. Tas ir ideāli piemērots kioskam vai publiskā displeja monitoram, bet apzinieties, ka citās situācijās šis stāsts var būt grūtāk lasāms. Šis elements netiek atbalstīts mazos displejos.",
+      "autoplayExplain2": "Pēc šī režīma aktivizēšanas ir pieejamas vadīklas stāsta demonstrēšanai/pauzēšanai un navigācijas ātruma regulēšanai."
     },
     "general": {
       "noPlaces": "Šajā teritorijā vietu nav. Lai redzētu vietas, attāliniet vai klikšķiniet uz sākuma pogas.",

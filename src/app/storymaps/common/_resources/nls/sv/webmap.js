@@ -14,7 +14,7 @@ define({
       "loadingTitle": "Läser in titel",
       "entry": "Post",
       "entries": "Poster",
-      "section": "Sektion",
+      "section": "Avsnitt",
       "sections": "Avsnitt",
       "and": "och",
       "action": "Åtgärd i avsnitt",

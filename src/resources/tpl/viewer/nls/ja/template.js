@@ -44,7 +44,7 @@ define({
       "builderButton": "編集",
       "facebookTooltip": "Facebook で共有",
       "twitterTooltip": "Twitter で共有",
-      "bitlyTooltip": "アプリケーションへのショート リンクを取得",
+      "bitlyTooltip": "ショート リンクを取得",
       "templateTitle": "テンプレートのタイトルの設定",
       "templateSubtitle": "テンプレートのサブタイトルの設定",
       "share": "共有"
@@ -55,7 +55,10 @@ define({
       "open": "開く",
       "embed": "Web ページに埋め込む",
       "embedExplain": "アプリケーションを Web ページに埋め込むには、次の HTML コードを使用します。",
-      "size": "サイズ (幅/高さ):"
+      "size": "サイズ (幅/高さ):",
+      "autoplayLabel": "自動再生モード",
+      "autoplayExplain1": "自動再生モードでは、ストーリーが一定の間隔で進みます。 このモードは、売店や公共の表示モニターでは理想的ですが、その他の状況では、ストーリーを読むのを難しくする場合があることに注意してください。 この機能は、小さいディスプレイではサポートされません。",
+      "autoplayExplain2": "このモードがアクティブの場合、ストーリーの再生/一時停止および再生速度の調整を行うコントロールが表示されます。"
     },
     "general": {
       "noPlaces": "このエリアには場所が表示されていません。  縮小表示するか、[ホーム] ボタンをクリックして場所を表示してください。",

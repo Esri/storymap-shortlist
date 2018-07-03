@@ -45,7 +45,7 @@ define({
 				builderButton: "Edit",
 				facebookTooltip: "Share on Facebook",
 				twitterTooltip: "Share on Twitter",
-				bitlyTooltip: "Get a short link to the application",
+				bitlyTooltip: "Get a short link",
 				templateTitle: "Set template title",
 				templateSubtitle: "Set template subtitle",
 				share: "Share"
@@ -56,7 +56,10 @@ define({
 				open: "Open",
 				embed: "Embed in web page",
 				embedExplain: "Use the following HTML code to embed the application in a web page.",
-				size: "Size (width/height):"
+				size: "Size (width/height):",
+				autoplayLabel: "Autoplay mode",
+				autoplayExplain1: "Autoplay mode will advance through your story at a regular interval. This is ideal on a kiosk or public display monitor, but be aware that in other situations it may make the story harder to read. This feature isn't supported on small displays.",
+				autoplayExplain2: "When this mode is active there are controls to play/pause the story and adjust the navigation speed."
 			},
 			general: {
 				noPlaces: "No places are in this area.  Zoom out or click the Home button to see places.",
@@ -66,6 +69,7 @@ define({
 	}),
 	"ar": 1,
 	"bs": 1,
+	"ca": 1,
 	"cs": 1,
 	"da": 1,
 	"de": 1,
@@ -77,6 +81,7 @@ define({
 	"he": 1,
 	"hi": 1,
 	"hr": 1,
+	"hu": 1,
 	"id": 1,
 	"it": 1,
 	"ja": 1,

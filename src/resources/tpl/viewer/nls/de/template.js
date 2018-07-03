@@ -44,7 +44,7 @@ define({
       "builderButton": "Bearbeiten",
       "facebookTooltip": "Auf Facebook freigeben",
       "twitterTooltip": "Auf Twitter freigeben",
-      "bitlyTooltip": "Kurzlink zur Anwendung abrufen",
+      "bitlyTooltip": "Kurzlink abrufen",
       "templateTitle": "Vorlagentitel festlegen",
       "templateSubtitle": "Untertitel der Vorlage festlegen",
       "share": "Freigeben"
@@ -55,7 +55,10 @@ define({
       "open": "Öffnen Sie",
       "embed": "In Webseite einbetten",
       "embedExplain": "Verwenden Sie den folgenden HTML-Code, um die Anwendung in eine Webseite einzubetten.",
-      "size": "Größe (Breite/Höhe):"
+      "size": "Größe (Breite/Höhe):",
+      "autoplayLabel": "Modus für automatische Wiedergabe",
+      "autoplayExplain1": "Im Modus für automatische Wiedergabe wird die Story regelmäßig fortgesetzt. Er ist ideal für Kiosks oder öffentliche Monitore. In anderen Situationen wird dadurch allerdings die Lesbarkeit der Story beeinträchtigt. Dieses Feature wird auf kleinen Displays nicht unterstützt.",
+      "autoplayExplain2": "Ist dieser Modus aktiviert, stehen Steuerelemente für Wiedergabe/Pause der Story und zum Einstellen der Navigationsgeschwindigkeit zur Verfügung."
     },
     "general": {
       "noPlaces": "Keine Orte in diesem Bereich. Verkleinern Sie die Ansicht, oder klicken Sie auf die Schaltfläche \"Standardausdehnung\", um Orte anzuzeigen.",

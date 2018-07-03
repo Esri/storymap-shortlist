@@ -1,9 +1,10 @@
 define([
+		"esri/geometry/Extent",
 		"lib-build/tpl!./MobileIntro",
 		"lib-build/css!./MobileIntro",
 		"dojo/on"
 	],
-	function(mobileIntro){
+	function(Extent, mobileIntro, on){
 		return function MobileIntro(container, isInBuilder, saveData, mainView)
 		{
 			var _mainView = mainView;
@@ -83,7 +84,9 @@ define([
 				setTimeout(function(){
 					app.ui.detailPanel.resize();
 				}, 50);
+				$("#contentPanel").height($("body").height());
 				var mapHeight = $(window).height() * 0.48 - 20;
+				$("#mobileIntro").height($("body").height() - (app.embedBar && app.embedBar.initiated ? 26 : 0));
 				$('#map').css('height', mapHeight);
 				$('#map').css({'top': 0});
 				$('#mainStagePanel').css({'left': 0});
@@ -95,11 +98,13 @@ define([
 				var newTop = $('#paneLeft').css('top') * 0.52;
 				newTop -= 20;
 				$('#paneLeft').css('top', newTop);
+				app.embedBar && app.embedBar.initiated ? $('#mobilePaneList').css('bottom', "26px") : null;
 				$('#mobileThemeBar').css('top', '48%').css('top', $('#mobileThemeBar').position().top -20 +'px');
 				var themes = $('.mobileThemeTitle').length;
 				$('#mobileThemeBarSlider').width($(window).width() * themes);
 				$('#returnHiddenBar').css('width', '100%').css('width', '-=80px');
-				$('#mobilePaneList').css('height', '52%').css('height', '-=20px');
+				var mobileListHeight = $("body").height() * 0.52 - (app.embedBar && app.embedBar.initiated ? 41 : 20);
+				$('#mobilePaneList').css('height', '52%').css('height', mobileListHeight);
 				$('.mobileTileList.blurb').css('width', '100%').css('width', '-=125px');
 				setTimeout(function(){
 					app.ui.detailPanel.resize();
@@ -128,6 +133,15 @@ define([
 				//$('#mobilePaneList').css('display', 'block');
 				app.ui.mobileFeatureList.selectTheme(index);
 				_mainView.themeSelected = true;
+				var mapExtent = new Extent(app.data.getWebAppData().getMapExtent());
+				if ( app.map.spatialReference.wkid != 102100 && app.map.spatialReference.wkid != 4326 ){
+					mapExtent = esriConfig.defaults.geometryService.project([mapExtent], app.map.spatialReference, function(geom){
+						mapExtent = geom[0];
+						app.map.setExtent(mapExtent, true);
+					});
+				}else{
+					app.map.setExtent(mapExtent, true);
+				}
 			};
 
 		};

@@ -12,7 +12,8 @@ define({
       "disabled": "Tato funkce byla zakázána administrátorem.",
       "userLookup": "Nahrát alba",
       "notImplemented": "Dosud není implementováno.",
-      "noData": "Nebylo nalezeno žádné veřejné album."
+      "noData": "Nebylo nalezeno žádné veřejné album.",
+      "thirdPartyTerms": "Použitím služby třetí strany souhlasíte s jejími podmínkami: "
     },
     "imageSelector": {
       "lblStep1": "Vyberte službu.",
@@ -27,7 +28,7 @@ define({
       "lblDrop": "Přetáhněte sem obrázek",
       "infoUpload": "Obrázky se uloží do vašeho účtu ArcGIS a bude možné k nim přistupovat pouze ve vašem příběhu.",
       "warningFileTypes": "Lze použít obrázky ve formátech .jpg, .png, .gif a .bmp.",
-      "warningOneFile": "Soubory je nutné nahrávat po jednom.",
+      "warningOneFile": "Soubory lze nahrávat jen po jednom.",
       "warningFileSize": "Velikost souboru přesahuje maximální povolenou velikost přílohy. Zvolte jiný soubor.",
       "tooltipRemove": "Odstraňte tento nepoužitý obrázek z účtu ArcGIS. <br> (Rozhodnete-li se obrázek později použít, bude nutné ho znovu nahrát.)"
     },
@@ -35,15 +36,6 @@ define({
       "userInputLbl": "Uživatelské jméno",
       "signInMsg2": "Uživatel nenalezen",
       "loadingFailed": "Nahrávání se nezdařilo."
-    },
-    "imageSelectorFacebook": {
-      "leftHeader": "Uživatel služby Facebook",
-      "rightHeader": "Stránka služby Facebook",
-      "pageExplain": "Stránka služby Facebook představuje veřejnou značku či službu nebo známou osobnost, jako je například <b>esrigis</b>. Název stránky začíná za prvním lomítkem (/) v URL adrese stránky.",
-      "pageInputLbl": "Název stránky",
-      "lookupMsgError": "Stránka nenalezena",
-      "warning": "Podpora Facebooku byla ukončena, ${learn}.",
-      "learn": "další informace"
     },
     "imageSelectorPicasa": {
       "userInputLbl": "E-mail nebo identifikátor Google",
@@ -120,13 +112,18 @@ define({
       "unloadHelp": "Pokud webová stránka obsahuje audio nebo video média, nechte tuto možnost zaškrtnutou, aby se přehrávání tohoto obsahu ukončilo, pokud čtenář stránku opustí. Zrušte její zaškrtnutí, pokud například chcete, aby hudební podkres hrál po celou dobu prohlížení příběhu.<br />Pokud je webová stránka aplikací, zrušte zaškrtnutí této možnosti, aby se příběh nespouštěl znovu, když se k němu čtenář vrátí.",
       "embedProtocolLabel": "Nahrát stránku přes zabezpečené připojení (HTTPS)",
       "embedProtocolWarning1": "Pokud se tato webová stránka ve vašem příběhu nenačítá, nelze ji z důvodů zabezpečení webu vložit. Máte však možnost přidat do příběhu odkaz, který otevře stránku na nové kartě prohlížeče. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>Další informace</a>",
-      "embedProtocolWarning2": "Pokud se tato webová stránka ve vašem příběhu nenačítá, zrušte označení této možnosti a zkuste to znovu. Pokud se stránka stále nenačítá, nelze ji z důvodů zabezpečení webu vložit. Máte však možnost přidat do příběhu odkaz, který otevře stránku na nové kartě prohlížeče. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>Další informace</a>"
+      "embedProtocolWarning2": "Pokud se tato webová stránka ve vašem příběhu nenačítá, zrušte označení této možnosti a zkuste to znovu. Pokud se stránka stále nenačítá, nelze ji z důvodů zabezpečení webu vložit. Máte však možnost přidat do příběhu odkaz, který otevře stránku na nové kartě prohlížeče. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>Další informace</a>",
+      "learn": "Více informací",
+      "lblAltText": "Alternativní text",
+      "placeholderAltText": "Vložte popis tohoto média pro zrakově postižené čtenáře...",
+      "tooltipAltText": "Uveďte popis obsahu tohoto média, který bude použitý pomocnými technologiemi, jako je například software na čtení obrazovky. Popis je volitelný, nicméně se doporučuje, aby splňoval směrnice upravující dostupnost webu, jako například WCAG a článek 508."
     },
     "editorActionGeocode": {
       "lblTitle": "Najít adresu nebo místo",
       "mapMarkerExplain": "Uživatel při kliknutí na odkaz uvidí mapovou značku."
     },
     "editorActions": {
+      "navigate": "Přejít na jiný záznam",
       "remove": "Odebrat akci",
       "preview": "Náhled akce"
     },

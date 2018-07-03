@@ -44,7 +44,7 @@ define({
       "builderButton": "編輯",
       "facebookTooltip": "在 Facebook 上分享",
       "twitterTooltip": "在 Twitter 上分享",
-      "bitlyTooltip": "取得應用程式的短連結",
+      "bitlyTooltip": "取得短連結",
       "templateTitle": "設置範本標題",
       "templateSubtitle": "設置範本子標題",
       "share": "分享"
@@ -55,7 +55,10 @@ define({
       "open": "開啟",
       "embed": "嵌入到網頁",
       "embedExplain": "使用以下 HTML 代碼將應用程式嵌入到網頁。",
-      "size": "大小(寬度/高度):"
+      "size": "大小(寬度/高度):",
+      "autoplayLabel": "自動播放模式",
+      "autoplayExplain1": "自動播放模式將以一定間隔向前播放您的故事。 這很適用於書報攤或公共顯示器，但請注意，在其他情況下可能會使得故事更難閱讀。 此圖徵不支援小畫面。",
+      "autoplayExplain2": "啟用此模式時，可使用控制項來播放/暫停故事和調整瀏覽速度。"
     },
     "general": {
       "noPlaces": "在此地區中沒有地點。縮小或按一下「首頁」按鈕以查看地點。",

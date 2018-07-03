@@ -54,9 +54,9 @@ define({
       "useLocation": "Utilizaţi această locaţie",
       "selectAll": "Selectare globală",
       "imageSizeHelper": "Pentru rezultate optime, imaginile trebuie să fie mai mici de 400 KB. Dimensiunea şi aspectul recomandată este de 1000 x 750 pixeli (4:3 raport lăţime:înălţime) sau mai mică. Imaginile mai mari pot scădea performanţele. Pentru cea mai bună performanţă utilizaţi fişiere de imagini JPG comprimate la 80% din calitatea imaginii.",
-      "imageSizeHelperUpdated": "Pentru performanţă optimă, imaginile trebuie să fie mai mici de 400 KB. Pentru a reduce dimensiunea fişierului, folosiţi formatul JPG salvat la o calitate a imaginii de 80%. Dacă imaginea are în continuare peste 400 KB, redimensionarea acesteia poate ajuta la reducerea dimensiunii fişierului: se recomandă 1000 de pixeli lăţime x 750 de pixeli înălţime (raport lăţime:înălţime de 4:3).",
+      "imageSizeHelperUpdated": "Link-ul imaginii trebuie să înceapă cu HTTPS.<br><br>Pentru performanță optimă, imaginile trebuie să fie mai mici de 400 KB. Pentru a reduce dimensiunea fișierului, folosiți formatul JPG salvat la o calitate a imaginii de 80%. Dacă imaginea are în continuare peste 400 KB, redimensionarea acesteia poate ajuta la reducerea dimensiunii fișierului: se recomandă 1000 de pixeli lățime x 750 de pixeli înălțime (raport lățime:înălțime de 4:3).<br><br>Dacă o imagine conectată este trasată lent sau nu este disponibilă prin HTTPS, încărcați-o în relatarea dvs. pentru rezultate mai bune.",
       "thumbnailLink": "Legătură miniatură",
-      "thumbnailHelp": "Dimensiunea şi aspectul miniaturii este de 280 x 210 pixeli (4:3 raport lăţime:înălţime). Miniaturile mai mari pot scădea performanţele. Miniaturile cu raport 4:3 se potrivesc în segmentele tile fără a fi decupate."
+      "thumbnailHelp": "Link-ul miniaturii trebuie să înceapă cu HTTPS.<br><br>Dimensiunea și aspectul recomandat al miniaturii este de 280 x 210 pixeli (4:3 raport lățime:înălțime). Miniaturile mai mari pot scădea performanțele. Miniaturile cu raport 4:3 se potrivesc în segmentele tile fără a fi decupate."
     },
     "settings": {
       "numberedPlaces": "Afişare locuri cu numere",
@@ -73,7 +73,7 @@ define({
       "custom": "Personalizat",
       "customTooltip": "Setaţi locaţia utilizând butonul care va apărea în comenzile de zoom ale hărţii",
       "mapLocationTooltip": "Locaţia pe care o văd persoanele atunci când deschid lista dvs. preferenţială",
-      "bookmarksHelp": "Pentru a activa semnele de carte în lista preferenţială, adăugaţi şi administraţi semnele de carte ale hărţii web din aplicaţia de vizualizare a hărţii web",
+      "bookmarksHelp": "Pentru a activa semnele de carte, închideți aplicația de creare a Shortlist-ului și apoi deschideți harta web utilizată în acest Shortlist (prin Resursele mele ArcGIS sau Relatările mele) și adăugați semne de carte la aceasta prin intermediul aplicației de vizualizare a hărților ArcGIS.",
       "generalOptions": "Opţiuni generale",
       "mapOptions": "Opţiuni hartă",
       "changeBasemap": "Modificare hartă fundal",

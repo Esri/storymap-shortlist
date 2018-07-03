@@ -121,6 +121,7 @@ define([
 					picUrl = CommonHelper.possiblyAddToken(picUrl);
 				mobileImg = $('<div style="height: 75px; max-width: 100px; margin-bottom: 8px;"><div class="mobileTileListImg"></div></div>');
 				$(mobileImg).find('.mobileTileListImg').css('background-image', 'url(' + picUrl + ')');
+				$(mobileImg).find('.mobileTileListImg').attr("alt", "");
 				$(mobileTile).append(mobileImg);
 
 				$(mobileTile).on('tap', app.ui.tilePanel.tile_onClick);

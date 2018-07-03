@@ -44,7 +44,7 @@ define({
       "builderButton": "Redaguoti",
       "facebookTooltip": "Bendrinti Facebook",
       "twitterTooltip": "Bendrinti Twitter",
-      "bitlyTooltip": "Gauti sutrumpintą aplikacijos nuorodą",
+      "bitlyTooltip": "Gauti trumpą nuorodą",
       "templateTitle": "Nustatyti šablono pavadinimą",
       "templateSubtitle": "Nustatyti šablono antraštę",
       "share": "Bendrinti"
@@ -55,7 +55,10 @@ define({
       "open": "Atverta",
       "embed": "Įterpti į tinklalapį",
       "embedExplain": "Naudokite šį HTML kodą, kad įterptumėte aplikaciją į tinklalapį.",
-      "size": "Dydis (plotis / aukštis):"
+      "size": "Dydis (plotis / aukštis):",
+      "autoplayLabel": "Automatinio paleidimo režimas",
+      "autoplayExplain1": "Veikiant automatinio paleidimo režimu, jūsų pasakojimas bus pateikiamas reguliariais intervalais. Tai puikiai tinkama parinktis informaciniuose terminaluose arba viešuosiuose ekranuose, tačiau nepamirškite, kad kitais atvejais pasakojimą gali būti sudėtinga perskaityti. Ši funkcija nepalaikoma mažuose ekranuose.",
+      "autoplayExplain2": "Kai šis režimas aktyvus, yra valdikliai, kuriais galima leisti / pristabdyti pasakojimą ir reguliuoti naršymo greitį."
     },
     "general": {
       "noPlaces": "Šioje teritorijoje nėra vietovių. Atitolinkite arba spustelėkite mygtuką Pradžia, kad pamatytumėte vietoves.",

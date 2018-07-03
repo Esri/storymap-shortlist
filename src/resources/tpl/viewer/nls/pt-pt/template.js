@@ -44,7 +44,7 @@ define({
       "builderButton": "Editar",
       "facebookTooltip": "Partilhar no Facebook",
       "twitterTooltip": "Partilhar no Twitter",
-      "bitlyTooltip": "Obtenha uma ligação curta para a aplicação",
+      "bitlyTooltip": "Obter uma ligação curta",
       "templateTitle": "Definir o título do modelo",
       "templateSubtitle": "Definir o subtítulo do modelo",
       "share": "Partilhar"
@@ -55,7 +55,10 @@ define({
       "open": "Aberto",
       "embed": "Incorporar em página web",
       "embedExplain": "Utilize o seguinte código HTML para incorporar a aplicação numa página web.",
-      "size": "Tamanho (largura/altura):"
+      "size": "Tamanho (largura/altura):",
+      "autoplayLabel": "Modo reprodução automática",
+      "autoplayExplain1": "O modo de reprodução automática avançará pela sua história a um intervalo regular. Isto é ideal num quiosque ou num monitor de exibição pública, mas sabemos que, noutras situações, poderá tornar a história mais difícil de ler. Esta funcionalidade não é suportada em ecrãs pequenos.",
+      "autoplayExplain2": "Quando este modo está activo existem controles para reproduzir/pausar a história e ajustar a velocidade de navegação."
     },
     "general": {
       "noPlaces": "Não se encontram quaisquer locais nesta área.  Reduza o zoom ou clique no botão Início para visualizar locais.",

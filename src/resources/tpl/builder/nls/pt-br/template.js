@@ -54,9 +54,9 @@ define({
       "useLocation": "Utilizar esta localização",
       "selectAll": "Selecionar todos",
       "imageSizeHelper": "Para melhores resultados, as imagens devem ter menos que 400 KB. O tamanho & forma recomendados são 1000 x 750 pixels (4:3 proporção de largura:altura) ou menor. Imagens maiores podem diminuir o desempenho. Para obter o melhor desempenho, utilize imagens JPG compactadas com 80% da qualidade de imagem.",
-      "imageSizeHelperUpdated": "Para melhor performance, as imagens devem ter menos que 400 KB. Para reduzir o tamanho do arquivo utilize o formato JPG salvo em 80% de qualidade de imagem. Se sua imagem estiver ainda acima de 400 KB, o tamanho do arquivo pode ser reduzido ao redimensionar a imagem: 1000 pixels de largura x 750 pixels de altura (4:3 relação de largura:altura) é recomendado.",
+      "imageSizeHelperUpdated": "O link da imagem deve começar com HTTPS.<br><br>Para um melhor desempenho, as imagens devem ter menos que 400 KB. Para reduzir o tamanho do arquivo utilize o formato JPG salvo em 80% de qualidade de imagem. Se a sua imagem ainda estiver acima de 400 KB, redimensioná-la poderá reduzir ainda mais o tamanho do arquivo: 1.000 pixels de largura x 750 pixels de altura (4: 3: relação de largura:altura) é recomendado.<br><br>Se uma imagem vinculada desenhar lentamente ou não estiver disponível por HTTPS, carregue-a na sua história para obter melhores resultados.",
       "thumbnailLink": "Link da miniatura",
-      "thumbnailHelp": "O tamanho & forma da miniatura recomendados são 280 x 210 pixels (4:3 proporção de largura:altura). As miniaturas maiores podem diminuir o desempenho. As miniaturas de proporção 4: 3 se encaixam em seus mosaicos sem serem cortadas."
+      "thumbnailHelp": "O link da miniatura deve começar com HTTPS.<br><br>O tamanho e forma da miniatura recomendados são 280 x 210 pixels (4:3 relação de largura:altura). Miniaturas maiores podem diminuir o desempenho. As miniaturas da relação de aspecto 4: 3 se encaixam em seus mosaicos sem serem cortadas."
     },
     "settings": {
       "numberedPlaces": "Mostrar lugares com números",
@@ -73,7 +73,7 @@ define({
       "custom": "Personalizar",
       "customTooltip": "Defina o local utilizando o botão que aparecerá nos controles de zoom do mapa",
       "mapLocationTooltip": "O local que as pessoas visualizam quando abrem a sua lista de favoritos",
-      "bookmarksHelp": "Para habilitar os favoritos na Lista Restrita, adicione e gerencie os marcadores de mapa da web no visualizador de mapa da web",
+      "bookmarksHelp": "Para habilitar os marcadores, feche o Construtor de Lista Restrita e, em seguida, abra o mapa da web utilizado esta Lista Restrita (via Meu Conteúdo ou Minhas Histórias do ArcGIS) e adicione marcadores a ele utilizando o ArcGIS Map Viewer.",
       "generalOptions": "Opções gerais",
       "mapOptions": "Opções do mapa",
       "changeBasemap": "Alterar Mapa Base",

@@ -12,7 +12,8 @@ define({
       "disabled": "El administrador ha deshabilitado esta característica",
       "userLookup": "Cargar álbumes",
       "notImplemented": "No se ha implementado aún.",
-      "noData": "No se ha encontrado ningún álbum público"
+      "noData": "No se ha encontrado ningún álbum público",
+      "thirdPartyTerms": "Al utilizar un servicio de terceros, usted acepta sus condiciones de servicio: "
     },
     "imageSelector": {
       "lblStep1": "Elegir el servicio",
@@ -36,15 +37,6 @@ define({
       "signInMsg2": "Usuario no encontrado",
       "loadingFailed": "Error al cargar"
     },
-    "imageSelectorFacebook": {
-      "leftHeader": "Usuario de Facebook",
-      "rightHeader": "Página de Facebook",
-      "pageExplain": "Una página de Facebook es una marca/producto público o famoso como <b>esrigis</b>. Puedes obtener el nombre de la página después de la  primera '/' de la URL de la página.",
-      "pageInputLbl": "Nombre de la página",
-      "lookupMsgError": "No se encontró la página",
-      "warning": "Facebook ya no se admite, ${learn}.",
-      "learn": "más información"
-    },
     "imageSelectorPicasa": {
       "userInputLbl": "Id. de dirección de correo electrónico o Google",
       "signInMsg2": "Cuenta no encontrada",
@@ -66,7 +58,7 @@ define({
       "lookupMsgError": "Usuario no encontrado",
       "howToFind": "Cómo encontrar un nombre de usuario de YouTube",
       "howToFind2": "El nombre de usuario se muestra bajo los vídeos",
-      "found": "Encontrados",
+      "found": "Encontrado",
       "noData": "No se han encontrado vídeos públicos",
       "videoNotChecked": "El vídeo no se ha comprobado en YouTube pero la dirección parece estar bien.",
       "checkFailedAPI": "La comprobación de YouTube ha dado error, compruebe la clave API para YouTube."
@@ -108,10 +100,10 @@ define({
       "lblPosition2": "Relleno",
       "lblPosition3": "Ajustar",
       "lblPosition4": "Estirar",
-      "lblPosition5": "Personalizada",
+      "lblPosition5": "Personalizado",
       "lblURLHelp": "El vínculo de la imagen debe comenzar por HTTPS.<br><br>Para obtener unos resultados óptimos, las imágenes deben tener menos de 400 KB. Use imágenes JPG comprimidas con una calidad del 80 % y estos anchos de imagen recomendados: 2000 píxeles para el escenario principal o el panel narrativo con el botón de maximizar y 1000 píxeles para el panel narrativo sin el botón de maximizar.<br><br>Si una imagen vinculada se dibuja lentamente, cárguela en su historia para obtener unos resultados óptimos.",
       "tooltipDimension": "El valor se puede especificar en 'px' o en '%'",
-      "tooltipDimension2": "El valor se debe especificar en 'px'",
+      "tooltipDimension2": "El valor se debe especificar en «px»",
       "lblPosition2Explain": "(puede recortarse)",
       "lblPosition3Explain": "(no se recortará)",
       "lblPosition3Explain2": "(el ancho siempre se ajusta al panel)",
@@ -120,13 +112,18 @@ define({
       "unloadHelp": "Si la página Web incluye contenido multimedia de audio o vídeo, deje activada esta opción para evitar que el contenido se reproduzca cuando el lector se mueva. Desactive la opción, por ejemplo, para que la pista de audio se siga reproduciendo a medida que el lector avanza por la historia.<br />Si la página Web es una aplicación, desactive la opción para que la historia no se vuelva a cargar si el lector regresa a ella.",
       "embedProtocolLabel": "Cargue la página a través de una conexión de Internet segura (HTTPS)",
       "embedProtocolWarning1": "Si esta página no se carga en su historia, no se puede incorporar por motivos de seguridad web. Como alternativa, agregue un vínculo en su narración para abrir la página en una nueva pestaña del navegador. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>Más información</a>",
-      "embedProtocolWarning2": "Si esta página no se carga en su historia, desactive esta opción e inténtelo de nuevo. Si la página sigue sin cargarse, no se puede incorporar por motivos de seguridad web. Como alternativa, agregue un vínculo en su narración para abrir la página en una nueva pestaña del navegador. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>Más información</a>"
+      "embedProtocolWarning2": "Si esta página no se carga en su historia, desactive esta opción e inténtelo de nuevo. Si la página sigue sin cargarse, no se puede incorporar por motivos de seguridad web. Como alternativa, agregue un vínculo en su narración para abrir la página en una nueva pestaña del navegador. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>Más información</a>",
+      "learn": "Más información",
+      "lblAltText": "Texto alternativo",
+      "placeholderAltText": "Introduzca una descripción del contenido multimedia para invidentes...",
+      "tooltipAltText": "Proporcione una descripción del contenido multimedia que se utilizará con tecnologías de asistencia tales como el software de lectura de pantallas. La descripción es opcional, pero recomendada para satisfacer las directrices de accesibilidad web, por ejemplo, WCAG y la Sección 508."
     },
     "editorActionGeocode": {
       "lblTitle": "Buscar una dirección o un lugar",
       "mapMarkerExplain": "El usuario verá un marcador de mapa al hacer clic en el vínculo"
     },
     "editorActions": {
+      "navigate": "Navegar a otra entrada",
       "remove": "Quitar acción",
       "preview": "Previsualizar acción"
     },

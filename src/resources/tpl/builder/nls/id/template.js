@@ -54,9 +54,9 @@ define({
       "useLocation": "Gunakan lokasi ini",
       "selectAll": "Pilih semua",
       "imageSizeHelper": "Untuk mendapatkan hasil terbaik, gambar harus berukuran kurang dari 400 KB. Ukuran & bentuk yang disarankan adalah 1000 x 750 piksel (rasio lebar:tinggi 4:3) atau lebih kecil. Gambar yang lebih besar dapat memperlambat kinerja. Untuk kinerja terbaik, gunakan gambar JPG terkompresi dengan kualitas gambar sebesar 80%.",
-      "imageSizeHelperUpdated": "Untuk kinerja terbaik, gambar harus kurang dari 400 KB. Untuk mengurangi ukuran file gunakan format JPG yang tersimpan pada kualitas gambar 80%. Jika gambar Anda masih di atas 400 KB, ubah ukurannya bisa lebih mengurangi ukuran filenya: lebar 1000 piksel x tinggi 750 piksel (rasio lebar:tinggi 4:3) disarankan.",
+      "imageSizeHelperUpdated": "Tautan gambar harus diawali dengan HTTPS<br><br>Untuk kinerja terbaiik, gambar harus kurang dari 400 KB. Untuk mengurangi ukuran gambar gunakan format JPG yang disimpan dengan kualitas gambar 80%. Jika gambar Anda masih lebih dari 400 KB, mengubah ukurannya dapat mengurangi ukuran file: 1000 piksel lebar x 750 piksel tinggi (4:3 rasio lebar:tinggi) disarankan.<br><br>Jika gambar tautan muncul lambat atau tidak tersedia melalui HTTPS, unduh ke cerita Anda untuk mendapat hasil yang lebih baik.",
       "thumbnailLink": "Tautan thumbnail",
-      "thumbnailHelp": "Ukuran dan bentuk thumbnail yang disarankan adalah 280 x 210 piksel (rasio lebar:tinggi 4:3). Thumbnail yang lebih besar dapat memperlambat kinerja. Thumbnail dengan rasio aspek 4:3 sesuai dengan tile-nya tanpa harus dipotong."
+      "thumbnailHelp": "Tautan gambar mini harus diawali dengan HTTPS.<br><br>Ukuran dan bentuk gambar mini yang disarankan adalah 280 x 210 pikse (4:3 rasio lebar:tinggi). Gambar mini yang lebih besar dapat memperlambat kinerja. Gambar mini rasio aspek 4:3 cocok untuk petaknya tanpa dipotong."
     },
     "settings": {
       "numberedPlaces": "Tunjukkan tempat dengan nomor",
@@ -73,7 +73,7 @@ define({
       "custom": "Khusus",
       "customTooltip": "Atur lokasi menggunakan tombol yang akan muncul di kontrol pembesaran peta",
       "mapLocationTooltip": "Lokasi yang dilihat orang ketika mereka membuka Shortlist Anda",
-      "bookmarksHelp": "Untuk mengaktifkan penanda lokasi di Shortlist, tambahkan dan kelola penanda lokasi web map di penampil web map",
+      "bookmarksHelp": "Untuk mengaktifkan penanda lokasi, tutup Shortlist Builder lalu buka web map yang digunakan dalam Shortlist ini (melalui ArcGIS My Contents atau My Stories) dan tambahkan penampil lokasi menggunakan ArcGIS Map Viewer.",
       "generalOptions": "Opsi umum",
       "mapOptions": "Opsi peta",
       "changeBasemap": "Ubah Peta Dasar",

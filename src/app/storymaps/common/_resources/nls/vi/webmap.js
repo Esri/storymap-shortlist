@@ -55,7 +55,7 @@ define({
       "hintNavigation": "Điều hướng bản đồ bị tắt."
     },
     "editor": {
-      "loading": "Vui long chờ trong khi trình biên tập bản đồ đang được tải",
+      "loading": "Vui lòng trong khi trình biên tập bản đồ đang được tải",
       "newTitle": "Tạo bản đồ mới",
       "editTitle": "Chỉnh sửa bản đồ",
       "titleLbl": "Tiêu đề",

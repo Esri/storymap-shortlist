@@ -877,7 +877,7 @@ define([
 
 			function createSearchWidget(){
 				if(!_search){
-					if(!app.data.getWebAppData().getAppGeocoders())
+					if(!app.data.getWebAppData().getAppGeocoders)
 						return;
 					var resultDeferred = new Deferred();
 						CommonHelper.createGeocoder({

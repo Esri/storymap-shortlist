@@ -54,9 +54,9 @@ define({
       "useLocation": "Usar esta ubicación",
       "selectAll": "Seleccionar todo",
       "imageSizeHelper": "Para obtener unos resultados óptimos, las imágenes deben tener menos de 400 KB. El tamaño y la forma recomendados son 1000 x 750 píxeles o inferior con relación ancho:altura 4:3. Las imágenes más grandes pueden ralentizar el rendimiento. Para obtener un rendimiento óptimo, use imágenes JPG comprimidas con una calidad de imagen del 80%.",
-      "imageSizeHelperUpdated": "Para obtener un rendimiento óptimo, las imágenes deben tener menos de 400 KB. Para reducir el tamaño de archivo, use el formato JPG guardado con una calidad de imagen del 80%. Si la imagen sigue teniendo más de 400 KB, ajustar su tamaño puede reducir aún más su tamaño de archivo: se recomienda usar 1000 píxeles de ancho x 750 píxeles de alto (ratio de ancho:alto 4:3).",
+      "imageSizeHelperUpdated": "El vínculo de la imagen debe comenzar por HTTPS.<br><br>Para obtener un rendimiento óptimo, las imágenes deben tener menos de 400 KB. Para reducir el tamaño de archivo, use el formato JPG guardado con una calidad de imagen del 80 %. Si la imagen sigue teniendo más de 400 KB, ajustar su tamaño puede reducir aún más su tamaño de archivo: se recomienda usar 1000 píxeles de ancho x 750 píxeles de alto (ratio de ancho:alto 4:3).<br><br>Si una imagen vinculada se dibuja lentamente o no está disponible a través de HTTPS, cárguela en su historia para obtener unos resultados óptimos.",
       "thumbnailLink": "Vínculo de vista en miniatura",
-      "thumbnailHelp": "El tamaño y la forma de vista en miniatura recomendados son 280 x 210 píxeles con relación ancho:altura 4:3. Las vistas en miniatura más grandes pueden ralentizar el rendimiento. Las vistas en miniatura con una relación de aspecto 4:3 caben en las teselas correspondientes sin recortarlas."
+      "thumbnailHelp": "El vínculo de la vista en miniatura debe comenzar por HTTPS.<br><br>El tamaño y la forma de vista en miniatura recomendados son 280 x 210 píxeles (relación ancho:alto 4:3). Las vistas en miniatura más grandes pueden ralentizar el rendimiento. Las vistas en miniatura con una relación de aspecto 4:3 caben en las teselas correspondientes sin recortarlas."
     },
     "settings": {
       "numberedPlaces": "Mostrar lugares con números",
@@ -73,7 +73,7 @@ define({
       "custom": "Personalizada",
       "customTooltip": "Defina la ubicación usando el botón que aparecerá en los controles de zoom del mapa",
       "mapLocationTooltip": "La ubicación que los usuarios ven cuando abren su Shortlist",
-      "bookmarksHelp": "Para habilitar los marcadores en la Shortlist, agregue y administre los marcadores del mapa web en el visor de mapas web",
+      "bookmarksHelp": "Para habilitar los marcadores, cierre el Builder de Shortlist y, a continuación, abra el mapa web utilizado en esta Shortlist (a través de Mi contenido o Mis historias de ArcGIS) y agréguele marcadores con el Visor de mapas de ArcGIS.",
       "generalOptions": "Opciones generales",
       "mapOptions": "Opciones de mapa",
       "changeBasemap": "Cambiar mapa base",

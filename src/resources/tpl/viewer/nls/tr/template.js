@@ -44,7 +44,7 @@ define({
       "builderButton": "Düzenle",
       "facebookTooltip": "Facebook'ta Paylaş",
       "twitterTooltip": "Twitter'da Paylaş",
-      "bitlyTooltip": "Uygulamaya kısa bağlantı oluşturun",
+      "bitlyTooltip": "Kısa bağlantı edin",
       "templateTitle": "Şablon başlığını ayarla",
       "templateSubtitle": "Şablon altyazısını ayarla",
       "share": "Paylaş"
@@ -55,7 +55,10 @@ define({
       "open": "Aç",
       "embed": "Web sayfasının içine yerleştir",
       "embedExplain": "Uygulamayı bir web sayfasının içine yerleştirmek için aşağıdaki HTML kodunu kullanın.",
-      "size": "Boyut (genişlik/yükseklik):"
+      "size": "Boyut (genişlik/yükseklik):",
+      "autoplayLabel": "Otomatik oynatma modu",
+      "autoplayExplain1": "Otomatik oynatma modu, düzenli aralıklarla hikayenizde ilerler. Bu özellik, bir kiosk ya da genel ekran için idealdir, ancak bunun bazı durumlarda hikayenin okunmasını güçleştirebileceğini unutmayın. Bu özellik küçük ekranlarda desteklenmez.",
+      "autoplayExplain2": "Bu etkin durumdayken hikayeyi oynatacak/duraklatacak ve gezinme hızını ayarlayacak kontroller vardır."
     },
     "general": {
       "noPlaces": "Bu alanda yer bulunmuyor. Yer görmek için uzaklaştırın veya Ana Sayfa düğmesine tıklayın.",

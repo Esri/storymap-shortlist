@@ -386,3 +386,7 @@ a:hover{
 .arcgisSearch .searchBtn {
 	padding: 6px;
 }
+
+#autoplay {
+	position: absolute;
+}

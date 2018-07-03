@@ -44,7 +44,7 @@ define({
       "builderButton": "Muokkaa",
       "facebookTooltip": "Jaa Facebookissa",
       "twitterTooltip": "Jaa Twitterissä",
-      "bitlyTooltip": "Hanki lyhyt linkki sovellukseen",
+      "bitlyTooltip": "Hanki lyhyt linkki",
       "templateTitle": "Määritä mallin nimi",
       "templateSubtitle": "Määritä mallin alaotsikko",
       "share": "Jaa"
@@ -55,7 +55,10 @@ define({
       "open": "Avaa",
       "embed": "Upota Web-sivulle",
       "embedExplain": "Käytä seuraavaa HTML-koodia sovelluksen upottamiseen Web-sivulle.",
-      "size": "Koko (leveys/korkeus):"
+      "size": "Koko (leveys/korkeus):",
+      "autoplayLabel": "Automaattisen toiston tila",
+      "autoplayExplain1": "Automaattisen toiston tilassa tarina etenee säännöllisin väliajoin. Tämä soveltuu hyvin kioskin näyttöön tai julkiseen näyttöön. Huomaa kuitenkin, että muissa tilanteissa tarinan lukeminen voi olla vaikeampaa. Tätä ominaisuutta ei tueta pienissä näytöissä.",
+      "autoplayExplain2": "Kun tämä tila on käytössä, tarinan voi toistaa tai keskeyttää tai sen nopeutta voi säätää ohjausobjekteilla."
     },
     "general": {
       "noPlaces": "Tällä alueella ei ole paikkoja. Näytä lisää paikkoja loitontamalla tai napsauttamalla Kotisivu-painiketta.",

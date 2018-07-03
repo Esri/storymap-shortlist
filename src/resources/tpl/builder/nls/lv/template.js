@@ -54,9 +54,9 @@ define({
       "useLocation": "Lietot šo izvietojumu",
       "selectAll": "Izvēlēties visu",
       "imageSizeHelper": "Labāku rezultātu iegūšanai attēliem ir jābūt mazākiem par 400 KB. Ieteicamais izmērs un forma ir 1000 x 750 pikseļi (platuma:augstuma proporcija 4:3) vai mazāks. Lielāki attēli var palēnināt veiktspēju. Lai veiktspēja būtu labāka, izmantojiet saspiestus JPG attēlus ar 80% attēlu kvalitāti.",
-      "imageSizeHelperUpdated": "Lai panāktu vislabākos rezultātus, attēliem jābūt mazākiem par 400 KB. Samaziniet attēla faila lielumu, lietojot formātu JPG, kas saglabāts ar 80% attēla kvalitāti. Ja jūsu attēls joprojām pārsniedz 400 KB, tā lielumu var papildus samazināt, mainot tā izmērus: ieteicams 1000 pikseļu platums x 750 pikseļu augstums (platuma–augstuma attiecība 4:3).",
+      "imageSizeHelperUpdated": "Attēla saitei ir jāsākas ar HTTPS<br><br>Lai iegūtu labāko veiktspēju, attēliem jābūt mazākiem par 400 KB. Lai samazinātu faila izmēru, izmantojiet JPG formātu, kas saglabāts 80% attēla kvalitātē. Ja attēls joprojām pārsniedz 400 KB, tā izmēra maiņa var vēl vairāk samazināt tā faila izmēru: ir ieteicams 1000 pikseļu plats x 750 pikseļu garš (4:3 platuma:augstuma proporcija).<br><br>Ja saistītais attēls tiek zīmēts lēni vai nav pieejams, izmantojot HTTPS, augšupielādējiet to savā stāstā lai iegūtu labākus rezultātus.",
       "thumbnailLink": "Sīktēla saite",
-      "thumbnailHelp": "Ieteicamais sīktēla izmērs un forma ir 280 x 210 pikseļi (platuma:augstuma proporcija 4:3). Lielāki sīktēli var palēnināt veiktspēju. 4:3 proporcijas sīktēli ietilpst mozaīkās bez saspiešanas."
+      "thumbnailHelp": "Sīktēla saitei ir jāsākas ar HTTPS.<br><br>Ieteicamai sīktēla izmērs un forma ir 280 x 210 pikseļi (4:3 platuma:augstuma proporcija). Lielāki sīktēli var palēnināt veiktspēju. 4:3 proporciju sīktēli iekļaujas to mozaīkā, neapgriežot."
     },
     "settings": {
       "numberedPlaces": "Rādīt vietas ar skaitļiem",
@@ -73,7 +73,7 @@ define({
       "custom": "Pielāgots",
       "customTooltip": "Iestatiet izvietojumu, izmantojot pogu, kas parādās kartes mērogmaiņas vadīklās",
       "mapLocationTooltip": "Izvietojums, ko lietotāji redz, kad atver jūsu atlases sarakstu",
-      "bookmarksHelp": "Lai aktivizētu Shortlist grāmatzīmes, pievienojiet un pārvaldiet tīmekļa kartes grāmatzīmes tīmekļa kartes skatītājā",
+      "bookmarksHelp": "Lai aktivizētu grāmatzīmes, aizveriet Atlases saraksta veidotāju un pēc tam atveriet šajā Atlases sarakstā izmantoto tīmekļa karti (izmantojot ArcGIS Mans saturs vai Mani stāsti) un pievienojiet tai grāmatzīmes, izmantojot ArcGIS Kartes skatītāju.",
       "generalOptions": "Vispārīgās opcijas",
       "mapOptions": "Kartes opcijas",
       "changeBasemap": "Mainīt pamatkarti",

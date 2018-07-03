@@ -54,9 +54,9 @@ define({
       "useLocation": "Usa questa posizione",
       "selectAll": "Seleziona tutto",
       "imageSizeHelper": "Per risultati ottimali, utilizzare immagini più piccole di 400 KB. La dimensione e forma consigliata è 1000 x 750 pixel (4:3 rapporto larghezza:altezza) o inferiore. Immagini più grandi possono rallentare le prestazioni. Per prestazioni ottimali, utilizzare immagini JPG compresse con qualità immagine dell'80%.",
-      "imageSizeHelperUpdated": "Per migliorare le prestazioni, la dimensione immagine deve essere inferiore a 400 KB. Per ridurre la dimensione dell'immagine, impiegare il formato JPG salvato all'80% della qualità d'immagine. Se in seguito l'immagine è ancora superiore a 400 KB, si consiglia di ridurne ulteriormente la dimensione ridimensionandola: 1000 pixel largh. x 750 pixel altezza (rapporto 4:3 largh:alt).",
+      "imageSizeHelperUpdated": "I link delle immagini devono iniziare con HTTPS.<br><br>Per migliorare le prestazioni, la dimensione immagine deve essere inferiore a 400 KB. Per ridurre la dimensione dell'immagine, impiegare il formato JPG salvato all'80% della qualità d'immagine. Se in seguito l'immagine è ancora superiore a 400 KB, si consiglia di ridurne ulteriormente la dimensione ridimensionandola: 1000 pixel largh. x 750 pixel altezza (rapporto 4:3 largh:alt).<br><br>Se la visualizzazione di un'immagine collegata a un link risulta lenta o non è disponibile tramite HTTPS, caricare l'immagine nella storia per ottimizzare il risultato.",
       "thumbnailLink": "Collegamento anteprima",
-      "thumbnailHelp": "La dimensione e forma anteprima consigliata è 280 x 210 pixel (4:3 rapporto larghezza:altezza). Anteprime più grandi possono rallentare le prestazioni. Anteprime con rapporto prospettico 4:3 si adattano alle tile senza essere ritagliate."
+      "thumbnailHelp": "Il collegamento anteprima deve iniziare con HTTPS.<br><br>La dimensione e forma anteprima consigliata è 280 x 210 pixel (4:3 rapporto larghezza:altezza). Anteprime più grandi possono rallentare le prestazioni. Anteprime con rapporto prospettico 4:3 si adattano alle tile senza essere ritagliate."
     },
     "settings": {
       "numberedPlaces": "Mostra luoghi con numeri",
@@ -73,7 +73,7 @@ define({
       "custom": "Personalizzata",
       "customTooltip": "Imposta la posizione utilizzando il pulsante che verrà visualizzato nei controlli di zoom della mappa",
       "mapLocationTooltip": "La posizione visualizzata all'apertura della Shortlist",
-      "bookmarksHelp": "Per abilitare i segnalibri nella Shortlist, aggiungere e gestire i segnalibri della mappa Web nel visualizzatore delle mappe Web",
+      "bookmarksHelp": "Per abilitare i segnalibri, chiudere il Shortlist Builder, quindi aprire la mappa Web utilizzata in questa Shortlist (tramite I miei contenuti di ArcGIS o My Stories) e aggiungervi segnalibri utilizzando ArcGIS Map Viewer.",
       "generalOptions": "Opzioni generali",
       "mapOptions": "Opzioni mappa",
       "changeBasemap": "Cambia mappa di base",

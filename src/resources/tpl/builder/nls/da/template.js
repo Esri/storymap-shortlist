@@ -54,9 +54,9 @@ define({
       "useLocation": "Brug denne position",
       "selectAll": "Markér alle",
       "imageSizeHelper": "For at opnå de bedste resultater skal billeder være mindre end 400 KB. Den anbefalede størrelse og form er 1000 x 750 pixels (4:3 bredde:højdeforhold) eller mindre. Større billeder kan gøre ydeevnen langsommere. For at opnå den bedste ydeevne skal du bruge komprimerede JPG-billeder med 80 % billedkvalitet.",
-      "imageSizeHelperUpdated": "For at opnå den den bedste ydeevne skal du bruge billeder på mindre end 400 KB. For at reducere filstørrelsen skal du bruge JPG-format, der er gemt ved 80 % af billedkvaliteten. Hvis dit billede fortsat er på mere end 400 KB, kan du reducere filstørrelsen yderligere: 1000 pixels bredt x 750 pixels højt (4:3 bredde:højdeforhold) anbefales.",
+      "imageSizeHelperUpdated": "Billedlinket skal begynde med HTTPS.<br><br>For at opnå den bedste ydeevne skal billeder være mindre end 400 KB. For at reducere filstørrelsen skal du bruge JPG-format, der er gemt ved 80 % billedkvalitet. Hvis dit billede fortsat er på mere end 400 KB, kan du reducere filstørrelsen yderligere: 1000 pixels bredt x 750 pixels højt (4:3 bredde:højdeforhold) anbefales.<br><br>Hvis et linket billede tegnes langsomt eller ikke er tilgængeligt via HTTPS, skal du uploade det til din historie for at få det til at fungere bedre.",
       "thumbnailLink": "Miniature-link",
-      "thumbnailHelp": "Den anbefalede miniaturestørrelse og -form er 280 x 210 pixels (4:3 bredde:højdeforhold). Større miniaturer kan gøre ydeevnen langsommere. Miniaturer med et størrelsesforhold på 4:3 passer til deres tiles uden at blive beskåret."
+      "thumbnailHelp": "Links til miniaturebilleder skal begynde med HTTPS.<br><br>Den anbefalede miniaturestørrelse og -form er 280 x 210 pixel (4: 3 bredde:højdeforhold). Større miniaturer kan gøre ydeevnen langsommere. Miniaturer med et størrelsesforhold på 4:3 passer til deres tiles uden at blive beskåret."
     },
     "settings": {
       "numberedPlaces": "Vis steder med tal",
@@ -73,7 +73,7 @@ define({
       "custom": "Brugerdefineret",
       "customTooltip": "Angiv positionen ved hjælp af den knap, som bliver vist i kortzoom-kontrolelementerne",
       "mapLocationTooltip": "Den position, som folk før vist, når de åbner din Shortlist",
-      "bookmarksHelp": "Hvis du vil aktivere bogmærker i din Shortlist, skal du tilføje og håndtere webkortets bogmærker i webkortviseren",
+      "bookmarksHelp": "For at aktivere bogmærker skal du lukke Shortlist Builder og derefter åbne det webkort, der bruges i denne Shortlist (via ArcGIS Mit indhold eller Mine historier) og tilføje bogmærker ved hjælp af ArcGIS Map Viewer.",
       "generalOptions": "Generelle indstillinger",
       "mapOptions": "Indstillinger for kort",
       "changeBasemap": "Skift baggrundskort",

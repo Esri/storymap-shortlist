@@ -54,9 +54,9 @@ define({
       "useLocation": "Bruk denne lokasjonen",
       "selectAll": "Merk alt",
       "imageSizeHelper": "Du får best resultat når bildene er mindre enn 400 KB. Anbefalt størrelse og form er 1000 x 750 piksler (4:3-sideforhold) eller mindre. Store bilder kan redusere ytelsen. Du får best ytelse ved å bruke komprimerte JPG-bilder med 80 % bildekvalitet.",
-      "imageSizeHelperUpdated": "Du får best resultat når bildene er mindre enn 400 KB. Reduser filstørrelsen ved å bruke JPG-format lagret med 80 prosent bildekvalitet. Hvis bildet fremdeles er over 400 KB, kan du redusere størrelsen ytterligere for å minske filstørrelsen: 1000 piksler bredt x 750 piksler høyt (4:3-sideforhold) anbefales.",
+      "imageSizeHelperUpdated": "Bildekoblingen må begynne med HTTPS.<br><br>Du får best resultat når bildene er mindre enn 400 KB. Reduser filstørrelsen ved å bruke JPG-format lagret med 80 prosent bildekvalitet. Hvis bildet fremdeles er over 400 KB, kan du redusere størrelsen ytterligere for å minske filstørrelsen: 1000 piksler bredt x 750 piksler høyt (4:3-sideforhold) anbefales.<br><br>Hvis et tilkoblet bilde tegnes sakte, kan du laste det opp til fortellingen din for å få bedre resultat.",
       "thumbnailLink": "Miniatyrbildekobling",
-      "thumbnailHelp": "Anbefalt størrelse og form for miniatyrbilder er 280 x 210 piksler (4:3-sideforhold). Større miniatyrbilder kan redusere ytelsen. Miniatyrbilder i 4:3-sideforhold får plass i flisene uten beskjæring."
+      "thumbnailHelp": "Miniatyrkoblingen må begynne med HTTPS.<br><br>Anbefalt størrelse og form for miniatyrbilder er 280 x 210 piksler (4:3-sideforhold). Større miniatyrbilder kan redusere ytelsen. Miniatyrbilder i 4:3-sideforhold får plass i flisene uten beskjæring."
     },
     "settings": {
       "numberedPlaces": "Vis steder med tall",
@@ -73,7 +73,7 @@ define({
       "custom": "Tilpasset",
       "customTooltip": "Angi lokasjonen ved hjelp av knappen som vises i kartets zoomkontroller",
       "mapLocationTooltip": "Lokasjonen folk ser når de åpner din Shortlist",
-      "bookmarksHelp": "For å aktivere bokmerker i Shortlist legger du til og administrer webkartets bokmerker i webkartvisningen",
+      "bookmarksHelp": "Hvis du vil aktivere bokmerker, må du lukke Shortlist Builder og deretter åpne webkartet som er brukt i den aktuelle Shortlist (via ArcGIS Mitt innhold eller My Stories), og legge til bokmerker i det ved hjelp av kartviseren for ArcGIS.",
       "generalOptions": "Generelle alternativer",
       "mapOptions": "Kartalternativer",
       "changeBasemap": "Endre bakgrunnskart",

@@ -4,7 +4,7 @@ define({
       "lblWebMap": "Mapa",
       "lblLocation": "Ubicación",
       "lblContent": "Contenido",
-      "lblPopup": "Ventana emergente",
+      "lblPopup": "Elemento emergente",
       "lblControls": "Extras",
       "lblOverview": "Mapa de vista general",
       "lblLegend": "Leyenda",

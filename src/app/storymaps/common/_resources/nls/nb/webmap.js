@@ -2,9 +2,9 @@ define({
   "commonWebmap": {
     "selector": {
       "lblWebMap": "Kart",
-      "lblLocation": "Plassering",
+      "lblLocation": "Lokasjon",
       "lblContent": "Innhold",
-      "lblPopup": "Oppsprett",
+      "lblPopup": "oppsprett",
       "lblControls": "Tillegg",
       "lblOverview": "Oversiktskart",
       "lblLegend": "Tegnforklaring",
@@ -30,7 +30,7 @@ define({
       "newCreatedMap": "Nylig opprettet kart",
       "webmapDefault": "Standardinnstilling for kart",
       "customCfg": "Tilpasset konfigurasjon",
-      "tooltipLocation": "Definer lokasjonen som dette kartet skal vise.",
+      "tooltipLocation": "Definer lokasjonen som skal vises på dette kartet.",
       "tooltipContent": "Definer de synlige lagene.",
       "tooltipPopup": "Velg en popup som skal åpnes når dette kartet vises.",
       "tooltipOverview": "Vis et lite oversiktskart sammen med hovedkartet.",

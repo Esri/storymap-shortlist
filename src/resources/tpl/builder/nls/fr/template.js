@@ -54,9 +54,9 @@ define({
       "useLocation": "Utiliser cet emplacement",
       "selectAll": "Tout sélectionner",
       "imageSizeHelper": "Pour optimiser les résultats, la taille des images doit être inférieure à 400 Ko. La taille et la forme recommandées sont de 1 000 x 750 pixels (rapport largeur/hauteur de 4:3) au maximum. Les images de plus grande taille risquent de ralentir les performances. Utilisez des images JPG compressées à une qualité de 80 %.",
-      "imageSizeHelperUpdated": "Pour des performances optimales, la taille des fichiers images doit être inférieure à 400 Ko. Pour la réduire, utilisez le format JPG enregistré à une qualité d'image de 80 %. Si la taille de l'image est toujours supérieure à 400 Ko, redimensionnez-la pour la réduire encore davantage : une largeur de 1 000 pixels x hauteur de 750 pixels (rapport largeur/hauteur : 4:3) est recommandée.",
+      "imageSizeHelperUpdated": "Le lien de l’image doit commencer par HTTPS.<br><br>Pour des performances optimales, la taille des fichiers d’image doit être inférieure à 400 ko. Pour réduire la taille de fichier, utilisez le format JPG enregistré selon une qualité d’image de 80 %. Si la taille du fichier d’image est toujours supérieure à 400 Ko, redimensionnez l’image pour réduire encore davantage la taille de son fichier : une largeur de 1 000 pixels et une hauteur de 750 pixels (rapport largeur/hauteur de 4:3) sont recommandées.<br><br>Si une image liée s’affiche lentement ou n’est pas disponible via HTTPS, chargez-la dans votre récit pour de meilleurs résultats.",
       "thumbnailLink": "Lien de la miniature",
-      "thumbnailHelp": "La taille et la forme recommandées pour les miniatures sont de 280 x 210 pixels (rapport largeur/hauteur de 4:3). Les miniatures de plus grande taille risquent de ralentir les performances. Les miniatures dont le rapport largeur/hauteur est de 4:3 s'adaptent à leurs tuiles sans être rognées."
+      "thumbnailHelp": "Le lien de la miniature doit commencer par HTTPS.<br><br>La taille et la forme recommandées pour les miniatures sont de 280 x 210 pixels (rapport largeur/hauteur de 4:3). Les miniatures de plus grande taille risquent de ralentir les performances. Les miniatures dont les proportions sont de 4:3 s’adaptent à leurs tuiles sans rognage."
     },
     "settings": {
       "numberedPlaces": "Afficher des endroits avec des chiffres",
@@ -73,7 +73,7 @@ define({
       "custom": "Personnalisé",
       "customTooltip": "Définissez l’emplacement grâce au bouton qui apparaît dans les commandes de zoom de la carte",
       "mapLocationTooltip": "Emplacement que les utilisateurs voient lorsqu'ils ouvrent votre Shortlist",
-      "bookmarksHelp": "Pour activer les géosignets dans Shortlist, ajoutez et gérez les géosignets de la carte web dans la visionneuse de carte web",
+      "bookmarksHelp": "Pour activer les géosignets, commencez par fermer le générateur de shortlists, ouvrez ensuite la carte web utilisée dans cette shortlist (via Mon contenu ArcGIS ou via Mes récits) et ajoutez-y des géosignets à l’aide du ArcGIS Map Viewer.",
       "generalOptions": "Options générales",
       "mapOptions": "Options de la carte",
       "changeBasemap": "Modifier le fond de carte",

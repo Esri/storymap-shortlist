@@ -44,7 +44,7 @@ define({
       "builderButton": "Modifier",
       "facebookTooltip": "Partager sur Facebook",
       "twitterTooltip": "Partager sur Twitter",
-      "bitlyTooltip": "Obtenir un lien court vers l'application",
+      "bitlyTooltip": "Obtenir un lien court",
       "templateTitle": "Définir le titre du modèle",
       "templateSubtitle": "Définir le sous-titre du modèle",
       "share": "Partager"
@@ -55,7 +55,10 @@ define({
       "open": "Ouvert",
       "embed": "Incorporer dans une page web",
       "embedExplain": "Utilisez le code HTML suivant pour incorporer l'application dans une page web.",
-      "size": "Taille (largeur/hauteur):"
+      "size": "Taille (largeur/hauteur):",
+      "autoplayLabel": "Mode de lecture automatique",
+      "autoplayExplain1": "Le mode de lecture automatique parcourt progressivement votre récit selon un intervalle régulier. Ce mode est parfaitement adapté à un kiosque ou à un écran d’affichage public. Gardez toutefois à l’esprit qu’il peut rendre la lecture du récit plus difficile dans d’autres configurations. Cette fonctionnalité n’est pas prise en charge sur les petits écrans.",
+      "autoplayExplain2": "Lorsque ce mode est actif, vous disposez de contrôles pour lire le récit ou le mettre en pause, ainsi que régler la vitesse de navigation."
     },
     "general": {
       "noPlaces": "Aucun site dans cette zone. Appliquez un zoom arrière ou cliquez sur le bouton d'accueil pour voir des sites.",

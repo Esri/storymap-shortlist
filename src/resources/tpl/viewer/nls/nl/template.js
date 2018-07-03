@@ -44,7 +44,7 @@ define({
       "builderButton": "Bewerken",
       "facebookTooltip": "Delen op Facebook",
       "twitterTooltip": "Delen op Twitter",
-      "bitlyTooltip": "Een korte koppeling naar de applicatie maken",
+      "bitlyTooltip": "Ontvang een korte URL",
       "templateTitle": "Titel voor template instellen",
       "templateSubtitle": "Subtitel voor template instellen",
       "share": "Delen"
@@ -55,7 +55,10 @@ define({
       "open": "Openen",
       "embed": "Inbedden in webpagina",
       "embedExplain": "Gebruik de volgende HTML-code om het journaal in een webpagina in te bedden.",
-      "size": "Grootte (breedte/hoogte):"
+      "size": "Grootte (breedte/hoogte):",
+      "autoplayLabel": "Autoplaymodus",
+      "autoplayExplain1": "De modus Autoplay zal met regelmatige tussenpozen door uw verhaal gaan. Dit is ideaal voor een kiosk of een openbare weergavemonitor, maar houd er rekening mee dat het in andere situaties het verhaal lastiger te lezen kan maken. Deze functie wordt niet ondersteund op kleine schermen.",
+      "autoplayExplain2": "Wanneer deze modus actief is, kan het verhaal worden afgespeeld en gepauzeerd en kan de navigatiesnelheid worden aangepast."
     },
     "general": {
       "noPlaces": "Geen plaatsen in dit gebied. Uitzoomen of klik op de Home-knop om plaatsen te zien.",

@@ -4,7 +4,7 @@ define({
       "lblWebMap": "Harita",
       "lblLocation": "Konum",
       "lblContent": "İçerik",
-      "lblPopup": "Açılan Pencere",
+      "lblPopup": "Açılır pencere",
       "lblControls": "Ekstralar",
       "lblOverview": "Genel Bakış Haritası",
       "lblLegend": "Gösterim",
