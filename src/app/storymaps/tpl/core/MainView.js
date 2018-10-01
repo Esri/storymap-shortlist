@@ -152,7 +152,25 @@ define(["lib-build/css!./MainView",
 						b: [],
 						i: [],
 						u: [],
-						hr: []
+						hr: [],
+						// needed for <audio> and <video> tags
+						// in featurecollections (because src gets
+						// stripped by agol)
+						source: ['src', 'type'],
+						// same as journal attributes
+						iframe: [
+							'src',
+							'height',
+							'width',
+							'border',
+							'allowfullscreen',
+							'mozallowfullscreen',
+							'webkitallowfullscreen',
+							'frameborder',
+							'scrolling',
+							'allowtransparency',
+							'data-unload'
+						]
 					}
 				}, true),
 

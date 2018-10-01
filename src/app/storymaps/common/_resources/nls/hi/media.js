@@ -28,8 +28,8 @@ define({
       "lblDrop": "यहां छवि ड्राप करें या",
       "infoUpload": "छवियाँ आपके ArcGIS खाते में संग्रहित होंगी और केवल आपकी कहानी के अंदर ही सुलभ होंगी।",
       "warningFileTypes": "छवि.jpg, .png, .gif, या .bmp हो सकती है",
-      "warningOneFile": "एक बार में एक ही फ़ाइल ही स्वीकार्य है।",
-      "warningFileSize": "फ़ाइल अधिकतम स्वीकार्य अपलोड आकर से अधिक है। कृपया अन्य फ़ाइल् का चयन करें।",
+      "warningOneFile": "आ_Only one image may be uploaded at a time______________________ज.",
+      "warningFileSize": "आ_Image must be smaller than 10 MB__________________ज.",
       "tooltipRemove": "अपने ArcGIS खाते से इस अप्रयुक्त छवि को मिटा दें। <br> (यदि आप इसे बाद में उपयोग करने का फैसला करते हैं तो आपको इसे फिर से अपलोड करने की आवश्यकता होगी।)"
     },
     "imageSelectorFlickr": {

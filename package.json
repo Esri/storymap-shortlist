@@ -1,6 +1,6 @@
 {
   "name": "Storymaps-Shortlist",
-  "version": "2.7.0",
+  "version": "2.8.0",
   "private": true,
   "devDependencies": {
     "grunt": "~0.4.1",
