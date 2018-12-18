@@ -61,49 +61,49 @@ define({
     "settings": {
       "numberedPlaces": "Kuva kohad koos numbritega",
       "extentSensitive": "Näita kohti ainult vahekaartidel, mis on kaardil näha (ainult vaataja)",
-      "extentSensitiveTooltip": "See valik kehtib ainult lühinimekirja vaatamise korral. Lühinimekirja koosturis näitavad vahekaardid alati kõiki kohti ka siis, kui kohad ei ole kaardil näha. Tühjendage see valik, kui soovite, et vahekaardid näitaksid lühinimekirja vaatamisel alati kõiki kohti.",
-      "locateButton": "Nupp Määra asukoht",
+      "extentSensitiveTooltip": "See valik kehtib ainult lühinimekirja vaatamise korral. Lühinimekirja koostajas näitavad vahekaardid alati kõiki kohti ka siis, kui kohad ei ole kaardil näha. Tühjendage see valik, kui soovite, et vahekaardid näitaksid lühinimekirja vaatamisel alati kõiki kohti.",
+      "locateButton": "Nupp määra asukoht",
       "locateButtonTooltip": "Võimaldab lugejatel vaadata oma asukohta kaardil. Seda funktsiooni toetab enamik seadmeid ja brausereid, aga nuppu kuvatakse ainult siis, kui jagate oma loo HTTPS-lingina ja lugu pole manustatud.",
       "geocoder": "Aadressi-, koha- ja objektileidja",
       "bookmarks": "Järjehoidjad",
       "bookmarksMenuName": "Menüü nimi",
       "defaultMapLocation": "Kaardi vaikimisi määratud vaade",
       "auto": "Automaatne",
-      "autoTooltip": "Asukohta hallatakse automaatselt nii, et kõik teie kohad on näha",
+      "autoTooltip": "Asukohta hallatakse automaatselt nii, et kõik Teie kohad on näha",
       "custom": "Kohandatud",
       "customTooltip": "Seadke asukoht, kasutades kaardisuumi juhtseadiste hulgas kuvatavat nuppu",
       "mapLocationTooltip": "Asukoht, mis kuvatakse lühinimekirja avamisel",
-      "bookmarksHelp": "Järjehoidjate lubamiseks sulgege lühiloendite koostur. Seejärel avage selles lühiloendis loodud veebikaart (ArcGIS-i lehe Minu sisu või Minu lood kaudu) ja lisage sellele järjehoidjad ArcGIS-i kaardivaaturi kaudu.",
+      "bookmarksHelp": "Järjehoidjate lubamiseks sulgege lühiloendite koostaja. Seejärel avage selles lühiloendis loodud veebikaart (ArcGIS-i lehe minu sisu või minu lood kaudu) ja lisage sellele järjehoidjad ArcGIS-i kaardivaaturi kaudu.",
       "generalOptions": "Üldised valikud",
       "mapOptions": "Kaardivalikud",
       "changeBasemap": "Muuda aluskaarti",
-      "saveHomeLocation": "Salvesta kodu asukoht",
+      "saveHomeLocation": "Salvesta esilehe asukoht",
       "choose": "Valige",
       "headerColor": "Päise värv"
     },
     "help": {
       "title": "ABI",
-      "shortlistHelp1": "Tere tulemast rakendusse Story Map Shortlist. See rakendus võimaldab huvipunkte organiseerida vahekaartideks, mis muudab kasutajate jaoks selle piirkonna avastamise huvitavamaks. Selles koosturis saate oma asukohti luua ka interaktiivselt.",
-      "shortlistHelp2": "Kaardiloo lühiloendi saate luua ka olemasolevast ArcGIS-i veebikaardist (sh võimalus kasutada olemasolevaid kaardi punktiandmeid kohtadena). Need punktiandmed saate importida lühiloendi koosturisse edasiste muudatuste tegemiseks või kui teie kohad kasutavad <a href='http://links.esri.com/storymaps/shortlist_layer_template' target='_blank'>lühiloendi andmete skeemi</a>, võtta lühiloendi andmeteste nende olemasoleval kujul. Lisateabe saamiseks vaadake <a href='http://links.esri.com/storymaps/faq_shortlist_create_from_webmap' target='_blank'>seda KKK-d</a>.",
+      "shortlistHelp1": "Tere tulemast rakendusse Story Map Shortlist. See rakendus võimaldab huvipunkte organiseerida vahekaartideks, mis muudab kasutajate jaoks selle piirkonna avastamise huvitavamaks. Selles koostajas saate oma asukohti luua ka interaktiivselt.",
+      "shortlistHelp2": "Kaardiloo lühiloendi saate luua ka olemasolevast ArcGIS-i veebikaardist (sh võimalus kasutada olemasolevaid kaardi punktiandmeid kohtadena). Need punktiandmed saate importida lühiloendi koostajasse edasiste muudatuste tegemiseks või kui Teie kohad kasutavad <a href='http://links.esri.com/storymaps/shortlist_layer_template' target='_blank'>lühiloendi andmete skeemi</a>, võtta lühiloendi andmeteste nende olemasoleval kujul. Lisateabe saamiseks vaadake <a href='http://links.esri.com/storymaps/faq_shortlist_create_from_webmap' target='_blank'>seda KKK-d</a>.",
       "shortlistHelp3": "Veebikaardil lühinimekirja loomiseks avage",
-      "shortlistHelp4": "veebikaart, looge seal veebirakendus ja valige rakenduste galeriist rakendus Story Map Shortlist. Kui teie veebikaart sisaldab punktikihte, juhib lühinimekirjade koostur teid kihtide valiku juurde, mida soovite kasutada asukohtadena. Kui kasutasite lühinimekirja loomiseks rakenduse algupärast, ilma majutuseta versiooni, saate oma lühinimekirja samade toimingute abil üle kanda majutusega versiooni.",
+      "shortlistHelp4": "veebikaart, looge seal veebirakendus ja valige rakenduste galeriist rakendus Story Map Shortlist. Kui Teie veebikaart sisaldab punktikihte, juhib lühinimekirjade koostaja Teid kihtide valiku juurde, mida soovite kasutada asukohtadena. Kui kasutasite lühinimekirja loomiseks rakenduse algupärast, ilma majutuseta versiooni, saate oma lühinimekirja samade toimingute abil üle kanda majutusega versiooni.",
       "shortlistHelp5": "Lisateabe saamiseks",
       "shortlistHelp6": "avage Esri Story Maps veebilehe lühinimekirjade jaotis",
       "shortlistFAQ": "Lühinimekirjade KKK",
       "shortlistBetaFeedback": "Tagasiside beetaversiooni kohta",
-      "shortlistBetaFeedback2": "Meil oleks hea meel saada teilt tagasisidet! Teavitage meid oma probleemidest ja teile vajalikest uutest funktsioonidest, külastades",
+      "shortlistBetaFeedback2": "Meil oleks hea meel saada Teilt tagasisidet! Teavitage meid oma probleemidest ja Teile vajalikest uutest funktsioonidest, külastades",
       "geonetForum": "Story Maps’i foorumit GeoNet’is"
     },
     "migration": {
       "migrationPattern": {
-        "welcome": "Tere tulemast lühinimekirjade koosturisse Shortlist Builder",
+        "welcome": "Tere tulemast lühinimekirjade koostajasse Shortlist Builder",
         "importQuestion": "Teie veebikaart sisaldab punktandmeid.  Kas soovite neid punkte kasutada oma lühinimekirjas asukohtadena?",
-        "importExplainYes": "Lühinimekirjade koosturis saate oma kohti redigeerida, hallata ja lisada.  Teie veebikaardi koopia luuakse automaatselt nii, et teie algseid andmeid ei muudeta.",
-        "importExplainNo": "Teie punktid kuvatakse lühinimekirja kaardil, kuid neid ei kasutata asukohtadena.  Selle asemel saate oma kohti lisada lühinimekirjale koosturis.",
+        "importExplainYes": "Lühinimekirjade koostajas saate oma kohti redigeerida, hallata ja lisada. Teie veebikaardi koopia luuakse automaatselt nii, et Teie algseid andmeid ei muudeta.",
+        "importExplainNo": "Teie punktid kuvatakse lühinimekirja kaardil, kuid neid ei kasutata asukohtadena. Selle asemel saate oma kohti lisada lühinimekirjale koostajas.",
         "no": "Ei",
         "importOption": "Jah, impordi need",
         "asIsOption": "Jah, kasuta neid senisel kujul",
-        "asIsText": "Oma asukohti saate endiselt redigeerida ja hallata oma veebikaardil ja mitte lühinimekirjade koosturis.  Nendesse andmetesse sisseviidud uuendused kajastuvad lühinimekirjas automaatselt.  See suvand nõuab, et andmed kasutavad seda malli.",
+        "asIsText": "Oma asukohti saate endiselt redigeerida ja hallata oma veebikaardil ja mitte lühinimekirjade koostajas.  Nendesse andmetesse sisseviidud uuendused kajastuvad lühinimekirjas automaatselt. See suvand nõuab, et andmed kasutaksid seda malli.",
         "badData": "Teie asukohti sisaldav punktikiht ei kasuta nõutavat andmemalli. Palun vaadake mallile esitatud nõudeid.",
         "downloadTemplate": "Laadi mall alla",
         "selectPtData": "VALIGE OMA PUNKTANDMED",
@@ -118,12 +118,12 @@ define({
         "imageFields": "Väljad, mis sisaldavad iga koha piltide URL-i (valikuline): ",
         "mainImageField": "Põhipilt: ",
         "thumbImageField": "Pisipilt: ",
-        "noImageFields": "Jätke see komplekt olekusse „puudub“, kui soovite oma kohtadele pilte lisada koosturis",
-        "tabField": "Kui teil on väljanimi, mis jaotab asukohad teie kihis erinevateks paigutusteks, siis valige allpool asjaomane väljanimi."
+        "noImageFields": "Jätke see komplekt olekusse puudub, kui soovite oma kohtadele pilte lisada koostajas",
+        "tabField": "Kui Teil on väljanimi, mis jaotab asukohad Teie kihis erinevateks paigutusteks, siis valige allpool asjaomane väljanimi."
       },
       "layerPicker": {
         "pointLayers": "Valige oma veebikaardil punktikiht (-kihid), mida soovite kasutada asukohtadena: ",
-        "layerInfo": "Kui valite rohkem kui ühe kihi, siis peab kõigil kihtidel olema sama väljakomplekt.  Iga valitud kiht muutub teie lühinimekirjas vahekaardiks."
+        "layerInfo": "Kui valite rohkem kui ühe kihi, siis peab kõigil kihtidel olema sama väljakomplekt.  Iga valitud kiht muutub Teie lühinimekirjas vahekaardiks."
       }
     }
   }

@@ -24,10 +24,10 @@ define({
       "invalidApp": "Rakendust %TPL_NAME% ei eksisteeri või see pole kättesaadav.",
       "appLoadingFail": "Midagi läks valesti, rakendust %TPL_NAME% ei laaditud õigesti.",
       "notConfiguredDesktop": "Lugu pole veel konfigureeritud.",
-      "notConfiguredMobile": "Selle kuvasuuruse korral koosturit %TPL_NAME% ei toetata. Võimaluse korral muutke koosturile juurdepääsemiseks oma brauseri suurust või looge oma lugu suurema ekraaniga seadmes.",
-      "notConfiguredMobile2": "Koosturi %TPL_NAME% kasutamiseks pöörake oma seadet ja kasutage horisontaalpaigutust.",
+      "notConfiguredMobile": "Selle kuvasuuruse korral koostajat %TPL_NAME% ei toetata. Võimaluse korral muutke koostajale juurdepääsemiseks oma brauseri suurust või looge oma lugu suurema ekraaniga seadmes.",
+      "notConfiguredMobile2": "Koostaja %TPL_NAME% kasutamiseks pöörake oma seadet ja kasutage horisontaalpaigutust.",
       "notAuthorized": "Teil puudub õigus sellele loole juurde pääseda",
-      "notAuthorizedBuilder": "Teil pole õigust koosturit %TPL_NAME% kasutada.",
+      "notAuthorizedBuilder": "Teil pole õigust koostajat %TPL_NAME% kasutada.",
       "noBuilderIE": "Internet Exploreri versioonist %VERSION% varasemad versioonid ei toeta koostajat. %UPGRADE%",
       "noViewerIE": "Seda lugu ei toetata Internet Exploreri varasemas versioonis %VERSION%. %UPGRADE%",
       "noViewerIE2": "Püüate seda lugu vaadata vanemas brauseris, mida ei toetata. Mõned funktsioonid ei pruugi töötada ning ilmneda võib ootamatuid probleeme. Soovitame kasutada brauserit Internet Explorer 11 või mõnda muud brauserit (nt Chrome).",
@@ -36,8 +36,8 @@ define({
       "mapLoadingFail": "Midagi läks valesti ning kaarti ei laaditud õigesti.",
       "signOut": "Logi välja",
       "attention": "Tähelepanu!",
-      "noBuilderEdge": "Kaardiloo lühiloendeid saab kuvada kõigis brauserites, aga kaardiloo lühiloendi koostur pole toetatud brauseris Windows Edge. Kasutage lühiloendi loomiseks või redigeerimiseks mõnda muud brauserit.",
-      "noBuilderAllIE": "Kaardiloo lühiloendeid saab kuvada kõigis brauserites, aga kaardiloo lühiloendi koostur pole toetatud brauserites Microsoft Edge ega Internet Explorer. Kasutage lühiloendi loomiseks või redigeerimiseks mõnda muud brauserit."
+      "noBuilderEdge": "Kaardiloo lühiloendeid saab kuvada kõigis brauserites, aga kaardiloo lühiloendi koostaja pole toetatud brauseris Windows Edge. Kasutage lühiloendi loomiseks või redigeerimiseks mõnda muud brauserit.",
+      "noBuilderAllIE": "Kaardiloo lühiloendeid saab kuvada kõigis brauserites, aga kaardiloo lühiloendi koostaja pole toetatud brauserites Microsoft Edge ega Internet Explorer. Kasutage lühiloendi loomiseks või redigeerimiseks mõnda muud brauserit."
     },
     "headerFromCommon": {
       "storymapsText": "Kaardilugu",
@@ -46,7 +46,7 @@ define({
       "twitterTooltip": "Jaga Twitteris",
       "bitlyTooltip": "Hangi lühike link",
       "templateTitle": "Määra mallile pealkiri",
-      "templateSubtitle": "Määra mallile alampealkiri",
+      "templateSubtitle": "Määra mallile alapealkiri",
       "share": "Jaga"
     },
     "shareFromCommon": {
@@ -57,11 +57,11 @@ define({
       "embedExplain": "Kasutage rakenduse veebilehele manustamiseks järgmist HTML-koodi.",
       "size": "Suurus (laius/kõrgus):",
       "autoplayLabel": "Automaatesituse režiim",
-      "autoplayExplain1": "Automaatesituse režiimis keritakse teie lugu regulaarse intervalliga edasi. See sobib ideaalselt näiteks infokioskis või avalikul ekraanil, ent võtke arvesse, et muudes olukordades võib see muuta loo raskemini loetavaks. Seda funktsiooni ei saa väikeste ekraanide korral kasutada.",
+      "autoplayExplain1": "Automaatesituse režiimis keritakse Teie lugu regulaarse intervalliga edasi. See sobib ideaalselt näiteks infokioskis või avalikul ekraanil, ent võtke arvesse, et muudes olukordades võib see muuta loo raskemini loetavaks. Seda funktsiooni ei saa väikeste ekraanide korral kasutada.",
       "autoplayExplain2": "Kui see režiim on aktiveeritud, saate kasutada loo esitamise või peatamise ja liikumiskiiruse reguleerimise juhtelemente."
     },
     "general": {
-      "noPlaces": "Sellel alal pole kohti.  Kohtade vaatamiseks vähendage või klõpsake nuppu Kodu.",
+      "noPlaces": "Sellel alal pole kohti.  Kohtade vaatamiseks vähendage või klõpsake nuppu kodu.",
       "start": "Alusta"
     }
   }

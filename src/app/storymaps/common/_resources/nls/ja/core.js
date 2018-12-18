@@ -161,6 +161,9 @@ define({
       "enlarge": "拡大",
       "newTab": "新しいタブで開く",
       "tagline": "ストーリー マップ"
+    },
+    "licenseChange2018": {
+      "noAccess": "須_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________鷗."
     }
   }
 });

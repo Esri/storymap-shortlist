@@ -161,6 +161,9 @@ define({
       "enlarge": "Vergroten",
       "newTab": "Openen in een nieuw tabblad",
       "tagline": "Een Story Map"
+    },
+    "licenseChange2018": {
+      "noAccess": "Ĳ_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________ä."
     }
   }
 });

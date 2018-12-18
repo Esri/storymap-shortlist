@@ -117,7 +117,7 @@ define({
       "logoCustomUploadHelp": "ลิงก์ภาพโลโก้ต้องขึ้นต้นด้วย HTTPS โลโก้จะดูดีที่สุด หากมีอัตราส่วนความกว้าง:ความสูงระหว่าง 1:1 ถึง 5:1 หากโลโก้ที่เชื่อมโยงดึงช้า ให้บันทึกสำเนาแล้วอัปโหลดที่นี่",
       "logoCustomUploadTooltip": "ใช้โลโก้ที่อัพโหลด",
       "logoCustomUploadButton": "อัพโหลดโลโก้",
-      "logoUploadSizeError": "ขนาด GIF มีขนาดใหญ่เกินไป โปรดปรับขนาดไปยัง $ {PIXEL-WIDTH} พิกเซลกว้าง",
+      "logoUploadSizeError": "ขนาด GIF มีขนาดใหญ่เกินไป โปรดปรับขนาดไปยัง ${PIXEL-WIDTH} พิกเซลกว้าง",
       "logoCustomLinkHTTPSError": "ลิงก์ต้องขึ้นต้นด้วย HTTPS",
       "logoCustomLinkTooltip": "ลิงค์ไปยังโลโก้",
       "logoCustomLinkPlaceholder": "URL รูปภาพ",
@@ -161,6 +161,9 @@ define({
       "enlarge": "ขยาย",
       "newTab": "เปิดในแท็บใหม่",
       "tagline": "Story Map"
+    },
+    "licenseChange2018": {
+      "noAccess": "ก้_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________ษฺ."
     }
   }
 });

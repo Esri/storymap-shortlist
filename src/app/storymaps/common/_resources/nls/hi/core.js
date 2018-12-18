@@ -161,6 +161,9 @@ define({
       "enlarge": "बड़ा करें",
       "newTab": "नए टैब में खोलें",
       "tagline": "स्टोरी मैप"
+    },
+    "licenseChange2018": {
+      "noAccess": "आ_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________ज."
     }
   }
 });

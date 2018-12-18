@@ -161,6 +161,9 @@ define({
       "enlarge": "확대",
       "newTab": "새 탭에서 열기",
       "tagline": "스토리맵"
+    },
+    "licenseChange2018": {
+      "noAccess": "한_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________빠."
     }
   }
 });

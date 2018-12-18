@@ -161,6 +161,9 @@ define({
       "enlarge": "Увеличить",
       "newTab": "Открыть в новой вкладке",
       "tagline": "Карта-история"
+    },
+    "licenseChange2018": {
+      "noAccess": "Ж_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________Я."
     }
   }
 });

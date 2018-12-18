@@ -161,6 +161,9 @@ define({
       "enlarge": "放大",
       "newTab": "在新頁籤中開啟",
       "tagline": "故事地圖"
+    },
+    "licenseChange2018": {
+      "noAccess": "試_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________驗."
     }
   }
 });
