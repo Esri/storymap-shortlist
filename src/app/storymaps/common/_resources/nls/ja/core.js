@@ -120,7 +120,7 @@ define({
       "logoUploadSizeError": "GIF の寸法が大きすぎます。サイズを ${PIXEL-WIDTH} ピクセルの幅に変更してください。",
       "logoCustomLinkHTTPSError": "リンクは、HTTPS で始まる必要があります",
       "logoCustomLinkTooltip": "ロゴへのリンク",
-      "logoCustomLinkPlaceholder": "画像 URL",
+      "logoCustomLinkPlaceholder": "画像の URL",
       "logoCustomLinkPlaceholderHTTPS": "https://example.com/logo.jpg",
       "logoUploadGenericError": "ロゴは、*.bmp、*.gif、*.jpg、*.jpeg、または *.png ファイルにすることができます。GIF は、幅が 250 ピクセル未満、サイズが 10 MB 未満である必要があります。",
       "logoCustomTargetPlaceholder": "ロゴがクリックされたときに開かれる Web ページ",
@@ -134,11 +134,11 @@ define({
     },
     "bannerNotification": {
       "learnMore": "詳細",
-      "close": "クローズ",
+      "close": "閉じる",
       "dontShowAgain": "今後このメッセージを表示しない"
     },
     "httpsTransitionMessage": {
-      "bannerMsg": "Web Security とストーリー マップに関する重要なメッセージ",
+      "bannerMsg": "Web セキュリティとストーリー マップに関する重要なメッセージ",
       "s1h1": "Esri はストーリー マップのセキュリティ向上に努めています",
       "s1p1": "ストーリー マップは Web 上に存在しており、Web コミュニティが、より良いセキュリティを確立して実装しようと、常に努力しています。 インターネットを経由して送信されるコンテンツにセキュリティで保護された接続を提供する HTTPS は、Web コンテンツにアクセスすることが期待される方法として現れました。 最新のブラウザーは現在、HTTPS の代わりに HTTP が使用された場合、警告メッセージを表示します。 これが標準となったことから、ストーリー マップを作成および共有する場合には HTTPS リンクを使用すること、Web コンテンツを埋め込む場合またはストーリー マップ内の画像にリンクする場合には HTTPS URL のみを使用することが強く推奨されます。",
       "s1p2": "事実上、ストーリー マップおよびそのすべてのコンテンツ (画像、レイヤー、埋め込まれたアプリおよび Web サイトを含む) には、HTTP ではなく HTTPS で始まるリンクを使用してアクセスする必要があるということです。 これによって、ストーリーが安全であることをほとんどの Web ブラウザーが示すようになるため、ユーザーに最高の体験を提供します。",
@@ -163,7 +163,10 @@ define({
       "tagline": "ストーリー マップ"
     },
     "licenseChange2018": {
-      "noAccess": "須_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________鷗."
+      "noAccess": "パブリックでないストーリー マップを開くためのライセンスがアカウント (%USER_NAME%) に付与されていません。  組織の管理者にストーリー マップまたはアドオン Essential Apps ライセンスを含むユーザー タイプを割り当てるよう依頼してください。"
+    },
+    "storyTellerUserType": {
+      "notCreatorError": "お使いのアカウント (%USER_NAME%) には、従来のストーリー マップ ビルダーを使用するライセンスがありません。 組織の管理者に問い合わせて、Creator ユーザー タイプを割り当ててもらってください。"
     }
   }
 });

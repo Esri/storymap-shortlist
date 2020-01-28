@@ -4,7 +4,7 @@ define({
       "add": "Pridėti",
       "edit": "Redaguoti",
       "save": "Įrašyti",
-      "next": "Sekantis",
+      "next": "Kitas",
       "cancel": "Atšaukti",
       "back": "Grįžti",
       "apply": "Taikyti",
@@ -63,7 +63,7 @@ define({
       "panel2q1": "Pasakojimo pavadinimas (rekomenduojama)",
       "panel2q1tooltip": "Pasirinkus šią parinktį, jūsų elemento antraštė bus modifikuota, kad sutaptų su jūsų pasakojimo pavadinimu, o kiti kūrimo priemonėje atlikti keitimai bus sinchronizuojami.",
       "panel2q2": "Elemento antraštė",
-      "panel3": "Jei norite toliau tobulinti pasakojimo išvaizdą socialiniame tinkle, naudokite ${MYSTORIES}, kad pridėtumėte santrauką ir miniatiūros vaizdą.",
+      "panel3": "Jei norite toliau tobulinti pasakojimo išvaizdą socialiniame tinkle, naudokite ${MYSTORIES}, kad pridėtumėte santrauką ir miniatiūros vaizdą.",
       "panel4": "Nebeįspėti manęs apie šį pasakojimą"
     },
     "share": {
@@ -92,7 +92,7 @@ define({
       "notavailable6": "Deja, ši funkcija nėra visiškai palaikoma programavimo režime. Atsižvelgiant į jūsų talpinimo scenarijų, ši funkcija gali būti palaikoma patalpinus.",
       "notavailable7": "Būtinai apsilankykite %MYCONTENT%, kad patvirtintumėte, jog jūsų pasakojime naudojami žemėlapiai ir sluoksniai yra taip pat bendrinami.",
       "notavailable8": "Turinys",
-      "mystoriesinvite2": "Jei norite tobulinti pasakojimo išvaizdą socialiniuose tinkluose, naudokite ${MYSTORIES}, kad pridėtumėte santrauką ir miniatiūros vaizdą."
+      "mystoriesinvite2": "Jei norite tobulinti pasakojimo išvaizdą socialiniuose tinkluose, naudokite ${MYSTORIES}, kad pridėtumėte santrauką ir miniatiūros vaizdą."
     },
     "settings": {
       "header": "Nuostatos",
@@ -105,7 +105,7 @@ define({
       "viewExample": "Peržiūrėti veikiantį pavyzdį"
     },
     "settingsTheme": {
-      "title": "Apipavidalinimas"
+      "title": "Tema"
     },
     "settingsHeader": {
       "title": "Antraštė",
@@ -113,14 +113,14 @@ define({
       "logoNoneRadio": "Logotipo nėra",
       "logoOrgRadio": "Organizacijos logotipas",
       "logoCustomRadio": "Mano logotipas",
-      "logoCustomLabel": "Atvaizdas:",
+      "logoCustomLabel": "Paveikslėlis:",
       "logoCustomUploadHelp": "Logotipo paveikslėlis turi prasidėti HTTPS. Logotipai atrodo geriausiai, jei jų pločio ir aukščio santykis yra nuo 1:1 iki 5:1. Jei susietas logotipas atvaizduojamas lėtai, įrašykite kopiją ir įkelkite ją čia.",
       "logoCustomUploadTooltip": "Naudoti įkeltą logotipą",
       "logoCustomUploadButton": "Įkelti logotipą",
       "logoUploadSizeError": "GIF matmenys per dideli. Pakeiskite dydį, kad plotis pikseliais būtų ${PIXEL-WIDTH}.",
       "logoCustomLinkHTTPSError": "Nuoroda turi prasidėti HTTPS",
       "logoCustomLinkTooltip": "Nuoroda į logotipą",
-      "logoCustomLinkPlaceholder": "Atvaizdo URL",
+      "logoCustomLinkPlaceholder": "Paveikslėlio URL",
       "logoCustomLinkPlaceholderHTTPS": "https://example.com/logo.jpg",
       "logoUploadGenericError": "Logotipas gali būti .bmp, .gif, .jpg, .jpeg arba .png failas. Gif turi būti ne platesnis nei 250 piks. ir ne didesnis nei 10 Mb.",
       "logoCustomTargetPlaceholder": "Tinklalapis, atidaromas paspaudus logotipą",
@@ -134,11 +134,11 @@ define({
     },
     "bannerNotification": {
       "learnMore": "Sužinokite daugiau",
-      "close": "Uždaryti",
+      "close": "Užverti",
       "dontShowAgain": "Daugiau nerodyti šio pranešimo"
     },
     "httpsTransitionMessage": {
-      "bannerMsg": "Svarbus pranešimas apie žiniatinklio saugą ir žemėlapių pasakojimus",
+      "bannerMsg": "Svarbus pranešimas apie žiniatinklio saugumą ir žemėlapių pasakojimus",
       "s1h1": "Esri tobulina žemėlapių pasakojimų saugumą",
       "s1p1": "Jūsų žemėlapių pasakojimai yra internete ir interneto bendruomenė nuolat stengiasi įgyvendinti didesnę saugą. Kaip numatytasis būdas pasiekti interneto turinį, pradedamas naudoti HTTPS, kuris suteikia saugų internetu perduodamo turinio ryšį. Dauguma šiuolaikinių naršyklių rodo įspėjamąjį pranešimą, kai vietoje HTTPS naudojamas HTTP. Dėl šio naujo standarto labai rekomenduojame žemėlapių pasakojimų kūrimui ir saugojimui naudoti HTTPS nuorodas, o įdedant interneto turinį ar susiejant atvaizdus su žemėlapio pasakojimu, naudoti tik HTTPS URL.",
       "s1p2": "Tiksliau tariant, tai reiškia, kad žemėlapio pasakojimas ir visas jo turinys (įskaitant atvaizdus, sluoksnius, įdėtąsias aplikacijas ir svetaines) turi būti pasiekiamas naudojant nuorodas, prasidedančias HTTPS, o ne HTTP. Tai užtikrina jūsų skaitytojams geriausią patirtį, nes dauguma interneto naršyklių rodys, kad jūsų pasakojimai yra saugūs.",
@@ -163,7 +163,10 @@ define({
       "tagline": "Žemėlapio pasakojimas"
     },
     "licenseChange2018": {
-      "noAccess": "Į_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________š."
+      "noAccess": "Jūsų paskyra (%USER_NAME%) nelicencijuota atidaryti ne viešą žemėlapio pasakojimą. Kreipkitės į organizacijos administratorių, kad paskirtų jums naudotojo tipą, kuris turi žemėlapių pasakojimus, arba suteiktų jums papildomą svarbiausių aplikacijų licenciją."
+    },
+    "storyTellerUserType": {
+      "notCreatorError": "Jūsų paskyra (% USER_NAME%) nelicencijuota naudoti klasikines žemėlapių pasakojimų kūrimo priemones. Paprašykite organizacijos administratoriaus priskirti jums Kūrėjo naudotojo tipą."
     }
   }
 });

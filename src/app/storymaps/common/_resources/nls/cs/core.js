@@ -57,7 +57,7 @@ define({
     },
     "saveErrorSocial": {
       "title": "Aktualizace sdílení na sociálních sítích",
-      "panel1": "Vzhled vašeho příběhu na sociálních médiích byl aktualizován, název vaší položky webové aplikace ArcGIS se však neshoduje s názvem vašeho příběhu.",
+      "panel1": "Vzhled vašeho příběhu na sociálních sítích byl aktualizován, název položky webové aplikace ArcGIS se však neshoduje s názvem vašeho příběhu.",
       "panel1tooltip": "Pokud definujete název, shrnutí a náhledový obrázek, váš příběh bude vypadat následovně:",
       "panel2": "Název, který chcete použít na sociálních sítích:",
       "panel2q1": "Název příběhu (doporučeno)",
@@ -70,7 +70,7 @@ define({
       "shareTitle": "Sdílejte svůj příběh",
       "preview": "Náhled",
       "viewlive": "Zobrazit příběh",
-      "btnPrivate": "Soukromý",
+      "btnPrivate": "Soukromé",
       "btnPrivateTooltip": "Příběh můžete vidět pouze vy",
       "btnOrg": "Organizace",
       "btnOrgTooltip": "Příběh mohou vidět pouze členové vaší organizace",
@@ -105,7 +105,7 @@ define({
       "viewExample": "Zobrazit živý příklad"
     },
     "settingsTheme": {
-      "title": "Téma"
+      "title": "Motiv"
     },
     "settingsHeader": {
       "title": "Záhlaví",
@@ -120,7 +120,7 @@ define({
       "logoUploadSizeError": "Rozměry obrázku GIF jsou příliš velké. Změňte velikost obrázku na ${PIXEL-WIDTH}.",
       "logoCustomLinkHTTPSError": "Odkaz musí začínat řetězcem HTTPS",
       "logoCustomLinkTooltip": "Odkaz na logo",
-      "logoCustomLinkPlaceholder": "Adresa URL obrázku",
+      "logoCustomLinkPlaceholder": "URL obrázku",
       "logoCustomLinkPlaceholderHTTPS": "https://example.com/logo.jpg",
       "logoUploadGenericError": "Jako logo můžete použít soubory ve formátech BMP, GIF, JPG, JPEG a PNG. Soubory ve formátu GIF nesmí být širší než 250 px a nesmí přesahovat velikost 10 MB.",
       "logoCustomTargetPlaceholder": "Webová stránka, která se otevře po kliknutí na logo",
@@ -163,7 +163,10 @@ define({
       "tagline": "Mapa s příběhem"
     },
     "licenseChange2018": {
-      "noAccess": "Ř_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________ů."
+      "noAccess": "Váš účet (%USER_NAME%) nevlastní licenci k otevření mapy s příběhem, která není veřejná. Požádejte prosím správce své organizace, aby vám přidělil typ uživatele, jehož součástí jsou mapy s příběhem nebo doplňková licence základních aplikací."
+    },
+    "storyTellerUserType": {
+      "notCreatorError": "Váš účet (%USER_NAME%) nevlastní licenci k použití nástrojů pro tvorbu klasických map s příběhem. Požádejte prosím administrátora své organizace, aby vám přidělil typ uživatele Creator."
     }
   }
 });

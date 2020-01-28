@@ -6,7 +6,7 @@ define({
       "save": "Zapisz",
       "next": "Dalej",
       "cancel": "Anuluj",
-      "back": "Wstecz",
+      "back": "Powrót",
       "apply": "Zastosuj",
       "close": "Zamknij",
       "open": "Otwórz",
@@ -99,7 +99,7 @@ define({
       "tabError": "Sprawdź, czy poszczególne karty nie zawierają błędnych danych"
     },
     "settingsLayout": {
-      "title": "Kompozycja",
+      "title": "Układ",
       "explain": "Jakiego układu chcesz użyć?",
       "explainInit": "W oknie dialogowym ustawień możesz zmienić układ w dowolnej chwili.",
       "viewExample": "Wyświetl przykład online"
@@ -163,7 +163,10 @@ define({
       "tagline": "Mapa narracyjna"
     },
     "licenseChange2018": {
-      "noAccess": "ł_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________ą."
+      "noAccess": "Twoje konto (%USER_NAME%) nie jest licencjonowane do otwierania mapy narracyjnej, która nie jest publiczna. Poproś administratora instytucji o przypisanie typu użytkownika, który obejmuje licencję na mapy narracyjne lub licencję na kluczowe aplikacje dodatkowe."
+    },
+    "storyTellerUserType": {
+      "notCreatorError": "Twoje konto (%USER_NAME%) nie ma licencji na użytkowanie kreatorów klasycznych map narracyjnych. Poproś administratora instytucji o przypisanie Tobie typu użytkownika Creator (Twórca)."
     }
   }
 });

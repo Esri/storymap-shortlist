@@ -2,7 +2,7 @@ define({
   "commonWebmap": {
     "selector": {
       "lblWebMap": "Kort",
-      "lblLocation": "Placering",
+      "lblLocation": "Sted",
       "lblContent": "Indhold",
       "lblPopup": "Pop-up-vindue",
       "lblControls": "Ekstra",
@@ -33,7 +33,7 @@ define({
       "tooltipLocation": "Definér den position, som kortet skal vise.",
       "tooltipContent": "Definér synlige lag.",
       "tooltipPopup": "Vælg et pop-up-vindue, der åbnes, når kortet bliver vist.",
-      "tooltipOverview": "Vis et lille oversigtskort langs med hovedkortet.",
+      "tooltipOverview": "Få vist et lille oversigtskort sammen med hovedkortet.",
       "tooltipLegend": "Få vist signaturforklaringen på kortet. Dette er nyttigt, når kortet har mange lag og symboler.",
       "mapCfgInvite": "Brug disse knapper til at konfigurere kortet",
       "lblLocationAlt": "Arvet fra det første kort",

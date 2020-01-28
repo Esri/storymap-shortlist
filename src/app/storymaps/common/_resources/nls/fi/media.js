@@ -18,7 +18,7 @@ define({
     "imageSelector": {
       "lblStep1": "Valitse palvelu",
       "lblStep2": "Valitse media",
-      "lblStep3": "Määritä"
+      "lblStep3": "Muokkaa"
     },
     "imageSelectorHome": {
       "explain": "Lataa kuvat sosiaalisesta mediasta <br />tai suoraan URL-osoitteesta"
@@ -30,7 +30,7 @@ define({
       "warningFileTypes": "Kuva voi olla jossakin seuraavista muodoista: .jpg, .png, .gif, tai .bmp.",
       "warningOneFile": "Vain yhden kuvan voi ladata kerralla palvelimeen.",
       "warningFileSize": "Kuvan on oltava kooltaan pienempi kuin 10 Mt.",
-      "tooltipRemove": "Delete this unused image from your ArcGIS account. <br> (You'll need to upload it again if you decide to use it later.)"
+      "tooltipRemove": "Poista tämä käyttämätön kuva ArcGIS-tililtäsi. <br> (Sinun on ladattava se tilillesi uudelleen, jos päätät käyttää sitä myöhemmin.)"
     },
     "imageSelectorFlickr": {
       "userInputLbl": "Käyttäjätunnus",
@@ -79,7 +79,7 @@ define({
       "lblOR": "TAI",
       "lblError1": "Virhe, tyhjennä toinen kahdesta lähtöaineistokentästä.",
       "lblError2": "Upotuskoodi voi sisältää vain yhden merkkijonon %IFRAMETAG%",
-      "configure": "Määritä"
+      "configure": "Muokkaa"
     },
     "mediaConfigure": {
       "lblURL": "Kuvan linkki",

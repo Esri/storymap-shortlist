@@ -2,9 +2,9 @@ define({
   "commonCore": {
     "common": {
       "add": "Добавить",
-      "edit": "Редактировать",
+      "edit": "Редактирование",
       "save": "Сохранить",
-      "next": "Следующий",
+      "next": "Далее",
       "cancel": "Отмена",
       "back": "Назад",
       "apply": "Применить",
@@ -29,7 +29,7 @@ define({
       "panelHeader": "%TPL_NAME% Конструктор",
       "buttonSaving": "Сохранение",
       "buttonSaved": "Сохранено",
-      "buttonShare": "Опубликовать",
+      "buttonShare": "Предоставить доступ",
       "buttonSettings": "Настройки",
       "buttonHelp": "Справка",
       "buttonPreview": "Просмотр истории",
@@ -91,7 +91,7 @@ define({
       "notavailable5": "страница элемента",
       "notavailable6": "Извините, этот объект не поддерживается в режиме разработки полностью. Он может поддерживаться в зависимости от выбранного варианта разворачивания.",
       "notavailable7": "Посмотрите в %MYCONTENT%, что карты и слои, которые используются в истории, также доступны.",
-      "notavailable8": "Моих ресурсов",
+      "notavailable8": "Мои ресурсы",
       "mystoriesinvite2": "Для дальнейшего улучшения отображения своей истории в социальных сетях используйте ${MYSTORIES}, чтобы добавить краткую информацию и изображение образца."
     },
     "settings": {
@@ -120,7 +120,7 @@ define({
       "logoUploadSizeError": "Слишком большие размеры GIF. Замените размер на ${PIXEL-WIDTH} пикселов по ширине",
       "logoCustomLinkHTTPSError": "Ссылка должна начинаться с HTTPS",
       "logoCustomLinkTooltip": "Ссылка на логотип",
-      "logoCustomLinkPlaceholder": "URL изображения",
+      "logoCustomLinkPlaceholder": "URL-адрес изображения",
       "logoCustomLinkPlaceholderHTTPS": "https://example.com/logo.jpg",
       "logoUploadGenericError": "Логотипом может быть файл формата .bmp, .gif, .jpg, .jpeg, или .png. Gif должен быть меньше 250 пикс. в ширину и 10 МБ по размеру.",
       "logoCustomTargetPlaceholder": "Веб-страница, которая будет открываться при нажатии на логотип",
@@ -163,7 +163,10 @@ define({
       "tagline": "Карта-история"
     },
     "licenseChange2018": {
-      "noAccess": "Ж_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________Я."
+      "noAccess": "Ваша учетная запись (%USER_NAME%) не лицензирована на открытие не публичной Story Map. Обратитесь к администратору организации, чтобы получить тип пользователя, в который входит Story Map или лицензия дополнительного модуля Essential Apps."
+    },
+    "storyTellerUserType": {
+      "notCreatorError": "Лицензия вашей учетной записи (%USER_NAME%) не позволяет использовать классический конструктор карт-историй. Попросите администратора вашей организации назначить вам тип лицензии Creator."
     }
   }
 });

@@ -21,12 +21,12 @@ define({
       "lblStep3": "Configura"
     },
     "imageSelectorHome": {
-      "explain": "Carregueu imatges des de les xarxes socials <br /> o directament des d'una URL"
+      "explain": "Pugeu les imatges de les xarxes socials <br /> o directament d'una URL"
     },
     "imageSelectorUpload": {
       "lblUploadButton": "cerca una imatge",
       "lblDrop": "Deixa anar una imatge aquí o bé",
-      "infoUpload": "Les imatges s'emmagatzemaran al vostre compte de l'ArcGIS i només s'hi podrà accedir a la vostra història.",
+      "infoUpload": "Les imatges s'emmagatzemaran al vostre compte de l'ArcGIS i només s'hi podrà accedir des de dins de la vostra història.",
       "warningFileTypes": "La imatge pot ser .jpg, .png, .gif o .bmp",
       "warningOneFile": "Només es pot pujar una imatge a la vegada.",
       "warningFileSize": "La imatge ha de tenir una mida inferior a 10 MB.",
@@ -67,8 +67,8 @@ define({
       "url": "Enllaç de vídeo del Vimeo"
     },
     "videoSelectorOther": {
-      "explain1": "Aquest story map no pot reproduir fitxers de vídeo sense processar (per exemple, .avi o .mpeg), però pot reproduir vídeos allotjats amb reproductors integrats (per exemple, del YouTube o del Vimeo).",
-      "explain2": "La majoria dels serveis d'allotjament de vídeos ofereixen aquesta característica. Cerqueu l'opció per incrustar el vídeo, copieu el codi proporcionat i afegiu-lo a la vostra història amb l'opció de contingut %WEBPAGE%.",
+      "explain1": "Aquest Story Map no pot reproduir fitxers de vídeo sense processar (per exemple, .avi o .mpeg), però pot reproduir vídeos allotjats amb reproductors integrats (per exemple, del YouTube o del Vimeo).",
+      "explain2": "La majoria dels serveis d'allotjament de vídeos ofereixen aquesta característica. Busqueu l'opció per incrustar el vídeo, copieu el codi proporcionat i afegiu-lo a la vostra història amb l'opció de contingut %WEBPAGE%.",
       "explain3": "També podeu allotjar el vídeo amb una pàgina HTML que utilitzi un reproductor de vídeo com ara %EXAMPLE%. A continuació, podreu afegir l'adreça URL d'aquesta pàgina HTML a la vostra història com a %WEBPAGE%.",
       "webpage": "Pàgina web"
     },
@@ -112,7 +112,7 @@ define({
       "unloadHelp": "Si la pàgina web inclou contingut multimèdia d'àudio o vídeo, deixeu activada aquesta opció per evitar que el contingut es reprodueixi quan el lector surti. Desactiveu l'opció, per exemple, perquè una pista d'àudio es continuï reproduint a mesura que el lector avanci per la història.<br />Si la pàgina web és una aplicació, desactiveu l'opció perquè la història no es torni a carregar si el lector hi torna.",
       "embedProtocolLabel": "Carrega la pàgina a través d'una connexió segura (HTTPS)",
       "embedProtocolWarning1": "Si aquesta pàgina no es carrega a la vostra història, significa que no es pot incrustar per motius de seguretat web. Com a alternativa, afegiu un enllaç a la narració per obrir la pàgina en una nova pestanya del navegador. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>Més informació</a>",
-      "embedProtocolWarning2": "Si aquesta pàgina no es carrega a la vostra història, deshabiliteu aquesta opció i torneu-ho a provar. Si la pàgina segueix sense carregar-se, significa que no es pot incrustar per motius de seguretat web. Com a alternativa, afegiu un enllaç a la vostra narració per obrir la pàgina en una nova pestanya del navegador. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>Més informació</a>",
+      "embedProtocolWarning2": "Si aquesta pàgina no es carrega a la vostra història, desactiveu aquesta opció i torneu-ho a provar. Si la pàgina segueix sense carregar-se, significa que no es pot incrustar per motius de seguretat web. Com a alternativa, afegiu un enllaç a la narració per obrir la pàgina en una nova pestanya del navegador. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>Més informació</a>",
       "learn": "Més informació",
       "lblAltText": "Text alternatiu",
       "placeholderAltText": "Introduïu una descripció d'aquest contingut multimèdia per als lectors amb dificultats visuals...",

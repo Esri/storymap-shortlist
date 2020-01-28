@@ -14,7 +14,7 @@ define({
       "loadingTitle": "載入標題",
       "entry": "條目",
       "entries": "條目",
-      "section": "地塊",
+      "section": "節",
       "sections": "1 平方英里的土地",
       "and": "and",
       "action": "節中的操作",
@@ -49,7 +49,7 @@ define({
       "extentTitle": "地圖位置",
       "extentExplain": "平移並縮放地圖以定義供讀者觀看的地圖外觀。",
       "extentSave": "儲存地圖位置",
-      "popupTitle": "地圖快顯",
+      "popupTitle": "地圖快顯視窗",
       "popupExplain": "按一下圖徵以打開您要顯示的快顯。",
       "popupSave": "儲存快顯配置",
       "hintNavigation": "地圖導航已停用。"

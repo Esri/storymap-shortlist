@@ -4,7 +4,7 @@ define({
       "add": "Dodaj",
       "edit": "Uredi",
       "save": "Shrani",
-      "next": "Naprej",
+      "next": "Naslednji",
       "cancel": "Prekliči",
       "back": "Nazaj",
       "apply": "Uporabi",
@@ -62,7 +62,7 @@ define({
       "panel2": "Katero ime želite uporabiti na družbenih omrežjih:",
       "panel2q1": "Ime zgodbe (priporočeno)",
       "panel2q1tooltip": "Če izberete to možnost, se bo ime vašega elementa spremenilo zaradi ujemanja z imenom vaše zgodbe, dodatne spremembe pa bodo sinhronizirane v graditelju.",
-      "panel2q2": "Ime elementa",
+      "panel2q2": "Naslov elementa",
       "panel3": "Za nadaljnje izboljševanje videza vaše zgodbe na družbenih omrežjih uporabite ${MYSTORIES} in dodajte povzetek in sličico.",
       "panel4": "Ne opozarjaj me več za to zgodbo"
     },
@@ -85,12 +85,12 @@ define({
       "statusNoErrPrivate": "Svojo zgodbo delite, ko boste pripravljeni!",
       "mystoriesinvite": "Upravljajte vse svoje zgodbe",
       "notavailable1": "Oprostite, deljenje zgodbe z graditelja ni podprto, saj ta aplikacija ne gostuje v %PRODUCT%.",
-      "notavailable2": "Oprostite, deljenje vaše zgodbe z graditelja ni podprto na tej različici strani Portal for ArcGIS (zahtevana je različica 10.4 ali novejša).",
+      "notavailable2": "Oprostite, deljenje vaše zgodbe z graditelja ni podprto na tej različici Portal for ArcGIS (zahtevana je različica 10.4 ali novejša).",
       "notavailable3": "To zgodbo lahko delite z %LINK%.",
       "notavailable4": "Moje zgodbe",
       "notavailable5": "stran z elementi",
       "notavailable6": "Oprostite, ta funkcionalnost ni v celoti podprta v razvijalskem načinu. Odvisno od vašega namestitvenega scenarija bo ta funkcionalnost podprta po namestitvi.",
-      "notavailable7": "Obvezno obiščite %MYCONTENT%, da se prepričate, da so karte in sloji, uporabljeni v vaši zgodbi, prav tako deljeni.",
+      "notavailable7": "Obvezno obiščite %MYCONTENT%, da se prepričate, da so karte in sloji, uporabljeni v vaši zgodbi, prav tudi deljeni.",
       "notavailable8": "Moja vsebina",
       "mystoriesinvite2": "Za izboljšanje videza vaše zgodbe na družbenih omrežjih uporabite ${MYSTORIES}, da dodate povzetek in sličico."
     },
@@ -163,7 +163,10 @@ define({
       "tagline": "Karta z zgodbo"
     },
     "licenseChange2018": {
-      "noAccess": "Š_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________č."
+      "noAccess": "Vaš račun (%UPORABNIŠKO_IME%) ni licenciran za odpiranje Karte z zgodbo, ki ni javna. Prosite administratorja v vaši organizaciji, da vam dodeli tip uporabnika, ki vsebuje aplikacije Karto z zgodbo ali licenco za dodatne aplikacije Essential Apps."
+    },
+    "storyTellerUserType": {
+      "notCreatorError": "Vaš račun (%UPORABNIŠKO_IME%) nima licence za uporabo graditeljev klasičnih kart z zgodbo. Prosite skrbnika svoje organizacije, da vam dodeli vrsto uporabnika Ustvarjalec."
     }
   }
 });

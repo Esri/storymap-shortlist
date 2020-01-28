@@ -1,15 +1,15 @@
 define({
   "commonMedia": {
     "mediaSelector": {
-      "lblSelect1": "Support",
+      "lblSelect1": "Multimédia",
       "lblSelect2": "Contenu",
       "lblMap": "Carte",
       "lblImage": "Image",
       "lblVideo": "Vidéo",
       "lblExternal": "Page Web",
       "lblUpload": "Charger",
-      "lblLink": "Lier",
-      "disabled": "Cette fonction a été désactivée par l'administrateur",
+      "lblLink": "Lien",
+      "disabled": "Cette entité a été désactivée par l'administrateur",
       "userLookup": "Charger des albums",
       "notImplemented": "Fonction pas encore implémentée.",
       "noData": "Aucun album public trouvé",
@@ -58,7 +58,7 @@ define({
       "lookupMsgError": "Utilisateur introuvable",
       "howToFind": "Comment trouver un nom d'utilisateur YouTube",
       "howToFind2": "Le nom d'utilisateur est affiché sous les vidéos",
-      "found": "Trouvé(e)",
+      "found": "Trouvés",
       "noData": "Aucune vidéo publique trouvée",
       "videoNotChecked": "La vidéo n'a pas été vérifiée sur YouTube mais son adresse semble correcte.",
       "checkFailedAPI": "La vérification YouTube a échoué, vérifiez votre clé d'API YouTube."
@@ -70,7 +70,7 @@ define({
       "explain1": "Cette carte de narration ne lit pas les fichiers vidéo bruts (AVI, MPEG), mais peut lire les vidéos hébergées avec des lecteurs intégrés (YouTube ou Vimeo).",
       "explain2": "La plupart des services d'hébergement de vidéos proposent cette fonctionnalité. Trouvez l'option permettant d'incorporer la vidéo, copiez le code fourni, puis ajoutez-le à votre narration à l'aide de l'option de contenu %WEBPAGE%.",
       "explain3": "L'autre solution consiste à héberger la vidéo dans une page HTML qui utilise un lecteur vidéo tel que %EXAMPLE%. Vous pouvez ensuite ajouter l'URL de cette page HTML dans votre narration en tant que %WEBPAGE%.",
-      "webpage": "Page web"
+      "webpage": "Page Web"
     },
     "webpageSelectorHome": {
       "lblUrl": "Lien de page Web",

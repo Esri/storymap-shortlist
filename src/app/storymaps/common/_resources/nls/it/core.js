@@ -89,9 +89,9 @@ define({
       "notavailable3": "È possibile condividere questa storia da %LINK%.",
       "notavailable4": "My Stories",
       "notavailable5": "la sua pagina degli elementi",
-      "notavailable6": "Spiacenti, questa feature non è completamente supportata nella modalità di sviluppo. In base allo scenario di sviluppo, questa feature può essere sviluppata quando viene distribuita.",
+      "notavailable6": "Spiacenti, questa feature non è completamente supportata in modalità di sviluppo. In base allo scenario di sviluppo, essa potrebbe essere sviluppata quando viene distribuita.",
       "notavailable7": "Accertarsi di visitare %MYCONTENT% per confermare che anche le mappe e i layer utilizzati nella storia siano condivisi.",
-      "notavailable8": "Contenuto personale",
+      "notavailable8": "I miei contenuti",
       "mystoriesinvite2": "Per migliorare ulteriormente l'aspetto della storia sulle reti social utilizzare ${MYSTORIES} per aggiungere un riepilogo e un'immagine di anteprima."
     },
     "settings": {
@@ -163,7 +163,10 @@ define({
       "tagline": "Story Map"
     },
     "licenseChange2018": {
-      "noAccess": "é_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________È."
+      "noAccess": "L’account (%USER_NAME%) non dispone della licenza per aprire una Story Map non pubblica. È necessario richiedere all’amministratore dell'organizzazione l’assegnazione di un tipo di utente che includa le Story Map o una licenza aggiuntiva per le app essenziali."
+    },
+    "storyTellerUserType": {
+      "notCreatorError": "L'account (%USER_NAME%) non possiede la licenza per utilizzare i generatori di Story Map classiche. Richiedere all'amministratore dell'organizzazione di assegnare all'utente corrente un tipo di utente Creator."
     }
   }
 });

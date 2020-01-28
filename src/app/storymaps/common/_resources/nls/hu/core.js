@@ -27,7 +27,7 @@ define({
     },
     "builderPanel": {
       "panelHeader": "%TPL_NAME% szerkesztő",
-      "buttonSaving": "Mentés folyamatban",
+      "buttonSaving": "Mentés",
       "buttonSaved": "Mentve",
       "buttonShare": "Megosztás",
       "buttonSettings": "Beállítások",
@@ -38,13 +38,13 @@ define({
       "tooltipNotShared2": "A történet nincs megosztva, csak Ön érheti el.",
       "noPendingChange": "Nincs függőben lévő módosítás",
       "unSavedChangePlural": "Függőben lévő módosítások",
-      "closeWithPendingChange": "Biztos, hogy megerősíti ezt a műveletet? A módosításai el fognak veszni.",
+      "closeWithPendingChange": "Biztos, hogy megerősíti ezt a műveletet? A módosítások el fognak veszni.",
       "saveError": "Nem sikerült a mentés, próbálja meg újra",
-      "status1": "A történet megosztott, de hibákat tartalmaz",
+      "status1": "A történet meg van osztva, de hibákat tartalmaz",
       "status2": "A történet nincs megosztva, de hibákat tartalmaz",
       "status3": "A történet nyilvános",
-      "status4": "A történet a szervezeten belül megosztott",
-      "status5": "A történet nem nyilvánosan megosztott",
+      "status4": "A történet a szervezetén belül van megosztva",
+      "status5": "A történet saját",
       "status6": "A történet még nincs mentve",
       "checking": "Ellenőrzés",
       "fix": "Javítás"
@@ -56,8 +56,8 @@ define({
       "btnOk": "A történet címének szerkesztése"
     },
     "saveErrorSocial": {
-      "title": "Közösségi médiamegosztás módosítása",
-      "panel1": "Történetének közösségi médiabeli megjelenését javítottuk, de az ArcGIS webes alkalmazás elemcíme nem azonos a történetének a címével.",
+      "title": "Közösségi médiabeli megosztás módosítása",
+      "panel1": "Történetének közösségi médiabeli megjelenését javítottuk, de az ArcGIS webes alkalmazás elemcíme nem azonos a történet címével.",
       "panel1tooltip": "Cím, összefoglalás és bélyegkép megadásával a történet így fog megjelenni:",
       "panel2": "Melyik címet kívánja használni a közösségi médiában:",
       "panel2q1": "Történet címe (ajánlott)",
@@ -70,7 +70,7 @@ define({
       "shareTitle": "A történet megosztása",
       "preview": "Előnézet",
       "viewlive": "Történet megtekintése",
-      "btnPrivate": "Nem nyilvános",
+      "btnPrivate": "Saját",
       "btnPrivateTooltip": "Csak Ön láthatja a történetet",
       "btnOrg": "Szervezet",
       "btnOrgTooltip": "Csak a szervezetének tagjai láthatják a történetet",
@@ -79,13 +79,13 @@ define({
       "loadingMessage": "A történet ellenőrzése hibakereséssel",
       "viewToggle1": "Történet tartalmának megjelenítése",
       "viewToggle2": "Történet tartalmának bezárása",
-      "socialize": "Kapcsolódj be a közösségi életbe",
+      "socialize": "Közösségi élet",
       "statusPrivate": "A történet saját, csak Ön láthatja.",
       "statusError": "Hibák vannak a történet tartalmában, amelyek észrevehetők lesznek az olvasók számára. Az alábbiakban azonosíthatja és kijavíthatja a hibákat.",
       "statusNoErrPrivate": "Ossza meg a történetet, amikor elkészült!",
       "mystoriesinvite": "Az összes történet kezelése",
       "notavailable1": "A történetnek a szerkesztőből való megosztása nem támogatott, mivel a(z) %PRODUCT% nem tartalmazza ezt az alkalmazást.",
-      "notavailable2": "A történetnek a szerkesztőből való megosztása nem támogatott a Portal for ArcGIS ezen verziójában (ehhez 10.4-es vagy újabb verzió szükséges).",
+      "notavailable2": "A történetnek a szerkesztőből való megosztása nem támogatott az ArcGIS portál ezen verziójában (ehhez 10.4-es vagy újabb verzió szükséges).",
       "notavailable3": "A történetet innen oszthatja meg: %LINK%.",
       "notavailable4": "Saját történetek",
       "notavailable5": "elemoldal",
@@ -163,7 +163,10 @@ define({
       "tagline": "Egy story map"
     },
     "licenseChange2018": {
-      "noAccess": "í_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________ő."
+      "noAccess": "Az Ön fiókjának (%USER_NAME%) licence nem teszi lehetővé a nem nyilvános story map megnyitását.  Igényelje a szervezete adminisztrátorától, hogy rendeljen Önhöz olyan felhasználótípust, amely tartalmazza a story map-eket, vagy egy kiegészítő story map-ekre vonatkozó licencet."
+    },
+    "storyTellerUserType": {
+      "notCreatorError": "Az Ön fiókjának (%USER_NAME%) licence nem teszi lehetővé a klasszikus story map szerkesztők használatát. Kérje meg a szervezete adminisztrátorát, hogy rendeljen Önhöz Készítő felhasználótípust."
     }
   }
 });

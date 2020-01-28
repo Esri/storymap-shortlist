@@ -105,7 +105,7 @@ define({
       "viewExample": "Live-Beispiel anzeigen"
     },
     "settingsTheme": {
-      "title": "Thema"
+      "title": "Design"
     },
     "settingsHeader": {
       "title": "Kopfzeile",
@@ -126,11 +126,11 @@ define({
       "logoCustomTargetPlaceholder": "Website, die beim Klicken auf das Logo geöffnet wird",
       "logoSocialText": "Tag-Zeile:",
       "logoLink": "Link:",
-      "lblSmallHeader": "Kompakte Kopfzeile verwenden (kein Untertitel)"
+      "lblSmallHeader": "Kompakte Überschrift verwenden (keinen Untertitel)"
     },
     "header": {
       "title": "Bearbeiten Sie den Titel von %TPL_NAME%",
-      "subtitle": "Bearbeiten Sie den Untertitel von %TPL_NAME%"
+      "subtitle": "Den Untertitel für %TPL_NAME% bearbeiten"
     },
     "bannerNotification": {
       "learnMore": "Mehr erfahren",
@@ -163,7 +163,10 @@ define({
       "tagline": "Eine Story-Map"
     },
     "licenseChange2018": {
-      "noAccess": "ä_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________Ü."
+      "noAccess": "Ihr Konto (%USER_NAME%) ist nicht dafür lizenziert, eine nicht öffentliche Story-Map zu öffnen. Bitten Sie den Administrator der Organisation, Ihnen einen Benutzertyp mit Story-Maps oder eine Add-On-Lizenz für Essential Apps zuzuweisen."
+    },
+    "storyTellerUserType": {
+      "notCreatorError": "Ihr Konto (%USER_NAME%) ist nicht für die Verwendung klassischer Story-Map-Builder lizenziert. Bitten Sie den Administrator Ihrer Organisation, Ihnen einen Creator-Benutzertyp zuzuweisen."
     }
   }
 });

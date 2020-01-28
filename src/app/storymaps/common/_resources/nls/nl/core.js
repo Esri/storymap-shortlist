@@ -33,8 +33,8 @@ define({
       "buttonSettings": "Instellingen",
       "buttonHelp": "Help",
       "buttonPreview": "Verhaal bekijken",
-      "tooltipFirstSave": "Dit is niet beschikbaar tot u opslaat",
-      "tooltipNotShared": "Dit is niet beschikbaar tot u deelt.",
+      "tooltipFirstSave": "Dit is niet beschikbaar totdat u opslaat.",
+      "tooltipNotShared": "Dit is niet beschikbaar totdat u deelt.",
       "tooltipNotShared2": "Uw verhaal is niet gedeeld, alleen u hebt toegang.",
       "noPendingChange": "Geen wijziging in behandeling",
       "unSavedChangePlural": "Wijzigingen in behandeling",
@@ -56,7 +56,7 @@ define({
       "btnOk": "De verhaaltitel bewerken"
     },
     "saveErrorSocial": {
-      "title": "Social media update aangaande het delen",
+      "title": "Delen bijwerken social media",
       "panel1": "De weergave van uw storyâ€™s op social media is verbeterd, maar uw ArcGIS webapplicatietitel is niet hetzelfde als uw verhaaltitel.",
       "panel1tooltip": "Door het definiëren van een titel, samenvatting en thumbnail-afbeelding, komt uw verhaal er als volgt uit te zien:",
       "panel2": "Welke titel zou u willen gebruiken op social media:",
@@ -126,7 +126,7 @@ define({
       "logoCustomTargetPlaceholder": "Webpagina wordt geopend als het logo wordt aangeklikt",
       "logoSocialText": "Tagline:",
       "logoLink": "Link:",
-      "lblSmallHeader": "Compacte header gebruiken (geen subtitel)"
+      "lblSmallHeader": "Compact header gebruiken (geen subtitel)"
     },
     "header": {
       "title": "De titel van uw %TPL_NAME% bewerken",
@@ -150,7 +150,7 @@ define({
     },
     "sectionNavigation": {
       "select": "Selecteer een item...",
-      "section": "Invoer",
+      "section": "Item",
       "thisSection": "Dit item",
       "hiddenSection": "Verborgen item"
     },
@@ -163,7 +163,10 @@ define({
       "tagline": "Een Story Map"
     },
     "licenseChange2018": {
-      "noAccess": "Ĳ_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________ä."
+      "noAccess": "Uw account  (%USER_NAME%) heeft geen licentie om een Story Map te openen die niet openbaar is. Vraag uw organisatiebeheerder om u een gebruikerstype toe te wijzen die Sory Maps of een add-on Essential Apps-licentie bevat."
+    },
+    "storyTellerUserType": {
+      "notCreatorError": "Uw account (%USER_NAME%) heeft geen licentie om Classic Story Map Builders te gebruiken. Vraag uw organisatiebeheerder om u een Ontwikkelaar user type toe te wijzen."
     }
   }
 });

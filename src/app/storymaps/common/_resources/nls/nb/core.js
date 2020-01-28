@@ -99,10 +99,10 @@ define({
       "tabError": "Se etter feil i alle faner"
     },
     "settingsLayout": {
-      "title": "Oppsett",
+      "title": "Utforming",
       "explain": "Hva slags oppsett vil du bruke?",
       "explainInit": "Du kan når som helst endre oppsettet fra innstillingdialogen.",
-      "viewExample": "Vis et eksempel i sanntid"
+      "viewExample": "Vis et eksempel"
     },
     "settingsTheme": {
       "title": "Tema"
@@ -130,7 +130,7 @@ define({
     },
     "header": {
       "title": "Rediger tittelen på %TPL_NAME%",
-      "subtitle": "Rediger undertittelen på %TPL_NAME%"
+      "subtitle": "Rediger undertittelen på din %TPL_NAME%"
     },
     "bannerNotification": {
       "learnMore": "Få mer informasjon",
@@ -163,7 +163,10 @@ define({
       "tagline": "Et fortellingskart"
     },
     "licenseChange2018": {
-      "noAccess": "å_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________ø."
+      "noAccess": "Kontoen (%USER_NAME%) er ikke lisensiert til å åpne et fortellingskart som ikke er offentlig. Be administratoren for organisasjonen om å tilordne deg en brukertype som omfatter Story Maps eller en tilleggslisens for Essential Apps."
+    },
+    "storyTellerUserType": {
+      "notCreatorError": "Kontoen (%USER_NAME%) har ikke lisens til å bruke byggeverktøyene for klassiske Story Maps. Be administratoren for organisasjonen om å tilordne Creator-brukertypen til deg."
     }
   }
 });

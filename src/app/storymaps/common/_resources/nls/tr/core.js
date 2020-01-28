@@ -91,7 +91,7 @@ define({
       "notavailable5": "ilgili öğe sayfası",
       "notavailable6": "Üzgünüz, bu detay geliştirme modunda tam olarak desteklenmez. Dağıtım senaryonuza bağlı olarak bu detay dağıtıldığında desteklenebilir.",
       "notavailable7": "Hikayenizde kullanılan haritaların ve katmanların da paylaşıldığını onaylamak için %MYCONTENT% bağlantısını ziyaret edin.",
-      "notavailable8": "İçeriklerim",
+      "notavailable8": "İçeriğim",
       "mystoriesinvite2": "Hikayenizin sosyal ağlarda görüntülenme biçimini daha da iyileştirmek için ${MYSTORIES} kullanarak bir özet ve küçük resim ekleyin."
     },
     "settings": {
@@ -105,10 +105,10 @@ define({
       "viewExample": "Canlı örnek görüntüle"
     },
     "settingsTheme": {
-      "title": "Konu"
+      "title": "Tema"
     },
     "settingsHeader": {
-      "title": "Başlık",
+      "title": "Üstbilgi",
       "logoEsriRadio": "Esri logosu",
       "logoNoneRadio": "Logo yok",
       "logoOrgRadio": "Kuruluş logosu",
@@ -126,7 +126,7 @@ define({
       "logoCustomTargetPlaceholder": "Logoya tıklandığında açılacak web sayfası",
       "logoSocialText": "Etiket Satırı:",
       "logoLink": "Bağlantı:",
-      "lblSmallHeader": "Kısa başlık kullanın (alt başlıksız)"
+      "lblSmallHeader": "Kompakt başlık kullanın (alt başlıksız)"
     },
     "header": {
       "title": "%TPL_NAME% adınızın başlığını düzenleyin",
@@ -143,7 +143,7 @@ define({
       "s1p1": "Hikaye Haritanız web’de yayınlanır ve web topluluğu her zaman daha iyi güvenlik sağlamak ve uygulamak için çalışmaktadır. İnternet üzerinden iletilen içerik için güvenli bir bağlantı sağlayan HTTPS, web içeriğine erişmenin birincil yolu olarak kullanılmaktadır. Çoğu modern tarayıcı artık, HTTPS yerine HTTP kullanıldığında uyarı mesajları göstermektedir. Bu yeni standart nedeniyle, Hikaye Haritaları oluştururken ve paylaşırken HTTPS bağlantıları kullanmanızı ve Story Map’e web içeriği yerleştirirken veya görüntü bağlantısı yaparken yalnızca HTTPS URL’leri kullanmanızı öneririz.",
       "s1p2": "Pratik olarak, bu bir Hikaye Haritası anlamına gelir ve tüm içeriği (görüntüler, katmanlar, gömülü uygulamalar ve web siteleri dahil) HTTP yerine HTTPS ile başlayan bağlantılar kullanılarak erişilmelidir. Bu, okuyucularınız için en iyi deneyimi sağlar; çünkü çoğu web tarayıcısı hikayelerinizin güvenli olduğunu gösterecektir.",
       "s2h1": "Ne yapmam gerekiyor?",
-      "s2p1": "Esri, Story Map sahipleri ve okuyucuları için bu geçişi kolaylaştırmaya çalışmaktadır. Artık Story Map oluşturucuları ve Hikayelerim’de, hikayelerinizdeki güvensiz içeriği (HTTP) bulmanıza yardımcı olacak ve bunları nasıl ele alacağınıza dair tavsiyelerde bulunacak araçlar mevcuttur. Lütfen hikayenizi güvenli olmayan içeriklere karşı kontrol edin ve bir an önce HTTPS’ye güncelleyin.",
+      "s2p1": "Esri, Story Map sahipleri ve okuyucuları için bu geçişi kolaylaştırmaya çalışmaktadır. Artık Story Map oluşturucularında ve Hikayelerim’de, hikayelerinizdeki güvensiz içeriği (HTTP) bulmanıza yardımcı olacak ve bunları nasıl ele alacağınıza dair tavsiyelerde bulunacak araçlar mevcuttur. Lütfen hikayenizi güvenli olmayan içeriklere karşı kontrol edin ve bir an önce HTTPS’ye güncelleyin.",
       "action1": "Kapat",
       "action2": "Hikayelerimi şimdi kontrol et",
       "action3": "Daha fazla bilgi"
@@ -163,7 +163,10 @@ define({
       "tagline": "Bir Hikaye Haritası"
     },
     "licenseChange2018": {
-      "noAccess": "ı_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________İ."
+      "noAccess": "Hesabınız (%USER_NAME%) herkese açık olmayan bir Hikaye Haritasını açmak için lisanslandırılmamış. Lütfen kuruluş yöneticinizden Hikaye Haritaları veya eklenti Temel Uygulamalar lisansı içeren bir kullanıcı türü atamasını isteyin."
+    },
+    "storyTellerUserType": {
+      "notCreatorError": "Hesabınızın (%USER_NAME%) klasik story map oluşturucularını kullanma yetkisi yok. Kuruluşunuzun yöneticisinden size bir Creator kullanıcı türü atamasını isteyin."
     }
   }
 });

@@ -2,7 +2,7 @@ define({
   "commonWebmap": {
     "selector": {
       "lblWebMap": "Mapa",
-      "lblLocation": "localização",
+      "lblLocation": "Local",
       "lblContent": "Conteúdo",
       "lblPopup": "Janela Pop-up",
       "lblControls": "Extras",
@@ -33,7 +33,7 @@ define({
       "tooltipLocation": "Defina a localização em que o mapa exibido.",
       "tooltipContent": "Definir as camadas visíveis.",
       "tooltipPopup": "Escolher um pop-up que irá ser aberto quando este mapa for exibido.",
-      "tooltipOverview": "Exibir uma vista geral pequena juntamente com o mapa.",
+      "tooltipOverview": "Exiba um pequeno mapa de vista geral juntamente com o mapa principal.",
       "tooltipLegend": "Exiba a legenda de mapa no mapa, útil quando o mapa tem muitas camadas e símbolos.",
       "mapCfgInvite": "Utilize estes controlos para configurar o seu mapa",
       "lblLocationAlt": "Herdado do primeiro mapa",
@@ -92,7 +92,7 @@ define({
       },
       "title": "Selecionar um mapa",
       "searchTitle": "Pesquisar",
-      "ok": "Ok",
+      "ok": "OK",
       "cancel": "Cancelar",
       "placeholder": "Introduza termo de pesquisa ou a ID de mapa web..."
     }

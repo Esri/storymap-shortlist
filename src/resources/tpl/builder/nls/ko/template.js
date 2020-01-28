@@ -55,7 +55,7 @@ define({
       "selectAll": "모두 선택",
       "imageSizeHelper": "최상의 결과를 위해 이미지의 크기는 400KB 미만이어야 합니다. 1000 x 750픽셀(가로 세로 4:3 비율) 이하의 크기와 도형을 사용하는 것이 좋습니다. 이미지가 클수록 성능이 떨어질 수 있습니다. 최상의 성능을 위해 이미지 품질이 80%인 압축된 JPG 이미지를 사용하세요.",
       "imageSizeHelperUpdated": "이미지 링크는 HTTPS로 시작해야 합니다.<br><br>최상의 성능을 위해 이미지 크기는 400KB 미만이어야 합니다. 파일 크기를 줄이려면 80% 이미지 품질로 저장된 JPG 형식을 사용하세요. 그래도 이미지가 400KB보다 큰 경우 크기를 조정하면 파일 크기를 더 줄일 수 있습니다. 너비 1000픽셀 x 높이 750픽셀(가로 세로 4:3 비율)의 크기를 사용하는 것을 권장합니다.<br><br>연결된 이미지가 느리게 그려지거나 HTTPS를 통해 사용할 수 없는 경우 스토리에 업로드하면 더욱 빠르게 불러옵니다.",
-      "thumbnailLink": "섬네일 링크",
+      "thumbnailLink": "썸네일 링크",
       "thumbnailHelp": "썸네일 링크는 HTTPS로 시작해야 합니다.<br><br>권장되는 썸네일 크기와 도형은 280 x 210픽셀(가로 세로 4:3 비율)입니다. 썸네일이 클수록 성능이 떨어질 수 있습니다. 썸네일의 경사면 방향 비율이 4:3인 경우 이미지가 잘리지 않고 타일에 맞춰집니다."
     },
     "settings": {
@@ -64,8 +64,8 @@ define({
       "extentSensitiveTooltip": "이 옵션은 Shortlist가 열람될 때만 적용됩니다. Shortlist 빌더에서는 탭이 항상 모든 장소(맵에 보이지 않는 장소도 포함)를 표시합니다. Shortlist가 열람될 때 탭에 모든 장소가 항상 표시되도록 하려면 이 옵션을 선택 취소하세요.",
       "locateButton": "버튼 위치",
       "locateButtonTooltip": "독자가 맵에서 자신의 현재 위치를 볼 수 있습니다. 이 기능은 대부분의 기기와 브라우저에서 지원되지만 스토리를 HTTPS 링크로 공유하고 스토리가 임베드되어 있지 않은 경우에만 버튼이 나타납니다.",
-      "geocoder": "주소, 장소 및 피처 찾기",
-      "bookmarks": "책갈피",
+      "geocoder": "주소, 장소, 피처 찾기",
+      "bookmarks": "북마크",
       "bookmarksMenuName": "메뉴 이름",
       "defaultMapLocation": "기본 맵 위치",
       "auto": "자동",
@@ -73,13 +73,13 @@ define({
       "custom": "사용자 정의",
       "customTooltip": "맵 확대 컨트롤에 나타나는 버튼을 사용하여 위치를 설정",
       "mapLocationTooltip": "Shortlist를 열었을 때 보게 될 위치",
-      "bookmarksHelp": "책갈피를 활성화하려면 Shortlist 빌더를 닫은 후 ArcGIS 내 콘텐츠 또는 내 스토리를 통해 이 Shortlist에 사용된 웹 맵을 엽니다. 그런 다음, ArcGIS 맵 뷰어를 사용하여 책갈피를 추가합니다.",
+      "bookmarksHelp": "북마크를 활성화하려면 Shortlist 빌더를 닫은 후 ArcGIS 내 콘텐츠 또는 내 스토리를 통해 이 Shortlist에 사용된 웹 맵을 엽니다. 그런 다음, ArcGIS 맵 뷰어를 사용하여 북마크를 추가합니다.",
       "generalOptions": "일반 옵션",
       "mapOptions": "맵 옵션",
       "changeBasemap": "베이스맵 변경",
       "saveHomeLocation": "홈 위치 저장",
       "choose": "선택",
-      "headerColor": "헤더 색상"
+      "headerColor": "머리글 색상"
     },
     "help": {
       "title": "도움말",
@@ -91,7 +91,7 @@ define({
       "shortlistHelp6": "Esri Story Maps 웹 사이트의 Shortlist 섹션을 참고하세요.",
       "shortlistFAQ": "Shortlist FAQ",
       "shortlistBetaFeedback": "베타 피드백",
-      "shortlistBetaFeedback2": "여러분의 의견을 환영합니다. GeoNet의 스토리 맵 포럼을 방문하여",
+      "shortlistBetaFeedback2": "여러분의 의견을 환영합니다. GeoNet의 스토리맵 포럼을 방문하여",
       "geonetForum": "필요한 새 기능과 문제점을 알려주세요."
     },
     "migration": {
@@ -117,7 +117,7 @@ define({
         "none": "없음",
         "imageFields": "각 장소의 이미지에 대한 URL이 포함되는 필드(선택): ",
         "mainImageField": "기본 이미지: ",
-        "thumbImageField": "섬네일: ",
+        "thumbImageField": "썸네일: ",
         "noImageFields": "빌더에서 장소에 대한 이미지를 추가하려는 경우 이러한 필드를 없음 설정으로 유지",
         "tabField": "레이어의 장소를 여러 테마로 나누는 필드 이름을 사용한다면 아래에서 적합한 필드 이름을 선택합니다."
       },

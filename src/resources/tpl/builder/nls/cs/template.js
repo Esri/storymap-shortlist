@@ -22,7 +22,7 @@ define({
       "lblHelp": "Prohlídka"
     },
     "organizePopup": {
-      "title": "Organizovat",
+      "title": "Uspořádat",
       "tab": "tab",
       "dragNDrop": "Uspořádejte svůj příběh přetažením karet.",
       "lblColTitle": "Název"
@@ -35,7 +35,7 @@ define({
       "add": "Přidat",
       "import": "Importovat",
       "done": "Hotovo",
-      "deleteFeature": "Smazat (Delete)",
+      "deleteFeature": "Smazat",
       "move": "Přesunout",
       "locateFeaturesTooltip": "Některá místa je nutné nalézt. Kliknutím sem je zobrazíte"
     },
@@ -73,7 +73,7 @@ define({
       "custom": "Vlastní",
       "customTooltip": "Nastavte umístění pomocí tlačítka, které se zobrazí v ovládacích prvcích přiblížení mapy.",
       "mapLocationTooltip": "Umístění, které uživatelé vidí, když otevřou váš krátký seznam.",
-      "bookmarksHelp": "Pro aktivaci záložek zavřete nástroj pro tvorbu zkráceného přehledu a následně otevřete webovou mapu použitou v tomto zkráceném přehledu (pomocí sekcí Můj obsah nebo Moje příběhy) a přidejte do ní záložky pomocí mapového prohlížeče ArcGIS.",
+      "bookmarksHelp": "Pro aktivaci záložek zavřete nástroj pro tvorbu krátkého seznamu Shortlist Builder a následně otevřete webovou mapu použitou v tomto krátkém seznamu (pomocí sekcí Můj obsah nebo Moje příběhy) a přidejte do ní záložky pomocí mapového prohlížeče ArcGIS.",
       "generalOptions": "Obecné možnosti",
       "mapOptions": "Možnosti mapy",
       "changeBasemap": "Změnit podkladovou mapu",
@@ -83,10 +83,10 @@ define({
     },
     "help": {
       "title": "NÁPOVĚDA",
-      "shortlistHelp1": "Vítejte v aplikaci Mapa s příběhem – Krátký seznam. Tato aplikace vám umožňuje prezentovat zajímavá místa organizovaná do karet, díky čemuž lze snadným a zábavným způsobem prozkoumat jakoukoli oblast. V tomto nástroji pro tvorbu můžete svá místa zájmu vytvářet interaktivně.",
-      "shortlistHelp2": "Zkrácený přehled můžete také vytvořit z existující webové mapy ArcGIS včetně možnosti použít existující bodová data v mapě jako místa. Tato bodová data můžete importovat do nástroje pro tvorbu zkráceného přehledu za účelem další úpravy, nebo, pokud vaše místa používají <a href='http://links.esri.com/storymaps/shortlist_layer_template' target='_blank'>schéma dat zkráceného přehledu</a>, získat zkrácený přehled přímo z dat tak, jak jsou. Pro více informací viz <a href='http://links.esri.com/storymaps/faq_shortlist_create_from_webmap' target='_blank'>časté dotazy</a>.",
+      "shortlistHelp1": "Vítejte v aplikaci Story Map Shortlist. Tato aplikace vám umožňuje prezentovat zajímavá místa uspořádaná do karet, díky čemuž lze snadným a zábavným způsobem prozkoumat jakoukoli oblast. V tomto nástroji pro tvorbu můžete svá místa zájmu vytvářet interaktivně.",
+      "shortlistHelp2": "Krátký seznam můžete také vytvořit z existující webové mapy ArcGIS včetně možnosti použít stávající bodová data v mapě jako místa. Tato bodová data můžete importovat do nástroje pro tvorbu krátkého seznamu Shortlist Builder za účelem další úpravy, nebo, pokud vaše místa používají <a href='http://links.esri.com/storymaps/shortlist_layer_template' target='_blank'>schéma dat krátkého seznamu</a>, získat krátký seznam přímo z dat tak, jak jsou. Pro více informací viz <a href='http://links.esri.com/storymaps/faq_shortlist_create_from_webmap' target='_blank'>časté dotazy</a>.",
       "shortlistHelp3": "K vytvoření krátkého seznamu z webové mapy přejděte do",
-      "shortlistHelp4": "otevřete webovou mapu, vytvořte z ní webovou aplikaci a z galerie aplikací zvolte možnost Mapa s příběhem – Krátký seznam. Pokud vaše webová mapa obsahuje bodové vrstvy, nástroj pro tvorbu krátkého seznamu vás požádá, abyste zvolili vrstvy, které chcete použít jako místa. Pokud jste krátký seznam vytvořili pomocí původní, nehostované verze aplikace, můžete svůj krátký seznam stejným postupem přesunout do této hostované verze aplikace.",
+      "shortlistHelp4": "otevřete webovou mapu, vytvořte z ní webovou aplikaci a z galerie aplikací zvolte možnost Story Map Shortlist. Pokud vaše webová mapa obsahuje bodové vrstvy, nástroj pro tvorbu krátkého seznamu vás požádá, abyste zvolili vrstvy, které chcete použít jako místa. Pokud jste krátký seznam vytvořili pomocí původní, nehostované verze aplikace, můžete svůj krátký seznam stejným postupem přesunout do této hostované verze aplikace.",
       "shortlistHelp5": "Další informace",
       "shortlistHelp6": "Navštivte sekci Krátký seznam na webových stránkách map s příběhem společnosti Esri.",
       "shortlistFAQ": "Krátký seznam – často kladené dotazy",
@@ -96,10 +96,10 @@ define({
     },
     "migration": {
       "migrationPattern": {
-        "welcome": "Vítejte v nástroji pro tvorbu krátkých seznamů.",
+        "welcome": "Vítejte v nástroji pro tvorbu krátkých seznamů Shortlist Builder",
         "importQuestion": "Vaše webová mapa obsahuje bodová data. Chcete tyto body použít jako místa ve svém krátkém seznamu?",
         "importExplainYes": "V nástroji pro tvorbu krátkých seznamů budete moci upravovat, spravovat a přidávat svá místa. Automaticky se vytvoří kopie vaší webové mapy, takže původní data zůstanou nezměněna.",
-        "importExplainNo": "Body se zobrazí na vaší mapě krátkého seznamu, ale nebudou použity jako místa. Místa přidáte do krátkého seznamu v nástroji pro tvorbu.",
+        "importExplainNo": "Body se zobrazí na vaší mapě krátkého seznamu, ale nebudou použity jako místa. Místa přidáte do krátkého seznamu v nástroji pro tvorbu Shortlist Builder.",
         "no": "Ne",
         "importOption": "Ano, importovat je",
         "asIsOption": "Ano, použít je tak, jak jsou",

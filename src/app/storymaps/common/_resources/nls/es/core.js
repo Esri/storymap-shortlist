@@ -68,7 +68,7 @@ define({
     },
     "share": {
       "shareTitle": "Compartir tu historia",
-      "preview": "Vista previa",
+      "preview": "Presentación preliminar",
       "viewlive": "Ver historia",
       "btnPrivate": "Privado",
       "btnPrivateTooltip": "Solo tú podrás ver la historia",
@@ -120,7 +120,7 @@ define({
       "logoUploadSizeError": "Dimensiones de GIF demasiado grandes. Cambie su tamaño a ${PIXEL-WIDTH} píxeles de ancho.",
       "logoCustomLinkHTTPSError": "El vínculo debe comenzar por HTTPS",
       "logoCustomLinkTooltip": "Vínculo a un logotipo",
-      "logoCustomLinkPlaceholder": "Dirección URL de la imagen",
+      "logoCustomLinkPlaceholder": "URL de imagen",
       "logoCustomLinkPlaceholderHTTPS": "https://ejemplo.com/logotipo.jpg",
       "logoUploadGenericError": "El logotipo puede ser un archivo .bmp, .gif, .jpg, .jpeg. o .png. Los archivos GIF deben tener un tamaño de 10 MB y menos de 250 px de ancho.",
       "logoCustomTargetPlaceholder": "Página web que se abrirá al hacer clic en el logotipo",
@@ -163,7 +163,10 @@ define({
       "tagline": "Un story map"
     },
     "licenseChange2018": {
-      "noAccess": "á_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________Ó."
+      "noAccess": "Su cuenta (%USER_NAME%) no tiene licencia para abrir un story map que no sea público.  Pídale al administrador de su organización que le asigne un tipo de usuario que incluya Story Maps o una licencia complementaria de aplicaciones esenciales."
+    },
+    "storyTellerUserType": {
+      "notCreatorError": "Su cuenta (%USER_NAME%) no tiene licencia para usar builders de story maps clásicos. Pídale al administrador de su organización que le asigne un tipo de usuario Creator."
     }
   }
 });

@@ -14,7 +14,7 @@ define({
       "loadingTitle": "Ladataan otsikkoa",
       "entry": "Merkintä",
       "entries": "Merkinnät",
-      "section": "Osa",
+      "section": "Osio",
       "sections": "osaa",
       "and": "ja",
       "action": "Osan toiminto",

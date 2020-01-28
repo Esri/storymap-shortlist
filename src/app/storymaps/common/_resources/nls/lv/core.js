@@ -2,9 +2,9 @@ define({
   "commonCore": {
     "common": {
       "add": "Pievienot",
-      "edit": "Rediģēt",
+      "edit": "Labot",
       "save": "Saglabāt",
-      "next": "Nākamais",
+      "next": "Tālāk",
       "cancel": "Atcelt",
       "back": "Atpakaļ",
       "apply": "Lietot",
@@ -12,7 +12,7 @@ define({
       "open": "Atvērt",
       "start": "Starts",
       "loading": "Ielādē",
-      "disabledAdmin": "Šo elementu ir atspējojis administrators",
+      "disabledAdmin": "Administrators ir atspējojis šo iezīmi",
       "width": "Platums",
       "height": "Augstums",
       "create": "Izveidot",
@@ -21,15 +21,15 @@ define({
       "mystories": "Mani stāsti"
     },
     "inlineFieldEdit": {
-      "editMe": "Rediģē mani!",
+      "editMe": "Rediģēt!",
       "enterTitle": "Ievadiet virsrakstu...",
-      "enterSubtitle": "Ievadiet neobligātu apakšvirsrakstu..."
+      "enterSubtitle": "Ievadiet apakšvirsrakstu (pēc izvēles)..."
     },
     "builderPanel": {
       "panelHeader": "%TPL_NAME% veidotājs",
       "buttonSaving": "Saglabāšana",
       "buttonSaved": "Saglabāts",
-      "buttonShare": "Kopīgot",
+      "buttonShare": "Koplietot",
       "buttonSettings": "Iestatījumi",
       "buttonHelp": "Palīdzība",
       "buttonPreview": "Skatīt stāstu",
@@ -64,7 +64,7 @@ define({
       "panel2q1tooltip": "Ja izvēlēsieties šo opciju, vienības virsraksts tiks modificēts tā, lai atbilstu stāsta virsrakstam, un veidotājā tiks sinhronizētas tālākās izmaiņas.",
       "panel2q2": "Vienības virsraksts",
       "panel3": "Ja sociālajā multividē vēlaties vēl vairāk uzlabot stāsta izskatu, izmantojiet ${MYSTORIES}, lai pievienotu kopsavilkumu un sīktēla attēlu.",
-      "panel4": "Vairāk nerādīt brīdinājumus par šo stāstu"
+      "panel4": "Vairs nerādīt brīdinājumus par šo stāstu"
     },
     "share": {
       "shareTitle": "Koplietojiet stāstu",
@@ -79,7 +79,7 @@ define({
       "loadingMessage": "Pārbaude, vai stāstā nav problēmu",
       "viewToggle1": "Rādīt stāsta saturu",
       "viewToggle2": "Aizvērt stāsta saturu",
-      "socialize": "Socializācija",
+      "socialize": "Socializējies",
       "statusPrivate": "Jūsu stāsts ir privāts. To varat skatīt tikai jūs.",
       "statusError": "Jūsu stāsta saturā ir problēmas, ko lasītāji pamanīs. Varat noteikt un salabot šīs problēmas tālāk.",
       "statusNoErrPrivate": "Koplietojiet savu stāstu, kad būsiet gatavs!",
@@ -163,7 +163,10 @@ define({
       "tagline": "Kartes stāsts"
     },
     "licenseChange2018": {
-      "noAccess": "ķ_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________ū."
+      "noAccess": "Jūsu kontam (%USER_NAME%) nav licences, lai atvērtu Kartes stāstu, kas nav publisks. Pieprasiet savas organizācijas administratoram piešķirt jums lietotāja veidu, kurā iekļauts Story Maps vai papildinājumlietotņu Essential Apps licence."
+    },
+    "storyTellerUserType": {
+      "notCreatorError": "Jūsu kontam (%USER_NAME%) nav atļaujas izmantot klasisko stāstu karšu veidotājus. Lūdzu, sazinieties ar savas organizācijas administratoru, lai jums tiktu piešķirts lietotāja veids Creator."
     }
   }
 });

@@ -36,8 +36,8 @@ define({
       "mapLoadingFail": "Něco se pokazilo, mapa se nenahrála správně.",
       "signOut": "Odhlásit",
       "attention": "Upozornění!",
-      "noBuilderEdge": "Seznamy map s příběhem lze zobrazit v libovolném prohlížeči. Nástroj pro tvorbu seznamů map s příběhem však není podporován v prohlížeči Windows Edge. K vytvoření nebo úpravě seznamu použijte jiný webový prohlížeč.",
-      "noBuilderAllIE": "Zkrácený přehled lze zobrazit v libovolném prohlížeči. Nástroj pro tvorbu seznamů map s příběhem však není podporován v prohlížeči Windows Edge a Internet Explorer. K vytvoření nebo úpravě seznamu použijte jiný webový prohlížeč."
+      "noBuilderEdge": "Krátké seznamy map s příběhem lze zobrazit v libovolném prohlížeči. Nástroj pro tvorbu seznamů map s příběhem Story Map Shortlist Builder však není podporován v prohlížeči Windows Edge. K vytvoření nebo úpravě seznamu použijte jiný webový prohlížeč.",
+      "noBuilderAllIE": "Krátké seznamy map s příběhem lze zobrazit v libovolném prohlížeči. Nástroj pro tvorbu seznamů map s příběhem Story Map Shortlist Builder však není podporován v prohlížeči Windows Edge a Internet Explorer. K vytvoření nebo úpravě seznamu použijte jiný webový prohlížeč."
     },
     "headerFromCommon": {
       "storymapsText": "Mapa s příběhem",
@@ -50,9 +50,9 @@ define({
       "share": "Sdílet"
     },
     "shareFromCommon": {
-      "copy": "Kopírovat (Copy)",
+      "copy": "Kopírovat",
       "copied": "Zkopírováno",
-      "open": "Otevřeno",
+      "open": "Otevřít",
       "embed": "Vložit do webové stránky",
       "embedExplain": "Použijte následující kód HTML ke vložení aplikace do webové stránky.",
       "size": "Velikost (šířka/výška):",

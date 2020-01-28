@@ -4,7 +4,7 @@ define({
       "add": "Adicionar",
       "edit": "Editar",
       "save": "Salvar",
-      "next": "Próximo",
+      "next": "Avançar",
       "cancel": "Cancelar",
       "back": "Voltar",
       "apply": "Aplicar",
@@ -67,7 +67,7 @@ define({
       "panel4": "Não me avisar novamente desta história"
     },
     "share": {
-      "shareTitle": "Compartilhe sua história",
+      "shareTitle": "Compartilhar sua história",
       "preview": "Visualizar",
       "viewlive": "Visualizar história",
       "btnPrivate": "Privado",
@@ -163,7 +163,10 @@ define({
       "tagline": "Um Mapa Histórico"
     },
     "licenseChange2018": {
-      "noAccess": "ã_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________Ç."
+      "noAccess": "Sua conta (%USER_NAME%) não está licenciada para abrir um Mapa Histórico que não seja público. Solicite ao administrador da sua organização que lhe atribua um tipo de usuário que inclua os Aplicativos Fundamentais ou uma licença complementar dos Aplicativos Fundamentais."
+    },
+    "storyTellerUserType": {
+      "notCreatorError": "Sua conta (%USER_NAME%) não está licenciada para utilizar os construtores de mapa histórico clássicos. Peça a seu administrador da organização para atribuir um tipo de usuário Creator."
     }
   }
 });

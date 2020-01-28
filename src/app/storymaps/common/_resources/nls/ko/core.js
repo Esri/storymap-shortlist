@@ -11,7 +11,7 @@ define({
       "close": "닫기",
       "open": "열기",
       "start": "시작",
-      "loading": "불러오는 중",
+      "loading": "로드 중",
       "disabledAdmin": "이 기능은 관리자가 사용하지 않도록 설정했습니다.",
       "width": "너비",
       "height": "높이",
@@ -58,17 +58,17 @@ define({
     "saveErrorSocial": {
       "title": "소셜 미디어 공유 업데이트",
       "panel1": "소셜 미디어에서의 스토리의 외관이 향상되었지만 ArcGIS 웹 응용프로그램 항목 제목이 스토리 제목과 같지 않습니다.",
-      "panel1tooltip": "제목, 요약 및 섬네일 이미지를 정의하면 스토리가 다음과 같이 보입니다:",
+      "panel1tooltip": "제목, 요약 및 썸네일 이미지를 정의하면 스토리가 다음과 같이 보입니다:",
       "panel2": "소셜 미디어에서 사용할 제목:",
       "panel2q1": "스토리 제목(권장됨)",
       "panel2q1tooltip": "이 옵션을 선택하면 항목 제목이 스토리 제목과 일치하도록 수정되며 빌더에서의 후속 변경 사항이 동기화됩니다.",
       "panel2q2": "항목 제목",
-      "panel3": "소셜 미디어에서의 스토리의 외관을 더욱 향상시키려면 ${MYSTORIES}을(를) 사용하여 요약 및 섬네일 이미지를 추가합니다.",
+      "panel3": "소셜 미디어에서의 스토리의 외관을 더욱 향상시키려면 ${MYSTORIES}을(를) 사용하여 요약 및 썸네일 이미지를 추가합니다.",
       "panel4": "이 스토리에 대해 다시 경고 안 함"
     },
     "share": {
       "shareTitle": "스토리 공유",
-      "preview": "미리 보기",
+      "preview": "미리보기",
       "viewlive": "스토리 보기",
       "btnPrivate": "비공개",
       "btnPrivateTooltip": "사용자 본인만 스토리를 볼 수 있음",
@@ -91,24 +91,24 @@ define({
       "notavailable5": "항목 페이지",
       "notavailable6": "죄송합니다. 개발 모드에서는 이 피처가 완전히 지원되지는 않습니다. 배포 시나리오에 따라 배포 시에 이 피처가 지원될 수도 있습니다.",
       "notavailable7": "%MYCONTENT%에 방문하여 내 스토리에 사용된 맵과 레이어도 공유되는지 확인하세요.",
-      "notavailable8": "내 콘텐츠",
-      "mystoriesinvite2": "소셜 미디어에서의 스토리의 외관을 더욱 향상시키려면 ${MYSTORIES}을(를) 사용하여 요약 및 섬네일 이미지를 추가합니다."
+      "notavailable8": "내 컨텐츠",
+      "mystoriesinvite2": "소셜 미디어에서의 스토리의 외관을 더욱 향상시키려면 ${MYSTORIES}을(를) 사용하여 요약 및 썸네일 이미지를 추가합니다."
     },
     "settings": {
       "header": "설정",
-      "tabError": "모든 탭에서 오류를 확인하세요."
+      "tabError": "오류가 있는지 모든 탭을 확인하세요."
     },
     "settingsLayout": {
       "title": "레이아웃",
       "explain": "어떤 레이아웃을 사용하시겠습니까?",
       "explainInit": "언제든지 설정 대화상자에서 레이아웃을 변경할 수 있습니다.",
-      "viewExample": "라이브 예 보기"
+      "viewExample": "실시간 예 보기"
     },
     "settingsTheme": {
       "title": "테마"
     },
     "settingsHeader": {
-      "title": "헤더",
+      "title": "머리글",
       "logoEsriRadio": "Esri 로고",
       "logoNoneRadio": "로고 없음",
       "logoOrgRadio": "기관 로고",
@@ -123,7 +123,7 @@ define({
       "logoCustomLinkPlaceholder": "이미지 URL",
       "logoCustomLinkPlaceholderHTTPS": "https://example.com/logo.jpg",
       "logoUploadGenericError": "로고는 .bmp, .gif, .jpg, .jpeg, .png 파일 형식이 될 수 있습니다. Gif는 250px 너비 및 10Mb 크기 미만이어야 합니다.",
-      "logoCustomTargetPlaceholder": "로고를 클릭할 때 열리는 웹 페이지",
+      "logoCustomTargetPlaceholder": "로고를 클릭할 때 열리는 웹페이지",
       "logoSocialText": "설명:",
       "logoLink": "링크:",
       "lblSmallHeader": "압축 머리글 사용(부제목 없음)"
@@ -155,7 +155,7 @@ define({
       "hiddenSection": "숨겨진 항목"
     },
     "embedBar": {
-      "share": "공유하기",
+      "share": "공유",
       "fullScreen": "전체 화면",
       "exitFullScreen": "전체 화면 종료",
       "enlarge": "확대",
@@ -163,7 +163,10 @@ define({
       "tagline": "스토리맵"
     },
     "licenseChange2018": {
-      "noAccess": "한_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________빠."
+      "noAccess": "귀하의 계정(%USER_NAME%)에는 공개 상태가 아닌 스토리맵을 열 수 있는 라이선스가 없습니다. 스토리맵 또는 애드온 필수 앱 라이선스가 포함된 사용자 유형을 업무 지시하려면 기관 관리자에게 문의하세요."
+    },
+    "storyTellerUserType": {
+      "notCreatorError": "계정(%USER_NAME%)에는 클래식 스토리맵 빌더를 사용할 수 있는 라이선스가 없습니다. Creator 사용자 유형 할당을 기관 관리자에게 요청하세요."
     }
   }
 });

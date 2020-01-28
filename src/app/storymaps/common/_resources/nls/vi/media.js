@@ -30,7 +30,7 @@ define({
       "warningFileTypes": "Ảnh có thể ở định dạng .jpg, .png, .gif, hoặc .bmp",
       "warningOneFile": "Mỗi lần chỉ có thể tải lên một hình ảnh.",
       "warningFileSize": "Hình ảnh không được quá 10 MB.",
-      "tooltipRemove": "Xóa ảnh không sử dụng này khỏi tài khoản ArcGIS. <br> (Bạn sẽ phải tải lại ảnh nếu muốn sử dụng nó sau này.)"
+      "tooltipRemove": "Xóa ảnh không sử dụng này khỏi tài khoản ArcGIS. <br> (Bạn sẽ phải tải lại ảnh lên lại nếu muốn sử dụng nó sau này.)"
     },
     "imageSelectorFlickr": {
       "userInputLbl": "Tên đăng nhập",
@@ -68,8 +68,8 @@ define({
     },
     "videoSelectorOther": {
       "explain1": "Story map này không thể phát các tệp video thô (như avi, mpeg), nhưng có thể phát các tệp video được lưu trữ có trình phát tích hợp (ví dụ: YouTube hoặc Vimeo).",
-      "explain2": "Hầu hết các dịch vụ lưu trữ video đều được hỗ trợ với chức năng này. Hãy tìm tùy chọn để nhúng video, sao chép mã đã được cung cấp và thêm vào câu chuyện của bạn bằng cách sử dụng tùy chọn nội dung %WEBPAGE%.",
-      "explain3": "Ngoài ra, bạn có thể tự lưu video cùng với trang HTML sử dụng trình phát video như %EXAMPLE%. Sau đó, bạn chỉ cần thêm URL của trang HTML đó vào câu chuyện của bạn như một %WEBPAGE%.",
+      "explain2": "Hầu hết các dịch vụ lưu trữ video đều cung cấp đối tượng này. Hãy tìm tùy chọn để nhúng video, sao chép mã đã cung cấp và thêm vào câu chuyện của bạn bằng cách sử dụng tùy chọn nội dung %WEBPAGE%.",
+      "explain3": "Ngoài ra, bạn có thể tự lưu trữ video cùng với trang HTML sử dụng trình phát video như %EXAMPLE%. Sau đó, bạn cần thêm URL của trang HTML đó vào câu chuyện của bạn như một %WEBPAGE%.",
       "webpage": "Trang web"
     },
     "webpageSelectorHome": {

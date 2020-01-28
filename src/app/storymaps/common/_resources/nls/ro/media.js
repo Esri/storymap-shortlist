@@ -91,7 +91,7 @@ define({
       "lblLabel": "Comentariu imagine",
       "lblLabel1": "Subtitlu",
       "lblLabel2": "Text informativ",
-      "lblLabel3": "Niciunul",
+      "lblLabel3": "Niciuna",
       "lblLabelPH": "Introduceţi text...",
       "lblMaximize": "Includeţi un buton de maximizare în colţul imaginii",
       "lblMaximizeHelp": "Recomandat numai pentru fotografii la calitate ridicată",

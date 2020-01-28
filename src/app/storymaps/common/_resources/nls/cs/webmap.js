@@ -17,8 +17,8 @@ define({
       "section": "Část",
       "sections": "Části",
       "and": "a",
-      "action": "Akce v sekci",
-      "actions": "Akce v sekcích",
+      "action": "Akce v části",
+      "actions": "Akce v částech",
       "originalWebmap": "Mapa použitá při publikaci %TPL_NAME%",
       "browseMaps": "Vybrat mapu",
       "createMap": "Vytvořit mapu",
@@ -52,13 +52,13 @@ define({
       "popupTitle": "Vyskakovací okno mapy",
       "popupExplain": "Kliknutím na prvek otevřete požadované vyskakovací okno.",
       "popupSave": "Uložit konfiguraci vyskakovacích oken",
-      "hintNavigation": "Navigace v mapě je vypnuta."
+      "hintNavigation": "Navigace mapy je vypnuta."
     },
     "editor": {
       "loading": "Počkejte, dokud se nenahraje editor mapy",
       "newTitle": "Vytvořit novou mapu",
       "editTitle": "Upravit mapu",
-      "titleLbl": "Nadpis",
+      "titleLbl": "Název",
       "titlePh": "Název mapy...",
       "folderLbl": "Mapa bude vytvořena ve stejné složce jako příběh.",
       "creating": "Vytváření mapy",
@@ -88,7 +88,7 @@ define({
         "organizationLabel": "Moje organizace",
         "onlineLabel": "ArcGIS Online",
         "contentLabel": "Můj obsah",
-        "favoritesLabel": "Moje oblíbené"
+        "favoritesLabel": "Moje oblíbené položky"
       },
       "title": "Vybrat mapu",
       "searchTitle": "Hledat",

@@ -8,7 +8,7 @@ define({
       "lblVideo": "Wideo",
       "lblExternal": "Strona internetowa",
       "lblUpload": "Prześlij",
-      "lblLink": "Połącz",
+      "lblLink": "Łącze",
       "disabled": "Opcja ta została wyłączona przez Administratora",
       "userLookup": "Wczytaj albumy",
       "notImplemented": "Jeszcze nie wprowadzone",

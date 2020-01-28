@@ -122,7 +122,7 @@ define({
       "logoCustomLinkTooltip": "Linkitä logo",
       "logoCustomLinkPlaceholder": "Kuvan URL",
       "logoCustomLinkPlaceholderHTTPS": "https://example.com/logo.jpg",
-      "logoUploadGenericError": "Logo voi olla .bmp-, .gif-, .jpg-, .jpeg- tai .png-tiedosto. Gif-tiedostojen on oltava alle 250 kuvapisteen levyisiä ja alle 10 Mt:n kokoisia.",
+      "logoUploadGenericError": "Logo voi olla .bmp-, .gif-, .jpg-, .jpeg- tai .png-tiedosto. Gif-tiedostojen leveyden on oltava alle 250 kuvapistettä ja koon enintään 10 Mt.",
       "logoCustomTargetPlaceholder": "Logoa napsautettaessa avattava verkkosivu",
       "logoSocialText": "Iskulause:",
       "logoLink": "Linkki:",
@@ -163,7 +163,10 @@ define({
       "tagline": "Tarinakartta"
     },
     "licenseChange2018": {
-      "noAccess": "Å_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________ö."
+      "noAccess": "Tiliäsi (%USER_NAME%) ei ole lisensoitu avaamaan tarinakarttaa, joka ei ole julkinen. Pyydä organisaatiosi pääkäyttäjää määrittämään sinulle käyttäjätyyppi, joka sisältää tarinakartat tai keskeisten sovellusten lisäosan lisenssin."
+    },
+    "storyTellerUserType": {
+      "notCreatorError": "Tiliäsi (%USER_NAME%) ei ole lisensoitu käyttämään perinteisiä tarinakarttojen luontitoimintoja. Pyydä organisaatiosi pääkäyttäjää määrittämään sinulle Creator-käyttäjätyyppi."
     }
   }
 });

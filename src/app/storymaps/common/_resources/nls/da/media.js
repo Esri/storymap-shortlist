@@ -100,7 +100,7 @@ define({
       "lblPosition2": "Fyld",
       "lblPosition3": "Tilpas",
       "lblPosition4": "Stræk",
-      "lblPosition5": "Tilpas",
+      "lblPosition5": "Tilpasset",
       "lblURLHelp": "Billedlink skal begynde med HTTPS.<br><br>For at opnå de bedste resultater skal billeder være mindre end 400 KB. Brug komprimerede JPG-billeder ved 80 % kvalitet og disse anbefalede billedbredder: 2000 pixels for hovedscene eller fortællingspanel med maksimér-knap, 1000 pixels for fortællingspanel uden maksimér-knap.<br><br>Hvis et linket billede indlæses langsomt, kan du overføre det til din historie for at opnå bedre resultater.",
       "tooltipDimension": "Værdien kan angives i 'px' eller '%'",
       "tooltipDimension2": "Værdien skal angives i \"px\"",

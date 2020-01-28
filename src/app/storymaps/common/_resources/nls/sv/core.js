@@ -42,18 +42,18 @@ define({
       "saveError": "Det gick inte att spara, försök igen",
       "status1": "Berättelsen är delad men det har uppstått vissa problem med den",
       "status2": "Berättelsen är inte delad men det har uppstått vissa problem med den",
-      "status3": "Berättelsen är offentlig",
-      "status4": "Berättelsen delas inom din organisation",
+      "status3": "Berättelsen är publik",
+      "status4": "Berättelsen delas inom organisationen",
       "status5": "Berättelsen är privat",
-      "status6": "Berättelsen har inte sparats än",
+      "status6": "Berättelsen är inte sparad än",
       "checking": "Kontrollerar",
       "fix": "Fixa"
     },
     "saveError": {
       "title": "Det uppstod ett fel när berättelsen skulle sparas",
-      "err1Div1": "Berättelsen kan inte sparas efter du redan har ett annat objekt med samma namn.",
+      "err1Div1": "Berättelsen kan inte sparas eftersom du redan har ett annat objekt med samma namn.",
       "err1Div2": "Ändra titeln på berättelsen och spara den sedan.",
-      "btnOk": "Redigera berättelsens titel"
+      "btnOk": "Redigera titeln på berättelsen"
     },
     "saveErrorSocial": {
       "title": "Delningsuppdatering för sociala medier",
@@ -73,24 +73,24 @@ define({
       "btnPrivate": "Privat",
       "btnPrivateTooltip": "Bara du kan se berättelsen",
       "btnOrg": "Organisation",
-      "btnOrgTooltip": "Bara medlemmar i din organisation kan se berättelsen",
+      "btnOrgTooltip": "Enbart medlemmar i din organisation kan visa berättelsen",
       "btnPublic": "Allmän",
       "btnPublicTooltip": "Alla kan se berättelsen",
       "loadingMessage": "Kontrollerar om berättelsen innehåller fel",
       "viewToggle1": "Visa berättelsens innehåll",
       "viewToggle2": "Stäng berättelsens innehåll",
-      "socialize": "Sociala sammanhang",
-      "statusPrivate": "Din berättelse är privat. Det är bara du som kan se den.",
-      "statusError": "Det finns fel i berättelsens innehåll som kommer att märkas för läsarna. Du kan hitta och rätta till problemen nedan.",
-      "statusNoErrPrivate": "Dela din berättelse när du är klar!",
+      "socialize": "Socialisera",
+      "statusPrivate": "Din berättelse är privat, bara du kan se den.",
+      "statusError": "Det finns fel i berättelsens innehåll som läsarna kommer att märka. Du kan identifiera och lösa dessa fel nedan.",
+      "statusNoErrPrivate": "Dela din berättelse när du är färdig!",
       "mystoriesinvite": "Hantera alla dina berättelser",
-      "notavailable1": "Tyvärr går det inte att dela din berättelse från byggverktyget, eftersom %PRODUCT% inte är värd för det här programmet.",
-      "notavailable2": "Tyvärr stöds inte din berättelse från byggverktyget i den här versionen av Portal for ArcGIS (kräver 10.4 eller senare).",
-      "notavailable3": "Du kan dela din berättelse från %LINK%.",
+      "notavailable1": "Det går tyvärr inte att dela din berättelse från byggaren eftersom denna applikation inte driftas på %PRODUCT%.",
+      "notavailable2": "Det går tyvärr inte att dela din berättelse från byggaren i denna version av Portal for ArcGIS (kräver 10.4 eller senare).",
+      "notavailable3": "Du kan dela denna berättelse från %LINK%.",
       "notavailable4": "Mina berättelser",
       "notavailable5": "dess objektsida",
-      "notavailable6": "Det här geoobjektet stöds tyvärr inte i utvecklingsläge. Beroende på hur ditt distributionsscenario ser ut kan det eventuellt finnas stöd för geoobjektet när det har distribuerats.",
-      "notavailable7": "Besök %MYCONTENT% och kontrollera att de kartor och lager som används i din berättelse även delas.",
+      "notavailable6": "Denna funktion stöds inte fullt ut i utvecklingsläge. Beroende på ditt distributionsscenario kanske detta geoobjekt stöds vid distributionen.",
+      "notavailable7": "Se till att du besöker %MYCONTENT% för att bekräfta att de kartor och lager som används i din berättelse också delas.",
       "notavailable8": "Mitt innehåll",
       "mystoriesinvite2": "Om du vill förbättra presentationen av din berättelse på sociala nätverk använder du ${MYSTORIES} för att lägga till en sammanfattning och en miniatyrbild."
     },
@@ -163,7 +163,10 @@ define({
       "tagline": "En Story Map"
     },
     "licenseChange2018": {
-      "noAccess": "Å_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________ö."
+      "noAccess": "Ditt konto (%USER_NAME%) har ingen licens för att öppna en Story Map som inte är tillgänglig för allmänheten. Be din organisations administratör att tilldela dig en användartyp som omfattar Story Maps eller en tilläggslicens för Essential Apps."
+    },
+    "storyTellerUserType": {
+      "notCreatorError": "Ditt konto (%USER_NAME%) har ingen licens för att använda klassiska Story Maps-builder. Be organisationens administratör att tilldela dig en Creator-användartyp."
     }
   }
 });

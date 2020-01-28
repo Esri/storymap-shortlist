@@ -73,13 +73,13 @@ define({
       "errorDuplicate": "Ja teniu un mapa amb aquest títol",
       "errorCreate": "No es pot crear el mapa. Torneu-ho a provar.",
       "errorSave": "No es pot desar el mapa. Torneu-ho a provar.",
-      "notavailable1": "A causa d'una limitació tècnica, no s'admeten la creació ni l'edició de mapes amb el Firefox. Si ho preferiu, podeu crear la història en un navegador web diferent o fer servir la solució alternativa següent.",
-      "notavailable2": "No s'admeten la creació ni l'edició de mapes perquè l'aplicació de l'story map no està allotjada al %PRODUCT%. Poseu-vos en contacte amb el vostre administrador de l'ArcGIS per obtenir més informació.",
-      "notavailable3": "No s'admeten la creació ni l'edició de mapes amb aquesta versió del Portal for ArcGIS (es necessita la versió 10.4 o posterior). Poseu-vos en contacte amb el vostre administrador de l'ArcGIS per obtenir més informació.",
+      "notavailable1": "A causa d'una limitació tècnica, no s'admeten la creació ni l'edició de mapes amb el Firefox Si ho preferiu, podeu crear la història amb un navegador web diferent o fer servir la solució alternativa següent.",
+      "notavailable2": "No s'admeten la creació ni l'edició de mapes perquè l'aplicació de l'Story Maps no està allotjada al %PRODUCT%. Poseu-vos en contacte amb l'administrador de l'ArcGIS per obtenir més informació.",
+      "notavailable3": "No s'admeten la creació ni l'edició de mapes amb aquesta versió del Portal for ArcGIS (es necessita la versió 10.4 o posterior). Poseu-vos en contacte amb l'administrador de l'ArcGIS per obtenir més informació.",
       "notavailable4": "Podeu crear un mapa amb el %MV% i després tornar aquí per afegir-lo a la vostra història.",
       "notavailable5": "Podeu editar el mapa amb el %MV%, tornar aquí i %apply% per veure els canvis.",
       "notavailable6": "visor de mapes",
-      "notavailable7": "torna a carregar el mapa"
+      "notavailable7": "tornar a carregar el mapa"
     }
   },
   "configure": {

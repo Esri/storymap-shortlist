@@ -6,7 +6,7 @@ define({
       "save": "保存",
       "next": "下一步",
       "cancel": "取消",
-      "back": "返回",
+      "back": "上一步",
       "apply": "应用",
       "close": "关闭",
       "open": "打开",
@@ -105,10 +105,10 @@ define({
       "viewExample": "查看实时示例"
     },
     "settingsTheme": {
-      "title": "主题"
+      "title": "专题"
     },
     "settingsHeader": {
-      "title": "页眉",
+      "title": "标题",
       "logoEsriRadio": "Esri 徽标",
       "logoNoneRadio": "无徽标",
       "logoOrgRadio": "组织徽标",
@@ -140,7 +140,7 @@ define({
     "httpsTransitionMessage": {
       "bannerMsg": "关于网络安全和故事地图的重要消息",
       "s1h1": "Esri 将增强故事地图的安全性",
-      "s1p1": "您的故事地图将显示在 web 上，web 社区始终致力于建立并实施更好的安全性措施。 HTTPS (可为通过 Internet 传输的内容提供安全连接)正逐渐成为访问 web 内容的首选方式。 当使用 HTTP 而非 HTTPS 时，大多数现代浏览器现在会显示警告消息。 鉴于这一新兴标准，我们强烈建议您使用 HTTPS 链接来创作和共享 Story Maps，并且仅在嵌入 web 内容或链接到 Story Map 中的影像时才使用 HTTPS URL。",
+      "s1p1": "您的故事地图将显示在 web 上，web 社区始终致力于建立并实施更好的安全性措施。 HTTPS (可为通过 Internet 传输的内容提供安全连接)正逐渐成为访问 web 内容的首选方式。 当使用 HTTP 而非 HTTPS 时，大多数现代浏览器现在会显示警告消息。 鉴于这一新兴标准，我们强烈建议您使用 HTTPS 链接来创作和共享 Story Maps，并且仅在嵌入 web 内容或链接到 Story Map 中的图像时才使用 HTTPS URL。",
       "s1p2": "实际上，这意味着 Story Map 及其所有内容(包括影像、图层、嵌入式应用程序和网站)应使用以 HTTPS 而非 HTTP 开头的链接进行访问。 这可确保为读者提供最佳体验，因为大多数 web 浏览器都会指示您的故事是安全的。",
       "s2h1": "我需要做什么?",
       "s2p1": "Esri 致力于使故事地图的作者和读者轻松实现过渡。 Story Map 构建器和 My Stories 中现已提供工具，可帮助您在故事中查找非安全内容(HTTP)，并就如何解决提出建议。 请检查您的故事是否存在非安全内容，并尽快更新为 HTTPS。",
@@ -163,7 +163,10 @@ define({
       "tagline": "故事地图"
     },
     "licenseChange2018": {
-      "noAccess": "试_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________验."
+      "noAccess": "您的帐户(%USER_NAME%)无权打开非公共 Story Map。 请联系您的组织管理员为您分配包含 Story Maps 或附加基本应用程序许可的用户类型。"
+    },
+    "storyTellerUserType": {
+      "notCreatorError": "您的帐户(%USER_NAME%)未获得使用经典 Story Map 构建器的许可。 请求您的组织管理员为您分配一个 Creator 用户类型。"
     }
   }
 });

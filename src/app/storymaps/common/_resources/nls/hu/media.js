@@ -21,11 +21,11 @@ define({
       "lblStep3": "Konfigurálás"
     },
     "imageSelectorHome": {
-      "explain": "Töltsön fel képeket a közösségi médiából, <br /> vagy közvetlenül egy URL-címről"
+      "explain": "Töltsön fel képeket a közösségi médiából <br /> vagy közvetlenül egy URL-címről"
     },
     "imageSelectorUpload": {
       "lblUploadButton": "tallózással keressen egy képet",
-      "lblDrop": "Tegyen ide egy képet vagy",
+      "lblDrop": "Húzzon ide egy képet vagy",
       "infoUpload": "A képek az ArcGIS-fiókjában lesznek tárolva, és csak a történetében lesznek elérhetők.",
       "warningFileTypes": "A kép lehet .jpg, .png, .gif vagy .bmp",
       "warningOneFile": "Egyszerre csak egy kép tölthető fel.",
@@ -85,7 +85,7 @@ define({
       "lblURL": "Kép hivatkozása",
       "lblURLPH": "A hivatkozásnak .jpg, .png, .gif vagy .bmp kiterjesztéssel kell végződnie",
       "lblURLPHHTTPS": "https://www.example.com/image.jpg",
-      "lblURLError": "Ez a kép nem érvényes. Adjon egy képfájlra mutató közvetlen hivatkozást (az URL-címnek általában .jpg vagy .png kiterjesztéssel kell végződnie). A képet tartalmazó weboldalra mutató hivatkozások nem fognak működni.",
+      "lblURLError": "A kép érvénytelennek tűnik. Adjon egy képfájlra mutató közvetlen hivatkozást (az URL-címnek általában .jpg vagy .png kiterjesztéssel kell végződnie). A képet tartalmazó weboldalra mutató hivatkozások nem fognak működni.",
       "lblURLErrorHTTPS": "A képhivatkozás nem érvényes. Az URL-nek HTTPS-sel kell kezdődnie, és valamelyik támogatott fájlkiterjesztésre (.jpg, .png, .gif, .bmp) kell végződnie.",
       "lblURLCheck": "Kép ellenőrzése...",
       "lblLabel": "Képaláírás",
@@ -101,7 +101,7 @@ define({
       "lblPosition3": "Illesztés",
       "lblPosition4": "Nyújtás",
       "lblPosition5": "Egyéni",
-      "lblURLHelp": "A képhivatkozásnak HTTPS-sel kell kezdődnie.<br><br>A legjobb eredmény érdekében a képek mérete ne legyen nagyobb, mint 400 KB. Használjon tömörített JPG-képeket 80%-os minőséggel és a következő ajánlott képszélességekkel: 2000 képpont a fő szakaszhoz vagy a maximális méretre állító gombot tartalmazó történetpanelhez, 1000 képpont a maximális méretre állító gomb nélküli történetpanelhez.<br><br>Ha egy hivatkozott kép lassan jelenik meg, töltse fel a történetbe a legjobb eredmény érdekében.",
+      "lblURLHelp": "A képhivatkozásnak HTTPS-sel kell kezdődnie.<br><br>A legjobb eredmény érdekében a képek mérete kevesebb kell legyen, mint 400 KB. Használjon tömörített JPG-képeket 80%-os minőséggel és a következő ajánlott képszélességekkel: 2000 képpont a fő szakaszhoz vagy a maximális méretre állító gombot tartalmazó elbeszéléspanelhez, 1000 képpont a maximális méretre állító gomb nélküli elbeszéléspanelhez.<br><br>Ha egy hivatkozott kép lassan jelenik meg, töltse fel a történetbe a jobb eredmény érdekében.",
       "tooltipDimension": "Az érték megadható képpontban vagy %-ban",
       "tooltipDimension2": "Az értéket képpontban kell megadni",
       "lblPosition2Explain": "(levágás lehet)",
@@ -109,14 +109,14 @@ define({
       "lblPosition3Explain2": "(a szélesség mindig kitölti a panelt)",
       "lblPosition4Explain": "(torzulhat)",
       "unloadLbl": "Eltávolítás, amikor az olvasó továbblép",
-      "unloadHelp": "Ha a weboldalon hangfájl vagy videó található, adja meg ezt a beállítást, hogy a tartalom lejátszása leálljon, amikor az olvasó elhagyja a weboldalt. Ezt a beállítást akkor kapcsolhatja ki, amikor például végig zenét szeretne lejátszani, miközben az olvasó halad előre a történetben.<br />Ha a weboldal egy alkalmazás, kapcsolja ki ezt a beállítást, hogy a történet ne töltődjön be újra, amikor az olvasó visszatér a weboldalra.",
+      "unloadHelp": "Ha a weboldalon hangfájl vagy videó található, akkor tartsa meg ezt a beállítást, hogy a tartalom lejátszása leálljon, amikor az olvasó elhagyja a weboldalt. Ezt a beállítást akkor kapcsolhatja ki, amikor például végig zenét szeretne lejátszani, miközben az olvasó halad előre a történetben.<br />Ha a weboldal egy alkalmazás, kapcsolja ki ezt a beállítást, hogy a történet ne töltődjön be újra, amikor az olvasó visszatér a weboldalra.",
       "embedProtocolLabel": "Oldal betöltése biztonságos kapcsolaton (HTTPS) keresztül",
-      "embedProtocolWarning1": "Ha az oldalon nem töltődik be a történet, az azt jelenti, hogy webbiztonsági okok miatt nem ágyazható be. Másik megoldásként helyezzen el egy hivatkozást a történetben, amellyel az oldal új böngészőlapon nyitható meg. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>További információk</a>",
-      "embedProtocolWarning2": "Ha az oldalon nem töltődik be a történet, kapcsolja ki ezt a beállítást, és próbálja meg újra. Ha az oldal továbbra sem töltődik be, az azt jelenti, hogy webbiztonsági okok miatt nem ágyazható be. Másik megoldásként helyezzen el egy hivatkozást a történetben, amellyel az oldal új böngészőlapon nyitható meg. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>További információk</a>",
+      "embedProtocolWarning1": "Ha az oldalon nem töltődik be a történet, az azt jelenti, hogy webbiztonsági okok miatt nem ágyazható be. Másik megoldásként helyezzen el egy hivatkozást az elbeszélésben, amellyel az oldal új böngészőlapon nyitható meg. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target=’_blank’>További információk</a>",
+      "embedProtocolWarning2": "Ha az oldalon nem töltődik be a történet, kapcsolja ki ezt a beállítást, és próbálja újra. Ha az oldal továbbra sem töltődik be, akkor webbiztonsági okok miatt nem ágyazható be. Másik megoldásként helyezzen el egy hivatkozást az elbeszélésben, amellyel az oldal új böngészőlapon nyitható meg. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target=’_blank’>További információk</a>",
       "learn": "További információk",
       "lblAltText": "Helyettesítő szöveg",
       "placeholderAltText": "Adja meg a média leírását a gyengén látó olvasók számára...",
-      "tooltipAltText": "Adja meg a médiatartalom leírását, amelyet a kisegítő technológiák fognak használni, például a képernyőolvasó szoftverek.  A leírás megadása nem kötelező, de ajánlott a webes hozzáférésre vonatkozó irányelveknek való megfelelés érdekében (ilyen például a WCAG és az 508. szakasz)."
+      "tooltipAltText": "Adja meg a médiatartalom leírását, amelyet a kisegítő technológiák fognak használni, például a képernyőolvasó szoftverek. A leírás megadása nem kötelező, de ajánlott a webes hozzáférésre vonatkozó irányelveknek való megfelelés érdekében (ilyen például a WCAG és az 508. szakasz)."
     },
     "editorActionGeocode": {
       "lblTitle": "Cím vagy hely megkeresése",

@@ -1,7 +1,7 @@
 define({
   "commonMedia": {
     "mediaSelector": {
-      "lblSelect1": "Media",
+      "lblSelect1": "Imagem",
       "lblSelect2": "Conteúdo",
       "lblMap": "Mapa",
       "lblImage": "Imagem",
@@ -101,7 +101,7 @@ define({
       "lblPosition3": "Adaptar",
       "lblPosition4": "Esticar",
       "lblPosition5": "Personalizar",
-      "lblURLHelp": "As ligações a imagens têm de começar com HTTPS.<br><br>Para melhores resultados, as imagens devem ser menores do que 400 KB. Utilize imagens JPG comprimidas com 80% de qualidade e estas larguras de imagem recomendadas: 2000 pixeis para o ecrã principal ou painel narrativo com botão maximizar, 1000 pixeis para painel narrativo sem botão maximizar.<br><br>Caso uma imagem ligada fique lenta, carregue-a para a sua história para obter melhores resultados.",
+      "lblURLHelp": "As ligações a imagens têm de começar com HTTPS.<br><br>Para obter melhores resultados, as imagens devem ser menores do que 400 KB. Utilize imagens JPG comprimidas com 80% de qualidade e estas larguras de imagem recomendadas: 2000 pixeis para o ecrã principal ou painel narrativo com botão maximizar, 1000 pixeis para painel narrativo sem botão maximizar.<br><br>Caso uma imagem ligada fique lenta, carregue-a para a sua história para obter melhores resultados.",
       "tooltipDimension": "O valor pode ser especificado em pixéis ou percentagem",
       "tooltipDimension2": "O valor tem de ser especificado em px",
       "lblPosition2Explain": "(pode recortar)",

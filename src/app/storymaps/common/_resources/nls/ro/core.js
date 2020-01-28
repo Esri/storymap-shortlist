@@ -4,7 +4,7 @@ define({
       "add": "Adăugare",
       "edit": "Editare",
       "save": "Salvare",
-      "next": "Înainte",
+      "next": "Următor",
       "cancel": "Anulare",
       "back": "Înapoi",
       "apply": "Aplicare",
@@ -149,10 +149,10 @@ define({
       "action3": "Aflați mai multe"
     },
     "sectionNavigation": {
-      "select": "Selectați o intrare...",
+      "select": "Selectați o înregistrare...",
       "section": "Înregistrare",
-      "thisSection": "Această intrare",
-      "hiddenSection": "Intrare ascunsă"
+      "thisSection": "Această înregistrare",
+      "hiddenSection": "Înregistrare ascunsă"
     },
     "embedBar": {
       "share": "Partajare",
@@ -163,7 +163,10 @@ define({
       "tagline": "O hartă informativă"
     },
     "licenseChange2018": {
-      "noAccess": "Ă_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________ș."
+      "noAccess": "Contul dvs. (%USER_NAME%) nu este licențiat să deschidă o hartă informativă care nu este publică. Solicitați-i administratorului organizației să vă aloce un tip de utilizator care include hărți informative sau o licență pentru aplicații esențiale de completare."
+    },
+    "storyTellerUserType": {
+      "notCreatorError": "Contul dvs. (%USER_NAME%) nu are licența necesară pentru utilizarea aplicațiilor de creare a hărților informative clasice. Solicitați-i administratorului organizației dvs. să vă aloce un tip de utilizator Creator."
     }
   }
 });

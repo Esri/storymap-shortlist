@@ -36,13 +36,13 @@ define({
       "tooltipFirstSave": "儲存後，此功能才可用。",
       "tooltipNotShared": "分享後，此功能才可用。",
       "tooltipNotShared2": "您的故事未分享，只有您可以存取。",
-      "noPendingChange": "無待決定的變更",
-      "unSavedChangePlural": "待決定的變更",
+      "noPendingChange": "無待決的變更",
+      "unSavedChangePlural": "待決變更",
       "closeWithPendingChange": "是否確定要確認此操作？您的變更將遺失。",
       "saveError": "儲存失敗，請重試",
       "status1": "故事已分享但發生問題",
       "status2": "故事未分享但發生問題",
-      "status3": "故事為公開",
+      "status3": "故事已公開",
       "status4": "故事已在您的組織內部分享",
       "status5": "故事為私有",
       "status6": "故事尚未儲存",
@@ -99,7 +99,7 @@ define({
       "tabError": "請檢查所有索引標籤中的錯誤"
     },
     "settingsLayout": {
-      "title": "版面配置",
+      "title": "版面設定",
       "explain": "想要使用哪種版面設定？",
       "explainInit": "可隨時在設定對話方塊中變更版面設定。",
       "viewExample": "查看即時範例"
@@ -163,7 +163,10 @@ define({
       "tagline": "故事地圖"
     },
     "licenseChange2018": {
-      "noAccess": "試_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________驗."
+      "noAccess": "您的帳號 (%USER_NAME%) 未經授權，無法開啟非公開的故事地圖。 請聯繫您的組織管理員，請其將包含 Story Maps 或附加元件基礎應用程式授權的使用者類型指派給您。"
+    },
+    "storyTellerUserType": {
+      "notCreatorError": "您的帳號 (%USER_NAME%) 沒有使用傳統的故事地圖建立器的授權。 請要求您的組織管理員將 Creator 使用者類型指派給您。"
     }
   }
 });

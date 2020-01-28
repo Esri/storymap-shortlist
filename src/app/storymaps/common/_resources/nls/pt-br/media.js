@@ -8,7 +8,7 @@ define({
       "lblVideo": "Vídeo",
       "lblExternal": "Página da web",
       "lblUpload": "Carregar",
-      "lblLink": "Vincular",
+      "lblLink": "Link",
       "disabled": "Este recurso foi desabilitado pelo Administrador",
       "userLookup": "Carregar álbuns",
       "notImplemented": "Não implementado ainda.",

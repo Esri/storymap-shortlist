@@ -68,7 +68,7 @@ define({
     },
     "share": {
       "shareTitle": "Del din historie",
-      "preview": "Eksempel",
+      "preview": "Forhåndsvisning",
       "viewlive": "Vis historie",
       "btnPrivate": "Privat",
       "btnPrivateTooltip": "Kun du kan se historien",
@@ -163,7 +163,10 @@ define({
       "tagline": "Et Story Map"
     },
     "licenseChange2018": {
-      "noAccess": "ø_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________å."
+      "noAccess": "Din konto (%USER_NAME%) har ikke licens til at åbne et Story Map, der ikke er offentligt. Bed din organisationsadministrator om at knytte dig til en brugertype, der omfatter Story Maps eller en add-on Essential Apps-licens."
+    },
+    "storyTellerUserType": {
+      "notCreatorError": "Din konto (%USER_NAME%) er ikke licenseret til at benytte klassiske story map-buildere. Bed din organisationsadministrator om at tildele dig en Creator-licens."
     }
   }
 });

@@ -85,7 +85,7 @@ define({
       "statusNoErrPrivate": "Hãy chia sẻ câu chuyện của bạn khi bạn đã sẵn sàng!",
       "mystoriesinvite": "Quản lý tất cả các câu chuyện của bạn",
       "notavailable1": "Xin lỗi, chia sẻ câu chuyện của bạn từ Bộ thiết lập không được hỗ trợ do ứng dụng story map không được lưu trữ trong %PRODUCT%.",
-      "notavailable2": "Xin lỗi, chia sẻ câu chuyện của bạn từ Bộ thiết lập không được hỗ trợ do trên phiên bản Portal for ArcGIS này (yêu cầu phiên bản 10.4 trở lên).",
+      "notavailable2": "Xin lỗi, chia sẻ câu chuyện của bạn từ Bộ thiết lập không được hỗ trợ trên phiên bản Portal for ArcGIS này (yêu cầu phiên bản 10.4 trở lên).",
       "notavailable3": "Bạn có thể chia sẻ câu chuyện từ %LINK%.",
       "notavailable4": "Câu chuyện của Tôi",
       "notavailable5": "trang mục của câu chuyện",
@@ -108,7 +108,7 @@ define({
       "title": "Chủ đề"
     },
     "settingsHeader": {
-      "title": "Đầu trang",
+      "title": "Đầu mục",
       "logoEsriRadio": "Logo Esri",
       "logoNoneRadio": "Không có logo",
       "logoOrgRadio": "Logo của tổ chức",
@@ -139,8 +139,8 @@ define({
     },
     "httpsTransitionMessage": {
       "bannerMsg": "Thông báo quan trọng về Bảo mật web và Story Maps",
-      "s1h1": "Esri đang ngày càng làm tăng cường chế độ bảo mật cho Story Maps",
-      "s1p1": "Story Map của bạn hiển thị trực tiếp trên web, và cộng đồng web luôn nỗ lực để xây dựng và triển khai bảo mật tốt hơn. HTTPS là một kết nối bảo mật dành cho nội dung được truyền qua internet, đây là một phương thức đang được mong muốn để truy cập vào nội dung web. Các trình duyệt hiện đại nhất giờ đây đều hiển thị thông tin cảnh báo khi phát hiện việc sử dụng HTTP thay vì HTTPS. Vì đây là tiêu chuẩn mới, chúng tôi khuyến cáo bạn nên sử dụng các liên kết HTTPS để tạo và chia sẻ Story Map, và chỉ sử dụng URL HTTPS khi nhúng nội dung web hoặc đường dẫn vào hình ảnh trong một Story Map.",
+      "s1h1": "Esri đang ngày càng cải tiến chế độ bảo mật cho Story Maps",
+      "s1p1": "Story Map của bạn hiển thị trực tiếp trên web, và cộng đồng web luôn nỗ lực để xây dựng và thực hiện bảo mật tốt hơn. HTTPS vốn là một kết nối bảo mật dành cho những nội dung được truyền qua internet, đây là giao thức mong muốn được sử dụng để truy cập vào nội dung web. Các trình duyệt hiện đại nhất giờ đây đều hiển thị thông tin cảnh báo khi phát hiện việc sử dụng giao thức HTTP thay vì HTTPS. Do tiêu chuẩn mới nổi này, nên chúng tôi khuyến cáo bạn nên sử dụng các liên kết HTTPS để tạo và chia sẻ Story Map, và chỉ sử dụng URL HTTPS khi nhúng nội dung web hoặc đường dẫn vào hình ảnh trong một Story Map.",
       "s1p2": "Trên thực tế, điều này có nghĩa là nên truy cập Story Map và tất cả nội dung trong đó (bao gồm hình ảnh, các lớp, ứng dụng và trang web được nhúng vào) bằng các liên kết bắt đầu bằng HTTPS thay vì HTTP. Điều này đảm bảo mang đến trải nghiệm tốt nhất cho người xem bởi vì hầu hết các trình duyệt web sẽ cho biết rằng câu chuyện của bạn đã được bảo mật.",
       "s2h1": "Bạn cần làm gì?",
       "s2p1": "Esri đang nỗ lực để biến điều này thành bước chuyển tiếp đơn giản đối với tác giả và người xem Story Map. Các công cụ hiện có sẵn trong trình xây dựng Story Map và My Stories sẽ giúp bạn tìm kiếm nội dung không bảo mật (HTTP) trong các câu chuyện của bạn đồng thời đưa ra khuyến nghị về cách xử lý các vấn đề trên. Vui lòng kiểm tra các câu chuyện của bạn để tìm kiếm nội dung không bảo mật và cập nhật thành HTTPS sớm nhất có thể.",
@@ -150,7 +150,7 @@ define({
     },
     "sectionNavigation": {
       "select": "Lựa chọn đầu vào...",
-      "section": "Mục nhập",
+      "section": "Đầu vào",
       "thisSection": "Mục đầu vào này",
       "hiddenSection": "Mục đầu vào ẩn"
     },
@@ -163,7 +163,10 @@ define({
       "tagline": "Story Map"
     },
     "licenseChange2018": {
-      "noAccess": "Đ_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________ớ."
+      "noAccess": "Tài khoản của bạn (%USER_NAME%) không được cấp phép để mở ứng dụng Story Map mà không được chia sẻ công khai. Vui lòng yêu cầu quản trị viên của tổ chức bạn gán cho bạn loại người dùng nào có bao gồm việc sử dụng ứng dụng Story Maps hoặc có giấy phép sử dụng các ứng dụng thiết yếu bổ trợ."
+    },
+    "storyTellerUserType": {
+      "notCreatorError": "Tài khoản của bạn (%USER_NAME%) không được cấp phép để sử dụng các trình dựng bản đồ câu chuyện cổ điển. Vui lòng yêu cầu quản trị viên của tổ chức chỉ định cho bạn loại người dùng là Creator."
     }
   }
 });

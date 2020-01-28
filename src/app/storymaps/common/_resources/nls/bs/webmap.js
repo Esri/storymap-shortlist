@@ -55,7 +55,7 @@ define({
       "hintNavigation": "Onemogućena je navigacija kartom."
     },
     "editor": {
-      "loading": "Pričekajte dok se ne učita uređivač karte",
+      "loading": "Pričekajte dok se ne učita uređivač karte",
       "newTitle": "Stvori novu kartu",
       "editTitle": "Uredi kartu",
       "titleLbl": "Naziv",
@@ -65,7 +65,7 @@ define({
       "saving": "Spremanje karte",
       "success": "Karta spremljena",
       "successCreate": "Karta stvorena",
-      "cancelTitle": "Želite li odbaciti nespremljene promjene?",
+      "cancelTitle": "Želite li odbaciti nespremljene promjene?",
       "close": "Zatvori",
       "save": "Spremi",
       "confirm": "Da, zatvori kartu",

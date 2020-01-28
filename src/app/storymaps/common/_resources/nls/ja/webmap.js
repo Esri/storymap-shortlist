@@ -67,7 +67,7 @@ define({
       "successCreate": "マップが作成されました",
       "cancelTitle": "保存されていない変更内容をすべて破棄しますか？",
       "close": "閉じる",
-      "save": "更新",
+      "save": "保存",
       "confirm": "はい、マップを閉じます",
       "deny": "いいえ、このまま続行します",
       "errorDuplicate": "そのタイトルのマップはすでに存在しています。",

@@ -1,8 +1,8 @@
 define({
   "commonCore": {
     "common": {
-      "add": "הוסף",
-      "edit": "עריכה",
+      "add": "הוספה",
+      "edit": "ערוך",
       "save": "שמור",
       "next": "הבא",
       "cancel": "ביטול",
@@ -29,7 +29,7 @@ define({
       "panelHeader": "%TPL_NAME% Builder",
       "buttonSaving": "שמירה",
       "buttonSaved": "נשמר",
-      "buttonShare": "שתף",
+      "buttonShare": "שיתוף",
       "buttonSettings": "הגדרות",
       "buttonHelp": "עזרה",
       "buttonPreview": "הצג סיפור",
@@ -90,8 +90,8 @@ define({
       "notavailable4": "הסיפורים שלי",
       "notavailable5": "זה דף פריט",
       "notavailable6": "מצטערים, ישות זו לא נתמכת במלואה במצב פיתוח. בהתאם לתרחיש הפיתוח שלך, ייתכן שיישות זו תיתמך כאשר תיפרס.",
-      "notavailable7": "הקפד לבקר את %MYCONTENT% כדי לוודא שהמפות והשכבות המשמשות בסיפור שלך משותפות.",
-      "notavailable8": "התכולה שלי",
+      "notavailable7": "הקפד לבקר את %MYCONTENT% כדי לוודא שהמפות והשכבות שבסיפור שלך משותפות.",
+      "notavailable8": "התוכן שלי",
       "mystoriesinvite2": "כדי לשפר את הופעת הסיפור שלך ברשתות החברתיות, השתמש ב-${MYSTORIES} כדי להוסיף סיכום ותמונה ממוזערת."
     },
     "settings": {
@@ -101,16 +101,16 @@ define({
     "settingsLayout": {
       "title": "תצוגה",
       "explain": "באיזו תצוגה תרצה להשתמש?",
-      "explainInit": "בכל זמן אתה יכול לשנות את סידור המפה מתוך דיאלוג ההגדרות.",
+      "explainInit": "אתה יכול לשנות את כל עת את סידור המפה מתוך דיאלוג ההגדרות.",
       "viewExample": "הצג דוגמה חיה"
     },
     "settingsTheme": {
-      "title": "נושא"
+      "title": "ערכת נושא"
     },
     "settingsHeader": {
       "title": "כותרת עליונה",
       "logoEsriRadio": "לוגו של Esri",
-      "logoNoneRadio": "ללא לוגו",
+      "logoNoneRadio": "אין לוגו",
       "logoOrgRadio": "הלוגו של הארגון",
       "logoCustomRadio": "הלוגו שלי",
       "logoCustomLabel": "תמונה:",
@@ -163,7 +163,10 @@ define({
       "tagline": "מפת סיפור"
     },
     "licenseChange2018": {
-      "noAccess": "כן_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________ש."
+      "noAccess": "החשבון שלך (%USER_NAME%) אינו מורשה לפתוח מפת סיפור שאינה ציבורית. בקש ממנהל המערכת בארגון שלך להקצות לך סוג משתמש שכולל את 'מפות סיפור' או רישיון הרחבה ל-Essential Apps."
+    },
+    "storyTellerUserType": {
+      "notCreatorError": "החשבון שלך (%USER_NAME%) אינו מורשה להשתמש בבוני מפות סיפור קלסיות. בקש ממנהל המערכת בארגון שלך להקצות לך סוג משתמש 'יוצר'."
     }
   }
 });

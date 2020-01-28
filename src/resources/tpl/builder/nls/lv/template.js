@@ -16,7 +16,7 @@ define({
       "confirmDeletion": "Apstiprināt dzēšanu šim: "
     },
     "landing": {
-      "lblAdd": "Kā vēlaties nosaukt savu atlases sarakstu?",
+      "lblAdd": "Kā vēlaties nosaukt savu stāstu?",
       "phAdd": "Ievadīt virsrakstu...",
       "lblOR": "Vai",
       "lblHelp": "Iepazīties"
@@ -59,7 +59,7 @@ define({
       "thumbnailHelp": "Sīktēla saitei ir jāsākas ar HTTPS.<br><br>Ieteicamai sīktēla izmērs un forma ir 280 x 210 pikseļi (4:3 platuma:augstuma proporcija). Lielāki sīktēli var palēnināt veiktspēju. 4:3 proporciju sīktēli iekļaujas to mozaīkā, neapgriežot."
     },
     "settings": {
-      "numberedPlaces": "Rādīt vietas ar skaitļiem",
+      "numberedPlaces": "Rādīt numurētos novietojumus",
       "extentSensitive": "Cilnēs rādīt tikai vietas, kas redzamas kartē (tikai skatītājs)",
       "extentSensitiveTooltip": "Šī izvēlne ir spēkā tikai tad, kad jūsu atlases saraksts tiek skatīts. Shortlist veidotāja cilnēs vienmēr tiek rādītas visas vietas, arī tās, kuras nav redzamas kartē. Lai Shortlist lietotnes skatīšanas laikā cilnēs vienmēr rādītu visas vietas, noņemiet atzīmi šai izvēlnei.",
       "locateButton": "Poga Meklēt",

@@ -9,7 +9,7 @@ define({
       "lblExternal": "Tinklalapis",
       "lblUpload": "Įkelti",
       "lblLink": "Nuoroda",
-      "disabled": "Šią funkciją išjungė administratorius",
+      "disabled": "Šią funkciją išjungė Administratorius",
       "userLookup": "Įkelti albumus",
       "notImplemented": "Dar neįdiegta.",
       "noData": "Viešųjų albumų nerasta",
@@ -33,8 +33,8 @@ define({
       "tooltipRemove": "Ištrinkite šį nenaudojamą atvaizdą iš savo ArcGIS paskyros. <br> (Jei vėliau nuspręsite jį naudoti, turėsite įkelti dar kartą.)"
     },
     "imageSelectorFlickr": {
-      "userInputLbl": "Vartotojo vardas",
-      "signInMsg2": "Vartotojas nerastas",
+      "userInputLbl": "Naudotojo vardas",
+      "signInMsg2": "Naudotojas nerastas",
       "loadingFailed": "Įkelti nepavyko"
     },
     "imageSelectorPicasa": {
@@ -54,10 +54,10 @@ define({
     },
     "videoSelectorYoutube": {
       "url": "Youtube vaizdo įrašo nuoroda",
-      "pageInputLbl": "Vartotojo vardas",
-      "lookupMsgError": "Vartotojas nerastas",
-      "howToFind": "Kaip rasti YouTube vartotojo vardą",
-      "howToFind2": "Vartotojo vardas rodomas po vaizdo įrašo",
+      "pageInputLbl": "Naudotojo vardas",
+      "lookupMsgError": "Naudotojas nerastas",
+      "howToFind": "Kaip rasti YouTube naudotojo vardą",
+      "howToFind2": "Naudotojo vardas rodomas po vaizdo įrašais",
       "found": "Surasta",
       "noData": "Nerasta viešų vaizdo įrašų",
       "videoNotChecked": "Vaizdo įrašas nebuvo patikrintas „YouTube“, bet jo adresas atrodo tinkamas.",
@@ -101,7 +101,7 @@ define({
       "lblPosition3": "Talpinti",
       "lblPosition4": "Ištempti",
       "lblPosition5": "Adaptuota",
-      "lblURLHelp": "Paveikslėlio nuoroda turi prasidėti HTTPS.<br><br>Jei norite geriausių rezultatų, paveikslėliai turi būti mažesni nei 400 KB. Naudokite 80% kokybės suglaudintus JPG paveikslėlius ir tokių rekomenduojamų pločių: 2 000 pikselių pagrindinėje srityje arba pasakojimo skydelyje su padidinimo mygtuku, 1 000 pikselių pasakojimo skydelyje be padidinimo mygtuko.<br><br>Jei susietas paveikslėlis atvaizduojamas lėtai, norėdami geresnių rezultatų, įkelkite jį į savo pasakojimą.",
+      "lblURLHelp": "Paveikslėlio nuoroda turi prasidėti HTTPS.<br><br>Jei norite geriausių rezultatų, paveikslėliai turi būti mažesni nei 400 KB. Naudokite 80% kokybės suglaudintus JPG paveikslėlius ir tokių rekomenduojamų pločių: 2 000 pikselių pagrindinėje srityje arba pasakojimo skydelyje su padidinimo mygtuku, 1 000 pikselių pasakojimo skydelyje be padidinimo mygtuko.<br><br>Jei susietas paveikslėlis atvaizduojamas lėtai, norėdami geresnių rezultatų, įkelkite jį į savo pasakojimą.",
       "tooltipDimension": "Reikšmę galima nurodyti piks. arba %",
       "tooltipDimension2": "Reikšmę reikia nurodyti piks.",
       "lblPosition2Explain": "(gali būti apkarpoma)",
@@ -109,18 +109,18 @@ define({
       "lblPosition3Explain2": "(plotis visada atitiks skydą)",
       "lblPosition4Explain": "(gali būti iškraipoma)",
       "unloadLbl": "Iškelti, kai skaitytojas palieka šią dalį",
-      "unloadHelp": "Jeigu tinklalapyje yra garso arba vaizdo įrašų, palikite šią parinktį pažymėtą, kad sustabdytumėte turinio leidimą, kai skaitytojas išeina. Panaikinkite žymėjimą, jei norite leisti garso takelį, kai skaitytojas peržiūri pasakojimą.<br/>Jeigu tinklalapis yra aplikacija, panaikinkite šios parinkties žymėjimą, kad skaitytojui grįžus, pasakojimas nebūtų įkeliamas iš naujo.",
+      "unloadHelp": "Jeigu tinklalapyje yra garso arba vaizdo įrašų, palikite šią parinktį pažymėtą, kad sustabdytumėte turinio leidimą, kai skaitytojas išeina. Panaikinkite žymėjimą, jei norite leisti garso takelį, kai skaitytojas peržiūri pasakojimą.<br />Jeigu tinklalapis yra aplikacija, panaikinkite šios parinkties žymėjimą, kad skaitytojui grįžus, pasakojimas nebūtų įkeliamas iš naujo.",
       "embedProtocolLabel": "Įkelkite puslapį naudodami saugų ryšį (HTTPS)",
       "embedProtocolWarning1": "Jei šis puslapis jūsų pasakojime neįkeliamas, jį galima įdėti interneto saugumo sumetimais. Arba pridėkite nuorodą savo pasakojime, kad atidarytumėte puslapį naujame naršyklės skirtuke. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>Sužinokite daugiau</a>",
       "embedProtocolWarning2": "Jei šis puslapis jūsų pasakojime neįkeliamas, atžymėkite šią parinktį ir bandykite dar kartą. Jei puslapis vis tiek neįkeliamas, jį galima įdėti interneto saugumo sumetimais. Arba pridėkite nuorodą savo pasakojime, kad atidarytumėte puslapį naujame naršyklės skirtuke. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>Sužinokite daugiau</a>",
       "learn": "Sužinokite daugiau",
       "lblAltText": "Alternatyvus tekstas",
       "placeholderAltText": "Įveskite šios medijos aprašą, skirtą skaitytojams su regos sutrikimais...",
-      "tooltipAltText": "Pateikite šio medijos aprašą, kuris bus naudojamas neįgaliesiems pritaikytose technologijose, pvz., ekrano skaitytuvo programinėje įrangoje. Aprašas nėra privalomas, tačiau rekomenduojamas norint atitikti žiniatinklio pritaikymo neįgaliesiems gaires, pavyzdžiui, WCAG ir Section 508."
+      "tooltipAltText": "Pateikite šios medijos aprašą, kuris bus naudojamas neįgaliesiems pritaikytose technologijose, pvz., ekrano skaitytuvo programinėje įrangoje. Aprašas nėra privalomas, tačiau rekomenduojamas norint atitikti žiniatinklio pritaikymo neįgaliesiems gaires, pavyzdžiui, WCAG ir Section 508."
     },
     "editorActionGeocode": {
       "lblTitle": "Raskite adresą arba vietą",
-      "mapMarkerExplain": "Spustelėjęs nuorodą, vartotojas matys žemėlapio žymeklį"
+      "mapMarkerExplain": "Spustelėjęs nuorodą, naudotojas matys žemėlapio žymeklį"
     },
     "editorActions": {
       "navigate": "Eiti į kitą įrašą",

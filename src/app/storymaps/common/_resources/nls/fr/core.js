@@ -2,7 +2,7 @@ define({
   "commonCore": {
     "common": {
       "add": "Ajouter",
-      "edit": "Modifier",
+      "edit": "Mise à jour",
       "save": "Enregistrer",
       "next": "Suivant",
       "cancel": "Annuler",
@@ -12,7 +12,7 @@ define({
       "open": "Ouvrir",
       "start": "Démarrer",
       "loading": "Chargement en cours",
-      "disabledAdmin": "Cette fonction a été désactivée par l'administrateur",
+      "disabledAdmin": "Cette entité a été désactivée par l'administrateur",
       "width": "Largeur",
       "height": "Hauteur",
       "create": "Créer",
@@ -39,7 +39,7 @@ define({
       "noPendingChange": "Aucune modification en attente",
       "unSavedChangePlural": "Modifications en attente",
       "closeWithPendingChange": "Vouez-vous vraiment confirmer cette opération ? Vos modifications seront perdues.",
-      "saveError": "L'enregistrement a échoué, réessayez",
+      "saveError": "L’enregistrement a échoué, réessayez",
       "status1": "Le récit est partagé, mais comporte des problèmes",
       "status2": "Le récit n'est pas partagé, mais comporte des problèmes",
       "status3": "Le récit est public",
@@ -74,7 +74,7 @@ define({
       "btnPrivateTooltip": "Vous seul pouvez voir le récit",
       "btnOrg": "Organisation",
       "btnOrgTooltip": "Seuls les membres de votre organisation peuvent voir le récit",
-      "btnPublic": "Publique",
+      "btnPublic": "Public",
       "btnPublicTooltip": "Tout le monde peut voir le récit",
       "loadingMessage": "Recherche d'erreurs dans votre récit",
       "viewToggle1": "Afficher le contenu du récit",
@@ -120,7 +120,7 @@ define({
       "logoUploadSizeError": "Dimensions du GIF trop importantes. Réduisez-le à une largeur de ${PIXEL-WIDTH} pixels.",
       "logoCustomLinkHTTPSError": "Le lien doit commencer par HTTPS",
       "logoCustomLinkTooltip": "Lien vers un logo",
-      "logoCustomLinkPlaceholder": "URL de l'image",
+      "logoCustomLinkPlaceholder": "URL de l’image",
       "logoCustomLinkPlaceholderHTTPS": "https://example.com/logo.jpg",
       "logoUploadGenericError": "Un logo peut être au format BMP, GIF, JPG, JPEG ou PNG. Les fichiers GIF ne doivent pas dépasser une largeur de 250 pixels et une taille de 10 Mo.",
       "logoCustomTargetPlaceholder": "Page web à ouvrir lorsqu'un utilisateur clique sur le logo",
@@ -163,7 +163,10 @@ define({
       "tagline": "Une Story Map"
     },
     "licenseChange2018": {
-      "noAccess": "æ_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________Â."
+      "noAccess": "La licence de votre compte (%USER_NAME%) ne permet pas d’ouvrir une Story Map non publique. Demandez à l’administrateur de votre organisation de vous attribuer un type d’utilisateur qui inclut les Story Maps ou une licence Essential Apps sous forme de complément."
+    },
+    "storyTellerUserType": {
+      "notCreatorError": "La licence de votre compte (%USER_NAME%) ne permet pas d’utiliser les générateurs de story maps classiques. Demandez à l’administrateur de votre organisation de vous attribuer le type d’utilisateur Creator."
     }
   }
 });

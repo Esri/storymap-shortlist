@@ -47,7 +47,7 @@ define({
       "status5": "La història és privada",
       "status6": "La història encara no s'ha desat",
       "checking": "S'està comprovant",
-      "fix": "Soluciona"
+      "fix": "Corregeix"
     },
     "saveError": {
       "title": "Error en desar la història",
@@ -64,7 +64,7 @@ define({
       "panel2q1tooltip": "Si trieu aquesta opció, el títol de l'element es modificarà perquè coincideixi amb el títol de la història i se sincronitzaran els canvis posteriors del builder.",
       "panel2q2": "Títol de l'element",
       "panel3": "Per millorar l'aspecte de la vostra història a les xarxes socials, utilitzeu ${MYSTORIES} per afegir un resum i una imatge en miniatura.",
-      "panel4": "No em tornis a mostrar avisos per a aquesta història"
+      "panel4": "No em tornis a mostrar avisos d'aquesta història"
     },
     "share": {
       "shareTitle": "Compartiu la vostra història",
@@ -81,14 +81,14 @@ define({
       "viewToggle2": "Tanca el contingut de la història",
       "socialize": "Socialitza",
       "statusPrivate": "La història és privada i només vós la podeu veure.",
-      "statusError": "Hi ha problemes al contingut de la vostra història que seran visibles per als lectors. Podeu identificar-los i solucionar-los a continuació.",
+      "statusError": "Hi ha problemes al contingut de la història que seran visibles per als lectors. Podeu identificar-los i solucionar-los a continuació.",
       "statusNoErrPrivate": "Compartiu la vostra història quan estigueu a punt.",
       "mystoriesinvite": "Administreu totes les vostres històries",
       "notavailable1": "No s'admet la compartició de la història des del Builder perquè aquesta aplicació no està allotjada al %PRODUCT%.",
       "notavailable2": "No s'admet la compartició de la història des del Builder en aquesta versió del Portal for ArcGIS (cal la versió 10.4 o posterior).",
       "notavailable3": "Podeu compartir aquesta història des de %LINK%.",
       "notavailable4": "Les meves històries",
-      "notavailable5": "la seva pàgina de l'element",
+      "notavailable5": "la pàgina de l'element",
       "notavailable6": "Aquesta entitat no és totalment compatible amb el mode de desenvolupament. Segons el vostre escenari d'implementació, és possible que l'entitat sigui compatible quan s'implementi.",
       "notavailable7": "Assegureu-vos de visitar %MYCONTENT% per comprovar que els mapes i les capes que es fan servir a la vostra història també s'han compartit.",
       "notavailable8": "El meu contingut",
@@ -117,12 +117,12 @@ define({
       "logoCustomUploadHelp": "L'enllaç de la imatge del logotip ha de començar amb HTTPS. Els logotips es veuen millor si tenen una relació d'amplada i altura entre 1:1 i 5:1. Si un logotip enllaçat es dibuixa lentament, deseu-ne una còpia i pugeu-lo aquí.",
       "logoCustomUploadTooltip": "Utilitza un logotip que s'hagi pujat",
       "logoCustomUploadButton": "Puja un logotip",
-      "logoUploadSizeError": "Les dimensions del GIF són massa grans. Canvieu-ne la mida a ${PIXEL-WIDTH} píxels d'amplada.",
+      "logoUploadSizeError": "Les dimensions del fitxer GIF són massa grans. Canvieu la mida a ${PIXEL-WIDTH} píxels d'ample.",
       "logoCustomLinkHTTPSError": "L'enllaç ha de començar amb HTTPS",
       "logoCustomLinkTooltip": "Enllaç a un logotip",
       "logoCustomLinkPlaceholder": "URL de la imatge",
       "logoCustomLinkPlaceholderHTTPS": "https://exemple.com/logo.jpg",
-      "logoUploadGenericError": "El logotip pot ser un fitxer .bmp, .gif, .jpg, .jpeg. o .png. Els fitxers GIF han de tenir menys de 250 px d'amplada i una mida menor que 10 MB.",
+      "logoUploadGenericError": "El logotip pot ser un fitxer .bmp, .gif, .jpg, .jpeg. o .png. Els fitxers GIF han de tenir menys de 250 px d'ample i una mida menor que 10 MB.",
       "logoCustomTargetPlaceholder": "Pàgina web que s'obrirà en fer clic al logotip",
       "logoSocialText": "Eslògan:",
       "logoLink": "Enllaç:",
@@ -163,7 +163,10 @@ define({
       "tagline": "Un Story Map"
     },
     "licenseChange2018": {
-      "noAccess": "ó_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________à."
+      "noAccess": "El vostre compte (%USER_NAME%) no té llicència per obrir un story map que no sigui públic.  Demaneu a l'administrador de l'organització que us assigni un tipus d'usuari que inclogui story maps o una llicència d'aplicacions bàsiques de complement."
+    },
+    "storyTellerUserType": {
+      "notCreatorError": "El vostre compte (%USER_NAME%) no té llicència per utilitzar els builders d'story maps clàssics. Demaneu a l'administrador de l'organització que us assigni un tipus d'usuari Creator."
     }
   }
 });

@@ -12,7 +12,7 @@ define({
       "open": "Otvori",
       "start": "Početak",
       "loading": "Učitavanje",
-      "disabledAdmin": "Administrator je onemogućio ovu značajku",
+      "disabledAdmin": "Administrator je onemogućio ovu značajku.",
       "width": "Širina",
       "height": "Visina",
       "create": "Izradi",
@@ -57,7 +57,7 @@ define({
     },
     "saveErrorSocial": {
       "title": "Ažuriranje dijeljenja na društvenim mrežama",
-      "panel1": "Poboljšana je prisutnost vaše priče na društvenim medijima, ali naziv stavke u web-aplikaciji ArcGIS nije jednak nazivu vaše priče.",
+      "panel1": "Poboljšana je prisutnost vaše priče na društvenim medijima, ali naziv stavke u ArcGIS web-aplikaciji nije jednak nazivu vaše priče.",
       "panel1tooltip": "Kada odredite naziv, sažetak i sličicu, vaša će priča izgledati ovako:",
       "panel2": "Koji biste naziv upotrijebili na društvenim medijima:",
       "panel2q1": "Naziv priče (preporučeno)",
@@ -109,8 +109,8 @@ define({
     },
     "settingsHeader": {
       "title": "Zaglavlje",
-      "logoEsriRadio": "Esri logotip",
-      "logoNoneRadio": "Nema logotipa",
+      "logoEsriRadio": "Logotip Esri",
+      "logoNoneRadio": "Bez logotipa",
       "logoOrgRadio": "Logotip organizacije",
       "logoCustomRadio": "Moj logotip",
       "logoCustomLabel": "Slika:",
@@ -163,7 +163,10 @@ define({
       "tagline": "Story Map"
     },
     "licenseChange2018": {
-      "noAccess": "Č_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________ž."
+      "noAccess": "Vaš račun (%USER_NAME%) nije licenciran za upotrebu Story Mapa koji nije javan. Obratite se administratoru svoje organizacije da vam dodijeli vrstu korisnika koja sadrži licencu za Story Map ili za dodatke za osnovne appove."
+    },
+    "storyTellerUserType": {
+      "notCreatorError": "Vaš račun (%USER_NAME%) nije licenciran za upotrebu classic story map builder softvera. Upitajte administratora svoje organizacije da vam dodijeli vrstu korisnika Creator."
     }
   }
 });

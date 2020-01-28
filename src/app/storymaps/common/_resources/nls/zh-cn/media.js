@@ -116,7 +116,7 @@ define({
       "learn": "了解详细信息",
       "lblAltText": "备选文本",
       "placeholderAltText": "针对视觉障碍的读者，输入该媒体的描述...",
-      "tooltipAltText": "请提供辅助性技术(例如屏幕阅读软件)将使用的该媒体内容的描述。 描述为可选内容，但是建议符合 web 可及性原则，例如 WCAG 和 Section 508。"
+      "tooltipAltText": "请提供该媒体的内容描述，以供辅助性技术(例如屏幕阅读软件)使用。 描述为可选内容，但是建议遵循 web 可及性原则，例如 WCAG 和 Section 508。"
     },
     "editorActionGeocode": {
       "lblTitle": "定位地址或地点",

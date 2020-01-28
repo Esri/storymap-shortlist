@@ -85,7 +85,7 @@ define({
       "lblURL": "Görüntü bağlantısı",
       "lblURLPH": "Bağlantı .jpg, .png, .gif veya .bmp ile bitmelidir",
       "lblURLPHHTTPS": "https://www.example.com/image.jpg",
-      "lblURLError": "Bu görüntü geçerli gibi görünmüyor. Bir görüntü dosyasına bir doğrudan bağlantı belirtin (URL'niz genelde .jpg ya da .png ile biter). Web sayfasının bağlantıları çalışmayan bir görüntü içeriyor.",
+      "lblURLError": "Bu görüntü geçerli gibi görünmüyor. Bir görüntü dosyasına bir doğrudan bağlantı belirtin (URL'niz genelde .jpg ya da .png ile biter). Bir web sayfasının bağlantıları çalışmayan bir görüntü içeriyor.",
       "lblURLErrorHTTPS": "Bu görüntü bağlantısı geçerli değil. URL HTTPS ile başlamalı ve desteklenen bir görüntü dosyası uzantısıyla (.jpg, .png, .gif, .bmp) bitmelidir.",
       "lblURLCheck": "Görüntü denetleniyor...",
       "lblLabel": "Görüntü alt yazısı",

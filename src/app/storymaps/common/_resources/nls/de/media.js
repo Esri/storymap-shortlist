@@ -21,7 +21,7 @@ define({
       "lblStep3": "Konfigurieren"
     },
     "imageSelectorHome": {
-      "explain": "Bilder von sozialen Medien <br /> oder direkt über eine URL laden"
+      "explain": "Bilder über soziale Medien <br /> oder direkt über eine URL laden"
     },
     "imageSelectorUpload": {
       "lblUploadButton": "Bild suchen",
@@ -56,7 +56,7 @@ define({
       "url": "YouTube-Video-Link",
       "pageInputLbl": "Benutzername",
       "lookupMsgError": "Benutzer nicht gefunden",
-      "howToFind": "So finden Sie einen Youtube-Benutzernamen",
+      "howToFind": "So finden Sie einen YouTube-Benutzernamen",
       "howToFind2": "Benutzername wird unter Videos angezeigt",
       "found": "Gefunden",
       "noData": "Keine öffentlichen Videos gefunden",
@@ -108,7 +108,7 @@ define({
       "lblPosition3Explain": "(Zuschneiden nicht möglich)",
       "lblPosition3Explain2": "(Breite wird immer an den Bereich angepasst)",
       "lblPosition4Explain": "(Verzerren möglich)",
-      "unloadLbl": "Anhalten, wenn Benutzer zu einem anderen Ort navigiert",
+      "unloadLbl": "Wird angehalten, wenn Leser zu einem anderen Ort navigiert",
       "unloadHelp": "Wenn die Webseite über Audio- oder Video-Medien verfügt, lassen Sie diese Option aktiviert, um die Wiedergabe dieses Inhalts zu beenden, wenn der Leser zu einem anderen Ort navigiert. Deaktivieren Sie sie, um beispielsweise die Wiedergabe eines Soundtracks fortzusetzen, während der Leser durch die Story blättert.<br />Wenn es sich bei der Webseite um eine Anwendung handelt, deaktivieren Sie diese Option, damit die Story nicht erneut geladen wird, wenn der Leser zu ihr zurückkehrt.",
       "embedProtocolLabel": "Seite über eine sichere Verbindung (HTTPS) laden",
       "embedProtocolWarning1": "Wenn diese Seite nicht in Ihre Story geladen werden kann, kann sie aus Gründen der Websicherheit nicht eingebettet werden. Alternativ können Sie Ihrer Zusammenfassung einen Link hinzufügen, um die Seite in einer neuen Browser-Registerkarte zu öffnen. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>Weitere Informationen</a>",
@@ -120,7 +120,7 @@ define({
     },
     "editorActionGeocode": {
       "lblTitle": "Adresse oder Ort suchen",
-      "mapMarkerExplain": "Beim Klicken auf den Link wird ein Karten-Marker angezeigt."
+      "mapMarkerExplain": "Beim Klicken auf den Link wird ein Karten-Marker angezeigt"
     },
     "editorActions": {
       "navigate": "Zu einem anderen Eintrag navigieren",
@@ -131,7 +131,7 @@ define({
       "lblTitle": "Inhalt der Hauptanzeige ändern"
     },
     "editorInlineMedia": {
-      "lblTitle": "Bild, Video oder Website einfügen"
+      "lblTitle": "Bild, Video oder Webseite einfügen"
     }
   }
 });

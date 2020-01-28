@@ -6,7 +6,7 @@ define({
       "save": "Guardar",
       "next": "Seguinte",
       "cancel": "Cancelar",
-      "back": "Anterior",
+      "back": "Voltar",
       "apply": "Aplicar",
       "close": "Fechar",
       "open": "Abrir",
@@ -26,13 +26,13 @@ define({
       "enterSubtitle": "Introduzir subtítulo opcional..."
     },
     "builderPanel": {
-      "panelHeader": "Builder de %TPL_NAME%",
+      "panelHeader": "Builder %TPL_NAME%",
       "buttonSaving": "Guardar",
       "buttonSaved": "Guardado",
       "buttonShare": "Partilhar",
       "buttonSettings": "Configurações",
       "buttonHelp": "Ajuda",
-      "buttonPreview": "Visualizar História",
+      "buttonPreview": "Visualizar história",
       "tooltipFirstSave": "Esta funcionalidade não se encontra disponível até que a aplicação seja guardada.",
       "tooltipNotShared": "Esta funcionalidade não se encontra disponível até que a aplicação seja partilhada.",
       "tooltipNotShared2": "A sua história não é partilhada, apenas você a consegue aceder.",
@@ -68,8 +68,8 @@ define({
     },
     "share": {
       "shareTitle": "Partilhar a sua história",
-      "preview": "Pré-visualizar",
-      "viewlive": "Visualizar História",
+      "preview": "Pré-Visualizar",
+      "viewlive": "Visualizar história",
       "btnPrivate": "Privado",
       "btnPrivateTooltip": "A história apenas pode ser vista por si",
       "btnOrg": "Organização",
@@ -163,7 +163,10 @@ define({
       "tagline": "Um Story Map"
     },
     "licenseChange2018": {
-      "noAccess": "ã_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________Ç."
+      "noAccess": "A sua conta (%USER_NAME%) não está licenciada para abrir um Story Map não público. Peça ao administrador da sua organização para lhe atribuir um tipo de utilizador que inclua a licença para Story Maps ou aplicações essenciais complementares."
+    },
+    "storyTellerUserType": {
+      "notCreatorError": "A sua conta (%USER_NAME%) não está licenciada para usar construtores de story maps clássicos. Solicite ao administrador da sua organização para lhe atribuir um tipo de utilizador Creator."
     }
   }
 });

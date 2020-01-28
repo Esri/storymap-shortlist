@@ -74,10 +74,10 @@ define({
       "errorCreate": "Nem sikerült létrehozni a térképet. Próbálja meg újra.",
       "errorSave": "Nem sikerült menteni a térképet. Próbálja meg újra.",
       "notavailable1": "A térképek létrehozása és szerkesztése technikai korlátozás miatt nem támogatott a Firefox böngészőben. A történetet létrehozhatja egy másik böngészőben, vagy kipróbálhatja a következő megoldást.",
-      "notavailable2": "A térképek létrehozása és szerkesztése nem támogatott, mivel a(z) %PRODUCT% nem tartalmazza a story mapeket kezelő alkalmazást. További információért forduljon az ArcGIS adminisztrátorához.",
-      "notavailable3": "A térképek létrehozása és szerkesztése nem támogatott a Portal for ArcGIS ezen verziójában (ehhez 10.4-es vagy újabb verzió szükséges). További információért forduljon az ArcGIS adminisztrátorához.",
+      "notavailable2": "A térképek létrehozása és szerkesztése nem támogatott, mivel a(z) %PRODUCT% nem tartalmazza a story mapeket kezelő alkalmazást. További információkért forduljon ArcGIS adminisztrátorához.",
+      "notavailable3": "A térképek létrehozása és szerkesztése nem támogatott a Portal for ArcGIS ezen verziójában (ehhez 10.4-es vagy újabb verzió szükséges). További információkért forduljon ArcGIS adminisztrátorához.",
       "notavailable4": "Létrehozhat egy térképet a %MV% használatával, majd visszatérhet ide, és hozzáadhatja a történetéhez.",
-      "notavailable5": "Szerkesztheti a térképet a %MV% használatával, majd visszatérhet ide, majd a %apply% után megtekintheti a módosításait.",
+      "notavailable5": "Szerkesztheti a térképet a %MV% használatával, majd a %apply% után megtekintheti a módosításait.",
       "notavailable6": "térképnézegető",
       "notavailable7": "térkép újbóli betöltése"
     }

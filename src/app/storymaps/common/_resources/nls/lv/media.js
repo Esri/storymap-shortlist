@@ -1,15 +1,15 @@
 define({
   "commonMedia": {
     "mediaSelector": {
-      "lblSelect1": "Datu nesējs",
+      "lblSelect1": "Multivide",
       "lblSelect2": "Saturs",
       "lblMap": "Karte",
       "lblImage": "Attēls",
       "lblVideo": "Video",
-      "lblExternal": "Web lapa",
+      "lblExternal": "Tīmekļa lapa",
       "lblUpload": "Augšupielāde",
       "lblLink": "Saite",
-      "disabled": "Šo elementu ir atspējojis administrators",
+      "disabled": "Administrators ir atspējojis šo elementu",
       "userLookup": "Ielādēt albumus",
       "notImplemented": "Vēl nav ieviests.",
       "noData": "Nav atrasts publisks albums",
@@ -17,7 +17,7 @@ define({
     },
     "imageSelector": {
       "lblStep1": "Izvēlēties servisu",
-      "lblStep2": "Izvēlēties mediju",
+      "lblStep2": "Izvēlēties multividi",
       "lblStep3": "Konfigurēt"
     },
     "imageSelectorHome": {
@@ -41,7 +41,7 @@ define({
       "userInputLbl": "E-pasts vai Google ID",
       "signInMsg2": "Konts nav atrasts",
       "howToFind": "Picasa ID atrašana",
-      "howToFind2": "Iekopējiet ciparus starp jebkuras Picasa lapas pirmo un otro '/'."
+      "howToFind2": "Iekopējiet ciparus starp jebkuras Picasa lapas pirmo un otro '/'"
     },
     "videoSelectorCommon": {
       "check": "Pārbaudīt",
@@ -89,7 +89,7 @@ define({
       "lblURLErrorHTTPS": "Šī attēla saite nav derīga. Vietrādim URL ir jāsākas ar HTTPS un jābeidzas ar atbalstītu attēla faila paplašinājumu (.jpg, .png, .gif, .bmp).",
       "lblURLCheck": "Notiek attēla pārbaude...",
       "lblLabel": "Attēla paraksts",
-      "lblLabel1": "Uzraksts",
+      "lblLabel1": "Virsraksts",
       "lblLabel2": "Novietot virs teksta",
       "lblLabel3": "Neviens",
       "lblLabelPH": "Ievadiet tekstu...",
@@ -102,7 +102,7 @@ define({
       "lblPosition4": "Izstiept",
       "lblPosition5": "Pielāgots",
       "lblURLHelp": "Attēla saitei ir jāsākas ar HTTPS.<br><br>Lai iegūtu labākos rezultātus, attēliem ir jābūt mazākiem par 400 KB. Izmantojiet saspiestus JPG attēlus ar 80% kvalitāti un šiem ieteiktajiem attēla platumiem: 2000 pikseļu galvenajam posmam vai stāstījuma panelim ar maksimizēšanas pogu, 1000 pikseļu stāstījuma panelim bez maksimizēšanas pogas.<br><br>Ja saistītais attēls atveras lēni, tad augšupielādējiet to stāstā, lai ielāde notiktu ātrāk.",
-      "tooltipDimension": "Vērtība var būt norādīta kā px vai %",
+      "tooltipDimension": "Vērtību var norādīt 'px' vai '%'",
       "tooltipDimension2": "Vērtība ir jānorāda pikseļos",
       "lblPosition2Explain": "(var apgriezt)",
       "lblPosition3Explain": "(netiks apgriezts)",
@@ -123,7 +123,7 @@ define({
       "mapMarkerExplain": "Noklikšķinot uz saites, lietotājam tiks rādīts kartes punkts"
     },
     "editorActions": {
-      "navigate": "Navigēt uz citu ierakstu",
+      "navigate": "Naviģēt uz citu ierakstu",
       "remove": "Noņemt darbību",
       "preview": "Darbības priekšskatījums"
     },

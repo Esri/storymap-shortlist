@@ -1,7 +1,7 @@
 define({
   "commonWebmap": {
     "selector": {
-      "lblWebMap": "ΧΑΡΤΗΣ",
+      "lblWebMap": "Χάρτης",
       "lblLocation": "Τοποθεσία",
       "lblContent": "Περιεχόμενο",
       "lblPopup": "Αναδυόμενο παράθυρο",

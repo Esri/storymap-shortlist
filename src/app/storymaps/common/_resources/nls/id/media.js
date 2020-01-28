@@ -25,7 +25,7 @@ define({
     },
     "imageSelectorUpload": {
       "lblUploadButton": "telusuri untuk mencari gambar",
-      "lblDrop": "Letakkan gambar di sini atau",
+      "lblDrop": "Jatuhkan gambar di sini atau",
       "infoUpload": "Gambar akan disimpan di akun ArcGIS Anda dan dapat diakses hanya dari dalam cerita Anda.",
       "warningFileTypes": "Gambar dapat berupa .jpg, .png, .gif, atau .bmp",
       "warningOneFile": "Hanya satu gambar yang boleh diunggah dalam satu waktu.",
@@ -69,7 +69,7 @@ define({
     "videoSelectorOther": {
       "explain1": "Peta cerita ini tidak dapat memutar file video mentah (mis., avi, mpeg), tapi dapat memutar video yang di-host dengan pemutar bawaan (mis., YouTube atau Vimeo).",
       "explain2": "Kebanyakan layanan hosting video menawarkan fitur ini. Temukan opsi untuk menyematkan video tersebut, salin kode yang diberikan, dan tambahkan ke cerita Anda menggunakan opsi konten %WEBPAGE%.",
-      "explain3": "Sebagai alternatif, Anda juga dapat host video Anda sendiri dengan halaman HTML yang menggunakan pemutar video seperti %EXAMPLE%. Anda kemudian dapat menambahkan URL dari halaman HTML itu ke cerita Anda sebagai sebuah %WEBPAGE%.",
+      "explain3": "Sebagai alternatif, Anda juga dapat melakukan host untuk video Anda sendiri dengan halaman HTML yang menggunakan pemutar video seperti %EXAMPLE%. Anda kemudian akan dapat menambahkan URL dari halaman HTML itu ke cerita Anda sebagai sebuah %WEBPAGE%.",
       "webpage": "Halaman web"
     },
     "webpageSelectorHome": {
@@ -113,7 +113,7 @@ define({
       "embedProtocolLabel": "Muat halaman melalui koneksi aman (HTTPS)",
       "embedProtocolWarning1": "Jika halaman ini tidak dimuat dalam cerita Anda, halaman ini tidak dapat disematkan untuk alasan keamanan web. Sebagai alternatif, tambahkan tautan di narasi Anda untuk membuka halaman di tab browser baru. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>Pelajari selengkapnya</a>",
       "embedProtocolWarning2": "Jika halaman ini tidak dimuat dalam cerita Anda, batalkan centang opsi ini dan coba lagi. Jika halaman tetap tidak dimuat, halaman ini tidak dapat disematkan untuk alasan keamanan web. Sebagai alternatif, tambahkan tautan di narasi Anda untuk membuka halaman di tab browser baru. <a href='http://links.esri.com/storymaps/blogs_mixed_content/' target='_blank'>Pelajari selengkapnya</a>",
-      "learn": "Pelajari lebih lanjut",
+      "learn": "Pelajari selengkapnya",
       "lblAltText": "Teks Alternatif",
       "placeholderAltText": "Masukkan deskripsi media ini untuk pembaca tunanetra...",
       "tooltipAltText": "Sediakan deskripsi konten media ini yang digunakan oleh teknologi bantuan seperti perangkat lunak pembaca layar. Deskripsi adalah opsional tetapi disarankan untuk memenuhi pedoman aksesibilitas web seperti WCAG dan Bagian 508."
@@ -124,7 +124,7 @@ define({
     },
     "editorActions": {
       "navigate": "Bernavigasilah ke entri lain",
-      "remove": "Hapus tindakan",
+      "remove": "Buang tindakan",
       "preview": "Pratinjau tindakan"
     },
     "editorActionMedia": {

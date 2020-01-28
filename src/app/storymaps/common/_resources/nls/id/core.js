@@ -163,7 +163,10 @@ define({
       "tagline": "Story Map"
     },
     "licenseChange2018": {
-      "noAccess": "ng_Your account (%USER_NAME%) is not licensed to open a Story Map that is not public.  Please ask your organization administrator to assign you a user type that includes Story Maps or an add-on Essential Apps license____________________________________________________________________________________________________________ny."
+      "noAccess": "Akun Anda (%USER_NAME%) tidak dilisensikan untuk membuka Peta Cerita yang bukan bersifat publik.  Harap minta administrator organisasi Anda untuk menetapkan Anda jenis pengguna yang menyertakan Peta Cerita atau lisensi add-on Essential App."
+    },
+    "storyTellerUserType": {
+      "notCreatorError": "Akun Anda (%USER_NAME%) tidak dilisensikan untuk menggunakan builder Story Map Classic. Harap minta administrator organisasi Anda untuk menetapkan Anda jenis pengguna Creator."
     }
   }
 });
