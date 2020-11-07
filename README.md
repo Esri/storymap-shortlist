@@ -76,7 +76,7 @@ Yes, the regular ArcGIS Online security model applies.
 By default your Shortlist is private, you can share it through Shortlist builder or ArcGIS Online. 
 When you share your Shortlist, it is your responsibility to make sure that all the resources of your Shortlist (webmaps, imagess) are accessible to your audience.
 
-#### Can I use private web map or layer?
+#### Can I use a private web map or private layers?
 Yes. 
 
 When the Shortlist is hosted in ArcGIS Online, users that don't have access to the Shortlist or a webmap used in the Shortlist will be redirected to the ArcGIS Online sign-in page. It is not possible to display an authentication dialog in the Shortlist when the Shortlist is hosted in ArcGIS Online.
@@ -85,7 +85,7 @@ When the Shortlist is hosted on your web server, an authentication dialog will a
 
 Note that for that authentication to work on some older browser (Internet Explorer 9) you need to install a proxy server on your web server to make sure the login credentials can be passed securely to ArcGIS Online. For more information, see the [Using the proxy](https://developers.arcgis.com/javascript/jshelp/ags_proxy.html) in the ArcGIS API for JavaScript documentation.
 
-Because of that limitation, we recommend that you configure the application to use OAuth. OAuth 2.0 based authentication is available for ArcGIS Online and Portal for ArcGIS users with developer or organizational accounts. Follow the procedure to [add an application](http://doc.arcgis.com/en/arcgis-online/share-maps/add-items.htm#ESRI_SECTION1_55703F1EE9C845C3B07BBD85221FB074) and [register an application](http://doc.arcgis.com/en/arcgis-online/share-maps/add-items.htm#ESRI_SECTION2_20AF85308FD548B5ADBAE28836F66D3F) to get an OAuth application ID. Once you have that application, open `index.html`, locate the `configOptions` section and fill the `oAuthAppId` property.
+Because of that limitation, we recommend that you configure the application to use OAuth. OAuth 2.0 based authentication is available for ArcGIS Online and ArcGIS Enterprise users with developer or organizational accounts. Follow the procedure to [add an application](http://doc.arcgis.com/en/arcgis-online/share-maps/add-items.htm#ESRI_SECTION1_55703F1EE9C845C3B07BBD85221FB074) and [register an application](http://doc.arcgis.com/en/arcgis-online/share-maps/add-items.htm#ESRI_SECTION2_20AF85308FD548B5ADBAE28836F66D3F) to get an OAuth application ID. Once you have that application, open `index.html`, locate the `configOptions` section and fill the `oAuthAppId` property.
 
 If you are using secured services but don't want users to have to authenticate, you can use a proxy to store the username/password to be used, see [Working with Proxy Services](https://developers.arcgis.com/authentication/working-with-proxies/#selfhosted-proxy-service), and add a proxy rules to specify what services need to use the proxy by editing `PROXY_RULES` in `app/config.js`.
 
@@ -100,25 +100,25 @@ The Shortlist data are stored in a Web Application Item in ArcGIS Online and its
 
 The image that you include in your Shortlist using the builder are not copied in ArcGIS Online. You have to make sure that those medias as well as the webmap you are using are and will remain accessible to your audience.
 
-#### Can I deploy Shorlist on Portal for ArcGIS?
-Shortlist is not included in Portal for ArcGIS.
+#### Can I deploy Shortlist on ArcGIS Enterprise?
+Shortlist is not included with ArcGIS Enterprise by default. You can download the template and deploy it independently from ArcGIS Enterprise and add it to your ArcGIS Enterprise portal by following these steps.
 
 Steps:
 - [Download the latest version](http://links.esri.com/storymaps/shortlist_template_zip)
 
- - Log into Portal for ArcGIS and open My Content > Add Item > Application > Web Mapping Application > Configurable. Configure the URL to `https://portal.domain.com/arcgis/apps/Shortlist`. More details in the following documentation [publishing a new web application item](http://resources.arcgis.com/en/help/main/10.2/index.html#/Adding_applications/019300000031000000/).
- - Create a new group that will reference the template available in your Portal
+ - Log into the ArcGIS Enterprise portal and open My Content > Add Item > Application > Web Mapping Application > Configurable. Configure the URL to `https://portal.domain.com/<context>/apps/Shortlist`. More details in the following documentation [publishing a new web application item](https://enterprise.arcgis.com/en/portal/latest/administer/windows/add-items.htm#ESRI_SECTION1_0D1B620254F745AE84F394289F8AF44B).
+ - Create a new group that will reference the template available in your Enterprise portal
  - Share the newly created item with that group
- - Open My Organization > Edit Settings > Map  and set the `Web App Templates` to the newly created group. More details in the following documentation [configuring the web application gallery](http://resources.arcgis.com/en/help/main/10.2/index.html#/Configure_map_viewer/017s00000024000000/)
+ - Open My Organization > Edit Settings > Map  and set the `Web App Templates` to the newly created group. More details in the following documentation [configuring the web application gallery](https://enterprise.arcgis.com/en/portal/latest/administer/windows/configure-map.htm#ESRI_SECTION1_F3F54A03710B4336910148DDB8FA900B)
  - Now when you share a web map, the template should be an option
 
-_Note that the archive you downloaded is using the ArcGIS API for JavaScript hosted in ArcGIS Online. This can create some incompatibility with your Portal, if you run into issue, please see the next section to update it._
+_Note that the archive you downloaded is using the ArcGIS API for JavaScript hosted in ArcGIS Online. This can create some incompatibility with ArcGIS Enterprise, if you run into issue, please see the next section to update it._
 
 Also note that the web application gallery preview feature redirects to the StoryMaps website, the target page can be modified in `app/config.js > HELP_URL_PORTAL`.
 
 To edit the ArcGIS API for JavaScript, edit `index.html` and locate `pathJSAPI` around line 64. The URL is `//webadaptor.domain.com/arcgis/jsapi/jsapi` where arcgis is the name of your Web Adaptor.
 
-When deployed on a Portal for ArcGIS instance, the application doesn't require any external service to function. But by default the template will still include the header social buttons and Shortlist author are able to import pictures from the some online pictures hosting services. These options can be disabled individually through the configuration file `app/config.js`.
+When deployed with ArcGIS Enterprise, the application doesn't require any external service to function. But by default the template will still include the header social buttons and Shortlist author are able to import pictures from the some online pictures hosting services. These options can be disabled individually through the configuration file `app/config.js`.
 
 #### Can I use the builder with the downloadable?
 Yes, when the template is configured with an application ID, adding the URL parameter 'edit' will open the builder. You will be prompted for user authentication through the Identity Manager.
